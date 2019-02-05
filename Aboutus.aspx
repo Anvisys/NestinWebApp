@@ -466,7 +466,7 @@ img.app_centre{
            <div class="col-sm-4 hidden-xs zero-margin">
                     <!-- Logo text or image --> 
                     
-                      <div class="title" style="color:#00baed;padding-top:11px;text-align:center;font-size:x-large;"> Society Management System</div>
+                      <div class="title" style="color:#00baed;padding-top:12px;text-align:center;font-size:x-large;"> Society Management System</div>
                     <!-- Top Nav -->
 
           </div>
