@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- jQuery library -->
+
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" href="CSS/NewAptt.css" />
+
+    <style>
+        @media only screen and (max-width: 600px) {
+            #lblsocietyname {
+                font-size:17px;
+            }
+        }
+        @media only screen and (max-width: 600px) {
+            #profile_image {
+                margin-left: 17px;
+            }
+        }
+        e
+        .Left-Nav {
+            background-color: #727cf5;
+            padding-left: 15px;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            display: inline;
+        }
+
+            .Left-Nav ul {
+                list-style-type: none;
+            }
+            .Left-Nav li {
+                margin-top: 20px;
+            }
+            .Left-Nav a {
+                color: white;
+                font-size: 15px;
+               
+            }
+
+        .margin-zero {
+            margin: 0px !important;
+            padding: 0px;
+            background-color: #727cf5;
+        }
+
+        .margin-five {
+            margin: 5px !important;
+            padding: 0px;
+            background-color: #727cf5;
+        }
+        .dropdown-menu {
+            float: none;
+            left: -40px;
+            background-color: #f7f7f7;
+        }
+        .dropdown-menu li a {
+            color:#000;
+        }
+        .button-style {
+            background: none;
+            border: none;
+            padding-left: 1px;
+            color: #fff;
+        }
+        @media only screen and (max-width: 600px) {
+            .button-style {
+                padding-left: 18px;
+            }
+        }
+        .ro {
+            margin-top: 10px;
+        }
+
+      
+        .thumbnail {
+            border-color: #f7f7f7;
+            background-color: #4fc3f7;
+            text-align:center;
+            
+        }
+
+        @media only screen and (max-width: 600px) {
+            .thumbnail {
+                border-color: #f7f7f7;
+                background-color: #4fc3f7;
+                height: 120px;
+                color:#fff;
+                margin-bottom:0px;
+                
+                
+            }
+            .button-style {
+                color:#000;
+            }
+            .thumbnail img {
+                height: 100px;
+                width: 100px;
+                float: right;
+            }
+                .thumbnail h3, p, h4 {
+                    float: left;
+                    margin-right: 45px;
+                    margin-top: 2px;
+                    margin-bottom: 8px;
+                    padding-left: 10px;
+                }
+                #displayData {
+                    padding:0px;
+                    margin:0px;
+                }
+            .ro {
+                margin-top: 0px;
+            }
+        }
+      
+    </style>
+
+
+    <script>
+
+        function ShowMenu() {
+            var content = "";
+          
+
+            var content_profile = document.getElementById("bs-example-navbar-collapse-2").innerHTML;
+            var profile_dropdown = document.getElementById("profile_dropdown").innerHTML;
+            var profile_image = document.getElementById("image").innerHTML;
+            $("#Menu_x").empty();
+            $("#Menu_x").append(content_profile);
+            $("#Menu_x").append("<hr class=\"margin-five\" />");
+            $("#Menu_x").append(profile_image);
+            $("#Menu_x").append("<hr class=\"margin-five\"  />");
+            $("#Menu_x").append(profile_dropdown);
+
+            $("#Menu_x").toggle();
+            //$("#menu1").toggle();
+
+            
+        }
+
+        function ShowDDD() {
+            $("#ddmenu").toggle();
+        }
+
+        $(document).ready(function () {
+
+            GetAdvertisementData();
+        })
+
+
+        function GetAdvertisementData() {
+            //document.getElementById("data_loading").style.display= "block";
+            var url = "http://www.kevintech.in/GaurMahagun/api/Ads";
+          
+            $.ajax({
+                type: "Get",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    //document.getElementById("data_loading").style.display = "none";
+                 
+                    SetData(data);
+                },
+                failure: function (response) {
+                    // document.getElementById("data_loading").style.display = "none";
+                    alert(response.d);
+                    sessionStorage.clear();
+                }
+            });
+
+        }
+
+
+        function SetData(data) {
+
+            var jarray = data.$values;
+            var length = jarray.length;
+            var AdString = [];
+            var con = document.getElementById("displayData");
+            for (var i = 0; i < length; i++) {
+
+                var Owner = jarray[i].Owner;
+                var Title = jarray[i].Title;
+                var Description = jarray[i].Description;
+                var Offer = jarray[i].Offer;
+                var StartDate = jarray[i].StartDate;
+                var EndDate = jarray[i].EndDate;
+                var base64Image = jarray[i].AdImage;
+
+
+                AdString[i] = '<div class=\"ro \">' +
+                    '<div class=\"thumbnail\">' +
+                    '<h3 class=\"textlign\">' + Owner + '</h3>' +
+                    '<img class=\"img_ad\" src="data:image/png;base64,' + base64Image + '">' +
+
+                    '<h4 class=\"txtcolorwhite\">' + Description + '</h4>' +
+                    '<h4 class=\"txtcolor\">Offer- ' + Offer + '</h4>' +
+
+                    '</div>' +
+                    '</div>';
+
+            }
+
+
+            con.innerHTML += AdString;
+
+
+
+
+        }
+
+    </script>
+
+
+</head>
+<body>
+    <div class="container-fluid">
+
+        <div class="row" id="top_header" style="position: sticky; top: 0px; left: 0px; z-index: 10;">
+            <div class="col-xs-4">
+                <img src="Images/Icon/iconHome.png" style="margin-top: 5px;" height="40" width="40" />
+            </div>
+            <div class="col-xs-4">
+                <h3 style="color: #fff" id="lblsocietyname" >NestIn Demo</h3>
+            </div>
+            <div class="col-md-4 hidden-xs">
+
+                <ul class="list-inline pull-right">
+
+                    <li  class="dropdown">
+                        <span id="image">
+                            <img id="profile_image" src="Images/Icon/profile.jpg" Style="height: 40px; width: 40px; border-radius: 50%;" />
+                        </span>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <label id="lblUserName"  ForeColor="#00BCD4">Amit Bansal</label>
+                            <span class="caret"></span>
+                        </a>
+                        <ul id="profile_dropdown" class="dropdown-menu">
+                            <li><a href="#" id="User_profile" target="targetframe">Profile</a></li>
+                            <li>
+                                <a id="btnlogout" Text="Logout" >Logout</a>
+                            </li>
+                            <li id="ChangeFlat"  ><a href="#">Change Flat/Role</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+            </div>
+            <div class="hidden-lg hidden-md hidden-sm col-xs-4">
+                <span class="fa fa-align-justify fa-2x" onclick="ShowMenu()" style="float:right;color:white;padding-top:10px;"></span>
+
+                <ul class="dropdown-menu" id="Menu_x" style="display:none;"></ul>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-2 hidden-sm hidden-xs margin-zero" style="height:600px;">
+
+                <div id="Resident_Navigation" >
+                    <div class="Left-Nav">
+                        <ul id="bs-example-navbar-collapse-2">
+
+                            <li> <a href="#" target="targetframe">Dashboard</a></li>
+
+                            <li><a href="#" target="targetframe">Discussions</a></li>
+                            <li> <a href="#" target="targetframe">Reports</a></li>
+                            <li> <a href="#" target="targetframe">Notifications</a></li>
+
+                            <li><a href="#" target="targetframe">Bill Payments</a></li>
+                            <li>   <a href="#" target="targetframe">Polls</a></li>
+                            <li>  <a href="#" target="targetframe">Vendors</a></li>
+                            <li >
+                                <button href="#" class="button-style"  onclick="ShowDDD()" target="targetframe">Complaints</button>
+                            
+                            <ul id="ddmenu" class="mydropdown" style="display:none;">
+                                <li><a href="#">Action 1</a></li>
+                                <li><a href="#">Another 2 </a></li>
+                                <li><a href="#">Something 3</a></li>
+                            </ul>
+
+                            </li>
+                            <li> <a href="#" target="targetframe">Payments</a></li>
+                            <li>  <a href="#" target="targetframe">MyFlat</a></li>
+                            <li>  <a href="#" target="targetframe">Visitor</a></li>
+
+
+
+                        </ul>
+                        </div>
+                    </div>
+            </div>
+
+
+      
+            <div class="col-md-8 col-sm-12 col-xs-12" style="height:600px; margin:0px; padding:0px;background-color:bisque;">
+
+                <!--<iframe  id="content_frame" onload="iframeLoaded()" name="targetframe" class="iframe-layout" style="margin:0px;padding:0px;background-color: #f7f7f7;"></iframe>-->
+               <!--<iframe style="margin:0px;padding:0px;background-color: #f7f7f7; height:600px; width:100%;" id="content_frame"></iframe>-->
+
+            </div>
+
+        <div class="col-md-2 col-sm-12 col-xs-12" id="displayData">
+        </div>
+        </div>
+    </div>
+    
+    
+    
+</body>
+</html>
