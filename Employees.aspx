@@ -33,8 +33,6 @@
 
      <script>
         
-
-         
          $(function () {
              $("#txtEmpNamesrch").autocomplete({
                  source: function (request, response) {
@@ -86,8 +84,7 @@
                  });
              });
          });
-
-
+         
          $(document).ready(function () {
              $("#confirmActivate").hide();
              $('html').click(function () {
@@ -132,11 +129,9 @@
                  Posy += Element.offsetTop;
                  Element = Element.offsetParent;
              }
-
-            
+             
                  $("#dropdown-menu").slideDown();
              
-
              document.getElementById("dropdown-menu").style.top = Posy + 'px';
          }
 
@@ -197,7 +192,6 @@
              });
            
          });
-
          
          $(document).ready(function () {
              $("#btnDactiveEmpCancel,#Cancel_delete").click(function () {
@@ -218,7 +212,6 @@
          {
              $("#AddEmployeeModal").hide();
          }
-
          
          function EmployeeAdded(result) {
              
@@ -807,16 +800,65 @@
         <%-------------------------------------------------------------------------------------- Edit Employee Section Starts from here --------------------------------------------------------------------- %>
         <%--  <asp:Button ID="btnAddEmpcancel" runat="server" CssClass="btn_style" Text="Cancel" CausesValidation="False" TabIndex="16" OnClick="btnusercancel_Click" />--%>
         <div id="myModalEditPopup" class="modal">
-            <div class="container-fluid zero-margin" style="width:300px;margin-top:60px;">
-                   <div class="panel panel-primary" style="position:relative; margin:0px;">
+            <div class="container-fluid zero-margin" style="width:360px;">
+                   <div class="panel panel-primary" style="position:relative; width:auto; ">
                <div class="panel-heading">
                   <span style="text-align:left;"> Edit Employee </span>
                    <span class="fa fa-times" id="edit_cross" style="float:right;cursor:pointer;"></span>
                </div>
-         <table   class="layout_data_table" style="line-height:30px;">
-            
+            <%--<div class="panel_body"> 
+                   <%--<form class="employee"> 
+                       <div class="container-fluid">
+                           <div class="row" style="margin-top:0px">
+                             <label for="colFormLabel" class="col-xs-4 col-form-label">First Name: </label>
+                            <div class="col-xs-8">
+                             <asp:TextBox type="text" class="form-control col-xs-8" ID="txtEmpFname" runat="server"   placeholder="First Name" name="Name" />
+                             <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtEmpFname" ErrorMessage="Enter valid name" Font-Size="Small" ForeColor="#FF5050" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ValidationGroup="Edit_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
+                            </div>
+                          </div>
+                           <div class="row" style="margin-top:5px">
+                             <label for="colFormLabel" class="col-xs-4 col-form-label">Last Name: </label>
+                            <div class="col-xs-8">
+                             <asp:TextBox type="text" class="form-control col-xs-8" ID="txtEmpLname" runat="server"   placeholder="Last Name" name="Name" />
+                             <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtEmpFname" ErrorMessage="Enter valid name" Font-Size="Small" ForeColor="#FF5050" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ValidationGroup="Edit_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
+                            </div>
+                          </div>
+                           <div class="row" style="margin-top:5px">
+                             <label for="colFormLabel" class="col-xs-4 col-form-label">Addess : </label>
+                            <div class="col-xs-8">
+                             <asp:TextBox ID="txtAddress" runat="server" class="form-control col-xs-8" placeholder="Enter Address" name="Name" />
+                            </div>
+                          </div>
+                           <div class="row" style="margin-top:5px">
+                             <label for="colFormLabel" class="col-xs-4 col-form-label">MobileNo : </label>
+                            <div class="col-xs-8">
+                             <asp:TextBox ID="txtEditEmpMobile" runat="server"  OnTextChanged="txtEditEmpMobile_TextChanged" class="form-control col-xs-8" placeholder="Enter Mobile" name="Name" />
+                             <asp:Label ID="lblEditEmpMobChck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
+                             <asp:RegularExpressionValidator ID="RegularExpressionValidatoreditemp" runat="server" ForeColor="#FF5050" ErrorMessage="Enter valid  No." ControlToValidate="txtEditEmpMobile" ValidationExpression="^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$" Display="Dynamic" Font-Size="Small" ></asp:RegularExpressionValidator>
+                            </div>
+                          </div>
 
-            
+                           <div class="row" style="margin-top:5px">
+                             <label for="colFormLabel" class="col-xs-4 col-form-label">Email : </label>
+                            <div class="col-xs-8">
+                             <asp:TextBox ID="txtEditEmpEmail" runat="server" OnTextChanged="txtEditEmpEmail_TextChanged"  AutoPostBack="True" class="form-control col-xs-8" placeholder="Enter Email" name="Name" />
+                             <asp:Label ID="lblEditEmailCheck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
+                             <asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server" ErrorMessage="Enter valid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtEditEmpEmail" Display="Dynamic"></asp:RegularExpressionValidator>
+                            </div>
+                          </div>
+
+                           <div class="row" style="margin-top:5px">
+                             <label for="colFormLabel" class="col-xs-4 col-form-label"> </label>
+                            <div class="col-xs-8">
+                              <asp:Label ID="lblEditEmpstatus" runat="server" ForeColor="#51A8FF"></asp:Label>
+                            </div>
+                          </div>
+                       </div>
+                   </form>--%>
+               <%--</div>--%>
+
+
+         <table   class="layout_data_table">
         <tr>
             <td colspan="4" style="height:15px;">
                  
@@ -824,10 +866,10 @@
         </tr>
 
          <tr>
-             <td class="lbltxt" style="width:25%; font-size:15px;  padding-left:5%;">
+             <td class="lbltxt" style="width:25%; padding-left:5%; ">
               First Name :</td>
-             <td style="width:25%;">
-                 <asp:TextBox ID="txtEmpFname" runat="server" CssClass="txtbox_style" ValidationGroup="Edit_Employee"></asp:TextBox><br />
+             <td style="width:50%;">
+                 <asp:TextBox ID="txtEmpFname" runat="server" CssClass="form-control" ValidationGroup="Edit_Employee"></asp:TextBox>
                  <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ControlToValidate="txtEmpFname" ErrorMessage="Enter valid name" Font-Size="Small" ForeColor="#FF5050" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ValidationGroup="Edit_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
              </td>
              <td style="width:1%;">
@@ -839,10 +881,10 @@
          </tr>
 
           <tr>
-             <td class="lbltxt" style="width:25%; font-size:15px;  padding-left:5%;">
+             <td class="lbltxt" style="width:25%;   padding-left:5%;margin-top:5px">
                 Last Name :</td>
              <td>
-                 <asp:TextBox ID="txtEmpLname" runat="server" CssClass="txtbox_style" ValidationGroup="Edit_Employee"></asp:TextBox><br />
+                 <asp:TextBox ID="txtEmpLname" runat="server" CssClass="form-control" ValidationGroup="Edit_Employee"></asp:TextBox>
                  <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ControlToValidate="txtEmpLname" ErrorMessage="Enter valid name" Font-Size="Small" ForeColor="#FF5050" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ValidationGroup="Edit_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
 
              </td>
@@ -855,10 +897,10 @@
          </tr>
 
          <tr>
-             <td class="lbltxt" style="width:25%; font-size:15px;  padding-left:5%;">
+             <td class="lbltxt" style="width:25%; font-size:15px;  padding-left:5%;margin-top:5px">
                 Addess :             </td>
              <td>
-                  <asp:TextBox ID="txtAddress" runat="server" CssClass="txtbox_style" ValidationGroup="Edit_Employee"></asp:TextBox>
+                  <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control txtbox_style" ValidationGroup="Edit_Employee"></asp:TextBox>
              </td>
              <td>
 
@@ -867,15 +909,13 @@
 
              </td>
          </tr>
-
-
           <tr>
-            <td class="lbltxt" style="width:25%; font-size:15px;  padding-left:5%;">
+            <td class="lbltxt" style="width:25%; font-size:15px;  padding-left:5%;margin-top:5px">
                MobileNo :</td>
                 <td>
                     <asp:UpdatePanel ID="UpdatePanel7" runat="server">
                         <ContentTemplate>
-                              <asp:TextBox ID="txtEditEmpMobile" runat="server"  CssClass="txtbox_style" OnTextChanged="txtEditEmpMobile_TextChanged"  ValidationGroup="Edit_Employee"></asp:TextBox><br />
+                              <asp:TextBox ID="txtEditEmpMobile" runat="server"  CssClass="form-control txtbox_style" OnTextChanged="txtEditEmpMobile_TextChanged"  ValidationGroup="Edit_Employee"></asp:TextBox><br />
                             <asp:Label ID="lblEditEmpMobChck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidatoreditemp" runat="server" ForeColor="#FF5050" ErrorMessage="Enter valid  No." ControlToValidate="txtEditEmpMobile" ValidationExpression="^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$" Display="Dynamic" Font-Size="Small" ></asp:RegularExpressionValidator>
                         </ContentTemplate>
@@ -888,12 +928,12 @@
               <td>   </td>       
            </tr>
         <tr>
-            <td class="lbltxt" style="width:25%; font-size:15px;  padding-left:5%;">
+            <td class="lbltxt" style="width:25%; font-size:15px;  padding-left:5%;margin-top:5px">
                 Email :</td>
                 <td>
                     <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                         <ContentTemplate>
-                             <asp:TextBox ID="txtEditEmpEmail" runat="server"  CssClass="txtbox_style" OnTextChanged="txtEditEmpEmail_TextChanged"  AutoPostBack="True" ValidationGroup="Edit_Employee"></asp:TextBox><br />
+                             <asp:TextBox ID="txtEditEmpEmail" runat="server"  CssClass="form-control txtbox_style" OnTextChanged="txtEditEmpEmail_TextChanged"  AutoPostBack="True" ValidationGroup="Edit_Employee"></asp:TextBox><br />
                             <asp:Label ID="lblEditEmailCheck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server" ErrorMessage="Enter valid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtEditEmpEmail" Display="Dynamic"></asp:RegularExpressionValidator>
                         </ContentTemplate>
@@ -906,7 +946,7 @@
             <td>   </td>
             </tr>
          <tr>
-             <td colspan="4" style="width:25%; font-size:15px;  padding-left:5%;">
+             <td colspan="4" style="width:25%; font-size:15px;  padding-left:5%;margin-top:5px">
              </td>
          </tr>
          <tr>
@@ -915,9 +955,8 @@
              </td>
          </tr>
         
-            
-           
        </table>
+
  <div class="panel-footer" style="text-align:right;">
                    <asp:Button ID="btneditEmp" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btneditEmp_Click" ValidationGroup="Edit_Employee"/>
                 

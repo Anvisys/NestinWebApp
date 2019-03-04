@@ -25,7 +25,7 @@ public class SessionVariables
 
         set
         {
-            HttpContext.Current.Session["api_url"] = "http://www.kevintech.in/GaurMahagun";
+            HttpContext.Current.Session["api_url"] = "http://www.kevintech.in/GAService";
         }
     }
 
@@ -38,7 +38,7 @@ public class SessionVariables
 
         set
         {
-            HttpContext.Current.Session["api_url"] = "http://www.kevintech.in/GaurMahagun";
+            HttpContext.Current.Session["api_url"] = "http://www.kevintech.in/GAService";
             HttpContext.Current.Session["User"] = value;
         }
     }

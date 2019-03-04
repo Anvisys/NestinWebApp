@@ -154,10 +154,10 @@ public partial class SocietyBillPlan : System.Web.UI.Page
             String ChargeType = drpchargetype.SelectedItem.Text;
             String CycleType = drpbillcycle.SelectedItem.Text;
 
-
+            
             BillPlan billPlan = new BillPlan();
-
-            int BillID = billPlan.AddSocietyBillPlan(drpAddBillType.SelectedItem.Text, ChargeType, txtBillRate.Text, CycleType, ApplyTo);
+            muser = (User)SessionVariables.User;
+            int BillID = billPlan.AddSocietyBillPlan(drpAddBillType.SelectedItem.Text, ChargeType, txtBillRate.Text, CycleType, ApplyTo,muser.currentResident.SocietyID);
 
             if (BillID > 0)
             {

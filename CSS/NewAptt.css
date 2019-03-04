@@ -8,7 +8,7 @@
     background-color: #607D8B;
     padding: 10px;
     margin-left: -7px;
-    top: 2px;
+    top: 2px!important;
 }
 .zero-margin {
     margin:0px;

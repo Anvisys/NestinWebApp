@@ -338,7 +338,7 @@
 
                                        <div class="col-sm-3  col-xs-2" >
                                            
-                                         <button id="New_Notification" type="button" class="btn btn-primary pull-right btn_my"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                                         <button id="New_Notification" type="button" class="btn btn-primary btn-sm pull-right">Add</button>
                                      </div>
                                      
                          </div>
@@ -438,8 +438,8 @@
                                      
                                         <tr>
                                           <td colspan="2">
-                                                <asp:TextBox ID="txtNotificationText" runat="server" Width="95%" style="resize:none" AutoCompleteType="Disabled" CssClass="txtbox_notification" MaxLength="1200"  TextMode="MultiLine" ></asp:TextBox>
-                                              Characters Left : <asp:Label ID="lblNotificationCount" runat="server" ForeColor="#999999" Text="250"></asp:Label>  
+                                                <asp:TextBox ID="txtNotificationText" placeholder="Enter new notification" runat="server" Width="95%"  style="resize:none;height:80px;" AutoCompleteType="Disabled" CssClass="form-control" MaxLength="1200"  TextMode="MultiLine" ></asp:TextBox>
+                                             <span style="float: right;padding-right: 25PX;"> Characters Left : <asp:Label ID="lblNotificationCount" runat="server" ForeColor="#999999" Text="250"></asp:Label>  </span>
                                           </td>
                                       </tr>
                                        <tr>
@@ -448,10 +448,13 @@
                                       </tr>
                                   
                                   <tr>
-                                      <td colspan="2" style="padding-right:5px;">
-                                          <label style="padding-top:5px;">Valid Till <input runat="server" type="date" id="ValidTill" name="validTill" /></label>
+                                      <td  style="padding-right:5px;">
+                                          <label style="padding-top:5px;">Valid Till </label>
                                          <%-- <asp:Label ID="lblNotificationChar" runat="server" ForeColor="#999999" Text="Characters Left :"></asp:Label>--%>
                                    
+                                      </td>
+                                      <td >
+                                          <label><input class="form-control" runat="server" type="date"  id="ValidTill" name="validTill" /></label>
                                       </td>
                                   </tr> 
                                 

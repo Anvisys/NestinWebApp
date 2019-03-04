@@ -475,73 +475,99 @@
                                    Add Poll 
                                             <span class="fa fa-times" style="float:right;cursor:pointer;" onclick="funClear()" aria-hidden="true"></span>
                                         </div>
-                               <div class="panel-body">
-                         
+                               <div class="panel-body" >
+                         <form class="form-group">
                        
-                                       <div class="row">
-                                            <div class="col-xs-4">  Question :</div>
-                                            <div class="col-xs-8">
-                                                   <asp:TextBox  ID="txtPollQ" runat="server"  CssClass="txtbox_style no-resize" MaxLength="250" TextMode="MultiLine"></asp:TextBox><br />
-                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="Enter Valid Question" ValidationExpression="[a-zA-Z0-9 \s . & _ , ? @]+$" Font-Size="Small" ForeColor="#FF4040" ControlToValidate="txtPollQ" Display="Dynamic"></asp:RegularExpressionValidator>
-                    
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtPollQ" ErrorMessage="*" ForeColor="#FF5050" SetFocusOnError="True"></asp:RequiredFieldValidator>
-                                       
+                                       <div class="row" >
+                                       <div class="col-xs-1"></div>
+                                            <div class="col-xs-3">  Question :</div>
+                                            <div class="col-xs-7">
+                                                   <asp:TextBox  ID="txtPollQ" runat="server"  CssClass="form-control no-resize" MaxLength="250" TextMode="MultiLine"></asp:TextBox><br />
+                                                          
                                             </div>
+                                           <div class="col-xs-1">
+                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="*" ValidationExpression="[a-zA-Z0-9 \s . & _ , ? @]+$" Font-Size="Small" ForeColor="#FF4040" ControlToValidate="txtPollQ" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtPollQ" ErrorMessage="*" ForeColor="#FF5050" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                                       
+                                           </div>
                                        </div>
 
                                        <div class="row">
-                                           <div class="col-xs-4">
+                                           <div class="col-xs-1"></div>
+                                           <div class="col-xs-3">
                                                     Answer1 :
                                            </div>
-                                           <div class="col-xs-8">
-                                                 <asp:TextBox ID="txtPollAns1" runat="server" MaxLength="100" CssClass=" txtbox_style"></asp:TextBox><br />
-                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtPollAns1" ValidationExpression="^[a-zA-Z0-9 \s ?,.&_ ! ]{1,30}$" ErrorMessage="Speacial character not allowed" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
+                                           <div class="col-xs-7">
+                                                 <asp:TextBox ID="txtPollAns1" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox><br />
+                                                     
+                                               
+                                           </div>
+                                           <div class="col-xs-1">
+                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtPollAns1" ValidationExpression="^[a-zA-Z0-9 \s ?,.&_ ! ]{1,30}$" ErrorMessage="*" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
                                                
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtPollAns1" ErrorMessage="*" ForeColor="#FF5050" SetFocusOnError="True"></asp:RequiredFieldValidator>
                                              
                                            </div>
                                        </div>
                                        <div class="row">
-                                           <div class="col-xs-4">  Answer2 :</div>
-                                           <div class="col-xs-8">
-                                                   <asp:TextBox ID="txtPollAns2" runat="server" MaxLength="100" CssClass="txtbox_style"></asp:TextBox><br />
-                                                                       <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtPollAns2" ValidationExpression="^[a-zA-Z 0-9\s ?&,._ !]{1,40}$" ErrorMessage="Speacial character not allowed" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
+                                           <div class="col-xs-1"></div>
+                                           <div class="col-xs-3">  Answer2 :</div>
+                                           <div class="col-xs-7">
+                                                                   <asp:TextBox ID="txtPollAns2" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox><br />
+                                               
+                                                                              
+                                           </div>
+                                           <div class="col-xs-1">
+                                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtPollAns2" ValidationExpression="^[a-zA-Z 0-9\s ?&,._ !]{1,40}$" ErrorMessage="*" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
                                    
                                                       <asp:RequiredFieldValidator ID="RequireAddflatOwnername" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtPollAns2" SetFocusOnError="True"></asp:RequiredFieldValidator>
-                                                     
+                          
                                            </div>
                                        </div>
                                        <div class="row">
-                                           <div class="col-xs-4">   Answer3 :</div>
-                                           <div class="col-xs-8">
-                                                 <asp:TextBox ID="txtPollAns3" runat="server" MaxLength="100" CssClass="txtbox_style"></asp:TextBox><br />
-                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="Speacial character not allowed" ValidationExpression="^[a-zA-Z 0-9\s ?,&._ !]{1,50}$" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtPollAns3" Display="Dynamic"></asp:RegularExpressionValidator>
-                                               <br />
+                                           <div class="col-xs-1"></div>
+                                           <div class="col-xs-3">   Answer3 :</div>
+                                           <div class="col-xs-7">
+                                                 <asp:TextBox ID="txtPollAns3" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox><br />
+                                                          
+                                               
+                                           </div>
+                                           <div class="col-xs-1">
+                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="Speacial character not allowed" ValidationExpression="^[a-zA-Z 0-9\s ?,&._ !]{1,50}$" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtPollAns3" Display="Dynamic"></asp:RegularExpressionValidator>
                                            </div>
 
                                        </div>
                                        <div class="row">
-                                           <div class="col-xs-4">  Answer4 :</div>
-                                           <div class="col-xs-8">
-                                                <asp:TextBox ID="txtPollAns4" runat="server" MaxLength="100" CssClass="txtbox_style"></asp:TextBox><br />
-                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtPollAns4" ValidationExpression="^[a-zA-Z 0-9\s ?&._ !]{1,30}$" ErrorMessage="Speacial character not allowed" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
+                                           <div class="col-xs-1"></div>
+                                           <div class="col-xs-3">  Answer4 :</div>
+                                           <div class="col-xs-7">
+                                                <asp:TextBox ID="txtPollAns4" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox><br />
                                            </div>
-                                               <br /> <br />
+                                           <div class="col-xs-1">
+                                              <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtPollAns4" ValidationExpression="^[a-zA-Z 0-9\s ?&._ !]{1,30}$" ErrorMessage="Speacial character not allowed" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
+
+                                           </div>
+                                               
                                        </div>
 
                                        <div class="row">
-                                           <div class="col-xs-4">
+                                           <div class="col-xs-1"></div>
+                                           <div class="col-xs-3">
                                                   End Date :
                                            </div>
-                                           <div class="col-xs-8">
-                                               <asp:TextBox ID="txtEndDate" runat="server" CssClass="txtbox_style"  onchange="ValidateDate()"  ></asp:TextBox>
+                                           <div class="col-xs-7">
+                                               <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control"  onchange="ValidateDate()"  ></asp:TextBox>
+                                           </div>
+                                           <div class="col-xs-1">
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtEndDate" SetFocusOnError="True"></asp:RequiredFieldValidator>
+
                                            </div>
                                        </div>
                                        <div class="row">
+                                           <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtPollAns1" ValidationExpression="^[a-zA-Z0-9 \s ?,.&_ ! ]{1,30}$" ErrorMessage="Speacial character not allowed" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
                                            <asp:Label ID="lblPollstatus" runat="server" ForeColor="#409FFF" Font-Size="Small"></asp:Label>
                                        </div>
-
+                                   </form>
                                </div>
                                <div class="panel-footer" style="text-align:right;">
                                    <button type="button" id="CancelPoll_Button"  onclick="funClear()" class="btn btn-danger">Cancel</button>
