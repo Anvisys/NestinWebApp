@@ -50,7 +50,7 @@ public class Complaint
             String UpdateQuery = "insert into dbo.Complaints(CompID,Descrption,CompTypeID,SeverityID,Assignedto,ResidentID,FlatNumber,ModifiedAt,CurrentStatus, SocietyID) values('" +
                 CompID + "','" + Descrption + "','" + CompTypeID + "','" + SeverityID + "','" + Assignedto + "','" + ResidentID + "','" + FlatNumber  + "',GETUTCDATE() ,'" + CurrentStatus +"' ,'" + SessionVariables.SocietyID+  "'   )";
             bool result = daAccess.Update(UpdateQuery);
-            return true;
+            return result;
         }
         catch (Exception ex)
         {
