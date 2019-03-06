@@ -181,7 +181,7 @@
                 VisitorEntryHour = +endTime.split(":")[0];
 
                 var time = (VisitorEntryHour+1).toString() + ":00 Hrs";
-                alert(VisitorEntryHour);
+              //  alert(VisitorEntryHour);
                 $("#btnEndTime").text(time);
             });
 
@@ -277,7 +277,7 @@
                 },
                 failure: function (response) {
                     document.getElementById("verify_loading").style.display = "none";
-                    alert(response.d);
+                   // alert(response.d);
                     sessionStorage.clear();
                 }
             });
@@ -326,7 +326,7 @@
                 },
                 failure: function (response) {
                     document.getElementById("data_loading").style.display = "none";
-                    alert(response.d);
+                  //  alert(response.d);
                     sessionStorage.clear();
                 }
             });
@@ -372,10 +372,11 @@
 
 
                 viewString += '<div class=\"row layout_shadow_table\">' +
-                    '<div class=\"col-xs-4\"><b>Visitor: <span class="fa fa-circle" style="color:red;"></span></b> <br/> <span class="fa fa-user" style="color:#2b7a2d;"></span>  ' + VisitorName + '<br /><span class="fa fa-phone" style="color:#2b7a2d;"></span> ' + VisitorMobile + '<br /><span class="fa fa-home" style="color:#2b7a2d;"></span> ' + VisitorAddress + '</div>' +
-                         '<div class=\"col-xs-4 ' + bgClass + '\"><br/><span class="fa fa-question-circle" style="color:#2b7a2d;"></span> ' + VisitPurpose + '<br/>' + time + '<br /><span class="fa fa-info-circle" style="color:#2b7a2d;"></span><p1> ' + status + '</p1></div>' +
-                        
-                         '<div class=\"col-xs-4 Host\"><b> Host: <br/><span class="fa fa-user" style="color:#2b7a2d;"></span> </b>' + HostName + ',' + HostType+ '<br/><span class="fa fa-phone" style="color:#2b7a2d;"></span>' + VisitorMobile + '<br/><span class="fa fa-home" style="color:#2b7a2d;"></span>' + FlatNumber + '</div>' +
+                         '<div class=\"col-xs-2\"><b>Visitor: <span class="fa fa-circle" style="color:red;"></span></b> <img id="TenantImage" src="Images/Icon/profile.jpg" height="60" width="60" style="border-radius:50%;"/> </div>' +
+                         '<div class=\"col-xs-4\"> <br/> <span class="fa fa-user" style="color:#2b7a2d;"></span>  ' + VisitorName + '<br /><span class="fa fa-phone" style="color:#2b7a2d;"></span> ' + VisitorMobile + '<br /><span class="fa fa-home" style="color:#2b7a2d;"></span> ' + VisitorAddress + '</div>' +
+                         '<div class=\"col-xs-3 ' + bgClass + '\"><br/><span class="fa fa-question-circle" style="color:#2b7a2d;"></span> ' + VisitPurpose + '<br/>' + time + '<br /><span class="fa fa-info-circle" style="color:#2b7a2d;"></span><p1> ' + status + '</p1></div>' +
+       
+                         '<div class=\"col-xs-3 Host\"><b> Host: <br/><span class="fa fa-user" style="color:#2b7a2d;"></span> </b>' + HostName + ',' + HostType+ '<br/><span class="fa fa-phone" style="color:#2b7a2d;"></span>' + VisitorMobile + '<br/><span class="fa fa-home" style="color:#2b7a2d;"></span>' + FlatNumber + '</div>' +
                       '</div>';
 
             }
@@ -399,9 +400,9 @@
             visitDate = document.getElementById("btnEntryDate").value;
           
 
-            alert(visitDate);
+            //alert(visitDate);
             var start = new Date(visitDate);
-            alert(start);
+           // alert(start);
 
             var month = +start.getMonth() + 1;
             var strMonth="";
@@ -445,7 +446,7 @@
 
             var strEndDate = start.getFullYear() + "-" + strMonth + "-" + strDay +  "T" + endHrs + ":00:00" ;
            
-            alert(strStartDate);
+           // alert(strStartDate);
            
      
         //   endTime = document.getElementById("btnStartTime").value;
@@ -460,7 +461,7 @@
             var reqBody = "{\"VisitorName\":\"" + name + "\",\"VisitorMobile\":\"" + mobile + "\",\"VisitorAddress\":\"" + address + " \",\"VisitPurpose\":\"" + purpose + "\",\"StartTime\":\"" + strStartDate + "\",\"EndTime\":\"" + strEndDate +
                            "\",\"ResID\":\"" + ResId + "\",\"FlatNumber\":\"" + FlatNumber + "\",\"SocietyId\":\"" + SocietyId + "\"}"
 
-            alert(reqBody);
+          //  alert(reqBody);
 
             $.ajax({
                 dataType: "json",
@@ -470,7 +471,7 @@
                 type: 'post',
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    alert(JSON.stringify(data));
+               //     alert(JSON.stringify(data));
                     document.getElementById("post_loading").style.display = "none";
 
                     if (data.Response == "Fail") {
@@ -583,7 +584,7 @@
         function validateForm() {
   var x = document.forms["myForm"]["fname"].value;
   if (x == "") {
-    alert("Name must be filled out");
+  //  alert("Name must be filled out");
     return false;
   }
 }
@@ -593,14 +594,14 @@
 <body>
     <form id="form1" runat="server">
      <div class="container-fluid" style="background-color:#f7f7f7;">
-                         <div class="row">
-                                 <div class="col-sm-5">
+                         <div class="row" style="margin-top:15px;">
+                                 <div class="col-sm-6">
                                      <div><h4 class="pull-left ">Visitor </h4></div>
                                  </div>
-                             <div class="col-sm-5 pull-right">
-                                     <button id="btnAddVisitor" class="btn_my btn" type="button"><i class="fa fa-plus"></i> Add Visitor</button>
+                             <div class=" pull-right"style="margin-right:50px;">
+                                     <button id="btnAddVisitor" class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus"></i> Add Visitor</button>
 
-                                    <button id="btnVerifyVisitor" style="background-color:#2ECC71!important;border-color:#2ECC71!important;" class="btn_my btn" type="button"><i class="fa fa-check"></i> Verify</button>
+                                    <button id="btnVerifyVisitor"  class="btn btn-primary btn-sm" type="button"><i class="fa fa-check"></i> Verify</button>
                                  </div>
                              </div>
    
@@ -618,60 +619,94 @@
         <div id="AddVisitorModal" class="modal">
              
                   
-                  <div class="panel panel-primary" style="width:350px;background-color:#f2f2f2;margin: auto;">
+                  <div class="panel panel-primary" style="width:400px;background-color:#fff;margin: auto;">
                               <div class="panel-heading">
                                   Add Visitor <span class="fa fa-times" id="icon_close" style="cursor:pointer;float:right;"></span>
                               </div>
                               <div class="panel-body" >
+                                  <form name="visitor">
+                                      <div class="container-fluid">
+                                          <div class="row" style="margin-top:0px">
+                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Name: </label>
+                                            <div class="col-xs-8">
+                                                <input type="text" class="form-control col-xs-8" id="Name"   placeholder="Enter Name" name="Name" />
+                                            </div>
+                                          </div>
+                                          <div class="row"style="margin-top:5px">
+                                            <label class="col-xs-4" for="MobileNo">Mobile No:</label>
+                                            <div class="col-xs-8">
+                                                 <input type="text" class="form-control col-xs-8" id="MobileNo"  placeholder="Enter Mobile No." name="MobileNo"/>
+  
+                                            </div>
+                                          </div>
+                                          <div class="row"style="margin-top:5px">
+                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Address: </label>
+                                            <div class="col-xs-8">
+                                                 <textarea class="form-control col-xs-8" rows="2" id="Address" style="resize:none;" name="Address" placeholder="Enter Address"></textarea>
+                                            </div>
+                                          </div>
+                                          <div class="row"style="margin-top:5px">
+                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Purpose: </label>
+                                            <div class="col-xs-8">
+                                             <input type="text" name="Purpose" class="form-control col-xs-8"id="Purpose" placeholder="Enter Purpose"/>
+                                            </div>
+                                          </div>
+                                          <div class="row"style="margin-top:5px">
+                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Time / Date </label>
+                                            <div class="col-xs-8">
+                                             <input type="text" class="form-control col-xs-4"   id="btnEntryDate"  name="StartDate"/>
+                                             <select class="form-control col-xs-4" id="timeList"></select>
+                                            </div>
+                                          </div>
+                                          <div class="row"style="margin-top:5px">
+                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Valid Till: </label>
+                                            <div class="col-xs-8">
+                                           <label  class="form-control col-xs-8" id="btnEndTime" ></label>
+                                            </div>
+                                          </div>
+                                      </div>
+                                 
+                                  </form>
 
-                                <form class="form-inline" method="post" >
+
+                               <%-- <form class="form-inline" method="post" >
                                            <div class="form-group" >
                                                
                                                   <label class="col-xs-4"  for="Name">Name:</label>
                                                 
-                                               
-                                                <input type="text" class="form-control col-xs-8" id="Name" style="width:210px;"  placeholder="Enter Name" name="Name" required/>
+                                                <input type="text" class="form-control col-xs-8" id="Name"   placeholder="Enter Name" name="Name" />
                                               
                                             </div>
                                            <div class="form-group" >
                                               <label class="col-xs-4" for="MobileNo">Mobile No:</label>
      
-                                                <input type="text" class="form-control col-xs-8" id="MobileNo" style="width:210px;" placeholder="Enter Mobile No." name="MobileNo"/>
+                                                <input type="text" class="form-control col-xs-8" id="MobileNo"  placeholder="Enter Mobile No." name="MobileNo"/>
     
                                             </div>
                                            <div class="form-group">
    
                                       <label class="col-xs-4" >Address:</label>
  
-                                      <textarea class="form-control col-xs-8" rows="2" id="Address" style="width:210px;resize:none;" name="Address" placeholder="Enter Address"></textarea>
+                                      <textarea class="form-control col-xs-8" rows="2" id="Address" resize: none;" name="Address" placeholder="Enter Address"></textarea>
 
                                        </div>
                                            <div class="form-group">
                                           <label class="col-xs-4" for="Offer">Purpose:</label>
   
-                                          <input type="text" name="Purpose" class="form-control col-xs-8"id="Purpose" style="width:210px;" placeholder="Enter Purpose"/>
+                                          <input type="text" name="Purpose" class="form-control col-xs-8"id="Purpose" placeholder="Enter Purpose"/>
                                        </div>
                                     <div class="form-group">
      
                                           <label class="col-xs-4" for="Owner">Time / Date</label>
-                                        <input type="text" class="form-control col-xs-4" style="width:102px;"  id="btnEntryDate"  name="StartDate"/>
-                                        <select class="form-control col-xs-4" style="width:108px;" id="timeList">
-                                           
-                                         
-                                        </select>
+                                        <input type="text" class="form-control col-xs-4"   id="btnEntryDate"  name="StartDate"/>
+                                        <select class="form-control col-xs-4" id="timeList"></select>
                                 
-                                            
-                                              
-                                            </div>
-                                     <div class="form-group" >
-     
-                                         </div>
-                                    
-
+                                   </div>
+                                  
                                            <div class="form-group">
                                           <label class="col-xs-4" for="Owner">Valid Till:</label>
       
-                                            <label style="width:210px;" class="form-control col-xs-8" id="btnEndTime" ></label>
+                                            <label  class="form-control col-xs-8" id="btnEndTime" ></label>
       
                                             </div>
                                     
@@ -679,10 +714,10 @@
                                       <div id="post_loading" class="layout-overlay" style="margin-top:50px; left:100px; width:100%; text-align:center;vertical-align:middle;">
                                        <img src="Images/Icon/ajax-loader.gif" style="width:30px; height:30px;margin-top:35px;" />
                                       </div>
-                                    </form>
+                                    </form>--%>
                               </div>
 
-                              <div class="panel-footer" style="text-align:right;">
+                              <div class="panel-footer" style="text-align:right; background-color:#fff;">
                                   <button type="button" id="btnCancel"  style="margin-top:5px;" class="btn btn-danger">Cancel</button>
                                   <button type="button" id="btnSubmit"  style="margin-top:5px;" class="btn btn-primary">Submit</button>
                                           

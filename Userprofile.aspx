@@ -38,14 +38,14 @@
 
         var FlatID = '';
         var ResiID = '';
-         var UserID = '';
+        var UserID = '';
+        var api_url = '';
        
         window.onload = function SetImage() {
-            FlatID = '<%=Session["FlatID"] %>';
-            ResiID = '<%=Session["ResiID"] %>';
-                ResiID = '<%=UserID %>';
+          
          <%--   // document.getElementById("uploadPreview").src = '/AppImage/Userimages/' + ResiID + '.png';
             // alert(FlatID);--%>
+
             document.getElementById("uploadPreview").src = "GetImages.ashx?UserID=" + UserID;
         };
 
@@ -71,6 +71,13 @@
                 $(document).ready(function () {
 
                     window.parent.FrameSourceChanged();
+                    api_url = '<%=Session["api_url"] %>';
+                
+                    FlatID = '<%=Session["FlatID"] %>';
+                    ResiID = '<%=Session["ResiID"] %>';
+                    UserID = '<%=UserID %>';
+
+
 
                     $("#update").click(function () {               
                         //  $("#uploadImage").trigger('click');
@@ -249,8 +256,7 @@
         var res_id;
 
         window.onload = function GetData() {
-            res_id = '<%=Session["ResiID"] %>';
-            user_login = '<%=Session["UserLogin"] %>';
+        
             sessionStorage.clear();
             //  GetUserData(user_login);
 
@@ -359,7 +365,8 @@
                    // $("#divSetting").hide();
                 } else {
                   
-                    GetSettingData(res_id);
+                    GetSettingData();
+                   
 
                 }
                 $('#divSetting').toggle();
@@ -391,15 +398,68 @@
             });
 
 
+            $('#btnUpdateSetting').click(function(){
+                UpdateSettingData();
+
+            });
+
 
         });
 
-        function GetSettingData(res_id) {
+        function UpdateSettingData() {
 
+            var billNotice = $('#<%=chkBillingNotice.ClientID %>').prop('checked');
+            var billMail = $('#<%=chkBillingMail.ClientID %>').prop('checked');
+            var billSms  =   $('#<%=chkBillingSMS.ClientID %>').prop('checked');
+
+            var compNotice=  $('#<%=chkComplaintNotice.ClientID %>').prop('checked');
+            var compMail =   $('#<%=chkComplaintMail.ClientID %>').prop('checked');
+            var compSms =    $('#<%=chkComplaintSMS.ClientID %>').prop('checked');
+
+            var ForumNotice=    $('#<%=chkForumNotice.ClientID %>').prop('checked');
+            var ForumMail  =    $('#<%=chkForumMail.ClientID %>').prop('checked');
+            var ForumSms  =     $('#<%=chkForumSMS.ClientID %>').prop('checked');
+                    
+            var Notice    =    $('#<%=ChkNoticeNotification.ClientID %>').prop('checked');
+            var noticeMail=    $('#<%=chkNoticeMail.ClientID %>').prop('checked');
+            var noticeSms = $('#<%=chkNoticeSMS.ClientID %>').prop('checked');
+            
+            
+            return;
+               
+
+
+            var settingData = "{\"UserId\":\""+UserID+ "\", \"BillingNotification\":\"" + billNotice + "\",\"BillingMail\":\"" + billMail + "\", \"BillingSMS\":\"" +billSms
+                    + "\", \"ComplaintNotification\":\"" + compNotice + "\", \"ComplaintMail\":\"" + compMail + "\", \"ComplaintSMS\":\"" +compSms + "\", \"forumNotification\":\"" + ForumNotice
+                + "\", \"forumMail\":" + ForumMail + ", \"forumSMS\":\"" + ForumSms + ", \"NoticeNotification\":\"" + Notice
+                + ", \"NoticeMail\":\"" + noticeMail+ "\", \"NoticeSMS\":\"" + noticeSms+ "\"}";
+            
+             var updateUrl = api_url + "/api/User/Setting/" + UserID;
+            
+            alert(settingData);
+            alert(updateUrl);
             $.ajax({
-                type: "POST",
-                url: "Userprofile.aspx/GetUserSetting",
-                data: '{ResID:"' + res_id + '"}',
+                type: "Post",
+                url: updateUrl,
+                data: settingData,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccessSetting,
+                failure: function (response) {
+                    alert(response.d);
+                    sessionStorage.clear();
+                }
+            });
+
+        };
+
+        function GetSettingData() {
+             
+            var compUrl = api_url + "/api/User/Setting/" + UserID;
+            alert(compUrl);
+            $.ajax({
+                type: "Get",
+                url: compUrl,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: OnSuccessSetting,
@@ -412,38 +472,28 @@
 
 
         function OnSuccessSetting(response) {
-           
-           var js = jQuery.parseJSON(response.d);
+            alert(JSON.stringify(response));
+           var js = response;
 
-           
-            if (js.result == "Error") {
-                alert("Error getiing settings data");
-            }
-            else if (js.length > 0) {
+                $('#<%=chkBillingNotice.ClientID %>').prop('checked', js.BillingNotification);
+                $('#<%=chkBillingMail.ClientID %>').prop('checked', js.BillingMail);
+                $('#<%=chkBillingSMS.ClientID %>').prop('checked', js.BillingSMS);
 
-                var length = js.length;
+                $('#<%=chkComplaintNotice.ClientID %>').prop('checked', js.ComplaintNotification);
+                $('#<%=chkComplaintMail.ClientID %>').prop('checked', js.ComplaintMail);
+                $('#<%=chkComplaintSMS.ClientID %>').prop('checked', js.ComplaintSMS);
 
-                for (var i = 0; i < length; i++) {
-                  
-                    $('#<%=chkComplaintNotice.ClientID %>').prop('checked', js[i].ComplaintNotification);
+                $('#<%=chkForumNotice.ClientID %>').prop('checked', js.forumNotification);
+                $('#<%=chkForumMail.ClientID %>').prop('checked', js.forumMail);
+                $('#<%=chkForumSMS.ClientID %>').prop('checked', js.forumSMS);
+                    
+                $('#<%=ChkNoticeNotification.ClientID %>').prop('checked', js.NoticeNotification);
+                $('#<%=chkNoticeMail.ClientID %>').prop('checked', js.NoticeMail);
+                $('#<%=chkNoticeSMS.ClientID %>').prop('checked', js.NoticeSMS);
 
-                    $('#<%=chkForumNotice.ClientID %>').prop('checked', js[i].forumNotification);
-
-                    $('#<%=chkBillingNotice.ClientID %>').prop('checked', js[i].BillingNotification);
-
-                    $('#<%=chkComplaintMail.ClientID %>').prop('checked', js[i].ComplaintMail);
-
-                    $('#<%=chkForumMail.ClientID %>').prop('checked', js[i].forumMail);
-
-                    $('#<%=chkBillingMail.ClientID %>').prop('checked', js[i].BillingMail);
-
-                }
                 $("#divSetting").show();
-            }
-            else {
-                //alert("NoData")
-            }
-
+         
+           
         };
 
     </script>
@@ -752,30 +802,43 @@ div.show-image #update {
            
                                                 <div id="divSetting" class="layout_shadow_box container-fluid" style="padding:20px;display:none;">
                                                     <div class="row" style="margin-top:10px;">
-                                                            <div class="col-sm-6" style="text-align:left; padding-left:10px; font-size:medium; color:rgb(51, 51, 51);">
-                                                          <label>Send Notifications on :</label> <br />
+                                                            <div class="col-sm-4" style="text-align:left; padding-left:10px; font-size:medium; color:rgb(51, 51, 51);">
+                                                          <label><b>Send Notifications on :</b></label> <br />
                                                        
-                                                    
-                                       
-                                                                <asp:CheckBox runat="server" ID="chkComplaintNotice" Text="On Complaint Edit"/> <br />
+                                                                <asp:CheckBox runat="server" ID="chkComplaintNotice" Text=" Complaint Edit"/> <br />
                         
-                                                                <asp:CheckBox runat="server" ID="chkForumNotice" Text="On Forum Update"/>  <br />
+                                                                <asp:CheckBox runat="server" ID="chkForumNotice" Text=" Forum Update"/>  <br />
                         
-                                                                <asp:CheckBox runat="server" ID="chkBillingNotice" Text="On vendor Update"/>  <br />
+                                                                <asp:CheckBox runat="server" ID="chkBillingNotice" Text=" Bill Update"/>  <br />
+
+                                                                <asp:CheckBox runat="server" ID="ChkNoticeNotification" Text=" Notification Update"/>  <br />
                        
                                                          </div>
                                                         
                                                          
-                                                            <div class="col-sm-6" style="text-align:left; padding-left:10px; font-size:medium; color:#000;">
-                                                                <label>Send Mails on :</label><br />
+                                                            <div class="col-sm-4" style="text-align:left; padding-left:10px; font-size:medium; color:#000;">
+                                                                <label><b>Send Mails on : </b></label><br />
                                                                
-                                                            
-                                                    
-                                                                        <asp:CheckBox runat="server" ID="chkComplaintMail" Text="On Complaint Edit"/> <br />
+                                                                        <asp:CheckBox runat="server" ID="chkComplaintMail" Text=" Complaint Edit"/> <br />
                                    
-                                                                        <asp:CheckBox runat="server" ID="chkForumMail" Text="On Forum Update"/> <br />
+                                                                        <asp:CheckBox runat="server" ID="chkForumMail" Text=" Forum Update"/> <br />
                                    
-                                                                <asp:CheckBox runat="server" ID="chkBillingMail" Text="On Bill Update"/> <br />
+                                                                        <asp:CheckBox runat="server" ID="chkBillingMail" Text=" Bill Update"/> <br />
+
+                                                                        <asp:CheckBox runat="server" ID="chkNoticeMail" Text=" Notification Update"/> <br />
+                                   
+                                                            </div>
+
+                                                        <div class="col-sm-4" style="text-align:left; padding-left:10px; font-size:medium; color:#000;">
+                                                                <label><b>Send Sms on :</b></label><br />
+                                                               
+                                                                        <asp:CheckBox runat="server" ID="chkComplaintSMS" Text=" Complaint Edit"/> <br />
+                                   
+                                                                        <asp:CheckBox runat="server" ID="chkForumSMS" Text=" Forum Update"/> <br />
+                                   
+                                                                        <asp:CheckBox runat="server" ID="chkBillingSMS" Text=" Bill Update"/> <br />
+
+                                                                        <asp:CheckBox runat="server" ID="chkNoticeSMS" Text=" Notification Update"/> <br />
                                    
                                                             </div>
                                                          </div>

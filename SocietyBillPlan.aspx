@@ -316,7 +316,7 @@
 
                 
                  <div id="NewEditSocietyPlanForm" class="modal">
-                     <div class="panel panel-primary popup_box_size">
+                     <div class="panel panel-primary popup_box_size" style="width:400px;">
                                  <div class="panel-heading">
               
                                         <asp:Label ID="lblNewEdit" runat="server" Text="New Plan " ForeColor="White"></asp:Label>
@@ -325,14 +325,14 @@
                         
                                 </div>
                          
-                             <div class="panel-body">
+                             <div class="panel-body"style="margin:20px;">
                                
                                 <div class="row">
-                                    <div class="col-xs-6">   Bill Type :</div>
-                                    <div class="col-xs-6"> 
+                                    <div class="col-xs-4">   Bill Type :</div>
+                                    <div class="col-xs-8"> 
                                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:DropDownList ID="drpAddBillType" runat="server" CssClass="ddl_style" AutoPostBack="true" OnSelectedIndexChanged="drpAddBillType_SelectedIndexChanged">
+                                                    <asp:DropDownList ID="drpAddBillType" runat="server" CssClass="form-control ddl_style" AutoPostBack="true" OnSelectedIndexChanged="drpAddBillType_SelectedIndexChanged">
                                                         <asp:ListItem Value="0">Select</asp:ListItem>
                                                         <asp:ListItem>Electricity</asp:ListItem>
                                                         <asp:ListItem>Maintenance</asp:ListItem>
@@ -341,7 +341,7 @@
                                                         <asp:ListItem>Water</asp:ListItem>
                                                         <asp:ListItem>Security</asp:ListItem>
                                                         <asp:ListItem>CulturalActivities</asp:ListItem>
-                                                    </asp:DropDownList> <br />
+                                                    </asp:DropDownList> 
                                                     <asp:Label ID="lblBillCheck" runat="server" Font-Size="Small" ForeColor="#FF6666"></asp:Label>
                                                 </ContentTemplate>
 
@@ -350,10 +350,10 @@
                                     </div>
                                 </div>
                              
-                                  <div class="row" style="margin-top:5px;">
-                                    <div class="col-xs-6">  Charge Type</div>
-                                    <div class="col-xs-6">
-                                        <asp:DropDownList ID="drpchargetype" runat="server" Width="120" CssClass="ddl_style">
+                                  <div class="row" style="margin-top:0px;">
+                                    <div class="col-xs-4">  Charge Type</div>
+                                    <div class="col-xs-8">
+                                        <asp:DropDownList ID="drpchargetype" runat="server"  CssClass="form-control ddl_style">
                                                   <asp:ListItem>Manual</asp:ListItem>
                                                   <asp:ListItem>Rate</asp:ListItem>
                                                   <asp:ListItem>Fixed</asp:ListItem>
@@ -362,19 +362,19 @@
                                     </div>
                                 </div>
                                  
-                                  <div class="row" style="margin-top:5px;">
-                                    <div class="col-xs-6"> Rate</div>
-                                    <div class="col-xs-6">
-                                          <asp:TextBox ID="txtBillRate" runat="server" Width="120"></asp:TextBox>
+                                  <div class="row" style="margin-top:0px;">
+                                    <div class="col-xs-4"> Rate</div>
+                                    <div class="col-xs-8">
+                                          <asp:TextBox ID="txtBillRate"  CssClass="form-control" runat="server" ></asp:TextBox>
                                          <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*" ForeColor="Red" ControlToValidate="txtBillRate"></asp:RequiredFieldValidator>
                                     </div>
                                 </div> 
-                                 <div class="row" style="margin-top:5px;">
-                                     <div class="col-xs-6">
+                                 <div class="row" style="margin-top:0px;">
+                                     <div class="col-xs-4">
                                          Cycle
                                      </div>
-                                     <div class="col-xs-6">
-                                         <asp:DropDownList ID="drpbillcycle" runat="server" CssClass="ddl_style">
+                                     <div class="col-xs-8">
+                                         <asp:DropDownList ID="drpbillcycle" runat="server" CssClass="form-control ddl_style">
                                                 <asp:ListItem>Daily</asp:ListItem>
                                               <asp:ListItem>Monthly</asp:ListItem>
                                               <asp:ListItem>Quarterly</asp:ListItem>
@@ -384,11 +384,11 @@
                                  </div>
 
 
-                                 <div class="row" style="margin-top:5px;">
-                                     <div class="col-xs-6">
+                                 <div class="row" style="margin-top:0px;">
+                                     <div class="col-xs-4">
                                           Apply To :
                                      </div>
-                                     <div class="col-xs-6">
+                                     <div class="col-xs-8">
                                           <asp:RadioButton ID="radioall" runat="server"  GroupName="Radiobill"/>
                                                                 <label>All</label><br />
                                                                 <asp:RadioButton ID="radioselected" runat="server"  GroupName="Radiobill"/>

@@ -785,7 +785,7 @@ hr {
                                                         <label>Category :</label>
                                                     </td>
                                                     <td style="width: 150px;">
-                                                        <asp:DropDownList ID="drpVendorcategory" runat="server" CssClass="ddl_style" Width="150px">
+                                                        <asp:DropDownList ID="drpVendorcategory" runat="server" CssClass="ddl_style form-control" Width="150px">
                                                         </asp:DropDownList>
                                                     </td>
                                                     <td style="width: 5px;"></td>
@@ -796,7 +796,7 @@ hr {
                                                         <label>Vendor Name :</label>
                                                     </td>
                                                     <td style="width: 150px;">
-                                                        <asp:TextBox ID="txtvendorname" runat="server" CssClass="txtbox_style" EnableViewState="false" Width="150px"></asp:TextBox><br />
+                                                        <asp:TextBox ID="txtvendorname" runat="server" CssClass="form-control" EnableViewState="false" Width="150px"></asp:TextBox>
                                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ValidationExpression="^[a-zA-Z\s0-9.]{0,25}$" ControlToValidate="txtvendorname" ErrorMessage="Enter valid Name" Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Add_Vendor" Display="Dynamic"></asp:RegularExpressionValidator>
                                                     </td>
                                                     <td style="width: 5px;">
@@ -810,8 +810,8 @@ hr {
                                                         <label>Contact No.1 :</label>
                                                     </td>
                                                     <td style="width: 150px;">
-                                                        <asp:TextBox ID="txtvendromobile" runat="server" CssClass="txtbox_style" EnableViewState="false" Width="150px" MaxLength="10"></asp:TextBox>
-                                                        <br />
+                                                        <asp:TextBox ID="txtvendromobile" runat="server" CssClass="form-control" EnableViewState="false" Width="150px" MaxLength="10"></asp:TextBox>
+                                                        
                                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator3"  runat="server" ValidationExpression="^[0-9]+$" ControlToValidate="txtvendromobile" ErrorMessage="Enter valid No." Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Add_Vendor" Display="Dynamic"></asp:RegularExpressionValidator>
                                                     </td>
                                                     <td style="width: 5px;">
@@ -823,8 +823,8 @@ hr {
                                                         <label>Contact No.2 :</label>
                                                     </td>
                                                     <td style="width: 150px;">
-                                                        <asp:TextBox ID="txtMobile2" runat="server" CssClass="txtbox_style" EnableViewState="false" Width="150px" MaxLength="10"></asp:TextBox>
-                                                        <br />
+                                                        <asp:TextBox ID="txtMobile2" runat="server" CssClass="txtbox_style form-control" EnableViewState="false"  Width="150px" MaxLength="10"></asp:TextBox>
+                                                        
                                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationExpression="^[0-9]+$" ControlToValidate="txtvendromobile" ErrorMessage="Enter valid No." Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Add_Vendor" Display="Dynamic"></asp:RegularExpressionValidator>
                                                     </td>
                                                     <td style="width: 5px;">
@@ -839,7 +839,7 @@ hr {
                                                         <label>Address-1 :</label>
                                                     </td>
                                                     <td style="width: 150px;">
-                                                        <asp:TextBox ID="txtvendoraddress" runat="server" EnableViewState="false" Width="150px" CssClass="txtbox_style"></asp:TextBox>
+                                                        <asp:TextBox ID="txtvendoraddress" runat="server" EnableViewState="false" Width="150px" CssClass="form-control txtbox_style"></asp:TextBox>
                                                     </td>
                                                     <td style="width: 5px;">
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtvendoraddress" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Vendor"></asp:RequiredFieldValidator>
@@ -851,7 +851,7 @@ hr {
                                                         <label>Address-2 :</label>
                                                     </td>
                                                     <td style="width: 150px;">
-                                                        <asp:TextBox ID="txtvendoraddress2" runat="server" EnableViewState="false" Width="150px" CssClass="txtbox_style"></asp:TextBox>
+                                                        <asp:TextBox ID="txtvendoraddress2" runat="server" EnableViewState="false" Width="150px" CssClass="form-control txtbox_style"></asp:TextBox>
                                                     </td>
                                                     <td style="width: 5px;">
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtvendoraddress" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Vendor"></asp:RequiredFieldValidator>

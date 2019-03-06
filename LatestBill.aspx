@@ -122,7 +122,7 @@
                // FlatNumber + "&" + BillStartDate + "&" + BillEndDate + "&" + CurrentBillAmount + "&" + CycleType + "&" + PreviousMonthBalance + "&" + BillID + "&" + PayID + "&" + CurrentMonthBalance;
                 var res = text.split("&");
                 flatNumber = res[0];
-                alert(flatNumber);
+               // alert(flatNumber);
 
                 $("#lblFlat").html(res[0]);
                 $("#lblBillTypee").html("");
@@ -134,7 +134,7 @@
                 $("#lblDueFor").html(res[2]);
                 $("#lblBillGenDate").html(res[2]);
                 $("#HiddenPayMannualID").val(res[7]);
-                alert(res[7]);
+             //   alert(res[7]);
               
 
                 $("#newPaymentForm").show();
@@ -200,9 +200,9 @@
                                     document.getElementById("HiddenGeneratedBillData").value = FlatNumber + "&" + BillStartDate + "&" + BillEndDate + "&" + CurrentBillAmount + "&" + CycleType + "&" + PreviousMonthBalance + "&" + BillID + "&" + PayID + "&" + CurrentMonthBalance;
 
                                     document.getElementById("HiddenAmountPaidDate").value = AmountPaidDate;
-                                    alert(a);
+                                  //  alert(a);
                                     var status = theElement.parentNode.parentNode.cells[7].innerHTML;
-                                    alert(b);
+                                 //   alert(b);
                                     //Added by Aarshi on 26 Sept 2017
                                     flatNumber = FlatNumber;
                                     billType = BillType;
@@ -217,7 +217,7 @@
                                     amountPaid = AmountPaid;
                                     currentMonthBalance = CurrentMonthBalance;
                                     //Ends here
-                                    alert(1);
+                                  //  alert(1);
                                     var Posx = 0;
                                     var Posy = 0;
 
@@ -814,7 +814,7 @@
                                    <div class="panel-body">
                                     
                              <label  class="lbltxt" style="width:150px;">Flat Number :</label>
-                              <asp:Label width="100" ID="lblFlatNuber" runat="server" Font-Size="Small"></asp:Label> <br />
+                              <asp:Label width="100" ID="lblFlatNuber"  runat="server" Font-Size="Small"></asp:Label> <br />
 
                                       
                              <label  class="lbltxt" style="width:150px;"> Bill Type :  </label>
@@ -843,7 +843,7 @@
                              <label class="lbltxt" style="width:150px;">Till Date : </label>
                             
                                                
-                                           <asp:TextBox ID="txtBillDate" runat="server"></asp:TextBox>                     
+                                           <asp:TextBox ID="txtBillDate" CssClass="form-control" runat="server"></asp:TextBox>                     
                                 <%-- >  <asp:Label ID="lblTillDate" runat="server" Font-Size="Small"></asp:Label>--%>
                                  
                            
@@ -861,7 +861,7 @@
                                          <label class="lbltxt" style="width:150px;"> Amount : </label>
                             
                                              
-                                                        <asp:TextBox width="100" ID="txtFlatBillAmt" runat="server" CssClass="txtbox_style" Visible="False"></asp:TextBox>
+                                                        <asp:TextBox width="100" ID="txtFlatBillAmt" runat="server" CssClass="form-control " Visible="False"></asp:TextBox>
                                                   </ContentTemplate>
                                               </asp:UpdatePanel>                        
                               
@@ -871,7 +871,7 @@
                                
                                         <label class="lbltxt" style="width:150px;"> Description :</label>
                                
-                                            <asp:TextBox width="100" ID="txtBillGenSingleFlatdesc" runat="server" onchange="ResizeBillGeTextbox();" CssClass="txtbox_style"></asp:TextBox><br />
+                                            <asp:TextBox width="100" ID="txtBillGenSingleFlatdesc" runat="server" onchange="ResizeBillGeTextbox();" CssClass="form-control "></asp:TextBox><br />
                                
                             
                                           <asp:Label  ID="lblBillDuplicate" runat="server" Font-Size="Small" ForeColor="#55AAFF" ></asp:Label>

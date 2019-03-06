@@ -90,11 +90,11 @@ public class BillPlan
 
     }
 
-    public int AddSocietyBillPlan(String BillType, String ChargeType, String Rate, String CycleType, int Applyto)
+    public int AddSocietyBillPlan(String BillType, String ChargeType, String Rate, String CycleType, int Applyto, int SocietyID)
     {
         int ID=0;
         DataAccess dacess = new DataAccess();
-        String BillingQuery = "Insert into "+ Table_Name+" (BillType,ChargeType,Rate,CycleType,Applyto) Values('" + BillType + "','" + ChargeType + "','" + Rate + "','" + CycleType + "','" + Applyto + "')";
+        String BillingQuery = "Insert into "+ Table_Name+" (BillType,ChargeType,Rate,CycleType,Applyto,SocietyID) Values('" + BillType + "','" + ChargeType + "','" + Rate + "','" + CycleType + "','" + Applyto + "','" + SocietyID + "')";
         bool result = dacess.Update(BillingQuery);
         if (result == true)
         {

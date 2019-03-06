@@ -495,7 +495,7 @@ public partial class Userprofile : System.Web.UI.Page
         try
         {
             List<string> Emp = new List<string>();
-            string query = string.Format("select * from dbo.ViewSocietySettings where ResID =" + ResID );
+            string query = string.Format("select * from dbo.ViewUserSetting where ResID =" + ResID );
 
             DataAccess da = new DataAccess();
             DataSet ds = da.GetData(query);

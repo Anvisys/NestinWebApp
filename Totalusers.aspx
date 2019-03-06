@@ -469,7 +469,7 @@
                    background-color: #607d8b;
     padding: 10px;
     margin-left: -3px;
-    top: 0px;
+    top: 0px!important;
     
             }
         .lbltxt {
@@ -478,7 +478,7 @@
         .txtbox_style {
             height:30px;
             margin-top: 3px;
-                width: 48%!important;
+                width: 100%!important;
         }
         .Zero_margin {
             margin: 0px;

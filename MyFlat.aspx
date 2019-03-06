@@ -51,7 +51,7 @@
 
 
         function GetData() {
-         FlatID = '<%=Session["FlatID"] %>';
+        FlatID = '<%=Session["FlatID"] %>';
 	    FlatNumber = '<%=Session["FlatNumber"] %>';
 	    SocietyID = '<%=Session["SocietyID"] %>';
 	    CurrentUserType = '<%=Session["UserType"] %>';
@@ -218,7 +218,7 @@
             }
             // document.getElementsByClassName("txtbox_style").disabled = true;
             document.getElementById("lblMessage").textContent = "Validating Mobile Number"
-            document.getElementById("inAddTEmailID").disabled = true;
+           // document.getElementById("inAddTEmailID").disabled = true;
             $("input").disabled = true;
             var url = api_url + "/api/Resident/Mobile/" + element.value;
 
@@ -243,13 +243,15 @@
                             document.getElementById("lblMessage").textContent = "Mobile No Exist"
                             //document.getElementById("inAddTEmailID").disabled = false;
                             document.getElementById("lblMessage").style.color = "Blue";
-                            alert(chkExistingUser);
+                           // alert(chkExistingUser);
+
+                            //set focus to email id box
                         }
                         else {
                              document.getElementById("lblMessage").textContent = "Mobile No is in use. Either check the Existing User or use another mobile"
                             //document.getElementById("inAddTEmailID").disabled = false;
                             document.getElementById("lblMessage").style.color = "Red";
-                             alert(chkExistingUser);
+                            // alert(chkExistingUser);
                         }
                     }
                     else {
@@ -387,7 +389,7 @@
 
                 var url = "http://www.kevintech.in/MyApttUserService/api/AddUser";
 
-                alert(reqBody);
+              //  alert(reqBody);
                
                 //AddTenant(100111);
 
@@ -400,7 +402,7 @@
                     contentType: 'application/json',
                     success: function (data) {
                         var da = JSON.stringify(data);
-                        alert(da);
+                      //  alert(da);
                         var js = jQuery.parseJSON(da);
                           var Response = js.Response;
                         if (Response == "OK") {
@@ -435,9 +437,9 @@
                 "\",\"LastName\":\"" + LastName + "\",\"MobileNo\":\"" + MobileNo + "\",\"EmailId\":\"" + EmailId + "\",\"Addres\":\"" + Address +
                 "\",\"SocietyID\":\"" + SocietyID   + "\",\"ActiveDate\":\"" + ActiveDate + "\",\"DeActiveDate\":\"" + DeActiveDate + "\"}";
             document.getElementById("lblMessage").innerHTML = reqBody2;
-           alert(reqBody2);
+            //alert(reqBody2);
             var url = api_url + "/api/Tenant/New";
-            alert(url);
+            //alert(url);
             $.ajax({
                 dataType: "json",
                 url: url,
@@ -464,8 +466,7 @@
 
             });
         }
-
-
+        
         function ChangeDateformat(inputdate) {
            
             var date = new Date(inputdate);
@@ -532,7 +533,7 @@
         {
             DeActiveDate = ChangeDateformat(document.getElementById("newDeactiveDate").value);
             var reqBody3 = "{\"id\":" + TenantResID + ",\"date\":\"" + DeActiveDate + "\"}";
-            alert(reqBody3);
+           // alert(reqBody3);
             var url = api_url + "/api/Tenant/Update";
 
             $.ajax({

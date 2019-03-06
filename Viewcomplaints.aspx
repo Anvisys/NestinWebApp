@@ -133,8 +133,6 @@
 
        });
 
-
-       
         function funClear() {
          
             var ComplaintDes = document.getElementById("txtComplaintdescription");
@@ -782,7 +780,7 @@
 
                  <%------------------------------------------------------ Add Complaint Section Starts from here------------------------------------------------------------- --%>
                  <div id="AddComplaintPopup" class="modal">
-                     <div class="panel panel-primary" style="width: 350px; margin: auto;">
+                     <div class="panel panel-primary" style="width: 400px; margin: auto;">
                          <div class="panel-heading">
                              Add complaint <span class="fa fa-times" onclick="funClear()" style="float: right; cursor: pointer;"></span>
 
@@ -790,7 +788,51 @@
                          <br />
                          <div class="panel-body">
 
-                             <table>
+                             <form name="complaints">
+                                      <div class="container-fluid">
+                                          <div class="row">
+                                            <label for="colFormLabel" class="col-xs-4 col-form-label">FlatNumber : </label>
+                                            <div class="col-xs-8">
+                                                <input type="text" class="form-control col-xs-8" id="txtAddcompFlat1"   placeholder="Enter Name" name="Name" />
+                                            </div>
+                                          </div>
+                                          <div class="row"style="margin-top:5px">
+                                            <label class="col-xs-4" for="MobileNo">Mobile No:</label>
+                                            <div class="col-xs-8">
+                                                 <input type="text" class="form-control col-xs-8" id="MobileNo"  placeholder="Enter Mobile No." name="MobileNo"/>
+  
+                                            </div>
+                                          </div>
+                                          <div class="row"style="margin-top:5px">
+                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Address: </label>
+                                            <div class="col-xs-8">
+                                                 <textarea class="form-control col-xs-8" rows="2" id="Address" style="resize:none;" name="Address" placeholder="Enter Address"></textarea>
+                                            </div>
+                                          </div>
+                                          <div class="row"style="margin-top:5px">
+                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Purpose: </label>
+                                            <div class="col-xs-8">
+                                             <input type="text" name="Purpose" class="form-control col-xs-8"id="Purpose" placeholder="Enter Purpose"/>
+                                            </div>
+                                          </div>
+                                          <div class="row"style="margin-top:5px">
+                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Time / Date </label>
+                                            <div class="col-xs-8">
+                                             <input type="text" class="form-control col-xs-4"   id="btnEntryDate"  name="StartDate"/>
+                                             <select class="form-control col-xs-4" id="timeList"></select>
+                                            </div>
+                                          </div>
+                                          <div class="row"style="margin-top:5px">
+                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Valid Till: </label>
+                                            <div class="col-xs-8">
+                                           <label  class="form-control col-xs-8" id="btnEndTime" ></label>
+                                            </div>
+                                          </div>
+                                      </div>
+                                 
+                                  </form>
+
+                             <table style="display:none;">
 
                                  <tr>
                                      <td colspan="3" style=""></td>
@@ -850,7 +892,7 @@
                                          <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="drpComplaintcategory" ErrorMessage="*" ForeColor="#FF5050" InitialValue="NA" ValidationGroup="Add_Complaint"></asp:RequiredFieldValidator>
 
                                      </td>
-                                     <%--  <td> </td>--%>
+                                       <td> </td>
                                  </tr>
 
 
@@ -864,9 +906,9 @@
                                      <td>
                                          <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtComplaintdescription" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Complaint"></asp:RequiredFieldValidator>
                                      </td>
-                                     <%-- <td> 
+                                      <td> 
                              
-                                  </td>--%>
+                                  </td>
                                  </tr>
                                  <tr>
                                      <td class="lbltxt">Assigned  To :
@@ -883,7 +925,7 @@
                                      <td>
                                          <asp:RequiredFieldValidator ID="requireassigned" runat="server" ControlToValidate="drpAddcomAssign" ErrorMessage="*" ForeColor="#FF5050" InitialValue="0" ValidationGroup="Add_Complaint"></asp:RequiredFieldValidator>
                                      </td>
-                                     <%-- <td> </td>--%>
+                                     <td> </td>
                                  </tr>
                                  <tr>
                                      <td colspan="3" style="height: 10px;"></td>
