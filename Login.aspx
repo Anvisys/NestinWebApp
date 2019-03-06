@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" %>
+﻿.
+000000000000000000000000000000000000000000000000000000000000065931834/7<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" %>
 
 <!DOCTYPE html>
 
@@ -8,10 +9,11 @@
 
   
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="keywords" content="Housing Society Management,Apartment Management,Society Management,Residential Society Management,Complaint Management,Society Expenses,Billing Software"/>
+        <meta name="keywords" content="Housing Society Management,Apartment Management,Society Management,Residential Society Management,Complaint Management,Society Expenses,Billing Software, Society  Security"/>
     <meta name="description" content="Nestin provides solution to your daily Society and Apartment Management  operations like Service Requests, Visitor Entry, Vendor Directory, Notices, Internal discussions, Bills etc"/>
 
     <meta name="developer" content="Anvisys Technologies Pvt. Ltd."/>
+    <meta name="google-site-verification" content="eaOkM-61kCTqQjVeBRR_YiPMSjlpY13WHQEz4I8T278" />
 
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <!-- CORE CSS -->
@@ -540,7 +542,7 @@ img.app_centre{
           <div class="col-md-7 animation_fade_in">
               <h3>NestIn</h3>
               <p class="lead" style="font-size:18px;"> NestIn is developed by Anvisys Technologies  for the Apartment Societies. </p>
-             <p style="text-align:justify;">NestIn is developed by Anvisys Technologies Pvt. Ltd. To cater the needs of RWA operations and society management needs. While the trend of residential complex is increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing demand of a management system to manage these operations and communication mechanism to involve residents in operations.<br/>
+             <p style="text-align:justify;">NestIn is developed by <a href="www.Anvisys.net" target="_blank">Anvisys Technologies Pvt. Ltd.</a> To cater the needs of RWA operations and society management needs. While the trend of residential complex is increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing demand of a management system to manage these operations and communication mechanism to involve residents in operations.<br/>
 NestIn is our attempt to provide a state of the art, user friendly and secure Society Management System. We are good but not complacent, hence we are improving, enhancing the capabilities, taking the users feedback and working on them. Our dedicated team is working continuously to improve the system to better serve our customer.</p>
               <a class="btn btn-primary" style="color:#fff;" href="Aboutus.aspx">Read More</a>
           </div>
@@ -621,7 +623,7 @@ NestIn is our attempt to provide a state of the art, user friendly and secure So
                     <div class="col-md-6 animation_fade_in" style="margin-bottom:20px;">
                       <h2>Pricing</h2>
                        <h4 style="text-align:justify;">We don’t have complex pricing like many other software available as a service. Our is not based on complex features combination, not on number of users not for duration.
-                           It’s Simple<span style="color:blue;"> Rs. 2.00 per flat per month </span>for all society Management Features.</h4>
+                           It’s Simple<span style="color:blue;"> Rs. 5.00 per flat per month </span>for all society Management Features.</h4>
 
                     </div>
 
@@ -704,7 +706,7 @@ NestIn is our attempt to provide a state of the art, user friendly and secure So
             </div>
         </div>
         <div class="footer-copyright">
-            <p>© 2018 ANVISYS TECHNOLOGIES, ALL RIGHTS RESERVED. </p>
+            <p>© 2018 <a href="www.Anvisys.net" target="_blank">ANVISYS TECHNOLOGIES</a>, ALL RIGHTS RESERVED. </p>
         </div>
     </footer>
    
