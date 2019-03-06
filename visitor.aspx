@@ -114,7 +114,9 @@
     <script>
      
 
-        var UserType, ResId, SocietyId, FlatNumber, RequestID, VisitorEntryHour;
+        var UserType, ResId, SocietyId, FlatNumber, RequestID, VisitorEntryHour,api_url;
+        var page = 1;
+        var size = 5;
 
         function CloseAddVisitor() {
 
@@ -129,7 +131,7 @@
 
 
         $(document).ready(function () {
-
+             api_url = '<%=Session["api_url"] %>';
             UserType = '<%=Session["UserType"]%>';
             ResId = '<%=Session["ResiID"]%>';
             SocietyId = '<%=Session["SocietyID"]%>';
@@ -250,7 +252,7 @@
         {
             var code = $("#SecurityCode").val();
             document.getElementById("verify_loading").style.display = "block";
-            var url = "http://www.kevintech.in/GaurMahagun/api/Visitor/Code/" + code;
+            var url = api_url + "/api/Visitor/Code/" + code;
 
            
 
@@ -301,19 +303,29 @@
             return NewFormatDate;
         }
 
+
+          function ShowPrevious() {
+            page = page - 1;
+            GetVisitorData(); 
+        }
+
+        function ShowNext() {
+            page = page + 1;
+            GetVisitorData(); 
+        }
+
         function GetVisitorData() {
             document.getElementById("data_loading").style.display = "block";
           
-           var  url = "http://www.kevintech.in/GaurMahagun/api/Visitor/Soc/" + SocietyId;
+           var  url = api_url + "/api/Visitor/Soc/" + SocietyId +"/" + page + "/" + size;
 
             if (UserType == 'Admin') {
-                url = "http://www.kevintech.in/GaurMahagun/api/Visitor/Soc/" + SocietyId;
+                url = api_url+  "/api/Visitor/Soc/" + SocietyId  +"/" + page + "/" + size;
             }
             else if ((UserType == "Owner")||(UserType == "Tenant")) {
-                url = "http://www.kevintech.in/GaurMahagun/api/Visitor/"+ SocietyId+"/Res/" + ResId;
+                url = api_url + "/api/Visitor/"+ SocietyId+"/Res/" + ResId +"/" + page + "/" + size;
             }
-          
-
+            console.log(url);
             $.ajax({
                 type: "Get",
                 url: url,
@@ -322,6 +334,15 @@
                 success: function (data) {
                    
                     document.getElementById("data_loading").style.display = "none";
+
+                    if (page > 1) {
+                        $("#btnPrevious").show();
+                     
+                    }
+                    if (data.$values.length < size) {
+                         $("#btnNext").hide();
+                    }
+
                     SetData(data);
                 },
                 failure: function (response) {
@@ -339,7 +360,9 @@
             var jarray = data.$values;
             var length = jarray.length;
             var viewString = "";
+           
             var con = document.getElementById("dataContainer");
+                con.innerHTML = "";
             for (var i = 0; i < length; i++) {
 
                 var VisitorName = jarray[i].VisitorName;
@@ -595,17 +618,24 @@
             return true;
         }
 
+      
 
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
-     <div class="container-fluid" style="background-color:#f7f7f7;">
+     <div class="container-fluid" style="background-color:#f7f7f7;position:relative;">
                          <div class="row" style="margin-top:15px;">
-                                 <div class="col-sm-6">
+                                 <div class="col-xs-3">
                                      <div><h4 class="pull-left ">Visitor </h4></div>
                                  </div>
-                             <div class=" pull-right"style="margin-right:50px;">
+                             <div class="col-xs-6 " style="padding-left:10px; padding-right:10px;">
+                                <button type="button" onclick="ShowPrevious()" class="btn btn-default btn-sm pull-left" style="display:none;" id="btnPrevious">Previous</button>
+
+                                  <button type="button" onclick="ShowNext()" class="btn btn-default btn-sm pull-right" id="btnNext">Next</button>
+                           </div>
+
+                             <div class="col-xs-3 pull-right">
                                      <button id="btnAddVisitor" class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus"></i> Add Visitor</button>
 
                                     <button id="btnVerifyVisitor"  class="btn btn-primary btn-sm" type="button"><i class="fa fa-check"></i> Verify</button>
@@ -614,14 +644,12 @@
    
        
 
-         <div id="dataContainer" class="container-fluid">
-
-                     
-                         <div id="data_loading" class="container-fluid" style="text-align:center; height:200px;">
+         <div id="dataContainer" class="container-fluid" >
+             </div>
+              <div id="data_loading" class="container-fluid" style="text-align:center;width:100%; height:200px;background-color:#090909;opacity:0.2;position:fixed; top:100px; z-index:99;">
                     <img src="Images/Icon/ajax-loader.gif" style="width:20px;height:20px; margin-top:50px;" />
 
                    </div>
-             </div>
 
         <div id="AddVisitorModal" class="modal">
              
