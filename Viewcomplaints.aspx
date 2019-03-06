@@ -490,6 +490,14 @@
             var profileImage = $('#user_image').text(intials);
         });
 
+          function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : evt.keyCode;
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;    
+         return true;
+      }
+
    </script>
 
     <style type="text/css">
@@ -576,14 +584,17 @@
     background-color: #607d8b;
    
     border-radius: 2px;
-    top: 0px;
+    top: 0px!important;
     margin-left: -17px;
         }
-        .form-control {
+
+        /*.form-control {
                 border: 1px solid rgba(0,0,0,.075);
     border-radius: 0px;
     padding: 6px 2px;
-        }
+        }*/
+
+
         .my_padding{
             margin-left:30px;
         }
@@ -594,13 +605,13 @@
 
 
      <div class="container-fluid">
-         <div class="row" id="scroll_div" style="height: 500px;">
+         <div class="row"  style="height: 500px;overflow-x:hidden;">
 
 
 
              <form id="form1" runat="server">
                  <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                 <div class="container-fluid">
+                 <div class="container-fluid" >
                      <div class="row">
                          <asp:HiddenField ID="HiddenCompID" runat="server" />
                          <asp:HiddenField ID="HiddenFlatNumber" runat="server" />
@@ -614,35 +625,32 @@
                          <%--Added by Aarshi on 22-Sept-2017 for bug fix--%>
                      </div>
 
-                     <div class="row" style="margin-top:10px;">
+                     <div class="row" style="margin-top: 10px;">
                          <div class="col-xs-3">
                              <h4>Complaints:</h4>
                          </div>
+                         <div class="col-xs-6 zero-margin" style="align-content: center;">
+
+                             <asp:DropDownList EnableViewState="true" ID="drpVCompStatusF" runat="server" CssClass="search-dropdown">
+                             </asp:DropDownList>
 
 
-                             <div class="col-xs-4 zero-margin" >
-                                 <asp:DropDownList EnableViewState="true" ID="drpVCompStatusF" runat="server"   CssClass="form-control ">
-                                 </asp:DropDownList>
-                             </div>
-                             <div class="col-xs-3 zero-margin" style="display:none;">
-                                 <asp:DropDownList ID="drpComplaintDateFilter" runat="server" OnSelectedIndexChanged="drpComplaintDateFilter_SelectedIndexChanged" CssClass="form-control">
-                                     <asp:ListItem Selected="True">Current month</asp:ListItem>
-                                     <asp:ListItem>Last month</asp:ListItem>
-                                     <asp:ListItem>This year</asp:ListItem>
-                                     <asp:ListItem>Last year</asp:ListItem>
-                                     <asp:ListItem>All</asp:ListItem>
+                             <asp:TextBox ID="txtVcompFlatSrch" runat="server" CssClass="search-text" placeholder="Flat Number" OnTextChanged="txtVcompFlatSrch_TextChanged"></asp:TextBox>
+                             <asp:LinkButton ID="ImgCompSearch" runat="server" CssClass="search-button" BackColor="Transparent" ForeColor="white" OnClick="ImgCompSearch_Click"> <span class="glyphicon glyphicon-search"></span></asp:LinkButton>
 
-                                 </asp:DropDownList>
-                             </div>
-                             <div class="col-xs-2 zero-margin">
-                                 <asp:TextBox ID="txtVcompFlatSrch" runat="server" CssClass="form-control" placeholder="Flat Number" OnTextChanged="txtVcompFlatSrch_TextChanged"></asp:TextBox>
-                             </div>
-                             <div class="col-xs-1">
-                                 <asp:LinkButton ID="ImgCompSearch" runat="server" BackColor="Transparent" ForeColor="white" OnClick="ImgCompSearch_Click"> <span class="glyphicon glyphicon-search"></span></asp:LinkButton>
-                             </div>
+                         </div>
+                         <div class="col-xs-3 zero-margin" style="display: none;">
+                             <asp:DropDownList ID="drpComplaintDateFilter" runat="server" OnSelectedIndexChanged="drpComplaintDateFilter_SelectedIndexChanged" CssClass="form-control">
+                                 <asp:ListItem Selected="True">Current month</asp:ListItem>
+                                 <asp:ListItem>Last month</asp:ListItem>
+                                 <asp:ListItem>This year</asp:ListItem>
+                                 <asp:ListItem>Last year</asp:ListItem>
+                                 <asp:ListItem>All</asp:ListItem>
 
-                         <div class="col-xs-2" >
-                             <button type="button" id="btnAddComplaint" style="margin-top: 0px;" class="pull-right btn btn-primary btn_my"><i class="fa fa-plus-square"></i></button>
+                             </asp:DropDownList>
+                         </div>
+                         <div class="col-xs-3">
+                             <button type="button" id="btnAddComplaint" style="margin-top: 0px;" class="pull-right btn btn-primary btn-sm">Add Complaint</button>
                          </div>
                      </div>
 
@@ -669,7 +677,8 @@
 
                              <asp:DataList ID="dataListComplaint" runat="server" CellPadding="0"
                                  OnItemDataBound="DataListComplaint_ItemDataBound"
-                                 Width="95%"
+                                 Width="100%"
+                            
                                  headerstyle-font-name="Verdana"
                                  HeaderStyle-Font-Size="12pt"
                                  HeaderStyle-HorizontalAlign="center"
@@ -678,12 +687,13 @@
                                  HeaderStyle-Font-Bold="True"
                                  BackColor="Transparent"
                                  FooterStyle-Font-Size="9pt"
-                                 FooterStyle-Font-Italic="True" Height="1px" ForeColor="#CCCCCC" OnSelectedIndexChanged="DataListComplaint_SelectedIndexChanged">
+                                 FooterStyle-Font-Italic="True" Height="1px" ForeColor="#CCCCCC"
+                                 OnSelectedIndexChanged="DataListComplaint_SelectedIndexChanged">
 
                                  <ItemStyle></ItemStyle>
                                  <ItemTemplate>
 
-                                     <div class="row layout_shadow_table">
+                                     <div class="row layout_shadow_table zero-margin" style="padding-bottom:10px;">
 
                                          <div class="col-sm-2 col-xs-6">
 
@@ -723,10 +733,10 @@
 
                                          </div>
                                          <div class="row" style="float: right; margin-right: 5px;">
-                                             <button id="btnComplete" class="btn btn-success" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("CompType")+ "\",4,\"Complete\")"%>' runat="server" type="button">Work Complete</button>
-                                             <button id="btnAssign" class="btn btn-warning" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID") +",\""+ Eval("FlatNumber")+"\",\""+ Eval("CompType")+ "\",2,\"Assign\")"%>' runat="server" type="button">Assign</button>
-                                             <button id="btnOpen" class="btn btn-info" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("CompType")+ "\",3,\"Open\")"%>' runat="server" type="button">Open</button>
-                                             <button id="btnClose" class="btn btn-success" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("CompType")+ "\",5,\"Close\")"%>' runat="server" type="button">Close</button>
+                                             <button id="btnComplete" class="btn-sm btn btn-success" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("CompType")+ "\",4,\"Complete\")"%>' runat="server" type="button">Work Complete</button>
+                                             <button id="btnAssign" class="btn-sm btn btn-warning" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID") +",\""+ Eval("FlatNumber")+"\",\""+ Eval("CompType")+ "\",2,\"Assign\")"%>' runat="server" type="button">Assign</button>
+                                             <button id="btnOpen" class="btn-sm btn btn-info" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("CompType")+ "\",3,\"Open\")"%>' runat="server" type="button">Open</button>
+                                             <button id="btnClose" class="btn-sm btn btn-success" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("CompType")+ "\",5,\"Close\")"%>' runat="server" type="button">Close</button>
 
 
                                          </div>
@@ -778,8 +788,153 @@
 
 
 
+
+        
+          <div id="AddComplaintPopup" class="modal">
+                     <div class="panel panel-primary" style="width: 350px; margin: auto;">
+                         <div class="panel-heading">
+                             Add complaint <span class="fa fa-times" onclick="funClear()" style="float: right; cursor: pointer;"></span>
+
+                         </div>
+                         <br />
+                         <div class="panel-body">
+                             <form class="form-group" autocomplete="off">
+                             <table style="vertical-align:top;">
+
+                                 <tr>
+                                     <td colspan="3" style=""></td>
+                                 </tr>
+                                 <tr>
+                                     <td class="lbltxt" style="width: 50%;">FlatNumber : 
+                                     </td>
+                                     <td style="width: 50%;">
+                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                             <ContentTemplate>
+                                                 <asp:TextBox ID="txtAddcompFlat" runat="server" CssClass="form-control" OnTextChanged="txtAddcompFlat_TextChanged" AutoPostBack="True" ValidationGroup="Add_Complaint"></asp:TextBox>
+
+                                                 <asp:Label ID="lblcomperror" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
+                                             </ContentTemplate>
+                                         </asp:UpdatePanel>
+                                     </td>
+                                     <td style="width: 1%;">
+                                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                             <ContentTemplate>
+                                                 <asp:RequiredFieldValidator ID="RequireComplainterflat" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtAddcompFlat" InitialValue="0" ValidationGroup="Add_Complaint"></asp:RequiredFieldValidator>
+                                             </ContentTemplate>
+                                         </asp:UpdatePanel>
+                                     </td>
+
+                                 </tr>
+
+                                 <tr>
+                                     <td class="lbltxt">Name :
+                                     </td>
+                                     <td>
+                                         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                             <ContentTemplate>
+                                                 <asp:TextBox ID="txtComplaintername" runat="server" style="margin-top:10px;" CssClass="form-control"></asp:TextBox>
+
+                                             </ContentTemplate>
+                                         </asp:UpdatePanel>
+
+                                     </td>
+                                     <td>
+                                         <asp:RequiredFieldValidator ID="RequireAddAomplaintername" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtComplaintername" ValidationGroup="Add_Complaint"></asp:RequiredFieldValidator>
+                                     </td>
+
+                                 </tr>
+                                 <tr>
+                                     <td class="lbltxt">Category :
+                                     </td>
+                                     <td>
+                                         <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                                             <ContentTemplate>
+                                                 <asp:DropDownList ID="drpComplaintcategory" style="margin-top:10px;" runat="server" OnSelectedIndexChanged="drpComplaintcategory_SelectedIndexChanged" CssClass="form-control txtDrop" AutoPostBack="True" ValidationGroup="Add_Complaint">
+                                                 </asp:DropDownList>
+                                             </ContentTemplate>
+                                         </asp:UpdatePanel>
+
+                                     </td>
+                                     <td>
+
+                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="drpComplaintcategory" ErrorMessage="*" ForeColor="#FF5050" InitialValue="NA" ValidationGroup="Add_Complaint"></asp:RequiredFieldValidator>
+
+                                     </td>
+                                     <%--  <td> </td>--%>
+                                 </tr>
+
+
+                                 <tr>
+                                     <td class="lbltxt">Description :
+                                     </td>
+                                     <td>
+                                         <asp:TextBox ID="txtComplaintdescription" runat="server" CssClass="form-control" TextMode="MultiLine" Style="resize: none; margin-top:10px;" ValidationGroup="Add_Complaint"></asp:TextBox><br />
+
+                                     </td>
+                                     <td>
+                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtComplaintdescription" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Complaint"></asp:RequiredFieldValidator>
+                                     </td>
+                                     <%-- <td> 
+                             
+                                  </td>--%>
+                                 </tr>
+                                 <tr>
+                                     <td class="lbltxt">Assigned  To :
+                                     </td>
+                                     <td>
+                                         <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                                             <ContentTemplate>
+                                                 <asp:DropDownList ID="drpAddcomAssign" runat="server" CssClass="form-control" ValidationGroup="Add_Complaint">
+                                                 </asp:DropDownList>
+                                             </ContentTemplate>
+                                         </asp:UpdatePanel>
+
+                                     </td>
+                                     <td>
+                                         <asp:RequiredFieldValidator ID="requireassigned" runat="server" ControlToValidate="drpAddcomAssign" ErrorMessage="*" ForeColor="#FF5050" InitialValue="0" ValidationGroup="Add_Complaint"></asp:RequiredFieldValidator>
+                                     </td>
+                                     <%-- <td> </td>--%>
+                                 </tr>
+                                 <tr>
+                                     <td colspan="3" style="height: 10px;"></td>
+                                 </tr>
+                                 <tr>
+                                     <td colspan="3" style="text-align: center;">
+                                         <asp:Label ID="lblCompstatus" runat="server" Font-Size="Small" ForeColor="#48A4FF"></asp:Label>
+                                     </td>
+
+                                 </tr>
+                                 <tr>
+                                     <td colspan="3" style="height: 10px;"></td>
+                                 </tr>
+
+                             </table>
+                                 </form>
+
+                         </div>
+
+                         <div class="panel-footer" style="text-align: right;">
+                             <asp:Button ID="btnAddcomplaintsubmit" runat="server" Text="Submit" CssClass="btn-sm btn btn-success" OnClick="btnAddcomplaintsubmit_Click" ValidationGroup="Add_Complaint" />
+                             <button type="button" id="CancelAddcomplaint" onclick="funClear()" class="btn-sm btn btn-danger">Cancel</button>
+                         </div>
+                     </div>
+
+                       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
                  <%------------------------------------------------------ Add Complaint Section Starts from here------------------------------------------------------------- --%>
-                 <div id="AddComplaintPopup" class="modal">
+           <%--      <div id="wrongAddComplaintPopup" class="modal">
                      <div class="panel panel-primary" style="width: 400px; margin: auto;">
                          <div class="panel-heading">
                              Add complaint <span class="fa fa-times" onclick="funClear()" style="float: right; cursor: pointer;"></span>
@@ -788,7 +943,7 @@
                          <br />
                          <div class="panel-body">
 
-                             <form name="complaints">
+                             <form name="complaints"  autocomplete="off">
                                       <div class="container-fluid">
                                           <div class="row">
                                             <label for="colFormLabel" class="col-xs-4 col-form-label">FlatNumber : </label>
@@ -799,7 +954,7 @@
                                           <div class="row"style="margin-top:5px">
                                             <label class="col-xs-4" for="MobileNo">Mobile No:</label>
                                             <div class="col-xs-8">
-                                                 <input type="text" class="form-control col-xs-8" id="MobileNo"  placeholder="Enter Mobile No." name="MobileNo"/>
+                                                 <input type="text" onkeypress="return isNumberKey(event)" class="form-control col-xs-8" id="MobileNo"  placeholder="Enter Mobile No." name="MobileNo"/>
   
                                             </div>
                                           </div>
@@ -946,11 +1101,11 @@
 
                          <div class="panel-footer" style="text-align: right;">
                              <asp:Button ID="btnAddcomplaintsubmit" runat="server" Text="Submit" CssClass="btn_style btn btn-success" OnClick="btnAddcomplaintsubmit_Click" ValidationGroup="Add_Complaint" />
-                             <button type="button" id="CancelAddcomplaint" onclick="funClear()" class="btn_style btn btn-danger">Cancel</button>
+                             <button type="button" id="wrongCancelAddcomplaint" onclick="funClear()" class="btn_style btn btn-danger">Cancel</button>
                          </div>
                      </div>
 
-                       </div>
+                       </div>--%>
 
                      <%-----------------------------------------DataBindingEdit_Complaint_btn HistoryEventArgs Section Starts from here ------------------------------------------------------------------------------%>
 

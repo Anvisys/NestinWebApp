@@ -326,11 +326,25 @@
     
      color:#000;
  }
-  .form-control {
+  .form-control1 {
             display: inline;
             width: 41%;
             margin-left:-5px;
             border-radius: 1px;
+       
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 
         }
 
@@ -356,11 +370,11 @@
                                      <div class="col-sm-6 col-xs-12"  >
                                          
                                           <div class="form-group">
-                                                 <asp:DropDownList ID="drpEmpServtFilter" runat="server" CssClass="form-control" >
+                                                 <asp:DropDownList ID="drpEmpServtFilter" runat="server" CssClass="form-control1" >
                                                                            
                                                                         </asp:DropDownList>
                             
-                                                    <asp:TextBox ID="txtEmpNamesrch" runat="server"  placeholder="First Name" CssClass="form-control" ValidationGroup="Search"></asp:TextBox>
+                                                    <asp:TextBox ID="txtEmpNamesrch" runat="server"  placeholder="First Name" CssClass="form-control1" ValidationGroup="Search"></asp:TextBox>
                                                        <asp:LinkButton runat="server"  CausesValidation="false" OnClick="ImgFlatSearch_Click"> <span class="glyphicon glyphicon-search"></span></asp:LinkButton>
                                                  
                                           
@@ -373,7 +387,7 @@
                                       </div>
                                      <div class="col-sm-3 hidden-xs" style="vertical-align:middle;">
                                        
-                                               <button type="button" id="Add_Employee" style="margin:0px;"  class="btn btn_my btn-primary"><i class="fa fa-plus"></i> Add Employee</button>
+                                               <button type="button" id="Add_Employee" style="margin-right:0px;"  class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Add Employee</button>
                                        
                                      </div>
                          </div>
@@ -592,196 +606,236 @@
          <div id="AddEmployeeModal" class="modal">
              <asp:UpdatePanel ID="UpdatePanel15" runat="server" EnableViewState="true">
                             <ContentTemplate>
-               <div class="container-fluid" style="width:400px;">
-                   <div class="panel panel-primary" style="position:absolute;">
+               <div class="container-fluid" style="width:675px;">
+                   <div class="panel panel-primary" style="position:relative;">
 
-                    <div class="panel-heading" style="height:40px;">
+                    <div class="panel-heading" >
                         
                          <span>Add Employee</span>
                          <span class="fa fa-times" id="Cancel_cross" style="float:right;cursor:pointer;"></span>
                  
                     </div>
-                       <div class="panel-body">
+                       <div class="panel-body" >
                          
+                                     <span style="text-align:center;font-size:16px;color:cornflowerblue;">User Details</span>
 
+                            <form class="form-group">
+                                  <div class="row">
+                                      <div class="col-xs-12 col-sm-6">
 
-                   <div class="row">
-                   
-                        <div class="col-xs-12" style="display:none;">
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter valid name" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtAddEmpFName" ValidationGroup="Add_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Enter valid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtAddEmpEmailId" ValidationGroup="Add_Employee" Display="Dynamic"></asp:RegularExpressionValidator> 
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ValidationExpression="^([0-9]{10})+$" ErrorMessage="Please enter valid  number" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtAddEmpMobile" ValidationGroup="Add_Employee" Display="Dynamic"></asp:RegularExpressionValidator> 
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="Enter valid name" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtAddEmpLName" ValidationGroup="Add_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
-                            
-                            <asp:Label ID="lblEmpError" runat="server" Font-Size="Small" ForeColor="#48A4FF"></asp:Label><br />
-                  
-                        </div>
-                    
-                        <div class="col-md-6" >
-                            <span style="text-align:center;font-size:16px;color:cornflowerblue;">User Details</span>
-                            <table class="layout_data_table" style="line-height:30px;text-align:left;">
-                                  <tr>
-                                        <td style="width:100px;">
-                                           Mobile :
-                                        </td>
-                                         <td style="width:100px;">
-                                           <asp:TextBox ID="txtAddEmpMobile" runat="server" Height="25px" TabIndex="0" AutoCompleteType="Disabled" MaxLength="10" 
+                                 <div class="col-xs-5"">
+                                       <label class="form-inline"> Mobile :</label> 
+                                 </div>
+                                         <div class="col-xs-6">
+                                           
+                                           <asp:TextBox ID="txtAddEmpMobile" CssClass="form-control" runat="server" TabIndex="0" AutoCompleteType="Disabled" MaxLength="10" 
                                                OnTextChanged="txtAddEmpMobile_TextChanged" AutoPostBack="True"></asp:TextBox>
-                                         </td>
-                                         <td style="width:5px;">
-                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="txtAddEmpMobile" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Employee">
-
-                                             </asp:RequiredFieldValidator>   
-                                         </td>
-                                    </tr>
-                                 <tr>
-                                        <td style="width:100px;">
-                                           Email :
-                                        </td>
-                                         <td style="width:100px;">
-                                           <asp:TextBox ID="txtAddEmpEmailId" runat="server" Height="25px" AutoCompleteType="Disabled" TabIndex="1" OnTextChanged="txtAddEmpEmailId_TextChanged" AutoPostBack="True"></asp:TextBox> <br />
-                                         </td>
-                                         <td style="width:5px;">
-                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtAddEmpEmailId" ValidationGroup="Add_Employee"></asp:RequiredFieldValidator>              
-                                         </td>
-                                    </tr>
-                               <tr>
-                                        <td style="width:110px;">
-                                           First Name :
-                                        </td>
-                                         <td style="width:100px;">
-                                           <asp:TextBox ID="txtAddEmpFName" runat="server" Height="25px" TabIndex="2"></asp:TextBox>
-                                         </td>
-                                         <td style="width:5px;">
-                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtAddEmpFName" ValidationGroup="Add_Employee"></asp:RequiredFieldValidator>
-                                         </td>
-                                    </tr>
-
-                                   <tr style="display:none;">
-                                        <td style="width:100px;">
-                                           Middle Name :
-                                        </td>
-                                         <td style="width:100px;">
-                                           <asp:TextBox ID="txtAddEmpMName" runat="server" Height="25px"  TabIndex="3"></asp:TextBox>
-                                         </td>
-                                         <td style="width:5px;">
                                              
-                                         </td>
-                                    </tr>
-                                   <tr>
-                                        <td style="width:100px;">
-                                           Last Name :
-                                        </td>
-                                         <td style="width:100px;">
-                                           <asp:TextBox ID="txtAddEmpLName" runat="server" Height="25px" TabIndex="4"></asp:TextBox>
-                                         </td>
-                                         <td style="width:5px;">
+                                         </div>
+                                          <div class="col-xs-1">
+                                             <asp:RequiredFieldValidator  ID="RequiredFieldValidator13" runat="server" ControlToValidate="txtAddEmpMobile" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Employee">
+
+                                             </asp:RequiredFieldValidator> 
+                                        </div>
+                                      </div>
+
+                                         <div class="col-xs-12 col-sm-6">
+                                              <div class="col-xs-5"">
+                                           Email :
+                                        </div>
+                                         <div class="col-xs-6">
+                                           <asp:TextBox ID="txtAddEmpEmailId" runat="server"  CssClass="form-control"  AutoCompleteType="Disabled" TabIndex="1" OnTextChanged="txtAddEmpEmailId_TextChanged" AutoPostBack="True"></asp:TextBox>
+                                         </div>
+                                         <div class="col-xs-1">
+                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtAddEmpEmailId" ValidationGroup="Add_Employee"></asp:RequiredFieldValidator>              
+                                         </div>
+                                         </div>
+
+                                      
+                                    </div>
+                            
+                                     <div class="row">
+                                           <div class="col-xs-12 col-sm-6">
+
+                                        <div class="col-xs-5">
+                                           First Name:
+                                        </div>
+                                         <div class="col-xs-6"">
+                                           <asp:TextBox ID="txtAddEmpFName" runat="server"  CssClass="form-control" TabIndex="2"></asp:TextBox>
+                                         </div>
+                                         <div class="col-xs-1">
+                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtAddEmpFName" ValidationGroup="Add_Employee"></asp:RequiredFieldValidator>
+                                         </div>
+                                         </div>
+                                             <div class="col-xs-12 col-sm-6">
+                                                 <div class="col-xs-5">
+                                           Last Name:
+                                        </div>
+                                         <div class="col-xs-6">
+                                           <asp:TextBox ID="txtAddEmpLName" runat="server" CssClass="form-control" TabIndex="4" ></asp:TextBox>
+                                         </div>
+                                         <div class="col-xs-1">
                                               <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtAddEmpLName" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Employee"></asp:RequiredFieldValidator>
-                                         </td>
-                                    </tr>
-                                   <tr>
-                                        <td style="width:100px;">
+                                         </div>
+
+                                             </div>
+
+                                    </div>
+
+                            
+                                   <div class="row">
+                                         <div class="col-xs-12 col-sm-6">
+                                               <div class="col-xs-5">
+                                           Parent Name :
+                                        </div>
+                                         <div class="col-xs-6">
+                                           <asp:TextBox ID="txtAddempPName" runat="server"  CssClass="form-control" TabIndex="6"></asp:TextBox>
+                                         </div>
+                                         <div class="col-xs-1">
+                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="txtAddempPName" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Employee"></asp:RequiredFieldValidator>
+                                         </div>
+                                        </div>
+                                           <div class="col-xs-12 col-sm-6">
+                                                 <div class="col-xs-5">
                                            Gender :
-                                        </td>
-                                         <td style="width:100px;">
-                                            <asp:DropDownList ID="drpAddempGender" runat="server" Height="25px" Width="100%" TabIndex="5">
+                                        </div>
+                                         <div class="col-xs-6">
+                                            <asp:DropDownList ID="drpAddempGender" runat="server"  CssClass="form-control" Width="100%" TabIndex="5">
                                                 <asp:ListItem>Male</asp:ListItem>
                                                 <asp:ListItem>Female</asp:ListItem>
                                             </asp:DropDownList>
-                                         </td>
-                                         <td style="width:5px;">
+                                         </div>
+                                         <div class="col-xs-1">
                                              
-                                         </td>
-                                    </tr>
-                                   <tr>
-                                        <td style="width:100px;">
-                                           Parent Name :
-                                        </td>
-                                         <td style="width:100px;">
-                                           <asp:TextBox ID="txtAddempPName" runat="server" Height="25px" TabIndex="6"></asp:TextBox>
-                                         </td>
-                                         <td style="width:5px;">
-                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="txtAddempPName" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Employee"></asp:RequiredFieldValidator>
-                                         </td>
-                                    </tr>
-                                    <tr style="display:none;">
-                                            <td style="width:100px;">
+                                         </div>
+                                           </div>
+                                      
+                                    </div>
+                                  <%-- <div class="row">
+                                         <div class="col-xs-12 col-sm-6">
+                                              <div class="col-xs-4">
                                            UserType:
-                                            </td>
-                                             <td style="width:100px;">
-                                                    <asp:DropDownList ID="drpAddEmpUserType" runat="server" Height="25px" TabIndex="7">
+                                            </div>
+                                             <div class="col-xs-7">
+                                                    <asp:DropDownList ID="drpAddEmpUserType" runat="server"  CssClass="form-control" TabIndex="7">
                                                         <asp:ListItem>Employee</asp:ListItem>
                                                     </asp:DropDownList>
-                                             </td>
-                                             <td style="width:5px;">
+                                             </div>
+                                             <div class="col-xs-1">
                                              
-                                             </td>
-                                    </tr>
-                            </table>
-                            </div>
+                                             </div>
+                                         </div>
+                                           <div class="col-xs-12 col-sm-6">
 
-                         <div class="col-md-6" style="text-align:left;">
-                            <table class="layout_data_table" style="line-height:30px;">
-                                  
-                                 
-                                   <tr>
-                                        <td style="width:100px;">
+                                           </div>
+                                    </div>--%>
+                                   
+                             <hr />
+                                <div class="row">
+                                <span style="text-align:center; padding-left:30px; font-size:16px;margin-bottom:10px; color:cornflowerblue;">Employee Details</span>
+                                   
+                                </div>
+
+                                <div class="row">
+                                           <div class="col-xs-12 col-sm-6">
+                                               <div class="col-xs-5" >
                                            Address :
-                                        </td>
-                                         <td style="width:100px;">
-                                           <asp:TextBox ID="txtAddEmpAddress" runat="server" Height="25px" TabIndex="8"></asp:TextBox>
-                                         </td>
-                                         <td style="width:5px;">
+                                        </div>
+                                         <div class="col-xs-6" >
+                                           <asp:TextBox ID="txtAddEmpAddress" runat="server" Style="margin-bottom:10px;" CssClass="form-control" TabIndex="8"></asp:TextBox>
+                                         </div>
+                                         <div class="col-xs-1">
                                              
-                                         </td>
-                                    </tr>
-                                   <tr style="display:none;">
-                                        <td style="width:100px;">
+                                         </div>
+                                           </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="col-xs-5" >
                                            Userlogin :
-                                        </td>
-                                         <td style="width:100px;">
-                                           <asp:TextBox ID="txtEmpUsrid" runat="server" Height="25px" TabIndex="9" OnTextChanged="txtEmpUsrid_TextChanged" AutoPostBack="True"></asp:TextBox>
-                                         </td>
-                                         <td style="width:5px;">
+                                        </div>
+                                         <div class="col-xs-6" >
+                                           <asp:TextBox ID="txtEmpUsrid" runat="server" Style="margin-bottom:10px;" CssClass="form-control" TabIndex="9" OnTextChanged="txtEmpUsrid_TextChanged" AutoPostBack="True"></asp:TextBox>
+                                         </div>
+                                         <div class="col-xs-1">
                                             <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtEmpUsrid" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Employee"></asp:RequiredFieldValidator>--%>
-                                         </td>
-                                    </tr>
+                                         </div>
+                                           </div>
+                                    </div>
+                             <div class="row">
+                                           <div class="col-xs-12 col-sm-6">
+                                               <div class="col-xs-5">
+                                           Company Name :
+                                        </div>
+                                         <div class="col-xs-6" >
+                                            <asp:TextBox ID="txtAddempCompName" runat="server" CssClass="form-control" OnTextChanged="txtAddempCompName_TextChanged" TabIndex="10"></asp:TextBox>
+                                         </div>
+                                         <div class="col-xs-1">
+                                             
+                                         </div>
+                                           </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                         <div class="col-xs-5">
+                                           Service Type :
+                                        </div>
+                                         <div class="col-xs-6">
+                                            <asp:DropDownList ID="drpAddEmpSType" runat="server" CssClass="form-control"  TabIndex="11">
+                                            </asp:DropDownList>
+                                         </div>
+                                         <div class="col-xs-1">
+                                              <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ControlToValidate="drpAddEmpSType" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Employee" InitialValue="NA"></asp:RequiredFieldValidator>
+                                         </div>
+                                           </div>
+                                    </div>
+
+                                          <%--  <div class="row">
+                                        <div class="col-xs-4">
+                                           Middle Name :
+                                        </div>
+                                         <div class="col-xs-7">
+                                           <asp:TextBox ID="txtAddEmpMName" runat="server"  CssClass="form-control"  TabIndex="3"></asp:TextBox>
+                                         </div>
+                                         <div class="col-xs-1">
+                                             
+                                         </div>
+                                    </div>  --%>              
+                                 
+                                   <div class="row">
+                                        
+                                    </div>
+                                   <div class="row">
+                                        
+                                    </div>
                              
                                    
-                                        <hr />
-                                  <tr>
-                                <span style="text-align:center;font-size:16px;padding-left: 112px;color:cornflowerblue;">Employee Details</span>
                                    
-                                </tr>
-                                   <tr>
-                                        <td style="width:110px;">
-                                           Company Name :
-                                        </td>
-                                         <td style="width:100px;">
-                                            <asp:TextBox ID="txtAddempCompName" runat="server" Height="25px" OnTextChanged="txtAddempCompName_TextChanged" TabIndex="10"></asp:TextBox>
-                                         </td>
-                                         <td style="width:5px;">
-                                             
-                                         </td>
-                                    </tr>
-                                <tr>
-                                        <td style="width:100px;">
-                                           Service Type :
-                                        </td>
-                                         <td style="width:100px;">
-                                            <asp:DropDownList ID="drpAddEmpSType" runat="server" Height="25px" Width="100%" TabIndex="11">
-                                            </asp:DropDownList>
-                                         </td>
-                                         <td style="width:5px;">
-                                              <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ControlToValidate="drpAddEmpSType" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Employee" InitialValue="NA"></asp:RequiredFieldValidator>
-                                         </td>
-                                    </tr>
-                            </table>
-                            </div>
-                   
-                   </div>
-                     
-                    </div>
+                                  
+                                   <div class="row">
+                                        
+                                    </div>
+                                <div class="row">
+                                       
+                                    </div>
+                            
+                            </form>
+
+                               <div class="col-xs-12" style="display:none;">
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter valid name" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtAddEmpFName" ValidationGroup="Add_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Enter valid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtAddEmpEmailId" ValidationGroup="Add_Employee" Display="Dynamic"></asp:RegularExpressionValidator> 
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ValidationExpression="^([0-9]{10})+$" ErrorMessage="Please enter valid  number" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtAddEmpMobile" ValidationGroup="Add_Employee" Display="Dynamic"></asp:RegularExpressionValidator> 
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="Enter valid name" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtAddEmpLName" ValidationGroup="Add_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
+                            
+                                        <asp:Label ID="lblEmpError" runat="server" Font-Size="Small" ForeColor="#48A4FF"></asp:Label><br />
+                  
+                                    </div>
+
+                           <div class="col-xs-12" >
+                               <asp:ValidationSummary ID="Summary1" runat="server" ShowSummary="true" HeaderText="Validation Error"
+                                   DisplayMode="BulletList" />
+                           </div>
+
+
+                         </div>
+        
+
                         <div class="panel-footer" style="text-align:right;margin-top:5px;">
                             <asp:Button ID="btnAddEmpSubmit" runat="server" CssClass="btn btn-primary" Text="Submit" OnClick="btnAdduserres_Click" TabIndex="15" CausesValidation="true" ValidationGroup="Add_Employee" />
                              <button type="button" id="Cancel_AddEmployee"  class="btn btn-danger">Cancel</button>
@@ -800,171 +854,109 @@
         <%-------------------------------------------------------------------------------------- Edit Employee Section Starts from here --------------------------------------------------------------------- %>
         <%--  <asp:Button ID="btnAddEmpcancel" runat="server" CssClass="btn_style" Text="Cancel" CausesValidation="False" TabIndex="16" OnClick="btnusercancel_Click" />--%>
         <div id="myModalEditPopup" class="modal">
-            <div class="container-fluid zero-margin" style="width:360px;">
-                   <div class="panel panel-primary" style="position:relative; width:auto; ">
-               <div class="panel-heading">
-                  <span style="text-align:left;"> Edit Employee </span>
-                   <span class="fa fa-times" id="edit_cross" style="float:right;cursor:pointer;"></span>
-               </div>
-            <%--<div class="panel_body"> 
-                   <%--<form class="employee"> 
-                       <div class="container-fluid">
-                           <div class="row" style="margin-top:0px">
-                             <label for="colFormLabel" class="col-xs-4 col-form-label">First Name: </label>
-                            <div class="col-xs-8">
-                             <asp:TextBox type="text" class="form-control col-xs-8" ID="txtEmpFname" runat="server"   placeholder="First Name" name="Name" />
-                             <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtEmpFname" ErrorMessage="Enter valid name" Font-Size="Small" ForeColor="#FF5050" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ValidationGroup="Edit_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
+            <div class="container-fluid" style="width: 360px;">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <span style="text-align: left;">Edit Employee </span>
+                        <span class="fa fa-times" id="edit_cross" style="float: right; cursor: pointer;"></span>
+                    </div>
+
+                    <div class="panel-body">
+                        <form class="form-group">
+                            <div class="row">
+                                <div class="col-xs-4 ">
+                                    First Name :
+                                </div>
+                                <div class="col-xs-7">
+                                    <asp:TextBox ID="txtEmpFname" runat="server" CssClass="form-control" ValidationGroup="Edit_Employee"></asp:TextBox>
+
+                                </div>
+                                <div class="col-xs-1">
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ControlToValidate="txtEmpFname" ErrorMessage="*" Font-Size="Small" ForeColor="#FF5050" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ValidationGroup="Edit_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
+                                </div>
                             </div>
-                          </div>
-                           <div class="row" style="margin-top:5px">
-                             <label for="colFormLabel" class="col-xs-4 col-form-label">Last Name: </label>
-                            <div class="col-xs-8">
-                             <asp:TextBox type="text" class="form-control col-xs-8" ID="txtEmpLname" runat="server"   placeholder="Last Name" name="Name" />
-                             <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtEmpFname" ErrorMessage="Enter valid name" Font-Size="Small" ForeColor="#FF5050" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ValidationGroup="Edit_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
+
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-xs-4">
+                                    Last Name :
+                                </div>
+                                <div class="col-xs-7">
+                                    <asp:TextBox ID="txtEmpLname" runat="server" CssClass="form-control" ValidationGroup="Edit_Employee"></asp:TextBox>
+
+
+                                </div>
+                                <div class="col-xs-1">
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ControlToValidate="txtEmpLname" ErrorMessage="*" Font-Size="Small" ForeColor="#FF5050" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ValidationGroup="Edit_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtEmpLname" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Edit_Employee"></asp:RequiredFieldValidator>
+                                </div>
                             </div>
-                          </div>
-                           <div class="row" style="margin-top:5px">
-                             <label for="colFormLabel" class="col-xs-4 col-form-label">Addess : </label>
-                            <div class="col-xs-8">
-                             <asp:TextBox ID="txtAddress" runat="server" class="form-control col-xs-8" placeholder="Enter Address" name="Name" />
+
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    Addess :  
+                                </div>
+                                <div class="col-xs-7">
+                                    <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" ValidationGroup="Edit_Employee"></asp:TextBox>
+                                </div>
+                                <div class="col-xs-1">
+                                </div>
+
                             </div>
-                          </div>
-                           <div class="row" style="margin-top:5px">
-                             <label for="colFormLabel" class="col-xs-4 col-form-label">MobileNo : </label>
-                            <div class="col-xs-8">
-                             <asp:TextBox ID="txtEditEmpMobile" runat="server"  OnTextChanged="txtEditEmpMobile_TextChanged" class="form-control col-xs-8" placeholder="Enter Mobile" name="Name" />
-                             <asp:Label ID="lblEditEmpMobChck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
-                             <asp:RegularExpressionValidator ID="RegularExpressionValidatoreditemp" runat="server" ForeColor="#FF5050" ErrorMessage="Enter valid  No." ControlToValidate="txtEditEmpMobile" ValidationExpression="^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$" Display="Dynamic" Font-Size="Small" ></asp:RegularExpressionValidator>
+                            <div class="row"style="margin-top:10px;" >
+                                <div class="col-xs-4 lbltxt">
+                                    MobileNo :
+                                </div>
+                                <div class="col-xs-7">
+                                    <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="txtEditEmpMobile" runat="server" CssClass="form-control" OnTextChanged="txtEditEmpMobile_TextChanged" ValidationGroup="Edit_Employee"></asp:TextBox>
+                                            <asp:Label ID="lblEditEmpMobChck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
+                                            <asp:RegularExpressionValidator ID="RegularExpressionValidatoreditemp" runat="server" ForeColor="#FF5050" ErrorMessage="*" ControlToValidate="txtEditEmpMobile" ValidationExpression="^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$" Display="Dynamic" Font-Size="Small"></asp:RegularExpressionValidator>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+
+                                </div>
+                                <div class="col-xs-1">
+                                    <asp:RequiredFieldValidator ID="RequireEditEmpMobile" runat="server" ControlToValidate="txtEditEmpMobile" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Edit_Employee"></asp:RequiredFieldValidator>
+                                </div>
+
                             </div>
-                          </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                   Email :
+                                </div>
+                                <div class="col-xs-7">
+                                    <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="txtEditEmpEmail" runat="server" CssClass="form-control" OnTextChanged="txtEditEmpEmail_TextChanged" AutoPostBack="True" ValidationGroup="Edit_Employee"></asp:TextBox>
+                                            <asp:Label ID="lblEditEmailCheck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
+                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server" ErrorMessage="*" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtEditEmpEmail" Display="Dynamic"></asp:RegularExpressionValidator>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
 
-                           <div class="row" style="margin-top:5px">
-                             <label for="colFormLabel" class="col-xs-4 col-form-label">Email : </label>
-                            <div class="col-xs-8">
-                             <asp:TextBox ID="txtEditEmpEmail" runat="server" OnTextChanged="txtEditEmpEmail_TextChanged"  AutoPostBack="True" class="form-control col-xs-8" placeholder="Enter Email" name="Name" />
-                             <asp:Label ID="lblEditEmailCheck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
-                             <asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server" ErrorMessage="Enter valid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtEditEmpEmail" Display="Dynamic"></asp:RegularExpressionValidator>
+                                </div>
+                                <div class="col-xs-1">
+                                    <asp:RequiredFieldValidator ID="RequireEditEmpEmail" runat="server" ControlToValidate="txtEditEmpEmail" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Edit_Employee"></asp:RequiredFieldValidator>
+                                </div>
+
                             </div>
-                          </div>
+                           <div class="row">
 
-                           <div class="row" style="margin-top:5px">
-                             <label for="colFormLabel" class="col-xs-4 col-form-label"> </label>
-                            <div class="col-xs-8">
-                              <asp:Label ID="lblEditEmpstatus" runat="server" ForeColor="#51A8FF"></asp:Label>
+                                <div class="col-xs-12 ">
+                                    <asp:Label ID="lblEditEmpstatus" runat="server" ForeColor="#51A8FF"></asp:Label>
+                                </div>
                             </div>
-                          </div>
-                       </div>
-                   </form>--%>
-               <%--</div>--%>
+                        </form>
+                    </div>
 
+                    <div class="panel-footer" style="text-align: right;">
+                        <asp:Button ID="btneditEmp" runat="server" Text="Submit" CssClass="btn btn-sm btn-primary" OnClick="btneditEmp_Click" ValidationGroup="Edit_Employee" />
 
-         <table   class="layout_data_table">
-        <tr>
-            <td colspan="4" style="height:15px;">
-                 
-            </td>
-        </tr>
-
-         <tr>
-             <td class="lbltxt" style="width:25%; padding-left:5%; ">
-              First Name :</td>
-             <td style="width:50%;">
-                 <asp:TextBox ID="txtEmpFname" runat="server" CssClass="form-control" ValidationGroup="Edit_Employee"></asp:TextBox>
-                 <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ControlToValidate="txtEmpFname" ErrorMessage="Enter valid name" Font-Size="Small" ForeColor="#FF5050" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ValidationGroup="Edit_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
-             </td>
-             <td style="width:1%;">
-                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtEmpFname" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Edit_Employee"></asp:RequiredFieldValidator>
-             </td>
-             <td style="width:1%;">
-                 
-             </td>
-         </tr>
-
-          <tr>
-             <td class="lbltxt" style="width:25%;   padding-left:5%;margin-top:5px">
-                Last Name :</td>
-             <td>
-                 <asp:TextBox ID="txtEmpLname" runat="server" CssClass="form-control" ValidationGroup="Edit_Employee"></asp:TextBox>
-                 <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ControlToValidate="txtEmpLname" ErrorMessage="Enter valid name" Font-Size="Small" ForeColor="#FF5050" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ValidationGroup="Edit_Employee" Display="Dynamic"></asp:RegularExpressionValidator>
-
-             </td>
-             <td>
-                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtEmpLname" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Edit_Employee"></asp:RequiredFieldValidator>
-             </td>
-             <td>
-                 
-              </td>
-         </tr>
-
-         <tr>
-             <td class="lbltxt" style="width:25%; font-size:15px;  padding-left:5%;margin-top:5px">
-                Addess :             </td>
-             <td>
-                  <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control txtbox_style" ValidationGroup="Edit_Employee"></asp:TextBox>
-             </td>
-             <td>
-
-             </td>
-             <td>
-
-             </td>
-         </tr>
-          <tr>
-            <td class="lbltxt" style="width:25%; font-size:15px;  padding-left:5%;margin-top:5px">
-               MobileNo :</td>
-                <td>
-                    <asp:UpdatePanel ID="UpdatePanel7" runat="server">
-                        <ContentTemplate>
-                              <asp:TextBox ID="txtEditEmpMobile" runat="server"  CssClass="form-control txtbox_style" OnTextChanged="txtEditEmpMobile_TextChanged"  ValidationGroup="Edit_Employee"></asp:TextBox><br />
-                            <asp:Label ID="lblEditEmpMobChck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidatoreditemp" runat="server" ForeColor="#FF5050" ErrorMessage="Enter valid  No." ControlToValidate="txtEditEmpMobile" ValidationExpression="^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$" Display="Dynamic" Font-Size="Small" ></asp:RegularExpressionValidator>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                
-                </td>
-              <td>
-                  <asp:RequiredFieldValidator ID="RequireEditEmpMobile" runat="server" ControlToValidate="txtEditEmpMobile" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Edit_Employee"></asp:RequiredFieldValidator>
-                      </td>
-              <td>   </td>       
-           </tr>
-        <tr>
-            <td class="lbltxt" style="width:25%; font-size:15px;  padding-left:5%;margin-top:5px">
-                Email :</td>
-                <td>
-                    <asp:UpdatePanel ID="UpdatePanel9" runat="server">
-                        <ContentTemplate>
-                             <asp:TextBox ID="txtEditEmpEmail" runat="server"  CssClass="form-control txtbox_style" OnTextChanged="txtEditEmpEmail_TextChanged"  AutoPostBack="True" ValidationGroup="Edit_Employee"></asp:TextBox><br />
-                            <asp:Label ID="lblEditEmailCheck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server" ErrorMessage="Enter valid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtEditEmpEmail" Display="Dynamic"></asp:RegularExpressionValidator>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                 
-                </td>
-              <td>
-                  <asp:RequiredFieldValidator ID="RequireEditEmpEmail" runat="server" ControlToValidate="txtEditEmpEmail" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Edit_Employee"></asp:RequiredFieldValidator>
-                </td>
-            <td>   </td>
-            </tr>
-         <tr>
-             <td colspan="4" style="width:25%; font-size:15px;  padding-left:5%;margin-top:5px">
-             </td>
-         </tr>
-         <tr>
-             <td colspan="4" style="height:15px;text-align:center;">
-                 <asp:Label ID="lblEditEmpstatus" runat="server" ForeColor="#51A8FF"></asp:Label>
-             </td>
-         </tr>
-        
-       </table>
-
- <div class="panel-footer" style="text-align:right;">
-                   <asp:Button ID="btneditEmp" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btneditEmp_Click" ValidationGroup="Edit_Employee"/>
-                
-                     <button type="button" id="Edit_Cancel" class="btn btn-danger">Cancel</button>
-               </div>
-</div>
+                        <button type="button" id="Edit_Cancel" class="btn btn-sm btn-danger">Cancel</button>
+                    </div>
+                </div>
             </div>
-          </div>
+        </div>
        
    
          </form> 

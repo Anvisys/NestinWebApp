@@ -316,12 +316,12 @@
                                      <div class="col-sm-3  col-xs-3" >
                                          <div><p class="pull-left" style="margin-top:16px;font-size: 15px;color: #000;">Notice : </p></div>
                                      </div>
-                               <div id="myDIV" class="col-sm-6  col-xs-7" style="margin-top:10px;text-align:center;">
+                               <div id="myDIV" class="col-sm-6  col-xs-6" style="margin-top:10px;text-align:center;">
 
                                    <ul class="nav nav-pills" style="margin:auto;width:170px;">
-                                      <li role="presentation" class="active"><asp:Button runat="server" CssClass="btn" ID="showOpen" OnClick="showOpen_Click" Text="Open" CausesValidation="False"  /></li>
-                                      <li role="presentation"><asp:Button runat="server" CssClass="btn" ID="showClose" OnClick="showClose_Click" Text="Close" CausesValidation="False"  /></li>
-                                      <li role="presentation"><asp:Button runat="server" CssClass="btn" ID="showAll" OnClick="showAll_Click" Text="All" CausesValidation="False"  /></li>
+                                      <li role="presentation" class="active"><asp:Button runat="server" CssClass="btn btn-sm" ID="showOpen" OnClick="showOpen_Click" Text="Open" CausesValidation="False"  /></li>
+                                      <li role="presentation"><asp:Button runat="server" CssClass="btn btn-sm" ID="showClose" OnClick="showClose_Click" Text="Close" CausesValidation="False"  /></li>
+                                      <li role="presentation"><asp:Button runat="server" CssClass="btn btn-sm" ID="showAll" OnClick="showAll_Click" Text="All" CausesValidation="False"  /></li>
                                     </ul>
                                  
                                 
@@ -336,9 +336,9 @@
 
                               </div>
 
-                                       <div class="col-sm-3  col-xs-2" >
+                                       <div class="col-sm-3  col-xs-3" >
                                            
-                                         <button id="New_Notification" type="button" class="btn btn-primary btn-sm pull-right">Add</button>
+                                         <button id="New_Notification" style="margin-top:10px;" type="button" class="btn btn-primary btn-sm pull-right ">Add</button>
                                      </div>
                                      
                          </div>
@@ -351,61 +351,60 @@
                              
                           </div>
 
-                    <div class ="row">
-                              <div class="col-xs-12 col-sm-12">
-             
-                    <asp:HiddenField ID="HiddenNotificationSuccess" runat="server" />
-                    <asp:DataList ID="DataNotifications" runat="server" cellpadding="0"    OnItemDataBound="DataNotifications_ItemDataBound"
-                            width="100%"
-                            headerstyle-font-name="Verdana"
-                            headerstyle-font-size="12pt"
-                            headerstyle-horizontalalign="center"
-                            RepeatColumns="0"
-                            HorizontalAlign="Center"
-                            headerstyle-font-bold="True"
-                            BackColor ="Transparent" 
-                           
-                            footerstyle-font-size="9pt"
-                            footerstyle-font-italic="True"  Height="1px" ForeColor="#000" OnSelectedIndexChanged="DataNotifications_SelectedIndexChanged">
-                                   
-                               <ItemStyle ></ItemStyle>
-                               <ItemTemplate>
-                                     <div class="row layout_shadow_table">
+                          <div class="row zero-margin">
+                                  <asp:HiddenField ID="HiddenNotificationSuccess" runat="server" />
+                                  <asp:DataList ID="DataNotifications" runat="server" CellPadding="0"
+                                      OnItemDataBound="DataNotifications_ItemDataBound"
+                                      Width="100%"
+                                      headerstyle-font-name="Verdana"
+                                      HeaderStyle-Font-Size="12pt"
+                                      HeaderStyle-HorizontalAlign="center"
+                                      RepeatColumns="0"
+                                      HorizontalAlign="Center"
+                                      HeaderStyle-Font-Bold="True"
+                                      BackColor="Transparent"
+                                      FooterStyle-Font-Size="9pt"
+                                      FooterStyle-Font-Italic="True" Height="1px" ForeColor="#000" OnSelectedIndexChanged="DataNotifications_SelectedIndexChanged">
 
-                                                    <div class="col-sm-2 col-xs-2" >
-                                       
-                                                 <asp:Image  src='<%# "GetImages.ashx?UserID="+ Eval("UserID")+"&Name="+Eval("FirstName") +"&UserType=Admin"%>' CssClass="UserImage  profile-image" ID="user_image" runat="server" /> <br />
+                                      <ItemStyle></ItemStyle>
+                                      <ItemTemplate>
+                                          <div class="row layout_shadow_table zero-margin">
 
-                                                    <%# Eval("FirstName") +" " + Eval("LastName")  %>
-                                                </div>
-                                                    <div class="col-sm-7 col-xs-6" >
-                                                    <asp:Label ID="Label4" runat="server" ForeColor="#6699cc" Font-Size="medium"  Text='<%# Eval("Notification") %>'></asp:Label><br />     
-                                                             <asp:Label ID="Label7" runat="server" Font-Names="Euphemia" Font-Size="small" ForeColor="green"  Text='<%# "Entry date: " + Eval("Date", "{0:dd MMM,yy}") %>'></asp:Label> &nbsp;&nbsp;
-                                                        <asp:Label ID="Label8" runat="server" Font-Names="Euphemia" Font-Size="small" ForeColor="red"  Text='<%#"Valid Till: "+ Eval("EndDate", "{0:dd MMM,yy}") %>'></asp:Label> 
-                                                        
-                                                    </a>  
-                                         </div>
-                                                    <div class="col-sm-3 col-xs-4">                                                                                                                                                                     
-                                                  <asp:Image ID="ImageFile" with="50" Height="50" CssClass="ImgAttach pull-right" ToolTip="Click to see" OnClientClick="DisplayFullImage(this)" CausesValidation="false" runat="server"  /> 
-                                                   
-                                                  
-                                                        <asp:Label ID="lblFileName" runat="server" Text='<%# Eval("AttachName") %>' ></asp:Label>
-                                                       <a href= "#" onclick="window.open('OpenFile.aspx?NoticeID=<%#Eval("ID") %> &FileName=<%#Eval("AttachName")%>','pagename','resizable,height=560,width=570'); return false;">
-                                                <asp:ImageButton ID="ImageAttachemnt" runat="server"  Width="15" Height="15" CssClass="ImgAttach" CausesValidation="false" ToolTip="Click to see the attachment" ImageUrl="Images/attachment_icon.png" OnClientClick='<%# "NotificationImage.ashx?NotifFileID="+ Eval("ID") %>' /> 
-                                                        <span class="fa fa-paperclip" title="Click to see the attachment" onclick='<%# "NotificationImage.ashx?NotifFileID="+ Eval("ID") %>' id="attachment" runat="server"></span>
+                                              <div class="col-sm-2 col-xs-2">
 
-                                                </div>
-                                            
-                                       </div> 
-                                         
-                              </ItemTemplate>
-                              
-                          <EditItemStyle Height="0px" BackColor="Transparent" />                       
-                        <SeparatorStyle BackColor="Transparent" Height="50px" />
-              </asp:DataList>
-               
-                    </div>
-                      </div>
+                                                  <asp:Image src='<%# "GetImages.ashx?UserID="+ Eval("UserID")+"&Name="+Eval("FirstName") +"&UserType=Admin"%>' CssClass="UserImage  profile-image" ID="user_image" runat="server" />
+                                                  <br />
+
+                                                  <%# Eval("FirstName") +" " + Eval("LastName")  %>
+                                              </div>
+                                              <div class="col-sm-7 col-xs-6">
+                                                  <asp:Label ID="Label4" runat="server" ForeColor="#6699cc" Font-Size="medium" Text='<%# Eval("Notification") %>'></asp:Label><br />
+                                                  <asp:Label ID="Label7" runat="server" Font-Names="Euphemia" Font-Size="small" ForeColor="green" Text='<%# "Entry date: " + Eval("Date", "{0:dd MMM,yy}") %>'></asp:Label>
+                                                  &nbsp;&nbsp;
+                                                        <asp:Label ID="Label8" runat="server" Font-Names="Euphemia" Font-Size="small" ForeColor="red" Text='<%#"Valid Till: "+ Eval("EndDate", "{0:dd MMM,yy}") %>'></asp:Label>
+
+                                                  </a>  
+                                              </div>
+                                              <div class="col-sm-3 col-xs-4">
+                                                  <asp:Image ID="ImageFile" with="50" Height="50" CssClass="ImgAttach pull-right" ToolTip="Click to see" OnClientClick="DisplayFullImage(this)" CausesValidation="false" runat="server" />
+
+
+                                                  <asp:Label ID="lblFileName" runat="server" Text='<%# Eval("AttachName") %>'></asp:Label>
+                                                  <a href="#" onclick="window.open('OpenFile.aspx?NoticeID=<%#Eval("ID") %> &FileName=<%#Eval("AttachName")%>','pagename','resizable,height=560,width=570'); return false;">
+                                                      <asp:ImageButton ID="ImageAttachemnt" runat="server" Width="15" Height="15" CssClass="ImgAttach" CausesValidation="false" ToolTip="Click to see the attachment" ImageUrl="Images/attachment_icon.png" OnClientClick='<%# "NotificationImage.ashx?NotifFileID="+ Eval("ID") %>' />
+                                                      <span class="fa fa-paperclip" title="Click to see the attachment" onclick='<%# "NotificationImage.ashx?NotifFileID="+ Eval("ID") %>' id="attachment" runat="server"></span>
+                                              </div>
+
+                                          </div>
+
+                                      </ItemTemplate>
+
+                                      <EditItemStyle Height="0px" BackColor="Transparent" />
+                                      <SeparatorStyle BackColor="Transparent" Height="50px" />
+                                  </asp:DataList>
+
+                             
+                          </div>
                           </div>
                            <div class ="row" style="margin-top:8px;">
                                      <div class="col-xs-4" style="text-align:center">

@@ -199,9 +199,9 @@
                                 <div class="col-sm-6 col-xs-12" style="padding:0px;">
                                                          
                                                       </div>
-                                 <div class="col-sm-3 hidden-xs" style="vertical-align:middle;">
+                                 <div class="col-sm-3 hidden-xs" style="vertical-align:middle; margin-top:10px;">
                                     <div>
-                                        <button type="button" id="IDNewBill" class="btn_my btn btn-primary"><i class="fa fa-plus"></i> Add Plan</button>  
+                                        <button type="button" id="IDNewBill" class="btn-sm btn btn-primary"><i class="fa fa-plus"></i> Add Plan</button>  
                                     </div>
                                  </div>
                              </div>

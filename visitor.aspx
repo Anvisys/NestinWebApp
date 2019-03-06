@@ -494,8 +494,7 @@
         }
 
 
-        function UpdateCheckIn()
-        {
+        function UpdateCheckIn() {
             document.getElementById("verify_loading").style.display = "block";
 
 
@@ -582,14 +581,22 @@
             return NewFormatDate;
         }
         function validateForm() {
-  var x = document.forms["myForm"]["fname"].value;
-  if (x == "") {
-  //  alert("Name must be filled out");
-    return false;
-  }
-}
+            var x = document.forms["myForm"]["fname"].value;
+            if (x == "") {
+                //  alert("Name must be filled out");
+                return false;
+            }
+        }
 
-</script>
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+
+
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -624,7 +631,7 @@
                                   Add Visitor <span class="fa fa-times" id="icon_close" style="cursor:pointer;float:right;"></span>
                               </div>
                               <div class="panel-body" >
-                                  <form name="visitor">
+                                  <form name="visitor" autocomplete="off">
                                       <div class="container-fluid">
                                           <div class="row" style="margin-top:0px">
                                             <label for="colFormLabel" class="col-xs-4 col-form-label">Name: </label>
@@ -635,7 +642,7 @@
                                           <div class="row"style="margin-top:5px">
                                             <label class="col-xs-4" for="MobileNo">Mobile No:</label>
                                             <div class="col-xs-8">
-                                                 <input type="text" class="form-control col-xs-8" id="MobileNo"  placeholder="Enter Mobile No." name="MobileNo"/>
+                                                 <input type="text" onkeypress="return isNumberKey(event)" class="form-control col-xs-8" id="MobileNo"  placeholder="Enter Mobile No." name="MobileNo"/>
   
                                             </div>
                                           </div>
@@ -669,58 +676,12 @@
                                   </form>
 
 
-                               <%-- <form class="form-inline" method="post" >
-                                           <div class="form-group" >
-                                               
-                                                  <label class="col-xs-4"  for="Name">Name:</label>
-                                                
-                                                <input type="text" class="form-control col-xs-8" id="Name"   placeholder="Enter Name" name="Name" />
-                                              
-                                            </div>
-                                           <div class="form-group" >
-                                              <label class="col-xs-4" for="MobileNo">Mobile No:</label>
-     
-                                                <input type="text" class="form-control col-xs-8" id="MobileNo"  placeholder="Enter Mobile No." name="MobileNo"/>
-    
-                                            </div>
-                                           <div class="form-group">
-   
-                                      <label class="col-xs-4" >Address:</label>
- 
-                                      <textarea class="form-control col-xs-8" rows="2" id="Address" resize: none;" name="Address" placeholder="Enter Address"></textarea>
-
-                                       </div>
-                                           <div class="form-group">
-                                          <label class="col-xs-4" for="Offer">Purpose:</label>
-  
-                                          <input type="text" name="Purpose" class="form-control col-xs-8"id="Purpose" placeholder="Enter Purpose"/>
-                                       </div>
-                                    <div class="form-group">
-     
-                                          <label class="col-xs-4" for="Owner">Time / Date</label>
-                                        <input type="text" class="form-control col-xs-4"   id="btnEntryDate"  name="StartDate"/>
-                                        <select class="form-control col-xs-4" id="timeList"></select>
-                                
-                                   </div>
-                                  
-                                           <div class="form-group">
-                                          <label class="col-xs-4" for="Owner">Valid Till:</label>
-      
-                                            <label  class="form-control col-xs-8" id="btnEndTime" ></label>
-      
-                                            </div>
-                                    
-                                 
-                                      <div id="post_loading" class="layout-overlay" style="margin-top:50px; left:100px; width:100%; text-align:center;vertical-align:middle;">
-                                       <img src="Images/Icon/ajax-loader.gif" style="width:30px; height:30px;margin-top:35px;" />
-                                      </div>
-                                    </form>--%>
                               </div>
 
-                              <div class="panel-footer" style="text-align:right; background-color:#fff;">
-                                  <button type="button" id="btnCancel"  style="margin-top:5px;" class="btn btn-danger">Cancel</button>
-                                  <button type="button" id="btnSubmit"  style="margin-top:5px;" class="btn btn-primary">Submit</button>
-                                          
+                              <div class="panel-footer" style="text-align:right; background-color:#f7f7f7;">
+                                   <button type="button" id="btnSubmit"  style="margin-top:5px;" class="btn-sm btn btn-primary">Submit</button>
+                                  <button type="button" id="btnCancel"  style="margin-top:5px;" class="btn-sm btn btn-danger">Cancel</button>
+                                   
                               </div>
                           </div>
 
@@ -802,8 +763,8 @@
                          
                      
                       <div class="panel-footer" style="text-align:right;">
-                          <button type="button" class="btn btn-danger" onclick="CloseVerify()">Cancel</button>
-                              <button type="button" id="btnCheckIn"  class="btn btn-primary" >Check In</button>
+                          <button type="button" class="btn btn-sm btn-danger" onclick="CloseVerify()">Cancel</button>
+                              <button type="button" id="btnCheckIn"  class="btn btn-sm btn-primary" >Check In</button>
                                      
                       </div>
                         <div id="verify_loading" class="layout-overlay" style="width:500px; text-align:center;vertical-align:middle;">

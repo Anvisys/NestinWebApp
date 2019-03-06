@@ -321,7 +321,7 @@
             
 
                
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" autocomplete="off">
     
          
         <div class="container-fluid">
@@ -332,14 +332,14 @@
                                       <div class="col-sm-6 col-xs-6" style="text-align:center;">
                                           
                                          <ul class="nav nav-pills" style="margin:auto;width:170px;">
-                                              <li role="presentation"><asp:Button runat="server" CssClass="btn btn-primary" ID="showOpen" OnClick="showOpen_Click" Text="Open" CausesValidation="False"  /></li>
-                                              <li role="presentation"><asp:Button runat="server" CssClass="btn" ID="showClose" OnClick="showClose_Click" Text="Close" CausesValidation="False"  /></li>
-                                              <li role="presentation"><asp:Button runat="server" CssClass="btn" ID="showAll" OnClick="showAll_Click" Text="All" CausesValidation="False"  /></li>
+                                              <li role="presentation"><asp:Button runat="server" CssClass="btn btn-sm btn-primary" ID="showOpen" OnClick="showOpen_Click" Text="Open" CausesValidation="False"  /></li>
+                                              <li role="presentation"><asp:Button runat="server" CssClass="btn btn-sm btn-primary" ID="showClose" OnClick="showClose_Click" Text="Close" CausesValidation="False"  /></li>
+                                              <li role="presentation"><asp:Button runat="server" CssClass="btn btn-sm btn-primary" ID="showAll" OnClick="showAll_Click" Text="All" CausesValidation="False"  /></li>
                                             </ul>
                                       </div>
                                      <div class="col-sm-3 col-xs-3" >
                                         <div>
-                                             <button id="Add_Poll" type="button" style="margin-top: 0px;" class="btn btn-primary pull-right btn_my"><i class="fa fa-plus-square"></i></button>
+                                             <button id="Add_Poll" type="button" style="margin-top: 0px;" class="btn btn-primary pull-right btn-sm">Add Poll</button>
 
 <%--                                             <a id="Add_Poll" class="btn btn-primary pull-right" style="visibility:hidden;cursor:pointer;">Add Poll</a>--%>
                                         </div>
@@ -476,7 +476,7 @@
                                             <span class="fa fa-times" style="float:right;cursor:pointer;" onclick="funClear()" aria-hidden="true"></span>
                                         </div>
                                <div class="panel-body" >
-                         <form class="form-group">
+                         <form class="form-group" autocomplete="off">
                        
                                        <div class="row" >
                                        <div class="col-xs-1"></div>

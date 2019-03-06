@@ -619,7 +619,13 @@ hr {
             }
 
 
-       
+       function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : evt.keyCode;
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;    
+         return true;
+      }
 
       
    </script>
@@ -631,10 +637,9 @@ hr {
     <div class="container-fluid" style="background-color: #f7f7f7;">
         <div class="row" id="scroll_div">
 
-            <div class="col-xs-12 col-sm-12">
+         
 
-
-                <form id="form1" runat="server">
+                <form id="form1" runat="server" autocomplete="off">
 
                     <%-------------------------------------------------------------Vendor  Datalist  starts from here ------------------------------------------------------------------ --%>
                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -651,14 +656,14 @@ hr {
                             </div>
                             <div class="col-sm-3  hidden-xs" style="vertical-align: middle;">
                                 <div>
-                                    <a id="Add_Vendor" class="Add_Button pull-right btn btn-primary btn_my fa fa-plus" style="visibility: hidden; cursor: pointer;">Add Vendor</a>
+                                    <a id="Add_Vendor" class="Add_Button pull-right btn btn-primary btn-sm fa fa-plus" style="visibility: hidden;margin-top:10px; cursor: pointer;">Add Vendor</a>
 
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="container-fluid">
-                        <div class="row" style="margin-top: 10px;">
+                    <div class="container-fluid" style="margin-top: 10px;">
+                        <div class="row zero-margin" >
                             <div class="col-xs-12" style="text-align: center; display: none;">
                                 <label class="hidden-xs">Total Vendors :</label><asp:Label ID="lblTotalVendors" CssClass="hidden-xs" runat="server" ForeColor="#46A3FF"></asp:Label>
                             </div>
@@ -810,7 +815,7 @@ hr {
                                                         <label>Contact No.1 :</label>
                                                     </td>
                                                     <td style="width: 150px;">
-                                                        <asp:TextBox ID="txtvendromobile" runat="server" CssClass="form-control" EnableViewState="false" Width="150px" MaxLength="10"></asp:TextBox>
+                                                        <asp:TextBox onkeypress="return isNumberKey(event)"  ID="txtvendromobile" runat="server" CssClass="form-control" EnableViewState="false" Width="150px" MaxLength="10"></asp:TextBox>
                                                         
                                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator3"  runat="server" ValidationExpression="^[0-9]+$" ControlToValidate="txtvendromobile" ErrorMessage="Enter valid No." Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Add_Vendor" Display="Dynamic"></asp:RegularExpressionValidator>
                                                     </td>
@@ -823,7 +828,7 @@ hr {
                                                         <label>Contact No.2 :</label>
                                                     </td>
                                                     <td style="width: 150px;">
-                                                        <asp:TextBox ID="txtMobile2" runat="server" CssClass="txtbox_style form-control" EnableViewState="false"  Width="150px" MaxLength="10"></asp:TextBox>
+                                                        <asp:TextBox  onkeypress="return isNumberKey(event)" ID="txtMobile2" runat="server" CssClass="txtbox_style form-control" EnableViewState="false"  Width="150px" MaxLength="10"></asp:TextBox>
                                                         
                                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationExpression="^[0-9]+$" ControlToValidate="txtvendromobile" ErrorMessage="Enter valid No." Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Add_Vendor" Display="Dynamic"></asp:RegularExpressionValidator>
                                                     </td>
@@ -955,7 +960,7 @@ hr {
                     </div>
                 </div>
 
-            </div>
+
         </div>
     </div>
 </body>

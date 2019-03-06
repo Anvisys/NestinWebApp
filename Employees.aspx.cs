@@ -393,7 +393,7 @@ public partial class Employees : System.Web.UI.Page
         {
             User newUser = new User();
                 newUser.strFirstName = txtAddEmpFName.Text;
-                newUser.strMiddleName = txtAddEmpMName.Text;
+                newUser.strMiddleName = "K";
                 newUser.strLastName = txtAddEmpLName.Text;
                 newUser.strMobileNumber = txtAddEmpMobile.Text;
                 newUser.strEmailID = txtAddEmpEmailId.Text;
@@ -415,7 +415,7 @@ public partial class Employees : System.Web.UI.Page
                 if (result == true)
                 {
                 txtAddEmpFName.Text ="";
-                txtAddEmpMName.Text="";
+                //txtAddEmpMName.Text="";
                 txtAddEmpLName.Text="";
                 txtAddEmpMobile.Text="";
                 txtAddEmpEmailId.Text = "";

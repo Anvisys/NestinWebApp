@@ -321,7 +321,7 @@
                                       </div>
                                      <div class="col-sm-3 hidden-xs" style="vertical-align:middle;">
                                         
-                                            <button type="button" id="btnImport" class="btn_my btn btn-primary"><i class="fa fa-cogs"></i> Generate Bill</button>  
+                                            <button type="button" id="btnImport" class="btn-sm btn btn-primary"><i class="fa fa-cogs"></i> Generate Bill</button>  
                                         
                                      </div>
                                  </div>

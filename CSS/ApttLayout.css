@@ -264,3 +264,36 @@ float:right;
 .margin-right-5p{
     margin-right:5px;
 }
+
+
+.search-dropdown {
+    width: 150px;
+    height: 34px;
+    padding: 0px;
+    margin: 0px;
+    display: inline;
+    float: left;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: 0px;
+}
+
+.search-text {
+    width: 150px;
+    height: 34px;
+    padding: 0px;
+    margin: 0px;
+    display: inline;
+    float: left;
+    border:0px;
+}
+.search-button {
+    width: 34px;
+    height: 34px;
+    padding: 0px;
+    margin: 0px;
+    display: inline;
+    float: left;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

@@ -537,7 +537,7 @@
             text-align: center;
             padding: 4%;
         }
-        .form-control {
+        .topbar_style {
             border-radius:0px;
         }
 
@@ -589,7 +589,7 @@
                                 </div>
                                 <div class="col-sm-3 col-xs-4 zero-margin">
                                   <div class="form-group" >
-                                 <asp:DropDownList ID="drpResidentFilter" runat="server"  CssClass="form-control">
+                                 <asp:DropDownList ID="drpResidentFilter" runat="server"  CssClass="topbar_style form-control">
                                      <asp:ListItem Selected="True">Owner & Tenant</asp:ListItem>
                                      <asp:ListItem>Owner</asp:ListItem>
                                      <asp:ListItem>Tenant</asp:ListItem>
@@ -609,10 +609,9 @@
                                 
                                 <div class="col-sm-2 col-xs-5">
 
-                                    <button type="button" id="Add_Resident" class="btn btn-success pull-right">Add User</button>
+                                    <button type="button" id="Add_Resident" class="btn btn-sm btn-primary pull-right">Add User</button>
                                 </div>
                             </div>
-
 
                             <div class="row layout_header theme_third_bg font_size_2 vcenter" style="height: 40px; margin: 0px; display: none;">
                                 <div class="col-xs-3 hidden-xs">
@@ -674,18 +673,19 @@
 
 
                         <asp:HiddenField ID="HiddenCompDeactiveID" runat="server" />
-                        <div id="UserTable" class="row" style="margin: 1px;">
+                        <div id="UserTable" class="row" style="margin: 1px; ">
 
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 ">
 
                                 <asp:DataList
                                     ID="residentsDataList" runat="server" HorizontalAlign="Center"
-                                    RepeatColumns="1" RepeatDirection="Horizontal" Width="100%" OnSelectedIndexChanged="ResidentList_DataBound">
+                                    
+                                    RepeatColumns="1" RepeatDirection="Horizontal" Width="100%"  OnSelectedIndexChanged="ResidentList_DataBound">
 
                                     <ItemStyle />
                                     <ItemTemplate>
 
-                                        <div class="row layout_shadow_table">
+                                        <div class="row layout_shadow_table"  style="margin-left:10px;">
 
                                             <div class="col-sm-4 col-xs-4" style="text-align: center;">
 
@@ -769,15 +769,14 @@
                         <asp:UpdatePanel ID="UpdatePanel15" runat="server" EnableViewState="true">
                             <ContentTemplate>
                                 <div class="container-fluid">
-                                    <div class="panel panel-primary popup_box_size" style="background-color: #f2f2f2; position: relative;">
+                                    <div class="panel panel-primary popup_box_size" style="width: 630px; position: relative;">
                                         <div class="panel-heading">
                                             Add User :
-                        
-                        
-                          <a onclick="CloseAddResident()" style="cursor: pointer;"><span class="fa fa-close" style="color: white; float: right"></span></a>
+                                                <a onclick="CloseAddResident()" style="cursor: pointer;"><span class="fa fa-close" style="color: white; float: right"></span></a>
 
                                         </div>
                                         <div class=" panel-body ">
+                                            <form class="form-group">
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter valid name" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtFirstname" ValidationGroup="Add_User" Display="Dynamic"></asp:RegularExpressionValidator>
@@ -791,127 +790,133 @@
 
                                                 </div>
                                             </div>
-                                            
 
-                                            <div class="row">
-                                                
-                                                <div class="col-xs-6 col-sm-6" style="display:none;">
-                                                    <label class="lblHead">Flat No. :</label>
-
-                                                    <asp:TextBox ID="txtFlat" CssClass="txtbox_style" runat="server" Height="25px" TabIndex="0"></asp:TextBox>
-                                                </div>
-
-                                                <div class="col-xs-6 col-sm-6">
-                                                    <label class="lblHead">Email :</label>
-
-                                                    <asp:TextBox ID="txtEmailId" runat="server" Height="25px" CssClass="txtbox_style" AutoCompleteType="Disabled" TabIndex="8" onblur="validateEmail(this);"  OnTextChanged="txtEmailId_TextChanged" AutoPostBack="True"></asp:TextBox>
-
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtEmailId" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
-                                                </div>
-
-                                                <div class="col-xs-6 col-sm-6">
-                                                    <label class="lblHead">Mobile :</label>
-
-
-                                                    <asp:TextBox ID="txtMobileno" runat="server" Height="25px" CssClass="txtbox_style" MaxLength="10" TabIndex="1" OnTextChanged="txtMobileno_TextChanged" AutoCompleteType="Disabled" AutoPostBack="True"></asp:TextBox>
-
-                                                    <asp:RequiredFieldValidator ID="RequireUserMobileNo" runat="server" ControlToValidate="txtMobileno" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
-                                                </div>
-                                            </div>
 
                                             <div class="row">
 
-                                                <div class="col-xs-6 col-sm-6">
-
-                                                    <td>
-                                                        <label class="lblHead">First Name :</label>
-
-                                                    </td>
-                                                    <asp:TextBox ID="txtFirstname" CssClass="txtbox_style" runat="server" Height="25px" TabIndex="2"></asp:TextBox>
-
-
+                                                <div class="col-xs-6 col-sm-6" style="display: none;">
+                                                    <label class="lblHead col-xs-8 ">Flat No. :</label>
+                                                    <div class="col-xs-8">
+                                                        <asp:TextBox ID="txtFlat" CssClass="form-control" runat="server" TabIndex="0"></asp:TextBox>
+                                                    </div>
                                                 </div>
-                                                <div class="col-xs-6 col-sm-6">
-                                                    <label class="lblHead">Middle Name :</label>
+
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <label class="col-xs-5">Email :</label>
+                                                    <div class="col-xs-7">
+                                                        <asp:TextBox ID="txtEmailId" runat="server" CssClass="form-control col-xs-8" AutoCompleteType="Disabled" TabIndex="8" onblur="validateEmail(this);" OnTextChanged="txtEmailId_TextChanged" AutoPostBack="True"></asp:TextBox>
+
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtEmailId" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <label class="col-xs-5">Mobile :</label>
+                                                    <div class="col-xs-7">
+
+                                                        <asp:TextBox ID="txtMobileno" runat="server" CssClass="form-control" MaxLength="10" TabIndex="1" OnTextChanged="txtMobileno_TextChanged" AutoCompleteType="Disabled" AutoPostBack="True"></asp:TextBox>
+
+                                                        <asp:RequiredFieldValidator ID="RequireUserMobileNo" runat="server" ControlToValidate="txtMobileno" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 15px;">
+
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <label class="col-xs-5">First Name :</label>
+                                                    <div class="col-xs-7">
+
+                                                        <asp:TextBox ID="txtFirstname" CssClass="form-control" runat="server" TabIndex="2"></asp:TextBox>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6">
 
 
-                                                    <asp:TextBox ID="txtMiddleName" runat="server" Height="25px" CssClass="txtbox_style" TabIndex="3"></asp:TextBox>
+                                                    <label class="col-xs-5">Middle Name:</label>
+                                                    <div class="col-xs-7">
 
+                                                        <asp:TextBox ID="txtMiddleName" runat="server" CssClass="form-control" TabIndex="3"></asp:TextBox>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-bottom: 15px;">
+
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <label class="col-xs-5">Last Name :</label>
+                                                    <div class="col-xs-7">
+
+
+
+                                                        <asp:TextBox ID="txtLastname" runat="server" CssClass="form-control" TabIndex="4"></asp:TextBox>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <label class="col-xs-5">Gender :</label>
+                                                    <div class="col-xs-7">
+
+
+                                                        <asp:DropDownList ID="drpAddusrGendr" runat="server" CssClass="form-control ddl_style" TabIndex="5">
+                                                            <asp:ListItem>Male</asp:ListItem>
+                                                            <asp:ListItem>Female</asp:ListItem>
+                                                        </asp:DropDownList>
+
+                                                    </div>
 
                                                 </div>
                                             </div>
 
-                                            <div class="row">
+                                            <div class="row" >
 
-                                                <div class="col-xs-6 col-sm-6">
-                                                    <label class="lblHead">Last Name :</label>
+                                                <div class="col-xs-12 col-sm-6">
 
-
-
-                                                    <asp:TextBox ID="txtLastname" runat="server" Height="25px" CssClass="txtbox_style" TabIndex="4"></asp:TextBox>
+                                                    <label class="col-xs-5">ParentName :</label>
+                                                    <div class="col-xs-7">
 
 
+                                                        <asp:TextBox ID="txtParentname" runat="server" CssClass="form-control" TabIndex="6"></asp:TextBox>
+
+                                                    </div>
                                                 </div>
-                                                <div class="col-xs-6 col-sm-6">
-                                                    <label class="lblHead">Gender :</label>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <label class="col-xs-5">Address :</label>
+                                                    <div class="col-xs-7">
 
 
-                                                    <asp:DropDownList ID="drpAddusrGendr" runat="server" Height="28px" width="93px" CssClass="ddl_style" TabIndex="5">
-                                                        <asp:ListItem>Male</asp:ListItem>
-                                                        <asp:ListItem>Female</asp:ListItem>
-                                                    </asp:DropDownList>
-                                                    
-    
 
+                                                        <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TabIndex="9" AutoCompleteType="Disabled"></asp:TextBox>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="row">
-
-                                                <div class="col-xs-6 col-sm-6">
-                                                    <label class="lblHead">ParentName :</label>
+                                                <div class="col-xs-12 col-sm-6" style="display: none;">
+                                                    <label class="col-xs-5">UserType :</label>
+                                                    <div class="col-xs-7">
 
 
 
-                                                    <asp:TextBox ID="txtParentname" runat="server" Height="25px" CssClass="txtbox_style" TabIndex="6"></asp:TextBox>
+                                                        <asp:DropDownList ID="drpAddusertype" runat="server" CssClass="form-control ddl_style" TabIndex="7">
+                                                            <asp:ListItem>Owner</asp:ListItem>
+                                                            <asp:ListItem>Tenant
+                                                            </asp:ListItem>
+                                                        </asp:DropDownList>
 
-
-                                                </div>
-                                                 <div class="col-xs-6 col-sm-6">
-                                                    <label class="lblHead">Address :</label>
-
-                                                    <asp:TextBox ID="txtAddress" runat="server" Height="25px" CssClass="txtbox_style" TabIndex="9" AutoCompleteType="Disabled"></asp:TextBox>
-
-                                                </div>
-                                                
-                                                <div class="col-xs-6 col-sm-6" style="display:none;">
-
-                                                    <label class="lblHead">UserType :</label>
-
-
-                                                    <asp:DropDownList ID="drpAddusertype" runat="server" Height="25px" CssClass="ddl_style" TabIndex="7">
-                                                        <asp:ListItem>Owner</asp:ListItem>
-                                                        <asp:ListItem>Tenant
-                                                        </asp:ListItem>
-                                                    </asp:DropDownList>
-
-
+                                                    </div>
 
                                                 </div>
 
                                             </div>
-                                           
 
+                                            </form>
                                         </div>
 
 
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                            </div>
-                                        </div>
                                         <div class="panel-footer" style="text-align: right;">
-                                            <asp:Button ID="btnAddUserResident" runat="server" CssClass="btn btn-primary" Text="Submit" ValidationGroup="Add_User" CausesValidation="False"  OnClick="btnAddUserResident_Click" TabIndex="10" />
-                                            <button type="button" id="btnusercancel" class="btn btn-danger"   onclick="HideAddRes();" >Cancel</button>
+                                            <asp:Button ID="btnAddUserResident" runat="server" CssClass="btn btn-primary" Text="Submit" ValidationGroup="Add_User" CausesValidation="False" OnClick="btnAddUserResident_Click" TabIndex="10" />
+                                            <button type="button" id="btnusercancel" class="btn btn-danger" onclick="HideAddRes();">Cancel</button>
                                         </div>
                                     </div>
                             </ContentTemplate>
@@ -921,8 +926,8 @@
 
             <%-------------------------------------------------------------------------------------Edit User Section ---------------------------------------------------------------------------%>           <%--   <div id="myModalEditPopup" class="modal">   --%>
             <div id="myModalEditPopup" class="modal">
-                <div class="container-fluid" style="width: 350px; margin-top: 100px;">
-                    <div class="panel panel-primary" style="position: relative; margin: 0px; background-color: #f2f2f2;">
+                <div class="container-fluid" style="width: 400px; margin-top: 100px;">
+                    <div class="panel panel-primary" style="position: relative; margin: 0px;">
 
                         <div class="panel-heading" style="height: 40px;">
 
@@ -939,16 +944,16 @@
                                         <tr>
                                             <td class="lbltxt" style="width: 30%;">FlatNumber:</td>
                                             <td style="width: 35%;">
-                                                <asp:TextBox ID="txtEditFlatNumber" runat="server" CssClass="txtbox_style UserEditInfo" ReadOnly="True"></asp:TextBox>
+                                                <asp:TextBox ID="txtEditFlatNumber"  runat="server"  CssClass="form-control UserEditInfo" ReadOnly="True"></asp:TextBox>
                                             </td>
                                             <td style="width: 1%;"></td>
                                             
                                         </tr>
 
-                                        <tr>
-                                            <td class="lbltxt" style="width: 20%;">FirstName:</td>
-                                            <td style="width: 35%;">
-                                                <asp:TextBox ID="txtEditFirstname" runat="server" CssClass="txtbox_style UserEditInfo"></asp:TextBox><br />
+                                        <tr  >
+                                            <td class="lbltxt" >FirstName:</td>
+                                            <td style="width: 35%; ">
+                                                <asp:TextBox ID="txtEditFirstname" runat="server" Style="margin-top:10px;" CssClass="form-control UserEditInfo"></asp:TextBox><br />
                                                 <asp:RegularExpressionValidator ID="regulareditusername" runat="server" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ErrorMessage="enter valid name" ForeColor="#FF5050" ControlToValidate="txtEditFirstname" Font-Size="Small" ValidationGroup="Edit_User" Display="Dynamic"></asp:RegularExpressionValidator>
                                             </td>
                                             <td>
@@ -960,7 +965,7 @@
                                         <tr style="display:none;">
                                             <td class="lbltxt">MiddleName:</td>
                                             <td style="width: 35%;">
-                                                <asp:TextBox ID="txtEditMiddlename" runat="server" CssClass="txtbox_style UserEditInfo"></asp:TextBox><br />
+                                                <asp:TextBox ID="txtEditMiddlename" runat="server" CssClass="form-control UserEditInfo"></asp:TextBox><br />
                                                 <asp:RegularExpressionValidator ID="Regularedituserlastname" runat="server" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ErrorMessage="enter valid name" ForeColor="#FF5050" ControlToValidate="txtEditMiddlename" Font-Size="Small" ValidationGroup="Edit_User" Display="Dynamic"></asp:RegularExpressionValidator>
                                             </td>
                                             <td>&nbsp;</td>
@@ -970,7 +975,7 @@
                                         <tr>
                                             <td class="lbltxt">LastName:</td>
                                             <td>
-                                                <asp:TextBox ID="txtEditlastname" runat="server" CssClass="txtbox_style UserEditInfo"></asp:TextBox>
+                                                <asp:TextBox ID="txtEditlastname" runat="server" CssClass="form-control UserEditInfo"></asp:TextBox>
                                             </td>
                                             <td>
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="txtEditlastname" ErrorMessage="*" ForeColor="#FF5050"></asp:RequiredFieldValidator>
@@ -981,7 +986,7 @@
                                             <td class="lbltxt">EMailId:</td>
                                             <td>
 
-                                                <asp:TextBox ID="txtEditEmailID" runat="server" CssClass="txtbox_style UserEditInfo" OnTextChanged="txtEditEmailID_TextChanged" AutoPostBack="True"></asp:TextBox><br />
+                                                <asp:TextBox ID="txtEditEmailID" runat="server" Style="margin-top:10px;" CssClass="form-control UserEditInfo" OnTextChanged="txtEditEmailID_TextChanged" AutoPostBack="True"></asp:TextBox><br />
                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ControlToValidate="txtEditEmailID" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Enter vaild mail" Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Edit_User" Display="Dynamic"></asp:RegularExpressionValidator>
                                                 <asp:Label ID="lblEditEmailCheck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
 
@@ -997,7 +1002,7 @@
                                         <tr>
                                             <td class="lbltxt">ParentName:</td>
                                             <td>
-                                                <asp:TextBox ID="txtEditusrParentN" runat="server" CssClass="txtbox_style UserEditInfo"></asp:TextBox>
+                                                <asp:TextBox ID="txtEditusrParentN" runat="server" CssClass="form-control UserEditInfo"></asp:TextBox>
                                             </td>
                                             <td></td>
                                             <td></td>
@@ -1007,7 +1012,7 @@
                                             <td class="lbltxt">MobileNo:</td>
                                             <td style="width: 35%;">
 
-                                                <asp:TextBox ID="txtEditMobileNo" runat="server" CssClass="txtbox_style UserEditInfo" MaxLength="10" OnTextChanged="txtEditMobileNo_TextChanged" AutoPostBack="True"></asp:TextBox><br />
+                                                <asp:TextBox ID="txtEditMobileNo" runat="server" Style="margin-top:10px;" CssClass="form-control UserEditInfo" MaxLength="10" OnTextChanged="txtEditMobileNo_TextChanged" AutoPostBack="True"></asp:TextBox><br />
                                                 <asp:Label ID="lblEditMobileCheck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidatoredituser" runat="server" ErrorMessage="Enter valid No." ControlToValidate="txtEditMobileNo" ForeColor="#FF5050" ValidationExpression="^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$" Font-Size="Small" ValidationGroup="Edit_User" Display="Dynamic"></asp:RegularExpressionValidator>
 
@@ -1029,12 +1034,12 @@
                                         
                                         <tr id="tdNewPwd" style="display: none;text-align:center">
                                             <td colspan="4" class="lbltxt" style="padding: 5px;">New Password:
-                                                <asp:TextBox ID="newPassword" CssClass="login_txtbox" TextMode="Password" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="newPassword" CssClass="form-control" TextMode="Password" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr id="tdCnfPwd" style="display: none;text-align:center;">
                                             <td colspan="4" class="lbltxt">Confirm Password:
-                                                <asp:TextBox ID="cnfPassword" CssClass="login_txtbox" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="cnfPassword" CssClass="form-control" runat="server"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>

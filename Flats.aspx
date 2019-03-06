@@ -488,9 +488,9 @@
                                               </div>
                                       </div>
                  <div class="col-sm-4 hidden-xs" style="vertical-align:middle;">
-                    <div >
-                          <button id="Add_Flat_Button" type="button" class="btn_my btn btn-primary" style="cursor:pointer;margin:0px;"><i class="fa fa-plus"></i> Add Flat</button>  
-                         <a id="linkTemplate" type="button"  class="btn_my btn btn-primary"  href="http://www.myaptt.com/NewTestApp/Excel_Format.zip" download="true" style="cursor:pointer;background-color:#2ECC71!important;margin:0; border-color:#2ECC71!important;"><i class="fa fa-plus"></i> Template</a>
+                    <div style=" align-content">
+                          <button id="Add_Flat_Button" type="button" class="btn-sm btn btn-primary pull-right" style="cursor:pointer;margin-right:30px;"><i class="fa fa-plus"></i> Add Flat</button>  
+                         <a id="linkTemplate" type="button"  class="btn-sm btn btn-primary pull-right"  href="http://www.myaptt.com/NewTestApp/Excel_Format.zip" download="true" style="cursor:pointer;border-color:#2ECC71!important;"><i class="fa fa-plus"></i> Template</a>
                     </div>
                  </div>
              </div>
@@ -501,7 +501,7 @@
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
 
-         <div class ="container-fluid" style="padding-bottom:10px;">
+         <div class ="container-fluid zero-margin" style="padding-bottom:10px;">
                               <div class="col-xs-12 col-sm-12">
 
               <asp:DataList ID="dataListFlats" runat="server" cellpadding="0"  
@@ -520,7 +520,7 @@
                                    
                                            <ItemStyle ></ItemStyle>
                                            <ItemTemplate>
-                                                <div class="row layout_shadow_table">
+                                                <div class="row layout_shadow_table ">
                                                
                                                     <table>
                                                         <div class="col-sm-3" style="text-align:center;">
