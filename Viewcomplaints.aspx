@@ -605,7 +605,7 @@
 
 
      <div class="container-fluid">
-         <div class="row"  style="height: 500px;overflow-x:hidden;">
+         <div class="row"  style="overflow-x:hidden; overflow-y:hidden;">
 
 
 
@@ -693,7 +693,7 @@
                                  <ItemStyle></ItemStyle>
                                  <ItemTemplate>
 
-                                     <div class="row layout_shadow_table zero-margin" style="padding-bottom:10px;">
+                                     <div class="row layout_shadow_table" style="margin-left:3px;">
 
                                          <div class="col-sm-2 col-xs-6">
 

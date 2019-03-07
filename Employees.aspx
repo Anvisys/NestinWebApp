@@ -259,7 +259,15 @@
                  $("#lblEditEmpMobChck").html('');
                  
              });
-                  });
+         });
+
+           function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : evt.keyCode;
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;    
+         return true;
+      }
 
    </script>
 
@@ -619,7 +627,7 @@
                          
                                      <span style="text-align:center;font-size:16px;color:cornflowerblue;">User Details</span>
 
-                            <form class="form-group">
+                            <form class="form-group" autocomplete="off">
                                   <div class="row">
                                       <div class="col-xs-12 col-sm-6">
 
@@ -628,7 +636,7 @@
                                  </div>
                                          <div class="col-xs-6">
                                            
-                                           <asp:TextBox ID="txtAddEmpMobile" CssClass="form-control" runat="server" TabIndex="0" AutoCompleteType="Disabled" MaxLength="10" 
+                                           <asp:TextBox ID="txtAddEmpMobile" onkeypress="return isNumberKey(event)"  CssClass="form-control" runat="server" TabIndex="0" AutoCompleteType="Disabled" MaxLength="10" 
                                                OnTextChanged="txtAddEmpMobile_TextChanged" AutoPostBack="True"></asp:TextBox>
                                              
                                          </div>
@@ -909,7 +917,7 @@
                                 <div class="col-xs-7">
                                     <asp:UpdatePanel ID="UpdatePanel7" runat="server">
                                         <ContentTemplate>
-                                            <asp:TextBox ID="txtEditEmpMobile" runat="server" CssClass="form-control" OnTextChanged="txtEditEmpMobile_TextChanged" ValidationGroup="Edit_Employee"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditEmpMobile" runat="server" onkeypress="return isNumberKey(event)" CssClass="form-control" OnTextChanged="txtEditEmpMobile_TextChanged" ValidationGroup="Edit_Employee"></asp:TextBox>
                                             <asp:Label ID="lblEditEmpMobChck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
                                             <asp:RegularExpressionValidator ID="RegularExpressionValidatoreditemp" runat="server" ForeColor="#FF5050" ErrorMessage="*" ControlToValidate="txtEditEmpMobile" ValidationExpression="^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$" Display="Dynamic" Font-Size="Small"></asp:RegularExpressionValidator>
                                         </ContentTemplate>

@@ -19,8 +19,10 @@ public partial class Totalusers : System.Web.UI.Page
     
     Copyright © 2016 Anvisys Technologies Pvt. Ltd.All rights reserved.
     */
-
+    PagedDataSource adsource;
+    int pos;
     User muser;
+ 
 
     private static User newUser;
      private static bool ExistingUser;
@@ -37,6 +39,10 @@ public partial class Totalusers : System.Web.UI.Page
         if (!IsPostBack)
         {
             //Filldata();
+            this.ViewState["vs"] = 0;
+            pos = (int)this.ViewState["vs"];
+            Utility.Initializehashtables();
+
             LoadResidentData(); //Changed name by Aarshi on 4 aug 2017
             //btnResShwall.Visible = false; //Changed by Aarshi on 4 Aug 2017
             btnResidentShowAll.Visible = false;
@@ -67,14 +73,23 @@ public partial class Totalusers : System.Web.UI.Page
         {
             if (dsResidentAll.Tables.Count > 0)
             {
+                adsource = new PagedDataSource();
+                adsource.DataSource = dsResidentAll.Tables[0].DefaultView;
+                adsource.PageSize = 5;
+                adsource.AllowPaging = true;
+                adsource.CurrentPageIndex = pos;
+                residentsDataList.DataSource = adsource;
+                btnprevious.Visible = !adsource.IsFirstPage;
+                btnnext.Visible = !adsource.IsLastPage;
 
-                residentsDataList.DataSource = dsResidentAll;
+
+                //residentsDataList.DataSource = dsResidentAll;
                 residentsDataList.DataBind();
                 //UserGrid.DataSource = dsResidentAll;
                 //UserGrid.DataBind();
                 //btnResShwall.Visible = false; //Changed by Aarshi on 4 Aug 2017
-                btnResidentShowAll.Visible = false;
-
+                // btnResidentShowAll.Visible = false;
+                lblPage.Text = "Page " + (adsource.CurrentPageIndex + 1) + " of " + adsource.PageCount;
                 if (dsResidentAll.Tables[0].Rows.Count == 0)
                 {
                     
@@ -101,19 +116,30 @@ public partial class Totalusers : System.Web.UI.Page
         {
             lblGridEmptyDataText.Text = "Unable to retreive data.";
         }
-
-
-
-      
+        
+    }
+    protected void btnprevious_Click(object sender, EventArgs e)
+    {
+        pos = (int)this.ViewState["vs"];
+        pos -= 1;
+        this.ViewState["vs"] = pos;
+        LoadResidentData();
     }
 
+    protected void btnnext_Click(object sender, EventArgs e)
+    {
+        pos = (int)this.ViewState["vs"];
+        pos += 1;
+        this.ViewState["vs"] = pos;
+        LoadResidentData();
+    }
     protected void btnResidentShowAll_Click(object sender, EventArgs e)
     {
         //Filldata();
         LoadResidentData(); //Changed name by Aarshi on 4 aug 2017
         var txt = txtUserSrch.Text;
-        txtUserSrch.Text = "";  
-    
+        txtUserSrch.Text = "";
+
         drpUserResTypeFilter.SelectedValue = drpUserResTypeFilter.Items.FindByText("Select").Value;
     }
 

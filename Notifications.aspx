@@ -504,9 +504,9 @@
                                     </div>             
                                     <div class="panel-footer" style="text-align:right;">
                                          <asp:Button ID="btnNofificancel" runat="server" CssClass="btn_style" Text="Cancel" OnClick="btnNofificancel_Click" Visible="False" CausesValidation="False" />             
-                                        <asp:Button class="btn btn-success"  ID="btnNotificationsSend" runat="server"  OnClick="btnNotificationsSend_Click" Text="Send" />
+                                        <asp:Button class="btn btn-sm btn-success"  ID="btnNotificationsSend" runat="server"  OnClick="btnNotificationsSend_Click" Text="Send" />
 
-                                       <button type="button" class="btn btn-danger" id="CancelNotifications_Button" >Cancel</button>    
+                                       <button type="button" class="btn btn-sm btn-danger" id="CancelNotifications_Button" >Cancel</button>    
                                     </div>         
 
 

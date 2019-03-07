@@ -460,7 +460,13 @@
         return true;
 
 }
-
+         function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : evt.keyCode;
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;    
+         return true;
+      }
     </script>
 
 
@@ -583,30 +589,30 @@
                     <div>
                         <div class="container-fluid">
 
-                            <div class="row" style="height: 56px;margin-top:15px;">
+                            <div class="row" style="height: 56px; margin-top: 15px;">
                                 <div class="col-sm-4 hidden-xs">
-                                    <h4 style="margin:0px">Resident:</h4>
+                                    <h4 style="margin: 0px">Resident:</h4>
                                 </div>
                                 <div class="col-sm-3 col-xs-4 zero-margin">
-                                  <div class="form-group" >
-                                 <asp:DropDownList ID="drpResidentFilter" runat="server"  CssClass="topbar_style form-control">
-                                     <asp:ListItem Selected="True">Owner & Tenant</asp:ListItem>
-                                     <asp:ListItem>Owner</asp:ListItem>
-                                     <asp:ListItem>Tenant</asp:ListItem>
+                                    <div class="form-group">
+                                        <asp:DropDownList ID="drpResidentFilter" runat="server" CssClass="topbar_style form-control">
+                                            <asp:ListItem Selected="True">Owner & Tenant</asp:ListItem>
+                                            <asp:ListItem>Owner</asp:ListItem>
+                                            <asp:ListItem>Tenant</asp:ListItem>
 
-                                 </asp:DropDownList>
-                                      </div>
+                                        </asp:DropDownList>
                                     </div>
-                                    <div class="col-sm-2 col-xs-2 zero-margin">
-                                  <asp:TextBox ID="txtFlatNoFilter" placeholder="Flat Number" runat="server" CssClass="form-control"></asp:TextBox>
-                                        </div>
-                                    <div class="col-sm-1 col-xs-1 zero-margin">
-                                   <asp:LinkButton runat="server" BackColor="Transparent" ForeColor="Black" ValidationGroup="Flat_Search" OnClick="btnSearch_OnClick"> 
+                                </div>
+                                <div class="col-sm-2 col-xs-2 zero-margin">
+                                    <asp:TextBox ID="txtFlatNoFilter" placeholder="Flat Number" runat="server" CssClass="form-control"></asp:TextBox>
+                                </div>
+                                <div class="col-sm-1 col-xs-1 zero-margin">
+                                    <asp:LinkButton runat="server" BackColor="Transparent" ForeColor="Black" ValidationGroup="Flat_Search" OnClick="btnSearch_OnClick"> 
                                        <span class="glyphicon glyphicon-search"></span></asp:LinkButton>
-                                        </div>
-                            
+                                </div>
 
-                                
+
+
                                 <div class="col-sm-2 col-xs-5">
 
                                     <button type="button" id="Add_Resident" class="btn btn-sm btn-primary pull-right">Add User</button>
@@ -673,19 +679,18 @@
 
 
                         <asp:HiddenField ID="HiddenCompDeactiveID" runat="server" />
-                        <div id="UserTable" class="row" style="margin: 1px; ">
+                        <div id="UserTable" class="row" style="margin: 1px;">
 
                             <div class="col-sm-12 ">
 
                                 <asp:DataList
                                     ID="residentsDataList" runat="server" HorizontalAlign="Center"
-                                    
-                                    RepeatColumns="1" RepeatDirection="Horizontal" Width="100%"  OnSelectedIndexChanged="ResidentList_DataBound">
+                                    RepeatColumns="1" RepeatDirection="Horizontal" Width="100%" OnSelectedIndexChanged="ResidentList_DataBound">
 
                                     <ItemStyle />
                                     <ItemTemplate>
 
-                                        <div class="row layout_shadow_table"  style="margin-left:10px;">
+                                        <div class="row layout_shadow_table" style="margin-left: 10px;">
 
                                             <div class="col-sm-4 col-xs-4" style="text-align: center;">
 
@@ -693,19 +698,24 @@
                                                 <br />
 
                                                 <%# Eval("FirstName") +" " + Eval("LastName") %> , <%# Eval("FlatNumber") %>
-                                                <br /> <hr style="margin:0px;" /> <%# Eval("Type") %> 
+                                                <br />
+                                                <hr style="margin: 0px;" />
+                                                <%# Eval("Type") %>
                                             </div>
 
-                                            <div class="col-sm-4 col-xs-4" >
+                                            <div class="col-sm-4 col-xs-4">
                                                 <br />
-                                                <span class="fa fa-envelope" style="color:blue;"></span>  <%# Eval("Emailid") %> <br />
-                                               
+                                                <span class="fa fa-envelope" style="color: blue;"></span><%# Eval("Emailid") %>
+                                                <br />
+
                                                 <%--<span class="fa fa-phone-square" style="color:blue;"></span> <%# Eval("IntercomNumber") %><br />--%>
-                                               <span class="fa fa-phone" style="color:blue;"></span>  <%# Eval("MobileNo") %>
-                                                  <%# Eval("ParentName") %> <br />
-                                                <span class="fa fa-clock-o" style="color:blue;"></span> <%# Eval("ActiveDate","{0:dd MMM,yy}") %> <br />
+                                                <span class="fa fa-phone" style="color: blue;"></span><%# Eval("MobileNo") %>
+                                                <%# Eval("ParentName") %>
+                                                <br />
+                                                <span class="fa fa-clock-o" style="color: blue;"></span><%# Eval("ActiveDate","{0:dd MMM,yy}") %>
+                                                <br />
                                             </div>
-                                           
+
 
                                             <div class="col-sm-4 col-xs-4">
                                                 <div class="btn-group">
@@ -720,8 +730,8 @@
 
                                                     </ul>
                                                 </div>
-                                                </div>
-                                            
+                                            </div>
+
                                         </div>
 
 
@@ -732,7 +742,23 @@
 
                                 </asp:DataList>
 
+                                <div class="row">
+
+                                    <div class="col-xs-4" style="text-align: center; padding: 8px;">
+                                        <asp:Button ID="btnprevious" CausesValidation="false" runat="server" Font-Bold="true" Text="Prev" Height="31px" Width="60px" OnClick="btnprevious_Click" />
+
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <asp:Label ID="lblPage" runat="server" Font-Size="Small" ForeColor="#f9f9f9f"></asp:Label>
+                                    </div>
+                                    <div class="col-xs-4" style="text-align: center; padding: 8px;">
+                                        <asp:Button ID="btnnext" CausesValidation="false" runat="server" Font-Bold="true" Text="Next" Height="31px" Width="60px" OnClick="btnnext_Click" />
+                                    </div>
+                                </div>
+
                             </div>
+
+
 
 
                             <div id="resident_dropdown" class="layout-dropdown-content theme-dropdown-content " style="position: relative; margin-top: 20px; display: none;">
@@ -776,7 +802,7 @@
 
                                         </div>
                                         <div class=" panel-body ">
-                                            <form class="form-group">
+                                            <form class="form-group" autocomplete="off">
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter valid name" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtFirstname" ValidationGroup="Add_User" Display="Dynamic"></asp:RegularExpressionValidator>
@@ -814,7 +840,7 @@
                                                     <label class="col-xs-5">Mobile :</label>
                                                     <div class="col-xs-7">
 
-                                                        <asp:TextBox ID="txtMobileno" runat="server" CssClass="form-control" MaxLength="10" TabIndex="1" OnTextChanged="txtMobileno_TextChanged" AutoCompleteType="Disabled" AutoPostBack="True"></asp:TextBox>
+                                                        <asp:TextBox ID="txtMobileno" onkeypress="return isNumberKey(event)" runat="server" CssClass="form-control" MaxLength="10" TabIndex="1" OnTextChanged="txtMobileno_TextChanged" AutoCompleteType="Disabled" AutoPostBack="True"></asp:TextBox>
 
                                                         <asp:RequiredFieldValidator ID="RequireUserMobileNo" runat="server" ControlToValidate="txtMobileno" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
                                                     </div>
@@ -922,7 +948,7 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
-            </div>
+        
 
             <%-------------------------------------------------------------------------------------Edit User Section ---------------------------------------------------------------------------%>           <%--   <div id="myModalEditPopup" class="modal">   --%>
             <div id="myModalEditPopup" class="modal">
@@ -936,6 +962,7 @@
 
                         </div>
                         <div class="panel-body">
+                            <form class="from-group" autocomplete="off">
                             <asp:UpdatePanel ID="UpdatePanel7" runat="server">
                                 <ContentTemplate>
                                     <table>
@@ -1012,7 +1039,7 @@
                                             <td class="lbltxt">MobileNo:</td>
                                             <td style="width: 35%;">
 
-                                                <asp:TextBox ID="txtEditMobileNo" runat="server" Style="margin-top:10px;" CssClass="form-control UserEditInfo" MaxLength="10" OnTextChanged="txtEditMobileNo_TextChanged" AutoPostBack="True"></asp:TextBox><br />
+                                                <asp:TextBox ID="txtEditMobileNo" runat="server" Style="margin-top:10px;"  CssClass="form-control UserEditInfo" MaxLength="10" OnTextChanged="txtEditMobileNo_TextChanged" AutoPostBack="True"></asp:TextBox><br />
                                                 <asp:Label ID="lblEditMobileCheck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
                                                 <asp:RegularExpressionValidator ID="RegularExpressionValidatoredituser" runat="server" ErrorMessage="Enter valid No." ControlToValidate="txtEditMobileNo" ForeColor="#FF5050" ValidationExpression="^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$" Font-Size="Small" ValidationGroup="Edit_User" Display="Dynamic"></asp:RegularExpressionValidator>
 
@@ -1054,11 +1081,11 @@
                                     </div>
                             </div>
                             <div class="panel-footer" style="text-align: right;">
-                                <asp:Button ID="btnedit" runat="server" Text="Submit" CssClass="btn btn-primary" OnClientClick="Verify();" OnClick="btnedit_Click" ValidationGroup="Edit_User" />
+                                <asp:Button ID="btnedit" runat="server" Text="Submit" CssClass="btn btn-sm btn-primary" OnClientClick="Verify();" OnClick="btnedit_Click" ValidationGroup="Edit_User" />
 
 
                                 <asp:HiddenField ID="hiddenChangeField" runat="server" />
-                                <button type="button" id="Edit_Cancel" class="btn btn-danger">Cancel</button>
+                                <button type="button" id="Edit_Cancel" class="btn btn-sm btn-danger">Cancel</button>
                             </div>
 
                                 </ContentTemplate>
@@ -1072,5 +1099,10 @@
                     </div>
                 </div>
             </div>
+
+            </form>
+                    </div>
+            </div>
+        </div>
 </body>
 </html>
