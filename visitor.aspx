@@ -631,7 +631,7 @@
                                   Add Visitor <span class="fa fa-times" id="icon_close" style="cursor:pointer;float:right;"></span>
                               </div>
                               <div class="panel-body" >
-                                  <form name="visitor" autocomplete="off">
+                                  <form name="visitor"autocomplete="off">
                                       <div class="container-fluid">
                                           <div class="row" style="margin-top:0px">
                                             <label for="colFormLabel" class="col-xs-4 col-form-label">Name: </label>
