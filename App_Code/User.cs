@@ -50,6 +50,7 @@ public class User
     public Resident currentResident;
 
    private List<Resident> allResidents = new List<Resident>();
+
     public List<Resident> AllResidents
     {
         get { return allResidents; }
@@ -186,6 +187,7 @@ public class User
 
                 if (ds == null)
                 {
+
                     return null;
                 }
                 else if (ds.Tables[0].Rows.Count == 0)

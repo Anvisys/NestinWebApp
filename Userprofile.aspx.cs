@@ -27,13 +27,17 @@ public partial class Userprofile : System.Web.UI.Page
 
     public string UserNameFirstLetter
     {
-        get { return SessionVariables.User.strFirstName.Substring(0, 1); }
+        get { return muser.strFirstName.Substring(0, 1); }
     }
 
 
     public string UserType
     {
-        get { return SessionVariables.User.currentResident.UserType; }
+        get {
+            if (muser.AllResidents.Count > 0)
+                return muser.currentResident.UserType;
+            else return "";
+        }
     }
     public string UserID
     {
@@ -49,6 +53,11 @@ public partial class Userprofile : System.Web.UI.Page
         //muser = (User)Session["User"];
         SessionVariables.CurrentPage = "Userprofile.aspx";
         muser = SessionVariables.User;
+
+        if (muser.AllResidents.Count == 0)
+        {
+
+        }
         if (muser == null)
         {
 
@@ -111,14 +120,15 @@ public partial class Userprofile : System.Web.UI.Page
 
     public void FillData()
     {
-        
-        lblUsrResType.Text = muser.currentResident.UserType;
-        lblActivedate.Text = muser.currentResident.ActiveDate;
-        lblFlatNo.Text = muser.currentResident.FlatNumber;
-        lblIntercom.Text = muser.currentResident.IntercomNumber;
-       
-        lblsocietyname.Text = muser.currentResident.SocietyName;
+        if (muser.AllResidents.Count > 0)
+        {
+            lblUsrResType.Text = muser.currentResident.UserType;
+            lblActivedate.Text = muser.currentResident.ActiveDate;
+            lblFlatNo.Text = muser.currentResident.FlatNumber;
+            lblIntercom.Text = muser.currentResident.IntercomNumber;
 
+            lblsocietyname.Text = muser.currentResident.SocietyName;
+        }
         txtUFName.Enabled = false;
         txtUMName.Enabled = false;
         txtULName.Enabled = false;

@@ -480,6 +480,7 @@ img.app_centre{
        
                       <li class=" "><a  class="menu_text" href="contact.aspx">Contact </a></li>
                       <li class=" "><a  class="menu_text" href="#" id="login">Login</a></li>
+                        <li class=" "><a  class="menu_text" href="register.aspx" id="register">Register</a></li>
                       <!-- GLOBAL SEARCH -->
                       <li class="search dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"  style="display:none;"> </li>
             

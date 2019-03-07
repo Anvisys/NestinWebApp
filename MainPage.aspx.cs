@@ -43,8 +43,12 @@ public partial class MainPage : System.Web.UI.Page
 
 
                 //currentResident = (Resident)muser.AllResidents[0];
-                muser.currentResident = (Resident)muser.AllResidents[0];
-                initializePageControl(muser.currentResident);
+                if (muser.AllResidents.Count > 0)
+                {
+                    muser.currentResident = (Resident)muser.AllResidents[0];
+                    initializePageControl(muser.currentResident);
+                }
+              
             }
 
         }
