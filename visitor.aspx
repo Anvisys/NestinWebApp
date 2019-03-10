@@ -342,6 +342,10 @@
                     if (data.$values.length < size) {
                          $("#btnNext").hide();
                     }
+                    if (page = 1) {
+                        $("#btnPrevious").hide();
+                     
+                    }
 
                     SetData(data);
                 },
