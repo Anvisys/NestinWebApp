@@ -1,5 +1,4 @@
-﻿.
-000000000000000000000000000000000000000000000000000000000000065931834/7<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" %>
 
 <!DOCTYPE html>
 
@@ -44,10 +43,18 @@
     <link rel="stylesheet" href="CSS/NewAptt.css" />
    
     <script>
-
+        var api_url;
 
         $(function () {
+                 if (top.location != self.location) {
+                        top.location = self.location.href
+                    }
+
+
             $("[id*=submitbutton]").bind("click", function () {
+
+                //ValidateUser();
+            
                 var user = {};
                 user.Username = $("[id*=TxtUserID]").val();
                 user.Password = $("[id*=txtPwd]").val();
@@ -61,17 +68,24 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                       
-                        if (response.d == true) {
+                      
+                        if (response.d == 1) {
                             window.location = "MainPage.aspx";
                         }
-                        //else if ()
-                        //{
-                        //    window.location = "";
-                        //}
-                        else if (response.d == false) {
+                        else if (response.d == 0)
+                        {
+                            window.location = "Role.aspx";
+                        }
+                        else if (response.d == -1) {
 
                             $('#lblerror').text("Login Failed");
+                            $('#lblerror').show();
+                            $('#lblPasswordRes').hide();
+                            $("#Forgotpass").show();
+                        }
+                         else if (response.d == -2)
+                        {
+                          $('#lblerror').text("Failed to read database");
                             $('#lblerror').show();
                             $('#lblPasswordRes').hide();
                             $("#Forgotpass").show();
@@ -87,13 +101,12 @@
                     }
                 });
                 return false;
+
+               
             });
         });
 
-        if (top.location != self.location) {
-            top.location = self.location.href
-        }
-
+   
        <%-- function HideLabel() {
             var seconds = 5;
             setTimeout(function () {
@@ -101,24 +114,111 @@
             }, seconds * 1000);
         };--%>
 
+
+        function ValidateUser() {
+            api_url = "http://www.kevintech.in/GAService";
+            var fullURL = api_url + "/api/User/Validate";
+            var user = {};
+            user.Username = $("[id*=TxtUserID]").val();
+            user.Password = $("[id*=txtPwd]").val();
+
+            var dataObject = "{\"Email\":\"" + user.Username + "\",\"Mobile\":\"\",\"RegistrationID\":\"\",\"Password\":\"" + user.Password + "\"}";
+            console.log(dataObject);
+            $("#txtPwd").val("");
+            $("#Forgotpass").hide();
+
+            $.ajax({
+                type: "POST",
+                url: fullURL,
+                data: dataObject,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                    var result = response.result;
+
+                    if (result === "Fail") {
+
+                        console.log("Login Failed");
+                        $('#lblerror').text("Login Failed");
+                        $('#lblerror').show();
+                        $('#lblPasswordRes').hide();
+                        $("#Forgotpass").show();
+                    }
+                    else {
+                        var user = response.UserData;
+
+                        sessionStorage.setItem("User", user);
+                        console.log(user);
+
+                        Address: "Noida"
+                        user.EmailId;
+                        user.FirstName;
+                        user.Gender;
+                        user.LastName;
+                        user.MiddleName;
+                        user.MobileNo;
+                        user.Parentname;
+                        user.Password;
+                        user.SocietyID;
+                        user.SocietyName;
+                        user.UserID;
+                        user.UserLogin;
+
+
+                        var ResidentInfo = response.SocietyUser.$values;
+                        console.log(ResidentInfo);
+                        if (ResidentInfo.length == 0) {
+
+                        }
+                        else {
+                            var resCount = ResidentInfo.length;
+                            for (var i = 0; i < resCount; i++) {
+
+                                var ThreadDate = ResidentInfo[i].CompType;
+                                var UpdatedDate = ResidentInfo[i].CompanyName;
+
+                                var ThreadDate = ResidentInfo[i].FlatID;
+                                var UpdatedDate = ResidentInfo[i].FlatNumber;
+                                var strResID = ResidentInfo[i].ResID;
+                                var UpdatedDate = ResidentInfo[i].ServiceType;
+                                var ThreadDate = ResidentInfo[i].ResID;
+                                var UpdatedDate = ResidentInfo[i].SocietyID;
+
+                                var UpdatedDate = ResidentInfo[i].SocietyName;
+                                var UpdatedDate = ResidentInfo[i].Type;
+
+                                var UpdatedDate = ResidentInfo[i].intercomNumber;
+                                var UpdatedDate = ResidentInfo[i].DeActiveDate;
+                            }
+
+
+
+                            window.location = "MainPage.aspx";
+                        }
+
+
+
+
+                    }
+                }
+
+            });
+        }
+
         $(document).ready(function () {
            
             $("#login").click(function () {           
                 $("#loginModal").show();
                 $("#Forgot_div").hide();
             });
-        });
 
-        $(document).ready(function () {
-            $(".close").click(function () {
+             $(".close").click(function () {
                 $("#loginModal").hide();
                 $("#Forgot_div").hide();
             });
-        });
 
-
-        $(document).ready(function () {
-            $("#Forgotpass").click(function () {
+             $("#Forgotpass").click(function () {
                 $("#loginModal").hide();
                 $("#Forgot_div").show();
                
@@ -133,28 +233,23 @@
             $("#btnForgotpass").click(function () {
                 $("#Forgot_div").show();
                 $("#loginModal").hide();
-            })
+            });
 
-        });
-
-        $(document).ready(function () {
-            $("#close").click(function () {
+              $("#close").click(function () {
                 $("input:text").val("");
                 $("#txtPwd").val("");
                 $("#lblerror").html("");
+           });
 
-            });
-        });
-
-
-        $(document).ready(function () {
-
-           $("#txtPwd").on('input', function () {
+             $("#txtPwd").on('input', function () {
                 $("#lblerror").html("");
             });
-                
-            
-        });
+
+
+          });
+
+
+       
 
         $(document).keypress(function (e) {
             if (e.which == 13) {
@@ -312,23 +407,23 @@ img.app_centre{
 
 
 
-    <!-- Facebook Pixel Code -->
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '277102566548362');
-  fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=277102566548362&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Facebook Pixel Code -->
+            <!-- Facebook Pixel Code -->
+        <script>
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '277102566548362');
+          fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+          src="https://www.facebook.com/tr?id=277102566548362&ev=PageView&noscript=1"
+        /></noscript>
+        <!-- End Facebook Pixel Code -->
 </head>
 <body>
         
@@ -436,6 +531,7 @@ img.app_centre{
        
                       <li class=" "><a  class="menu_text" href="contact.aspx">Contact </a></li>
                       <li class=" "><a  class="menu_text" href="#" id="login">Login</a></li>
+                        <li class=" "><a  class="menu_text" href="register.aspx" id="register">Register</a></li>
                       <!-- GLOBAL SEARCH -->
                       <li class="search dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"  style="display:none;"> </li>
             
@@ -544,7 +640,9 @@ img.app_centre{
               <p class="lead" style="font-size:18px;"> NestIn is developed by Anvisys Technologies  for the Apartment Societies. </p>
              <p style="text-align:justify;">NestIn is developed by <a href="www.Anvisys.net" target="_blank">Anvisys Technologies Pvt. Ltd.</a> To cater the needs of RWA operations and society management needs. While the trend of residential complex is increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing demand of a management system to manage these operations and communication mechanism to involve residents in operations.<br/>
 NestIn is our attempt to provide a state of the art, user friendly and secure Society Management System. We are good but not complacent, hence we are improving, enhancing the capabilities, taking the users feedback and working on them. Our dedicated team is working continuously to improve the system to better serve our customer.</p>
-              <a class="btn btn-primary" style="color:#fff;" href="Aboutus.aspx">Read More</a>
+              <a class="btn btn-primary" style="color:#fff;" href="Aboutus.aspx">Read More</a><br /><br />
+
+                 <a class="btn btn-primary" style="color:#fff;" href="Register.aspx">RegisterNow</a>
           </div>
                
         <!-- right image -->
@@ -624,7 +722,8 @@ NestIn is our attempt to provide a state of the art, user friendly and secure So
                       <h2>Pricing</h2>
                        <h4 style="text-align:justify;">We don’t have complex pricing like many other software available as a service. Our is not based on complex features combination, not on number of users not for duration.
                            It’s Simple<span style="color:blue;"> Rs. 5.00 per flat per month </span>for all society Management Features.</h4>
-
+                        
+                        <a class="btn btn-primary" style="color:#fff;" href="register.aspx"> Start Free Trial</a>
                     </div>
 
                      <div class="col-md-6 animation_fade_in">

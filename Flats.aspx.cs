@@ -833,16 +833,16 @@ public partial class Flats : System.Web.UI.Page
         User newUser = new User();
         Flat newFlat = new Flat();
 
-        newUser.strFirstName = txtAddflatFirstname.Text;
-        newUser.strLastName = txtAddflatLastName.Text;
+        newUser.FirstName = txtAddflatFirstname.Text;
+        newUser.LastName = txtAddflatLastName.Text;
         newUser.Address = txtAddfltAddrs.Text;
-        newUser.strMobileNumber = txtAddfltMobile.Text;
-        newUser.strEmailID = txtAddfltEmail.Text;
+        newUser.MobileNumber = txtAddfltMobile.Text;
+        newUser.EmailID = txtAddfltEmail.Text;
         newUser.Gender = drpFlatGender.SelectedItem.Text;
         newUser.ParentName = txtAddfltParentName.Text;
         newUser.UserLogin = txtAddflatUserLogin.Text.ToLower();
         //user login is emilid
-        newUser.UserLogin = newUser.strEmailID;
+        newUser.UserLogin = newUser.EmailID;
 
         newFlat.Block = txtAddBlock.Text;
         newFlat.Floor = txtAddfltFlr.Text;
@@ -860,7 +860,7 @@ public partial class Flats : System.Web.UI.Page
             if (ExistingUser == false)
             {
                 newFlat.AddFlatWithUser(newUser);
-                SendMail(newUser.strEmailID, newUser.Password, newUser.strEmailID, newUser.strFirstName);
+                SendMail(newUser.EmailID, newUser.Password, newUser.EmailID, newUser.FirstName);
                 AddBillToFlat(newFlat.FlatNumber, newFlat.FlatArea);
                 GenerateInitialZeroBill(newFlat.FlatNumber, newFlat.FlatArea);
                 FillFlatdata();
@@ -869,7 +869,7 @@ public partial class Flats : System.Web.UI.Page
             else
             {
                 newFlat.AddFlat(ExistingUserID);
-                SendMail(newUser.strEmailID, newUser.Password, newUser.strEmailID, newUser.strFirstName);
+                SendMail(newUser.EmailID, newUser.Password, newUser.EmailID, newUser.FirstName);
                 AddBillToFlat(newFlat.FlatNumber, newFlat.FlatArea);
                 GenerateInitialZeroBill(newFlat.FlatNumber, newFlat.FlatArea);
                 FillFlatdata();
@@ -1068,12 +1068,12 @@ public partial class Flats : System.Web.UI.Page
                 newUser = new User();
                 DataTable usertable = dUser.Tables[0];
                 newUser.ID = Convert.ToInt32(usertable.Rows[0]["UserID"]);
-                newUser.strFirstName = usertable.Rows[0]["FirstName"].ToString();
-                newUser.strLastName = usertable.Rows[0]["LastName"].ToString();
+                newUser.FirstName = usertable.Rows[0]["FirstName"].ToString();
+                newUser.LastName = usertable.Rows[0]["LastName"].ToString();
                 newUser.ParentName = usertable.Rows[0]["ParentName"].ToString().Trim();
                 newUser.Address = usertable.Rows[0]["Address"].ToString();
                 newUser.Gender = usertable.Rows[0]["Gender"].ToString();
-                newUser.strEmailID = usertable.Rows[0]["EmailId"].ToString();
+                newUser.EmailID = usertable.Rows[0]["EmailId"].ToString();
 
                 mobileMsg.ForeColor = System.Drawing.Color.Red;
                 mobileMsg.ImageUrl = "~/Images/Icon/Cancelled.png";
@@ -1142,11 +1142,11 @@ public partial class Flats : System.Web.UI.Page
 
             else if (ExistingUser == true)
             {
-                if (txtAddfltEmail.Text.ToLower() == newUser.strEmailID.ToLower())
+                if (txtAddfltEmail.Text.ToLower() == newUser.EmailID.ToLower())
                 {
                     ExistingUserID = newUser.ID;
-                    txtAddflatFirstname.Text = newUser.strFirstName;
-                    txtAddflatLastName.Text = newUser.strLastName;
+                    txtAddflatFirstname.Text = newUser.FirstName;
+                    txtAddflatLastName.Text = newUser.LastName;
                     txtAddfltParentName.Text = newUser.ParentName;
                     txtAddfltAddrs.Text = newUser.Address;
                     drpFlatGender.SelectedItem.Text = newUser.Gender;

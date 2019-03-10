@@ -10,14 +10,14 @@ public partial class MainPage : System.Web.UI.Page
     User muser;
     //Resident currentResident;
 
-    public string UserID
+    public int UserID
     {
-        get { return muser.strUserID; }
+        get { return muser.UserID; }
     }
 
     public string UserFirstName
     {
-        get { return muser.strFirstName; }
+        get { return muser.FirstName; }
     }
 
     public string UserType
@@ -43,8 +43,17 @@ public partial class MainPage : System.Web.UI.Page
 
 
                 //currentResident = (Resident)muser.AllResidents[0];
-                muser.currentResident = (Resident)muser.AllResidents[0];
-                initializePageControl(muser.currentResident);
+                if (muser.AllResidents.Count > 0)
+                {
+                    if (muser.currentResident.UserType == "Individual")
+                    {
+
+                        
+                    }
+                    muser.currentResident = (Resident)muser.AllResidents[0];
+                    initializePageControl(muser.currentResident);
+                }
+              
             }
 
         }
@@ -115,9 +124,9 @@ public partial class MainPage : System.Web.UI.Page
         {
             lblsocietyname.Text = muser.currentResident.SocietyName ;
 
-            lblUserName.Text = muser.strFirstName +" as " + muser.currentResident.UserType;
+            lblUserName.Text = muser.FirstName +" as " + muser.currentResident.UserType;
            
-            GetProfileImage(muser.strUserID);
+            GetProfileImage(muser.UserID);
 
            
         }
@@ -125,26 +134,35 @@ public partial class MainPage : System.Web.UI.Page
         {
             lblsocietyname.Text = muser.currentResident.SocietyName ;
 
-            lblUserName.Text = muser.strFirstName + " as " + muser.currentResident.UserType; ;
+            lblUserName.Text = muser.FirstName + " as " + muser.currentResident.UserType; ;
             
-            GetProfileImage(muser.strUserID);
+            GetProfileImage(muser.UserID);
+
+        }
+        else if (muser.currentResident.UserType == "Individual" )
+        {
+            lblsocietyname.Text = "My Home";
+
+            lblUserName.Text = muser.FirstName + " as " + muser.currentResident.UserType; ;
+
+            GetProfileImage(muser.UserID);
 
         }
         if (muser.currentResident.UserType == "Employee")
         {
 
-            lblUserName.Text = muser.strFirstName + " as " + muser.currentResident.UserType;
+            lblUserName.Text = muser.FirstName + " as " + muser.currentResident.UserType;
             
-            GetProfileImage(muser.strUserID);
+            GetProfileImage(muser.UserID);
         }
 
     }
 
 
-    public void GetProfileImage(string id)
+    public void GetProfileImage(int id)
     {
 
-        string name = muser.strFirstName.Substring(0, 1).ToUpper() ;
+        string name = muser.FirstName.Substring(0, 1).ToUpper() ;
         ImgProfileIcon.Attributes["src"] = "GetImages.ashx?UserID=" + id + "&Name=" + name + "&UserType=" + muser.currentResident.UserType;
         
     }

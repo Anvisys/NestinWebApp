@@ -19,8 +19,10 @@ public partial class Totalusers : System.Web.UI.Page
     
     Copyright © 2016 Anvisys Technologies Pvt. Ltd.All rights reserved.
     */
-
+    PagedDataSource adsource;
+    int pos;
     User muser;
+ 
 
     private static User newUser;
      private static bool ExistingUser;
@@ -37,6 +39,10 @@ public partial class Totalusers : System.Web.UI.Page
         if (!IsPostBack)
         {
             //Filldata();
+            this.ViewState["vs"] = 0;
+            pos = (int)this.ViewState["vs"];
+            Utility.Initializehashtables();
+
             LoadResidentData(); //Changed name by Aarshi on 4 aug 2017
             //btnResShwall.Visible = false; //Changed by Aarshi on 4 Aug 2017
             btnResidentShowAll.Visible = false;
@@ -67,14 +73,23 @@ public partial class Totalusers : System.Web.UI.Page
         {
             if (dsResidentAll.Tables.Count > 0)
             {
+                adsource = new PagedDataSource();
+                adsource.DataSource = dsResidentAll.Tables[0].DefaultView;
+                adsource.PageSize = 5;
+                adsource.AllowPaging = true;
+                adsource.CurrentPageIndex = pos;
+                residentsDataList.DataSource = adsource;
+                btnprevious.Visible = !adsource.IsFirstPage;
+                btnnext.Visible = !adsource.IsLastPage;
 
-                residentsDataList.DataSource = dsResidentAll;
+
+                //residentsDataList.DataSource = dsResidentAll;
                 residentsDataList.DataBind();
                 //UserGrid.DataSource = dsResidentAll;
                 //UserGrid.DataBind();
                 //btnResShwall.Visible = false; //Changed by Aarshi on 4 Aug 2017
-                btnResidentShowAll.Visible = false;
-
+                // btnResidentShowAll.Visible = false;
+                lblPage.Text = "Page " + (adsource.CurrentPageIndex + 1) + " of " + adsource.PageCount;
                 if (dsResidentAll.Tables[0].Rows.Count == 0)
                 {
                     
@@ -101,19 +116,30 @@ public partial class Totalusers : System.Web.UI.Page
         {
             lblGridEmptyDataText.Text = "Unable to retreive data.";
         }
-
-
-
-      
+        
+    }
+    protected void btnprevious_Click(object sender, EventArgs e)
+    {
+        pos = (int)this.ViewState["vs"];
+        pos -= 1;
+        this.ViewState["vs"] = pos;
+        LoadResidentData();
     }
 
+    protected void btnnext_Click(object sender, EventArgs e)
+    {
+        pos = (int)this.ViewState["vs"];
+        pos += 1;
+        this.ViewState["vs"] = pos;
+        LoadResidentData();
+    }
     protected void btnResidentShowAll_Click(object sender, EventArgs e)
     {
         //Filldata();
         LoadResidentData(); //Changed name by Aarshi on 4 aug 2017
         var txt = txtUserSrch.Text;
-        txtUserSrch.Text = "";  
-    
+        txtUserSrch.Text = "";
+
         drpUserResTypeFilter.SelectedValue = drpUserResTypeFilter.Items.FindByText("Select").Value;
     }
 
@@ -405,11 +431,11 @@ public partial class Totalusers : System.Web.UI.Page
     {
         if (ExistingUser)
         {
-            if (txtMobileno.Text == newUser.strMobileNumber)
+            if (txtMobileno.Text == newUser.MobileNumber)
             {
-                txtFirstname.Text = newUser.strFirstName;
-                txtMiddleName.Text = newUser.strMiddleName;
-                txtLastname.Text = newUser.strLastName;
+                txtFirstname.Text = newUser.FirstName;
+                txtMiddleName.Text = newUser.MiddleName;
+                txtLastname.Text = newUser.LastName;
                 txtAddress.Text = newUser.Address;
                 drpAddusrGendr.Text = newUser.Gender;
                 //txtNewusername.Text = newUser.UserLogin;
@@ -447,12 +473,12 @@ public partial class Totalusers : System.Web.UI.Page
             newUser = new User();
             DataTable usertable = dUser.Tables[0];
             newUser.ID = Convert.ToInt32(usertable.Rows[0]["UserID"]);
-            newUser.strFirstName = usertable.Rows[0]["FirstName"].ToString();
-            newUser.strLastName = usertable.Rows[0]["LastName"].ToString();
+            newUser.FirstName = usertable.Rows[0]["FirstName"].ToString();
+            newUser.LastName = usertable.Rows[0]["LastName"].ToString();
             newUser.ParentName = usertable.Rows[0]["ParentName"].ToString().Trim();
             newUser.Address = usertable.Rows[0]["Address"].ToString();
             newUser.Gender = usertable.Rows[0]["Gender"].ToString();
-            newUser.strMobileNumber = usertable.Rows[0]["MobileNo"].ToString();
+            newUser.MobileNumber = usertable.Rows[0]["MobileNo"].ToString();
             lblEmailcheck.Text = "Email already Exist. Enter Mobile for Exising User or use another Email";
             ExistingUser = true;
    
@@ -515,12 +541,12 @@ public partial class Totalusers : System.Web.UI.Page
         editUSer = res.GetEditResidentData(UserId, FlatNumber);
         
         txtEditFlatNumber.Text = editUSer.currentResident.FlatNumber;
-        txtEditFirstname.Text = editUSer.strFirstName;
-        txtEditMiddlename.Text = editUSer.strMiddleName;
-        txtEditlastname.Text = editUSer.strLastName;
-        txtEditEmailID.Text = editUSer.strEmailID;
+        txtEditFirstname.Text = editUSer.FirstName;
+        txtEditMiddlename.Text = editUSer.MiddleName;
+        txtEditlastname.Text = editUSer.LastName;
+        txtEditEmailID.Text = editUSer.EmailID;
         txtEditusrParentN.Text = editUSer.ParentName;
-        txtEditMobileNo.Text = editUSer.strMobileNumber;
+        txtEditMobileNo.Text = editUSer.MobileNumber;
         EditHidedenFlat.Value = FlatNumber;
         lbleditstatus.Text = "";
 
@@ -555,7 +581,7 @@ public partial class Totalusers : System.Web.UI.Page
                 bool result = edituser.UpdatePassword(UserLogin, password);
                 if (result == true)
                 {
-                    edituser.SendMailToUsers("", password, edituser.strEmailID, edituser.strFirstName);
+                    edituser.SendMailToUsers("", password, edituser.EmailID, edituser.FirstName);
                     lbleditstatus.Text = "Password Updated";
                     ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "HideUserEdiitLabel()", true);
 

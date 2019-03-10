@@ -16,7 +16,7 @@ public partial class Discussions : System.Web.UI.Page
 
     public string UserNameFirstLetter
     {
-        get { return SessionVariables.User.strFirstName.Substring(0, 1); }
+        get { return SessionVariables.User.FirstName.Substring(0, 1); }
     }
 
 
@@ -24,11 +24,11 @@ public partial class Discussions : System.Web.UI.Page
     {
         get { return SessionVariables.User.currentResident.UserType; }
     }
-    public string UserID
+    public int UserID
     {
         get
         {
-            return muser.strUserID;
+            return muser.UserID;
         }
     }
 

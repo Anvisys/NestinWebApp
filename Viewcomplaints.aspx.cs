@@ -39,7 +39,7 @@ public partial class Viewcomplaints : System.Web.UI.Page
 
     int empID;
     string EmpName;
-    public string UserID { get { return muser.strUserID; } }
+    public int UserID { get { return muser.UserID; } }
     private static DataSet dsComplaint;
     private int newComplaintResidentID = 0;
 
@@ -149,7 +149,7 @@ public partial class Viewcomplaints : System.Web.UI.Page
         {
 
           
-            String FirstName = muser.strFirstName;
+            String FirstName = muser.FirstName;
 
             String FlatNumber = muser.currentResident.FlatNumber;
             txtVcompFlatSrch.Text = FlatNumber;

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="visitor.aspx.cs" Inherits="visitor" %>
+﻿  <%@ Page Language="C#" AutoEventWireup="true" CodeFile="visitor.aspx.cs" Inherits="visitor" %>
 
 <!DOCTYPE html>
 
@@ -487,7 +487,7 @@
              
             var reqBody = "{\"VisitorName\":\"" + name + "\",\"VisitorMobile\":\"" + mobile + "\",\"VisitorAddress\":\"" + address + " \",\"VisitPurpose\":\"" + purpose + "\",\"StartTime\":\"" + strStartDate + "\",\"EndTime\":\"" + strEndDate +
                            "\",\"ResID\":\"" + ResId + "\",\"FlatNumber\":\"" + FlatNumber + "\",\"SocietyId\":\"" + SocietyId + "\"}"
-
+            console.log(reqBody);
           //  alert(reqBody);
 
             $.ajax({
@@ -715,9 +715,11 @@
                                   <button type="button" id="btnCancel"  style="margin-top:5px;" class="btn-sm btn btn-danger">Cancel</button>
                                    
                               </div>
+                      <div id="post_loading" class="container-fluid" style="text-align:center;width:100%; height:200px;background-color:#090909;display:none;opacity:0.2;position:fixed; top:100px; z-index:99;">
+                    <img src="Images/Icon/ajax-loader.gif" style="width:20px;height:20px; margin-top:50px;" />
+                  </div>
                           </div>
-
-                  
+            
                  
         </div>
          

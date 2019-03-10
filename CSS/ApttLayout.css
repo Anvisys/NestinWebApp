@@ -240,15 +240,7 @@
     float: left;
     padding-right: 10px;
 }
-.vendor-top{
 
-}
-.vendor-right{
-   
-}
-.vendor-bottom{
-
-}
 .vendor-address {
     min-width: 120px;    
     text-align: left;
@@ -271,7 +263,7 @@ float:right;
     height: 34px;
     padding: 0px;
     margin: 0px;
-    display: inline;
+  
     float: left;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;

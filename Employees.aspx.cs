@@ -392,11 +392,11 @@ public partial class Employees : System.Web.UI.Page
         try
         {
             User newUser = new User();
-                newUser.strFirstName = txtAddEmpFName.Text;
-                newUser.strMiddleName = "K";
-                newUser.strLastName = txtAddEmpLName.Text;
-                newUser.strMobileNumber = txtAddEmpMobile.Text;
-                newUser.strEmailID = txtAddEmpEmailId.Text;
+                newUser.FirstName = txtAddEmpFName.Text;
+                newUser.MiddleName = "K";
+                newUser.LastName = txtAddEmpLName.Text;
+                newUser.MobileNumber = txtAddEmpMobile.Text;
+                newUser.EmailID = txtAddEmpEmailId.Text;
                 newUser.ParentName = txtAddempPName.Text;
                 String CompanyName = txtAddempCompName.Text;
                 int ServiceType = Convert.ToInt32(drpAddEmpSType.SelectedValue);

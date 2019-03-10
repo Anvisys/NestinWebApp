@@ -135,20 +135,31 @@ public partial class Login : System.Web.UI.Page
 
     [System.Web.Services.WebMethod]
     [System.Web.Script.Services.ScriptMethod]
-    public static bool ValidateUser(Users user)
+    public static int ValidateUser(Users user)
     {
         User muser = new User();
         if (muser.Validate(user.Username, user.Password))
         {
-           var users = muser.GetResidentInfo();
-            if (users == null)
+           var residents = muser.GetResidentInfo();
+            if (residents == null)
             {
 
-                return false;
+                return -2;
             }
-            else if (users.Count() == 0)
+            else if (residents.Count() == 0)
             {
-                return true;
+                //added by aarshi to test session
+                SessionVariables.User = muser;
+                //SessionVariables.UserType = muser.UserType;
+                //SessionVariables.ResiID = muser.strUserID;
+                SessionVariables.UserLogin = muser.UserLogin;
+                //SessionVariables.SocietyName = muser.SocietyName;
+                //SessionVariables.FlatNumber = muser.FlatNumber;
+                SessionVariables.LName = muser.LastName;
+                SessionVariables.FName = muser.FirstName;
+                //SessionVariables.SocietyID = muser.SocietyID;
+                SessionVariables.CurrentPage = "Userprofile.aspx";
+                return 0;
             }
             else
             {
@@ -161,12 +172,19 @@ public partial class Login : System.Web.UI.Page
                 SessionVariables.UserLogin = muser.UserLogin;
                 //SessionVariables.SocietyName = muser.SocietyName;
                 //SessionVariables.FlatNumber = muser.FlatNumber;
-                SessionVariables.LName = muser.strLastName;
-                SessionVariables.FName = muser.strFirstName;
+                SessionVariables.LName = muser.LastName;
+                SessionVariables.FName = muser.FirstName;
                 //SessionVariables.SocietyID = muser.SocietyID;
-                SessionVariables.CurrentPage = "Dashboard.aspx";
+                if (muser.currentResident.UserType == "Individual")
+                {
+                    SessionVariables.CurrentPage = "MyHouse.aspx";
+                }
+                else
+                {
+                    SessionVariables.CurrentPage = "Dashboard.aspx";
+                }
 
-                return true;
+                return 1;
             }
           
           
@@ -174,7 +192,7 @@ public partial class Login : System.Web.UI.Page
         
         }
         else
-            return false;
+            return -1;
 
     }
     public class Users

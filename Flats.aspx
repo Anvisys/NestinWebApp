@@ -467,7 +467,13 @@
             $("#data_loading").show();
         }
 
-    
+       function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : evt.keyCode;
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;    
+         return true;
+      }
 
     </script>
 </head>
@@ -769,7 +775,8 @@
                        <span class="fa fa-close" onclick="HideAddFlatModal()" style="color:white;float:right; cursor:pointer;"></span>
                         
                     </div>
-                    <div class="panel-body" style="background-color:#fff;">
+                    <form class="form-group"autocomplete="off">
+                    <div class="panel-body" style="background-color:#fff;" >
                              <div class="row">
                                  <div class="col-xs-12"><asp:RegularExpressionValidator ID="RegularExpressionValidator15" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Please enter valid Email" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtAddfltEmail" ValidationGroup="Add_Flat" Display="Dynamic"></asp:RegularExpressionValidator> </div>
                              </div>
@@ -785,7 +792,7 @@
                                              Mobile :
                                          </label>
 
-                                         <asp:TextBox Width="100px" ID="txtAddfltMobile" runat="server" MaxLength="10" Height="25px" OnTextChanged="txtAddfltMobile_TextChanged" onclick="Reset()" TabIndex="1" AutoPostBack="True"></asp:TextBox>
+                                         <asp:TextBox Width="100px" ID="txtAddfltMobile" onkeypress="return isNumberKey(event)" runat="server" MaxLength="10" Height="25px" OnTextChanged="txtAddfltMobile_TextChanged" onclick="Reset()" TabIndex="1" AutoPostBack="True"></asp:TextBox>
 
                                          <asp:Image ID="mobileMsg" Height="1px" Width="1px" runat="server" />
                                          <i id='mobInvalid' class="fa fa-circle" style="color: green; display: none;" aria-hidden="true"></i>
@@ -969,6 +976,7 @@
                                             
 
                                  </div>
+                        </form>
                              
                          <asp:Label ID="msg" runat="server" ForeColor="Red" text=""></asp:Label>
                              <div class="panle-footer" style="text-align:right;padding-right:10px;margin:10px;">

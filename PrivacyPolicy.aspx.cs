@@ -161,8 +161,8 @@ public partial class Privacy_Policy : System.Web.UI.Page
                 SessionVariables.UserLogin = muser.UserLogin;
                 //SessionVariables.SocietyName = muser.SocietyName;
                 //SessionVariables.FlatNumber = muser.FlatNumber;
-                SessionVariables.LName = muser.strLastName;
-                SessionVariables.FName = muser.strFirstName;
+                SessionVariables.LName = muser.LastName;
+                SessionVariables.FName = muser.FirstName;
                 //SessionVariables.SocietyID = muser.SocietyID;
                 SessionVariables.CurrentPage = "Dashboard.aspx";
 

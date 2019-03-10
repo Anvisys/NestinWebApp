@@ -624,106 +624,110 @@
         <div class="row">
             <div class="col-sm-12 col-xs-12" >
 
-                   <div class="container-fluid">
-                       <div class="row" style="height:40px;">
-                 <div class="col-sm-3  col-xs-12" >
-                     <h3 class="pull-left ">My Flat:</h3>
-                 </div>
-                <div class="col-sm-6 hidden-xs" style="padding:0px;">
-                                      
-                                      </div>
-                 <div class="col-sm-3 hidden-xs" style="vertical-align:middle;">
-                    <div>
-                         
+                <div class="container-fluid">
+                    <div class="row" style="height: 40px;">
+                        <div class="col-sm-3  col-xs-12">
+                            <h3 class="pull-left ">My Flat:</h3>
+                        </div>
+                        <div class="col-sm-6 hidden-xs" style="padding: 0px;">
+                        </div>
+                        <div class="col-sm-3 hidden-xs" style="vertical-align: middle;">
+                            <div>
+                            </div>
+                        </div>
                     </div>
-                 </div>
-             </div>
-                 </div>
+                </div>
 
 
 
                  <div id="main_div" style="display:none; margin:10px;">
-                      <div id="FlatDetails" class="content_div" >
-                <div class="row" style="margin-top:10px;margin-bottom:10px;">
-                    <div class="col-sm-4">
-                        <label class="data_heading"> Flat Number :</label> <label class="data_label" id="lblFlatNumber">...</label>
-                    </div>
-                    <div class="col-sm-4">
-                        <label class="data_heading"> Flat Floor :</label> <label class="data_label" id="lblFlatFloor">...</label>
-                    </div>
-                    <div class="col-sm-4">
-                        <label class="data_heading"> Intercom Number :</label> <label class="data_label" id="lblIntercomNumber">...</label>
-                    </div>
-                </div>
-                <div class="row" style="margin-top:10px;margin-bottom:10px;">
-                    <div class="col-sm-4">
-                         <label class="data_heading"> BHK :</label>
-                        <label class="data_label" id="lblFlatBHK">...</label>
-                    </div>
-                    <div class="col-sm-4">
-                       <label class="data_heading"> Block :</label>
-                        <label class="data_label" id="lblFlatBlock">...</label>
-                    </div>
-                    <div class="col-sm-4">
-                       <label class="data_heading"> Flat Area :</label>
-                        <label class="data_label" id="lblFlatArea">...</label>
-                    </div>
-                </div>
-           
-            </div>
+                     <div id="FlatDetails" class="content_div">
+                         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                             <div class="col-sm-4">
+                                 <label class="data_heading">Flat Number :</label>
+                                 <label class="data_label" id="lblFlatNumber">...</label>
+                             </div>
+                             <div class="col-sm-4">
+                                 <label class="data_heading">Flat Floor :</label>
+                                 <label class="data_label" id="lblFlatFloor">...</label>
+                             </div>
+                             <div class="col-sm-4">
+                                 <label class="data_heading">Intercom Number :</label>
+                                 <label class="data_label" id="lblIntercomNumber">...</label>
+                             </div>
+                         </div>
+                         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                             <div class="col-sm-4">
+                                 <label class="data_heading">BHK :</label>
+                                 <label class="data_label" id="lblFlatBHK">...</label>
+                             </div>
+                             <div class="col-sm-4">
+                                 <label class="data_heading">Block :</label>
+                                 <label class="data_label" id="lblFlatBlock">...</label>
+                             </div>
+                             <div class="col-sm-4">
+                                 <label class="data_heading">Flat Area :</label>
+                                 <label class="data_label" id="lblFlatArea">...</label>
+                             </div>
+                         </div>
+
+                     </div>
 
                      <div id="OwnerDetail" class="content_div">
-                         <div class="row" style="margin-top:5px;margin-bottom:5px; text-align:center;">
+                         <div class="row" style="margin-top: 5px; margin-bottom: 5px; text-align: center;">
                              <div class="col-xs-12">
-                                <h4 style="padding-right: 141px;font-family:Verdana;"> Owner Info</h4>
+                                 <h4 style="padding-right: 141px; font-family: Verdana;">Owner Info</h4>
                              </div>
                          </div>
-                        <div class="row" style="margin-top:10px;margin-bottom:10px;">
-                            <div class="col-sm-4">
-                                <img src="Images/Icon/profile.jpg" id ="OwnerImage" height="110" width="110" style="border-radius:50%;"/>
-                            </div>
-                            <div class="col-sm-8">
-                                <label style="width:100px;" class="data_heading"> Name :</label>
-                                <label style="width:50%;" class="data_label" id="lblFlatOwner">...</label><br />
-                                <label style="width:100px;" class="data_heading"> Email :</label>
-                                <label style="width:50%;" class="data_label" id="lblFlatOwnerEmail">...</label><br />
-                                <label style="width:100px;" class="data_heading">  Contact :</label>
-                                <label style="width:50%;" class="data_label" id="lblFlatOwnerMobile">...</label>
-                            </div>
-                            
-                        </div>
-                    </div>
+                         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                             <div class="col-sm-4">
+                                 <img src="Images/Icon/profile.jpg" id="OwnerImage" height="110" width="110" style="border-radius: 50%;" />
+                             </div>
+                             <div class="col-sm-8">
+                                 <label style="width: 100px;" class="data_heading">Name :</label>
+                                 <label style="width: 50%;" class="data_label" id="lblFlatOwner">...</label><br />
+                                 <label style="width: 100px;" class="data_heading">Email :</label>
+                                 <label style="width: 50%;" class="data_label" id="lblFlatOwnerEmail">...</label><br />
+                                 <label style="width: 100px;" class="data_heading">Contact :</label>
+                                 <label style="width: 50%;" class="data_label" id="lblFlatOwnerMobile">...</label>
+                             </div>
+
+                         </div>
+                     </div>
 
                      <div id="TenantDetail" class="content_div">
-                         <div class="row" style="margin-top:5px;margin-bottom:5px; text-align:center;">
+                         <div class="row" style="margin-top: 5px; margin-bottom: 5px; text-align: center;">
                              <div class="col-xs-12">
-                                 <h4 style="padding-right: 141px;font-family:Verdana;"> Tenant Info</h4>
-                              
+                                 <h4 style="padding-right: 141px; font-family: Verdana;">Tenant Info</h4>
+
                              </div>
                          </div>
-            <div class="row" style="margin-top:10px;margin-bottom:10px;">
-                 <div class="col-sm-4">
-                    <img id="TenantImage" src="Images/Icon/profile.jpg" height="110" width="110" style="border-radius:50%;"/>
-                </div>
-                <div  class="col-sm-8">
-                    <label style="width:100px;" class="data_heading"> Name :</label>
-                    <label class="data_label" id="lblFlatTenantName">...</label><br />
-                    <label style="width:100px;" class="data_heading"> Email :</label>
-                    <label class="data_label" id="lblFlatTenantEmail">...</label><br />
-                    <label style="width:100px;" class="data_heading"> Contact :</label>
-                    <label class="data_label" id="lblFlatTenantMobile">...</label><br />
-                    <label style="width:100px;" class="data_heading"> Address :</label>
-                    <label class="data_label" id="lblFlatTenantAddress">...</label><br />
-                    <label style="width:100px;" class="data_heading"> From :</label>
-                    <label class="data_label" id="lblFlatTenantFrom">...</label><br />
-                    <label style="width:100px;" class="data_heading"> Till :</label>
-                    <label class="data_label" id="lblFlatTenantTo">...</label>
-                    <button id="btnEdit" type="button" class="btn btn-danger" style="display:none" onclick="ChangeDeactiveDate()">Set End Date</button>
-                    <div id="ChangeDate" style="display:none"><input type="date" id="newDeactiveDate" style="width:150px"  /> <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button> </div>
-                </div>
-               
-            </div>
-           </div>
+                         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                             <div class="col-sm-4">
+                                 <img id="TenantImage" src="Images/Icon/profile.jpg" height="110" width="110" style="border-radius: 50%;" />
+                             </div>
+                             <div class="col-sm-8">
+                                 <label style="width: 100px;" class="data_heading">Name :</label>
+                                 <label class="data_label" id="lblFlatTenantName">...</label><br />
+                                 <label style="width: 100px;" class="data_heading">Email :</label>
+                                 <label class="data_label" id="lblFlatTenantEmail">...</label><br />
+                                 <label style="width: 100px;" class="data_heading">Contact :</label>
+                                 <label class="data_label" id="lblFlatTenantMobile">...</label><br />
+                                 <label style="width: 100px;" class="data_heading">Address :</label>
+                                 <label class="data_label" id="lblFlatTenantAddress">...</label><br />
+                                 <label style="width: 100px;" class="data_heading">From :</label>
+                                 <label class="data_label" id="lblFlatTenantFrom">...</label><br />
+                                 <label style="width: 100px;" class="data_heading">Till :</label>
+                                 <label class="data_label" id="lblFlatTenantTo">...</label>
+                                 <button id="btnEdit" type="button" class="btn btn-danger" style="display: none" onclick="ChangeDeactiveDate()">Set End Date</button>
+                                 <div id="ChangeDate" style="display: none">
+                                     <input type="date" id="newDeactiveDate" style="width: 150px" />
+                                     <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
+                                 </div>
+                             </div>
+
+                         </div>
+                     </div>
 
                      <div class="row">
                          <div class="col-sm-12">
