@@ -9,14 +9,14 @@ public partial class MyFlat : System.Web.UI.Page
 {
     User muser;
 
-    public string UserID
+    public int UserID
     {
-        get { return muser.strUserID; }
+        get { return muser.UserID; }
     }
 
     public string UserFirstName
     {
-        get { return muser.strFirstName; }
+        get { return muser.FirstName; }
     }
 
     public string UserType

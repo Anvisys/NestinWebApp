@@ -133,50 +133,6 @@ public partial class Aboutus : System.Web.UI.Page
 
 
 
-    [System.Web.Services.WebMethod]
-    [System.Web.Script.Services.ScriptMethod]
-    public static bool ValidateUser(Users user)
-    {
-        User muser = new User();
-        if (muser.Validate(user.Username, user.Password))
-        {
-            var users = muser.GetResidentInfo();
-            if (users == null)
-            {
-
-                return false;
-            }
-            else if (users.Count() == 0)
-            {
-                return false;
-            }
-            else
-            {
-                Utility.Initializehashtables();
-
-                //added by aarshi to test session
-                SessionVariables.User = muser;
-                //SessionVariables.UserType = muser.UserType;
-                //SessionVariables.ResiID = muser.strUserID;
-                SessionVariables.UserLogin = muser.UserLogin;
-                //SessionVariables.SocietyName = muser.SocietyName;
-                //SessionVariables.FlatNumber = muser.FlatNumber;
-                SessionVariables.LName = muser.strLastName;
-                SessionVariables.FName = muser.strFirstName;
-                //SessionVariables.SocietyID = muser.SocietyID;
-                SessionVariables.CurrentPage = "Dashboard.aspx";
-
-                return true;
-            }
-
-
-
-
-        }
-        else
-            return false;
-
-    }
     public class Users
     {
         public string Username { get; set; }

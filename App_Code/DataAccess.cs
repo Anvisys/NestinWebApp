@@ -233,19 +233,19 @@ public class DataAccess
 
     }
 
-    public String GetStringValueFromSocietyDB(String Querystring)
+    public int GetIDFromSocietyDB(String Querystring)
     {
 
         try
         {
             SqlConnection sqlcon = this.ConnectSocietyDB();
             SqlCommand cmd = new SqlCommand(Querystring, sqlcon);
-            String value = (String)cmd.ExecuteScalar();
+            int value = (int)cmd.ExecuteScalar();
             return value;
         }
         catch
         {
-            return null;
+            return 0;
         }
     }
 

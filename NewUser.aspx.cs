@@ -13,7 +13,7 @@ public partial class NewUser : System.Web.UI.Page
     {
         get
         {
-            return muser.strFirstName + " " + muser.strLastName;
+            return muser.FirstName + " " + muser.LastName;
         }
     }
 
@@ -21,7 +21,7 @@ public partial class NewUser : System.Web.UI.Page
     {
         get
         {
-            return muser.strMobileNumber;
+            return muser.MobileNumber;
         }
     }
 

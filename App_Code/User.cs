@@ -12,6 +12,7 @@ using System.Net;
 using System.IO;
 
 
+
 /*  This Total  code  is  licenced
     Developed By Anvisys Technologies Pvt Ltd.
     
@@ -23,15 +24,17 @@ using System.IO;
 public class User
 {
     public int ID;
-    public string strUserID;
+    public int UserID;
     public string Password;
-    public string strFirstName;
-    public string strMiddleName;
-    public string strLastName;
-    public string strMobileNumber;
-    public string strEmailID="";
+    public string FirstName;
+    public string MiddleName;
+    public string LastName;
+    public string MobileNumber;
+    public string EmailID="";
     public string Address;
     public string EmpAddress;
+    public string UserType = "Owner";
+    public int Status=0;
   
     public string UserLogin;
     public string EmpID;
@@ -49,7 +52,11 @@ public class User
     public String Gender;
     public Resident currentResident;
 
-   private List<Resident> allResidents = new List<Resident>();
+   
+
+    private List<Resident> allResidents = new List<Resident>();
+
+  
 
     public List<Resident> AllResidents
     {
@@ -141,13 +148,13 @@ public class User
                 {
                     while (rdr.Read())
                     {
-                        strUserID = rdr["UserID"].ToString();
+                        UserID = Convert.ToInt32(rdr["UserID"].ToString());
                         Password = rdr["Password"].ToString();
-                        strFirstName = rdr["FirstName"].ToString();
-                        strMiddleName = rdr["MiddleName"].ToString();
-                        strLastName = rdr["LastName"].ToString();
-                        strMobileNumber = rdr["MobileNo"].ToString();
-                        strEmailID = rdr["EmailID"].ToString();
+                        FirstName = rdr["FirstName"].ToString();
+                        MiddleName = rdr["MiddleName"].ToString();
+                        LastName = rdr["LastName"].ToString();
+                        MobileNumber = rdr["MobileNo"].ToString();
+                        EmailID = rdr["EmailID"].ToString();
                         UserLogin = rdr["UserLogin"].ToString();
                         Address = rdr["Address"].ToString().Trim();
                      }
@@ -180,7 +187,7 @@ public class User
                 societyConn.ConnectionString = Utility.SocietyConnectionString;
                 societyConn.Open();
 
-                strQuery = "select * from dbo.ViewSocietyUsers where UserID = " + strUserID + " and DeActiveDate > GetDate()";
+                strQuery = "select * from dbo.ViewSocietyUsers where UserID = " + UserID + " and DeActiveDate > GetDate()";
 
                 DataAccess da = new DataAccess();
                  DataSet ds =  da.GetData(strQuery);
@@ -210,12 +217,20 @@ public class User
                         string flatNumber = "";
                         int serviceType = 0;
                         string compName = "";
+
+                        var _HouseNo = "";
+                        var _Sector = "";
+                        var _City = "";
+                        var _State = "";
+                        var _Pin = "";
+
+
                         if (userType == "Owner" || userType == "Tenant")
                         {
                             flatID = Convert.ToInt32(item["FlatID"]);
                             flatNumber = item["FlatNumber"].ToString();
                         }
-                        else if (userType == "ResidentAdmin")
+                        else if (userType == "Admin")
                         {
                             flatID = Convert.ToInt32(item["FlatID"]);
                             flatNumber = item["FlatNumber"].ToString();
@@ -225,25 +240,45 @@ public class User
                             int.TryParse( item["ServiceType"].ToString(),out serviceType);
                             compName = item["CompanyName"].ToString();
                         }
+                        else if (userType == "Individual")
+                        {
+                            _HouseNo = item["HouseNUmber"].ToString();
+                            _Sector = item["Sector"].ToString();
+                            _City = item["City"].ToString();
+                            _State = item["State"].ToString();
+                            _Pin = item["PinCode"].ToString();
+                        }
                         else
                         { continue; }
 
-                        allResidents.Add(new Resident() {
+
+                        Resident newRes = new Resident()
+                        {
 
                             ResID = Convert.ToInt32(strResID),
                             UserType = userType,
                             SocietyID = Convert.ToInt32(item["SocietyID"]),
                             SocietyName = item["SocietyName"].ToString(),
-                            ActiveDate = activeDate!= string.Empty ? Convert.ToDateTime(activeDate).ToString("dd/MM/yyyy"): null,                        
-                            DeActiveDate = deActiveDate != string.Empty ? Convert.ToDateTime(deActiveDate).ToString("dd/MM/yyyy"): null,
+                            ActiveDate = activeDate != string.Empty ? Convert.ToDateTime(activeDate).ToString("dd/MM/yyyy") : null,
+                            DeActiveDate = deActiveDate != string.Empty ? Convert.ToDateTime(deActiveDate).ToString("dd/MM/yyyy") : null,
                             FlatID = flatID,
                             FlatNumber = flatNumber,
                             CompanyName = compName,
                             ServiceType = serviceType,
-                            IntercomNumber = intercomNumber
+                            IntercomNumber = intercomNumber,
+                            HouseNo = _HouseNo,
+                            Sector = _Sector,
+                            City = _City,
+                            State = _State,
+                            Pin = _Pin
 
+                        };
 
-});
+                        allResidents.Add(newRes);
+                        if(currentResident == null)
+                        {
+                            currentResident = newRes;
+                        }
                     }
 
                     return allResidents;
@@ -309,7 +344,7 @@ public class User
 
                 if (currentResident.UserType == "Owner" || currentResident.UserType == "Tenant" || currentResident.UserType == "Admin")
                 {
-                    strQuery = "select * from dbo.ViewResidents where UserID = " + strUserID + "";
+                    strQuery = "select * from dbo.ViewResidents where UserID = " + UserID + "";
                     SqlCommand newCmd = new SqlCommand(strQuery, societyConn);
                     SqlDataReader newRdr = newCmd.ExecuteReader();
 
@@ -331,7 +366,7 @@ public class User
                 }
                 else if (currentResident.UserType == "Employee")
                 {
-                    strQuery = "select * from dbo.ViewEmployee where UserID = " + strUserID + "";
+                    strQuery = "select * from dbo.ViewEmployee where UserID = " + UserID + "";
                     SqlCommand newCmd = new SqlCommand(strQuery, societyConn);
                     SqlDataReader newRdr = newCmd.ExecuteReader();
 
@@ -420,5 +455,50 @@ public class User
         return Password;
     }
 
+
+    public string createNewUser()
+    {
+        try {
+
+
+        }
+        catch (Exception ex)
+        { }
+
+        return "";
+
+    }
+
+    public int InsertUserResident()
+    {
+        try
+        {
+            DataAccess dacess = new DataAccess();
+
+            String checkQuery = "Select * from " + CONSTANTS.Table_Users + " Where MobileNo = " + MobileNumber + " or EmailId = '" + EmailID + "'";
+
+             DataSet ds  = dacess.GetData(checkQuery);
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                UserID = -1;
+            }
+            else
+            {
+                string strEncPassword = this.EncryptPassword(EmailID, Password);
+
+                String UpdateQuery = "Insert into " + CONSTANTS.Table_Users
+                    + " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address,UserType,SocietyID) output INSERTED.UserID Values('"
+                     + FirstName + "','" + MiddleName + "','" + LastName + "','" + MobileNumber + "','" + EmailID + "','" + Gender + "','" + ParentName
+                     + "','" + UserLogin + "','" + strEncPassword + "','" + Address + "','" + UserType + "','" + 1 + "')";
+
+                UserID = Convert.ToInt32(dacess.GetIDFromSocietyDB(UpdateQuery));
+            }
+        }
+        catch (Exception ex)
+        {
+            UserID = 0;
+        }
+        return UserID;
+    }
 
 }

@@ -86,67 +86,8 @@
             top.location = self.location.href
         }
 
-       <%-- function HideLabel() {
-            var seconds = 5;
-            setTimeout(function () {
-                document.getElementById("<%=lblMessage.ClientID %>").style.display = "none";
-            }, seconds * 1000);
-        };--%>
-
-        $(document).ready(function () {
-               $("#formRegister").show();
-            $("#login").click(function () {
-                $("#loginModal").show();
-                $("#Forgot_div").hide();
-            });
-        });
-
-        $(document).ready(function () {
-            $(".close").click(function () {
-                $("#loginModal").hide();
-                $("#Forgot_div").hide();
-            });
-        });
 
 
-        $(document).ready(function () {
-            $("#Forgotpass").click(function () {
-                $("#loginModal").hide();
-                $("#Forgot_div").show();
-
-            });
-
-            $("#GoLogin").click(function () {
-                $("#loginModal").show();
-                $("#Forgot_div").hide();
-
-            });
-
-            $("#btnForgotpass").click(function () {
-                $("#Forgot_div").show();
-                $("#loginModal").hide();
-            })
-
-        });
-
-        $(document).ready(function () {
-            $("#close").click(function () {
-                $("input:text").val("");
-                $("#txtPwd").val("");
-                $("#lblerror").html("");
-
-            });
-        });
-
-
-        $(document).ready(function () {
-
-            $("#txtPwd").on('input', function () {
-                $("#lblerror").html("");
-            });
-
-
-        });
 
         $(document).keypress(function (e) {
             if (e.which == 13) {
@@ -162,7 +103,7 @@
         });
         $("#btnSubmit").click(function () {
 
-            AddVisitor();
+            AddUser();
         });
 
         if (top.location != self.location) {
@@ -170,22 +111,23 @@
         }
 
         /*------*/
-        function AddVisitor() {
+        function AddDemoUser() {
 
-            var name, mobile, address, purpose, visitDate;
-
-            name = document.getElementById("Name").value;
-            mobile = document.getElementById("MobileNo").value;
-            address = document.getElementById("Address").value;
-            purpose = document.getElementById("Purpose").value;
-            visitDate = document.getElementById("btnEntryDate").value;
-
-
+            var email, mobile, firstname, lastname,parentname, address;
+            email = document.getElementById("email").value;
+            
+            mobile = document.getElementById("mobile").value;
+            firstname = document.getElementById("firstname").value;
+            lastname = document.getElementById("lastname").value;
+            parentname = document.getElementById("parentname").value;
+            address = document.getElementById("address").value;
+    
             //alert(visitDate);
-            var start = new Date(visitDate);
+            var start = new Date();
             // alert(start);
 
-            var month = +start.getMonth() + 1;
+            var month = start.getMonth() + 1;
+
             var strMonth = "";
             if (month < 10) {
                 strMonth = 0 + month.toString();
@@ -194,7 +136,7 @@
                 strMonth = month.toString();
             }
 
-            var day = +start.getDate();
+            var day = start.getDate();
             var strDay = "";
             if (day < 10) {
                 strDay = 0 + day.toString();
@@ -203,46 +145,49 @@
                 strDay = day.toString();
             }
 
-            var startHrs = "";
-            var endHrs = "";
+            var endDate = new Date(new Date().getTime() + (15 * 24 * 60 * 60 * 1000));
 
-            if (VisitorEntryHour < 9) {
-                startHrs = 0 + VisitorEntryHour.toString();
-                endHrs = 0 + (VisitorEntryHour + 1).toString();
 
-            }
-            else if (VisitorEntryHour = 9) {
-                startHrs = 0 + VisitorEntryHour.toString();
-                endHrs = (VisitorEntryHour + 1).toString();
+             var endMonth = endDate.getMonth() + 1;
+
+            var strEndMonth = "";
+            if (endMonth < 10) {
+                strEndMonth = 0 + endMonth.toString();
             }
             else {
-                startHrs = VisitorEntryHour.toString();
-                endHrs = (VisitorEntryHour + 1).toString();
-
+                strEndMonth = endMonth.toString();
             }
 
 
-            var strStartDate = start.getFullYear() + "-" + strMonth + "-" + strDay + "T" + startHrs + ":00:00";
+            var endDay = start.getDate() + 10;
+            var strEndDay = "";
+            if (endDay < 10) {
+               strEndDay = 0 + endDay.toString();
+            }
+            else {
+                strEndDay = endDay.toString();
+            }
+           
 
 
-            var strEndDate = start.getFullYear() + "-" + strMonth + "-" + strDay + "T" + endHrs + ":00:00";
-
-            // alert(strStartDate);
+            var strStartDate = start.getFullYear() + "-" + strMonth + "-" + strDay + "T00:00:00";
 
 
-            //   endTime = document.getElementById("btnStartTime").value;
+            var strEndDate = endDate.getFullYear() + "-" + strEndMonth + "-" + strEndDay + "T00:00:00";
 
-            document.getElementById("post_loading").style.display = "block";
+      document.getElementById("post_loading").style.display = "block";
 
-
-
-            var strURL = "http://www.kevintech.in/GaurMahagun/api/Visitor/New";
+            var strURL = "http://www.kevintech.in/GAService/api/User/Add/Demo";
             //var strURL = "visitor.aspx/AddVisitor";
 
-            var reqBody = "{\"VisitorName\":\"" + name + "\",\"VisitorMobile\":\"" + mobile + "\",\"VisitorAddress\":\"" + address + " \",\"VisitPurpose\":\"" + purpose + "\",\"StartTime\":\"" + strStartDate + "\",\"EndTime\":\"" + strEndDate +
-                "\",\"ResID\":\"" + ResId + "\",\"FlatNumber\":\"" + FlatNumber + "\",\"SocietyId\":\"" + SocietyId + "\"}"
+            var reqBody = "{\"UserLogin\":\"" + email + "\",\"Password\":\"Password@123\",\"MiddleName\":\"K\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname + " \",\"MobileNo\":\""
+                + mobile + "\",\"StartTime\":\"" + strStartDate + "\",\"EndTime\":\"" + strEndDate +
+                "\",\"EmailId\":\"" + email + "\",\"Gender\":\"male\",\"Parentname\":\"" + parentname + "\",\"Address\":\"" + address
+                + "\",\"SocietyID\":\"" + 1 + "\",\"UserType\":\"Demo\"}";
 
-            //  alert(reqBody);
+            console.log(reqBody);
+
+          
 
             $.ajax({
                 dataType: "json",
@@ -252,35 +197,162 @@
                 type: 'post',
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    //     alert(JSON.stringify(data));
+                   console.log(JSON.stringify(data));
                     document.getElementById("post_loading").style.display = "none";
 
-                    if (data.Response == "Fail") {
-                        alert('Could not update');
-                    }
-                    else {
-                        alert('Updated Successfully');
-                    }
-
+                    window.location = "Role.aspx?UserID=10111";
 
 
                 },
                 error: function (data, errorThrown) {
-                    document.getElementById("post_loading").style.display = "none";
+                       document.getElementById("post_loading").style.display = "none";
+                    if (data.status == 500) {
+                        alert("Internal Server Error");
+                    }
+                    else {
+                          console.log(data);
+                    console.log(errorThrown);
+                 
 
-                    alert('Error Updating comment, try again');
+                     alert('Error Updating comment, try again');
+                    }
+                  
                 }
             });
 
         }
 
         function AddUser() {
+              var email, mobile, firstname, lastname,parentname, address;
+            email = document.getElementById("email").value;
+            
+            mobile = document.getElementById("mobile").value;
+            firstname = document.getElementById("firstname").value;
+            lastname = document.getElementById("lastname").value;
+            parentname = document.getElementById("parentname").value;
+            address = document.getElementById("address").value;
+    
+            //alert(visitDate);
+            var start = new Date();
+            // alert(start);
 
-            $("#formRegister").hide();
+            var month = start.getMonth() + 1;
 
-            $("#formEnroll").show();
+            var strMonth = "";
+            if (month < 10) {
+                strMonth = 0 + month.toString();
+            }
+            else {
+                strMonth = month.toString();
+            }
+
+            var day = start.getDate();
+            var strDay = "";
+            if (day < 10) {
+                strDay = 0 + day.toString();
+            }
+            else {
+                strDay = day.toString();
+            }
+
+            var endDate = new Date(new Date().getTime() + (15 * 24 * 60 * 60 * 1000));
+
+
+             var endMonth = endDate.getMonth() + 1;
+
+            var strEndMonth = "";
+            if (endMonth < 10) {
+                strEndMonth = 0 + endMonth.toString();
+            }
+            else {
+                strEndMonth = endMonth.toString();
+            }
+
+
+            var endDay = start.getDate() + 10;
+            var strEndDay = "";
+            if (endDay < 10) {
+               strEndDay = 0 + endDay.toString();
+            }
+            else {
+                strEndDay = endDay.toString();
+            }
+           
+
+
+            var strStartDate = start.getFullYear() + "-" + strMonth + "-" + strDay + "T00:00:00";
+
+
+            var strEndDate = endDate.getFullYear() + "-" + strEndMonth + "-" + strEndDay + "T00:00:00";
+
+      document.getElementById("post_loading").style.display = "block";
+
+            var strURL = "http://www.kevintech.in/GAService/api/User/Add/Demo";
+            //var strURL = "visitor.aspx/AddVisitor";
+
+            var user = "{\"UserLogin\":\"" + email + "\",\"Password\":\"Password@123\",\"MiddleName\":\"K\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname
+                        + " \",\"MobileNumber\":\""  + mobile + "\",\"StartTime\":\"" + strStartDate + "\",\"EndTime\":\"" + strEndDate +
+                        "\",\"EmailID\":\"" + email + "\",\"Gender\":\"male\",\"ParentName\":\"" + parentname + "\",\"Address\":\"" + address
+                        + "\",\"SocietyID\":\"" + 1 + "\",\"UserType\":\"Demo\"}";
+
+            var user1 = "{\"UserLogin\":\"" + email + "\"}";
+
+            console.log(user);
+
+         var jData =  JSON.parse(user)
+
+            $.ajax({
+                type: 'POST',
+                url: "register.aspx/AddUser",
+                data: '{user: ' + JSON.stringify(jData) + '}',
+                contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                success: function (response) {
+                   document.getElementById("post_loading").style.display = "none";
+                    if (response.d > 0) {
+                            window.location = "Role.aspx?response.d";
+                    }
+                    else if(response.d < 0)
+                        {
+                        alert('Mobile Number or Email is in use, Please go to login');
+                    }
+                    else 
+                    {
+                        alert('Server Error');
+                    }
+
+                },
+                error: function (data, errorThrown) {
+                    document.getElementById("post_loading").style.display = "none";
+                        alert('Error Updating comment, try again');
+                
+                  
+                }
+            });
+
+             
         }
 
+            function switchVisible() {
+                        if (document.getElementById('Div1')) {
+
+                            if (document.getElementById('Div1').style.display == 'none') {
+                                document.getElementById('Div1').style.display = 'block';
+                                document.getElementById('Div2').style.display = 'none';
+                            }
+                            else {
+                                document.getElementById('Div1').style.display = 'none';
+                                document.getElementById('Div2').style.display = 'block';
+                            }
+                        }
+                    }
+
+                       $(function() {
+                    $('#sel1').change(function(){
+                        $('.content').hide();
+                        $('#' + $(this).val()).show();
+                    });
+                });
     </script>
 
     <style>
@@ -314,22 +386,7 @@
             }
         }
 
-        .Forgot_button {
-            background-color: transparent;
-            height: 30px;
-            color: white;
-            font-family: 'Times New Roman', Times, serif;
-            font-style: oblique;
-            font-weight: bold;
-            outline: 0;
-            display: none;
-        }
-
-        .forgot_pass {
-            color: #6eab91;
-            text-decoration: none;
-            padding: 1% 0 2% 0;
-        }
+     
 
         .forgottxt {
             padding: 1% 2%
@@ -434,6 +491,7 @@
 
         .bg-white {
             background-color: #fff !important;
+         /*background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);*/
         }
     </style>
 
@@ -442,67 +500,8 @@
 
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <%--Login Popup --%>
+    
 
-        <div class="login_div" id="loginModal" style="display: none; padding: 0% 0 3% 0;">
-            <img id="close" class="close" src="Images/Icon/close_red.png" alt="close" width="25" height="25" style="background-size: contain;" />
-            <br />
-
-            <div style="padding: 0 1% 3% 1%; color: #6eab91; font-family: 'Baskerville Old Face'; font-size: x-large;">
-                <%-- <img src="Images/Icon/login_icon.png"  width="25" height="25"/>--%>
-                <i class="fa fa-user-circle-o" style="color: #000;" aria-hidden="true"></i>
-
-
-                <asp:Label ID="lbltext" runat="server" Style="color: #000;" Text="Account Login "></asp:Label>
-
-                <h4 style="margin-bottom: 0;">
-                    <asp:Label ID="lblPasswordRes" runat="server" Text="" Font-Size="small" ForeColor="#000"></asp:Label></h4>
-
-            </div>
-
-            <asp:TextBox ID="TxtUserID" runat="server" CssClass="login_txtbox" placeholder="Username/MobileNumber" BorderStyle="None" TabIndex="1"></asp:TextBox><br />
-            <br />
-            <asp:TextBox ID="txtPwd" runat="server" CssClass="login_txtbox" placeholder="Password" TextMode="Password" BorderStyle="None" TabIndex="2"></asp:TextBox><br />
-            <br />
-            <div id="Login_background" style="padding: 0.5% 0% 0.5% 0%; background-color: #000;">
-                <button type="button" id="submitbutton" style="width: 200px; height: 30px; color: white;" tabindex="3">Submit </button>
-            </div>
-            <div>
-                <img class="dvLoading_first" src="Images/Icon/ajax-loader.gif" alt="Loading..." style="border: 0;" />
-            </div>
-
-            <asp:Label ID="lblerror" runat="server" Text="" CssClass="lblerror"></asp:Label><br />
-            <a href="#" id="Forgotpass" class="forgot_pass" tabindex="4">Forgot Password</a><br />
-        </div>
-        <%--Login Popup --%>
-
-        <%--Forgot Popup --%>
-
-        <div class="login_div" id="Forgot_div" style="display: none;">
-            <%--<img id="closed" class="close" src="Images/Icon/close.png" width="25" height="25"  style="background-size:contain;"/> <br />--%>
-            <span id="closed" class="close fa fa-close" style="background-size: contain;"></span>
-            <br />
-            <div>
-                <%--   <img src="Images/icon/login_icon.png"  width="25" height="25"/>--%>
-                <asp:Label ID="Label1" runat="server" Text="Forgot Password "></asp:Label><br />
-
-                <asp:Label ID="Label2" runat="server" ForeColor="#666666" Font-Size="Small" CssClass="forgottxt" Text="We will send  your New password to  your Email  which  is  associated with this UserId."></asp:Label>
-            </div>
-
-            <asp:TextBox ID="txtForgotText" runat="server" CssClass="login_txtbox" onfocus="if (this.value == 'Username or Email') this.value = '';" onblur="if (this.value == '') this.value = 'Username or Email';" value="Username or Email" BorderStyle="None"></asp:TextBox><br />
-            <br />
-            <div id="Login_backgroundd" style="padding: 2% 1% 2% 1%; background-color: #f19e64;">
-                <asp:Button ID="btnForgotpass" runat="server" Text="Reset Password" CssClass="login_Submit" OnClick="btnForgotpass_Click" BorderStyle="None" /><br />
-            </div>
-
-            <asp:Label ID="lblEmailerror" runat="server" Text="" CssClass="lblerror"></asp:Label>
-            <a href="#" id="GoLogin" class="forgot_pass">Go to Login</a><br />
-            <asp:Label ID="lblres" runat="server"></asp:Label>
-
-
-        </div>
-
-        <%--Forgot  Popup Ends --%>
 
 
         <div class="login_div" id="select_flat" style="display: none;">
@@ -524,69 +523,7 @@
 
         </div>
 
-    </form>
-
-
-    <header id="topNav" class="layout_header" style="height: 75px; background-color: #fff; color: #fff;">
-
-        <div class="container-fluid">
-            <div class="col-sm-4 col-xs-6 zero-margin">
-                <!-- Mobile Menu Button -->
-
-                <a class="logo" href="#">
-                    <img src="Images/Icon/Logo1.png" height="50" alt="logo" />
-                </a>
-            </div>
-            <div class="col-sm-4 hidden-xs zero-margin">
-                <!-- Logo text or image -->
-
-                <div class="title" style="color: #00baed; padding-top: 11px; text-align: center; font-size: x-large;">Society Management System</div>
-                <!-- Top Nav -->
-
-            </div>
-            <div class="col-sm-4 col-xs-6 zero-margin">
-                <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse"><i class="fa fa-bars"></i></button>
-                <div class="navbar-collapse nav-main-collapse collapse pull-right" style="margin-top: 9px; color: white; text-align: center;">
-                    <nav class="nav-main mega-menu">
-                        <ul class="nav nav-pills nav-main scroll-menu" id="topMain">
-                            <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
-                            <li class=" "><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
-
-                            <li class=" "><a class="menu_text" href="Contact.aspx">Contact </a></li>
-                            <li class=" "><a class="menu_text" href="#" id="login">Login</a></li>
-                            <li class=" "><a class="menu_text" href="register.aspx" id="register">Register</a></li>
-                            <!-- GLOBAL SEARCH -->
-                            <li class="search dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" style="display: none;"></li>
-
-                            <!-- search form -->
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <form method="get" action="#" class="input-group pull-right" style="">
-                                        <input type="text" class="form-control" name="k" id="k" value="" placeholder="Search" />
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary notransition" style="margin-top: 8px;"><i class="fa fa-search"></i></button>
-                                        </span>
-                                    </form>
-                                </li>
-                            </ul>
-
-                            <!-- /search form -->
-
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <!-- /Top Nav -->
-
-        </div>
-    </header>
-
-    <!-- WRAPPER -->
-    <span itemtype="http://schema.org/SoftwareApplication" />
-
-
-
-    <section id="contact">
+            <section id="contact">
 
         <div class="jumbotron text-center" style="height: 150px;">
             <h3 style="padding-top: 50px; color: #000;">Register for Demo</h3>
@@ -598,10 +535,10 @@
 
                 <div class="col-sm-3">
                 </div>
-                <div class="col-sm-6">
+                <div  class="col-sm-6 shadow p-3 mb-5 bg-white rounded">
 
-
-                    <form id="formRegister" class="shadow p-3 mb-5 bg-white rounded" style="display:none;">
+                    <div id="formRegister">
+                    <form  style="display:none;">
                         <div class="form-group row">
                             <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg">Email</label>
                             <div class="col-sm-9">
@@ -611,7 +548,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label col-form-label-lg">Mobile No.</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control form-control-lg" id="mobile" placeholder="Enter Mobile No." />
+                                <input  class="form-control form-control-lg" id="mobile" placeholder="Enter Mobile No." />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -641,25 +578,20 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label col-form-label-lg"></label>
                             <div class="col-sm-9">
-                                <button type="submit" onclick="AddUser()"  id="btnsubmit" class="btn btn-default">Submit</button>
+                                <button type="button" onclick="AddUser()"  id="btnsubmit" class="btn btn-default">Submit</button>
 
                             </div>
+                       
                         </div>
-
-
+                     
+                     <div id="post_loading" class="container-fluid" style="text-align:center;width:100%; height:200px;background-color:#090909;opacity:0.2;display:none;position:fixed; top:100px; z-index:99;">
+                    <img src="Images/Icon/ajax-loader.gif" style="width:20px;height:20px; margin-top:50px;" />
+                  </div>
                     </form>
+                </div>
 
 
-
-                    <form id="formEnroll" style="display:none;">
-
-                        Select Your Purpose
-
-                        Option1: Independent House
-                        Option2: Enroll in Exisiting Society
-                        Option3: Request for New Society Registration
-
-                    </form>
+               
 
                 </div>
                 <div class="col-sm-3">
@@ -667,6 +599,50 @@
             </div>
         </div>
     </section>
+
+
+
+    </form>
+
+
+    <header id="topNav" class="layout_header" style="height: 75px; background-color: #fff; color: #fff;">
+
+        <div class="container-fluid">
+            <div class="col-sm-4 col-xs-6 zero-margin">
+                <!-- Mobile Menu Button -->
+
+                <a class="logo" href="#">
+                    <img src="Images/Icon/Logo1.png" height="50" alt="logo" />
+                </a>
+            </div>
+            <div class="col-sm-4 hidden-xs zero-margin">
+                <!-- Logo text or image -->
+
+                <div class="title" style="color: #00baed; padding-top: 11px; text-align: center; font-size: x-large;">Society Management System</div>
+                <!-- Top Nav -->
+
+            </div>
+            <div class="col-sm-4 col-xs-6 zero-margin">
+                <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse"><i class="fa fa-bars"></i></button>
+                <div class="navbar-collapse nav-main-collapse collapse pull-right" style="margin-top: 9px; color: white; text-align: center;">
+                    <nav class="nav-main mega-menu">
+                        <ul class="nav nav-pills nav-main scroll-menu" id="topMain">
+                            <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
+                         
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /Top Nav -->
+
+        </div>
+    </header>
+
+    <!-- WRAPPER -->
+    <span itemtype="http://schema.org/SoftwareApplication" />
+
+
 
 
 

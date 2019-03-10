@@ -53,7 +53,7 @@ public partial class MainPage : System.Web.UI.Page
         }
         if (muser.currentResident.UserType == "Employee")
         {
-            lblAdmin.Text = muser.strFirstName + " " + muser.strLastName;
+            lblAdmin.Text = muser.FirstName + " " + muser.LastName;
             lblUType.Text = muser.currentResident.UserType;
             ImgProfileIcon.ImageUrl = "Images/Temp/" + muser.EmpID + ".png";
             ImgProfileIcon.Attributes["onerror"] = "this.src='Images/Icon/profile.jpg';";

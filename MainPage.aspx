@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="CSS/NewAptt.css" />
 
 
+
     <style>
         @media only screen and (max-width: 600px) {
             #lblsocietyname {

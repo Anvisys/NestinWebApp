@@ -23,9 +23,18 @@ public class Resident
     public String SocietyName { get; set; }
     public String IntercomNumber { get; set; }
 
+    public string HouseNo { get; set; }
+    public string Sector { get; set; }
+    public string City { get; set; }
+    public string State { get; set; }
+    public string Pin { get; set; }
+
+
     String ViewName = "dbo.ViewSocietyUsers";
     string Table_Name = "dbo.Resident";
     string Table_TotalUser = "dbo.TotalUsers";
+
+
 
     public Resident()
     {
@@ -240,14 +249,14 @@ public class Resident
             {
                
                 //editUSer.FlatNumber = FlatNumber;
-                editUSer.strFirstName = (myReader["FirstName"].ToString());
-                editUSer.strMiddleName = (myReader["MiddleName"].ToString());
-                editUSer.strLastName = (myReader["LastName"].ToString());
-                editUSer.strEmailID = (myReader["Emailid"].ToString());
+                editUSer.FirstName = (myReader["FirstName"].ToString());
+                editUSer.MiddleName = (myReader["MiddleName"].ToString());
+                editUSer.LastName = (myReader["LastName"].ToString());
+                editUSer.EmailID = (myReader["Emailid"].ToString());
                 editUSer.ParentName = (myReader["Parentname"].ToString().Trim());
-                editUSer.strMobileNumber = (myReader["MobileNo"].ToString());
+                editUSer.MobileNumber = (myReader["MobileNo"].ToString());
                 editUSer.UserLogin = (myReader["UserLogin"].ToString());
-                editUSer.strUserID = UserId;
+                editUSer.UserID = Convert.ToInt32(UserId);
                 HttpContext.Current.Session.Add("EditUser", editUSer);
                 HttpContext.Current.Session["UserID"] = UserId;           
             }
@@ -348,7 +357,7 @@ public class Resident
 
             String newUserQuery =
                 "Insert Into dbo.TotalUsers  (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address,UserType,SocietyID) output INSERTED.UserID values('" +
-                newUser.strFirstName + "','','" + newUser.strLastName + "','" + newUser.strMobileNumber + "','" + newUser.strEmailID + "','" + newUser.Gender + "','" + newUser.ParentName + "','" + newUser.UserLogin + "','" + EncryptPassword + "','" + newUser.Address + "','Owner','" + SessionVariables.SocietyID + "')";
+                newUser.FirstName + "','','" + newUser.LastName + "','" + newUser.MobileNumber + "','" + newUser.EmailID + "','" + newUser.Gender + "','" + newUser.ParentName + "','" + newUser.UserLogin + "','" + EncryptPassword + "','" + newUser.Address + "','Owner','" + SessionVariables.SocietyID + "')";
 
             using (TransactionScope tran = new TransactionScope())
             {

@@ -155,10 +155,10 @@ public partial class Login : System.Web.UI.Page
                 SessionVariables.UserLogin = muser.UserLogin;
                 //SessionVariables.SocietyName = muser.SocietyName;
                 //SessionVariables.FlatNumber = muser.FlatNumber;
-                SessionVariables.LName = muser.strLastName;
-                SessionVariables.FName = muser.strFirstName;
+                SessionVariables.LName = muser.LastName;
+                SessionVariables.FName = muser.FirstName;
                 //SessionVariables.SocietyID = muser.SocietyID;
-                SessionVariables.CurrentPage = "NewUser.aspx";
+                SessionVariables.CurrentPage = "Userprofile.aspx";
                 return 0;
             }
             else
@@ -172,10 +172,17 @@ public partial class Login : System.Web.UI.Page
                 SessionVariables.UserLogin = muser.UserLogin;
                 //SessionVariables.SocietyName = muser.SocietyName;
                 //SessionVariables.FlatNumber = muser.FlatNumber;
-                SessionVariables.LName = muser.strLastName;
-                SessionVariables.FName = muser.strFirstName;
+                SessionVariables.LName = muser.LastName;
+                SessionVariables.FName = muser.FirstName;
                 //SessionVariables.SocietyID = muser.SocietyID;
-                SessionVariables.CurrentPage = "Dashboard.aspx";
+                if (muser.currentResident.UserType == "Individual")
+                {
+                    SessionVariables.CurrentPage = "MyHouse.aspx";
+                }
+                else
+                {
+                    SessionVariables.CurrentPage = "Dashboard.aspx";
+                }
 
                 return 1;
             }

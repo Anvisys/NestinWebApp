@@ -431,11 +431,11 @@ public partial class Totalusers : System.Web.UI.Page
     {
         if (ExistingUser)
         {
-            if (txtMobileno.Text == newUser.strMobileNumber)
+            if (txtMobileno.Text == newUser.MobileNumber)
             {
-                txtFirstname.Text = newUser.strFirstName;
-                txtMiddleName.Text = newUser.strMiddleName;
-                txtLastname.Text = newUser.strLastName;
+                txtFirstname.Text = newUser.FirstName;
+                txtMiddleName.Text = newUser.MiddleName;
+                txtLastname.Text = newUser.LastName;
                 txtAddress.Text = newUser.Address;
                 drpAddusrGendr.Text = newUser.Gender;
                 //txtNewusername.Text = newUser.UserLogin;
@@ -473,12 +473,12 @@ public partial class Totalusers : System.Web.UI.Page
             newUser = new User();
             DataTable usertable = dUser.Tables[0];
             newUser.ID = Convert.ToInt32(usertable.Rows[0]["UserID"]);
-            newUser.strFirstName = usertable.Rows[0]["FirstName"].ToString();
-            newUser.strLastName = usertable.Rows[0]["LastName"].ToString();
+            newUser.FirstName = usertable.Rows[0]["FirstName"].ToString();
+            newUser.LastName = usertable.Rows[0]["LastName"].ToString();
             newUser.ParentName = usertable.Rows[0]["ParentName"].ToString().Trim();
             newUser.Address = usertable.Rows[0]["Address"].ToString();
             newUser.Gender = usertable.Rows[0]["Gender"].ToString();
-            newUser.strMobileNumber = usertable.Rows[0]["MobileNo"].ToString();
+            newUser.MobileNumber = usertable.Rows[0]["MobileNo"].ToString();
             lblEmailcheck.Text = "Email already Exist. Enter Mobile for Exising User or use another Email";
             ExistingUser = true;
    
@@ -541,12 +541,12 @@ public partial class Totalusers : System.Web.UI.Page
         editUSer = res.GetEditResidentData(UserId, FlatNumber);
         
         txtEditFlatNumber.Text = editUSer.currentResident.FlatNumber;
-        txtEditFirstname.Text = editUSer.strFirstName;
-        txtEditMiddlename.Text = editUSer.strMiddleName;
-        txtEditlastname.Text = editUSer.strLastName;
-        txtEditEmailID.Text = editUSer.strEmailID;
+        txtEditFirstname.Text = editUSer.FirstName;
+        txtEditMiddlename.Text = editUSer.MiddleName;
+        txtEditlastname.Text = editUSer.LastName;
+        txtEditEmailID.Text = editUSer.EmailID;
         txtEditusrParentN.Text = editUSer.ParentName;
-        txtEditMobileNo.Text = editUSer.strMobileNumber;
+        txtEditMobileNo.Text = editUSer.MobileNumber;
         EditHidedenFlat.Value = FlatNumber;
         lbleditstatus.Text = "";
 
@@ -581,7 +581,7 @@ public partial class Totalusers : System.Web.UI.Page
                 bool result = edituser.UpdatePassword(UserLogin, password);
                 if (result == true)
                 {
-                    edituser.SendMailToUsers("", password, edituser.strEmailID, edituser.strFirstName);
+                    edituser.SendMailToUsers("", password, edituser.EmailID, edituser.FirstName);
                     lbleditstatus.Text = "Password Updated";
                     ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "HideUserEdiitLabel()", true);
 

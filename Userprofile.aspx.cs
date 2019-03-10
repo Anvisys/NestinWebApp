@@ -27,7 +27,7 @@ public partial class Userprofile : System.Web.UI.Page
 
     public string UserNameFirstLetter
     {
-        get { return muser.strFirstName.Substring(0, 1); }
+        get { return muser.FirstName.Substring(0, 1); }
     }
 
 
@@ -39,11 +39,11 @@ public partial class Userprofile : System.Web.UI.Page
             else return "";
         }
     }
-    public string UserID
+    public int UserID
     {
         get
         {
-            return muser.strUserID;
+            return muser.UserID;
         }
     }
     protected void Page_Load(object sender, EventArgs e)
@@ -67,7 +67,7 @@ public partial class Userprofile : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            lbluser.Text = muser.strFirstName;
+            lbluser.Text = muser.FirstName;
             FillData();
             Editdata();
            //  GetProfileImage();
@@ -271,7 +271,7 @@ public partial class Userprofile : System.Web.UI.Page
                     ImageFormat format = ImageFormat.Png;
                     
                    
-                    String ImageName = muser.strUserID.ToString();
+                    String ImageName = muser.UserID.ToString();
                     string filePath = string.Format(ImagePath + ImageName + ".{0}", format.ToString());
 
                     string base64 = Request.Form["imgCropped"];
@@ -297,11 +297,11 @@ public partial class Userprofile : System.Web.UI.Page
                             cmd = new SqlCommand(UpdateImageQuery, con1);
                             cmd.Parameters.Add("@ProfileIcon", SqlDbType.Image).Value = bytesImages;
                             cmd.Parameters.Add("@ResID", SqlDbType.Int).Value = muser.currentResident.ResID;
-                            cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = Convert.ToInt32(muser.strUserID);
+                            cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = Convert.ToInt32(muser.UserID);
                         }
                         else
                         {
-                            UpdateImageQuery = "Update dbo.ResidentImage set Profile_image = @ProfileIcon where UserID = '" + muser.strUserID + "'";
+                            UpdateImageQuery = "Update dbo.ResidentImage set Profile_image = @ProfileIcon where UserID = '" + muser.UserID + "'";
                             cmd = new SqlCommand(UpdateImageQuery, con1);
                             cmd.Parameters.Add("@ProfileIcon", SqlDbType.Image).Value = bytesImages;
                         }
@@ -379,7 +379,7 @@ public partial class Userprofile : System.Web.UI.Page
                             cmd = new SqlCommand(UpdateImageQuery, con1);
                             cmd.Parameters.Add("@ProfileIcon", SqlDbType.Image).Value = data;
                             cmd.Parameters.Add("@EmpID", SqlDbType.Int).Value = muser.currentResident.ResID;
-                            cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = Convert.ToInt32(muser.strUserID);
+                            cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = Convert.ToInt32(muser.UserID);
                         }
                         else
                         {

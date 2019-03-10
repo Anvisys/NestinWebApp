@@ -72,7 +72,7 @@ public class Flat
 
             String newUserQuery =
                 "Insert Into dbo.TotalUsers  (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address,UserType,SocietyID) output INSERTED.UserID values('" +
-                newUser.strFirstName + "','','" + newUser.strLastName + "','" + newUser.strMobileNumber + "','" + newUser.strEmailID + "','" + newUser.Gender + "','" + newUser.ParentName + "','" + newUser.UserLogin + "','" + EncryptPassword + "','" + newUser.Address + "','Owner','" + SessionVariables.SocietyID + "')";
+                newUser.FirstName + "','','" + newUser.LastName + "','" + newUser.MobileNumber + "','" + newUser.EmailID + "','" + newUser.Gender + "','" + newUser.ParentName + "','" + newUser.UserLogin + "','" + EncryptPassword + "','" + newUser.Address + "','Owner','" + SessionVariables.SocietyID + "')";
                
                 using (TransactionScope tran = new TransactionScope())
                 {

@@ -483,7 +483,7 @@
              
             var reqBody = "{\"VisitorName\":\"" + name + "\",\"VisitorMobile\":\"" + mobile + "\",\"VisitorAddress\":\"" + address + " \",\"VisitPurpose\":\"" + purpose + "\",\"StartTime\":\"" + strStartDate + "\",\"EndTime\":\"" + strEndDate +
                            "\",\"ResID\":\"" + ResId + "\",\"FlatNumber\":\"" + FlatNumber + "\",\"SocietyId\":\"" + SocietyId + "\"}"
-
+            console.log(reqBody);
           //  alert(reqBody);
 
             $.ajax({
@@ -659,7 +659,7 @@
                                   Add Visitor <span class="fa fa-times" id="icon_close" style="cursor:pointer;float:right;"></span>
                               </div>
                               <div class="panel-body" >
-                                  <form name="visitor"autocomplete="off">
+                                  <form name="visitor" autocomplete="off">
                                       <div class="container-fluid">
                                           <div class="row" style="margin-top:0px">
                                             <label for="colFormLabel" class="col-xs-4 col-form-label">Name: </label>
@@ -711,9 +711,11 @@
                                   <button type="button" id="btnCancel"  style="margin-top:5px;" class="btn-sm btn btn-danger">Cancel</button>
                                    
                               </div>
+                      <div id="post_loading" class="container-fluid" style="text-align:center;width:100%; height:200px;background-color:#090909;display:none;opacity:0.2;position:fixed; top:100px; z-index:99;">
+                    <img src="Images/Icon/ajax-loader.gif" style="width:20px;height:20px; margin-top:50px;" />
+                  </div>
                           </div>
-
-                  
+            
                  
         </div>
          

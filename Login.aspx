@@ -74,7 +74,7 @@
                         }
                         else if (response.d == 0)
                         {
-                            window.location = "MainPage.aspx";
+                            window.location = "Role.aspx";
                         }
                         else if (response.d == -1) {
 
@@ -212,18 +212,13 @@
                 $("#loginModal").show();
                 $("#Forgot_div").hide();
             });
-        });
 
-        $(document).ready(function () {
-            $(".close").click(function () {
+             $(".close").click(function () {
                 $("#loginModal").hide();
                 $("#Forgot_div").hide();
             });
-        });
 
-
-        $(document).ready(function () {
-            $("#Forgotpass").click(function () {
+             $("#Forgotpass").click(function () {
                 $("#loginModal").hide();
                 $("#Forgot_div").show();
                
@@ -240,19 +235,18 @@
                 $("#loginModal").hide();
             });
 
-        });
-
-        $(document).ready(function () {
-            $("#close").click(function () {
+              $("#close").click(function () {
                 $("input:text").val("");
                 $("#txtPwd").val("");
                 $("#lblerror").html("");
-       });
+           });
 
-          $("#txtPwd").on('input', function () {
+             $("#txtPwd").on('input', function () {
                 $("#lblerror").html("");
             });
-        });
+
+
+          });
 
 
        
@@ -646,7 +640,9 @@ img.app_centre{
               <p class="lead" style="font-size:18px;"> NestIn is developed by Anvisys Technologies  for the Apartment Societies. </p>
              <p style="text-align:justify;">NestIn is developed by <a href="www.Anvisys.net" target="_blank">Anvisys Technologies Pvt. Ltd.</a> To cater the needs of RWA operations and society management needs. While the trend of residential complex is increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing demand of a management system to manage these operations and communication mechanism to involve residents in operations.<br/>
 NestIn is our attempt to provide a state of the art, user friendly and secure Society Management System. We are good but not complacent, hence we are improving, enhancing the capabilities, taking the users feedback and working on them. Our dedicated team is working continuously to improve the system to better serve our customer.</p>
-              <a class="btn btn-primary" style="color:#fff;" href="Aboutus.aspx">Read More</a>
+              <a class="btn btn-primary" style="color:#fff;" href="Aboutus.aspx">Read More</a><br /><br />
+
+                 <a class="btn btn-primary" style="color:#fff;" href="Register.aspx">RegisterNow</a>
           </div>
                
         <!-- right image -->
