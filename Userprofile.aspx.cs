@@ -482,9 +482,8 @@ public partial class Userprofile : System.Web.UI.Page
             int BillingNotice = Convert.ToInt32(chkComplaintNotice.Checked);
             int BillingMail = Convert.ToInt32(chkComplaintMail.Checked);
 
-            Resident res = new Resident();
 
-            if (res.UpdateUserSetting(BillingNotice, BillingMail, forumNotice, forumMail, complaintNotice, complaintMail, muser.currentResident.ResID))
+            if (muser.UpdateUserSetting(BillingNotice, BillingMail, forumNotice, forumMail, complaintNotice, complaintMail, muser.currentResident.ResID))
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "alert('Updated Successfully')", true);
             }

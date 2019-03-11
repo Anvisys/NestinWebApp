@@ -89,9 +89,10 @@
         $(function () {
             $("#txtUserSrch,#txtFlatNoFilter").autocomplete({
                 source: function (request, response) {
+                   
                     var param = {
-                        FlatNumber: $('#txtUserSrch,#txtFlatNoFilter').val()
-                    };
+                        FlatNumber: $('#txtUserSrch,#txtFlatNoFilter').val(),
+                                          };
 
                     $.ajax({
                         url: "Totalusers.aspx/GetFlatNumber",

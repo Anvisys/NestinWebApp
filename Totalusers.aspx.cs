@@ -21,7 +21,7 @@ public partial class Totalusers : System.Web.UI.Page
     */
     PagedDataSource adsource;
     int pos;
-    User muser;
+   public static User muser;
  
 
     private static User newUser;
@@ -678,12 +678,12 @@ public partial class Totalusers : System.Web.UI.Page
     }
 
     [System.Web.Services.WebMethod]
-    public static List<string> GetFlatNumber(string FlatNumber)
+    public static List<string> GetFlatNumber(string FlatNumber, int SocietyId)
    {
         //Added by Aarshi on 15 Aug 2017 for code restructuring
         List<string> Emp = new List<string>();
         Resident res = new Resident();
-        Emp = res.GetFlatNumber(FlatNumber);
+        Emp = res.GetFlatNumber(FlatNumber, muser.currentResident.SocietyID);
         return Emp;
 
         

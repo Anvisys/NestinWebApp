@@ -22,7 +22,9 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>  
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>  
+    <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" /> 
 
     <link href="Login/css/settings.css" rel="stylesheet" type="text/css" />
     <!-- THEME CSS -->
@@ -41,6 +43,61 @@
 
 
     <script>
+
+        var UserId;
+        var SocId=1;
+
+        $(document).ready(function () {
+          let params = (new URL(document.location)).searchParams;
+            UserId = params.get("name");
+
+
+
+
+        });
+
+
+        $(function () {
+
+            
+              $("#flatno").autocomplete({
+                source: function (request, response) {
+                    var param = {
+                        FlatNumber: $('#flatno').val(),
+                        SocietyId: SocId
+                    };
+
+                    $.ajax({
+                        url: "Role.aspx/GetFlatNumber",
+                        data: '{flat: ' + JSON.stringify(param) + '}',
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function (data) { return data; },
+                        success: function (data) {
+                            console.log(data);
+                            var flats = jQuery.parseJSON(data.d);
+                            response($.map(flats, function (value, value.ID) {
+                                  console.log(value);
+                                return {
+                                    label: value.FlatNumber,
+                                     value: value.FlatNumber
+                                }
+                            }))
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                            console.log("Ajax Error!");
+                        }
+                    });
+                },
+                minLength: 2 //This is the Char length of inputTextBox  
+            });
+
+        });
+
+
            function switchVisible() {
                         if (document.getElementById('Div1')) {
 
@@ -57,11 +114,11 @@
                     }
 
                        $(function() {
-                    $('#sel1').change(function(){
-                        $('.content').hide();
-                        $('#' + $(this).val()).show();
-                    });
-        });
+                            $('#sel1').change(function(){
+                                $('.content').hide();
+                                $('#' + $(this).val()).show();
+                            });
+                      });
 
         function AddIndependentHouse() {
             var House = {};
@@ -102,6 +159,39 @@
             });
 
         }
+
+
+      function  AddInExistingSociety(){
+                      var user = {};
+            user.UserID = document.getElementById("houseno").value;
+            user.FlatID = document.getElementById("sector").value;
+            
+            $.ajax({
+                type: 'POST',
+                url: "Role.aspx/AddInSociety",
+                data: '{sUser: ' + JSON.stringify(user) + '}',
+                contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                success: function (response) {
+                   document.getElementById("post_loading").style.display = "none";
+                    if (response.d == true) {
+                       alert('Your Request has been successfully Submitted');
+                    }
+                    else 
+                    {
+                        alert('Request could not be submitted');
+                    }
+
+                },
+                error: function (data, errorThrown) {
+                    document.getElementById("post_loading").style.display = "none";
+                        alert('Error Updating comment, try again');
+                
+                  
+                }
+            });
+        }
+
 
     </script>
 
@@ -277,7 +367,12 @@
                                     <input type="text" class="form-control form-control-lg" id="pincode4" placeholder="Eg.201301 " />
                                 </div>
                                 </div>
+                                    <div class="col-xs-12">
+                                        <button type="button" class="btn btn-success btn-sm" onclick="AddInExistingSociety()">Submit</button>
+                                    </div>
                             </div>
+
+
 
                         </div>
 

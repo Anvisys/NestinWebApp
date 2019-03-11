@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Net;
 using System.IO;
-
+using System.Transactions;
 
 
 /*  This Total  code  is  licenced
@@ -500,5 +500,64 @@ public class User
         }
         return UserID;
     }
+
+    public bool InsertUserSetting(int ResID)
+    {
+        try
+        {
+            String strInsertQuery = "INSERT INTO ResidentNotification (BillingNotification, BillingMail, forumNotice, forumMail, ComplaintNotification, ComplaintMail, FlatMail,ResID) VALUES (1,1,1,1,1,1,1, " + ResID + ")";
+            DataAccess da = new DataAccess();
+
+            return da.Update(strInsertQuery);
+        }
+        catch (Exception ex)
+        {
+
+            return false;
+        }
+
+    }
+
+    public bool UpdateUserSetting(int BillNotice, int BillMail, int forumNotice, int forumMail, int compNotice, int compMail, int ResID)
+    {
+        try
+        {
+
+            String deleteQuery = "Delete [dbo].[ResidentSettings] where  ResID = " + ResID;
+
+            String insertQuery = "INSERT INTO [dbo].[ResidentSettings] ([ResID] ,[BillingNotification],[BillingMail],[BillingSMS],[ComplaintNotification]" +
+                                ",[ComplaintMail],[ComplaintSMS] ,[forumNotification],[forumMail],[forumSMS],[NoticeNotification] ,[NoticeMail]" +
+                                ",[NoticeSMS]) VALUES( " + ResID + "," + BillNotice + "," + BillMail + ",0," + compNotice + "," + compMail + ",0," +
+                                 forumNotice + "," + forumMail + ",0,0,0,0)";
+
+
+            using (TransactionScope tran = new TransactionScope())
+            {
+                string connString = Utility.SocietyConnectionString;
+                using (SqlConnection dbConnection = new SqlConnection(connString))
+                {
+                    dbConnection.Open();
+
+                    SqlCommand sqlComm = new SqlCommand();
+                    sqlComm = dbConnection.CreateCommand();
+                    sqlComm.CommandText = deleteQuery;
+                    int i = sqlComm.ExecuteNonQuery();
+                    sqlComm.CommandText = insertQuery;
+                    int j = sqlComm.ExecuteNonQuery();
+
+                }
+                tran.Complete();
+                return true;
+            }
+
+
+        }
+        catch (Exception ex)
+        {
+
+            return false;
+        }
+    }
+
 
 }

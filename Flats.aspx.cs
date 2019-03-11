@@ -1607,6 +1607,7 @@ public partial class Flats : System.Web.UI.Page
         }
         return Emp;
     }
+
     [System.Web.Services.WebMethod]
     public static List<string> GetFlatNumber(string FlatNumber)
     {

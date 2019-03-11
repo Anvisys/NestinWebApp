@@ -27,9 +27,7 @@
     
 
     <style>
-        hr {
         
-        }
          .modalFlat {
            display: none;   /*Hidden by default */
             position: fixed; /* Stay in place */

@@ -30,10 +30,6 @@ public class Resident
     public string Pin { get; set; }
 
 
-    String ViewName = "dbo.ViewSocietyUsers";
-    string Table_Name = "dbo.Resident";
-    string Table_TotalUser = "dbo.TotalUsers";
-
 
 
     public Resident()
@@ -50,7 +46,7 @@ public class Resident
         try
         {
             DataAccess dacess = new DataAccess();
-            String UserSearchQuery = "select * from " + ViewName;
+            String UserSearchQuery = "select * from " + CONSTANTS.View_SocietyUser;
             dsResident = dacess.GetData(UserSearchQuery);
 
         }
@@ -58,6 +54,25 @@ public class Resident
         {
         }
         return dsResident;
+    }
+
+    public bool AddSocietyUser(int UserId, int FlatID)
+    {
+        try {
+
+
+            String societyUserQuery = "Insert Into dbo.SocietyUser  (UserID,FlatID,Type,ServiceType,CompanyName,ActiveDate, SocietyID,Status) output INSERTED.ResID Values('" +
+                                                                 UserId + "','"+ FlatID + "','Owner','0','NA','" + DateTime.UtcNow + "','" + SessionVariables.SocietyID + "',1)";
+            DataAccess da = new DataAccess();
+            bool result =   da.UpdateQuery(societyUserQuery);
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+
     }
 
     public DataSet GetResidentUserFlat(string UserName, String FlatNumber)
@@ -86,7 +101,7 @@ public class Resident
 
 
             DataAccess dacess = new DataAccess();
-            String UserSearchQuery = "select * from " + ViewName + " Where " + userNameCond + " and " + flatCond;
+            String UserSearchQuery = "select * from " + CONSTANTS.View_SocietyUser + " Where " + userNameCond + " and " + flatCond;
             dsResidentUserFlat = dacess.GetData(UserSearchQuery);
         }
         catch (Exception ex)
@@ -103,23 +118,23 @@ public class Resident
 
             if (FlatNumber != "" && ResType != "All")
             {
-                ResidentGenQuery = "select * from " + ViewName + " where FlatNumber ='" + FlatNumber + "' and Type = '" + ResType + "' and societyID = " + SocietyID;
+                ResidentGenQuery = "select * from " + CONSTANTS.View_SocietyUser + " where FlatNumber ='" + FlatNumber + "' and Type = '" + ResType + "' and societyID = " + SocietyID;
             }
 
 
             else if (FlatNumber != "" && ResType == "All")
             {
-                ResidentGenQuery = "  select * from " + ViewName + " where (Type = 'Owner' or Type = 'Tenant') and FlatNumber ='" + FlatNumber + "' and societyID = " + SocietyID;
+                ResidentGenQuery = "  select * from " + CONSTANTS.View_SocietyUser + " where (Type = 'Owner' or Type = 'Tenant') and FlatNumber ='" + FlatNumber + "' and societyID = " + SocietyID;
             }
 
             else if (FlatNumber == "" && ResType != "All")
             {
-                ResidentGenQuery = "select * from " + ViewName + " where Type ='" + ResType + "' and societyID = " + SocietyID ;
+                ResidentGenQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type ='" + ResType + "' and societyID = " + SocietyID ;
             }
 
             else if (FlatNumber == "" && ResType == "All")
             {
-                ResidentGenQuery = "select * from " + ViewName + " where Type = 'Owner' or Type = 'Tenant' and societyID = '" + SocietyID + "'";
+                ResidentGenQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type = 'Owner' or Type = 'Tenant' and societyID = '" + SocietyID + "'";
             }
 
             DataAccess dacess = new DataAccess();
@@ -138,11 +153,11 @@ public class Resident
         {
             String EmployeeQuery = "";
 
-            EmployeeQuery = "select * from " + ViewName + " where Type = 'Employee' and societyID = '" + SocietyID + "'";
+            EmployeeQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type = 'Employee' and societyID = '" + SocietyID + "'";
 
             if (ServiceTypeID > 0)
             {
-                EmployeeQuery = "select * from " + ViewName + " where Type = 'Employee' and societyID = '" + SocietyID + "' and ServiceType = " + ServiceTypeID;
+                EmployeeQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type = 'Employee' and societyID = '" + SocietyID + "' and ServiceType = " + ServiceTypeID;
             }
 
             DataAccess dacess = new DataAccess();
@@ -159,7 +174,7 @@ public class Resident
     public bool UpdateResidentDeactive(DateTime Date, string UserID)
     {
         DataAccess dacess = new DataAccess();
-        String DeactiveUserQuery = "Update " + Table_Name + "  set DeActiveDate = '" + Date + "' where UserID = '" + UserID + "'";
+        String DeactiveUserQuery = "Update " + CONSTANTS.Table_SocietyUser + "  set DeActiveDate = '" + Date + "' where UserID = '" + UserID + "'";
         bool result = dacess.Update(DeactiveUserQuery);
         return result;
     }
@@ -170,7 +185,7 @@ public class Resident
         User newUser = new User();
         string strNewPassword = newUser.EncryptPassword(EmailId, Password);
         
-        String UpdateQuery = "Insert into " + Table_TotalUser + " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address,UserType,SocietyID) Values('" + FirstName + "','','" + LastName + "','" + MobileNo + "','" + EmailId + "','" + Gender + "','" + Parentname + "','" + UserLogin +"','" + strNewPassword + "','" + Address + "','" + UserType + "','" + SocietyID + "')";
+        String UpdateQuery = "Insert into " + CONSTANTS.Table_Users + " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address,UserType,SocietyID) Values('" + FirstName + "','','" + LastName + "','" + MobileNo + "','" + EmailId + "','" + Gender + "','" + Parentname + "','" + UserLogin +"','" + strNewPassword + "','" + Address + "','" + UserType + "','" + SocietyID + "')";
 
 
 
@@ -181,7 +196,7 @@ public class Resident
     public int GetUserAvailable(string UserName)
     {
         DataAccess dacess = new DataAccess();
-        String UserAvailbleQuery = "Select  * from " + Table_TotalUser + " where UserLogin = '" + UserName + "'";
+        String UserAvailbleQuery = "Select  * from " + CONSTANTS.Table_Users + " where UserLogin = '" + UserName + "'";
         int UserID = dacess.GetSingleUserValue(UserAvailbleQuery);
         return UserID;
     }
@@ -189,7 +204,7 @@ public class Resident
     public DataSet GetEmailAvailable(String EmailID)
     {
         DataAccess dacess = new DataAccess();
-        String EmailAvailableQuery = "Select * from " + Table_TotalUser + " where EmailId = '" + EmailID + "' ";
+        String EmailAvailableQuery = "Select * from " + CONSTANTS.Table_Users + " where EmailId = '" + EmailID + "' ";
         DataSet dUser = dacess.GetUserData(EmailAvailableQuery);
         return dUser;
     }
@@ -197,7 +212,7 @@ public class Resident
     public DataSet GetDeactiveCheck(String UserID)
     {
         DataAccess dacess = new DataAccess();
-        String CheckDeactiveQuery = "Select DeActiveDate from " + Table_Name + " where UserID = '" + UserID + "' ";
+        String CheckDeactiveQuery = "Select DeActiveDate from " + CONSTANTS.Table_SocietyUser + " where UserID = '" + UserID + "' ";
         DataSet ds = dacess.GetData(CheckDeactiveQuery);
         return ds;
     }
@@ -205,7 +220,7 @@ public class Resident
     public bool UpdateUserResident(string FirstName, string MiddleName, string LastName, string EmailId, string ParentName, string MobileNo, string UserID)
     {
         DataAccess dacess = new DataAccess();
-        String UpdateQuery = "Update " + Table_TotalUser + "  SET Firstname='" + FirstName + "', MiddleName='" + MiddleName + "', LastName='" + FirstName + "',Emailid='" + EmailId + "',Parentname= '" + ParentName + "' ,MobileNo='" + MobileNo + "' WHERE UserID ='" + UserID + "'";
+        String UpdateQuery = "Update " + CONSTANTS.Table_Users + "  SET Firstname='" + FirstName + "', MiddleName='" + MiddleName + "', LastName='" + FirstName + "',Emailid='" + EmailId + "',Parentname= '" + ParentName + "' ,MobileNo='" + MobileNo + "' WHERE UserID ='" + UserID + "'";
         bool result = dacess.Update(UpdateQuery);
         return result;
     }
@@ -213,7 +228,7 @@ public class Resident
     public bool UpdateResident(string FirstName, string LastName, string EmailId, string MobileNo, string UserID)
     {
         DataAccess dacess = new DataAccess();
-        String UpdatReseQuery = "Update " + Table_Name + " SET Firstname='" + FirstName + "', LastName='" + LastName + "',Emailid='" + EmailId + "',MobileNo='" + MobileNo + "' WHERE UserID ='" + UserID + "'";
+        String UpdatReseQuery = "Update " + CONSTANTS.Table_Users + " SET Firstname='" + FirstName + "', LastName='" + LastName + "',Emailid='" + EmailId + "',MobileNo='" + MobileNo + "' WHERE UserID ='" + UserID + "'";
         bool result = dacess.Update(UpdatReseQuery);
         return result;
     }
@@ -221,14 +236,14 @@ public class Resident
     public int GetEditMobileNoAvailable(String UserEditMobileNo)
     {
         DataAccess dacess = new DataAccess();
-        String UserAvailbleQuery = "Select  UserID from " + Table_TotalUser + " where MobileNo = '" + UserEditMobileNo + "'";
+        String UserAvailbleQuery = "Select  UserID from " + CONSTANTS.Table_Users + " where MobileNo = '" + UserEditMobileNo + "'";
         int UserID = dacess.GetSingleUserValue(UserAvailbleQuery);
         return UserID;
     }
     public int GetEditEmailIDAvailable(String UserEditEmailID)
     {
         DataAccess dacess = new DataAccess();
-        String EmailAvailableQuery = "Select UserID from " + Table_TotalUser + " where EmailId = '" + UserEditEmailID + "'";
+        String EmailAvailableQuery = "Select UserID from " + CONSTANTS.Table_Users + " where EmailId = '" + UserEditEmailID + "'";
         int UserID = dacess.GetSingleUserValue(EmailAvailableQuery);
         return UserID;
     }
@@ -241,7 +256,7 @@ public class Resident
         {
             DataTable dt = new DataTable();
 
-            String EditUserQuery = "select * from " + Table_TotalUser + " where UserID ='" + UserId + "'";
+            String EditUserQuery = "select * from " + CONSTANTS.Table_Users + " where UserID ='" + UserId + "'";
             SqlCommand myCommand = new SqlCommand(EditUserQuery, con);
             SqlDataReader myReader = myCommand.ExecuteReader();
 
@@ -265,13 +280,13 @@ public class Resident
         return editUSer;
     }
 
-    public List<string> GetFlatNumber(string FlatNumber)
+    public List<string> GetFlatNumber(string FlatNumber, int SocietyID)
     {
         List<string> Emp = new List<string>();
         //Changed View name by aarshi on 4 aug 2017, it was throwing exception for ViewOwnerResidents not exist
         //string query = string.Format("Select distinct FlatNumber from dbo.ViewOwnerResidents where FlatNumber like '" + FlatNumber + "%'");
 
-        string query = string.Format("Select distinct FlatNumber from " + ViewName + " where FlatNumber like '" + FlatNumber + "%'");
+        string query = string.Format("Select distinct FlatNumber from " + CONSTANTS.Table_Flats + " where SocietyID = "+ SocietyID + " and FlatNumber like '" + FlatNumber + "%'");
         using (SqlConnection con = new SqlConnection(Utility.SocietyConnectionString))
         {
             con.Open();
@@ -288,65 +303,7 @@ public class Resident
         return Emp;
     }
 
-    public bool InsertUserSetting(int ResID)
-    {
-        try
-        {
-            String strInsertQuery = "INSERT INTO ResidentNotification (BillingNotification, BillingMail, forumNotice, forumMail, ComplaintNotification, ComplaintMail, FlatMail,ResID) VALUES (1,1,1,1,1,1,1, " + ResID + ")";
-            DataAccess da = new DataAccess();
-
-            return da.Update(strInsertQuery);
-        }
-        catch (Exception ex)
-        {
-
-            return false;
-        }
-    
-    }
-
-    public bool UpdateUserSetting(int BillNotice, int BillMail, int forumNotice, int forumMail, int compNotice, int compMail, int ResID)
-    {
-        try
-        {
-
-            String deleteQuery = "Delete [dbo].[ResidentSettings] where  ResID = " + ResID;
-
-            String insertQuery = "INSERT INTO [dbo].[ResidentSettings] ([ResID] ,[BillingNotification],[BillingMail],[BillingSMS],[ComplaintNotification]"+
-                                ",[ComplaintMail],[ComplaintSMS] ,[forumNotification],[forumMail],[forumSMS],[NoticeNotification] ,[NoticeMail]"+
-                                ",[NoticeSMS]) VALUES( "+ ResID +"," + BillNotice +"," + BillMail + ",0," + compNotice + ","+ compMail + ",0," +
-                                 forumNotice +"," + forumMail +",0,0,0,0)";
-
-
-            using (TransactionScope tran = new TransactionScope())
-            {
-                string connString = Utility.SocietyConnectionString;
-                using (SqlConnection dbConnection = new SqlConnection(connString))
-                {
-                    dbConnection.Open();
-
-                    SqlCommand sqlComm = new SqlCommand();
-                    sqlComm = dbConnection.CreateCommand();
-                    sqlComm.CommandText = deleteQuery;
-                    int i = sqlComm.ExecuteNonQuery();
-                    sqlComm.CommandText = insertQuery;
-                    int j = sqlComm.ExecuteNonQuery();
-
-                }
-                tran.Complete();
-                return true;
-            }
-
-
-        }
-        catch (Exception ex)
-        {
-
-            return false;
-        }
-    }
-
-
+   
 
     public bool AddEmployeeWithUser(User newUser, int ServiceType, String CompanyName)
     {
