@@ -293,78 +293,7 @@ img.app_centre{
          <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>    
         <%--Login Popup --%>
       
-        <div class="login_div" id="loginModal" style="display:none;padding:0% 0 3% 0;">
-        <img id="close" class="close" src="Images/Icon/close_red.png" alt="close" width="25" height="25"  style="background-size:contain;"/> <br />    
-           
-            <div style="padding:0 1% 3% 1%;color:#6eab91; font-family:'Baskerville Old Face';font-size:x-large;">
-               <%-- <img src="Images/Icon/login_icon.png"  width="25" height="25"/>--%>
-               <i class="fa fa-user-circle-o" style="color:#000;" aria-hidden="true"></i>
-
-                
-                                <asp:Label ID="lbltext" runat="server" style="color:#000;" Text="Account Login "></asp:Label>    
-                         
-              <h4 style="margin-bottom:0;"> 
-                  <asp:Label ID="lblPasswordRes" runat="server" Text="" Font-Size="small" ForeColor="#000"></asp:Label></h4> 
-
-            </div>
-           
-                    <asp:TextBox ID="TxtUserID" runat="server" CssClass="login_txtbox" placeholder="Username/MobileNumber"   BorderStyle="None"  TabIndex="1" ></asp:TextBox><br /><br />
-                   <asp:TextBox ID="txtPwd" runat="server" CssClass="login_txtbox"  placeholder="Password"  TextMode="Password" BorderStyle="None"  TabIndex="2"></asp:TextBox><br /><br />
-                   <div id="Login_background" style="padding:0.5% 0% 0.5% 0%;background-color:#000;">
-                        <button  type="button" id="submitbutton" style="width:200px;height:30px;color:white;" tabindex="3"> Submit </button>                
-                   </div>
-                   <div>
-                       <img  class="dvLoading_first" src="Images/Icon/ajax-loader.gif" alt="Loading.." style="border:0;"/>  
-                   </div>
-
-                  <asp:Label ID="lblerror" runat="server" Text="" CssClass="lblerror"></asp:Label><br />
-                  <a href="#" id="Forgotpass" class="forgot_pass" tabindex="4">Forgot Password</a><br />
-        </div>     
-          <%--Login Popup --%>
-
-          <%--Forgot Popup --%>
-
-            <div class="login_div" id="Forgot_div" style="display:none;">
-                        <%--<img id="closed" class="close" src="Images/Icon/close.png" width="25" height="25"  style="background-size:contain;"/> <br />--%>
-                        <span id="closed" class="close fa fa-close"  style="background-size:contain; "></span> <br />
-                            <div >
-                             <%--   <img src="Images/icon/login_icon.png"  width="25" height="25"/>--%>
-                                <asp:Label ID="Label1" runat="server" Text="Forgot Password "></asp:Label><br />
-
-                                <asp:Label ID="Label2" runat="server" ForeColor="#666666" Font-Size="Small"  CssClass="forgottxt" Text="We will send  your New password to  your Email  which  is  associated with this UserId."></asp:Label>
-                            </div>
-           
-                       <asp:TextBox ID="txtForgotText" runat="server" CssClass="login_txtbox" onfocus="if (this.value == 'Username or Email') this.value = '';" onblur="if (this.value == '') this.value = 'Username or Email';" value="Username or Email" BorderStyle="None"></asp:TextBox><br /><br />
-                              <div id="Login_backgroundd" style="padding:2% 1% 2% 1%;background-color:#f19e64;">                 
-                                   <asp:Button ID="btnForgotpass" runat="server" Text="Reset Password" CssClass="login_Submit"  OnClick="btnForgotpass_Click"   BorderStyle="None"/><br />                                            
-                               </div>
-
-                              <asp:Label ID="lblEmailerror" runat="server" Text="" CssClass="lblerror"></asp:Label>
-                              <a href="#" id="GoLogin" class="forgot_pass" >Go to Login</a><br />
-                    <asp:Label ID="lblres" runat="server"></asp:Label>
-
-
-            </div>
-
-          <%--Forgot  Popup Ends --%>
-
-
-         <div class="login_div" id="select_flat" style="display:none;">
-                        
-                          <div>
-                               <input type="radio" name="gender" value="1" checked="checked" /> A502, Owner, ATS<br/>
-                               <input type="radio" name="gender" value="2" checked="checked" />A203, Owner, ATS<br/>
-                              <input type="radio" name="gender" value="3" checked="checked" /> Resident Admin, Gaur<br/>
-                            </div>
-           
-                       <asp:TextBox ID="TextBox1" runat="server" CssClass="login_txtbox" onfocus="if (this.value == 'Username or Email') this.value = '';" onblur="if (this.value == '') this.value = 'Username or Email';" value="Username or Email" BorderStyle="None"></asp:TextBox><br /><br />
-                             <asp:Label ID="Label5" runat="server" Text="" CssClass="lblerror"></asp:Label>
-                              <a href="#" id="GoMain" class="forgot_pass" >Next</a><br />
-                    <asp:Label ID="Label6" runat="server"></asp:Label>
-
-
-            </div>
-
+      
         </form>
 
 

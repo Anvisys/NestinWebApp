@@ -176,7 +176,7 @@ public class User
     }
 
 
-    public IEnumerable<Resident> GetResidentInfo()
+    public IEnumerable<Resident> SetResidentInfo()
     {
         String strQuery = "";
         try
@@ -187,10 +187,8 @@ public class User
                 societyConn.ConnectionString = Utility.SocietyConnectionString;
                 societyConn.Open();
 
-                strQuery = "select * from dbo.ViewSocietyUsers where UserID = " + UserID + " and DeActiveDate > GetDate()";
-
-                DataAccess da = new DataAccess();
-                 DataSet ds =  da.GetData(strQuery);
+                Resident res = new Resident();
+                DataSet ds =  res.GetActiveResident(UserID);
 
                 if (ds == null)
                 {

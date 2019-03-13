@@ -25,4 +25,13 @@ public class CONSTANTS
         // TODO: Add constructor logic here
         //
     }
+
+    
+}
+
+public enum Resident_Status {
+    Approved=0,
+    Applied =1,
+    Demo =2,
+
 }

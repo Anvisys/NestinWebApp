@@ -39,6 +39,40 @@ public class Resident
         //
     }
 
+    public DataSet GetResidentForUser(int UserId)
+    {
+        DataSet dsResidentUserFlat = null;
+        try
+        {
+            
+            DataAccess dacess = new DataAccess();
+            String UserSearchQuery = "select * from " + CONSTANTS.View_SocietyUser + " Where UserID =" + UserId ;
+            dsResidentUserFlat = dacess.GetData(UserSearchQuery);
+        }
+        catch (Exception ex)
+        {
+        }
+        return dsResidentUserFlat;
+    }
+
+
+    public DataSet GetActiveResident(int UserId)
+    {
+        DataSet dsResidentUserFlat = null;
+        try
+        {
+
+            DataAccess dacess = new DataAccess();
+            String UserSearchQuery = "select * from " + CONSTANTS.View_SocietyUser + " Where UserID =" + UserId + 
+                                     " and Status = 0 and DeActiveDate > GetDate()";
+            dsResidentUserFlat = dacess.GetData(UserSearchQuery);
+        }
+        catch (Exception ex)
+        {
+        }
+        return dsResidentUserFlat;
+
+    }
 
     public DataSet GetResidentAll()
     {
@@ -56,13 +90,13 @@ public class Resident
         return dsResident;
     }
 
-    public bool AddSocietyUser(int UserId, int FlatID)
+    public bool AddSocietyUser(int UserId, int FlatID, int SocieyID)
     {
         try {
 
 
             String societyUserQuery = "Insert Into dbo.SocietyUser  (UserID,FlatID,Type,ServiceType,CompanyName,ActiveDate, SocietyID,Status) output INSERTED.ResID Values('" +
-                                                                 UserId + "','"+ FlatID + "','Owner','0','NA','" + DateTime.UtcNow + "','" + SessionVariables.SocietyID + "',1)";
+                                                                 UserId + "','"+ FlatID + "','Owner','0','NA','" + DateTime.UtcNow + "','" + SocieyID + "',1)";
             DataAccess da = new DataAccess();
             bool result =   da.UpdateQuery(societyUserQuery);
 
@@ -145,6 +179,20 @@ public class Resident
             return null;
         }
        
+    }
+
+    public DataSet GetInReviewResident(int _SocietyID)
+    {
+        try
+        { 
+        String ResidentGenQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type = 'Owner' and Status = 1 and societyID = '" + _SocietyID + "'";
+        DataAccess dacess = new DataAccess();
+        return dacess.GetData(ResidentGenQuery);
+         }
+        catch (Exception ex)
+        {
+            return null;
+        }
     }
 
     public DataSet GetEmployee( int SocietyID, int ServiceTypeID)
@@ -352,5 +400,23 @@ public class Resident
 
     }
 
+    public bool ActivateUser( int _ResId, DateTime _activeDate, DateTime _deactiveDate)
+    {
+        try
+        {
+            DataAccess dacess = new DataAccess();
+            String UpdateQuery = "update " + CONSTANTS.Table_SocietyUser
+                               + " set ActiveDate = '" + _activeDate + "', DeActiveDate = '" + _deactiveDate 
+                               + "', Status = 0 Where ResID = " + _ResId+")";
+            
+            bool result = dacess.Update(UpdateQuery);
+            return result;
+        }
+        catch (Exception ex)
+        {
+
+            return false;
+        }
+    }
 
 }

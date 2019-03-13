@@ -33,8 +33,7 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
     <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
-
-
+    
     <script type="text/javascript">
 
         var CurrentUserType;
@@ -52,39 +51,7 @@
 
         }
 
-        function hideColumn() {
-            var gridrows = $("#UserGrid tr");
-
-            for (var i = 0; i < gridrows.length; i++) {
-                try {
-                    gridrows[i].cells[6].style.display = "none";
-                    gridrows[i].cells[7].style.display = "none";
-                    gridrows[i].cells[8].style.display = "none";
-                }
-                catch (err) {
-                    // alert(err.message);
-                }
-            }
-            return false;
-
-        };
-
-        function showColumn() {
-            var gridrows = $("#UserGrid tr");
-
-            for (var i = 0; i < gridrows.length; i++) {
-                try {
-                    gridrows[i].cells[6].style.display = "inline";
-                    gridrows[i].cells[7].style.display = "inline";
-                    gridrows[i].cells[8].style.display = "inline";
-                }
-                catch (err) {
-                    //alert(err.message);
-                }
-            }
-            return false;
-
-        };
+      
 
         $(function () {
             $("#txtUserSrch,#txtFlatNoFilter").autocomplete({
@@ -232,24 +199,6 @@
 
 
 
-        $(document).ready(function () {
-            $('#chkChangePassword').click(function () {
-                if ($(this).is(':checked')) {
-                    $("#tdCnfPwd").show();
-                    $("#tdNewPwd").show();
-                    $(".UserEditInfo").attr("readonly", true);
-                    $("#hiddenChangeField").val("Password");
-
-                } else {
-                    $("#tdCnfPwd").hide();
-                    $("#tdNewPwd").hide();
-                    $(".UserEditInfo").attr("readonly", false);
-                    $("#hiddenChangeField").val("UserInfo");
-                }
-            });
-
-        });
-
         function CheckOtherIsCheckedByGVID(rb) {
             var isChecked = rb.checked;
             var row = rb.parentNode.parentNode;
@@ -280,27 +229,6 @@
 
 
 
-        $(document).ready(function () {
-            $("#Users_Add_Data").click(function () {
-                $(".dropdown-content").toggle();
-            });
-        });
-
-        $(document).ready(function () {
-            $("#dropdown-sample").mouseleave(function () {
-                $("#dropdown-sample").hide();
-            });
-        });
-
-        $(document).ready(function () {
-            $("#Add_Resident").click(function () {
-
-                $("#myModalPopup").show();
-
-            });
-
-        });
-
         //   $(document).ready(function () {
         // $("#btnusersEdit").click(function () {
         //     $("#myModalEditPopup").show();
@@ -308,65 +236,67 @@
         //});
 
         $(document).ready(function () {
+
+                $('#chkChangePassword').click(function () {
+                if ($(this).is(':checked')) {
+                    $("#tdCnfPwd").show();
+                    $("#tdNewPwd").show();
+                    $(".UserEditInfo").attr("readonly", true);
+                    $("#hiddenChangeField").val("Password");
+
+                } else {
+                    $("#tdCnfPwd").hide();
+                    $("#tdNewPwd").hide();
+                    $(".UserEditInfo").attr("readonly", false);
+                    $("#hiddenChangeField").val("UserInfo");
+                }
+            });
+
+             $("#Users_Add_Data").click(function () {
+                $(".dropdown-content").toggle();
+            });
+
+              $("#dropdown-sample").mouseleave(function () {
+                $("#dropdown-sample").hide();
+            });
+
+             $("#Add_Resident").click(function () {
+
+                $("#myModalPopup").show();
+
+            });
+
             $("#Cancel_Popup").click(function () {
                 $("#myModalPopup").hide();
                 $("input:text").val("");
                 $("#lblstatus").html('');
 
-
             });
-        });
 
-        $(document).ready(function () {
-            $("#Edit_Cancel,#Cross_Cancel").click(function () {
+              $("#Edit_Cancel,#Cross_Cancel").click(function () {
                 $("#myModalEditPopup").hide();
                 // $("#EditHidedenFlat").val("");
                 $("#lblEditMobileCheck").html('');
                 $("#lblEditEmailCheck").html('');
             });
-        });
 
-
-        $(document).ready(function () {
-            $("#btnDactiveUsrCancel,#Cross_cancel").click(function () {
-                $("#confirmBox").hide();
+             $("#btnDactiveUsrCancel,#Cross_cancel").click(function () {
+                $("#confirmDeactivatBox").hide();
                 //$("#HiddenCompDeactiveID").val("");
             });
-        });
 
-        $(document).ready(function () {
-            $("#btnDeactiveUserConfirm").click(function () {
-                $("#confirmBox").hide();
+              $("#btnDeactiveUserConfirm").click(function () {
+                $("#confirmDeactivatBox").hide();
                 $("#HiddenCompDeactiveID").val("");
             });
+
+            $("#txtEndDate").datepicker({ dateFormat: 'dd-mm-yy' });
+
+             $("#txtStartDate").datepicker({ dateFormat: 'dd-mm-yy' });
         });
 
-
-
-        function ShowUserPopup() {
-            setTimeout(function () {
-                if (EditHidedenFlat.value != "") {
-                    document.getElementById("myModalEditPopup").style.display = "block";
-                }
-
-                var Firstname = document.getElementById('<%=txtFirstname.ClientID%>').value;
-
-                if (Firstname != "") {
-                    document.getElementById("myModalPopup").style.display = "block";
-                }
-
-                if (HiddenCompDeactiveID.value != "") {
-
-                    document.getElementById("confirmBox").style.display = "block";
-                }
-                if (HiddenField2.value != "") {
-                    //  document.getElementById("myModalPopup").style.display = "block";
-                }
-
-            }, 1000);
-
-
-        }
+       
+          
 
         function ShowAddTenant() {
             setTimeout(function () {
@@ -446,9 +376,35 @@
             document.getElementById("HiddenField1").value = UserID;
             document.getElementById("HiddenField2").value = FlatNumber;
             document.getElementById("HiddenDeactivedate").value = DeactiveDate;
-
-            $("#confirmBox").show();
+            $("#confirmDeactivatBox").show();
         }
+
+        function ShowActivateForm(UserID, type, ResID, DeactiveDate) {
+
+             document.getElementById("HiddenField1").value = UserID;
+            document.getElementById("HiddenField2").value = ResID;
+       
+            $("#confirmActivateBox").show();
+
+        }
+
+        function CancelActivate() {
+             $("#confirmActivateBox").hide();
+        }
+
+        function ActivateResult(result) {
+
+            if (result) {
+                $("#confirmActivateBox").hide();
+                $("#lblHeaderMessage").text("Resident Activated");
+            }
+            else {
+                 $("#confirmActivateBox").hide();
+                $("#lblHeaderMessage").text("Failed to Activate Resident");
+            }
+        }
+
+
         function validateEmail(emailField){
         var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
@@ -467,7 +423,9 @@
          if (charCode > 31 && (charCode < 48 || charCode > 57))
             return false;    
          return true;
-      }
+        }
+
+
     </script>
 
 
@@ -523,13 +481,6 @@
             background-color: #e6e2e2;
             background-color: rgba(0,0,0,0.4);
         }
-
-
-
-        #confirmBox {
-            ;
-        }
-
 
 
 
@@ -611,16 +562,16 @@
                                     <asp:LinkButton runat="server" BackColor="Transparent" ForeColor="Black" ValidationGroup="Flat_Search" OnClick="btnSearch_OnClick"> 
                                        <span class="glyphicon glyphicon-search"></span></asp:LinkButton>
                                 </div>
-
-
-
                                 <div class="col-sm-2 col-xs-5">
-
+                                    <asp:LinkButton ID="btnReview" CausesValidation="false" runat="server" OnClick="btnReview_OnClick">
+                                        <asp:Label runat="server" ID="lblInReview" ForeColor="Black"></asp:Label></asp:LinkButton>
                                     <button type="button" id="Add_Resident" class="btn btn-sm btn-primary pull-right">Add User</button>
                                 </div>
                             </div>
-
-                            <div class="row layout_header theme_third_bg font_size_2 vcenter" style="height: 40px; margin: 0px; display: none;">
+                            <div class="row">
+                                <label id="lblHeaderMessage"></label>
+                            </div>
+                            <%--   <div class="row layout_header theme_third_bg font_size_2 vcenter" style="height: 40px; margin: 0px; display: none;">
                                 <div class="col-xs-3 hidden-xs">
                                     <div>
                                         <label class="pull-left ">Resident : </label>
@@ -641,154 +592,233 @@
                                 <div class="col-xs-3 hidden-xs" style="vertical-align: middle;">
                                     <div>
                                         <%--<a  id="Add_Resident" class="Add_Button" style="cursor:pointer;">Add Resident</a> --%>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+                        <%-- </div>
+                            </div>--%>
+                    </div>
 
-                        <div id="confirmBox" class="modal">
-                            <div class="container-fluid" style="margin-top: 50px; width: 350px;">
-                                <div class="panel panel-primary" style="position: relative; margin: 0px;">
-                                    <div class="panel-heading">
-                                        Delete Confirmation
+                    <div id="confirmDeactivatBox" class="modal">
+                        <div class="container-fluid" style="margin-top: 50px; width: 350px;">
+                            <div class="panel panel-primary" style="position: relative; margin: 0px;">
+                                <div class="panel-heading">
+                                    Delete Confirmation
                         <span class="fa fa-times" id="Cross_cancel" style="float: right; cursor: pointer;"></span>
-                                    </div>
-                                    <div class="panel-body">
+                                </div>
+                                <div class="panel-body">
 
-                                        <table>
-                                            <tr>
-                                                <td colspan="2" style="text-align: center;">You  are about  to  Deactivate  Resident,  it  will permanantly  Deactivated from database Continue ?
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="height: 15px;"></td>
-                                            </tr>
+                                    <table>
+                                        <tr>
+                                            <td colspan="2" style="text-align: center;">You  are about  to  Deactivate  Resident,  it  will permanantly  Deactivated from database Continue ?
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="height: 15px;"></td>
+                                        </tr>
 
-
-
-
-                                        </table>
-                                    </div>
-                                    <div class="panel-footer" style="text-align: right;">
-                                        <asp:Button ID="btnDeactiveUserConfirm" CausesValidation="false" CssClass="btn btn-primary" runat="server" OnClick="btnDeactiveUserConfirm_Click" Text="Yes" />
-                                        <button type="button" id="btnDactiveUsrCancel" class="btn btn-danger">No</button>
-                                    </div>
+                                    </table>
+                                </div>
+                                <div class="panel-footer" style="text-align: right;">
+                                    <asp:Button ID="btnDeactiveUserConfirm" CausesValidation="false" CssClass="btn btn-primary" runat="server" OnClick="btnDeactiveUserConfirm_Click" Text="Yes" />
+                                    <button type="button" id="btnDactiveUsrCancel" class="btn btn-danger">No</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                        <div id="confirmActivateBox" class="modal">
+                        <div class="container-fluid" style="margin-top: 50px; width: 350px;">
+                            <div class="panel panel-primary" style="position: relative; margin: 0px;">
+                                <div class="panel-heading">
+                                    Delete Confirmation
+                                    <span class="fa fa-times" onclick="CancelActivate()" id="cancelAct" style="float: right; cursor: pointer;"></span>
+                                </div>
+                                <div class="panel-body">
+
+                                    <table>
+                                        <tr>
+                                            <td colspan="2" style="text-align: center;">Activate  Resident
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                              <td  style="height: 15px;">  Active From </td>
+                                         <td  style="height: 15px;">   <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control" ></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                             <td  style="height: 15px;">  Active Till </td>
+                                         <td  style="height: 15px;">   <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control"  onchange="ValidateDate()"  ></asp:TextBox></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="panel-footer" style="text-align: right;">
+                                    <asp:Button ID="btnActivate" CausesValidation="false" CssClass="btn btn-primary" runat="server" OnClick="btnActivateUser_Click" Text="Yes" />
+                                    <button type="button" onclick="CancelActivate()" class="btn btn-danger">No</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
+                    <asp:HiddenField ID="HiddenCompDeactiveID" runat="server" />
+                    <div id="UserTable" class="row" style="margin: 1px;">
 
-                        <asp:HiddenField ID="HiddenCompDeactiveID" runat="server" />
-                        <div id="UserTable" class="row" style="margin: 1px;">
+                        <div class="col-sm-12 ">
+                            <asp:MultiView ID="MultiView1" runat="server">
+                                <asp:View ID="View1" runat="server">
+                                    <asp:DataList
+                                        ID="residentsDataList" runat="server" HorizontalAlign="Center"
+                                        RepeatColumns="1" RepeatDirection="Horizontal" Width="100%" OnSelectedIndexChanged="ResidentList_DataBound">
 
-                            <div class="col-sm-12 ">
+                                        <ItemStyle />
+                                        <ItemTemplate>
 
-                                <asp:DataList
-                                    ID="residentsDataList" runat="server" HorizontalAlign="Center"
-                                    RepeatColumns="1" RepeatDirection="Horizontal" Width="100%" OnSelectedIndexChanged="ResidentList_DataBound">
+                                            <div class="row layout_shadow_table" style="margin-left: 10px;">
 
-                                    <ItemStyle />
-                                    <ItemTemplate>
+                                                <div class="col-sm-4 col-xs-4" style="text-align: center;">
 
-                                        <div class="row layout_shadow_table" style="margin-left: 10px;">
+                                                    <img class="profile-image" src='<%# "GetImages.ashx?ResID="+ Eval("ResID")+"&Name="+Eval("FirstName") +"&UserType="+Eval("Type") %>' />
+                                                    <br />
 
-                                            <div class="col-sm-4 col-xs-4" style="text-align: center;">
-
-                                                <img class="profile-image" src='<%# "GetImages.ashx?ResID="+ Eval("ResID")+"&Name="+Eval("FirstName") +"&UserType="+Eval("Type") %>' />
-                                                <br />
-
-                                                <%# Eval("FirstName") +" " + Eval("LastName") %> , <%# Eval("FlatNumber") %>
-                                                <br />
-                                                <hr style="margin: 0px;" />
-                                                <%# Eval("Type") %>
-                                            </div>
-
-                                            <div class="col-sm-4 col-xs-4">
-                                                <br />
-                                                <span class="fa fa-envelope" style="color: blue;"></span><%# Eval("Emailid") %>
-                                                <br />
-
-                                                <%--<span class="fa fa-phone-square" style="color:blue;"></span> <%# Eval("IntercomNumber") %><br />--%>
-                                                <span class="fa fa-phone" style="color: blue;"></span><%# Eval("MobileNo") %>
-                                                <%# Eval("ParentName") %>
-                                                <br />
-                                                <span class="fa fa-clock-o" style="color: blue;"></span><%# Eval("ActiveDate","{0:dd MMM,yy}") %>
-                                                <br />
-                                            </div>
-
-
-                                            <div class="col-sm-4 col-xs-4">
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Action <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#" onclick="ShowEditForm('<%# Eval("UserID") %>' ,'<%# Eval("FirstName") %>' ,'<%# Eval("LastName") %>','<%# Eval("MobileNo") %>','<%# Eval("ParentName") %>','<%# Eval("EmailId") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Edit</a></li>
-                                                        <li><a href="#" onclick="ShowAddTenant()">Tenant</a></li>
-                                                        <li><a href="#" onclick="ShowDeactivateForm('<%# Eval("UserID") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Deactivate</a></li>
-                                                        <li></li>
-
-                                                    </ul>
+                                                    <%# Eval("FirstName") +" " + Eval("LastName") %> , <%# Eval("FlatNumber") %>
+                                                    <br />
+                                                    <hr style="margin: 0px;" />
+                                                    <%# Eval("Type") %>
                                                 </div>
+
+                                                <div class="col-sm-4 col-xs-4">
+                                                    <br />
+                                                    <span class="fa fa-envelope" style="color: blue;"></span><%# Eval("Emailid") %>
+                                                    <br />
+
+                                                    <%--<span class="fa fa-phone-square" style="color:blue;"></span> <%# Eval("IntercomNumber") %><br />--%>
+                                                    <span class="fa fa-phone" style="color: blue;"></span><%# Eval("MobileNo") %>
+                                                    <%# Eval("ParentName") %>
+                                                    <br />
+                                                    <span class="fa fa-clock-o" style="color: blue;"></span><%# Eval("ActiveDate","{0:dd MMM,yy}") %>
+                                                    <br />
+                                                </div>
+
+
+                                                <div class="col-sm-4 col-xs-4">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Action <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#" onclick="ShowEditForm('<%# Eval("UserID") %>' ,'<%# Eval("FirstName") %>' ,'<%# Eval("LastName") %>','<%# Eval("MobileNo") %>','<%# Eval("ParentName") %>','<%# Eval("EmailId") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Edit</a></li>
+                                                            <li><a href="#" onclick="ShowAddTenant()">Tenant</a></li>
+                                                            <li><a href="#" onclick="ShowDeactivateForm('<%# Eval("UserID") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Deactivate</a></li>
+                                                            <li></li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
                                             </div>
+
+
+
+                                        </ItemTemplate>
+                                        <AlternatingItemStyle />
+
+
+                                    </asp:DataList>
+
+                                    <div class="row">
+
+                                        <div class="col-xs-4" style="text-align: center; padding: 8px;">
+                                            <asp:Button ID="btnprevious" CausesValidation="false" runat="server" Font-Bold="true" Text="Prev" Height="31px" Width="60px" OnClick="btnprevious_Click" />
 
                                         </div>
-
-
-
-                                    </ItemTemplate>
-                                    <AlternatingItemStyle />
-
-
-                                </asp:DataList>
-
-                                <div class="row">
-
-                                    <div class="col-xs-4" style="text-align: center; padding: 8px;">
-                                        <asp:Button ID="btnprevious" CausesValidation="false" runat="server" Font-Bold="true" Text="Prev" Height="31px" Width="60px" OnClick="btnprevious_Click" />
-
+                                        <div class="col-xs-4">
+                                            <asp:Label ID="lblPage" runat="server" Font-Size="Small" ForeColor="#f9f9f9f"></asp:Label>
+                                        </div>
+                                        <div class="col-xs-4" style="text-align: center; padding: 8px;">
+                                            <asp:Button ID="btnnext" CausesValidation="false" runat="server" Font-Bold="true" Text="Next" Height="31px" Width="60px" OnClick="btnnext_Click" />
+                                        </div>
                                     </div>
-                                    <div class="col-xs-4">
-                                        <asp:Label ID="lblPage" runat="server" Font-Size="Small" ForeColor="#f9f9f9f"></asp:Label>
-                                    </div>
-                                    <div class="col-xs-4" style="text-align: center; padding: 8px;">
-                                        <asp:Button ID="btnnext" CausesValidation="false" runat="server" Font-Bold="true" Text="Next" Height="31px" Width="60px" OnClick="btnnext_Click" />
-                                    </div>
-                                </div>
+                                </asp:View>
+                                  <asp:View ID="View2" runat="server">
+                                       <asp:DataList
+                                        ID="dataListReview" runat="server" HorizontalAlign="Center"
+                                        RepeatColumns="1" RepeatDirection="Horizontal" Width="100%" OnSelectedIndexChanged="ResidentList_DataBound">
+                                        <ItemStyle />
+                                        <ItemTemplate>
+                                            <div class="row layout_shadow_table" style="margin-left: 10px;">
 
-                            </div>
+                                                <div class="col-sm-4 col-xs-4" style="text-align: center;">
+
+                                                    <img class="profile-image" src='<%# "GetImages.ashx?ResID="+ Eval("ResID")+"&Name="+Eval("FirstName") +"&UserType="+Eval("Type") %>' />
+                                                    <br />
+
+                                                    <%# Eval("FirstName") +" " + Eval("LastName") %> , <%# Eval("FlatNumber") %>
+                                                    <br />
+                                                    <hr style="margin: 0px;" />
+                                                    <%# Eval("Type") %>
+                                                </div>
+
+                                                <div class="col-sm-4 col-xs-4">
+                                                    <br />
+                                                    <span class="fa fa-envelope" style="color: blue;"></span><%# Eval("Emailid") %>
+                                                    <br />
+
+                                                    <%--<span class="fa fa-phone-square" style="color:blue;"></span> <%# Eval("IntercomNumber") %><br />--%>
+                                                    <span class="fa fa-phone" style="color: blue;"></span><%# Eval("MobileNo") %>
+                                                    <%# Eval("ParentName") %>
+                                                    <br />
+                                                    <span class="fa fa-clock-o" style="color: blue;"></span><%# Eval("ActiveDate","{0:dd MMM,yy}") %>
+                                                    <br />
+                                                </div>
+                                                <div class="col-sm-4 col-xs-4">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                            onclick="ShowActivateForm('<%# Eval("UserID") %>' ,'<%# Eval("Type") %>', '<%# Eval("ResID") %>','<%# Eval("DeActiveDate") %>')">
+                                                           Activate
+                                                        </button>
+                                                       
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </ItemTemplate>
+                                        <AlternatingItemStyle />
 
 
-
-
-                            <div id="resident_dropdown" class="layout-dropdown-content theme-dropdown-content " style="position: relative; margin-top: 20px; display: none;">
-                                <asp:Button ID="btnusersEdit" runat="server" Text="Edit/Update" CausesValidation="false" CssClass="layout_list_type" OnClick="btnusersEdit_Click" />
-                                <asp:Button ID="btnUsersDeactive" runat="server" CssClass="layout_list_type" Text="Deactivate" CausesValidation="false" OnClick="btnUsersDeactive_Click" />
-
-                                <asp:Button ID="btnAddTenant" runat="server" Text="Add Tenant" CausesValidation="false" CssClass="layout_list_type" OnClick="btnAddUser_Click" />
-                            </div>
+                                    </asp:DataList>
+                                  </asp:View>
+                            </asp:MultiView>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-12" style="text-align: center;">
-                                <asp:HiddenField ID="EditHidedenFlat" runat="server" />
-                                <asp:HiddenField ID="HiddenFieldOwnerType" runat="server" />
-                                <asp:HiddenField ID="HiddenDeactivedate" runat="server" />
-                                <asp:HiddenField ID="HiddenField1" runat="server" />
-                                <asp:HiddenField ID="HiddenField2" runat="server" />
-                                <asp:Label ID="Label4" runat="server" ForeColor="#007cf9" Text="Total Residents :"></asp:Label>
-                                <asp:Label ID="lblTotalResidents" runat="server" ForeColor="#4774d1" Text=""></asp:Label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12" style="text-align: center;">
-                                <asp:Label ID="lblCheckDeactive" runat="server" ForeColor="#FF5050" Font-Size="Small"></asp:Label>
-                                <asp:Label ID="lblGridEmptyDataText" runat="server" ForeColor="#46A3FF"></asp:Label>
-                                <asp:Button ID="btnResidentShowAll" runat="server" CssClass="btn_style" OnClick="btnResidentShowAll_Click" Text="Show All" CausesValidation="False" />
-                            </div>
-                        </div>
 
+
+
+
+                        <div id="resident_dropdown" class="layout-dropdown-content theme-dropdown-content " style="position: relative; margin-top: 20px; display: none;">
+                            <asp:Button ID="btnusersEdit" runat="server" Text="Edit/Update" CausesValidation="false" CssClass="layout_list_type" OnClick="btnusersEdit_Click" />
+                            <asp:Button ID="btnUsersDeactive" runat="server" CssClass="layout_list_type" Text="Deactivate" CausesValidation="false" OnClick="btnUsersDeactive_Click" />
+
+                            <asp:Button ID="btnAddTenant" runat="server" Text="Add Tenant" CausesValidation="false" CssClass="layout_list_type" OnClick="btnAddUser_Click" />
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12" style="text-align: center;">
+                            <asp:HiddenField ID="EditHidedenFlat" runat="server" />
+                            <asp:HiddenField ID="HiddenFieldOwnerType" runat="server" />
+                            <asp:HiddenField ID="HiddenDeactivedate" runat="server" />
+                            <asp:HiddenField ID="HiddenField1" runat="server" />
+                            <asp:HiddenField ID="HiddenField2" runat="server" />
+                            <asp:Label ID="Label4" runat="server" ForeColor="#007cf9" Text="Total Residents :"></asp:Label>
+                            <asp:Label ID="lblTotalResidents" runat="server" ForeColor="#4774d1" Text=""></asp:Label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12" style="text-align: center;">
+                            <asp:Label ID="lblCheckDeactive" runat="server" ForeColor="#FF5050" Font-Size="Small"></asp:Label>
+                            <asp:Label ID="lblGridEmptyDataText" runat="server" ForeColor="#46A3FF"></asp:Label>
+                            <asp:Button ID="btnResidentShowAll" runat="server" CssClass="btn_style" OnClick="btnResidentShowAll_Click" Text="Show All" CausesValidation="False" />
+                        </div>
+                    </div>
+
+
 
                     <%----------------------------------------------------------------------- Add Resident Section starts from here----------------------------------------------------------------------------------------- --%>
                     <!--<div id="myModalPopup" class="modal">-->
@@ -804,138 +834,138 @@
                                         </div>
                                         <div class=" panel-body ">
                                             <form class="form-group" autocomplete="off">
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter valid name" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtFirstname" ValidationGroup="Add_User" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtFirstname" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Enter valid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtEmailId" ValidationGroup="Add_User" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ValidationExpression="^[0-9]+$" ControlToValidate="txtMobileno" ErrorMessage="Enter Valid No." Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Add_User" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                    <asp:Label ID="lblusravailblerr" runat="server" Font-Size="Small" ForeColor="#FF5050" ViewStateMode="Disabled"></asp:Label>
-                                                    <asp:Label ID="lblmobileavailbe" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
-                                                    <asp:Label ID="lblEmailcheck" runat="server" Font-Size="Small" ForeColor="#FF5050" Text=""></asp:Label>
-                                                    <asp:Label ID="lblstatus" runat="server" Font-Size="Small" ForeColor="#409FFF"></asp:Label>
-
-                                                </div>
-                                            </div>
-
-
-                                            <div class="row">
-
-                                                <div class="col-xs-6 col-sm-6" style="display: none;">
-                                                    <label class="lblHead col-xs-8 ">Flat No. :</label>
-                                                    <div class="col-xs-8">
-                                                        <asp:TextBox ID="txtFlat" CssClass="form-control" runat="server" TabIndex="0"></asp:TextBox>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xs-12 col-sm-6">
-                                                    <label class="col-xs-5">Email :</label>
-                                                    <div class="col-xs-7">
-                                                        <asp:TextBox ID="txtEmailId" runat="server" CssClass="form-control col-xs-8" AutoCompleteType="Disabled" TabIndex="8" onblur="validateEmail(this);" OnTextChanged="txtEmailId_TextChanged" AutoPostBack="True"></asp:TextBox>
-
-                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtEmailId" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xs-12 col-sm-6">
-                                                    <label class="col-xs-5">Mobile :</label>
-                                                    <div class="col-xs-7">
-
-                                                        <asp:TextBox ID="txtMobileno" onkeypress="return isNumberKey(event)" runat="server" CssClass="form-control" MaxLength="10" TabIndex="1" OnTextChanged="txtMobileno_TextChanged" AutoCompleteType="Disabled" AutoPostBack="True"></asp:TextBox>
-
-                                                        <asp:RequiredFieldValidator ID="RequireUserMobileNo" runat="server" ControlToValidate="txtMobileno" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row" style="margin-bottom: 15px;">
-
-                                                <div class="col-xs-12 col-sm-6">
-                                                    <label class="col-xs-5">First Name :</label>
-                                                    <div class="col-xs-7">
-
-                                                        <asp:TextBox ID="txtFirstname" CssClass="form-control" runat="server" TabIndex="2"></asp:TextBox>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter valid name" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtFirstname" ValidationGroup="Add_User" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtFirstname" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
+                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Enter valid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtEmailId" ValidationGroup="Add_User" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ValidationExpression="^[0-9]+$" ControlToValidate="txtMobileno" ErrorMessage="Enter Valid No." Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Add_User" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                        <asp:Label ID="lblusravailblerr" runat="server" Font-Size="Small" ForeColor="#FF5050" ViewStateMode="Disabled"></asp:Label>
+                                                        <asp:Label ID="lblmobileavailbe" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
+                                                        <asp:Label ID="lblEmailcheck" runat="server" Font-Size="Small" ForeColor="#FF5050" Text=""></asp:Label>
+                                                        <asp:Label ID="lblstatus" runat="server" Font-Size="Small" ForeColor="#409FFF"></asp:Label>
 
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-sm-6">
 
 
-                                                    <label class="col-xs-5">Middle Name:</label>
-                                                    <div class="col-xs-7">
+                                                <div class="row">
 
-                                                        <asp:TextBox ID="txtMiddleName" runat="server" CssClass="form-control" TabIndex="3"></asp:TextBox>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row" style="margin-bottom: 15px;">
-
-                                                <div class="col-xs-12 col-sm-6">
-                                                    <label class="col-xs-5">Last Name :</label>
-                                                    <div class="col-xs-7">
-
-
-
-                                                        <asp:TextBox ID="txtLastname" runat="server" CssClass="form-control" TabIndex="4"></asp:TextBox>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-6">
-                                                    <label class="col-xs-5">Gender :</label>
-                                                    <div class="col-xs-7">
-
-
-                                                        <asp:DropDownList ID="drpAddusrGendr" runat="server" CssClass="form-control ddl_style" TabIndex="5">
-                                                            <asp:ListItem>Male</asp:ListItem>
-                                                            <asp:ListItem>Female</asp:ListItem>
-                                                        </asp:DropDownList>
-
+                                                    <div class="col-xs-6 col-sm-6" style="display: none;">
+                                                        <label class="lblHead col-xs-8 ">Flat No. :</label>
+                                                        <div class="col-xs-8">
+                                                            <asp:TextBox ID="txtFlat" CssClass="form-control" runat="server" TabIndex="0"></asp:TextBox>
+                                                        </div>
                                                     </div>
 
-                                                </div>
-                                            </div>
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <label class="col-xs-5">Email :</label>
+                                                        <div class="col-xs-7">
+                                                            <asp:TextBox ID="txtEmailId" runat="server" CssClass="form-control col-xs-8" AutoCompleteType="Disabled" TabIndex="8" onblur="validateEmail(this);" OnTextChanged="txtEmailId_TextChanged" AutoPostBack="True"></asp:TextBox>
 
-                                            <div class="row" >
-
-                                                <div class="col-xs-12 col-sm-6">
-
-                                                    <label class="col-xs-5">ParentName :</label>
-                                                    <div class="col-xs-7">
-
-
-                                                        <asp:TextBox ID="txtParentname" runat="server" CssClass="form-control" TabIndex="6"></asp:TextBox>
-
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtEmailId" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-6">
-                                                    <label class="col-xs-5">Address :</label>
-                                                    <div class="col-xs-7">
 
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <label class="col-xs-5">Mobile :</label>
+                                                        <div class="col-xs-7">
 
+                                                            <asp:TextBox ID="txtMobileno" onkeypress="return isNumberKey(event)" runat="server" CssClass="form-control" MaxLength="10" TabIndex="1" OnTextChanged="txtMobileno_TextChanged" AutoCompleteType="Disabled" AutoPostBack="True"></asp:TextBox>
 
-                                                        <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TabIndex="9" AutoCompleteType="Disabled"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequireUserMobileNo" runat="server" ControlToValidate="txtMobileno" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
+                                                        </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-xs-12 col-sm-6" style="display: none;">
-                                                    <label class="col-xs-5">UserType :</label>
-                                                    <div class="col-xs-7">
+                                                <div class="row" style="margin-bottom: 15px;">
+
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <label class="col-xs-5">First Name :</label>
+                                                        <div class="col-xs-7">
+
+                                                            <asp:TextBox ID="txtFirstname" CssClass="form-control" runat="server" TabIndex="2"></asp:TextBox>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6">
+
+
+                                                        <label class="col-xs-5">Middle Name:</label>
+                                                        <div class="col-xs-7">
+
+                                                            <asp:TextBox ID="txtMiddleName" runat="server" CssClass="form-control" TabIndex="3"></asp:TextBox>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row" style="margin-bottom: 15px;">
+
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <label class="col-xs-5">Last Name :</label>
+                                                        <div class="col-xs-7">
 
 
 
-                                                        <asp:DropDownList ID="drpAddusertype" runat="server" CssClass="form-control ddl_style" TabIndex="7">
-                                                            <asp:ListItem>Owner</asp:ListItem>
-                                                            <asp:ListItem>Tenant
-                                                            </asp:ListItem>
-                                                        </asp:DropDownList>
+                                                            <asp:TextBox ID="txtLastname" runat="server" CssClass="form-control" TabIndex="4"></asp:TextBox>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <label class="col-xs-5">Gender :</label>
+                                                        <div class="col-xs-7">
+
+
+                                                            <asp:DropDownList ID="drpAddusrGendr" runat="server" CssClass="form-control ddl_style" TabIndex="5">
+                                                                <asp:ListItem>Male</asp:ListItem>
+                                                                <asp:ListItem>Female</asp:ListItem>
+                                                            </asp:DropDownList>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+
+                                                    <div class="col-xs-12 col-sm-6">
+
+                                                        <label class="col-xs-5">ParentName :</label>
+                                                        <div class="col-xs-7">
+
+
+                                                            <asp:TextBox ID="txtParentname" runat="server" CssClass="form-control" TabIndex="6"></asp:TextBox>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <label class="col-xs-5">Address :</label>
+                                                        <div class="col-xs-7">
+
+
+
+                                                            <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TabIndex="9" AutoCompleteType="Disabled"></asp:TextBox>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-12 col-sm-6" style="display: none;">
+                                                        <label class="col-xs-5">UserType :</label>
+                                                        <div class="col-xs-7">
+
+
+
+                                                            <asp:DropDownList ID="drpAddusertype" runat="server" CssClass="form-control ddl_style" TabIndex="7">
+                                                                <asp:ListItem>Owner</asp:ListItem>
+                                                                <asp:ListItem>Tenant
+                                                                </asp:ListItem>
+                                                            </asp:DropDownList>
+
+                                                        </div>
 
                                                     </div>
 
                                                 </div>
-
-                                            </div>
 
                                             </form>
                                         </div>
@@ -949,137 +979,134 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
-        
-
-            <%-------------------------------------------------------------------------------------Edit User Section ---------------------------------------------------------------------------%>           <%--   <div id="myModalEditPopup" class="modal">   --%>
-            <div id="myModalEditPopup" class="modal">
-                <div class="container-fluid" style="width: 400px; margin-top: 100px;">
-                    <div class="panel panel-primary" style="position: relative; margin: 0px;">
-
-                        <div class="panel-heading" style="height: 40px;">
-
-                            <span>Edit User</span>
-                            <span class="fa fa-times" id="Cross_Cancel" style="float: right; cursor: pointer;"></span>
-
-                        </div>
-                        <div class="panel-body">
-                            <form class="from-group" autocomplete="off">
-                            <asp:UpdatePanel ID="UpdatePanel7" runat="server">
-                                <ContentTemplate>
-                                    <table>
 
 
-                                        <tr>
-                                            <td class="lbltxt" style="width: 30%;">FlatNumber:</td>
-                                            <td style="width: 35%;">
-                                                <asp:TextBox ID="txtEditFlatNumber"  runat="server"  CssClass="form-control UserEditInfo" ReadOnly="True"></asp:TextBox>
-                                            </td>
-                                            <td style="width: 1%;"></td>
-                                            
-                                        </tr>
+                    <%-------------------------------------------------------------------------------------Edit User Section ---------------------------------------------------------------------------%>           <%--   <div id="myModalEditPopup" class="modal">   --%>
+                    <div id="myModalEditPopup" class="modal">
+                        <div class="container-fluid" style="width: 400px; margin-top: 100px;">
+                            <div class="panel panel-primary" style="position: relative; margin: 0px;">
 
-                                        <tr  >
-                                            <td class="lbltxt" >FirstName:</td>
-                                            <td style="width: 35%; ">
-                                                <asp:TextBox ID="txtEditFirstname" runat="server" Style="margin-top:10px;" CssClass="form-control UserEditInfo"></asp:TextBox><br />
-                                                <asp:RegularExpressionValidator ID="regulareditusername" runat="server" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ErrorMessage="enter valid name" ForeColor="#FF5050" ControlToValidate="txtEditFirstname" Font-Size="Small" ValidationGroup="Edit_User" Display="Dynamic"></asp:RegularExpressionValidator>
-                                            </td>
-                                            <td>
-                                                <asp:RequiredFieldValidator ID="RequireUserFirstname" runat="server" ControlToValidate="txtEditFirstname" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Edit_User"></asp:RequiredFieldValidator>
-                                            </td>
-                                            <td style="width: 2%;"></td>
-                                        </tr>
+                                <div class="panel-heading" style="height: 40px;">
 
-                                        <tr style="display:none;">
-                                            <td class="lbltxt">MiddleName:</td>
-                                            <td style="width: 35%;">
-                                                <asp:TextBox ID="txtEditMiddlename" runat="server" CssClass="form-control UserEditInfo"></asp:TextBox><br />
-                                                <asp:RegularExpressionValidator ID="Regularedituserlastname" runat="server" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ErrorMessage="enter valid name" ForeColor="#FF5050" ControlToValidate="txtEditMiddlename" Font-Size="Small" ValidationGroup="Edit_User" Display="Dynamic"></asp:RegularExpressionValidator>
-                                            </td>
-                                            <td>&nbsp;</td>
-                                            <td></td>
-                                        </tr>
+                                    <span>Edit Userpan>
 
-                                        <tr>
-                                            <td class="lbltxt">LastName:</td>
-                                            <td>
-                                                <asp:TextBox ID="txtEditlastname" runat="server" CssClass="form-control UserEditInfo"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="txtEditlastname" ErrorMessage="*" ForeColor="#FF5050"></asp:RequiredFieldValidator>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="lbltxt">EMailId:</td>
-                                            <td>
+                                </div>
+                                <div class="panel-body">
+                                    <form class="from-group" autocomplete="off">
+                                        <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                            <ContentTemplate>
+                                                <table>
+                                                    <tr>
+                                                        <td class="lbltxt" style="width: 30%;">FlatNumber:</td>
+                                                        <td style="width: 35%;">
+                                                            <asp:TextBox ID="txtEditFlatNumber" runat="server" CssClass="form-control UserEditInfo" ReadOnly="True"></asp:TextBox>
+                                                        </td>
+                                                        <td style="width: 1%;"></td>
 
-                                                <asp:TextBox ID="txtEditEmailID" runat="server" Style="margin-top:10px;" CssClass="form-control UserEditInfo" OnTextChanged="txtEditEmailID_TextChanged" AutoPostBack="True"></asp:TextBox><br />
-                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ControlToValidate="txtEditEmailID" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Enter vaild mail" Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Edit_User" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                <asp:Label ID="lblEditEmailCheck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
+                                                    </tr>
 
+                                                    <tr>
+                                                        <td class="lbltxt">FirstName:</td>
+                                                        <td style="width: 35%;">
+                                                            <asp:TextBox ID="txtEditFirstname" runat="server" Style="margin-top: 10px;" CssClass="form-control UserEditInfo"></asp:TextBox><br />
+                                                            <asp:RegularExpressionValidator ID="regulareditusername" runat="server" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ErrorMessage="enter valid name" ForeColor="#FF5050" ControlToValidate="txtEditFirstname" Font-Size="Small" ValidationGroup="Edit_User" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                        </td>
+                                                        <td>
+                                                            <asp:RequiredFieldValidator ID="RequireUserFirstname" runat="server" ControlToValidate="txtEditFirstname" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Edit_User"></asp:RequiredFieldValidator>
+                                                        </td>
+                                                        <td style="width: 2%;"></td>
+                                                    </tr>
 
-                                            </td>
-                                            <td>
+                                                    <tr style="display: none;">
+                                                        <td class="lbltxt">MiddleName:</td>
+                                                        <td style="width: 35%;">
+                                                            <asp:TextBox ID="txtEditMiddlename" runat="server" CssClass="form-control UserEditInfo"></asp:TextBox><br />
+                                                            <asp:RegularExpressionValidator ID="Regularedituserlastname" runat="server" ValidationExpression="^[a-zA-Z0-9.@]{0,25}$" ErrorMessage="enter valid name" ForeColor="#FF5050" ControlToValidate="txtEditMiddlename" Font-Size="Small" ValidationGroup="Edit_User" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                        </td>
+                                                        <td>&nbsp;</td>
+                                                        <td></td>
+                                                    </tr>
 
-                                                <asp:RequiredFieldValidator ID="RequiredUserEmailid" runat="server" ControlToValidate="txtEditEmailID" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Edit_User"></asp:RequiredFieldValidator>
+                                                    <tr>
+                                                        <td class="lbltxt">LastName:</td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtEditlastname" runat="server" CssClass="form-control UserEditInfo"></asp:TextBox>
+                                                        </td>
+                                                        <td>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="txtEditlastname" ErrorMessage="*" ForeColor="#FF5050"></asp:RequiredFieldValidator>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="lbltxt">EMailId:</td>
+                                                        <td>
 
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="lbltxt">ParentName:</td>
-                                            <td>
-                                                <asp:TextBox ID="txtEditusrParentN" runat="server" CssClass="form-control UserEditInfo"></asp:TextBox>
-                                            </td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="lbltxt">MobileNo:</td>
-                                            <td style="width: 35%;">
-
-                                                <asp:TextBox ID="txtEditMobileNo" runat="server" Style="margin-top:10px;"  CssClass="form-control UserEditInfo" MaxLength="10" OnTextChanged="txtEditMobileNo_TextChanged" AutoPostBack="True"></asp:TextBox><br />
-                                                <asp:Label ID="lblEditMobileCheck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
-                                                <asp:RegularExpressionValidator ID="RegularExpressionValidatoredituser" runat="server" ErrorMessage="Enter valid No." ControlToValidate="txtEditMobileNo" ForeColor="#FF5050" ValidationExpression="^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$" Font-Size="Small" ValidationGroup="Edit_User" Display="Dynamic"></asp:RegularExpressionValidator>
-
-                                            </td>
-                                            <td>
-
-                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtEditMobileNo" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Edit_User"></asp:RequiredFieldValidator>
-
-                                            </td>
-                                            <td style="width: 2%;"></td>
-                                        </tr>
+                                                            <asp:TextBox ID="txtEditEmailID" runat="server" Style="margin-top: 10px;" CssClass="form-control UserEditInfo" OnTextChanged="txtEditEmailID_TextChanged" AutoPostBack="True"></asp:TextBox><br />
+                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ControlToValidate="txtEditEmailID" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Enter vaild mail" Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Edit_User" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                            <asp:Label ID="lblEditEmailCheck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
 
 
-                                        <tr>
-                                            <td colspan="4" style="height: 15px;">
-                                                <input type="checkbox" id="chkChangePassword" name="Change_Password" value="Change" />Change Password:
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr id="tdNewPwd" style="display: none;text-align:center">
-                                            <td colspan="4" class="lbltxt" style="padding: 5px;">New Password:
+                                                        </td>
+                                                        <td>
+
+                                                            <asp:RequiredFieldValidator ID="RequiredUserEmailid" runat="server" ControlToValidate="txtEditEmailID" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Edit_User"></asp:RequiredFieldValidator>
+
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="lbltxt">ParentName:</td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtEditusrParentN" runat="server" CssClass="form-control UserEditInfo"></asp:TextBox>
+                                                        </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="lbltxt">MobileNo:</td>
+                                                        <td style="width: 35%;">
+
+                                                            <asp:TextBox ID="txtEditMobileNo" runat="server" Style="margin-top: 10px;" CssClass="form-control UserEditInfo" MaxLength="10" OnTextChanged="txtEditMobileNo_TextChanged" AutoPostBack="True"></asp:TextBox><br />
+                                                            <asp:Label ID="lblEditMobileCheck" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
+                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidatoredituser" runat="server" ErrorMessage="Enter valid No." ControlToValidate="txtEditMobileNo" ForeColor="#FF5050" ValidationExpression="^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$" Font-Size="Small" ValidationGroup="Edit_User" Display="Dynamic"></asp:RegularExpressionValidator>
+
+                                                        </td>
+                                                        <td>
+
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtEditMobileNo" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Edit_User"></asp:RequiredFieldValidator>
+
+                                                        </td>
+                                                        <td style="width: 2%;"></td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td colspan="4" style="height: 15px;">
+                                                            <input type="checkbox" id="chkChangePassword" name="Change_Password" value="Change" />Change Password:
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr id="tdNewPwd" style="display: none; text-align: center">
+                                                        <td colspan="4" class="lbltxt" style="padding: 5px;">New Password:
                                                 <asp:TextBox ID="newPassword" CssClass="form-control" TextMode="Password" runat="server"></asp:TextBox>
-                                            </td>
-                                        </tr>
-                                        <tr id="tdCnfPwd" style="display: none;text-align:center;">
-                                            <td colspan="4" class="lbltxt">Confirm Password:
+                                                        </td>
+                                                    </tr>
+                                                    <tr id="tdCnfPwd" style="display: none; text-align: center;">
+                                                        <td colspan="4" class="lbltxt">Confirm Password:
                                                 <asp:TextBox ID="cnfPassword" CssClass="form-control" runat="server"></asp:TextBox>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4" style="text-align: center;">
-                                                <asp:CompareValidator ID="userprofilevalidator" runat="server" ControlToCompare="cnfPassword" ControlToValidate="newPassword" EnableClientScript="False" ErrorMessage="Password  Not Matching" Font-Size="Small" ForeColor="Red"></asp:CompareValidator>
-                                                &nbsp;
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4" style="text-align: center;">
+                                                            <asp:CompareValidator ID="userprofilevalidator" runat="server" ControlToCompare="cnfPassword" ControlToValidate="newPassword" EnableClientScript="False" ErrorMessage="Password  Not Matching" Font-Size="Small" ForeColor="Red"></asp:CompareValidator>
+                                                            &nbsp;
                 <asp:Label ID="lbleditstatus" runat="server" ForeColor="#3C9DFF"></asp:Label>
-                                            </td>
-                                        </tr>
+                                                        </td>
+                                                    </tr>
 
-                                    </table>
-                                    </div>
+                                                </table>
+                                                </div>
                             </div>
                             <div class="panel-footer" style="text-align: right;">
                                 <asp:Button ID="btnedit" runat="server" Text="Submit" CssClass="btn btn-sm btn-primary" OnClientClick="Verify();" OnClick="btnedit_Click" ValidationGroup="Edit_User" />
@@ -1089,21 +1116,22 @@
                                 <button type="button" id="Edit_Cancel" class="btn btn-sm btn-danger">Cancel</button>
                             </div>
 
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
 
 
-                            </form>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                    </div>
-                </div>
-            </div>
 
-            </form>
-                    </div>
+                </form>
             </div>
+            <div class="col-md-2"></div>
         </div>
+    </div>
 </body>
 </html>

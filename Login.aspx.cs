@@ -140,7 +140,7 @@ public partial class Login : System.Web.UI.Page
         User muser = new User();
         if (muser.Validate(user.Username, user.Password))
         {
-           var residents = muser.GetResidentInfo();
+           var residents = muser.SetResidentInfo();
             if (residents == null)
             {
 

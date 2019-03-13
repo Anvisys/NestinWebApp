@@ -46,6 +46,7 @@ public partial class Totalusers : System.Web.UI.Page
             LoadResidentData(); //Changed name by Aarshi on 4 aug 2017
             //btnResShwall.Visible = false; //Changed by Aarshi on 4 Aug 2017
             btnResidentShowAll.Visible = false;
+            MultiView1.ActiveViewIndex = 0;
         }
 
        ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "ShowUserPopup();", true);
@@ -69,6 +70,42 @@ public partial class Totalusers : System.Web.UI.Page
         //DataSet dsResidentAll = res.GetResidentAll();
 
         DataSet dsResidentAll = res.GetResident(flatNumber, residentType, muser.currentResident.SocietyID);
+        DataSet inReviewResident = res.GetInReviewResident(muser.currentResident.SocietyID);
+        if (inReviewResident != null)
+        {
+            if (inReviewResident.Tables[0].Rows.Count > 0)
+            {
+                lblInReview.Text = inReviewResident.Tables[0].Rows.Count + " In Review";
+                
+
+                     adsource = new PagedDataSource();
+                adsource.DataSource = inReviewResident.Tables[0].DefaultView;
+                adsource.PageSize = 5;
+                adsource.AllowPaging = true;
+                adsource.CurrentPageIndex = pos;
+                dataListReview.DataSource = adsource;
+                btnprevious.Visible = !adsource.IsFirstPage;
+                btnnext.Visible = !adsource.IsLastPage;
+
+
+                //residentsDataList.DataSource = dsResidentAll;
+                dataListReview.DataBind();
+                //UserGrid.DataSource = dsResidentAll;
+                //UserGrid.DataBind();
+                //btnResShwall.Visible = false; //Changed by Aarshi on 4 Aug 2017
+                // btnResidentShowAll.Visible = false;
+                lblPage.Text = "Page " + (adsource.CurrentPageIndex + 1) + " of " + adsource.PageCount;
+            }
+            else
+            {
+                lblInReview.Text = "0 In Review";
+            }
+
+        }
+        else {
+            lblInReview.Text = "error !";
+        }
+
         if (dsResidentAll != null)
         {
             if (dsResidentAll.Tables.Count > 0)
@@ -93,14 +130,14 @@ public partial class Totalusers : System.Web.UI.Page
                 if (dsResidentAll.Tables[0].Rows.Count == 0)
                 {
                     
-                    txtUserSrch.Visible = false;
+                    //txtUserSrch.Visible = false;
                   
                     lblGridEmptyDataText.Text = "Hello! welcome to the Residents Section, No resident  available  at this point of time.  ";
                 }
                 else
                 {
                    
-                    txtUserSrch.Visible = true;
+                    //txtUserSrch.Visible = true;
                    
                 }
                 //Added by Aarshi on 4 Aug 2017 for Placing Sql Code in Resident Class
@@ -137,10 +174,10 @@ public partial class Totalusers : System.Web.UI.Page
     {
         //Filldata();
         LoadResidentData(); //Changed name by Aarshi on 4 aug 2017
-        var txt = txtUserSrch.Text;
-        txtUserSrch.Text = "";
+        //var txt = txtUserSrch.Text;
+        //txtUserSrch.Text = "";
 
-        drpUserResTypeFilter.SelectedValue = drpUserResTypeFilter.Items.FindByText("Select").Value;
+        //drpUserResTypeFilter.SelectedValue = drpUserResTypeFilter.Items.FindByText("Select").Value;
     }
 
     protected void btnUsersDeactive_Click(object sender, EventArgs e)
@@ -186,10 +223,10 @@ public partial class Totalusers : System.Web.UI.Page
     {
         String Username = "";
         String FlatNumber = "";
-      Username =  drpUserResTypeFilter.SelectedValue;
+      //Username =  drpUserResTypeFilter.SelectedValue;
 
-      if (txtUserSrch.Text != "")
-          Username = txtUserSrch.Text;
+      //if (txtUserSrch.Text != "")
+      //    Username = txtUserSrch.Text;
 
         //if (txtFlatSerch.Text != "")
         //    FlatNumber = txtFlatSerch.Text;
@@ -290,9 +327,9 @@ public partial class Totalusers : System.Web.UI.Page
 
     protected void ImgFltSearch_Click(object sender, EventArgs e)
     {
-        String FlatNumber = txtUserSrch.Text;
+        String FlatNumber = "";// txtUserSrch.Text;
         DataAccess dacess = new DataAccess();
-        String ResType = drpUserResTypeFilter.SelectedItem.Text;
+        String ResType = "";// drpUserResTypeFilter.SelectedItem.Text;
         if (ResType == "Owner & Tenant")
             ResType = "";
 
@@ -423,9 +460,6 @@ public partial class Totalusers : System.Web.UI.Page
     }
 
 
-   
-
-    
 
     protected void txtMobileno_TextChanged(object sender, EventArgs e)
     {
@@ -458,8 +492,7 @@ public partial class Totalusers : System.Web.UI.Page
     protected void txtEmailId_TextChanged(object sender, EventArgs e)
     {
        
-
-        //Added by Aarshi on 15 Aug 2017 for code restructuring
+       //Added by Aarshi on 15 Aug 2017 for code restructuring
         Resident res = new Resident();
         DataSet dUser = res.GetEmailAvailable(txtEmailId.Text);
 
@@ -520,9 +553,6 @@ public partial class Totalusers : System.Web.UI.Page
 
                     ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "HideUserLabel()", true);
 
-                   
-                    
-
                     //Session["Deactive"] = Deactive;
                     //Added by Aarshi on 18 auh 2017 for session storage
                     SessionVariables.Deactive = Deactive;
@@ -539,7 +569,6 @@ public partial class Totalusers : System.Web.UI.Page
         User editUSer = new User();
         SessionVariables.EditUser = editUSer;
         editUSer = res.GetEditResidentData(UserId, FlatNumber);
-        
         txtEditFlatNumber.Text = editUSer.currentResident.FlatNumber;
         txtEditFirstname.Text = editUSer.FirstName;
         txtEditMiddlename.Text = editUSer.MiddleName;
@@ -549,8 +578,7 @@ public partial class Totalusers : System.Web.UI.Page
         txtEditMobileNo.Text = editUSer.MobileNumber;
         EditHidedenFlat.Value = FlatNumber;
         lbleditstatus.Text = "";
-
-        
+       
     }
 
 
@@ -570,9 +598,6 @@ public partial class Totalusers : System.Web.UI.Page
                 ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "HideUserEdiitLabel()", true);
             }
             else {
-
-              
-
                // String UserLogin = EditHidedenFlat.Value;
                 String UserLogin = txtEditEmailID.Text;
                 User edituser = new User();//need to check with Amit
@@ -584,8 +609,7 @@ public partial class Totalusers : System.Web.UI.Page
                     edituser.SendMailToUsers("", password, edituser.EmailID, edituser.FirstName);
                     lbleditstatus.Text = "Password Updated";
                     ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "HideUserEdiitLabel()", true);
-
-                }
+               }
                 else
                 {
                     lbleditstatus.Text = "Password Could not be Updated";
@@ -686,7 +710,6 @@ public partial class Totalusers : System.Web.UI.Page
         Emp = res.GetFlatNumber(FlatNumber, muser.currentResident.SocietyID);
         return Emp;
 
-        
     }
 
 
@@ -706,6 +729,35 @@ public partial class Totalusers : System.Web.UI.Page
     protected void btnSearch_OnClick(object sender, EventArgs e)
     {
         LoadResidentData();
+    }
+
+    protected void btnReview_OnClick(object sender, EventArgs e)
+    {
+        MultiView1.ActiveViewIndex = 1;
+    }
+
+    protected void btnActivateUser_Click(object sender, EventArgs e)
+    {
+        bool result;
+        try {
+            DateTime Deactivedate = DateTime.ParseExact(txtEndDate.Text, "dd-MM-yyyy", System.Globalization.CultureInfo.CurrentUICulture);
+            DateTime Activedate = DateTime.ParseExact(txtStartDate.Text, "dd-MM-yyyy", System.Globalization.CultureInfo.CurrentUICulture);
+            var UserId = Convert.ToInt32(HiddenField1.Value);
+            var ResID = Convert.ToInt32(HiddenField2.Value);
+
+            Resident res = new Resident();
+            result = res.ActivateUser(ResID, Activedate, Deactivedate);
+            if (result)
+            {
+                LoadResidentData();
+            }
+           
+        }
+        catch (Exception ex)
+        {
+            result = false;
+        }
+        ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "ActivateResult(result)", true);
     }
 }
 

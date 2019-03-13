@@ -45,43 +45,46 @@
     <script>
 
         var UserId;
-        var SocId=1;
+        var selectedSocietyId=0;
+        var selectedFlatId = 0;
 
         $(document).ready(function () {
           let params = (new URL(document.location)).searchParams;
             UserId = params.get("name");
 
-
-
-
+            
         });
 
-
+        
         $(function () {
 
-            
-              $("#flatno").autocomplete({
-                source: function (request, response) {
-                    var param = {
-                        FlatNumber: $('#flatno').val(),
-                        SocietyId: SocId
-                    };
 
+              $("#selectSociety").autocomplete({
+                select: onSociety_select, 
+                source: function (request, response) {
+                var param = {
+                        SocietyName: $('#selectSociety').val()
+                      
+                    };
+                    
                     $.ajax({
-                        url: "Role.aspx/GetFlatNumber",
-                        data: '{flat: ' + JSON.stringify(param) + '}',
+                        url: "Role.aspx/GetSocieties",
+                        data: '{Society: '  + JSON.stringify(param)  + '}',
                         dataType: "json",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
                         dataFilter: function (data) { return data; },
                         success: function (data) {
-                            console.log(data);
                             var flats = jQuery.parseJSON(data.d);
-                            response($.map(flats, function (value, value.ID) {
-                                  console.log(value);
+                            response($.map(flats, function (value) {
+                                
                                 return {
-                                    label: value.FlatNumber,
-                                     value: value.FlatNumber
+                                    //label: value.FlatNumber,
+                                    value: value.SocietyName,
+                                    sector: value.Sector,
+                                    city: value.City,
+                                    pinCode: value.PinCode,
+                                    socID:value.SocietyID
                                 }
                             }))
                         },
@@ -92,11 +95,79 @@
                         }
                     });
                 },
-                minLength: 2 //This is the Char length of inputTextBox  
+             
+                minLength: 2, //This is the Char length of inputTextBox  
+                serverPaging: true,
+                pageSize: 10
+            });
+
+
+            $("#flatno").autocomplete({
+                select: onFlat_select, 
+                source: function (request, response) {
+                    var param = {
+                        FlatNumber: $('#flatno').val(),
+                        SocietyId: selectedSocietyId
+                    };
+                       
+                    $.ajax({
+                        url: "Role.aspx/GetFlatNumber",
+                        data: '{flat: ' + JSON.stringify(param) + '}',
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function (data) { return data; },
+                        success: function (data) {
+                            var flats = jQuery.parseJSON(data.d);
+                            response($.map(flats, function (value) {
+                                
+                                return {
+                                    //label: value.FlatNumber,
+                                    value: value.FlatNumber,
+                                    block: value.Block,
+                                    flatArea: value.FlatArea,
+                                    floor: value.Floor,
+                                    intercom: value.IntercomNumber,
+                                    bhk: value.BHK,
+                                    flatId : value.ID
+                                }
+                            }))
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                            console.log("Ajax Error!");
+                        }
+                    });
+                },
+             
+                minLength: 2, //This is the Char length of inputTextBox  
+                serverPaging: true,
+                pageSize: 10
             });
 
         });
 
+          function onSociety_select(e,ui) {   
+         
+            $("#locality4").text(ui.item.sector);
+            $("#city2").text(ui.item.city);
+            $("#pincode4").text(ui.item.pinCode);
+              selectedSocietyId = ui.item.socID;
+        };
+
+        function onFlat_select(e, ui) { 
+
+           console.log(ui.item.block);
+            console.log(ui.item.floor);
+
+            $("#floor").text(ui.item.floor);
+            $("#block").text(ui.item.block);
+            $("#intercom").text(ui.item.intercom);
+            $("#city2").text(ui.item.block);
+            selectedFlatId = ui.item.flatId;
+           
+        };
 
            function switchVisible() {
                         if (document.getElementById('Div1')) {
@@ -162,9 +233,9 @@
 
 
       function  AddInExistingSociety(){
-                      var user = {};
-            user.UserID = document.getElementById("houseno").value;
-            user.FlatID = document.getElementById("sector").value;
+          var user = {};
+            user.SocietyId = selectedSocietyId;
+            user.FlatId = selectedFlatId;
             
             $.ajax({
                 type: 'POST',
@@ -173,7 +244,7 @@
                 contentType: "application/json; charset=utf-8",
                  dataType: "json",
                 success: function (response) {
-                   document.getElementById("post_loading").style.display = "none";
+                   //document.getElementById("post_loading").style.display = "none";
                     if (response.d == true) {
                        alert('Your Request has been successfully Submitted');
                     }
@@ -221,8 +292,7 @@
                                     <nav class="nav-main mega-menu">
                                         <ul class="nav nav-pills nav-main scroll-menu" id="topMain">
                                             <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
-
-
+                                            <asp:LinkButton ID="btnlogout" runat="server" Text="Logout" OnClick="btnlogout_Click"></asp:LinkButton>
                                         </ul>
                                     </nav>
                                 </div>
@@ -231,6 +301,36 @@
 
                         </div>
                     </header>
+        <div style="margin-top:100px;">
+
+        <asp:GridView ID="gridViewRequests" runat="server"
+            
+            
+            >
+              <Columns>
+                                <%--<asp:BoundField DataField="FlatNumber" HeaderText="Flat" />--%>
+                                <asp:TemplateField HeaderStyle-Width="50px">
+                                <HeaderTemplate>
+                                    <asp:Label ID="lblFlat" runat="server" Text="Request"></asp:Label>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="lnkFlatNumber" runat="server" CssClass="BillActiveGrid"  Font-Bold="true" Font-Underline="true" ForeColor="#0066cc" 
+                                        Text='<%# Bind("FlatNumber") %>'></asp:LinkButton>
+                                </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:BoundField DataField="SocietyName" HeaderStyle-Width="100px" HeaderText="Society"/>
+                                <asp:BoundField DataField="FlatNumber" HeaderStyle-Width="40px" HeaderText="Flat"  ItemStyle-Width="40px"/>
+                                <asp:BoundField DataField="ActiveDate" HeaderStyle-Width="100px" HeaderText="Date"/>
+                              <%--  <asp:BoundField DataField="Status" HeaderStyle-Width="40px" HeaderText="Status"  ItemStyle-Width="40px"/>--%>
+                                
+                              
+                            </Columns>
+                            <EmptyDataRowStyle BackColor="#EEEEEE" />
+                            <HeaderStyle BackColor="#0065A8" Font-Bold="false" Font-Names="Modern" Font-Size="Small" ForeColor="White" Height="30px" />
+             
+        </asp:GridView>
+
+        </div>
         <div class="container-fluid">
             <div class="col-xs-3"></div>
             <div class="col-xs-6">
@@ -302,14 +402,8 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label col-form-label-lg">Select Your Society</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" id="selectSociety">
-                                        <option>Select</option>
-                                        <option value="1">Supertech</option>
-                                        <option value="2">Ats</option>
-                                        <option value="3">Gaur City</option>
-
-                                    </select>
-
+                                    <input type="text" class="form-control form-control-lg" placeholder="Society" id="selectSociety"/>
+                                     
                                 </div>
                             </div>
                                 <div class="form-group row">
@@ -322,7 +416,7 @@
                                  <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">floor</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control form-control-lg" id="floor" placeholder="Eg.201301 " />
+                                    <label class="form-control form-control-lg" id="floor" />
                                 </div>
                                 </div>
                             </div>
@@ -330,13 +424,13 @@
                                 <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">Block</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-lg" id="block" placeholder="Eg.A " />
+                                    <label class="form-control form-control-lg" id="block" />
                                 </div>
                                 </div>
                                  <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">Intercom No.</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control form-control-lg" id="intercom" placeholder="Eg.10020 " />
+                                    <label class="form-control form-control-lg" id="intercom" />
                                 </div>
                                 </div>
                             </div>
@@ -344,13 +438,13 @@
                                 <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">Locality</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-lg" id="locality4" placeholder="Locality " />
+                                    <label class="form-control form-control-lg" id="locality4"  />
                                 </div>
                                 </div>
                                  <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">City</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control form-control-lg" id="city2" placeholder="City " />
+                                    <label  class="form-control form-control-lg" id="city2"  />
                                 </div>
                                 </div>
                             </div>
@@ -364,7 +458,7 @@
                                  <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">Pin Code</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control form-control-lg" id="pincode4" placeholder="Eg.201301 " />
+                                    <label class="form-control form-control-lg" id="pincode4" />
                                 </div>
                                 </div>
                                     <div class="col-xs-12">

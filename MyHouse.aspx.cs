@@ -43,5 +43,7 @@ public partial class MyHouse : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         muser = (User)Session["User"];
+
+        SessionVariables.CurrentPage = "MyHouse.aspx";
     }
 }

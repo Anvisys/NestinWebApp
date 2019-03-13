@@ -20,6 +20,35 @@
             <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    
             <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>  
+
+    <script>
+
+        function InitiateRent() {
+            $("#addTenantModal").show();
+        }
+
+        function CloseRentalBox() {
+            $("#addTenantModal").hide();
+        }
+
+
+        const Inventory{ "1":"2BHK",
+            "2": "3BHK",
+            "3": "4BHK",
+            "4":"Bed",
+            "5": "Bed & Food",
+            "6": "Floor"
+        }
+
+         const RentType{ "1":"Flat",
+            "2": "PG",
+            "3": "Studio",
+            "4":"Independent",
+            
+        }
+   
+   
+    </script>
       
 </head>
 <body>
@@ -60,9 +89,78 @@
                         </div>
 
 
+                    <button type="button" class="btn btn-primary btn-sm" onclick="InitiateRent()">Add for Rent</button>
+
                 </div>
+
+
+
+                <div id="addTenantModal" class="modal">
+                         <div class="modal-content" style="border: 0px solid;width: 550px; margin: auto;">
+
+                             <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
+                                 <button type="button" id="Close_mod" class="close" onclick="CloseRentalBox()" style="color: #000;">&times;</button>
+                                 <h4 id="title" class="modal-title" style="margin-top: 5px;">Available for Rent:
+                                     <var>House Number</var></h4>
+                             </div>
+
+                             <div class="modal-body">
+
+                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+                                   
+                                     <div class="col-sm-6">
+                                         <label class="labelwidth">Type :</label>
+                                         <select id="inAddTMobile" onblur="" style="width: 120px">
+                                             <option >Independent House</option>
+                                             <option >Flat</option>
+                                             <option >PG-Shared</option>
+                                             <option >Fully Furnished Room</option>
+                                         </select>
+                                     </div>
+                                     <div class="col-sm-6">
+                                         <label class="labelwidth">Rent: </label>
+                                         <input id="inAddTEmailID" onblur="" style="width: 120px" />
+
+                                     </div>
+
+
+                                 </div>
+                                 <hr />
+                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+
+                                     <div class="col-sm-6">
+                                         <label class="labelwidth">Available from</label>
+                                         <input id="startDate" style="width: 120px" class="txtbox_style" tabindex="2" />
+                                     </div>
+                                     <div class="col-sm-6">
+                                         <label class="labelwidth">Lastname :</label>
+                                         <input id="endDate" style="width: 120px" class="txtbox_style" tabindex="3" />
+                                     </div>
+
+                                 </div>
+                             </div>
+
+                             <div class="panel-footer" style="text-align: right;">
+                                 <button type="button" id="btnCancel" style="margin-top: 5px;" onclick="CloseRentalBox()" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                                 <button type="button" id="btnSubmit" style="margin-top: 5px;" onclick="AddUser();" class="btn btn-primary">Submit</button>
+
+                             </div>
+                         </div>
+
+                     <div id="progressBar" class="container-fluid" style="text-align:center; height:200px;">
+                        <img src="Images/Icon/ajax-loader.gif" style="width:20px;height:20px; margin-top:50px;" />
+                    </div>
+                     </div>
+
+               </div>
+
+               
+
             </div>
-        </div>
-    </div>
+
+
+            </div>
+
+
 </body>
 </html>
