@@ -115,96 +115,6 @@
         };--%>
 
 
-        function ValidateUser() {
-            api_url = "http://www.kevintech.in/GAService";
-            var fullURL = api_url + "/api/User/Validate";
-            var user = {};
-            user.Username = $("[id*=TxtUserID]").val();
-            user.Password = $("[id*=txtPwd]").val();
-
-            var dataObject = "{\"Email\":\"" + user.Username + "\",\"Mobile\":\"\",\"RegistrationID\":\"\",\"Password\":\"" + user.Password + "\"}";
-            console.log(dataObject);
-            $("#txtPwd").val("");
-            $("#Forgotpass").hide();
-
-            $.ajax({
-                type: "POST",
-                url: fullURL,
-                data: dataObject,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-
-                    var result = response.result;
-
-                    if (result === "Fail") {
-
-                        console.log("Login Failed");
-                        $('#lblerror').text("Login Failed");
-                        $('#lblerror').show();
-                        $('#lblPasswordRes').hide();
-                        $("#Forgotpass").show();
-                    }
-                    else {
-                        var user = response.UserData;
-
-                        sessionStorage.setItem("User", user);
-                        console.log(user);
-
-                        Address: "Noida"
-                        user.EmailId;
-                        user.FirstName;
-                        user.Gender;
-                        user.LastName;
-                        user.MiddleName;
-                        user.MobileNo;
-                        user.Parentname;
-                        user.Password;
-                        user.SocietyID;
-                        user.SocietyName;
-                        user.UserID;
-                        user.UserLogin;
-
-
-                        var ResidentInfo = response.SocietyUser.$values;
-                        console.log(ResidentInfo);
-                        if (ResidentInfo.length == 0) {
-
-                        }
-                        else {
-                            var resCount = ResidentInfo.length;
-                            for (var i = 0; i < resCount; i++) {
-
-                                var ThreadDate = ResidentInfo[i].CompType;
-                                var UpdatedDate = ResidentInfo[i].CompanyName;
-
-                                var ThreadDate = ResidentInfo[i].FlatID;
-                                var UpdatedDate = ResidentInfo[i].FlatNumber;
-                                var strResID = ResidentInfo[i].ResID;
-                                var UpdatedDate = ResidentInfo[i].ServiceType;
-                                var ThreadDate = ResidentInfo[i].ResID;
-                                var UpdatedDate = ResidentInfo[i].SocietyID;
-
-                                var UpdatedDate = ResidentInfo[i].SocietyName;
-                                var UpdatedDate = ResidentInfo[i].Type;
-
-                                var UpdatedDate = ResidentInfo[i].intercomNumber;
-                                var UpdatedDate = ResidentInfo[i].DeActiveDate;
-                            }
-
-
-
-                            window.location = "MainPage.aspx";
-                        }
-
-
-
-
-                    }
-                }
-
-            });
-        }
 
         $(document).ready(function () {
            
@@ -533,21 +443,9 @@ img.app_centre{
                       <li class=" "><a  class="menu_text" href="#" id="login">Login</a></li>
                         <li class=" "><a  class="menu_text" href="register.aspx" id="register">Register</a></li>
                       <!-- GLOBAL SEARCH -->
-                      <li class="search dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"  style="display:none;"> </li>
+                      <li class="" ><a  class="menu_text" href="Rent.aspx" id="rent">Rent</a> </li>
             
-                        <!-- search form -->
-                        <ul class="dropdown-menu">
-                          <li>
-                            <form method="get" action="#" class="input-group pull-right" style="">
-                              <input type="text" class="form-control" name="k" id="k" value="" placeholder="Search"/>
-                              <span class="input-group-btn">
-                              <button class="btn btn-primary notransition" style="margin-top: 8px;"><i class="fa fa-search"></i></button>
-                              </span>
-                            </form>
-                          </li>
-                        </ul>
-            
-                        <!-- /search form -->
+           
             
                     </ul>
                   </nav>
@@ -723,7 +621,7 @@ NestIn is our attempt to provide a state of the art, user friendly and secure So
                        <h4 style="text-align:justify;">We don’t have complex pricing like many other software available as a service. Our is not based on complex features combination, not on number of users not for duration.
                            It’s Simple<span style="color:blue;"> Rs. 5.00 per flat per month </span>for all society Management Features.</h4>
                         
-                        <a class="btn btn-primary" style="color:#fff;" href="register.aspx"> Start Free Trial</a>
+                        <a class="btn btn-primary" style="color:#fff;" href="register.aspx?Role=demo"> Start Free Trial</a>
                     </div>
 
                      <div class="col-md-6 animation_fade_in">

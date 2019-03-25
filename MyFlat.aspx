@@ -158,7 +158,10 @@
                 $("#btnEdit").hide();
                 $("#btnAdd").hide();
             }
-            else { }
+            else {
+                 $("#btnEdit").hide();
+                $("#btnAdd").hide();
+            }
         };
 
         function GetImageByMobile(Mobile,element) {
@@ -590,6 +593,114 @@
             });
         });
 
+
+
+        //**************add for rental*************//
+
+          
+          $(document).ready(function () {
+            populateType();
+                populateSelect();
+        });
+
+
+            function InitiateRent() {
+              
+                $("#addInventoryModal").show();
+            }
+
+            function CloseRentalBox() {
+                $("#addInventoryModal").hide();
+
+            }
+
+
+            function populateType() {
+                // THE JSON ARRAY.
+                var InventoryType = [
+                    { "ID": 1, "Value": "Flat" },
+                    { "ID": 2, "Value": "PG" },
+                    { "ID": 3, "Value": "Studio" },
+                    { "ID": 4, "Value": "Independent" },
+                ];
+                var ele = document.getElementById('type');
+                for (var i = 0; i < InventoryType.length; i++) {
+                    // POPULATE SELECT ELEMENT WITH JSON.
+                    ele.innerHTML = ele.innerHTML +
+                        '<option value="' + InventoryType[i]['ID'] + '">' + InventoryType[i]['Value'] + '</option>';
+                }
+
+            }
+
+
+            function populateSelect() {
+                // THE JSON ARRAY.
+                var Inventory = [
+                    { "ID": 1, "Value": "2BHK" },
+                    { "ID": 2, "Value": "3BHK" },
+                    { "ID": 3, "Value": "4BHK" },
+                    { "ID": 4, "Value": "Bed" },
+                    { "ID": 5, "Value": "Bed & Food" },
+                    { "ID": 6, "Value": "Floor" }
+                ];
+
+                var ele = document.getElementById('inventory');
+                for (var i = 0; i < Inventory.length; i++) {
+                    // POPULATE SELECT ELEMENT WITH JSON.
+                    ele.innerHTML = ele.innerHTML +
+                        '<option value="' + Inventory[i]['ID'] + '">' + Inventory[i]['Value'] + '</option>';
+                }
+            }
+
+            function AddRentInventory() {
+
+                var RentInventory = {};
+                RentInventory.InventoryID = $("#inventory").val();
+                RentInventory.RentTypeID = $("#type").val();
+                RentInventory.RentValue = $("#inRent").val();
+                RentInventory.Available = 1;
+                RentInventory.Description = $("#description").val();
+                RentInventory.ContactName = $("#contactName").val();
+                RentInventory.ContactNumber = $("#contactNumber").val();
+                RentInventory.UserID = <%=UserID%>;
+                RentInventory.HouseID =0;
+                RentInventory.FlatID = FlatID;
+
+                console.log(RentInventory);
+
+                var url = api_url + "api/RentInventory/New"
+
+                $.ajax({
+                    dataType: "json",
+                    url: url,
+                    data: JSON.stringify(RentInventory),
+                    type: 'post',
+                    async: false,
+                    contentType: 'application/json',
+                    success: function (data) {
+                        //var da = JSON.stringify(data);
+                        //var js = jQuery.parseJSON(da);
+                        alert(JSON.stringify(data));
+                        var Response = data.Response;
+                        if (Response == "OK") {
+                            document.getElementById("lblMessage").innerHTML = "Your inventory is submitted for Rent";
+                        }
+                        else {
+                            document.getElementById("lblMessage").innerHTML = "Could not submitt, Please contact admin";
+                        }
+
+                    },
+                    error: function (data, errorThrown) {
+                        alert('Error submitting Rent Inventory :' + errorThrown);
+                        // sessionStorage.clear();
+                    }
+
+                });
+            }
+
+
+
+
 	</script>
 
 <style>
@@ -732,6 +843,8 @@
                      <div class="row">
                          <div class="col-sm-12">
                              <button id="btnAdd" class="btn btn-info btn-lg"  onclick="PopulateAddModal()"  style="display:none" type="button">Add Tenant</button>
+                             <br />
+                              <button type="button" class="btn btn-primary btn-sm" onclick="InitiateRent()">Add for Rent</button>
                          </div>
 
                      </div>
@@ -844,6 +957,78 @@
                              </div>
                          </div>
                      </div>
+
+                      <div id="addInventoryModal" class="modal">
+                        <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
+
+                            <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
+                                <button type="button" id="Close" class="close" onclick="CloseRentalBox()" style="color: #000;">&times;</button>
+                                <h4 id="" class="modal-title" style="margin-top: 5px;">Available for Rent:
+                                         <var>House Number</var></h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Inventory :</label>
+                                        <select id="inventory" onblur="" style="width: 120px">
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Type :</label>
+                                        <select id="type" onblur="" style="width: 120px">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Rent: </label>
+                                        <input id="inRent" onblur="" style="width: 120px" />
+
+                                    </div>
+
+
+                                </div>
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Description</label>
+                                        <input id="description" style="width: 120px" class="txtbox_style" tabindex="2" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <label class="labelwidth">Contact Person:</label>
+                                        <input id="contactName" style="width: 120px" class="txtbox_style" tabindex="3" />
+                                    </div>
+
+                                </div>
+                                <hr />
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+
+                                   <div class="col-sm-6">
+                                        <label class="labelwidth">Contact Number:</label>
+                                        <input id="contactNumber" style="width: 120px" class="txtbox_style" tabindex="3" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Lastname :</label>
+                                        <input id="endDate" style="width: 120px" class="txtbox_style" tabindex="3" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="panel-footer" style="text-align: right;">
+                                <button type="button" id="btnInvCancel" style="margin-top: 5px;" onclick="CloseRentalBox()" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                                <button type="button" id="btnInvSubmit" style="margin-top: 5px;" onclick="AddRentInventory();" class="btn btn-primary">Submit</button>
+
+                            </div>
+                        </div>
+
+                        <div id="invProgressBar" class="container-fluid" style="text-align: center; height: 200px;">
+                            <img src="Images/Icon/ajax-loader.gif" style="width: 20px; height: 20px; margin-top: 50px;" />
+                        </div>
+                    </div>
 
                </div>
 

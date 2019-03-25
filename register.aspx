@@ -42,6 +42,21 @@
     <script>
 
 
+        $(document).ready(function () {
+            let params = (new URL(document.location)).searchParams;
+            role = params.get("Role");
+             alert(role);
+            if (role == "demo") {
+                alert("demo");
+                $("#lblRegisterUser").text('Register for 15 days free trail');
+
+            }
+            else {
+                 $("#lblRegisterUser").text('Register as new  User');
+            }
+
+        });
+
         $(function () {
             $("[id*=submitbutton]").bind("click", function () {
                 var user = {};
@@ -185,8 +200,6 @@
                 "\",\"EmailId\":\"" + email + "\",\"Gender\":\"male\",\"Parentname\":\"" + parentname + "\",\"Address\":\"" + address
                 + "\",\"SocietyID\":\"" + 1 + "\",\"UserType\":\"Demo\"}";
 
-            console.log(reqBody);
-
           
 
             $.ajax({
@@ -297,20 +310,35 @@
 
             var user1 = "{\"UserLogin\":\"" + email + "\"}";
 
-            console.log(user);
+           
+            var url
+            if (role == "Demo") {
+              url=  "register.aspx/AddUser"
+
+            }
+            else {
+              url=   "register.aspx/AddDemoUser";
+            }
 
          var jData =  JSON.parse(user)
 
             $.ajax({
                 type: 'POST',
-                url: "register.aspx/AddUser",
+                url: url,
                 data: '{user: ' + JSON.stringify(jData) + '}',
                 contentType: "application/json; charset=utf-8",
                  dataType: "json",
                 success: function (response) {
                    document.getElementById("post_loading").style.display = "none";
                     if (response.d > 0) {
-                            window.location = "Role.aspx?response.d";
+                       
+                        if (role == "Demo") {
+
+                            window.location = "Role.aspx";
+                        }
+                        else {
+                            window.location = "MainPage.aspx";
+                        }
                     }
                     else if(response.d < 0)
                         {
@@ -526,7 +554,7 @@
             <section id="contact">
 
         <div class="jumbotron text-center" style="height: 150px;">
-            <h3 style="padding-top: 50px; color: #000;">Register for Demo</h3>
+            <h3 style="padding-top: 50px; color: #000;"><lable id="lblRegisterUser"></lable></h3>
 
 
         </div>

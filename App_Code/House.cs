@@ -33,7 +33,7 @@ public class House
         {
             DataAccess dacess = new DataAccess();
 
-            String checkQuery = "Select * from " + CONSTANTS.Table_IndependentHouse + " Where HouseNumber = '" + HouseNumber + "' or Sector = '" + Sector 
+            String checkQuery = "Select * from " + CONSTANTS.Table_IndependentHouse + " Where HouseNumber = '" + HouseNumber + "' and Sector = '" + Sector 
                                + "' and City = '" + City + "'";
 
             DataSet ds = dacess.GetData(checkQuery);
@@ -62,7 +62,7 @@ public class House
 
                         String societyUserQuery = "Insert Into "+ CONSTANTS.Table_SocietyUser 
                             + " (UserID,FlatID,Type,HouseID,ServiceType,CompanyName,ActiveDate, SocietyID,Status) output INSERTED.ResID Values('" +
-                                UserId + "','0','Individual','" + HouseId + "','0','NA','" + DateTime.UtcNow + "','0',0)";
+                                UserId + "','0','Individual','" + HouseId + "','0','NA','" + DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss") + "','0',0)";
                         sqlComm.CommandText = societyUserQuery;
 
                         HouseId = (int)sqlComm.ExecuteScalar();

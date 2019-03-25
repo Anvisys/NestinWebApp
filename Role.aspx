@@ -47,12 +47,14 @@
         var UserId;
         var selectedSocietyId=0;
         var selectedFlatId = 0;
+        var role = "";
+       
 
         $(document).ready(function () {
           let params = (new URL(document.location)).searchParams;
             UserId = params.get("name");
 
-            
+         
         });
 
         
@@ -148,17 +150,17 @@
 
         });
 
-          function onSociety_select(e,ui) {   
-         
+        function onSociety_select(e, ui) {
+
             $("#locality4").text(ui.item.sector);
             $("#city2").text(ui.item.city);
             $("#pincode4").text(ui.item.pinCode);
-              selectedSocietyId = ui.item.socID;
+            selectedSocietyId = ui.item.socID;
         };
 
-        function onFlat_select(e, ui) { 
+        function onFlat_select(e, ui) {
 
-           console.log(ui.item.block);
+            console.log(ui.item.block);
             console.log(ui.item.floor);
 
             $("#floor").text(ui.item.floor);
@@ -166,30 +168,29 @@
             $("#intercom").text(ui.item.intercom);
             $("#city2").text(ui.item.block);
             selectedFlatId = ui.item.flatId;
-           
+
         };
 
-           function switchVisible() {
-                        if (document.getElementById('Div1')) {
+        function switchVisible() {
+            if (document.getElementById('Div1')) {
 
-                            if (document.getElementById('Div1').style.display == 'none')
-                            {
-                                document.getElementById('Div1').style.display = 'block';
-                                document.getElementById('Div2').style.display = 'none';
-                            }
-                            else {
-                                document.getElementById('Div1').style.display = 'none';
-                                document.getElementById('Div2').style.display = 'block';
-                            }
-                        }
-                    }
+                if (document.getElementById('Div1').style.display == 'none') {
+                    document.getElementById('Div1').style.display = 'block';
+                    document.getElementById('Div2').style.display = 'none';
+                }
+                else {
+                    document.getElementById('Div1').style.display = 'none';
+                    document.getElementById('Div2').style.display = 'block';
+                }
+            }
+        };
 
-                       $(function() {
-                            $('#sel1').change(function(){
-                                $('.content').hide();
-                                $('#' + $(this).val()).show();
-                            });
-                      });
+        $(function () {
+            $('#sel1').change(function () {
+                $('.content').hide();
+                $('#' + $(this).val()).show();
+            });
+        });
 
         function AddIndependentHouse() {
             var House = {};

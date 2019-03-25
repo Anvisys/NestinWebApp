@@ -175,7 +175,7 @@
                 document.getElementById("Admin_Navigation").style.display = "inline";
                 document.getElementById("Resident_Navigation").style.display = "none";
                 document.getElementById("Employee_Navigation").style.display = "none";
-                //document.getElementById("Resi_Admin_Navigation").style.display = "none";
+                document.getElementById("Individual_Navigation").style.display = "none";
 
             }
 
@@ -183,22 +183,23 @@
                 document.getElementById("Resident_Navigation").style.display = "inline";
                 document.getElementById("Admin_Navigation").style.display = "none";
                 document.getElementById("Employee_Navigation").style.display = "none";
-                //document.getElementById("Resi_Admin_Navigation").style.display = "none";
+                document.getElementById("Individual_Navigation").style.display = "none";
             }
 
             else if (userType == "Employee") {
                 document.getElementById("Employee_Navigation").style.visibility = "visible";
                 document.getElementById("Admin_Navigation").style.display = "none";
                 document.getElementById("Resident_Navigation").style.display = "none";
-                //document.getElementById("Resi_Admin_Navigation").style.display = "none";
+                document.getElementById("Individual_Navigation").style.display = "none";
 
             }
-            //else if (ResidentAdmin) {
-            //    document.getElementById("Employee_Navigation").style.visibility = "none";
-            //    document.getElementById("Admin_Navigation").style.display = "none";
-            //    document.getElementById("Resident_Navigation").style.display = "none";
-            //    document.getElementById("Resi_Admin_Navigation").style.display = "visible";
-            //}
+            else if (userType == "Individual") {
+                Individual_Navigation
+                document.getElementById("Employee_Navigation").style.visibility = "none";
+                document.getElementById("Admin_Navigation").style.display = "none";
+                document.getElementById("Resident_Navigation").style.display = "none";
+                document.getElementById("Individual_Navigation").style.display = "visible";
+            }
         }
 
 
@@ -454,6 +455,20 @@
 
                             <li><a href="Discussions.aspx" target="targetframe">Discussions</a></li>
                             <li> <a href="Reports.aspx" target="targetframe">Reports</a></li>
+                      
+
+
+
+                        </ul>
+                        </div>
+                    </div>
+                <div id="Individual_Navigation" style="position:fixed;height:100%;background-color:#727cf5;width:inherit;" >
+                    <div class="Left-Nav">
+                        <ul id="navbar-individual">
+
+                            <li> <a href="MyHouse.aspx" target="targetframe">My House</a></li>
+                            <li><a href="Vendors.aspx" target="targetframe">Vendors</a></li>
+                            <li> <a href="Services.aspx" target="targetframe">Services</a></li>
                       
 
 

@@ -96,16 +96,17 @@
     </style>
 
 
-     <script>
-         
-       
+    <script>
+
+
 
         $(function () {
             $("#txtFlltsOwnernme").autocomplete({
                 source: function (request, response) {
                     var param = {
-                        empName: $('#txtFlltsOwnernme').val() };
-                   
+                        empName: $('#txtFlltsOwnernme').val()
+                    };
+
                     $.ajax({
                         url: "Flats.aspx/GetOwnerName",
                         data: JSON.stringify(param),
@@ -114,17 +115,17 @@
                         contentType: "application/json; charset=utf-8",
                         dataFilter: function (data) { return data; },
                         success: function (data) {
-                          
+
                             response($.map(data.d, function (item) {
                                 return {
                                     value: item
                                 }
                             }))
                         },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {                       
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
                             var err = eval("(" + XMLHttpRequest.responseText + ")");
                             alert(err.Message)
-                            console.log("Ajax Error!");  
+                            console.log("Ajax Error!");
                         }
                     });
                 },
@@ -194,12 +195,7 @@
               
             });
 
-        });
-
-
-        $(document).ready(function () {
-     
-        $("[id*=FlatGrid] td:has(button)").bind("click", function (event) {
+            $("[id*=FlatGrid] td:has(button)").bind("click", function (event) {
                 var row = $(this).parent();
                
                 $("td", row).each(function () {
@@ -216,6 +212,9 @@
         });
 
         });
+
+
+  
 
         function HideAddFlatModal()
         {
@@ -238,14 +237,14 @@
         }
 
 
-           function AddFlatError()
+       function AddFlatError()
         {
             $("#data_loading").hide();
           
          }
 
 
-          function AddFlatError()
+        function AddFlatError()
         {
             $("#data_loading").hide();
              document.getElementById("txtAddfltMobile").value = "";
@@ -376,12 +375,12 @@
             }, 1000);
          }
           
-         $(document).ready(function () {
-             $("#txtAddflatFirstname,#txtAddflatLastName,#txtAddfltParentName,#drpFlatGender,#txtAddfltAddrs").attr('disabled', true);
-            
-         });
+       
 
         $(document).ready(function () {
+
+              $("#txtAddflatFirstname,#txtAddflatLastName,#txtAddfltParentName,#drpFlatGender,#txtAddfltAddrs").attr('disabled', true);
+
             $("#btncancel").click(function () {
                 $("#Popup").hide();
                 $("#HiddenImportPopup").val("");
@@ -389,62 +388,51 @@
                 $("#lblFileUploadstatus").textContent('');
                  
             });
-        });
 
-        //Button click popup events --------------------------------------------------------------------------///
-        $(document).ready(function () {
-            $("#Add_Flat_Button").click(function () {
+              $("#Add_Flat_Button").click(function () {
                 $("#myModalPopup").show();
             });
-        });
 
-
-
-        $(document).ready(function () {
-            $("#Flats_Edit_Cancel").click(function () {
+               $("#Flats_Edit_Cancel").click(function () {
                 $("#myModalEditPopup").hide();
                 $("#HiddenEditID").val("");
             });
-        });
 
-        function CloseAddFlat()
-        {
-            $("#myModalPopup").hide();
-        }
-     
-       
-        $(document).ready(function () {
-            $("#Cancel_Popup").click(function () {
+             $("#Cancel_Popup").click(function () {
                 
                 $("#myModalPopup").hide();
                 $("input:text").val("");
                 $("#lblAddflatStatus").html("");
                 $("#lblDefalutBillText").html("");
             });
-        });
-
-        $(document).ready(function () {
-            $("#Flats_AddT_Cancel").click(function () {
+              $("#Flats_AddT_Cancel").click(function () {
                 $("#myModalAddTPopup").hide();
                 $("#HiddenAddTID").val("");
                 $("input:text").val("");
                 $("#lblResStatus").html("");
 
             });
-        });
 
-        $(document).ready(function () {
-            $("#Import_Data").click(function () {
+             $("#Import_Data").click(function () {
                 $("#myModalPopupImport").show();
             });
-        });
 
-        $(document).ready(function () {
-            $("#Import_close").click(function () {
+             $("#Import_close").click(function () {
                 $("#myModalPopupImport").hide();
                 $("#lblFileUploadstatus").html('');
               });
         });
+
+      
+
+
+
+        function CloseAddFlat()
+        {
+            $("#myModalPopup").hide();
+        }
+     
+
 
         //done by aarshi on 20 July 2017
         function ValidateImport() {

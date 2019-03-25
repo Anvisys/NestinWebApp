@@ -23,6 +23,7 @@ public class Resident
     public String SocietyName { get; set; }
     public String IntercomNumber { get; set; }
 
+    public int HouseID { get; set; }
     public string HouseNo { get; set; }
     public string Sector { get; set; }
     public string City { get; set; }
@@ -96,7 +97,7 @@ public class Resident
 
 
             String societyUserQuery = "Insert Into dbo.SocietyUser  (UserID,FlatID,Type,ServiceType,CompanyName,ActiveDate, SocietyID,Status) output INSERTED.ResID Values('" +
-                                                                 UserId + "','"+ FlatID + "','Owner','0','NA','" + DateTime.UtcNow + "','" + SocieyID + "',1)";
+                                                                 UserId + "','"+ FlatID + "','Owner','0','NA','" + DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss") + "','" + SocieyID + "',1)";
             DataAccess da = new DataAccess();
             bool result =   da.UpdateQuery(societyUserQuery);
 
@@ -233,7 +234,9 @@ public class Resident
         User newUser = new User();
         string strNewPassword = newUser.EncryptPassword(EmailId, Password);
         
-        String UpdateQuery = "Insert into " + CONSTANTS.Table_Users + " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address,UserType,SocietyID) Values('" + FirstName + "','','" + LastName + "','" + MobileNo + "','" + EmailId + "','" + Gender + "','" + Parentname + "','" + UserLogin +"','" + strNewPassword + "','" + Address + "','" + UserType + "','" + SocietyID + "')";
+        String UpdateQuery = "Insert into " + CONSTANTS.Table_Users + 
+            " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address,UserType,SocietyID) Values('" 
+            + FirstName + "','','" + LastName + "','" + MobileNo + "','" + EmailId + "','" + Gender + "','" + Parentname + "','" + UserLogin +"','" + strNewPassword + "','" + Address + "','" + UserType + "','" + SocietyID + "')";
 
 
 

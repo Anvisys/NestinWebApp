@@ -24,6 +24,11 @@ public partial class MyHouse : System.Web.UI.Page
         get { return muser.currentResident.UserType; }
     }
 
+    public int HouseID
+    {
+        get { return muser.currentResident.HouseID; }
+    }
+
     public string HouseNo
     {
         get { return muser.currentResident.HouseNo; }

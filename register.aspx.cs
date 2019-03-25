@@ -64,4 +64,24 @@ public partial class register : System.Web.UI.Page
     }
 
 
+    [System.Web.Services.WebMethod]
+    [System.Web.Script.Services.ScriptMethod]
+    public static int AddDemoUser(User user)
+    {
+       
+        int UserId = user.CreateDemoUser();
+        if (UserId > 0)
+        {
+            user.SetResidentInfo();
+            SessionVariables.User = user;
+            return UserId;
+        }
+        else
+        {
+            return UserId;
+        }
+
+
+    }
+
 }
