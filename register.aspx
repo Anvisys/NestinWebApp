@@ -45,7 +45,7 @@
         $(document).ready(function () {
             let params = (new URL(document.location)).searchParams;
             role = params.get("Role");
-             alert(role);
+            
             if (role == "demo") {
                 alert("demo");
                 $("#lblRegisterUser").text('Register for 15 days free trail');
@@ -116,6 +116,7 @@
         }).ajaxStop(function () {
             $('.dvLoading_first').hide();
         });
+
         $("#btnSubmit").click(function () {
 
             AddUser();
@@ -313,11 +314,12 @@
            
             var url
             if (role == "Demo") {
-              url=  "register.aspx/AddUser"
-
+                    url=   "register.aspx/AddDemoUser";
+        
             }
             else {
-              url=   "register.aspx/AddDemoUser";
+                url=  "register.aspx/AddUser"
+
             }
 
          var jData =  JSON.parse(user)
@@ -333,11 +335,11 @@
                     if (response.d > 0) {
                        
                         if (role == "Demo") {
-
-                            window.location = "Role.aspx";
+                              window.location = "MainPage.aspx";
+                           
                         }
                         else {
-                            window.location = "MainPage.aspx";
+                           window.location = "Role.aspx";
                         }
                     }
                     else if(response.d < 0)

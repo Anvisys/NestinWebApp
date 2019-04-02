@@ -13,10 +13,11 @@ public class CONSTANTS
     public static string Table_Flats = "dbo.Flats";
     public static string Table_IndependentHouse = "dbo.House";
     public static string Table_SocietyUser = " dbo.SocietyUser";
-
-    public static string View_SocietyUser = "dbo.ViewSocietyUsers";
+    public static string Table_Society = " dbo.Societies";
     public static string Table_Resident = "dbo.Resident";
- 
+    public static string View_SocietyUser = "dbo.ViewSocietyUsers";
+   
+    public static string View_Society = "dbo.ViewSocieties";
 
 
     public CONSTANTS()

@@ -248,8 +248,7 @@ public class User
                             _State = item["State"].ToString();
                             _Pin = item["PinCode"].ToString();
                         }
-                        else
-                        { continue; }
+                      
 
 
                         Resident newRes = new Resident()
@@ -483,7 +482,7 @@ public class User
                         sqlComm = dbConnection.CreateCommand();
 
 
-                        string strEncPassword = this.EncryptPassword(EmailID, Password);
+                        string strEncPassword = this.EncryptPassword(EmailID.ToLower(), Password);
                         String newUserQuery = "Insert into " + CONSTANTS.Table_Users
                             + " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address) output INSERTED.UserID Values('"
                              + FirstName + "','" + MiddleName + "','" + LastName + "','" + MobileNumber + "','" + EmailID + "','" + Gender + "','" + ParentName
@@ -535,7 +534,7 @@ public class User
         {
             DataAccess dacess = new DataAccess();
 
-            String checkQuery = "Select * from " + CONSTANTS.Table_Users + " Where MobileNo = " + MobileNumber + " or EmailId = '" + EmailID + "'";
+            String checkQuery = "Select * from " + CONSTANTS.Table_Users + " Where MobileNo = '" + MobileNumber + "' or EmailId = '" + EmailID + "'";
 
              DataSet ds  = dacess.GetData(checkQuery);
             if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -544,12 +543,12 @@ public class User
             }
             else
             {
-                string strEncPassword = this.EncryptPassword(EmailID, Password);
+                string strEncPassword = this.EncryptPassword(EmailID.ToLower(), Password);
 
                 String UpdateQuery = "Insert into " + CONSTANTS.Table_Users
-                    + " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address,UserType,SocietyID) output INSERTED.UserID Values('"
+                    + " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address) output INSERTED.UserID Values('"
                      + FirstName + "','" + MiddleName + "','" + LastName + "','" + MobileNumber + "','" + EmailID + "','" + Gender + "','" + ParentName
-                     + "','" + UserLogin + "','" + strEncPassword + "','" + Address + "','" + UserType + "','" + 1 + "')";
+                     + "','" + UserLogin + "','" + strEncPassword + "','" + Address +  "')";
 
                 UserID = Convert.ToInt32(dacess.GetIDFromSocietyDB(UpdateQuery));
             }

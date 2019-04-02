@@ -51,10 +51,13 @@
        
 
         $(document).ready(function () {
-          let params = (new URL(document.location)).searchParams;
-            UserId = params.get("name");
+          //let params = (new URL(document.location)).searchParams;
+          //  UserId = params.get("name");
 
-         
+            UserID = <%=UserID %>;
+
+            GetSocietyRequest();
+
         });
 
         
@@ -264,6 +267,99 @@
             });
         }
 
+        function GetSocietyRequest() {
+         
+             $.ajax({
+                url: "Role.aspx/GetSocietyRequest",
+                type: 'Post',
+                async: false,
+                contentType: 'application/json',
+                success: OnSuccess,
+                failure: function (response) {
+                    alert(response.d);
+                    sessionStorage.clear();
+                }
+            });
+
+        };
+
+
+         function OnSuccess(response) {
+
+              var strData = "";
+
+            var results = jQuery.parseJSON(response.d);
+           
+            if (results.length > 0) {
+                for (var i = 0; i < results.length; i++) {
+                    console.log(JSON.stringify(results[0]));
+
+                     strData = strData + "<div class=\"row \" style=\"margin-top:20px;margin-left:100px;\">" +
+                    "<div class='row'><div class='col-xs-8'>" + results[i].SocietyID + " " + results[i].SocietyName + " , Total Flats " + results[i].TotalFlats + "</div><div class='col-xs-4'></div></div>"
+                    + "<div class='col-xs-4'> Sector " + results[i].Sector + "</div> <div class='col-xs-8'> City" + results[i].City + "</div>"
+                    + "<div class='row'><div class='col-xs-12'> Pin" + results[i].PinCode + ", " + results[i].State + "</div><hr size='2'></div>" +
+                    "<button type='button' class='btn btn-primary btn-sm' onclick='Close("+ results[i].ContactUserId +",\"" + results[i].Status +"\")' >Close</button>"
+                    +"</div>"
+                }
+
+
+            $("#SocietyRequest").html(strData);
+
+
+
+              
+            }
+            else {
+                
+            }
+
+        }
+
+
+
+
+      function AddNewSociety() {
+            var Society = {};
+            Society.SocietyName = document.getElementById("societyname").value;
+            Society.Sector = document.getElementById("locality1").value;
+            //House.City = document.getElementById("locality").value;
+            Society.City = document.getElementById("city1").value;
+            Society.State = document.getElementById("state1").value;
+            Society.PinCode = document.getElementById("pincode2").value;
+            Society.Status = 0;
+            Society.ContactUserId =<%=UserID %>;
+            console.log(Society);
+            $.ajax({
+                type: 'POST',
+                url: "Role.aspx/AddNewSociety",
+                data: '{_society: ' + JSON.stringify(Society) + '}',
+                contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                success: function (response) {
+                   //document.getElementById("post_loading").style.display = "none";
+                    if (response.d >0) {
+                            //window.location = "main.aspx";
+                         alert('Your Request has been sent');
+                    }
+                    else if (response.d <0) {
+                            alert('Error in sending request');
+                    }
+                     else 
+                    {
+                        alert('Server Error');
+                    }
+
+                },
+                error: function (data, errorThrown) {
+                    document.getElementById("post_loading").style.display = "none";
+                        alert('Error Updating comment, try again');
+                
+                  
+                }
+            });
+
+        };
+
 
     </script>
 
@@ -330,6 +426,10 @@
                             <HeaderStyle BackColor="#0065A8" Font-Bold="false" Font-Names="Modern" Font-Size="Small" ForeColor="White" Height="30px" />
              
         </asp:GridView>
+
+        </div>
+
+        <div class="row" id="SocietyRequest">
 
         </div>
         <div class="container-fluid">
@@ -509,10 +609,10 @@
                               <label class="col-sm-3 col-form-label col-form-label-lg"></label>
                            
                         </div>
-
+                        
 
                         <div class="form-group row">
-                          
+                          <button type="button" class="btn btn-primary" onclick="AddNewSociety()"> Submit </button>
 
                         </div>
                  </div>

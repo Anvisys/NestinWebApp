@@ -113,7 +113,6 @@
     </style>
     <script>
      
-
         var UserType, ResId, SocietyId, FlatNumber, RequestID, VisitorEntryHour,api_url;
         var page = 1;
         var size = 5;
