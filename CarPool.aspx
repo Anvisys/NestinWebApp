@@ -15,7 +15,7 @@
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- jQuery library -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/ui/3.2.1/jquery.ui.js"></script>
+
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
 
@@ -71,7 +71,7 @@
         function OnSuccess(response) {
 
             var strData = "";
-            $("#CarPool").html("");
+            $("#CarPool").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
             console.log(results);
             if (results.length > 0) {
@@ -80,7 +80,7 @@
                     var JourneyDTime = DisplayDateTime(results[i].JourneyDateTime);
                     var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
                     var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
-
+                    console.log(SeatRemaining);
                     strData = strData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px;\">" +
                         "<div class='panel-heading'>" + results[i].Destination + "<br/>Start: " + JourneyDTime + " <br/> Return " + ReturnDTime + "</div>"
                         + "<div class='panel-body'> Sector " + results[i].VehicleType
@@ -91,7 +91,9 @@
                         + "<div class='panel-footer'><a onclick='ShowInterest(" + results[i].VehiclePoolID + ")'><span class='fa fa-thumbs-up'></span></a>" + results[i].InterestedCount
                         + "</div>"
                         + "</div>";
+                    
                 }
+                 console.log(strData);
                 $("#CarPool").html(strData);
 
             }

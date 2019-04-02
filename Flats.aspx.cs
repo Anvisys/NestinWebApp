@@ -28,7 +28,9 @@ public partial class Flats : System.Web.UI.Page
         SessionVariables.CurrentPage = "Flats.aspx";
         if (muser == null)
         {
-            Response.Redirect("Flats.aspx");
+
+            Response.Redirect("Login.aspx");
+
         }
 
         if (!IsPostBack)
