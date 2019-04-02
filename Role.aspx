@@ -232,6 +232,46 @@
 
         }
 
+        function AddNewSociety() {
+            var Society = {};
+             Society.SocietyName = document.getElementById("societyName").value;
+            Society.Sector = document.getElementById("sector").value;
+            //House.City = document.getElementById("locality").value;
+            Society.City = document.getElementById("city").value;
+            Society.State = document.getElementById("state").value;
+            Society.PinCode = document.getElementById("pincode").value;
+            console.log(Society);
+
+             $.ajax({
+                type: 'POST',
+                url: "Role.aspx/Add/societyUser",
+                data: '{Society: ' + JSON.stringify(Society) + '}',
+                contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                success: function (response) {
+                   document.getElementById("post_loading").style.display = "none";
+                    if (response.d >0) {
+                            window.location = "main.aspx";
+                    }
+                    if (response.d <0) {
+                            alert('House number is in use');
+                    }
+                     else 
+                    {
+                        alert('Server Error');
+                    }
+
+                },
+                error: function (data, errorThrown) {
+                    document.getElementById("post_loading").style.display = "none";
+                        alert('Error Updating comment, try again');
+                
+                  
+                }
+            });
+
+        }
+
 
       function  AddInExistingSociety(){
           var user = {};
@@ -263,7 +303,6 @@
                 }
             });
         }
-
 
     </script>
 
@@ -349,19 +388,20 @@
                             </div>
                         </div>
 
-
+                
                         <div id="individualHouse" class="content" style="display: none">
+                            <form="individual">
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">House No.</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-lg" id="houseno" placeholder="Eg.82 " />
+                                        <input type="text" name="house"   class="form-control form-control-lg" id="houseno" placeholder="Eg.82" required />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">Sector</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control form-control-lg" id="sector" placeholder="Eg.sector-63 " />
+                                        <input type="text" name="Sector" name="Sector"   class="form-control form-control-lg" id="sector" placeholder="Eg.sector-63" required />
                                     </div>
                                 </div>
                             </div>
@@ -369,13 +409,13 @@
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">Locality</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-lg" id="locality" placeholder="Locality " />
+                                        <input type="text" name="Locality" class="form-control form-control-lg" id="locality" placeholder="Locality " required/>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">City</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control form-control-lg" id="city" placeholder="Eg.Noida " />
+                                        <input type="text" name="City" class="form-control form-control-lg" id="city" placeholder="Eg.Noida "required />
                                     </div>
                                 </div>
                             </div>
@@ -383,21 +423,27 @@
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">State</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-lg" id="state" placeholder="State " />
+                                        <input type="text" name="State" class="form-control form-control-lg" id="state" placeholder="State" required />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">Pin Code</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control form-control-lg" id="pincode" placeholder="Eg.201301 " />
+                                        <input type="number" name="PinCode" class="form-control form-control-lg" id="pincode" placeholdert="Eg.201301" required />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-9">
-                                <button type="button" onclick="AddIndependentHouse()" id="btnfinalsubmit" class="btn btn-default">Submit</button>
+                             </form>
+                            <div class="col-sm-12"  >
+                                <button type="button" onclick="AddIndependentHouse()" id="btnfinalsubmit"  class="btn btn-success btn-defoult">Submit</button>
 
                             </div>
                         </div>
+                   
+
+               <%-- <div class="layout_modal_footer" style="margin-right:7px;">
+                    <button type="button" class="btn btn-success" onclick="AddUser()" id="btnsubmit" disabled="individual.house.$disabled || individual.Sector.$disabled">
+                    Submit</button>--%>
 
                         <div id="existingSociety" class="content" style="display: none">
                             <div class="form-group row">
@@ -411,7 +457,7 @@
                                 <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">Flat No.</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-lg" id="flatno" placeholder="State " />
+                                    <input type="text" class="form-control form-control-lg" id="flatno" placeholder="FlatNo. " />
                                 </div>
                                 </div>
                                  <div class="col-sm-6">
@@ -459,36 +505,33 @@
                                  <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">Pin Code</label>
                                 <div class="col-sm-7">
-                                    <label class="form-control form-control-lg" id="pincode4" />
+                                    <label  class="form-control form-control-lg"  id="pincode4" />
                                 </div>
                                 </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12" >
                                         <button type="button" class="btn btn-success btn-sm" onclick="AddInExistingSociety()">Submit</button>
                                     </div>
                             </div>
-
-
-
                         </div>
 
                         <div id="RequesttoAdd" class="content" style="display: none">
                             <div class="form-group row">
                                 <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg">Society Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control form-control-lg" id="societyname" placeholder="Enter Society name" />
+                                    <input type="text" name="society" class="form-control form-control-lg" id="societyname" placeholder="Enter Society name" />
                                 </div>
                             </div>
                            <div class="form-group row">
                                 <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">Locality</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-lg" id="locality1" placeholder="Locality " />
+                                    <input type="text" name="locality" class="form-control form-control-lg" id="locality1" placeholder="Locality " required/>
                                 </div>
                                 </div>
                                  <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">City</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control form-control-lg" id="city1" placeholder="City " />
+                                    <input type="text" name="city" class="form-control form-control-lg" id="city1" placeholder="City " required />
                                 </div>
                                 </div>
                             </div>
@@ -496,18 +539,21 @@
                                 <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">State</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-lg" id="state1" placeholder="State " />
+                                    <input type="text" name="state" class="form-control form-control-lg" id="state1" placeholder="State " required />
+
                                 </div>
                                 </div>
                                  <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">Pin Code</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control form-control-lg" id="pincode2" placeholder="Eg.201301 " />
+                                    <input type="number" name="pincode" class="form-control form-control-lg" id="pincode2" placeholder="Eg.201301 " required />
                                 </div>
                                 </div>
                             </div>
                               <label class="col-sm-3 col-form-label col-form-label-lg"></label>
-                           
+                            <div class="col-xs-12" >
+                                        <button type="button" class="btn btn-success btn-sm" onclick="AddNewSociety()">Submit</button>
+                                    </div>
                         </div>
 
 

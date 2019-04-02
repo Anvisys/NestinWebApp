@@ -47,8 +47,7 @@ public partial class Role : System.Web.UI.Page
         {
             return result;
         }
-
-
+        
     }
 
     [System.Web.Services.WebMethod]

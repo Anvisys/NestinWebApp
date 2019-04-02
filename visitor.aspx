@@ -351,6 +351,7 @@
                 },
                 failure: function (response) {
                     document.getElementById("data_loading").style.display = "none";
+
                   //  alert(response.d);
                     sessionStorage.clear();
                 }
@@ -507,9 +508,7 @@
                     else {
                         alert('Updated Successfully');
                     }
-
                     
-
                 },
                 error: function (data, errorThrown) {
                     document.getElementById("post_loading").style.display = "none";
@@ -652,7 +651,7 @@
              </div>
               <div id="data_loading" class="container-fluid" style="text-align:center;width:100%; height:200px;background-color:#090909;opacity:0.2;position:fixed; top:100px; z-index:99;">
                     <img src="Images/Icon/ajax-loader.gif" style="width:20px;height:20px; margin-top:50px;" />
-
+                  <%--<i class="fa fa-spinner" aria-hidden="true" style="width:30px; height:30px;margin-top:100px;"></i>--%>
                    </div>
 
         <div id="AddVisitorModal" class="modal">
@@ -717,6 +716,7 @@
                               </div>
                       <div id="post_loading" class="container-fluid" style="text-align:center;width:100%; height:200px;background-color:#090909;display:none;opacity:0.2;position:fixed; top:100px; z-index:99;">
                     <img src="Images/Icon/ajax-loader.gif" style="width:20px;height:20px; margin-top:50px;" />
+                    <%-- <i class="fa fa-spinner" aria-hidden="true" style="width:30px; height:30px;margin-top:100px;"></i>--%>
                   </div>
                           </div>
             
@@ -802,6 +802,8 @@
                                      
                       </div>
                         <div id="verify_loading" class="layout-overlay" style="width:500px; text-align:center;vertical-align:middle;">
+
+                            <%--<i class="fa fa-spinner" aria-hidden="true" style="width:30px; height:30px;margin-top:100px;"></i>--%>
                                <img src="Images/Icon/ajax-loader.gif" style="width:30px; height:30px;margin-top:100px;" />
                               
                      </div>

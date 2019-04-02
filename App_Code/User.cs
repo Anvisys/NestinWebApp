@@ -547,9 +547,9 @@ public class User
                 string strEncPassword = this.EncryptPassword(EmailID, Password);
 
                 String UpdateQuery = "Insert into " + CONSTANTS.Table_Users
-                    + " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address,UserType,SocietyID) output INSERTED.UserID Values('"
+                    + " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address) output INSERTED.UserID Values('"
                      + FirstName + "','" + MiddleName + "','" + LastName + "','" + MobileNumber + "','" + EmailID + "','" + Gender + "','" + ParentName
-                     + "','" + UserLogin + "','" + strEncPassword + "','" + Address + "','" + UserType + "','" + 1 + "')";
+                     + "','" + UserLogin + "','" + strEncPassword + "','" + Address + "')";
 
                 UserID = Convert.ToInt32(dacess.GetIDFromSocietyDB(UpdateQuery));
             }

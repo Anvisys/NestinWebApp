@@ -313,11 +313,11 @@
            
             var url
             if (role == "Demo") {
-              url=  "register.aspx/AddUser"
+              url= "register.aspx/AddDemoUser";
 
             }
             else {
-              url=   "register.aspx/AddDemoUser";
+              url=    "register.aspx/AddUser";
             }
 
          var jData =  JSON.parse(user)
@@ -566,69 +566,70 @@
                 <div  class="col-sm-6 shadow p-3 mb-5 bg-white rounded">
 
                     <div id="formRegister">
-                    <form  style="display:none;">
+                    <div class="layout_modal_body container-fluid">
+                    <form name="newActivity" style="display:none;">
+                   
                         <div class="form-group row">
                             <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg">Email</label>
                             <div class="col-sm-9">
-                                <input type="email" class="form-control form-control-lg" id="email" placeholder="Enter Email" />
+                                <input type="email" name="Email" class="form-control form-control-lg" id="email" placeholder="Enter Email" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label col-form-label-lg">Mobile No.</label>
                             <div class="col-sm-9">
-                                <input  class="form-control form-control-lg" id="mobile" placeholder="Enter Mobile No." />
+                                <input type="number" name="Mobile"  class="form-control form-control-lg" id="mobile" placeholder="Enter Mobile No." required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label col-form-label-lg">First Name</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control form-control-lg" id="firstname" placeholder="Enter first name" />
+                                <input type="text" name="firstName" class="form-control form-control-lg" id="firstname" placeholder="Enter first name" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label col-form-label-lg">Last Name</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control form-control-lg" id="lastname" placeholder="Enter last name" />
+                                <input type="text" name="LastName" class="form-control form-control-lg" id="lastname" placeholder="Enter last name" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label col-form-label-lg">Parent Name</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control form-control-lg" id="parentname" placeholder="Enter parent name" />
+                                <input type="text" name="ParentName" class="form-control form-control-lg" id="parentname" placeholder="Enter parent name" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label col-form-label-lg">Address</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control form-control-lg" id="address" placeholder="Enter address" />
+                                <input type="text" name="Address" class="form-control form-control-lg" id="address" placeholder="Enter address" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label col-form-label-lg"></label>
-                            <div class="col-sm-9">
-                                <button type="button" onclick="AddUser()"  id="btnsubmit" class="btn btn-default">Submit</button>
-
-                            </div>
-                       
+                            <div class="col-sm-9" style="text-align:end">
+                                <button type="button" onclick="AddUser()"  id="btnsubmit" class="btn btn-primary">Submit</button>
+                            </div>    
                         </div>
-                     
+        
                      <div id="post_loading" class="container-fluid" style="text-align:center;width:100%; height:200px;background-color:#090909;opacity:0.2;display:none;position:fixed; top:100px; z-index:99;">
                     <img src="Images/Icon/ajax-loader.gif" style="width:20px;height:20px; margin-top:50px;" />
                   </div>
                     </form>
                 </div>
-
-
-               
-
+               </div>
+                   <%-- <div class="layout_modal_footer" style="margin-right:7px;">
+                    <button type="button" class="btn btn-success" onclick="AddUser()" id="btnsubmit" disabled="register.Email.$invalid || register.Mobile.$invalid || register.firstName.$invalid|| register.LastName.$invalid|| register.ParentName.$invalid|| register.Address.$invalid">
+                    Submit</button>
+                    &nbsp;&nbsp;
+                    <button type="button" class="btn btn-warning" onclick="Cancel()">Cancel</button>
+                </div>--%>
                 </div>
                 <div class="col-sm-3">
                 </div>
             </div>
         </div>
     </section>
-
-
 
     </form>
 
