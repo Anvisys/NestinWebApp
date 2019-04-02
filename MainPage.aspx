@@ -441,8 +441,8 @@
                             <li> <a href="BillPayments.aspx" target="targetframe">Payments</a></li>
                             <li>  <a href="MyFlat.aspx" target="targetframe">MyFlat</a></li>
                             <li>  <a href="visitor.aspx" target="targetframe">Visitor</a></li>
-                            <li>  <a href="RentInOut.aspx" target="targetframe">Rent</a></li>
-                             <li>  <a href="CarPool.aspx" target="targetframe">CarPool</a></li>
+
+
 
                         </ul>
                         </div>

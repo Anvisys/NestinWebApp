@@ -276,7 +276,6 @@
                             <ul class="nav nav-pills nav-main scroll-menu" id="topMain">
                                 <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
                                 <li class=" "><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
-
                                 <li class=" "><a class="menu_text" href="contact.aspx">Contact </a></li>
 
                             </ul>

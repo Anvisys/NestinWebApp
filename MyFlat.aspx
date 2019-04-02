@@ -506,7 +506,15 @@
 
        }
 
-      
+        //$("#modalAdd").show(function () {
+           
+            
+        //});
+
+        //$('#modalAdd').on('show.bs.modal', function () {
+           
+        //    $("#title").text(name);
+        //})
 
         $(document).ajaxStart(function () {
             $('.loader').show();

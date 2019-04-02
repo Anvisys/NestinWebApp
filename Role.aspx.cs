@@ -11,10 +11,6 @@ using Newtonsoft.Json;
 public partial class Role : System.Web.UI.Page
 {
    static User mUser;
-    public int UserID
-    {
-        get { return mUser.UserID; }
-    }
     protected void Page_Load(object sender, EventArgs e)
     {
         SessionVariables.CurrentPage = "Role.aspx";
@@ -51,8 +47,7 @@ public partial class Role : System.Web.UI.Page
         {
             return result;
         }
-
-
+        
     }
 
     [System.Web.Services.WebMethod]
@@ -67,28 +62,6 @@ public partial class Role : System.Web.UI.Page
 
 
     }
-
-    [System.Web.Services.WebMethod]
-    [System.Web.Script.Services.ScriptMethod]
-    public static int AddNewSociety(Society _society)
-    {
-
-        int result = _society.InsertSociety();
-        return result;
-
-
-    }
-
-    [System.Web.Services.WebMethod]
-    [System.Web.Script.Services.ScriptMethod]
-    public static String GetSocietyRequest()
-    {
-
-        Society _society = new Society();
-        DataSet result = _society.GetSocietyRequest(mUser.UserID);
-        return JsonConvert.SerializeObject(result.Tables[0]);
-    }
-
 
     [System.Web.Services.WebMethod]
     [System.Web.Script.Services.ScriptMethod]

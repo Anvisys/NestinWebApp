@@ -179,10 +179,6 @@ public partial class Login : System.Web.UI.Page
                 {
                     SessionVariables.CurrentPage = "MyHouse.aspx";
                 }
-                else if (muser.currentResident.UserType == "SuperAdmin")
-                {
-                    SessionVariables.CurrentPage = "SuperAdmin.aspx";
-                }
                 else
                 {
                     SessionVariables.CurrentPage = "Dashboard.aspx";

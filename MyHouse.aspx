@@ -182,7 +182,6 @@
                     else {
                         document.getElementById("lblMessage").innerHTML = "Could not submitt, Please contact admin";
                     }
-
                 },
                 error: function (data, errorThrown) {
                     alert('User Creation failed :' + errorThrown);
@@ -302,63 +301,65 @@
         </div>
 
         <div id="addTenantModal" class="modal">
-            <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
+            <div class="modal-content" style="border-radius:5px; width: 580px; margin: auto; margin-top:120px">
 
-                <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
-                    <button type="button" id="Close_mod" class="close" onclick="CloseRentalBox()" style="color: #000;">&times;</button>
-                    <h4 id="title" class="modal-title" style="margin-top: 5px;">Available for Rent:
-                                         <var>House Number</var></h4>
+                <div class="modal-header" style="color: white; background-color:#5ca6de; height: 50px;">
+                    <i class="fa fa-close" style="float:right;cursor:pointer;" onclick="CloseRentalBox()"></i>
+                   <%-- <button type="button" id="Close_mod" class="close" onclick="CloseRentalBox()" style="color: #000;">&times;</button>--%>
+                    <h4 id="title" class="modal-title" style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif; font-size:14px">Available for Rent:
+                                        <var>House Number</var></h4>
                 </div>
-
-                <div class="modal-body">
-
-                    <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+ 
+                   <div class="layout_modal_body container-fluid">
+                    <form name="AddRent">
+                
+                    <div class="row " style="margin-top: 20px;">
 
                         <div class="col-sm-6">
-                            <label class="labelwidth">Inventory :</label>
-                            <select id="inventory" onblur="" style="width: 120px">
-                            </select>
+                            <label class="labelwidth col-sm-4 col-form-label ">Inventory:</label> 
+                            <div class="col-sm-8">
+                            <select id="inventory" onblur="" class="form-control form-control-sm"></select>
+                            </div>
                         </div>
                         <div class="col-sm-6">
-                            <label class="labelwidth">Type :</label>
-                            <select id="type" onblur="" style="width: 120px">
-                            </select>
+                            <label class="labelwidth col-sm-4 col-form-label ">Type:</label>
+                            <div class="col-sm-8">
+                            <select id="type"  onblur="" class="form-control form-control-sm "></select>  
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-top: 10px;">
                         <div class="col-sm-6">
-                            <label class="labelwidth">Rent: </label>
-                            <input id="inRent" onblur="" style="width: 120px" />
-
+                            <label class="labelwidth col-sm-4 col-form-label">Description:</label>
+                            <div class="col-sm-8">
+                            <input id="description" type="text"  class="form-control form-control-sm" tabindex="2" />
+                                </div>
                         </div>
-
-
-                    </div>
-                    <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-
+                        
                         <div class="col-sm-6">
-                            <label class="labelwidth">Description</label>
-                            <input id="description" style="width: 120px" class="txtbox_style" tabindex="2" />
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="labelwidth">Contact Person:</label>
-                            <input id="contactName" style="width: 120px" class="txtbox_style" tabindex="3" />
+                            <label class="labelwidth col-sm-4 col-form-label">Rent: </label>
+                            <div class="col-sm-8">
+                            <input id="inRent" type="number" onblur="" class="form-control form-control-sm"/>
+                                </div>
                         </div>
 
                     </div>
-                    <hr />
-                    <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+                    <div class="row" style="margin-top: 10px; margin-bottom: 10px">
 
                         <div class="col-sm-6">
-                            <label class="labelwidth">Contact Number:</label>
-                            <input id="contactNumber" style="width: 120px" class="txtbox_style" tabindex="3" />
+                            <label class="labelwidth col-sm-4 col-form-label">Contact Person:</label>
+                            <div class="col-sm-8">
+                            <input id="contactName" type="text"  class="form-control form-control-lg" tabindex="3" />
                         </div>
+                            </div>
                         <div class="col-sm-6">
-                            <label class="labelwidth">Lastname :</label>
-                            <input id="endDate" style="width: 120px" class="txtbox_style" tabindex="3" />
+                            <label class="labelwidth col-sm-4 col-form-label">Contact Number:</label>
+                            <div class="col-sm-8">
+                            <input id="contactNumber" type="number"  class="form-control form-control-lg" tabindex="3" />
                         </div>
-
+                        </div>
                     </div>
+                  </form>
                 </div>
 
                 <div class="panel-footer" style="text-align: right;">
