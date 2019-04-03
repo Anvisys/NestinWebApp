@@ -341,10 +341,10 @@
 
                         </div>
                     </header>
-        <div style="margin-top:100px;">
+        <div style="margin-top:100px;padding-left:100px;">
 
         <asp:GridView ID="gridViewRequests" runat="server"
-            
+            AutoGenerateColumns="false"
             
             >
               <Columns>
@@ -360,13 +360,15 @@
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="SocietyName" HeaderStyle-Width="100px" HeaderText="Society"/>
                                 <asp:BoundField DataField="FlatNumber" HeaderStyle-Width="40px" HeaderText="Flat"  ItemStyle-Width="40px"/>
-                                <asp:BoundField DataField="ActiveDate" HeaderStyle-Width="100px" HeaderText="Date"/>
+                                <asp:BoundField DataField="ActiveDate" HeaderStyle-Width="100px" HeaderText="Active From"/>
+                                <asp:BoundField DataField="DeActiveDate" HeaderStyle-Width="100px" HeaderText="Active Till"/>
+                                <asp:BoundField DataField="Status" HeaderStyle-Width="100px" HeaderText="Status"/>
                               <%--  <asp:BoundField DataField="Status" HeaderStyle-Width="40px" HeaderText="Status"  ItemStyle-Width="40px"/>--%>
                                 
                               
                             </Columns>
-                            <EmptyDataRowStyle BackColor="#EEEEEE" />
-                            <HeaderStyle BackColor="#0065A8" Font-Bold="false" Font-Names="Modern" Font-Size="Small" ForeColor="White" Height="30px" />
+                          <%--  <EmptyDataRowStyle BackColor="#EEEEEE" />
+                            <HeaderStyle BackColor="#0065A8" Font-Bold="false" Font-Names="Modern" Font-Size="Small" ForeColor="White" Height="30px" />--%>
              
         </asp:GridView>
 

@@ -15,7 +15,7 @@ public partial class Role : System.Web.UI.Page
     {
         SessionVariables.CurrentPage = "Role.aspx";
         mUser = SessionVariables.User;
-        if (muser == null)
+        if (mUser == null)
         {
 
             Response.Redirect("Login.aspx");
