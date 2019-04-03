@@ -15,11 +15,15 @@
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- jQuery library -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/ui/3.2.1/jquery.ui.js"></script>
+
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
-
+    <script src="bootstrap-datetimepicker.js"></script>
     <script type="text/javascript" src="Scripts/datetime.js"></script>
+
+    <script language="javascript" src="https://momentjs.com/downloads/moment.js"></script>
+    <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css"/>
 
     <script>
 
@@ -69,8 +73,8 @@
         };
 
         function OnSuccess(response) {
-
-            var strData = "";
+            $("#ProgressBar").show();
+            var strPoolData = "";
             $("#CarPool").html("");
             var results = response.$values;// jQuery.parseJSON(response.$values);
             console.log(results);
@@ -81,19 +85,22 @@
                     var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
                     var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
 
-                    strData = strData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='panel-heading'>" + results[i].Destination + "<br/>Start: " + JourneyDTime + " <br/> Return " + ReturnDTime + "</div>"
-                        + "<div class='panel-body'> Sector " + results[i].VehicleType
-                        + "<div> Contact" + results[i].AvailableSeats + "</div>"
-                        + "<div>" + results[i].SharedCost + ", " + results[i].Description + "</div>"
-                        + "<div> Available " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
+                    strPoolData = strPoolData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px; shadow:3px;\">" +
+                        "<div class='panel-heading'> Destination :  " + results[i].Destination + "<br/>Start: " + JourneyDTime + " <br/> Return: " + ReturnDTime + "</div>"
+                        + "<div class='panel-body'> <label class='data_label'> Vehicle:  </label>" + results[i].VehicleType
+                        + "<div><label class='data_label'> Total Seats :  </label>" + results[i].AvailableSeats + "</div>"
+                        + "<div> <label class='data_label'> Cost :  </label>" + results[i].SharedCost +"</div>"
+                        + "<div><label class='data_label'> Description :  </label> " + results[i].Description + "</div>"
+                        + "<div><label class='data_label'> Available :  </label> " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
                         + "</div>"
                         + "<div class='panel-footer'><a onclick='ShowInterest(" + results[i].VehiclePoolID + ")'><span class='fa fa-thumbs-up'></span></a>" + results[i].InterestedCount
                         + "</div>"
                         + "</div>";
+                   
                 }
-                $("#CarPool").html(strData);
-
+               
+                $("#CarPool").html(strPoolData);
+                $("#ProgressBar").hide();
             }
             else {
 
@@ -103,8 +110,8 @@
 
 
         function MyPoolData(response) {
-            var strData = "";
-            $("#CarPool").html("");
+            var strMyData = "";
+            $("#MyPool").html("");
             var results = response.$values;// jQuery.parseJSON(response.$values);
 
             if (results.length > 0) {
@@ -114,18 +121,21 @@
                     var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
                     var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
 
-                    strData = strData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='panel-heading'>" + results[i].Destination + "<br/>Start: " + JourneyDTime + " <br/> Return " + ReturnDTime + "</div>"
-                        + "<div class='panel-body'> Sector " + results[i].VehicleType
-                        + "<div> Contact" + results[i].AvailableSeats + "</div>"
-                        + "<div>" + results[i].SharedCost + ", " + results[i].Description + "</div>"
-                        + "<div> Available " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
+                    strMyData = strMyData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px;\">" +
+                        "<div class='panel-heading'> Destination : " + results[i].Destination + "<br/>Start : " + JourneyDTime + " <br/> Return : " + ReturnDTime + "</div>"
+                        + "<div class='panel-body'> <label class='data_label'> Vehicle:  </label>" + results[i].VehicleType
+                        + "<div> <label class='data_label'> Total Seats:  </label>" + results[i].AvailableSeats + "</div>"
+                        + "<div><label class='data_label'> Cost :  </label>  " + results[i].SharedCost + "</div>"
+                        + "<div> <label class='data_label'> Discription :  </label>  " + results[i].Description + "</div>"
+                        + "<div> <label class='data_label'> Available :  </label>  " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
                         + "</div>"
                         + "<div class='panel-footer'><a onclick='Close(" + results[i].VehiclePoolID + ")'><span class='fa fa-trash'></span></a>" + results[i].InterestedCount
                         + "</div>"
                         + "</div>";
+                    
                 }
-                $("#MyPool").html(strData);
+                
+                $("#MyPool").html(strMyData);
 
             }
             else {
@@ -167,7 +177,7 @@
             CarPool.SharedCost = $("#Shared_cost").val();
             CarPool.Description = $("#pool_description").val();
             CarPool.ResID = <%=ResID%>;
-             CarPool.SocietyID = <%=SocietyID%>;
+            CarPool.SocietyID = <%=SocietyID%>;
             var url = api_url + "/api/CarPool/Add";
             var CarPoolString = JSON.stringify(CarPool);
 
@@ -246,15 +256,15 @@
         }
 
         function CloseCloseModal() {
-             $("#showCloseModal").hide();
+            $("#showCloseModal").hide();
         }
 
         function ClosePoolOffer() {
-              var CarPool = {};
+            var CarPool = {};
             CarPool.VehiclePoolID = selectedPoolId;
             CarPool.ResID = <%=ResID%>;
             CarPool.Active = 0;
-            
+
             var url = api_url + "/api/CarPool/Status";
             var CarPoolString = JSON.stringify(CarPool);
 
@@ -267,7 +277,7 @@
                 contentType: 'application/json',
                 success: function (data) {
                     if (data.Response == "Ok") {
-                      $("#showCloseModal").hide();
+                        $("#showCloseModal").hide();
                         GetPoolOffers();
                     }
                     else {
@@ -284,6 +294,29 @@
         }
 
     </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#time_return').datetimepicker({
+                format: 'LT'
+            });
+        });
+         $(function () {
+            $('#time_when').datetimepicker({
+                format: 'LT'
+            });
+        });
+         $(function () {
+            $('#date_when').datetimepicker({
+          
+            });
+        });
+        $(function () {
+            $('#date_return').datetimepicker({
+               
+            });
+        });
+    </script>
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -293,115 +326,161 @@
         <div class="container-fluid">
 
 
-            <ul class="nav nav-pills">
+            <ul class="nav nav-pills" style="margin-top: 10px;">
                 <li role="presentation" class="active"><a href="#AllPool" data-toggle="tab">Pool</a></li>
                 <li role="presentation"><a href="#selfPool" data-toggle="tab">My Pool</a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade in active" id="AllPool">
+           </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="AllPool">
 
-                     <div id="CarPool"></div>
-                </div>
+                        <div id="CarPool"></div>
+                    </div>
 
-                <div class="tab-pane fade" id="selfPool">
-                    <button class="btn btn-primary" onclick="ShowPoolModal()">Add New Trip</button>
+                    <div class="tab-pane fade" id="selfPool" style="margin-top: 10px; margin-left: 10px;">
+                        <button class="btn btn-primary" onclick="ShowPoolModal()">Add New Trip</button>
                         <div id="MyPool"></div>
+                    </div>
                 </div>
-            
-            </div>
-
         </div>
-        <div id="addCarPoolModal" class="modal">
-            <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
 
-                <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
-                    <button type="button" id="Close" class="close" onclick="ClosePoolModal()" style="color: #000;">&times;</button>
-                    <h4 id="" class="modal-title" style="margin-top: 5px;">Offer for Pool:
-                    </h4>
-                </div>
-
-                <div class="modal-body">
-
-                    <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-
-                        <div class="col-sm-6">
-                            <label class="labelwidth">Type :</label>
-                            <select id="pool_type" onblur="" style="width: 120px">
-                                <option>One Way</option>
-                                <option>Two Way</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="labelwidth">Duration</label>
-                            <select id="pool_cycle" onblur="" style="width: 120px">
-                                <option>One Time</option>
-                                <option>Daily</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label class="labelwidth">Where: </label>
-                            <input id="destination" onblur="" style="width: 120px" />
-
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-                        <div class="col-sm-12">
-                            <label class="labelwidth">When: </label>
-                            <input type="date" id="date_when" onblur="" style="width: 120px" />
-                            <input type="time" id="time_when" name="time_when" />
-                        </div>
-                    </div>
-
-                    <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-                        <div class="col-sm-12">
-                            <label class="labelwidth">Return:</label>
-                            <input type="date" id="date_return" style="width: 120px" class="txtbox_style" tabindex="2" />
-                            <input type="time" id="time_return" name="time_when" />
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-
-                        <div class="col-sm-6">
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="labelwidth">Available Seat</label>
-                            <input id="seats" style="width: 120px" class="txtbox_style" tabindex="3" />
-                        </div>
-
-                    </div>
-                    <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-
-                        <div class="col-sm-6">
-                            <label class="labelwidth">Vehicle Type:</label>
-                            <input id="vehicle_type" style="width: 120px" class="txtbox_style" tabindex="2" />
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="labelwidth">Cost / Seat</label>
-                            <input id="Shared_cost" style="width: 120px" class="txtbox_style" tabindex="3" />
-                        </div>
-
-                    </div>
-                    <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-
-                        <div class="col-sm-12">
-                            <label class="labelwidth">Description:</label>
-                            <input type="text" id="pool_description" style="width: 200px;" class="txtbox_style" />
-                        </div>
-
-
-                    </div>
-                    <hr />
-
-                </div>
-
-                <div class="panel-footer" style="text-align: right;">
-                    <button type="button" id="btnInvCancel" style="margin-top: 5px;" onclick="ClosePoolModal()" data-dismiss="modal" class="btn btn-danger">Cancel</button>
-                    <button type="button" id="btnInvSubmit" style="margin-top: 5px;" onclick="AddPoolOffer();" class="btn btn-primary">Submit</button>
-
-                </div>
+         <div id="ProgressBar" class="container-fluid" style="text-align: center; height: 200px;">
+             <%--  <i class="fa fa-spinner"  style="width:50px; height:50px;margin-top:100px;"></i>--%>
+                <img src="Images/Icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 100px;" />
             </div>
+        <div id="addCarPoolModal" class="modal">
+            <div class="modal-content" style="border-radius:5px; width: 580px; margin: auto;margin-top:120px">
+
+                <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
+                    <i class="fa fa-close" style="float:right;cursor:pointer;" onclick="ClosePoolModal()"></i>
+                    
+                    <h4 id="" class="modal-title" style="margin-top: 5px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif; font-size:14px">Offer for Pool:</h4>
+                </div>
+                <div class="layout_modal_body container-fluid">
+                    <form name="CarPool">
+
+                        <div class="row" style="margin-top: 20px;">
+
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Type :</label>
+                                <div class="col-sm-8">
+                                <select id="pool_type" class="form-control form-control-sm" onblur="">
+                                    <option>One Way</option>
+                                    <option>Two Way</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Duration</label>
+                                <div class="col-sm-8">
+                                <select id="pool_cycle" class="form-control form-control-sm" onblur="">
+                                    <option>One Time</option>
+                                    <option>Daily</option>
+                                </select>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row"style="margin-top: 10px;" >
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Where: </label>
+                                <div class="col-sm-8">
+                                <input type="text" id="destination" class="form-control form-control-sm" onblur="" />
+                               </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Available Seat</label>
+                                <div class="col-sm-8">
+                                <input type="number" id="seats"  class="form-control form-control-sm" tabindex="3" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" style="margin-top: 0px;">
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">When: </label>
+                                <div class="col-sm-8">
+                                <div class="form-group">
+                                <div class='input-group date' id='date_when'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                             </div>
+                                </div>
+                                
+                                </div>
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Time:</label>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                     <div class='input-group date' id='time_when'>
+                                         <input type='text' class="form-control" />
+                                         <span class="input-group-addon">
+                                             <span class="glyphicon glyphicon-time"></span>
+                                         </span>
+                                     </div>
+                                 </div>
+                               </div>
+                            </div>
+                        </div>
+                         <div class="row" style="margin-top: 0px;">
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Return:</label>
+                             <div class="col-sm-8">  
+                                 <div class="form-group">
+                                <div class='input-group date' id='date_return'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                             </div>
+                              </div>
+                            </div>
+                             <div class="col-sm-6">
+                                 <label class="labelwidth col-sm-4 col-form-label">Time:</label>
+                                 <div class="col-sm-8">
+                                 <div class="form-group">
+                                     <div class='input-group date' id='time_return'>
+                                         <input type='text' class="form-control" />
+                                         <span class="input-group-addon">
+                                             <span class="glyphicon glyphicon-time"></span>
+                                         </span>
+                                     </div>
+                                     </div>
+                                 </div>
+                             </div>
+                        </div>
+                        <div class="row" style="margin-top:0px;">
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Vehicle Type:</label>
+                                 <div class="col-sm-8">
+                                <input id="vehicle_type" class="form-control form-control-sm" tabindex="4" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Cost / Seat</label>
+                                <div class="col-sm-8">
+                                <input id="Shared_cost" class="form-control form-control-sm" tabindex="5" />
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 5px; margin-bottom: 15px">
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Description:</label>
+                                <div class="col-sm-8">
+                                <input type="text" id="pool_description" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+
+                    <div class="panel-footer" style="text-align: right;">
+                        <button type="button" id="btnInvCancel" style="margin-top: 5px;" onclick="ClosePoolModal()" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                        <button type="button" id="btnInvSubmit" style="margin-top: 5px;" onclick="AddPoolOffer();" class="btn btn-primary">Submit</button>
+
+                    </div>
+                </div>
 
             <div id="invProgressBar" class="container-fluid" style="text-align: center; height: 200px; display: none;">
                 <img src="Images/Icon/ajax-loader.gif" style="width: 20px; height: 20px; margin-top: 50px;" />
@@ -410,37 +489,30 @@
 
 
         <div id="showInterestModal" class="modal">
-            <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
-
-                <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
-                    <button type="button" id="interestClose" class="close" onclick="CloseInterestModal()" style="color: #000;">&times;</button>
-                    <h4 id="" class="modal-title" style="margin-top: 5px;">Offer for Pool:
-                    </h4>
+            <div class="modal-content" style="border-radius:5px; width: 350px; margin: auto; margin-top:150px;">
+                <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
+                    <i class="fa fa-close" style="float:right;cursor:pointer;" onclick="CloseInterestModal()"></i>
+                    <h4 id="interestClose" class="modal-title" style="margin-top: 5px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif; font-size:14px">Offer for Pool:</h4>
                 </div>
 
                 <div class="modal-body">
-
-
                     <div class="row">
-                        <div class="col-sm-6">
-                            <label class="labelwidth">Seats: </label>
-                            <input id="in_seats" onblur="" style="width: 120px" />
-
+                        <div class="col-sm-12">
+                            <label class="labelwidth col-sm-4 col-form-label">Seats: </label>
+                         <div class="col-sm-8">
+                            <input id="in_seats" type="number" onblur="" class="form-control form-control-sm" />
                         </div>
-
-
+                      </div>
                     </div>
-                    <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+                    <div class="row" style="margin-top: 10px; margin-bottom: 10px">
 
-                        <div class="col-sm-6">
-                            <label class="labelwidth">Comments:</label>
-                            <input id="in_comments" style="width: 120px" class="txtbox_style" tabindex="2" />
+                        <div class="col-sm-12">
+                            <label class="labelwidth col-sm-4 col-form-label ">Comments:</label>
+                         <div class="col-sm-8">
+                            <input id="in_comments" class="form-control form-control-sm" tabindex="2" />
                         </div>
-
+                        </div>
                     </div>
-
-                    <hr />
-
                 </div>
 
                 <div class="panel-footer" style="text-align: right;">
@@ -450,43 +522,37 @@
                 </div>
             </div>
 
-            <div id="intrestProgressBar" class="container-fluid" style="text-align: center; height: 200px;">
+            <div id="intrestProgressBar" class="container-fluid" style="text-align: center; height: 200px; display:none">
                 <img src="Images/Icon/ajax-loader.gif" style="width: 20px; height: 20px; margin-top: 50px;" />
             </div>
         </div>
 
         <div id="showCloseModal" class="modal">
-            <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
+            <div class="modal-content"style="border-radius:5px; width: 350px; margin: auto; margin-top:150px;">
 
-                <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
-                    <button type="button" id="close_Close" class="close" onclick="CloseCloseModal()" style="color: #000;">&times;</button>
-                    <h4 id="" class="modal-title" style="margin-top: 5px;">Close Selected Pool
-                    </h4>
+                <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
+                      <i class="fa fa-close" style="float:right;cursor:pointer;" onclick="CloseCloseModal()"></i>
+                    <h4 id="close_Close" class="modal-title" style="margin-top: 5px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif; font-size:14px">Close Selected Pool</h4>
+                   
                 </div>
 
                 <div class="modal-body">
-
-
                     <div class="row">
-                        <div class="col-sm-6">
-                            <label class="labelwidth">Seats: </label>
-                            <input id="close_seats" onblur="" style="width: 120px" />
-
+                        <div class="col-sm-12">
+                            <label class="labelwidth col-sm-4 col-form-label">Seats: </label>
+                            <div class="col-sm-8">
+                            <input id="close_seats" type="number" onblur="" class="form-control form-control-sm" tabindex="1"/>
+                            </div>
                         </div>
-
-
                     </div>
-                    <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-
-                        <div class="col-sm-6">
-                            <label class="labelwidth">Comments:</label>
-                            <input id="close_comments" style="width: 120px" class="txtbox_style" tabindex="2" />
+                    <div class="row" style="margin-top: 10px; margin-bottom: 10px">
+                        <div class="col-sm-12">
+                            <label class="labelwidth col-sm-4 col-form-label">Comments:</label>
+                         <div class="col-sm-8">
+                            <input id="close_comments" class="form-control form-control-sm" tabindex="2" />
                         </div>
-
+                      </div>
                     </div>
-
-                    <hr />
-
                 </div>
 
                 <div class="panel-footer" style="text-align: right;">

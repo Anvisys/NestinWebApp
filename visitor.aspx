@@ -651,7 +651,7 @@
              </div>
               <div id="data_loading" class="container-fluid" style="text-align:center;width:100%; height:200px;background-color:#090909;opacity:0.2;position:fixed; top:100px; z-index:99;">
                     <img src="Images/Icon/ajax-loader.gif" style="width:20px;height:20px; margin-top:50px;" />
-                  <%--<i class="fa fa-spinner" aria-hidden="true" style="width:30px; height:30px;margin-top:100px;"></i>--%>
+                  <%--<i class="fa fa-spinner"  style="width:50px; height:50px;margin-top:100px;"></i>--%>
                    </div>
 
         <div id="AddVisitorModal" class="modal">

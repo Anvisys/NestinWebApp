@@ -61,10 +61,13 @@
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
                     strData = strData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='panel-heading'>" + results[i].Inventory + " " + results[i].RentType + " ,<br/> Rent " + results[i].RentValue + "</div>"
-                        + "<div class='panel-body'> Sector " + results[i].Description + "<div> Contact" + results[i].ContactName + "</div>"
-                        + "<div>" + results[i].ContactNumber + ", " + results[i].FlatNumber + "</div></div>"
-                        + "<div class='panel-footer'><a href=''  onclick='ShowInterest(" + results[i].RentInventoryID + ")'><span class='fa fa-thumbs-up'></span></a></div>"
+                        "<div class='panel-heading'>" + results[i].Inventory + ", Type :  " + results[i].RentType + " <br/>Rent : " + results[i].RentValue + "</div>"
+                        + "<div class='panel-body'> <span style='color:#4357D3;'></span>" + results[i].Description +"</div>"
+                        + "<div> <label class='data_label'> Contact :  </label>" + results[i].ContactName + "</div>"
+                        + "<div> <label class='data_label'> ContactNo. :  </label>" + results[i].ContactNumber + "</div>"
+                        + "<div> <label class='data_label'> FlatNumber :  </label>" + results[i].FlatNumber + "</div>"
+                        + "<div class='panel-footer'><a onclick='ShowInterest(" + results[i].RentInventoryID + ")'><span class='fa fa-thumbs-up'></span></a>" + results[i].InterestedCount
+                        + "</div>"
                         + "</div>";
                 }
 

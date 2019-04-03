@@ -76,7 +76,7 @@ function DisplayDateTime(inputdate) {
     var Currentdate = new Date();
 
     if (date.getDate() == Currentdate.getDate()) {
-        NewFormatDate = today +  ", " + date.getHours() + ": " + date.getMinutes();
+        NewFormatDate = "today" +  ", " + date.getHours() + ": " + date.getMinutes();
     }
     else {
         NewFormatDate = date.toLocaleDateString() + ", " + date.toLocaleTimeString();
