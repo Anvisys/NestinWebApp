@@ -47,7 +47,7 @@ public class Resident
         {
             
             DataAccess dacess = new DataAccess();
-            String UserSearchQuery = "select * from " + CONSTANTS.View_SocietyUser + " Where UserID =" + UserId ;
+            String UserSearchQuery = "select * from " + CONSTANTS.View_SocietyUser + " Where UserID =" + UserId + " and (Type = 'Owner' or Type = 'Tenant' )";
             dsResidentUserFlat = dacess.GetData(UserSearchQuery);
         }
         catch (Exception ex)

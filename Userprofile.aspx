@@ -41,23 +41,20 @@
         var UserID = '';
         var api_url = '';
        
-        window.onload = function SetImage() {
-          
-         <%--   // document.getElementById("uploadPreview").src = '/AppImage/Userimages/' + ResiID + '.png';
-            // alert(FlatID);--%>
+                window.onload = function SetImage() {
 
-            document.getElementById("uploadPreview").src = "GetImages.ashx?UserID=" + UserID;
-        };
+                    document.getElementById("uploadPreview").src = "GetImages.ashx?UserID=" + UserID;
+                };
 
-        function LoadMainpage(ResiID) {
-         <%--   //ResiID = '<%=Session["ResiID"] %>';--%>
-          
-          <%--  document.getElementById("uploadPreview").src = "GetImages.ashx?ResID=" + ResiID;--%>
-         
-            window.parent.ProfileChange();
-            //alert("reload Whole Page");
-            //window.top.location.reload();
-        };
+                function LoadMainpage(ResiID) {
+                 <%--   //ResiID = '<%=Session["ResiID"] %>';--%>
+
+                    <%--  document.getElementById("uploadPreview").src = "GetImages.ashx?ResID=" + ResiID;--%>
+
+                    window.parent.ProfileChange();
+                    //alert("reload Whole Page");
+                    //window.top.location.reload();
+                };
 
                 function PreviewImage() {         
                     var oFReader = new FileReader();
@@ -436,8 +433,7 @@
             
              var updateUrl = api_url + "/api/User/Setting/" + UserID;
             
-            alert(settingData);
-            alert(updateUrl);
+          
             $.ajax({
                 type: "Post",
                 url: updateUrl,
@@ -456,7 +452,7 @@
         function GetSettingData() {
              
             var compUrl = api_url + "/api/User/Setting/" + UserID;
-            alert(compUrl);
+        
             $.ajax({
                 type: "Get",
                 url: compUrl,
@@ -472,7 +468,7 @@
 
 
         function OnSuccessSetting(response) {
-            alert(JSON.stringify(response));
+       
            var js = response;
 
                 $('#<%=chkBillingNotice.ClientID %>').prop('checked', js.BillingNotification);

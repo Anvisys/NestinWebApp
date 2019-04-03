@@ -22,8 +22,10 @@
           
 
     <script>
-          var api_url = "http://www.Kevintech.in/GAService/";
+          var api_url = "";
         $(document).ready(function () {
+              api_url = '<%=Session["api_url"] %>';
+
               populateType();
             populateSelect();
                $("#progressBar").hide();
@@ -85,7 +87,7 @@
 
             console.log(RentInventory);
 
-            var url = api_url + "api/RentInventory/Find"
+            var url = api_url + "/api/RentInventory/Find"
 
                 $.ajax({
                 dataType: "json",
@@ -164,8 +166,8 @@
                                          '<div class="summary-text">'+ results[i].FlatArea +'sqft</div>'+
                                      '</div>'+
                                      '<div class="col-xs-3  well well-sm">'+
-                                         '<div class="summary-title">Status </div>'+
-                                         '<div class="summary-text">from 1st March</div>'+
+                                         '<div class="summary-title">Type </div>'+
+                                         '<div class="summary-text">'+  results[i].RentType+'</div>'+
                                      '</div>'+
                                      '<div class="col-xs-3  well well-sm">'+
                                          '<div class="summary-title">Floor </div>'+

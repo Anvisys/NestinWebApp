@@ -160,7 +160,6 @@
 
         function ShowPaymentForm()
         {
-           
             $("#lblFlat").html(flatNumber);
             $("#lblBillTypee").html(billType);
             $("#lblDueDate").html(dueDate);
@@ -172,17 +171,13 @@
             $("#lblBillGenDate").html(billGeneratedDate);
             $("#HiddenPayMannualID").val(flatNumber);
           
-
             if (amountPaid == totalPayable) {
                 $('#<%=txtAmt.ClientID %>').val("0");
-
             }
             else {
                 $('#<%=txtAmt.ClientID %>').val(currentMonthBalance);
-
             }
-
-         
+        
             $("#PaymentForm").show();
 
         }
@@ -336,98 +331,97 @@
                      
                     
                                                       
-                              <asp:GridView ID="GridlatestBills" runat="server"
-                                              AutoGenerateColumns="false" 
-                                              AllowPaging="True" 
-                                  GridLines="None"
-                                                                  Width="100%"                                 
-                                HorizontalAlign="Center" PageSize="15" EmptyDataText="No Records Found" 
-                                 ShowHeader="false"
-                                  OnPageIndexChanging="GridlatestBills_PageIndexChanging" 
-                                  OnRowDataBound="GridlatestBills_RowDataBound" OnRowCommand="LatestBill_RowCommand">                                          
-                     
-                       <Columns>              
-                                       <asp:TemplateField FooterStyle-BorderStyle="None" >
-                                            <ItemTemplate>   
-                                                  <div class="row layout_shadow_table"> 
-                                                   
-                                                      
-                                                      <span style="font-size:medium; color:#000;margin:10px;">  <asp:Label ID="lblFlatNumar" runat="server" Text='<%# Eval("FlatNumber") %>' ></asp:Label>, 
-                                                           <asp:Label ID="lblBillType" runat="server" Text='<%# Eval("BillType") %>' ></asp:Label></span>
-                                                      <span style="padding:5px;float:right;color:#03a9f4;">Invoice ID <asp:Label ID="lblPayID" runat="server"  Text='<%#Eval("PayID") %>' ></asp:Label></span>
-                                                      <hr style="margin-bottom:10px; margin-top:10px;" />
+                           <asp:GridView ID="GridlatestBills" runat="server"
+                               AutoGenerateColumns="false"
+                               AllowPaging="True"
+                               GridLines="None"
+                               Width="100%"
+                               HorizontalAlign="Center" PageSize="15" EmptyDataText="No Records Found"
+                               ShowHeader="false"
+                               OnPageIndexChanging="GridlatestBills_PageIndexChanging"
+                               OnRowDataBound="GridlatestBills_RowDataBound" OnRowCommand="LatestBill_RowCommand">
+
+                               <Columns>
+                                   <asp:TemplateField FooterStyle-BorderStyle="None">
+                                       <ItemTemplate>
+                                           <div class="row layout_shadow_table">
 
 
-                                                    <div class="col-xs-4 " style="padding: 7px 30px;" >
-                                                         
-                                                           <img   class="profile-image" src='<%# "GetImages.ashx?UserID="+ Eval("OwnerUserID")+"&Name="+Eval("OwnerFirstName") +"&UserType=Owner" %>' 
-                                                            /><br />
-                                                          
-                                                            <asp:Label ID="Label8" runat="server" Text='<%# "Owner: " + Eval("OwnerFirstName") %>' ></asp:Label>
-                                                       
-                                                      </div>
+                                               <span style="font-size: medium; color: #000; margin: 10px;">
+                                                   <asp:Label ID="lblFlatNumar" runat="server" Text='<%# Eval("FlatNumber") %>'></asp:Label>, 
+                                                           <asp:Label ID="lblBillType" runat="server" Text='<%# Eval("BillType") %>'></asp:Label></span>
+                                               <span style="padding: 5px; float: right; color: #03a9f4;">Invoice ID
+                                                   <asp:Label ID="lblPayID" runat="server" Text='<%#Eval("PayID") %>'></asp:Label></span>
+                                               <hr style="margin-bottom: 10px; margin-top: 10px;" />
 
-                                                      <div class="col-xs-4 ">
-                                                          
-                                                          Amount: <asp:Label ForeColor="Red" ID="Label2" runat="server" Text='<%# (int)Eval("CurrentBillAmount") -  (int)Eval("AmountPaid") %>' ></asp:Label> to be  paid by:
-                                                         <span style="color:#009688">  <asp:Label ID="Label5" runat="server" Text='<%# Eval("PaymentDueDate", "{0:dd/MMM/yy}") %>' ></asp:Label></span><br />
-                                                          Current Bill: <%# "Rs. "+ Eval("CurrentBillAmount") %>
-                                                            <%# "Paid: "+ Eval("AmountPaid") %><br />
-                                                            
 
-                                                           <asp:Button ID="btnBillPay" runat="server"
-                                                                CommandName="Pay" 
-                                                                CommandArgument="<%# Container.DataItemIndex %>"
-                                                               Text="Pay"  CssClass="btn btn-primary btn-sm" CausesValidation="false" />
-                                                          
-                                                        <asp:Button ID="btnBillHistory" runat="server" 
-                                                            CommandName="History" 
-                                                            CommandArgument="<%# Container.DataItemIndex %>"
-                                                            Text="Details" CssClass="btn btn-info btn-sm" CausesValidation="false"    />
+                                               <div class="col-xs-4 " style="padding: 7px 30px;">
 
-                                                      </div>
-                                                   <div class="col-xs-4 ">
-                                                        From:   <%# Eval("BillStartDate", "{0:dd/MMM/yy}") %>
+                                                   <img class="profile-image" src='<%# "GetImages.ashx?UserID="+ Eval("OwnerUserID")+"&Name="+Eval("OwnerFirstName") +"&UserType=Owner" %>' /><br />
+
+                                                   <asp:Label ID="Label8" runat="server" Text='<%# "Owner: " + Eval("OwnerFirstName") %>'></asp:Label>
+
+                                               </div>
+
+                                               <div class="col-xs-4 ">
+                                                   Amount:
+                                                   <asp:Label ForeColor="Red" ID="Label2" runat="server" Text='<%# (int)Eval("CurrentBillAmount") -  (int)Eval("AmountPaid") %>'></asp:Label>
+                                                   to be  paid by:
+                                                         <span style="color: #009688">
+                                                             <asp:Label ID="Label5" runat="server" Text='<%# Eval("PaymentDueDate", "{0:dd/MMM/yy}") %>'></asp:Label></span><br />
+                                                   Current Bill: <%# "Rs. "+ Eval("CurrentBillAmount") %>
+                                                   <%# "Paid: "+ Eval("AmountPaid") %><br />
+
+
+                                                   <asp:Button ID="btnBillPay" runat="server"
+                                                       CommandName="Pay"
+                                                       CommandArgument="<%# Container.DataItemIndex %>"
+                                                       Text="Pay" CssClass="btn btn-primary btn-sm" CausesValidation="false" />
+
+                                                   <asp:Button ID="btnBillHistory" runat="server"
+                                                       CommandName="History"
+                                                       CommandArgument="<%# Container.DataItemIndex %>"
+                                                       Text="Details" CssClass="btn btn-info btn-sm" CausesValidation="false" />
+
+                                               </div>
+                                               <div class="col-xs-4 ">
+                                                   From:   <%# Eval("BillStartDate", "{0:dd/MMM/yy}") %>
                                                         To:  <%#  Eval("BillEndDate", "{0:dd/MMM/yy}") %><br />
-                                                      
-                                                           Payment Date: <%#  Eval("AmountPaidDate", "{0:dd/MMM/yy}")  %> <br />
 
-                                                                               <asp:Button ID="btnLatestGenBill" runat="server"
-                                                            CommandName="Generate" 
-                                                            CommandArgument="<%# Container.DataItemIndex %>"
-                                                           Text="Generate"  CssClass="btn btn-success btn-sm" CausesValidation="false"   />
-                                                   </div>
+                                                   Payment Date: <%#  Eval("AmountPaidDate", "{0:dd/MMM/yy}")  %>
+                                                   <br />
 
-                                                      <div class="col-xs-12">
-                                                          
+                                                   <asp:Button ID="btnLatestGenBill" runat="server"
+                                                       CommandName="Generate"
+                                                       CommandArgument="<%# Container.DataItemIndex %>"
+                                                       Text="Generate" CssClass="btn btn-success btn-sm" CausesValidation="false" />
+                                               </div>
 
-                             
-                              
-                             
-                               
+                                               <div class="col-xs-12">
+                                               </div>
+                                           </div>
+
+                                       </ItemTemplate>
+                                   </asp:TemplateField>
+
+                                   <asp:TemplateField Visible="false">
+                                       <ItemTemplate>
+                                           <asp:HiddenField ID="hdnModifiedAt" Value='<%# Eval("ModifiedAt") %>' runat="server"></asp:HiddenField>
+
+                                       </ItemTemplate>
+                                   </asp:TemplateField>
 
 
-                                                      </div>
-                                                  </div>  
 
-                                      </ItemTemplate>
-                                     </asp:TemplateField>
-                      
-                       <asp:TemplateField Visible="false">
-                            <ItemTemplate>        
-                            <asp:HiddenField  ID="hdnModifiedAt" Value='<%# Eval("ModifiedAt") %>' runat="server"></asp:HiddenField>  
-                                                    
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                       
-                       
-                       
-                       </Columns>
-                          <EmptyDataRowStyle BackColor="#EEEEEE" />
-                          
-                        <PagerSettings Mode="NumericFirstLast" />
-                        <PagerStyle   Font-Bold="False" HorizontalAlign="Center"  Font-Names="Berlin Sans FB" Font-Size="Medium" />
-                       </asp:GridView>&nbsp;
+                               </Columns>
+                               <EmptyDataRowStyle BackColor="#EEEEEE" />
+
+                               <PagerSettings Mode="NumericFirstLast" />
+                               <PagerStyle Font-Bold="False" HorizontalAlign="Center" Font-Names="Berlin Sans FB" Font-Size="Medium" />
+                           </asp:GridView>
+                           
+                           
+                           &nbsp;
                              
                               <%--Added by Aarshi on 27-Sept-2017 for bug fix--%>
                               <asp:HiddenField ID="HiddenFlatNumberHistory" runat="server" />
