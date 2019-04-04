@@ -343,11 +343,6 @@
             }
            
         }
-
-        function ShowRoles() {
-            window.location = "Role.aspx";
-        }
-
     </script>
 
 </head>
@@ -379,8 +374,7 @@
                             <li>
                                  <asp:LinkButton ID="btnlogout" runat="server" Text="Logout" OnClick="btnlogout_Click"></asp:LinkButton>
                             </li>
-                            <li id="Li1" runat="server" onclick="ShowRoles()"><a href="#">Show Role</a></li>
-                            <li id="ChangeFlat" runat="server" onclick="ChangeLoggedinFlat()"><a href="#">Change Flat/Role</a></li>
+                              <li id="ChangeFlat" runat="server" onclick="ChangeLoggedinFlat()"><a href="#">Change Flat/Role</a></li>
                         </ul>
                     </li>
 

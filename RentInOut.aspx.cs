@@ -29,11 +29,5 @@ public partial class RentInOut : System.Web.UI.Page
         muser = (User)Session["User"];
 
         SessionVariables.CurrentPage = "RentInOut.aspx";
-        if (muser == null)
-        {
-
-            Response.Redirect("Login.aspx");
-
-        }
     }
 }

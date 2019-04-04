@@ -227,6 +227,8 @@
 
         }
 
+     
+
     </script>
     <style>
         .result_row {
@@ -303,7 +305,7 @@
         <div id="addTenantModal" class="modal">
             <div class="modal-content" style="border-radius:5px; width: 580px; margin: auto; margin-top:120px">
 
-                <div class="modal-header" style="color: white; background-color:#5ca6de; height: 50px;">
+                <div class="modal-header" style="color: white; background-color:#337ab7; height: 50px;">
                     <i class="fa fa-close" style="float:right;cursor:pointer;" onclick="CloseRentalBox()"></i>
                    <%-- <button type="button" id="Close_mod" class="close" onclick="CloseRentalBox()" style="color: #000;">&times;</button>--%>
                     <h4 id="title" class="modal-title" style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif; font-size:14px">Available for Rent:

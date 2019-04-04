@@ -50,11 +50,5 @@ public partial class MyHouse : System.Web.UI.Page
         muser = (User)Session["User"];
 
         SessionVariables.CurrentPage = "MyHouse.aspx";
-        if (muser == null)
-        {
-
-            Response.Redirect("Login.aspx");
-
-        }
     }
 }

@@ -48,16 +48,13 @@
         var selectedSocietyId=0;
         var selectedFlatId = 0;
         var role = "";
-        var api_url = "";
+       
 
         $(document).ready(function () {
-            let params = (new URL(document.location)).searchParams;
-            if (params != null) {
-                UserId = params.get("name");
-            }
-                api_url = '<%=Session["api_url"] %>';
-            GetMySocietyRequests();
-            GetMyHouses();
+          let params = (new URL(document.location)).searchParams;
+            UserId = params.get("name");
+
+         
         });
 
         
@@ -196,7 +193,6 @@
         });
 
         function AddIndependentHouse() {
-
             var House = {};
             House.HouseNumber = document.getElementById("houseno").value;
             House.Sector = document.getElementById("sector").value;
@@ -204,22 +200,20 @@
             House.City = document.getElementById("city").value;
             House.State = document.getElementById("state").value;
             House.PinCode = document.getElementById("pincode").value;
-
-            console.log(JSON.stringify(House));
+    
+            console.log(House);
             $.ajax({
                 type: 'POST',
-                url: 'Role.aspx/AddHouse',
+                url: "Role.aspx/AddHouse",
                 data: '{house: ' + JSON.stringify(House) + '}',
                 contentType: "application/json; charset=utf-8",
-                  async: false,
-                dataType: "json",
+                 dataType: "json",
                 success: function (response) {
-                   //document.getElementById("post_loading").style.display = "none";
+                   document.getElementById("post_loading").style.display = "none";
                     if (response.d >0) {
-
-                        window.location = "main.aspx";
+                            window.location = "main.aspx";
                     }
-                    else if (response.d <0) {
+                    if (response.d <0) {
                             alert('House number is in use');
                     }
                      else 
@@ -229,7 +223,7 @@
 
                 },
                 error: function (data, errorThrown) {
-                    //document.getElementById("post_loading").style.display = "none";
+                    document.getElementById("post_loading").style.display = "none";
                         alert('Error Updating comment, try again');
                 
                   
@@ -240,28 +234,27 @@
 
         function AddNewSociety() {
             var Society = {};
-            Society.SocietyName = document.getElementById("societyName").value;
-            Society.Sector = document.getElementById("socLocality").value;
+             Society.SocietyName = document.getElementById("societyName").value;
+            Society.Sector = document.getElementById("sector").value;
             //House.City = document.getElementById("locality").value;
-            Society.City = document.getElementById("socCity").value;
-            Society.State = document.getElementById("socState").value;
-            Society.PinCode = document.getElementById("socPin").value;
-            Society.ContactUserId = <%=UserID%>;
+            Society.City = document.getElementById("city").value;
+            Society.State = document.getElementById("state").value;
+            Society.PinCode = document.getElementById("pincode").value;
             console.log(Society);
 
              $.ajax({
                 type: 'POST',
-                url: "Role.aspx/AddNewSociety",
+                url: "Role.aspx/Add/societyUser",
                 data: '{Society: ' + JSON.stringify(Society) + '}',
                 contentType: "application/json; charset=utf-8",
                  dataType: "json",
                 success: function (response) {
-                   //document.getElementById("post_loading").style.display = "none";
+                   document.getElementById("post_loading").style.display = "none";
                     if (response.d >0) {
-                            alert('Your Request for new Society has been submitted');
+                            window.location = "main.aspx";
                     }
-                    else if (response.d <0) {
-                            alert('This society is already registered');
+                    if (response.d <0) {
+                            alert('House number is in use');
                     }
                      else 
                     {
@@ -270,7 +263,7 @@
 
                 },
                 error: function (data, errorThrown) {
-                    //document.getElementById("post_loading").style.display = "none";
+                    document.getElementById("post_loading").style.display = "none";
                         alert('Error Updating comment, try again');
                 
                   
@@ -279,92 +272,6 @@
 
         }
 
-
-        function GetMySocietyRequests() {
-             var abs_url = api_url + "/api/Society/" + <%=UserID%>;
-
-            $.ajax({
-                url: abs_url,
-                dataType: "json",
-                success: SocietyRequest,
-                failure: function (response) {
-                    alert(response.d);
-                    sessionStorage.clear();
-                }
-            });
-        }
-
-          function SocietyRequest(response) {
-
-            var strData = "";
-            $("#SocietyRequests").html(strData);
-            var results = response.$values;// jQuery.parseJSON(response.$values);
-            console.log(results);
-            if (results.length > 0) {
-                for (var i = 0; i < results.length; i++) {
-                                     
-                    strData = strData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='panel-heading'>" + results[i].SocietyID + "<br/>: " + results[i].SocietyName + " <br/> Return " + results[i].Sector + "</div>"
-                        + "<div class='panel-body'> City " + results[i].City
-                        + "<div> State" + results[i].State + "</div>"
-                           + "</div>"
-                        + "</div>";
-                    
-                }
-                
-                $("#SocietyRequests").html(strData);
-
-            }
-            else {
-
-            }
-
-        }
-
-
-
-
-        function GetMyHouses() {
-            var abs_url = api_url + "/api/Society/House/" + <%=UserID%>;
-
-                   $.ajax({
-                       url: abs_url,
-                       dataType: "json",
-                       success: HouseRequests,
-                       failure: function (response) {
-                           alert(response.d);
-                           sessionStorage.clear();
-                       }
-                   });
-               }
-
-
-          function HouseRequests(response) {
-
-            var strData = "";
-            $("#HouseRequests").html(strData);
-            var results = response.$values;// jQuery.parseJSON(response.$values);
-            console.log(results);
-            if (results.length > 0) {
-                for (var i = 0; i < results.length; i++) {
-                                     
-                    strData = strData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='panel-heading'>" + results[i].HouseNUmber + "<br/>: " + results[i].Sector + " <br/> Return " + results[i].City + "</div>"
-                        + "<div class='panel-body'> State " + results[i].State
-                        + "<div> Pin" + results[i].PinCode + "</div>"
-                           + "</div>"
-                        + "</div>";
-                    
-                }
-                
-                $("#HouseRequests").html(strData);
-
-            }
-            else {
-
-            }
-
-        }
 
       function  AddInExistingSociety(){
           var user = {};
@@ -397,25 +304,8 @@
             });
         }
 
-        function Click(ResId, status) {
-
-            if (status = 0) {
-                alert("Call Admin for Approval");
-            }
-            else {
-                 window.location = "MainPage.aspx?Res=" + ResId;
-                 alert("Go To Main Page");
-            }
-        }
-
     </script>
 
-    <style>
-
-        .hiddencol{
-            display:none;
-        }
-    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -451,39 +341,29 @@
 
                         </div>
                     </header>
-        <div style="margin-top:100px;padding-left:100px;">
+        <div style="margin-top:100px;">
 
         <asp:GridView ID="gridViewRequests" runat="server"
-            AutoGenerateColumns="false" OnRowDataBound="gridRequest_DataBound"
+            
             
             >
               <Columns>
                                 <%--<asp:BoundField DataField="FlatNumber" HeaderText="Flat" />--%>
-                                <asp:TemplateField HeaderStyle-Width="100px">
+                                <asp:TemplateField HeaderStyle-Width="50px">
                                 <HeaderTemplate>
-                                    <asp:Label ID="lblFlat" runat="server" Text="Flat"></asp:Label>
-                                  
+                                    <asp:Label ID="lblFlat" runat="server" Text="Request"></asp:Label>
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <%--<asp:LinkButton CausesValidation="true" OnClientClick='<%# "Click(" + Eval("ResID")+","+Eval("Status") %>' ID="lnkFlatNumber" runat="server" CssClass="BillActiveGrid"  Font-Bold="true" Font-Underline="true" ForeColor="#0066cc" 
-                                        Text='<%# Bind("FlatNumber") %>'></asp:LinkButton>--%>
-
-                                    <label  onclick='<%# "Click(" + Eval("ResID")+","+Eval("Status")+")" %>'  class="BillActiveGrid"> 
-                                        <%# Eval("FlatNumber") %> 
-
-                                    </label>
-
-                                        </ItemTemplate>
+                                    <asp:LinkButton ID="lnkFlatNumber" runat="server" CssClass="BillActiveGrid"  Font-Bold="true" Font-Underline="true" ForeColor="#0066cc" 
+                                        Text='<%# Bind("FlatNumber") %>'></asp:LinkButton>
+                                </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="SocietyName" HeaderStyle-Width="100px" HeaderText="Society"/>
                                 <asp:BoundField DataField="FlatNumber" HeaderStyle-Width="40px" HeaderText="Flat"  ItemStyle-Width="40px"/>
-                                <asp:BoundField DataField="ActiveDate" DataFormatString="{0:dd/MMM/yy}" HeaderStyle-Width="100px" HeaderText="Active From"/>
-                                <asp:BoundField DataField="DeActiveDate" DataFormatString="{0:dd/MMM/yy}" HeaderStyle-Width="100px" HeaderText="Active Till"/>
-                                <asp:BoundField DataField="Status" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hiddencol" />
+                                <asp:BoundField DataField="ActiveDate" HeaderStyle-Width="100px" HeaderText="Date"/>
                               <%--  <asp:BoundField DataField="Status" HeaderStyle-Width="40px" HeaderText="Status"  ItemStyle-Width="40px"/>--%>
-                            <asp:BoundField DataField="Status" HeaderStyle-Width="100px" HeaderText="Status"/>
-                          
-                             
+                                
+                              
                             </Columns>
                             <EmptyDataRowStyle BackColor="#EEEEEE" />
                             <HeaderStyle BackColor="#0065A8" Font-Bold="false" Font-Names="Modern" Font-Size="Small" ForeColor="White" Height="30px" />
@@ -491,11 +371,6 @@
         </asp:GridView>
 
         </div>
-
-        <div class="row" id="SocietyRequests"></div>
-        
-        <div class="row" id="HouseRequests"></div>
-
         <div class="container-fluid">
             <div class="col-xs-3"></div>
             <div class="col-xs-6">
@@ -526,7 +401,7 @@
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">Sector</label>
                                     <div class="col-sm-7">
-                                        <input type="text" name="Sector"  class="form-control form-control-lg" id="sector" placeholder="Eg.sector-63" required />
+                                        <input type="text" name="Sector" name="Sector"   class="form-control form-control-lg" id="sector" placeholder="Eg.sector-63" required />
                                     </div>
                                 </div>
                             </div>
@@ -643,20 +518,20 @@
                             <div class="form-group row">
                                 <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg">Society Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="society" class="form-control form-control-lg" id="societyName" placeholder="Enter Society name" />
+                                    <input type="text" name="society" class="form-control form-control-lg" id="societyname" placeholder="Enter Society name" />
                                 </div>
                             </div>
                            <div class="form-group row">
                                 <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">Locality</label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="locality" class="form-control form-control-lg" id="socLocality" placeholder="Locality " />
+                                    <input type="text" name="locality" class="form-control form-control-lg" id="locality1" placeholder="Locality " required/>
                                 </div>
                                 </div>
                                  <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">City</label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="city" class="form-control form-control-lg" id="socCity" placeholder="City "  />
+                                    <input type="text" name="city" class="form-control form-control-lg" id="city1" placeholder="City " required />
                                 </div>
                                 </div>
                             </div>
@@ -664,14 +539,14 @@
                                 <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">State</label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="state" class="form-control form-control-lg" id="socState" placeholder="State " />
+                                    <input type="text" name="state" class="form-control form-control-lg" id="state1" placeholder="State " required />
 
                                 </div>
                                 </div>
                                  <div class="col-sm-6">
                                <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">Pin Code</label>
                                 <div class="col-sm-7">
-                                    <input name="pincode" class="form-control form-control-lg" id="socPin" placeholder="Eg.201301 "  />
+                                    <input type="number" name="pincode" class="form-control form-control-lg" id="pincode2" placeholder="Eg.201301 " required />
                                 </div>
                                 </div>
                             </div>

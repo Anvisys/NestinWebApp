@@ -842,15 +842,15 @@
 
                      <div class="row">
                          <div class="col-sm-12">
-                             <button id="btnAdd" class="btn btn-info btn-lg"  onclick="PopulateAddModal()"  style="display:none" type="button">Add Tenant</button>
-                             <br />
+                             <button id="btnAdd" class="btn btn-info btn-sm"  onclick="PopulateAddModal()"  style="display:none" type="button">Add Tenant</button>
+                            
                               <button type="button" class="btn btn-primary btn-sm" onclick="InitiateRent()">Add for Rent</button>
                          </div>
 
                      </div>
 
 
-      <div id="addTenantModal" class="modal">
+                    <div id="addTenantModal" class="modal">
                          <div class="modal-content" style="border: 0px solid;width: 550px; margin: auto;">
 
                              <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
@@ -958,77 +958,74 @@
                          </div>
                      </div>
 
-                      <div id="addInventoryModal" class="modal">
-                        <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
+               <div id="addInventoryModal" class="modal">
+                 <div class="modal-content" style="border-radius:5px; width: 580px; margin: auto; margin-top:120px">
 
-                            <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
-                                <button type="button" id="Close" class="close" onclick="CloseRentalBox()" style="color: #000;">&times;</button>
-                                <h4 id="" class="modal-title" style="margin-top: 5px;">Available for Rent:
-                                         <var>House Number</var></h4>
-                            </div>
+                <div class="modal-header" style="color: white; background-color:#337ab7; height: 50px;">
+                    <i class="fa fa-close" style="float:right;cursor:pointer;" onclick="CloseRentalBox()"></i>
+                    <h4 id="Title" class="modal-title" style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif; font-size:14px">Available for Rent:
+                                        <var>House Number</var></h4>
+                </div>
+ 
+                   <div class="layout_modal_body container-fluid">
+                    <form name="AddRent">
+                
+                    <div class="row " style="margin-top: 20px;">
 
-                            <div class="modal-body">
-
-                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-
-                                    <div class="col-sm-6">
-                                        <label class="labelwidth">Inventory :</label>
-                                        <select id="inventory" onblur="" style="width: 120px">
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="labelwidth">Type :</label>
-                                        <select id="type" onblur="" style="width: 120px">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label class="labelwidth">Rent: </label>
-                                        <input id="inRent" onblur="" style="width: 120px" />
-
-                                    </div>
-
-
-                                </div>
-                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-
-                                    <div class="col-sm-6">
-                                        <label class="labelwidth">Description</label>
-                                        <input id="description" style="width: 120px" class="txtbox_style" tabindex="2" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                      <label class="labelwidth">Contact Person:</label>
-                                        <input id="contactName" style="width: 120px" class="txtbox_style" tabindex="3" />
-                                    </div>
-
-                                </div>
-                                <hr />
-                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-
-                                   <div class="col-sm-6">
-                                        <label class="labelwidth">Contact Number:</label>
-                                        <input id="contactNumber" style="width: 120px" class="txtbox_style" tabindex="3" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="labelwidth">Lastname :</label>
-                                        <input id="endDate" style="width: 120px" class="txtbox_style" tabindex="3" />
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="panel-footer" style="text-align: right;">
-                                <button type="button" id="btnInvCancel" style="margin-top: 5px;" onclick="CloseRentalBox()" data-dismiss="modal" class="btn btn-danger">Cancel</button>
-                                <button type="button" id="btnInvSubmit" style="margin-top: 5px;" onclick="AddRentInventory();" class="btn btn-primary">Submit</button>
-
+                        <div class="col-sm-6">
+                            <label class="labelwidth col-sm-4 col-form-label ">Inventory:</label> 
+                            <div class="col-sm-8">
+                            <select id="inventory" onblur="" class="form-control form-control-sm"></select>
                             </div>
                         </div>
-
-                        <div id="invProgressBar" class="container-fluid" style="text-align: center; height: 200px;">
-                            <img src="Images/Icon/ajax-loader.gif" style="width: 20px; height: 20px; margin-top: 50px;" />
+                        <div class="col-sm-6">
+                            <label class="labelwidth col-sm-4 col-form-label ">Type:</label>
+                            <div class="col-sm-8">
+                            <select id="type"  onblur="" class="form-control form-control-sm "></select>  
+                            </div>
                         </div>
                     </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-sm-6">
+                            <label class="labelwidth col-sm-4 col-form-label">Description:</label>
+                            <div class="col-sm-8">
+                            <input id="description" type="text"  class="form-control form-control-sm" tabindex="2" />
+                                </div>
+                        </div>
+                        
+                        <div class="col-sm-6">
+                            <label class="labelwidth col-sm-4 col-form-label">Rent: </label>
+                            <div class="col-sm-8">
+                            <input id="inRent" type="number" onblur="" class="form-control form-control-sm"/>
+                                </div>
+                        </div>
+
+                    </div>
+                    <div class="row" style="margin-top: 10px; margin-bottom: 10px">
+
+                        <div class="col-sm-6">
+                            <label class="labelwidth col-sm-4 col-form-label">Contact Person:</label>
+                            <div class="col-sm-8">
+                            <input id="contactName" type="text"  class="form-control form-control-lg" tabindex="3" />
+                        </div>
+                            </div>
+                        <div class="col-sm-6">
+                            <label class="labelwidth col-sm-4 col-form-label">Contact Number:</label>
+                            <div class="col-sm-8">
+                            <input id="contactNumber" type="number"  class="form-control form-control-lg" tabindex="3" />
+                        </div>
+                        </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="panel-footer" style="text-align: right;">
+                    <button type="button" id="btnInvCancel" style="margin-top: 5px;" onclick="CloseRentalBox()" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                    <button type="button" id="btnInvSubmit" style="margin-top: 5px;" onclick="AddRentInventory();" class="btn btn-primary">Submit</button>
+
+                </div>
+            </div>
+        </div>
 
                </div>
 

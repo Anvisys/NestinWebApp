@@ -11,22 +11,10 @@ using Newtonsoft.Json;
 public partial class Role : System.Web.UI.Page
 {
    static User mUser;
-
-    public int UserID
-    {
-        get { return mUser.UserID; }
-    }
-
     protected void Page_Load(object sender, EventArgs e)
     {
         SessionVariables.CurrentPage = "Role.aspx";
         mUser = SessionVariables.User;
-        if (mUser == null)
-        {
-
-            Response.Redirect("Login.aspx");
-
-        }
 
         ShowRequests();
     }
@@ -74,19 +62,6 @@ public partial class Role : System.Web.UI.Page
 
 
     }
-
-
-    [System.Web.Services.WebMethod]
-    [System.Web.Script.Services.ScriptMethod]
-    public static int AddNewSociety(Society Society)
-    {
-        int result = Society.InsertSociety();
-
-        return result;
-
-
-    }
-
 
     [System.Web.Services.WebMethod]
     [System.Web.Script.Services.ScriptMethod]
@@ -148,27 +123,4 @@ public partial class Role : System.Web.UI.Page
             mUser = null;
         }
     }
-
-    protected void gridRequest_DataBound(object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            DataRowView drv = e.Row.DataItem as DataRowView;
-            int status = Convert.ToInt32(drv["Status"].ToString());
-            DateTime ActiveDate = Convert.ToDateTime(drv["ActiveDate"].ToString());
-            DateTime InActiveDate = Convert.ToDateTime(drv["DeActiveDate"].ToString());
-            String txtStatus = "Active";
-            if (status == 0 && InActiveDate > DateTime.Now)
-            {
-                txtStatus = "Active";
-            }
-            else {
-                txtStatus = "InActive";
-            }
-            TableCell statusCell = e.Row.Cells[6];
-            statusCell.Text = txtStatus;
-        }
-
-    }
-
 }

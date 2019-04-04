@@ -45,7 +45,7 @@
         $(document).ready(function () {
             let params = (new URL(document.location)).searchParams;
             role = params.get("Role");
-            
+             alert(role);
             if (role == "demo") {
                 alert("demo");
                 $("#lblRegisterUser").text('Register for 15 days free trail');

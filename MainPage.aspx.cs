@@ -32,7 +32,6 @@ public partial class MainPage : System.Web.UI.Page
 
         muser = (User)Session["User"];
 
-
         if (muser == null)
         {
             Response.Redirect("Login.aspx");
@@ -41,35 +40,19 @@ public partial class MainPage : System.Web.UI.Page
         {
             if (!IsPostBack)
             {
-                string ResID = Request.QueryString["Res"];
-                if (ResID != null)
+
+
+                //currentResident = (Resident)muser.AllResidents[0];
+                if (muser.AllResidents.Count > 0)
                 {
-                    Resident currentResident = (Resident)muser.AllResidents.FirstOrDefault(f => f.ResID.ToString() == ResID);
-                    if (currentResident != null)
+                    if (muser.currentResident.UserType == "Individual")
                     {
-                        muser.currentResident = currentResident;
-                        initializePageControl(currentResident);
-                        SessionVariables.CurrentPage = "Dashboard.aspx";
+
+                        
                     }
-                    else {
-                        Response.Redirect("Role.aspx");
-                    }
+                    muser.currentResident = (Resident)muser.AllResidents[0];
+                    initializePageControl(muser.currentResident);
                 }
-                else
-                {
-                    if (muser.AllResidents.Count > 0)
-                    {
-                        if (muser.currentResident.UserType == "Individual")
-                        {
-
-
-                        }
-                        muser.currentResident = (Resident)muser.AllResidents[0];
-                        initializePageControl(muser.currentResident);
-                    }
-
-                }
-
               
             }
 

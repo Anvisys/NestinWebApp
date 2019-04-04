@@ -12,7 +12,7 @@ using System.Transactions;
 public class House
 {
     public int HouseId;
-    public String HouseNumber;
+    public int HouseNumber;
     public String Sector;
     public String City;
     public String State;
@@ -49,8 +49,8 @@ public class House
                     using (SqlConnection dbConnection = new SqlConnection(connString))
                     {
                         String UpdateHouse = "Insert into " + CONSTANTS.Table_IndependentHouse +
-                                             " (HouseNumber, Sector,City,State,PinCode) output INSERTED.ID Values('"
-                                               + HouseNumber + "','" + Sector + "','" + City + "','" + State + "'," + PinCode + ")";
+                                             " (HouseNumber, Sector,City,State,PinCode) output INSERTED.ID Values("
+                                               + HouseNumber + ",'" + Sector + "','" + City + "','" + State + "'," + PinCode + ")";
 
                         dbConnection.Open();
 
