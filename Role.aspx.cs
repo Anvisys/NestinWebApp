@@ -18,9 +18,14 @@ public partial class Role : System.Web.UI.Page
         get { return mUser.UserID; }
     }
 
+    public int ResCount
+    {
+        get { return mUser.AllResidents.Count; }
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        SessionVariables.CurrentPage = "Role.aspx";
+       // SessionVariables.CurrentPage = "Role.aspx";
         mUser = SessionVariables.User;
       
         if (mUser == null)
@@ -29,7 +34,7 @@ public partial class Role : System.Web.UI.Page
         }
         else
         {
-            ShowRequests();
+            //ShowRequests();
         }
     }
 
