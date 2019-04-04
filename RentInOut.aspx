@@ -60,9 +60,9 @@
            
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
-                    strData = strData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='panel-heading'>" + results[i].Inventory + ", Type :  " + results[i].RentType + " <br/>Rent : " + results[i].RentValue + "</div>"
-                        + "<div class='panel-body'> <span style='color:#4357D3;'></span>" + results[i].Description +"</div>"
+                    strData = strData + "<div class=\"col-xs-3 panel panel-success \" style=\"margin:20px;padding:0px; \">" +
+                        "<div class='panel-heading'> <label class='data_label'> Inventory  :  </label>" + results[i].Inventory + ",<label class='data_label'> Type : </label>" + results[i].RentType + " <br/><label class='data_label'>Rent : </label> " + results[i].RentValue + "</div>"
+                        + "<div class='panel-body'> <span style='color:#006400;'></span>" + results[i].Description +"</div>"
                         + "<div> <label class='data_label'> Contact :  </label>" + results[i].ContactName + "</div>"
                         + "<div> <label class='data_label'> ContactNo. :  </label>" + results[i].ContactNumber + "</div>"
                         + "<div> <label class='data_label'> FlatNumber :  </label>" + results[i].FlatNumber + "</div>"
@@ -75,7 +75,7 @@
             $("#RentInView").html(strData);
 
 
-
+            $("#ProgressBar").hide();
               
             }
             else {
@@ -111,5 +111,9 @@
          <div class="row" id="RentInView"></div>
 
      </div>
+     <div id="ProgressBar" class="container-fluid" style="text-align: center; height: 200px;">
+             <%--  <i class="fa fa-spinner"  style="width:50px; height:50px;margin-top:100px;"></i>--%>
+                <img src="Images/Icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 250px;" />
+            </div>
 </body>
 </html>

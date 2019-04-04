@@ -16,9 +16,9 @@
     <!-- jQuery library -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <script src="bootstrap-datetimepicker.js"></script>
+   
     <script type="text/javascript" src="Scripts/datetime.js"></script>
-
+   
     <script language="javascript" src="https://momentjs.com/downloads/moment.js"></script>
     <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css"/>
@@ -86,25 +86,26 @@
                     var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
                     var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
 
-                    strPoolData = strPoolData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px; shadow:3px;\">" +
-                        "<div class='panel-heading'> Destination :  " + results[i].Destination + "<br/>Start: " + JourneyDTime + " <br/> Return: " + ReturnDTime + "</div>"
-                        + "<div class='panel-body'> <label class='data_label'> Vehicle:  </label>" + results[i].VehicleType
+                    strPoolData = strPoolData + "<div class=\"col-xs-3 panel panel-success\" style=\"margin:20px;padding:0px; shadow:3px;\">" +
+                        "<div class='panel-heading'> Destination : " + results[i].Destination + "<br/>StartTime : " +JourneyDTime + " <br/> ReturnTime : " + ReturnDTime + "</div>"
+                        + "<div class='panel-body'> <label class='data_label'> Vehicle :  </label>" + results[i].VehicleType
                         + "<div><label class='data_label'> Total Seats :  </label>" + results[i].AvailableSeats + "</div>"
                         + "<div> <label class='data_label'> Cost :  </label>" + results[i].SharedCost +"</div>"
                         + "<div><label class='data_label'> Description :  </label> " + results[i].Description + "</div>"
                         + "<div><label class='data_label'> Available :  </label> " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
                     console.log(SeatRemaining);
-                    strData = strData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='panel-heading'>" + results[i].Destination + "<br/>Start: " + JourneyDTime + " <br/> Return " + ReturnDTime + "</div>"
-                        + "<div class='panel-body'> Sector " + results[i].VehicleType
-                        + "<div> Contact" + results[i].AvailableSeats + "</div>"
-                        + "<div>" + results[i].SharedCost + ", " + results[i].Description + "</div>"
-                        + "<div> Available " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
+                    strData = strData + "<div class=\"col-xs-3 panel panel-success\" style=\"margin:20px;padding:0px;\">" +
+                        "<div class='panel-heading'> <label class='data_label'> Destination :  </label>" +   results[i].Destination + "<br/> <label class='data_label'> StartTime :   </label>"   +JourneyDTime +
+                        " <br/><label class='data_label'> ReturnTime :   </label>"  + ReturnDTime + "</div>"
+                        + "<div class='panel-body'>  <label class='data_label'> Vehicle :  </label>" + results[i].VehicleType
+                        + "<div><label class='data_label'> Total Seats :  </label>" + results[i].AvailableSeats + "</div>"
+                        + "<div>  <label class='data_label'> Cost :  </label>" + results[i].SharedCost + "</div>"
+                        + "<div><label class='data_label'> Description :  </label> " + results[i].Description + "</div>"
+                        + "<div> <label class='data_label'> Available Seats :  </label>  " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
                         + "</div>"
                         + "<div class='panel-footer'><a onclick='ShowInterest(" + results[i].VehiclePoolID + ")'><span class='fa fa-thumbs-up'></span></a>" + results[i].InterestedCount
                         + "</div>"
                         + "</div>";
-                   
                 }
                
                 $("#CarPool").html(strPoolData);
@@ -133,8 +134,8 @@
                     var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
                     var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
 
-                    strMyData = strMyData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='panel-heading'> Destination : " + results[i].Destination + "<br/>Start : " + JourneyDTime + " <br/> Return : " + ReturnDTime + "</div>"
+                    strMyData = strMyData + "<div class=\"col-xs-3 panel panel-success\" style=\"margin:20px;padding:0px;\">" +
+                        "<div class='panel-heading'> Destination : " + results[i].Destination + "<br/>Start Time :  " + JourneyDTime + " <br/> Return Time : " + ReturnDTime + "</div>"
                         + "<div class='panel-body'> <label class='data_label'> Vehicle:  </label>" + results[i].VehicleType
                         + "<div> <label class='data_label'> Total Seats:  </label>" + results[i].AvailableSeats + "</div>"
                         + "<div><label class='data_label'> Cost :  </label>  " + results[i].SharedCost + "</div>"
@@ -163,13 +164,14 @@
         }
 
         function AddPoolOffer() {
+
+            $("#ProgressBar").show();
             var CarPool = {};
             CarPool.OneWay = 0;  // pool_type
             CarPool.PoolTypeID = 1; //pool_cycle   // 1, onetime, 2 for regular
             CarPool.Active = 1;
             CarPool.Destination = $("#destination").val();
             CarPool.InitiatedDateTime = GetDateTimeinISO(new Date());
-
             var date = $("#date_when").val();
             var time = $("#time_when").val();
             var datetime = date + "T" + time + ":00";
@@ -209,19 +211,18 @@
 
                 },
                 error: function (data, errorThrown) {
-                    alert('User Creation failed :' + errorThrown);
+                    alert('CarPool Creation failed :' + errorThrown);
                     // sessionStorage.clear();
                 }
 
             });
-
+            $("#ProgressBar").hide();
         }
 
         function ShowInterest(PoolId) {
             selectedPoolId = PoolId;
             $("#showInterestModal").show();
         }
-
 
         function AddInterest() {
             var CarPoolInterest = {};
@@ -317,16 +318,37 @@
         });
          $(function () {
             $('#date_when').datetimepicker({
-          
+            format: 'DD/MM/YYYY' 
             });
         });
         $(function () {
-            $('#date_return').datetimepicker({
-               
-            });
+            $('#date_return').datetimepicker({format: 'DD/MM/YYYY' });
         });
     </script>
 
+    <style>
+    .data_label {
+        color:#000;
+    }
+
+   
+ 
+      .model {
+            display: none;  /*  Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            padding-top: 8%; /* Location of the box */
+             padding-bottom: 2%;
+            left: 0px;
+            border-radius:5px;
+            top: 0px;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto;  /*Enable scroll if needed  */
+            background-color: #e6e2e2;
+            background-color: rgba(0,0,0,0.4); 
+        }
+     </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -359,7 +381,7 @@
             </div>
 
 
-        <div id="addCarPoolModal" class="modal">
+        <div id="addCarPoolModal" class="model">
             <div class="modal-content" style="border-radius:5px; width: 580px; margin: auto;margin-top:120px">
 
                 <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
@@ -477,10 +499,10 @@
                             </div>
                         </div>
                         <div class="row" style="margin-top: 5px; margin-bottom: 15px">
-                            <div class="col-sm-6">
-                                <label class="labelwidth col-sm-4 col-form-label">Description:</label>
-                                <div class="col-sm-8">
-                                <input type="text" id="pool_description" class="form-control form-control-sm" />
+                            <div class="col-sm-12">
+                                <label class="labelwidth col-sm-2 col-form-label">Description:</label>
+                                <div class="col-sm-10">
+                                <input type="text" id="pool_description" class="form-control form-control-lg" style="max-height:inherit" />
                                 </div>
                             </div>
                         </div>
@@ -500,11 +522,11 @@
         </div>
 
 
-        <div id="showInterestModal" class="modal">
+        <div id="showInterestModal" class="model">
             <div class="modal-content" style="border-radius:5px; width: 350px; margin: auto; margin-top:150px;">
                 <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
                     <i class="fa fa-close" style="float:right;cursor:pointer;" onclick="CloseInterestModal()"></i>
-                    <h4 id="interestClose" class="modal-title" style="margin-top: 5px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif; font-size:14px">Offer for Pool:</h4>
+                    <h4 id="interestClose" class="modal-title" style="margin-top: 5px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif; font-size:14px">show Interest for Pool:</h4>
                 </div>
 
                 <div class="modal-body">
@@ -521,7 +543,7 @@
                         <div class="col-sm-12">
                             <label class="labelwidth col-sm-4 col-form-label ">Comments:</label>
                          <div class="col-sm-8">
-                            <input id="in_comments" class="form-control form-control-sm" tabindex="2" />
+                            <input id="in_comments" class="form-control rows="2" form-control-sm" tabindex="2" />
                         </div>
                         </div>
                     </div>
@@ -539,7 +561,7 @@
             </div>
         </div>
 
-        <div id="showCloseModal" class="modal">
+        <div id="showCloseModal" class="model">
             <div class="modal-content"style="border-radius:5px; width: 350px; margin: auto; margin-top:150px;">
 
                 <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
@@ -561,7 +583,7 @@
                         <div class="col-sm-12">
                             <label class="labelwidth col-sm-4 col-form-label">Comments:</label>
                          <div class="col-sm-8">
-                            <input id="close_comments" class="form-control form-control-sm" tabindex="2" />
+                            <input id="close_comments"  class="form-control rows="2" form-control-sm" tabindex="2" />
                         </div>
                       </div>
                     </div>
