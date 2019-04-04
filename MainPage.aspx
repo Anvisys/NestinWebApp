@@ -267,8 +267,7 @@
 
 
         function GetAdvertisementData() {
-            //document.getElementById("data_loading").style.display= "block";
-           // var url = "http://www.kevintech.in/GaurMahagun/api/Ads";
+           
           var url = api_url + "/api/Ads";
             $.ajax({
                 type: "Get",
@@ -278,7 +277,7 @@
                 success: function (data) {
                     //document.getElementById("data_loading").style.display = "none";
                  
-                    SetData(data);
+                    SetAds(data);
                 },
                 failure: function (response) {
                     // document.getElementById("data_loading").style.display = "none";
@@ -290,7 +289,7 @@
         }
 
 
-        function SetData(data) {
+        function SetAds(data) {
 
             var jarray = data.$values;
             var length = jarray.length;
@@ -374,6 +373,7 @@
                             <li>
                                  <asp:LinkButton ID="btnlogout" runat="server" Text="Logout" OnClick="btnlogout_Click"></asp:LinkButton>
                             </li>
+                             <li><a href="Role.aspx" id="User_Role" >Role</a></li>
                               <li id="ChangeFlat" runat="server" onclick="ChangeLoggedinFlat()"><a href="#">Change Flat/Role</a></li>
                         </ul>
                     </li>
