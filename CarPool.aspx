@@ -15,12 +15,6 @@
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- jQuery library -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<<<<<<< HEAD
-=======
-
->>>>>>> 29d2ff36dec8fbfbe871f0ca19b93c85d5c4516b
-
-
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
     <script src="bootstrap-datetimepicker.js"></script>
     <script type="text/javascript" src="Scripts/datetime.js"></script>
@@ -77,15 +71,12 @@
         };
 
         function OnSuccess(response) {
-<<<<<<< HEAD
             $("#ProgressBar").show();
             var strPoolData = "";
             $("#CarPool").html("");
-=======
 
             var strData = "";
             $("#CarPool").html(strData);
->>>>>>> 29d2ff36dec8fbfbe871f0ca19b93c85d5c4516b
             var results = response.$values;// jQuery.parseJSON(response.$values);
             console.log(results);
             if (results.length > 0) {
@@ -94,7 +85,6 @@
                     var JourneyDTime = DisplayDateTime(results[i].JourneyDateTime);
                     var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
                     var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
-<<<<<<< HEAD
 
                     strPoolData = strPoolData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px; shadow:3px;\">" +
                         "<div class='panel-heading'> Destination :  " + results[i].Destination + "<br/>Start: " + JourneyDTime + " <br/> Return: " + ReturnDTime + "</div>"
@@ -103,7 +93,6 @@
                         + "<div> <label class='data_label'> Cost :  </label>" + results[i].SharedCost +"</div>"
                         + "<div><label class='data_label'> Description :  </label> " + results[i].Description + "</div>"
                         + "<div><label class='data_label'> Available :  </label> " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
-=======
                     console.log(SeatRemaining);
                     strData = strData + "<div class=\"col-xs-3 panel panel-primary\" style=\"margin:20px;padding:0px;\">" +
                         "<div class='panel-heading'>" + results[i].Destination + "<br/>Start: " + JourneyDTime + " <br/> Return " + ReturnDTime + "</div>"
@@ -111,30 +100,25 @@
                         + "<div> Contact" + results[i].AvailableSeats + "</div>"
                         + "<div>" + results[i].SharedCost + ", " + results[i].Description + "</div>"
                         + "<div> Available " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
->>>>>>> 29d2ff36dec8fbfbe871f0ca19b93c85d5c4516b
                         + "</div>"
                         + "<div class='panel-footer'><a onclick='ShowInterest(" + results[i].VehiclePoolID + ")'><span class='fa fa-thumbs-up'></span></a>" + results[i].InterestedCount
                         + "</div>"
                         + "</div>";
-<<<<<<< HEAD
                    
                 }
                
                 $("#CarPool").html(strPoolData);
                 $("#ProgressBar").hide();
-=======
+
                     
                 }
                  console.log(strData);
                 $("#CarPool").html(strData);
 
->>>>>>> 29d2ff36dec8fbfbe871f0ca19b93c85d5c4516b
-            }
-            else {
 
             }
 
-        }
+        
 
 
         function MyPoolData(response) {
@@ -166,9 +150,7 @@
                 $("#MyPool").html(strMyData);
 
             }
-            else {
-
-            }
+           
         }
 
         function ShowPoolModal() {
@@ -375,6 +357,8 @@
              <%--  <i class="fa fa-spinner"  style="width:50px; height:50px;margin-top:100px;"></i>--%>
                 <img src="Images/Icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 100px;" />
             </div>
+
+
         <div id="addCarPoolModal" class="modal">
             <div class="modal-content" style="border-radius:5px; width: 580px; margin: auto;margin-top:120px">
 
