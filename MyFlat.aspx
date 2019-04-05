@@ -24,7 +24,9 @@
 
     <script>
         var api_url, CurrentUserType, ResID, UserID, Type, BHK, FirstName, LastName, MobileNo, EmailId,FlatID, FlatNumber, Address, ParentName, SocietyID,SocietyName, Gender, ActiveDate, DeActiveDate,  TenantUserID;
-        var MobileExist, EmailExist,TenantResID,chkExistingUser=false;
+        var MobileExist, EmailExist, TenantResID, chkExistingUser = false;
+
+        var currentInvetoryID = 0;
 
         $(document).ready(function () {
 
@@ -60,12 +62,13 @@
          ResID = '<%=Session["ResiID"] %>';
       UserID= '<%=Session["UserID"] %>';
         
-	    Service(FlatNumber);
+            GetFlatInfo(FlatNumber);
+            GetRentalInfo(FlatNumber);
 	   
 	}
         
 
-        function Service(FlatNumber) {
+        function GetFlatInfo(FlatNumber) {
 
             // alert("minimum val is "+minvalue);
             // alert("maximum value is "+maxvalue);
@@ -81,7 +84,7 @@
                     $("#main_div").show();
                     $("#ad_div").show();
                     
-                    getData(data);
+                    SetFlatInfo(data);
                 },
                 error: function (data, errorThrown) {
                     $("#progressBar").hide();
@@ -94,7 +97,7 @@
             //  sessionStorage.setItem("maxvalue", maxvalue);
         };
 
-        function getData(data) {
+        function SetFlatInfo(data) {
           
             var da = JSON.stringify(data);
             var js = jQuery.parseJSON(da);
@@ -163,6 +166,57 @@
                 $("#btnAdd").hide();
             }
         };
+
+
+            function GetRentalInfo(FlatNumber) {
+
+           
+         
+            var url = api_url + "/api/RentInventory/Find/" + FlatID + "/0"; 
+            
+                 $.ajax({
+                dataType: "json",
+                url: url,
+                success: function (data) {
+                    
+                    SetRentalInfo(data);
+                },
+                error: function (data, errorThrown) {
+                 
+                    alert('request failed :' + errorThrown);
+                }
+
+            });
+
+
+            //  sessionStorage.setItem("maxvalue", maxvalue);
+        };
+
+
+        function SetRentalInfo(data) {
+
+            var obj = data.$values;
+
+            if (obj.length == 0) {
+                $("#RentalDetail").hide();
+                $("#btnAddForRent").show();
+            }
+            else {
+                $("#RentalDetail").show();
+                $("#btnAddForRent").hide();
+                currentInvetoryID = obj[0].RentInventoryID;
+                
+                document.getElementById("lblRentalType").innerHTML = obj[0].RentType;
+                document.getElementById("lblInventory").innerHTML = obj[0].Inventory;
+                document.getElementById("lblRentValue").innerHTML = obj[0].RentValue;
+                document.getElementById("lblRentContactName").innerHTML = obj[0].ContactName;
+                document.getElementById("lblRentContactNumber").innerHTML = obj[0].ContactNumber;
+                document.getElementById("lblRentDescription").innerHTML = obj[0].Description;
+
+            }
+
+        }
+
 
         function GetImageByMobile(Mobile,element) {
 
@@ -506,16 +560,7 @@
 
        }
 
-        //$("#modalAdd").show(function () {
-           
-            
-        //});
-
-        //$('#modalAdd').on('show.bs.modal', function () {
-           
-        //    $("#title").text(name);
-        //})
-
+    
         $(document).ajaxStart(function () {
             $('.loader').show();
         }).ajaxStop(function () {
@@ -566,12 +611,7 @@
             });
         }
 
-        //function UserStatusChange() {
-        //    if (chkUser) {
-
-        //        $("#inAddTFirstName").attr("enabled", false);
-        //    }
-        //}
+      
         jQuery(document).ready(function () {
 
         $("#chkUser").click(function () {
@@ -698,10 +738,53 @@
                 });
             }
 
+        function CloseRental() {
+
+            $("#closeInventoryModal").show();
+        }
 
 
+        function CloseCloseBox() {
+             $("#closeInventoryModal").hide();
+        }
 
-	</script>
+        function CloseRentInventory() {
+            var InventoryUpdate = {};
+            InventoryUpdate.InventoryId = currentInvetoryID;
+            InventoryUpdate.Status = 0;
+
+            var url = api_url + "/api/RentInventory/Close"
+
+                $.ajax({
+                    dataType: "json",
+                    url: url,
+                    data: JSON.stringify(InventoryUpdate),
+                    type: 'post',
+                    async: false,
+                    contentType: 'application/json',
+                    success: function (data) {
+                     
+                        var Response = data.Response;
+                        if (Response == "OK") {
+                            $("#closeInventoryModal").hide();
+                            GetRentalInfo(FlatNumber);
+                        }
+                        else {
+                            document.getElementById("lblMessage").innerHTML = "Could not submitt, Please contact admin";
+                        }
+
+                    },
+                    error: function (data, errorThrown) {
+                        alert('Error submitting Rent Inventory :' + errorThrown);
+                        // sessionStorage.clear();
+                    }
+
+                });
+
+
+        }
+
+    </script>
 
 <style>
     .data_label {
@@ -733,7 +816,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12 col-xs-12" >
+            <div class="col-sm-12 col-xs-12">
 
                 <div class="container-fluid">
                     <div class="row" style="height: 40px;">
@@ -751,293 +834,358 @@
 
 
 
-                 <div id="main_div" style="display:none; margin:10px;">
-                     <div id="FlatDetails" class="content_div">
-                         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
-                             <div class="col-sm-4">
-                                 <label class="data_heading">Flat Number :</label>
-                                 <label class="data_label" id="lblFlatNumber">...</label>
-                             </div>
-                             <div class="col-sm-4">
-                                 <label class="data_heading">Flat Floor :</label>
-                                 <label class="data_label" id="lblFlatFloor">...</label>
-                             </div>
-                             <div class="col-sm-4">
-                                 <label class="data_heading">Intercom Number :</label>
-                                 <label class="data_label" id="lblIntercomNumber">...</label>
-                             </div>
-                         </div>
-                         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
-                             <div class="col-sm-4">
-                                 <label class="data_heading">BHK :</label>
-                                 <label class="data_label" id="lblFlatBHK">...</label>
-                             </div>
-                             <div class="col-sm-4">
-                                 <label class="data_heading">Block :</label>
-                                 <label class="data_label" id="lblFlatBlock">...</label>
-                             </div>
-                             <div class="col-sm-4">
-                                 <label class="data_heading">Flat Area :</label>
-                                 <label class="data_label" id="lblFlatArea">...</label>
-                             </div>
-                         </div>
+                <div id="main_div" style="display: none; margin: 10px;">
+                    <div id="FlatDetails" class="content_div">
+                        <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                            <div class="col-sm-4">
+                                <label class="data_heading">Flat Number :</label>
+                                <label class="data_label" id="lblFlatNumber">...</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="data_heading">Flat Floor :</label>
+                                <label class="data_label" id="lblFlatFloor">...</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="data_heading">Intercom Number :</label>
+                                <label class="data_label" id="lblIntercomNumber">...</label>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                            <div class="col-sm-4">
+                                <label class="data_heading">BHK :</label>
+                                <label class="data_label" id="lblFlatBHK">...</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="data_heading">Block :</label>
+                                <label class="data_label" id="lblFlatBlock">...</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="data_heading">Flat Area :</label>
+                                <label class="data_label" id="lblFlatArea">...</label>
+                            </div>
+                        </div>
 
-                     </div>
+                    </div>
 
-                     <div id="OwnerDetail" class="content_div">
-                         <div class="row" style="margin-top: 5px; margin-bottom: 5px; text-align: center;">
-                             <div class="col-xs-12">
-                                 <h4 style="padding-right: 141px; font-family: Verdana;">Owner Info</h4>
-                             </div>
-                         </div>
-                         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
-                             <div class="col-sm-4">
-                                 <img src="Images/Icon/profile.jpg" id="OwnerImage" height="110" width="110" style="border-radius: 50%;" />
-                             </div>
-                             <div class="col-sm-8">
-                                 <label style="width: 100px;" class="data_heading">Name :</label>
-                                 <label style="width: 50%;" class="data_label" id="lblFlatOwner">...</label><br />
-                                 <label style="width: 100px;" class="data_heading">Email :</label>
-                                 <label style="width: 50%;" class="data_label" id="lblFlatOwnerEmail">...</label><br />
-                                 <label style="width: 100px;" class="data_heading">Contact :</label>
-                                 <label style="width: 50%;" class="data_label" id="lblFlatOwnerMobile">...</label>
-                             </div>
+                    <div id="OwnerDetail" class="content_div">
+                        <div class="row" style="margin-top: 5px; margin-bottom: 5px; text-align: center;">
+                            <div class="col-xs-12">
+                                <h4 style="padding-right: 141px; font-family: Verdana;">Owner Info</h4>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                            <div class="col-sm-4">
+                                <img src="Images/Icon/profile.jpg" id="OwnerImage" height="110" width="110" style="border-radius: 50%;" />
+                            </div>
+                            <div class="col-sm-8">
+                                <label style="width: 100px;" class="data_heading">Name :</label>
+                                <label style="width: 50%;" class="data_label" id="lblFlatOwner">...</label><br />
+                                <label style="width: 100px;" class="data_heading">Email :</label>
+                                <label style="width: 50%;" class="data_label" id="lblFlatOwnerEmail">...</label><br />
+                                <label style="width: 100px;" class="data_heading">Contact :</label>
+                                <label style="width: 50%;" class="data_label" id="lblFlatOwnerMobile">...</label>
+                            </div>
 
-                         </div>
-                     </div>
+                        </div>
+                    </div>
 
-                     <div id="TenantDetail" class="content_div">
-                         <div class="row" style="margin-top: 5px; margin-bottom: 5px; text-align: center;">
-                             <div class="col-xs-12">
-                                 <h4 style="padding-right: 141px; font-family: Verdana;">Tenant Info</h4>
+                    <div id="TenantDetail" class="content_div">
+                        <div class="row" style="margin-top: 5px; margin-bottom: 5px; text-align: center;">
+                            <div class="col-xs-12">
+                                <h4 style="padding-right: 141px; font-family: Verdana;">Tenant Info</h4>
 
-                             </div>
-                         </div>
-                         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
-                             <div class="col-sm-4">
-                                 <img id="TenantImage" src="Images/Icon/profile.jpg" height="110" width="110" style="border-radius: 50%;" />
-                             </div>
-                             <div class="col-sm-8">
-                                 <label style="width: 100px;" class="data_heading">Name :</label>
-                                 <label class="data_label" id="lblFlatTenantName">...</label><br />
-                                 <label style="width: 100px;" class="data_heading">Email :</label>
-                                 <label class="data_label" id="lblFlatTenantEmail">...</label><br />
-                                 <label style="width: 100px;" class="data_heading">Contact :</label>
-                                 <label class="data_label" id="lblFlatTenantMobile">...</label><br />
-                                 <label style="width: 100px;" class="data_heading">Address :</label>
-                                 <label class="data_label" id="lblFlatTenantAddress">...</label><br />
-                                 <label style="width: 100px;" class="data_heading">From :</label>
-                                 <label class="data_label" id="lblFlatTenantFrom">...</label><br />
-                                 <label style="width: 100px;" class="data_heading">Till :</label>
-                                 <label class="data_label" id="lblFlatTenantTo">...</label>
-                                 <button id="btnEdit" type="button" class="btn btn-danger" style="display: none" onclick="ChangeDeactiveDate()">Set End Date</button>
-                                 <div id="ChangeDate" style="display: none">
-                                     <input type="date" id="newDeactiveDate" style="width: 150px" />
-                                     <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
-                                 </div>
-                             </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                            <div class="col-sm-4">
+                                <img id="TenantImage" src="Images/Icon/profile.jpg" height="110" width="110" style="border-radius: 50%;" />
+                            </div>
+                            <div class="col-sm-8">
+                                <label style="width: 100px;" class="data_heading">Name :</label>
+                                <label class="data_label" id="lblFlatTenantName">...</label><br />
+                                <label style="width: 100px;" class="data_heading">Email :</label>
+                                <label class="data_label" id="lblFlatTenantEmail">...</label><br />
+                                <label style="width: 100px;" class="data_heading">Contact :</label>
+                                <label class="data_label" id="lblFlatTenantMobile">...</label><br />
+                                <label style="width: 100px;" class="data_heading">Address :</label>
+                                <label class="data_label" id="lblFlatTenantAddress">...</label><br />
+                                <label style="width: 100px;" class="data_heading">From :</label>
+                                <label class="data_label" id="lblFlatTenantFrom">...</label><br />
+                                <label style="width: 100px;" class="data_heading">Till :</label>
+                                <label class="data_label" id="lblFlatTenantTo">...</label>
+                                <button id="btnEdit" type="button" class="btn btn-danger" style="display: none" onclick="ChangeDeactiveDate()">Set End Date</button>
+                                <div id="ChangeDate" style="display: none">
+                                    <input type="date" id="newDeactiveDate" style="width: 150px" />
+                                    <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
+                                </div>
+                            </div>
 
-                         </div>
-                     </div>
+                        </div>
+                    </div>
 
-                     <div class="row">
-                         <div class="col-sm-12">
-                             <button id="btnAdd" class="btn btn-info btn-sm"  onclick="PopulateAddModal()"  style="display:none" type="button">Add Tenant</button>
-                            
-                              <button type="button" class="btn btn-primary btn-sm" onclick="InitiateRent()">Add for Rent</button>
-                         </div>
+                    <div id="RentalDetail" class="content_div">
+                        <div class="row" style="margin-top: 5px; margin-bottom: 5px; text-align: center;">
+                            <div class="col-xs-12">
+                                <h4 style="padding-right: 141px; font-family: Verdana;">Rental offer</h4>
 
-                     </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+
+                            <div class="col-sm-4">
+                                <label style="width: 100px;" class="data_heading">Type :</label>
+                                <label class="data_label" id="lblRentalType">...</label><br />
+                                <label style="width: 100px;" class="data_heading">Inventory :</label>
+                                <label class="data_label" id="lblInventory">...</label><br />
+                            </div>
+                            <div class="col-sm-4">
+                                <label style="width: 100px;" class="data_heading">Rent :</label>
+                                <label class="data_label" id="lblRentValue">...</label><br />
+                                <label style="width: 100px;" class="data_heading">Contact</label>
+                                <label class="data_label" id="lblRentContactName">...</label><br />
+                            </div>
+                            <div class="col-sm-4">
+                                <label style="width: 100px;" class="data_heading">Number</label>
+                                <label class="data_label" id="lblRentContactNumber">...</label><br />
+                                <label style="width: 100px;" class="data_heading">other</label>
+                                <label class="data_label" id="">...</label>
+                            </div>
+                            <div class="row">
+                                <label style="width: 100px;" class="data_heading">Description</label>
+                                <label class="data_label" id="lblRentDescription">...</label>
+                            </div>
+
+                            <div class="col-xs-12" id="Close">
+                                <button id="btnClose" type="button" class="btn btn-primary btn-sm pull-right" onclick="CloseRental();">Close</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button id="btnAdd" class="btn btn-info btn-sm" onclick="PopulateAddModal()" style="display: none" type="button">Add Tenant</button>
+
+                            <button id="btnAddForRent" type="button" class="btn btn-primary btn-sm" onclick="InitiateRent()">Add for Rent</button>
+                        </div>
+
+                    </div>
 
 
                     <div id="addTenantModal" class="modal">
-                         <div class="modal-content" style="border: 0px solid;width: 550px; margin: auto;">
+                        <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
 
-                             <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
-                                 <button type="button" id="Close_mod" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
-                                 <h4 id="title" class="modal-title" style="margin-top: 5px;">Add Tenant to:
+                            <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
+                                <button type="button" id="Close_mod" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
+                                <h4 id="title" class="modal-title" style="margin-top: 5px;">Add Tenant to:
                                      <var>FlatNumber</var></h4>
-                             </div>
+                            </div>
 
-                             <div class="modal-body">
+                            <div class="modal-body">
 
-                                 <label class="labelwidth">Existing Users :</label>
-                                    <input id="chkUser"  type="checkbox" /> &nbsp; <label id="lblMessage" ></label>
-                                 <br />
-                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-                                   
-                                     <div class="col-sm-6">
-                                         <label class="labelwidth">Mobile :</label>
-                                         <input id="inAddTMobile" onblur="ValidateMobile(this);" style="width: 120px" />
-                                     </div>
-                                     <div class="col-sm-6">
-                                         <label class="labelwidth">Email  :</label>
-                                         <input id="inAddTEmailID" onblur="ValidateEmail(this);" style="width: 120px" />
+                                <label class="labelwidth">Existing Users :</label>
+                                <input id="chkUser" type="checkbox" />
+                                &nbsp;
+                            <label id="lblMessage"></label>
+                                <br />
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
 
-                                     </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Mobile :</label>
+                                        <input id="inAddTMobile" onblur="ValidateMobile(this);" style="width: 120px" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Email  :</label>
+                                        <input id="inAddTEmailID" onblur="ValidateEmail(this);" style="width: 120px" />
 
-
-                                 </div>
-                                 <hr />
-                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-
-                                     <div class="col-sm-6">
-                                         <label class="labelwidth">Firstname :</label>
-                                         <input id="inAddTFirstName" style="width: 120px" class="txtbox_style" tabindex="2" />
-                                     </div>
-                                     <div class="col-sm-6">
-                                         <label class="labelwidth">Lastname :</label>
-                                         <input id="inAddTLastName" style="width: 120px" class="txtbox_style" tabindex="3" />
-                                     </div>
-
-                                 </div>
-
-                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-
-                                     <div class="col-sm-6">
-                                         <label class="labelwidth">ParentName :</label>
-                                         <input id="inAddTParentName" style="width: 120px" class="txtbox_style" tabindex="5" />
-                                     </div>
-                                     <div class="col-sm-6">
-                                         <label class="labelwidth">Gender :</label>
-                                         <select id="mgender" style="width: 120px;padding: 3px;">
-                                             <option value="Male">Male</option>
-                                             <option value="Female">Female</option>
-                                         </select>
-                                     </div>
-
-                                 </div>
-
-                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-                                     <div class="col-sm-6">
-                                         <label class="labelwidth">Address :</label>
-                                         <input id="inAddTAddress" style="width: 120px" class="txtbox_style" tabindex="8" />
-                                     </div>
-
-                                     <div class="col-sm-6" style="display:none;">
-                                         <label class="labelwidth">UserLogin  :</label>
-                                         <input id="inAddTUserLogin" style="width: 120px" class="txtbox_style" tabindex="10" />
-                                         <br />
-                                     </div>
-                                 </div>
+                                    </div>
 
 
-                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px; display:none;">
+                                </div>
+                                <hr />
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Firstname :</label>
+                                        <input id="inAddTFirstName" style="width: 120px" class="txtbox_style" tabindex="2" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Lastname :</label>
+                                        <input id="inAddTLastName" style="width: 120px" class="txtbox_style" tabindex="3" />
+                                    </div>
+
+                                </div>
+
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">ParentName :</label>
+                                        <input id="inAddTParentName" style="width: 120px" class="txtbox_style" tabindex="5" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Gender :</label>
+                                        <select id="mgender" style="width: 120px; padding: 3px;">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Address :</label>
+                                        <input id="inAddTAddress" style="width: 120px" class="txtbox_style" tabindex="8" />
+                                    </div>
+
+                                    <div class="col-sm-6" style="display: none;">
+                                        <label class="labelwidth">UserLogin  :</label>
+                                        <input id="inAddTUserLogin" style="width: 120px" class="txtbox_style" tabindex="10" />
+                                        <br />
+                                    </div>
+                                </div>
 
 
-                                     <div class="col-sm-6" >
-                                         <label class="labelwidth">Password  :</label>
-                                         <input id="inAddPassword" style="width: 120px" class="txtbox_style" tabindex="12" /><br />
-                                     </div>
-                                     <div class="col-sm-6">
-                                         <label class="labelwidth">Confirm Password :</label>
-                                         <input id="inTConfirmPassword" style="width: 120px" class="txtbox_style" tabindex="12" /><br />
-                                     </div>
-                                 </div>
-                                 <hr />
-                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px; display: none;">
 
-                                     <div class="col-sm-6">
-                                         <label class="labelwidth" style="width:105px;">Active date :</label>
-                                         <input type="date" id="inAddTActiveDate" max="" style="width: 135px" />
-                                     </div>
-                                     <div class="col-sm-6">
-                                         <label class="labelwidth" style="width:105px;">Deactive date :</label>
-                                         <input type="date" id="inAddTDeactiveDate" style="width: 135px" />
-                                     </div>
-                                 </div>
-                                
 
-                             </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Password  :</label>
+                                        <input id="inAddPassword" style="width: 120px" class="txtbox_style" tabindex="12" /><br />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Confirm Password :</label>
+                                        <input id="inTConfirmPassword" style="width: 120px" class="txtbox_style" tabindex="12" /><br />
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
 
-                             <div class="panel-footer" style="text-align: right;">
-                                 <button type="button" id="btnCancel" style="margin-top: 5px;" data-dismiss="modal" class="btn btn-danger">Cancel</button>
-                                 <button type="button" id="btnSubmit" style="margin-top: 5px;" onclick="AddUser();" class="btn btn-primary">Submit</button>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth" style="width: 105px;">Active date :</label>
+                                        <input type="date" id="inAddTActiveDate" max="" style="width: 135px" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth" style="width: 105px;">Deactive date :</label>
+                                        <input type="date" id="inAddTDeactiveDate" style="width: 135px" />
+                                    </div>
+                                </div>
 
-                             </div>
-                         </div>
-                     </div>
 
-               <div id="addInventoryModal" class="modal">
-                 <div class="modal-content" style="border-radius:5px; width: 580px; margin: auto; margin-top:120px">
+                            </div>
 
-                <div class="modal-header" style="color: white; background-color:#337ab7; height: 50px;">
-                    <i class="fa fa-close" style="float:right;cursor:pointer;" onclick="CloseRentalBox()"></i>
-                    <h4 id="Title" class="modal-title" style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif; font-size:14px">Available for Rent:
+                            <div class="panel-footer" style="text-align: right;">
+                                <button type="button" id="btnCancel" style="margin-top: 5px;" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                                <button type="button" id="btnSubmit" style="margin-top: 5px;" onclick="AddUser();" class="btn btn-primary">Submit</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="addInventoryModal" class="modal">
+                        <div class="modal-content" style="border-radius: 5px; width: 580px; margin: auto; margin-top: 120px">
+
+                            <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
+                                <i class="fa fa-close" style="float: right; cursor: pointer;" onclick="CloseRentalBox()"></i>
+                                <h4 id="Title" class="modal-title" style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-size: 14px">Available for Rent:
                                         <var>House Number</var></h4>
-                </div>
- 
-                   <div class="layout_modal_body container-fluid">
-                    <form name="AddRent">
-                
-                    <div class="row " style="margin-top: 20px;">
-
-                        <div class="col-sm-6">
-                            <label class="labelwidth col-sm-4 col-form-label ">Inventory:</label> 
-                            <div class="col-sm-8">
-                            <select id="inventory" onblur="" class="form-control form-control-sm"></select>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="labelwidth col-sm-4 col-form-label ">Type:</label>
-                            <div class="col-sm-8">
-                            <select id="type"  onblur="" class="form-control form-control-sm "></select>  
+
+                            <div class="layout_modal_body container-fluid">
+                                <form name="AddRent">
+
+                                    <div class="row " style="margin-top: 20px;">
+
+                                        <div class="col-sm-6">
+                                            <label class="labelwidth col-sm-4 col-form-label ">Inventory:</label>
+                                            <div class="col-sm-8">
+                                                <select id="inventory" onblur="" class="form-control form-control-sm"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="labelwidth col-sm-4 col-form-label ">Type:</label>
+                                            <div class="col-sm-8">
+                                                <select id="type" onblur="" class="form-control form-control-sm "></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-sm-6">
+                                            <label class="labelwidth col-sm-4 col-form-label">Description:</label>
+                                            <div class="col-sm-8">
+                                                <input id="description" type="text" class="form-control form-control-sm" tabindex="2" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <label class="labelwidth col-sm-4 col-form-label">Rent: </label>
+                                            <div class="col-sm-8">
+                                                <input id="inRent" type="number" onblur="" class="form-control form-control-sm" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="margin-top: 10px; margin-bottom: 10px">
+
+                                        <div class="col-sm-6">
+                                            <label class="labelwidth col-sm-4 col-form-label">Contact Person:</label>
+                                            <div class="col-sm-8">
+                                                <input id="contactName" type="text" class="form-control form-control-lg" tabindex="3" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="labelwidth col-sm-4 col-form-label">Contact Number:</label>
+                                            <div class="col-sm-8">
+                                                <input id="contactNumber" type="number" class="form-control form-control-lg" tabindex="3" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="panel-footer" style="text-align: right;">
+                                <button type="button" id="btnInvCancel" style="margin-top: 5px;" onclick="CloseRentalBox()" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                                <button type="button" id="btnInvSubmit" style="margin-top: 5px;" onclick="AddRentInventory();" class="btn btn-primary">Submit</button>
+
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="margin-top: 10px;">
-                        <div class="col-sm-6">
-                            <label class="labelwidth col-sm-4 col-form-label">Description:</label>
-                            <div class="col-sm-8">
-                            <input id="description" type="text"  class="form-control form-control-sm" tabindex="2" />
-                                </div>
-                        </div>
-                        
-                        <div class="col-sm-6">
-                            <label class="labelwidth col-sm-4 col-form-label">Rent: </label>
-                            <div class="col-sm-8">
-                            <input id="inRent" type="number" onblur="" class="form-control form-control-sm"/>
-                                </div>
-                        </div>
 
-                    </div>
-                    <div class="row" style="margin-top: 10px; margin-bottom: 10px">
+                </div>
 
-                        <div class="col-sm-6">
-                            <label class="labelwidth col-sm-4 col-form-label">Contact Person:</label>
-                            <div class="col-sm-8">
-                            <input id="contactName" type="text"  class="form-control form-control-lg" tabindex="3" />
-                        </div>
+                <div id="progressBar" class="container-fluid" style="text-align: center; height: 200px;">
+                    <img src="Images/Icon/ajax-loader.gif" style="width: 20px; height: 20px; margin-top: 50px;" />
+                </div>
+
+
+
+                 <div id="closeInventoryModal" class="modal">
+                        <div class="modal-content" style="border-radius: 5px; width: 580px; margin: auto; margin-top: 120px">
+
+                            <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
+                                <i class="fa fa-close" style="float: right; cursor: pointer;" onclick="CloseCloseBox()"></i>
+                                <h4 id="close" class="modal-title" >Close for Rent:
+                                        <var>House Number</var></h4>
                             </div>
-                        <div class="col-sm-6">
-                            <label class="labelwidth col-sm-4 col-form-label">Contact Number:</label>
-                            <div class="col-sm-8">
-                            <input id="contactNumber" type="number"  class="form-control form-control-lg" tabindex="3" />
-                        </div>
+
+                            <div class="layout_modal_body container-fluid">
+                              ! please confirm if you want to cose
+                            </div>
+
+                            <div class="panel-footer" style="text-align: right;">
+                                <button type="button" id="btnCloseCancel" style="margin-top: 5px;" onclick="CloseCloseBox()" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                                <button type="button" id="btnCloseSubmit" style="margin-top: 5px;" onclick="CloseRentInventory();" class="btn btn-primary">Submit</button>
+
+                            </div>
                         </div>
                     </div>
-                  </form>
-                </div>
 
-                <div class="panel-footer" style="text-align: right;">
-                    <button type="button" id="btnInvCancel" style="margin-top: 5px;" onclick="CloseRentalBox()" data-dismiss="modal" class="btn btn-danger">Cancel</button>
-                    <button type="button" id="btnInvSubmit" style="margin-top: 5px;" onclick="AddRentInventory();" class="btn btn-primary">Submit</button>
-
-                </div>
             </div>
-        </div>
 
-               </div>
-
-                <div id="progressBar" class="container-fluid" style="text-align:center; height:200px;">
-                    <img src="Images/Icon/ajax-loader.gif" style="width:20px;height:20px; margin-top:50px;" />
-                </div>
-
-            </div>
-        
 
         </div>
-        
     </div>
    
         

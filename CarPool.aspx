@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="CSS/ApttTheme.css" />
     <link rel="stylesheet" href="CSS/ApttLayout.css" />
+     <link rel="stylesheet" href="CSS/NewAptt.css" />
 
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -19,10 +20,10 @@
    
     <script type="text/javascript" src="Scripts/datetime.js"></script>
    
-    <script language="javascript" src="https://momentjs.com/downloads/moment.js"></script>
-    <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="https://momentjs.com/downloads/moment.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css"/>
-
+ 
     <script>
 
         var UserId, SocietyID, api_url, selectedPoolId, _ResID;
@@ -42,7 +43,7 @@
 
         function GetPoolOffers() {
             var abs_url = api_url + "/api/CarPool/" + SocietyID + "/0/20";
-
+            $("#progressBarGetData").show();
             $.ajax({
                 url: abs_url,
                 dataType: "json",
@@ -85,18 +86,17 @@
                     var JourneyDTime = DisplayDateTime(results[i].JourneyDateTime);
                     var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
                     var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
+                    var ImageSource = "GetImages.ashx?ResID=" + results[i].ResID + "&Name=" + results[i].FirstName + "&UserType= Owner";
 
-                    strPoolData = strPoolData + "<div class=\"col-xs-3 panel panel-success\" style=\"margin:20px;padding:0px; shadow:3px;\">" +
-                        "<div class='panel-heading'> Destination : " + results[i].Destination + "<br/>StartTime : " +JourneyDTime + " <br/> ReturnTime : " + ReturnDTime + "</div>"
-                        + "<div class='panel-body'> <label class='data_label'> Vehicle :  </label>" + results[i].VehicleType
-                        + "<div><label class='data_label'> Total Seats :  </label>" + results[i].AvailableSeats + "</div>"
-                        + "<div> <label class='data_label'> Cost :  </label>" + results[i].SharedCost +"</div>"
-                        + "<div><label class='data_label'> Description :  </label> " + results[i].Description + "</div>"
-                        + "<div><label class='data_label'> Available :  </label> " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
-                    console.log(SeatRemaining);
-                    strData = strData + "<div class=\"col-xs-3 panel panel-success\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='panel-heading'> <label class='data_label'> Destination :  </label>" +   results[i].Destination + "<br/> <label class='data_label'> StartTime :   </label>"   +JourneyDTime +
-                        " <br/><label class='data_label'> ReturnTime :   </label>"  + ReturnDTime + "</div>"
+                    strData = strData + "<div class=\"col-xs-4\" style=\"margin:0px;padding:10px;\">" +
+                        "<div class=\"panel panel-success\">"
+                        + "<div class='panel-heading'><div class='row'>"
+                            + "<div class='col-xs-7'> <label class='small_label'>Destination :</label><div>" + results[i].Destination + "</div></div>"
+
+                        + "<div class='col-xs-4'>" +"<img class='profile-image' src='" + ImageSource + "' />" + "</div></div>"
+
+                        + "<label class='small_label'> StartTime :   </label><div>" + JourneyDTime +
+                        " </div><label class='small_label'> ReturnTime :   </label><div>" + ReturnDTime + "</div></div>"
                         + "<div class='panel-body'>  <label class='data_label'> Vehicle :  </label>" + results[i].VehicleType
                         + "<div><label class='data_label'> Total Seats :  </label>" + results[i].AvailableSeats + "</div>"
                         + "<div>  <label class='data_label'> Cost :  </label>" + results[i].SharedCost + "</div>"
@@ -104,20 +104,18 @@
                         + "<div> <label class='data_label'> Available Seats :  </label>  " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
                         + "</div>"
                         + "<div class='panel-footer'><a onclick='ShowInterest(" + results[i].VehiclePoolID + ")'><span class='fa fa-thumbs-up'></span></a>" + results[i].InterestedCount
+                        + "<i class='fa fa-users fa-1x pull-right' style='color:blue;' onclick='ShowUsers(" + results[i].VehiclePoolID + ")'></i>"
                         + "</div>"
+                        +"</div>"
                         + "</div>";
-                }
-               
-                $("#CarPool").html(strPoolData);
-                $("#ProgressBar").hide();
 
-                    
                 }
-                 console.log(strData);
+              
                 $("#CarPool").html(strData);
-
+                 $("#progressBarGetData").hide();
 
             }
+        }
 
         
 
@@ -134,15 +132,18 @@
                     var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
                     var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
 
-                    strMyData = strMyData + "<div class=\"col-xs-3 panel panel-success\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='panel-heading'> Destination : " + results[i].Destination + "<br/>Start Time :  " + JourneyDTime + " <br/> Return Time : " + ReturnDTime + "</div>"
-                        + "<div class='panel-body'> <label class='data_label'> Vehicle:  </label>" + results[i].VehicleType
+                    strMyData = strMyData + "<div class=\"col-xs-4\" style=\"margin:0px;padding:10px;\">" 
+                        +"<div class=\"panel panel-success\" >"
+                        + "<div class='panel-heading'><label class='small_label'> Destination :</label><div> " + results[i].Destination
+                        + "</div><label class='small_label'> Start Time : </label><div> " + JourneyDTime + "</div><label class='small_label'> Return Time : </label><div> " + ReturnDTime + "</div></div>"
+                        + "<div class='panel-body'> <label class='small_label'> Vehicle:  </label>" + results[i].VehicleType
                         + "<div> <label class='data_label'> Total Seats:  </label>" + results[i].AvailableSeats + "</div>"
                         + "<div><label class='data_label'> Cost :  </label>  " + results[i].SharedCost + "</div>"
                         + "<div> <label class='data_label'> Discription :  </label>  " + results[i].Description + "</div>"
                         + "<div> <label class='data_label'> Available :  </label>  " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
                         + "</div>"
                         + "<div class='panel-footer'><a onclick='Close(" + results[i].VehiclePoolID + ")'><span class='fa fa-trash'></span></a>" + results[i].InterestedCount
+                        + "</div>"
                         + "</div>"
                         + "</div>";
                     
@@ -172,6 +173,8 @@
             CarPool.Active = 1;
             CarPool.Destination = $("#destination").val();
             CarPool.InitiatedDateTime = GetDateTimeinISO(new Date());
+
+
             var date = $("#date_when").val();
             var time = $("#time_when").val();
             var datetime = date + "T" + time + ":00";
@@ -192,6 +195,8 @@
             CarPool.SocietyID = <%=SocietyID%>;
             var url = api_url + "/api/CarPool/Add";
             var CarPoolString = JSON.stringify(CarPool);
+
+
 
             $.ajax({
                 dataType: "json",
@@ -222,6 +227,10 @@
         function ShowInterest(PoolId) {
             selectedPoolId = PoolId;
             $("#showInterestModal").show();
+        }
+
+        function ShowUsers() {
+
         }
 
         function AddInterest() {
@@ -292,12 +301,12 @@
                         GetPoolOffers();
                     }
                     else {
-                        alert('Could not add : try later');
+                        alert('Could not close : try later');
                     }
 
                 },
                 error: function (data, errorThrown) {
-                    alert('User Creation failed :' + errorThrown);
+                    alert('Could not close :' + errorThrown);
                     // sessionStorage.clear();
                 }
 
@@ -375,9 +384,8 @@
                 </div>
         </div>
 
-         <div id="ProgressBar" class="container-fluid" style="text-align: center; height: 200px;">
-             <%--  <i class="fa fa-spinner"  style="width:50px; height:50px;margin-top:100px;"></i>--%>
-                <img src="Images/Icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 100px;" />
+         <div id="progressBarGetData" class="container-fluid" style="text-align: center; height: 200px;display:none;">
+                    <img src="Images/Icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 100px;" />
             </div>
 
 
@@ -432,8 +440,8 @@
                                 <label class="labelwidth col-sm-4 col-form-label">When: </label>
                                 <div class="col-sm-8">
                                 <div class="form-group">
-                                <div class='input-group date' id='date_when'>
-                                    <input type='text' class="form-control" />
+                                <div class='input-group date'>
+                                    <input type='text'  id='date_when' class="form-control" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -446,8 +454,8 @@
                                 <label class="labelwidth col-sm-4 col-form-label">Time:</label>
                                 <div class="col-sm-8">
                                     <div class="form-group">
-                                     <div class='input-group date' id='time_when'>
-                                         <input type='text' class="form-control" />
+                                     <div class='input-group date'>
+                                         <input type='text'  id='time_when' class="form-control" />
                                          <span class="input-group-addon">
                                              <span class="glyphicon glyphicon-time"></span>
                                          </span>
@@ -461,8 +469,8 @@
                                 <label class="labelwidth col-sm-4 col-form-label">Return:</label>
                              <div class="col-sm-8">  
                                  <div class="form-group">
-                                <div class='input-group date' id='date_return'>
-                                    <input type='text' class="form-control" />
+                                <div class='input-group date'>
+                                    <input type='text'  id='date_return' class="form-control" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -474,8 +482,8 @@
                                  <label class="labelwidth col-sm-4 col-form-label">Time:</label>
                                  <div class="col-sm-8">
                                  <div class="form-group">
-                                     <div class='input-group date' id='time_return'>
-                                         <input type='text' class="form-control" />
+                                     <div class='input-group date' >
+                                         <input id='time_return' type='text' class="form-control" />
                                          <span class="input-group-addon">
                                              <span class="glyphicon glyphicon-time"></span>
                                          </span>
@@ -562,7 +570,7 @@
         </div>
 
         <div id="showCloseModal" class="model">
-            <div class="modal-content"style="border-radius:5px; width: 350px; margin: auto; margin-top:150px;">
+            <div class="modal-content"style="border-radius:5px; width: 350px; margin: auto; margin-top:150px;position:relative;">
 
                 <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
                       <i class="fa fa-close" style="float:right;cursor:pointer;" onclick="CloseCloseModal()"></i>
@@ -594,11 +602,14 @@
                     <button type="button" id="btnCloseSubmit" style="margin-top: 5px;" onclick="ClosePoolOffer();" class="btn btn-primary">Submit</button>
 
                 </div>
+
+                  <div id="closeProgressBar" class="container-fluid" style="text-align: center; height: 200px; position:absolute;">
+                        <img src="Images/Icon/ajax-loader.gif" style="width: 20px; height: 20px; margin-top: 50px;" />
+                    </div>
+
             </div>
 
-            <div id="closeProgressBar" class="container-fluid" style="text-align: center; height: 200px;">
-                <img src="Images/Icon/ajax-loader.gif" style="width: 20px; height: 20px; margin-top: 50px;" />
-            </div>
+          
         </div>
     </div>
 </body>

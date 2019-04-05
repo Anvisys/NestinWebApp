@@ -70,9 +70,11 @@
                     success: function (response) {
 
                         if (response.d == 1) {
+                         
                             window.location = "MainPage.aspx";
                         }
                         else if (response.d == 0) {
+                        
                             window.location = "Role.aspx";
                         }
                         else if (response.d == -1) {
