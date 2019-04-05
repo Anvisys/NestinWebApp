@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-      <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
     <meta name="description" content="The MyAptt System is developed considering the day to day needs of society like complaints, Notification, social communication as well as managing the Residents, Vendors, and Employees Data of a society. Application caters the need of small to large societies and also provide the customization to meet your specific needs." />
     <meta name="keywords" content="Society Management,Residential Society Management,Complaint Management,Society Expenses,Billing Software" />
     <meta name="developer" content="Anvisys Technologies Pvt. Ltd." />
@@ -29,7 +29,7 @@
     <link href="Login/css/settings.css" rel="stylesheet" type="text/css" />
     <!-- THEME CSS -->
 
-    <link href="Login/css/essentials.css" rel="stylesheet" type="text/css" />
+   <%-- <link href="Login/css/essentials.css" rel="stylesheet" type="text/css" />--%>
     <link href="Login/css/layout.css" rel="stylesheet" type="text/css" />
     <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css" />
 
@@ -212,6 +212,7 @@
         });
 
         function AddIndependentHouse() {
+             $("#ProgressBar").show();
             var House = {};
             House.HouseNumber = document.getElementById("houseno").value;
             House.Sector = document.getElementById("sector").value;
@@ -249,10 +250,12 @@
                   
                 }
             });
+             $("#ProgressBar").hide();
 
         }
 
         function AddNewSociety() {
+             $("#ProgressBar").show();
             var Society = {};
              Society.SocietyName = document.getElementById("societyName").value;
             Society.Sector = document.getElementById("socLocality").value;
@@ -290,6 +293,7 @@
                   
                 }
             });
+             $("#ProgressBar").hide();
 
         }
 
@@ -347,6 +351,7 @@
 
 
         function GetMySocietyRequests() {
+            $("#ProgressBar").show();
             var abs_url = api_url + "/api/Society/" + <%=UserID%>;
 
             $.ajax({
@@ -361,7 +366,7 @@
         }
 
         function SocietyRequest(response) {
-
+            $("#ProgressBar").show();
             var strData = "";
             $("#SocietyRequests").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
@@ -395,11 +400,12 @@
             else {
 
             }
-
+            $("#ProgressBar").hide();
         }
 
 
         function GetMyHouses() {
+            
             var abs_url = api_url + "/api/Society/House/" + <%=UserID%>;
 
             $.ajax({
@@ -415,7 +421,7 @@
 
 
         function HouseRequests(response) {
-
+            $("#ProgressBar").show();
             var strData = "";
             $("#HouseRequests").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
@@ -442,11 +448,12 @@
             else {
 
             }
-
+            $("#ProgressBar").hide();
         }
 
 
         function AddInExistingSociety() {
+            $("#ProgressBar").show();
             var user = {};
             user.SocietyId = selectedSocietyId;
             user.FlatId = selectedFlatId;
@@ -474,6 +481,7 @@
 
                 }
             });
+            $("#ProgressBar").hide();
         }
 
         function Click(ResId, status) {
@@ -578,7 +586,7 @@
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="SocietyName" HeaderStyle-Width="100px" HeaderText="Society"/>
                                 <asp:BoundField DataField="FlatNumber" HeaderStyle-Width="40px" HeaderText="Flat"  ItemStyle-Width="40px"/>
-                                                              <asp:BoundField DataField="ActiveDate" DataFormatString="{0:dd/MMM/yy}" HeaderStyle-Width="100px" HeaderText="Active From"/>
+                                <asp:BoundField DataField="ActiveDate" DataFormatString="{0:dd/MMM/yy}" HeaderStyle-Width="100px" HeaderText="Active From"/>
                                 <asp:BoundField DataField="DeActiveDate" DataFormatString="{0:dd/MMM/yy}" HeaderStyle-Width="100px" HeaderText="Active Till"/>
                                 <asp:BoundField DataField="Status" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hiddencol" />
                             <asp:BoundField DataField="Status" HeaderStyle-Width="100px" HeaderText="Status"/>
@@ -620,223 +628,219 @@
       
           
                 
-                <div id="addHouse" class="modal">
-
-
-                    <div class="container-fluid" style="width: 100%;">
-                        <div class="panel panel-primary popup_box_size">
-                            <div class="panel-heading">
-                                Add House
-                                            <span class="fa fa-times" style="float: right; cursor: pointer;" onclick="HideAddHouse()" aria-hidden="true"></span>
-                            </div>
-                            <div class="panel-body">
-
-                                <form>
-                                    <div class="form-group row">
-                                        <div class="col-sm-6">
-                                            <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">House No.</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="house" class="form-control form-control-lg" id="houseno" placeholder="Eg.82" />
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">Sector</label>
-                                            <div class="col-sm-7">
-                                                <input type="text" name="Sector" class="form-control form-control-lg" id="sector" placeholder="Eg.sector-63" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-6">
-                                            <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">Locality</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="Locality" class="form-control form-control-lg" id="locality" placeholder="Locality " />
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">City</label>
-                                            <div class="col-sm-7">
-                                                <input type="text" name="City" class="form-control form-control-lg" id="city" placeholder="Eg.Noida " />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-6">
-                                            <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">State</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="State" class="form-control form-control-lg" id="state" placeholder="State" required />
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">Pin Code</label>
-                                            <div class="col-sm-7">
-                                                <input type="number" name="PinCode" class="form-control form-control-lg" id="pincode" placeholdert="Eg.201301" required />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="panel-footer" style="text-align: right;">
-                                <button type="button" class="btn btn-danger" onclick="HideAddHouse()">Cancel</button>
-                                <button type="button" class="btn btn-success btn-sm" onclick="AddInExistingSociety()">Submit</button>
-                            </div>
-
-                        </div>
-                    </div>
+        <div id="addHouse" class="modal">
+            <div class="panel panel-primary" style="border: 0px; width: 670px; background-color: #fff; margin: auto;">
+                <div class="panel-heading">
+                    Add House<span class="fa fa-times" style="float: right; cursor: pointer;" onclick="HideAddHouse()" aria-hidden="true"></span>
                 </div>
+                <div class="panel-body">
+                    <form class="AddNewHouse" autocomplete="off">
+                        <div class="container-fluid">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">House No.</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" name="house" class="form-control " id="houseno" placeholder="001" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Sector</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="Sector" class="form-control " id="sector" placeholder="Eg.sector-63" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Locality</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="Locality" class="form-control" id="locality" placeholder="Locality " />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">City</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="City" class="form-control " id="city" placeholder="Eg.Noida " />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">State</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="State" class="form-control " id="state" placeholder="State" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Pin Code</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" name="PinCode" class="form-control " id="pincode" placeholder="201301" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="panel-footer" style="text-align: right;">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="HideAddHouse()">Cancel</button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="AddInExistingSociety()">Submit</button>
+                </div>
+
+            </div>
+        </div>
+               
                    
 
                <%-- <div class="layout_modal_footer" style="margin-right:7px;">
                     <button type="button" class="btn btn-success" onclick="AddUser()" id="btnsubmit" disabled="individual.house.$disabled || individual.Sector.$disabled">
                     Submit</button>--%>
 
-                <div id="addFlat" class="modal">
-                    <div class="container-fluid" style="width: 100%;">
-                        <div class="panel panel-primary popup_box_size">
-                            <div class="panel-heading">
-                                Add Flat
-                                            <span class="fa fa-times" style="float: right; cursor: pointer;" onclick="HideAddFlat()" aria-hidden="true"></span>
-                            </div>
-                            <div class="panel-body">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label col-form-label-lg">Select Your Society</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-lg" placeholder="Society" id="selectSociety" />
-
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">Flat No.</label>
-                                        <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-lg" id="flatno" placeholder="FlatNo. " />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">floor</label>
-                                        <div class="col-sm-7">
-                                            <label class="form-control form-control-lg" id="floor" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">Block</label>
-                                        <div class="col-sm-6">
-                                            <label class="form-control form-control-lg" id="block" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">Intercom No.</label>
-                                        <div class="col-sm-7">
-                                            <label class="form-control form-control-lg" id="intercom" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">Locality</label>
-                                        <div class="col-sm-6">
-                                            <label class="form-control form-control-lg" id="locality4" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">City</label>
-                                        <div class="col-sm-7">
-                                            <label class="form-control form-control-lg" id="city2" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">State</label>
-                                        <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-lg" id="state3" placeholder="State " />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">Pin Code</label>
-                                        <div class="col-sm-7">
-                                            <label class="form-control form-control-lg" id="pincode4" />
-                                        </div>
-                                    </div>
+        <div id="addFlat" class="modal">
+            <div class="panel panel-primary" style="border: 0px; width: 670px; background-color: #fff; margin: auto;">
+                <div class="panel-heading">
+                    Add Flat<span class="fa fa-times" style="float: right; cursor: pointer;" onclick="HideAddFlat()" aria-hidden="true"></span>
+                </div>
+                <div class="panel-body">
+                    <form class="Addflat">
+                        <div class="container-fluid">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label ">Select Your Society</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control " placeholder="Society" id="selectSociety" />
 
                                 </div>
                             </div>
-
-                            <div class="panel-footer" style="text-align: right;">
-                                <button type="button" class="btn btn-danger" onclick="HideAddFlat()">Cancel</button>
-                                <button type="button" class="btn btn-success btn-sm" onclick="AddInExistingSociety()">Submit</button>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Flat No.</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control " id="flatno" placeholder="FlatNo. " />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Floor</label>
+                                    <div class="col-sm-8">
+                                        <label class="form-control " id="floor" />
+                                    </div>
+                                </div>
                             </div>
-
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Block</label>
+                                    <div class="col-sm-8">
+                                        <label class="form-control " id="block" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Intercom </label>
+                                    <div class="col-sm-8">
+                                        <label class="form-control form-control-lg" id="intercom" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Locality</label>
+                                    <div class="col-sm-8">
+                                        <label class="form-control" id="locality4" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">City</label>
+                                    <div class="col-sm-8">
+                                        <label class="form-control " id="city2" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">State</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control " id="state3" placeholder="State " />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">PinCode</label>
+                                    <div class="col-sm-8">
+                                        <label class="form-control " id="pincode4" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+                </div>
+                <div class="panel-footer" style="text-align: right;">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="HideAddFlat()">Cancel</button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="AddInExistingSociety()">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="addSociety" class="modal">
+
+            <div class="panel panel-primary" style="border: 0px; width: 600px; background-color: #fff; margin: auto;">
+                <div class="panel-heading">
+                    Add Society <span class="fa fa-times" style="float: right; cursor: pointer;" onclick="HideAddSociety()" aria-hidden="true"></span>
+                </div>
+                <div class="panel-body">
+                    <form class="AddSociety">
+                        <div class="container-fluid">
+                            <div class="form-group row">
+                                <label for="colFormLabelLg" class="col-sm-3 col-form-label ">Society Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="society" class="form-control " id="societyName" placeholder="Enter Society name" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Locality</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="locality" class="form-control" id="socLocality" placeholder="Locality " />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">City</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="city" class="form-control" id="socCity" placeholder="City " />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">State</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="state" class="form-control " id="socState" placeholder="State " />
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Pin Code</label>
+                                    <div class="col-sm-8">
+                                        <input name="pincode" class="form-control " id="socPin" placeholder="201301 " />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer" style="text-align: right;">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="HideAddSociety()">Cancel</button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="AddNewSociety()">Submit</button>
                 </div>
 
-                <div id="addSociety" class="modal">
-                    <div class="container-fluid" style="width: 100%;">
-                        <div class="panel panel-primary popup_box_size">
-                            <div class="panel-heading">
-                                Add Society 
-                                            <span class="fa fa-times" style="float: right; cursor: pointer;" onclick="HideAddSociety()" aria-hidden="true"></span>
-                            </div>
-                            <div class="panel-body">
-                                <div class="form-group row">
-                                    <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg">Society Name</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="society" class="form-control form-control-lg" id="societyName" placeholder="Enter Society name" />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">Locality</label>
-                                        <div class="col-sm-6">
-                                            <input type="text" name="locality" class="form-control form-control-lg" id="socLocality" placeholder="Locality " />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">City</label>
-                                        <div class="col-sm-7">
-                                            <input type="text" name="city" class="form-control form-control-lg" id="socCity" placeholder="City " />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg">State</label>
-                                        <div class="col-sm-6">
-                                            <input type="text" name="state" class="form-control form-control-lg" id="socState" placeholder="State " />
+            </div>
+        </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="colFormLabelLg" class="col-sm-5 col-form-label col-form-label-lg">Pin Code</label>
-                                        <div class="col-sm-7">
-                                            <input name="pincode" class="form-control form-control-lg" id="socPin" placeholder="201301 " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <label class="col-sm-3 col-form-label col-form-label-lg"></label>
+         <div id="ProgressBar" class="container-fluid" style="text-align: center; height: 200px;">
+                <img src="Images/Icon/ajax-loader.gif" style="width: 40px; height: 40px;" />
+            </div>
 
 
-                            <div class="panel-footer" style="text-align: right;">
-                                <button type="button" class="btn btn-danger" onclick="HideAddSociety()" >Cancel</button>
-                                <button type="button" class="btn btn-success btn-sm" onclick="AddNewSociety()">Submit</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-           
-    </form>
-
-    
+</form>
 
 
-    <!-- WRAPPER -->
+        <!-- WRAPPER -->
     <span itemtype="http://schema.org/SoftwareApplication" />
 
 

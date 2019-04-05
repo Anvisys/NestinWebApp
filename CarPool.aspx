@@ -406,8 +406,8 @@
                                 <label class="labelwidth col-sm-4 col-form-label">Type :</label>
                                 <div class="col-sm-8">
                                 <select id="pool_type" class="form-control form-control-sm" onblur="">
-                                    <option>One Way</option>
-                                    <option>Two Way</option>
+                                    <option "1">One Way</option>
+                                    <option "2">Two Way</option>
                                 </select>
                                 </div>
                             </div>
