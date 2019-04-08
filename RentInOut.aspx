@@ -78,7 +78,7 @@
 
 
                         + "<div class='panel-body'> <span style='color:#006400;'></span>" + results[i].Description +"<hr style='margin:5px;paddiing:0px;'/>"
-                        + "<div style='text-align:center'> <label class='data_label'> Contact :  </label>" + results[i].ContactName + "</div>"
+                        + "<div> <label class='data_label'> <span class='fa fa-user' style='color:#2b7a2d;'> </label>" + results[i].ContactName + "</div>"
 
                     
 

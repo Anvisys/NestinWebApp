@@ -108,7 +108,7 @@
                         + "</div>"
                         +"</div>"
                         + "</div>";
-
+                     alert ('1');
                 }
               
                 $("#CarPool").html(strData);
@@ -139,7 +139,7 @@
                         + "<div class='panel-body'> <label class='small_label'> Vehicle:  </label>" + results[i].VehicleType
                         + "<div> <label class='data_label'> Total Seats:  </label>" + results[i].AvailableSeats + "</div>"
                         + "<div><label class='data_label'> Cost :  </label>  " + results[i].SharedCost + "</div>"
-                        + "<div> <label class='data_label'> Discription :  </label>  " + results[i].Description + "</div>"
+                        + "<div> <label class='data_label'> Description :  </label>  " + results[i].Description + "</div>"
                         + "<div> <label class='data_label'> Available :  </label>  " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
                         + "</div>"
                         + "<div class='panel-footer'><a onclick='Close(" + results[i].VehiclePoolID + ")'><span class='fa fa-trash'></span></a>" + results[i].InterestedCount
@@ -312,7 +312,12 @@
 
             });
         }
-
+        function checking() {
+    var textBox = $('input:destination').value;
+    if (textBox == "") {
+        $("#error").show('slow');
+    }
+}
     </script>
     <script type="text/javascript">
         $(function () {
@@ -334,6 +339,7 @@
             $('#date_return').datetimepicker({format: 'DD/MM/YYYY' });
         });
     </script>
+
 
     <style>
     .data_label {
@@ -390,7 +396,7 @@
 
 
         <div id="addCarPoolModal" class="model">
-            <div class="modal-content" style="border-radius:5px; width: 580px; margin: auto;margin-top:120px">
+            <div class="modal-content" style="border-radius:5px; width: 580px; margin: auto;margin-top:0px">
 
                 <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
                     <i class="fa fa-close" style="float:right;cursor:pointer;" onclick="ClosePoolModal()"></i>
@@ -399,13 +405,13 @@
                 </div>
                 <div class="layout_modal_body container-fluid">
                     <form name="CarPool">
-
+                        <ul class="errorMessages"></ul>
                         <div class="row" style="margin-top: 20px;">
 
                             <div class="col-sm-6">
                                 <label class="labelwidth col-sm-4 col-form-label">Type :</label>
                                 <div class="col-sm-8">
-                                <select id="pool_type" class="form-control form-control-sm" onblur="">
+                                <select id="pool_type" class="form-control form-control-sm" onblur="" tabindex="1" >
                                     <option "1">One Way</option>
                                     <option "2">Two Way</option>
                                 </select>
@@ -414,7 +420,7 @@
                             <div class="col-sm-6">
                                 <label class="labelwidth col-sm-4 col-form-label">Duration</label>
                                 <div class="col-sm-8">
-                                <select id="pool_cycle" class="form-control form-control-sm" onblur="">
+                                <select id="pool_cycle" class="form-control form-control-sm" onblur="" tabindex="2" >
                                     <option>One Time</option>
                                     <option>Daily</option>
                                 </select>
@@ -425,13 +431,13 @@
                             <div class="col-sm-6">
                                 <label class="labelwidth col-sm-4 col-form-label">Where: </label>
                                 <div class="col-sm-8">
-                                <input type="text" id="destination" class="form-control form-control-sm" onblur="" />
+                                <input type="text" id="destination" class="form-control form-control-sm" onblur="" tabindex="3" />
                                </div>
                             </div>
                             <div class="col-sm-6">
                                 <label class="labelwidth col-sm-4 col-form-label">Available Seat</label>
                                 <div class="col-sm-8">
-                                <input type="number" id="seats"  class="form-control form-control-sm" tabindex="3" />
+                                <input type="number" id="seats"  class="form-control form-control-sm" tabindex="4" />
                             </div>
                           </div>
                         </div>
@@ -439,70 +445,52 @@
                             <div class="col-sm-6">
                                 <label class="labelwidth col-sm-4 col-form-label">When: </label>
                                 <div class="col-sm-8">
-                                <div class="form-group">
-                                <div class='input-group date'>
-                                    <input type='text'  id='date_when' class="form-control" />
-                                    <span class="input-group-addon">
+                                <%--<div class="form-group">
+                                <div class='input-group date'>--%>
+                                    <input type='text'  id='date_when' class="form-control" placeholder="DD/MM/YYYY" tabindex="5"  />
+                              <%--      <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
-                             </div>
+                             </div>--%>
                                 </div>
-                                
                                 </div>
                             <div class="col-sm-6">
                                 <label class="labelwidth col-sm-4 col-form-label">Time:</label>
                                 <div class="col-sm-8">
-                                    <div class="form-group">
-                                     <div class='input-group date'>
-                                         <input type='text'  id='time_when' class="form-control" />
-                                         <span class="input-group-addon">
-                                             <span class="glyphicon glyphicon-time"></span>
-                                         </span>
-                                     </div>
-                                 </div>
+                                
+                                         <input type='text'  id='time_when' class="form-control" placeholder="00 : 00 AM" tabindex="6" />
+                                        
                                </div>
                             </div>
                         </div>
-                         <div class="row" style="margin-top: 0px;">
+                         <div class="row" style="margin-top: 10px;">
                             <div class="col-sm-6">
                                 <label class="labelwidth col-sm-4 col-form-label">Return:</label>
                              <div class="col-sm-8">  
-                                 <div class="form-group">
-                                <div class='input-group date'>
-                                    <input type='text'  id='date_return' class="form-control" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                             </div>
+                               
+                                    <input type='text'  id='date_return' class="form-control"  placeholder="DD/MM/YYYY"/ tabindex="7" />
+                                 
                               </div>
                             </div>
                              <div class="col-sm-6">
                                  <label class="labelwidth col-sm-4 col-form-label">Time:</label>
                                  <div class="col-sm-8">
-                                 <div class="form-group">
-                                     <div class='input-group date' >
-                                         <input id='time_return' type='text' class="form-control" />
-                                         <span class="input-group-addon">
-                                             <span class="glyphicon glyphicon-time"></span>
-                                         </span>
-                                     </div>
-                                     </div>
+                                         <input id='time_return' type='text' placeholder="00 : 00 AM" class="form-control" tabindex="8" />
                                  </div>
                              </div>
                         </div>
-                        <div class="row" style="margin-top:0px;">
+                        <div class="row" style="margin-top:10px;">
                             <div class="col-sm-6">
                                 <label class="labelwidth col-sm-4 col-form-label">Vehicle Type:</label>
                                  <div class="col-sm-8">
-                                <input id="vehicle_type" class="form-control form-control-sm" tabindex="4" />
+                                <input id="vehicle_type" class="form-control form-control-sm" tabindex="9" />
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <label class="labelwidth col-sm-4 col-form-label">Cost / Seat</label>
                                 <div class="col-sm-8">
-                                <input id="Shared_cost" class="form-control form-control-sm" tabindex="5" />
+                                <input id="Shared_cost" type="number" class="form-control form-control-sm" tabindex="10" />
                             </div>
                             </div>
                         </div>
@@ -510,7 +498,7 @@
                             <div class="col-sm-12">
                                 <label class="labelwidth col-sm-2 col-form-label">Description:</label>
                                 <div class="col-sm-10">
-                                <input type="text" id="pool_description" class="form-control form-control-lg" style="max-height:inherit" />
+                                <input type="text" id="pool_description" class="form-control form-control-lg" style="max-height:inherit" tabindex="11"  />
                                 </div>
                             </div>
                         </div>
@@ -520,7 +508,6 @@
                     <div class="panel-footer" style="text-align: right;">
                         <button type="button" id="btnInvCancel" style="margin-top: 5px;" onclick="ClosePoolModal()" data-dismiss="modal" class="btn btn-danger">Cancel</button>
                         <button type="button" id="btnInvSubmit" style="margin-top: 5px;" onclick="AddPoolOffer();" class="btn btn-primary">Submit</button>
-
                     </div>
                 </div>
 
