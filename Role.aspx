@@ -221,10 +221,6 @@
             House.State = document.getElementById("state").value;
             House.PinCode = document.getElementById("pincode").value;
 
-              if (House.HouseNumber.length < 1) {
-      $('#houseno').after('<span class="error">This field is required</span>');
-    }
-    
             console.log(House);
             $.ajax({
                 type: 'POST',
@@ -257,47 +253,6 @@
              $("#ProgressBar").hide();
 
         }
-        // Wait for the DOM to be ready
-$(function() {
-  // Initialize form validation on the registration form.
-  // It has the name attribute "registration"
-  $("form[name='AddSociety']").validate({
-    // Specify validation rules
-    rules: {
-      // The key name on the left side is the name attribute
-      // of an input field. Validation rules are defined
-      // on the right side
-      societyname: "required",
-      lastname: "required",
-      email: {
-        required: true,
-        // Specify that email should be validated
-        // by the built-in "email" rule
-        email: true
-      },
-      password: {
-        required: true,
-        minlength: 5
-      }
-    },
-    // Specify validation error messages
-    messages: {
-      firstname: "Please enter your firstname",
-      lastname: "Please enter your lastname",
-      password: {
-        required: "Please provide a password",
-        minlength: "Your password must be at least 5 characters long"
-      },
-      email: "Please enter a valid email address"
-    },
-    // Make sure the form is submitted to the destination defined
-    // in the "action" attribute of the form when valid
-    submitHandler: function(form) {
-      form.submit();
-    }
-  });
-});
-
         function AddNewSociety() {
              $("#ProgressBar").show();
             var Society = {};
@@ -673,14 +628,15 @@ $(function() {
                 <div class="panel-heading">
                     Add House<span class="fa fa-times" style="float: right; cursor: pointer;" onclick="HideAddHouse()" aria-hidden="true"></span>
                 </div>
+                <form class="AddNewHouse" autocomplete="off">
                 <div class="panel-body">
-                    <form class="AddNewHouse" autocomplete="off">
+                    
                         <div class="container-fluid">
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-4 col-form-label ">House No.</label>
                                     <div class="col-sm-8">
-                                        <input type="number" name="house" class="form-control " id="houseno" tabindex="1" placeholder="001" />
+                                        <input type="number" name="house" class="form-control " id="houseno" tabindex="1" placeholder="001"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -719,12 +675,13 @@ $(function() {
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    
                 </div>
                 <div class="panel-footer" style="text-align: right;">
                     <button type="button" class="btn btn-danger btn-sm" onclick="HideAddHouse()">Cancel</button>
-                    <button type="button" class="btn btn-success btn-sm" onclick="AddInExistingSociety()">Submit</button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="AddIndependentHouse()">Submit</button>
                 </div>
+            </form>
             </div>
         </div>
               
@@ -850,7 +807,7 @@ $(function() {
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Pin Code</label>
                                     <div class="col-sm-8">
-                                        <input name="pincode" class="form-control " id="socPin" tabindex="5" placeholder="201301 " />
+                                        <input name="pincode" type="number" class="form-control " id="socPin" tabindex="5" placeholder="201301 " />
                                     </div>
                                 </div>
                             </div>

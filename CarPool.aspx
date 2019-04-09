@@ -312,12 +312,6 @@
 
             });
         }
-        function checking() {
-    var textBox = $('input:destination').value;
-    if (textBox == "") {
-        $("#error").show('slow');
-    }
-}
     </script>
     <script type="text/javascript">
         $(function () {
@@ -405,7 +399,7 @@
                 </div>
                 <div class="layout_modal_body container-fluid">
                     <form name="CarPool">
-                        <ul class="errorMessages"></ul>
+                      
                         <div class="row" style="margin-top: 20px;">
 
                             <div class="col-sm-6">
