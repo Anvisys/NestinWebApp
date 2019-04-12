@@ -24,7 +24,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>  
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>  
-    <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" /> 
+    <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
 
     <link href="Login/css/settings.css" rel="stylesheet" type="text/css" />
     <!-- THEME CSS -->
@@ -42,7 +42,7 @@
 
 
     <script type="text/javascript" src="Scripts/datetime.js"></script>
-
+  
 
     <script>
 
@@ -220,7 +220,7 @@
             House.City = document.getElementById("city").value;
             House.State = document.getElementById("state").value;
             House.PinCode = document.getElementById("pincode").value;
-    
+
             console.log(House);
             $.ajax({
                 type: 'POST',
@@ -253,7 +253,6 @@
              $("#ProgressBar").hide();
 
         }
-
         function AddNewSociety() {
              $("#ProgressBar").show();
             var Society = {};
@@ -263,7 +262,7 @@
             Society.State = document.getElementById("socState").value;
             Society.PinCode = document.getElementById("socPin").value;
             Society.ContactUserId = <%=UserID%>;
-             Society.Status = 1;
+            Society.Status = 1;
             console.log(Society);
 
              $.ajax({
@@ -623,30 +622,27 @@
                     </div>
                    <div class="row" id="HouseRequests" style="border-top: solid 1px black"></div>
                 </div>
-
-
-      
-          
                 
         <div id="addHouse" class="modal">
             <div class="panel panel-primary" style="border: 0px; width: 670px; background-color: #fff; margin: auto;">
                 <div class="panel-heading">
                     Add House<span class="fa fa-times" style="float: right; cursor: pointer;" onclick="HideAddHouse()" aria-hidden="true"></span>
                 </div>
+                <form class="AddNewHouse" autocomplete="off">
                 <div class="panel-body">
-                    <form class="AddNewHouse" autocomplete="off">
+                    
                         <div class="container-fluid">
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-4 col-form-label ">House No.</label>
                                     <div class="col-sm-8">
-                                        <input type="number" name="house" class="form-control " id="houseno" placeholder="001" />
+                                        <input type="number" name="house" class="form-control " id="houseno" tabindex="1" placeholder="001"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Sector</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="Sector" class="form-control " id="sector" placeholder="Eg.sector-63" />
+                                        <input type="text" name="Sector" class="form-control " id="sector"tabindex="2" placeholder="Eg.sector-63" />
                                     </div>
                                 </div>
                             </div>
@@ -654,13 +650,13 @@
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Locality</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="Locality" class="form-control" id="locality" placeholder="Locality " />
+                                        <input type="text" name="Locality" class="form-control" id="locality" tabindex="3" placeholder="Locality " />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-4 col-form-label ">City</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="City" class="form-control " id="city" placeholder="Eg.Noida " />
+                                        <input type="text" name="City" class="form-control " id="city" tabindex="4" placeholder="Eg.Noida " />
                                     </div>
                                 </div>
                             </div>
@@ -668,33 +664,27 @@
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-4 col-form-label ">State</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="State" class="form-control " id="state" placeholder="State" />
+                                        <input type="text" name="State" class="form-control " id="state" tabindex="5" placeholder="State" />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Pin Code</label>
                                     <div class="col-sm-8">
-                                        <input type="number" name="PinCode" class="form-control " id="pincode" placeholder="201301" />
+                                        <input type="number" name="PinCode" class="form-control " tabindex="6" id="pincode" placeholder="201301" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    
                 </div>
-
                 <div class="panel-footer" style="text-align: right;">
                     <button type="button" class="btn btn-danger btn-sm" onclick="HideAddHouse()">Cancel</button>
-                    <button type="button" class="btn btn-success btn-sm" onclick="AddInExistingSociety()">Submit</button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="AddIndependentHouse()">Submit</button>
                 </div>
-
+            </form>
             </div>
         </div>
-               
-                   
-
-               <%-- <div class="layout_modal_footer" style="margin-right:7px;">
-                    <button type="button" class="btn btn-success" onclick="AddUser()" id="btnsubmit" disabled="individual.house.$disabled || individual.Sector.$disabled">
-                    Submit</button>--%>
+              
 
         <div id="addFlat" class="modal">
             <div class="panel panel-primary" style="border: 0px; width: 670px; background-color: #fff; margin: auto;">
@@ -787,22 +777,22 @@
                     <form class="AddSociety">
                         <div class="container-fluid">
                             <div class="form-group row">
-                                <label for="colFormLabelLg" class="col-sm-3 col-form-label ">Society Name</label>
+                                <label for="colFormLabelLg" class="col-sm-3 col-form-label">Society Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="society" class="form-control " id="societyName" placeholder="Enter Society name" />
+                                    <input type="text" name="society" class="form-control " id="societyName" tabindex="1" placeholder="Enter Society name"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Locality</label>
+                                    <label for="colFormLabelLg" class="col-sm-4 col-form-label">Locality</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="locality" class="form-control" id="socLocality" placeholder="Locality " />
+                                        <input type="text" name="locality" class="form-control" id="socLocality" tabindex="2" placeholder="Locality " />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-4 col-form-label ">City</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="city" class="form-control" id="socCity" placeholder="City " />
+                                        <input type="text" name="city" class="form-control" id="socCity" tabindex="3" placeholder="City " />
                                     </div>
                                 </div>
                             </div>
@@ -810,14 +800,14 @@
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-4 col-form-label ">State</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="state" class="form-control " id="socState" placeholder="State " />
+                                        <input type="text" name="state" class="form-control " id="socState" tabindex="4" placeholder="State " />
 
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="colFormLabelLg" class="col-sm-4 col-form-label ">Pin Code</label>
                                     <div class="col-sm-8">
-                                        <input name="pincode" class="form-control " id="socPin" placeholder="201301 " />
+                                        <input name="pincode" type="number" class="form-control " id="socPin" tabindex="5" placeholder="201301 " />
                                     </div>
                                 </div>
                             </div>

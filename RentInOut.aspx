@@ -67,8 +67,8 @@
                     strData = strData + "<div class=\"col-xs-3 panel panel-success \" style=\"margin:20px;padding:0px; \">" +
                         "<div class='panel-heading'>" 
                            +"<div class='row'><div class='col-xs-8'>"
-                        + " <label class='small_label'> Inventory  :  </label>" + results[i].Inventory
-                        + "<br/><label class='small_label'> Type : </label>" + results[i].RentType + "<br/><label class='small_label'>Rent : </label>"
+                        + " <label class='data_label'>Inventory  :  </label>" + results[i].Inventory
+                        + "<br/><label class='data_label'> Type : </label>" + results[i].RentType + "<br/><label class='data_label'>Rent : </label>"
                         + results[i].RentValue
 
                         +"</div><div class='col-xs-4'>"
@@ -78,7 +78,7 @@
 
 
                         + "<div class='panel-body'> <span style='color:#006400;'></span>" + results[i].Description +"<hr style='margin:5px;paddiing:0px;'/>"
-                        + "<div style='text-align:center'> <label class='data_label'> Contact :  </label>" + results[i].ContactName + "</div>"
+                        + "<div> <label class='data_label'> <span class='fa fa-user' style='color:#2b7a2d;'> </label>" + results[i].ContactName + "</div>"
 
                     
 
@@ -192,8 +192,8 @@
 
      </div>
      <div id="ProgressBar" class="container-fluid" style="text-align: center; height: 200px;">
-             <%--  <i class="fa fa-spinner"  style="width:50px; height:50px;margin-top:100px;"></i>--%>
-                <img src="Images/Icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 250px;" />
+             <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="margin-top: 200px;"></i>
+                <%--<img src="Images/Icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 250px;" />--%>
             </div>
 
 
