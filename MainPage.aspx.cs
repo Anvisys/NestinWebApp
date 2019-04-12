@@ -48,8 +48,13 @@ public partial class MainPage : System.Web.UI.Page
                     if (muser.currentResident.UserType == "Individual")
                     {
 
-                        
+
                     }
+                    else if (muser.currentResident.UserType == "SuperAdmin")
+                    {
+                        SessionVariables.CurrentPage = "SuperAdmin.aspx";
+                    }
+
                     muser.currentResident = (Resident)muser.AllResidents[0];
                     initializePageControl(muser.currentResident);
                 }

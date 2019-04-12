@@ -249,7 +249,9 @@ public class User
                             _Pin = item["PinCode"].ToString();
                         }
                         else
-                        { continue; }
+                        {
+
+                        }
 
 
                         Resident newRes = new Resident()
