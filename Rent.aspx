@@ -16,59 +16,85 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>  
     
             <link rel="stylesheet" href="CSS/forum.css"/>
-             <link rel="stylesheet" href="CSS/ApttTheme.css" />
-
-
-          
-
+            <link rel="stylesheet" href="CSS/ApttTheme.css" />
+            <link rel="stylesheet" href="CSS/ApttLayout.css" />
     <script>
-          var api_url = "http://www.Kevintech.in/GAService/";
+        var api_url = "";
+
+
         $(document).ready(function () {
-              populateType();
-            populateSelect();
-               $("#progressBar").hide();
-      
+             api_url = '<%=Session["api_url"] %>';
+
+            GetInventoryTypeData();
+             GetAccomodationType(1);
+
+            $('#selType').on('change', function () {
+                  GetAccomodationType( this.value );
+            });
+
+            // populateSelect();
+            $("#progressBar").hide();
+
         });
 
-      
-        
-        function populateType() {
-            // THE JSON ARRAY.
-            var InventoryType = [
-                { "ID": 1, "Value": "Flat" },
-                { "ID": 2, "Value": "PG" },
-                { "ID": 3, "Value": "Studio" },
-                { "ID": 4, "Value": "Independent" },
+        function GetInventoryTypeData() {
 
-            ];
+              var abs_url = api_url + "/api/InventoryType";
+
+            $.ajax({
+                url: abs_url,
+                dataType: "json",
+                success: populateInventoryType,
+                failure: function (response) {
+                    alert(response.d);
+                    sessionStorage.clear();
+                }
+            });
+
+
+        }
+
+        function populateInventoryType(data) {
+          
+            var InventoryType = data.$values;
 
             var ele = document.getElementById('selType');
+              ele.innerHTML = "";
             for (var i = 0; i < InventoryType.length; i++) {
                 // POPULATE SELECT ELEMENT WITH JSON.
                 ele.innerHTML = ele.innerHTML +
-                    '<option value="' + InventoryType[i]['ID'] + '">' + InventoryType[i]['Value'] + '</option>';
+                    '<option value="' + InventoryType[i].InventoryTypeID + '">' + InventoryType[i].InventoryType + '</option>';
             }
 
         }
 
 
+        function GetAccomodationType(id) {
 
-        function populateSelect() {
+               var abs_url = api_url + "/api/Accomodation/" + id;
+
+            $.ajax({
+                url: abs_url,
+                dataType: "json",
+                success: populateAccomodationType,
+                failure: function (response) {
+                    alert(response.d);
+                    sessionStorage.clear();
+                }
+            });
+        }
+
+
+        function populateAccomodationType( data) {
             // THE JSON ARRAY.
-            var Inventory = [
-                { "ID": 1, "Value": "2BHK" },
-                { "ID": 2, "Value": "3BHK" },
-                { "ID": 3, "Value": "4BHK" },
-                { "ID": 4, "Value": "Bed" },
-                { "ID": 5, "Value": "Bed & Food" },
-                { "ID": 6, "Value": "Floor" }
-            ];
+            var Inventory =  data.$values;
 
             var ele = document.getElementById('selStyle');
+            ele.innerHTML = "";
             for (var i = 0; i < Inventory.length; i++) {
                 // POPULATE SELECT ELEMENT WITH JSON.
                 ele.innerHTML = ele.innerHTML +
-                    '<option value="' + Inventory[i]['ID'] + '">' + Inventory[i]['Value'] + '</option>';
+                    '<option value="' + Inventory[i].AccomodationTypeID + '">' + Inventory[i].AccomodationType + '</option>';
             }
         }
 
@@ -76,16 +102,17 @@
         function searchHouse() {
             $("#searchData").html("");
             $("#progressBar").show();
-              var RentInventory = {};
+            var RentInventory = {};
             RentInventory.InventoryID = $("#selStyle").val();
             RentInventory.RentTypeID = $("#selType").val();
             RentInventory.RentValue = $("#txtRent").val();
             RentInventory.FlatCity = $("#txtCity").val();
             RentInventory.Available = 1;
 
-            console.log(RentInventory);
+            var url = api_url + "/api/RentInventory/Find"
 
-            var url = api_url + "api/RentInventory/Find"
+                console.log(url);
+                console.log(RentInventory);
 
                 $.ajax({
                 dataType: "json",
@@ -96,8 +123,7 @@
                 contentType: 'application/json',
                     success: function (data) {
                      $("#progressBar").hide();
-                    //var da = JSON.stringify(data);
-                    //var js = jQuery.parseJSON(da);
+              
                      var count = data.$values.length;
                     if(count>0)
                        {
@@ -127,13 +153,6 @@
 
                 var FlatNo = results[i].FlatNumber;
                 var HouseNo = results[i].HouseNumber;
-
-
-               /* strData = strData + "<div class=\"row result_row\" style=\"margin-top:20px;\">" +
-                    "<div class='row desc-row'><div class='col-xs-8'>" + results[i].Inventory + " " + results[i].RentType + " is available in " + results[i].sector + "</div><div class='col-xs-4'></div></div>"
-                    + "<div class='col-xs-4'> Expected Rent " + results[i].RentValue + "</div> <div class='col-xs-8'>" + results[i].Description + "</div>"
-                    + "<div class='row owner-row'><div class='col-xs-12'> Owner" + results[i].OwnerName + ", " + results[i].MobileNo + "</div><hr size='2'></div></div>";*/
-
                 strData = strData +     '<div class="row result_row" style="margin-top: 10px;">'+
 
                              '<div class="col-xs-6" >'+
@@ -264,23 +283,40 @@
                         </a>
                     </div>
                     <div class="col-sm-4 hidden-xs zero-margin">
-                        <!-- Logo text or image -->
+                    <!-- Logo text or image --> 
+                    
+                      <div class="title" style="color:#00baed;padding-top:12px;text-align:center;font-size:x-large;"> Society Management System</div>
+                    <!-- Top Nav -->
 
-                        <h1 class="title" style="color: #00baed; padding-top: 11px; text-align: center; font-size: x-large;">Society Management System</h1>
-                        <!-- Top Nav -->
-
-                    </div>
+                     </div>
                     <div class="col-sm-4 col-xs-6 zero-margin">
-
-                        <nav class="nav-main mega-menu">
-                            <ul class="nav nav-pills nav-main scroll-menu" id="topMain">
-                                <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
-                                <li class=" "><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
-                                <li class=" "><a class="menu_text" href="contact.aspx">Contact </a></li>
-
-                            </ul>
-                        </nav>
+                        <div class="navbar-collapse nav-main-collapse collapse pull-right" style="margin-top: 9px; color: white; text-align: center;">
+                            <nav class="nav-main mega-menu nav-small">
+                                <ul class="nav nav-pills nav-main scroll-menu" id="topMain">
+                                    <li><a class="menu_text" href="Login.aspx">Home</a></li>
+                                    <li><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
+                                    <li><a class="menu_text" href="contact.aspx">Contact</a></li>
+                                     <!-- GLOBAL SEARCH -->
+                                       <li class="search dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"  style="display:none;"> </li>
+            
+                                            <!-- search form -->
+                                            <ul class="dropdown-menu">
+                                              <li>
+                                                <form method="get" action="#" class="input-group pull-right" style="">
+                                                  <input type="text" class="form-control" name="k" id="k" value="" placeholder="Search"/>
+                                                  <span class="input-group-btn">
+                                                  <button class="btn btn-primary notransition" style="margin-top: 8px;"><i class="fa fa-search"></i></button>
+                                                  </span>
+                                                </form>
+                                              </li>
+                                            </ul>
+            
+                                            <!-- /search form -->
+                                  </ul>
+                            </nav>
+                        </div>
                     </div>
+
 
                     <!-- /Top Nav -->
 
@@ -288,18 +324,19 @@
             </header>
 
             <div class="row jumbotron" style="background-color:#6094c1; height:200px;border-radius:0px;margin-bottom:0px;">
-                <div class="col-sm-3 hidden-xs"></div>
-                <div class="col-sm-6 col-xs-12" >
+                <div class="col-sm-2 hidden-xs"></div>
+                <div class="col-sm-8 col-xs-12" >
                     
-                    <form class="form-group">
+                    <form class="form-group" style="align-content:center;">
                         <select id="selType" placeholder="Type" runat="server" class="search-dropdown"/>
+                        
                         <select id="selStyle" placeholder="Style" runat="server" class="search-text"/>
                          <input id="txtCity" placeholder="City" runat="server" class="search-text"/>
                          <input id="txtRent" placeholder="Rent" runat="server" class="search-text"/>
                         <i  onclick="searchHouse()" class="search-button"> <span class="fa fa-search fa-2x" ></span></i>
 
                     </form>
-                          <div class="col-sm-3 hidden-xs"></div>
+                          <div class="col-sm-2 hidden-xs"></div>
                 </div>
 
 
@@ -310,114 +347,9 @@
                 
                 <div class="col-sm-2 hidden-xs"></div>
                 <div class="col-sm-8 col-xs-12">
-                    <label id="lblMessage"></label>
+                    <label id="lblMessage" style="color:blue; font-size:medium;"></label>
                     <div id="searchData">
-                           <%--<div class="row result_row" style="margin-top: 10px;">
-
-                             <div class="col-xs-6" >
-                                <div style="color: blue;">Nestin-properties from Owners only</div> 
-                                 <div class="row">
-                                     <div class="col-xs-4">
-                                         <img class="property-image" src="Images/Icon/darkredbg.png" />
-                                     </div>
-                                     <div class="col-xs-8">
-                                         <div style="margin-top:5px;">
-                                             <b>Expected Rent:
-                                       
-                                             INR 5000  </b>
-                                         </div>
-                                         <div class="dropup" style="margin-top:5px;">
-                                             Contact: <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                 Amit Kumar</button>
-                                             <ul class="dropdown-menu" style="padding:5px;">
-                                               <li> Mob: 9591033223</li>
-                                                <li> Email: amit.bansal@anvisys.net</li>
-                                              </ul>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-
-
-                             <div class="col-xs-6">
-                                 <div class="col-xs-12"><b>3 BHK Flat</b><span class="normal-text"> is available in Sector 27</span></div>
-                                 <div class="col-xs-12">
-                                     <div class="col-xs-3  well well-sm" style="text-align: center">
-                                         <div class="summary-title">Area </div>
-                                         <div class="summary-text">1200sqft</div>
-                                     </div>
-                                     <div class="col-xs-3  well well-sm">
-                                         <div class="summary-title">Status </div>
-                                         <div class="summary-text">from 1st March</div>
-                                     </div>
-                                     <div class="col-xs-3  well well-sm">
-                                         <div class="summary-title">Floor </div>
-                                         <div class="summary-text">G of 2 </div>
-                                     </div>
-                                     <div class="col-xs-3  well well-sm">
-                                         <div class="summary-title">Furnished</div>
-                                         <div class="summary-text">none </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-xs-12">
-                                     Non-Vegetarians, Without Company Lease
-                                 </div>
-                             </div>
-                         
-                        </div>
-                         <div class="row result_row" style="margin-top: 10px;">
-
-                             <div class="col-xs-6" >
-                                <div style="color: blue;">Nestin-properties from Owners only</div> 
-                                 <div class="row">
-                                     <div class="col-xs-4">
-                                         <img class="property-image" src="Images/Icon/darkredbg.png" />
-                                     </div>
-                                     <div class="col-xs-8">
-                                         <div style="margin-top:5px;">
-                                             <b>Expected Rent:
-                                       
-                                             INR 5000  </b>
-                                         </div>
-                                         <div class="dropup" style="margin-top:5px;">
-                                             Contact: <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                 Amit Kumar</button>
-                                             <ul class="dropdown-menu" style="padding:5px;">
-                                               <li> Mob: 9591033223</li>
-                                                <li> Email: amit.bansal@anvisys.net</li>
-                                              </ul>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-
-
-                             <div class="col-xs-6">
-                                 <div class="col-xs-12"><b>3 BHK Flat</b><span class="normal-text"> is available in Sector 27</span></div>
-                                 <div class="col-xs-12">
-                                     <div class="col-xs-3  well well-sm" style="text-align: center">
-                                         <div class="summary-title">Area </div>
-                                         <div class="summary-text">1200sqft</div>
-                                     </div>
-                                     <div class="col-xs-3  well well-sm">
-                                         <div class="summary-title">Status </div>
-                                         <div class="summary-text">from 1st March</div>
-                                     </div>
-                                     <div class="col-xs-3  well well-sm">
-                                         <div class="summary-title">Floor </div>
-                                         <div class="summary-text">G of 2 </div>
-                                     </div>
-                                     <div class="col-xs-3  well well-sm">
-                                         <div class="summary-title">Furnished</div>
-                                         <div class="summary-text">none </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-xs-12">
-                                     Non-Vegetarians, Without Company Lease
-                                 </div>
-                             </div>
-                         
-                        </div>--%>
+                       
                     </div>
                 </div>
                 <div class="col-sm-2 hidden-xs"></div>

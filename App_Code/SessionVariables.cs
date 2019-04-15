@@ -16,16 +16,16 @@ public class SessionVariables
           //public static HttpContext.Current.Session["User"] usersession;
 
 
-    public static User API_URL
+    public static String API_URL
     {
         get
         {
-            return (User)HttpContext.Current.Session["api_url"];
+            return (String)HttpContext.Current.Session["api_url"];
         }
 
         set
         {
-            HttpContext.Current.Session["api_url"] = "http://www.kevintech.in/Nestin-WebApi";
+            HttpContext.Current.Session["api_url"] = value;
         }
     }
 
@@ -38,7 +38,7 @@ public class SessionVariables
 
         set
         {
-            HttpContext.Current.Session["api_url"] = "http://www.kevintech.in/Nestin-WebApi";
+           
             HttpContext.Current.Session["User"] = value;
         }
     }

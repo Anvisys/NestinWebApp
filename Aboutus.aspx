@@ -33,7 +33,8 @@
         <link href="Styles/Responsive.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="CSS/ApttTheme.css" />
-  <link rel="stylesheet" href="CSS/ApttLayout.css" />
+  <link rel="stylesheet" href="CSS/ApttLayounavt.css" />
+      <link rel="stylesheet" href="CSS/ApttLayout.css" />
      
     <link rel="stylesheet" href="CSS/NewAptt.css" />
    <link rel="stylesheet" href="Login/CSS/footer.css" />
@@ -473,7 +474,7 @@ img.app_centre{
            <div class="col-sm-4 col-xs-6 zero-margin">
                <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse"> <i class="fa fa-bars"></i> </button>
                   <div class="navbar-collapse nav-main-collapse collapse pull-right" style="margin-top: 9px;color:white; text-align:center;">
-                  <nav class="nav-main mega-menu">
+                  <nav class="nav-main mega-menu nav-small">
                     <ul class="nav nav-pills nav-main scroll-menu" id="topMain">
                       <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
                       <li class=" "><a class="menu_text"  href="Aboutus.aspx">About Us</a></li>

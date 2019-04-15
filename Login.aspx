@@ -323,10 +323,7 @@
         }
 
 
-        .nav-small li a{
-            font-size:14px!important;
-            font-weight:300!important;
-        }
+    
 
     </style>
 
@@ -473,8 +470,6 @@
                             <li class=" "><a class="menu_text" href="register.aspx" id="register">Register</a></li>
                             <!-- GLOBAL SEARCH -->
                             <li class=""><a class="menu_text" href="Rent.aspx" id="rent">Rent</a> </li>
-
-
 
                         </ul>
                     </nav>

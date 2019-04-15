@@ -72,7 +72,7 @@
             GetMySocietyRequests();
             GetMyHouses();
             GetMyFlats();
-         
+            GetUserData();
         });
 
         
@@ -253,6 +253,7 @@
              $("#ProgressBar").hide();
 
         }
+
         function AddNewSociety() {
              $("#ProgressBar").show();
             var Society = {};
@@ -315,12 +316,18 @@
             var strData = "";
             $("#FlatRequests").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
-            console.log(results);
+         
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
 
                     var reqDate = DisplayDateOnly(results[i].ActiveDate);
-                     var modDate = DisplayDateOnly(results[i].DeActiveDate);
+                    var modDate = DisplayDateOnly(results[i].DeActiveDate);
+                       var btnString = "";
+                      if (results[i].Status == 2) {
+
+                        btnString = "<button class='btn btn-primary btn-sm' onclick='Select("+results[i].ResID +",2)'>Select</button>";
+
+                    }
                                      
                     strData = strData + "<div class=\"row\" style=\"margin:20px;padding:0px;\">" +
                         "<div class='col-xs-1'>" + results[i].SocietyID + "</div>" +
@@ -329,12 +336,14 @@
                         "</div>" +
                         "<div class='col-xs-2'> Requested On:" +  reqDate + "</div>" +
                         "<div class='col-xs-2'>Modified On :" + modDate + "</div>" +
-                          "<div class='col-xs-2'> Status: <br/>" + results[i].Status + "</div>" 
+                          "<div class='col-xs-2'> Status: <br/>" + results[i].Status + "</div>" +
 
                         //"<div class='panel-heading'>" + results[i].SocietyID + "<br/>: " + results[i].SocietyName + " <br/> Return " + results[i].Sector + "</div>"
                         //+ "<div class='panel-body'> City " + results[i].City
                         //+ "<div> State" + results[i].State + "</div>"
                         //   + "</div>"
+                         "<div class='col-xs-10'>" + "</div>" +
+                          "<div class='col-xs-2'>" + btnString + "</div>" 
                         + "</div>";
                     
                 }
@@ -369,12 +378,14 @@
             var strData = "";
             $("#SocietyRequests").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
-            console.log(results);
+          
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
 
                     var reqDate = DisplayDateOnly(results[i].RequestDate);
                     var modDate = DisplayDateOnly(results[i].ModifiedDate);
+                 
+                  
 
                     strData = strData + "<div class=\"row\" style=\"margin:20px;padding:0px;\">" +
                         "<div class='col-xs-1'>" + results[i].SocietyID + "</div>" +
@@ -389,6 +400,8 @@
                         //+ "<div class='panel-body'> City " + results[i].City
                         //+ "<div> State" + results[i].State + "</div>"
                         //   + "</div>"
+                    
+                      
                         + "</div>";
 
                 }
@@ -424,7 +437,7 @@
             var strData = "";
             $("#HouseRequests").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
-            console.log(results);
+          
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
 
@@ -436,7 +449,7 @@
                         + "<div class='col-xs-4'>" + results[i].HouseNUmber + "<br/>: " + results[i].Sector + ", " + results[i].City + ", " + results[i].State + "</div>"
                         + "<div class='col-xs-2'> Active " + actDate + "</div>"
                         + "<div class='col-xs-2'> Active Till" + inactDate + "</div>"
-                        + "<div class='col-xs-2'></div>"
+                        + "<div class='col-xs-2'><button class='btn btn-primary btn-sm' onclick='Select("+results[i].ResID +",2)'>Select</button></div>"
                         + "</div>";
 
                 }
@@ -483,15 +496,17 @@
             $("#ProgressBar").hide();
         }
 
-        function Click(ResId, status) {
+        function Select(ResId, status) {
+            window.location = "MainPage.aspx?Res=" + ResId;
 
-            if (status = 0) {
-                alert("Call Admin for Approval");
-            }
-            else {
-                window.location = "MainPage.aspx?Res=" + ResId;
-                alert("Go To Main Page");
-            }
+            console.log(window.location);
+            //if (status = 0) {
+            //    alert("Call Admin for Approval");
+            //}
+            //else {
+            //    window.location = "MainPage.aspx?Res=" + ResId;
+            //    alert("Go To Main Page");
+            //}
         }
 
 
@@ -517,6 +532,54 @@
 
         function HideAddSociety() {
               $("#addSociety").hide();
+        }
+
+
+
+          function GetUserData(user_login) {
+          
+            $.ajax({
+                type: "POST",
+                url: "Userprofile.aspx/GetUserData",
+                data: '{userLogin:"' + user_login + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: ShowUserData,
+                failure: function (response) {
+                    alert(response.d);
+                    sessionStorage.clear();
+                }
+            });
+        }
+
+
+        function ShowUserData(response) {
+             var js = jQuery.parseJSON(response.d);
+          
+            if (js.length > 0) {
+              
+                var length = js.length;
+
+                for (var i = 0; i < length; i++) {
+                   
+                    $('#txtUFName').val(<% =UserName %>);
+                 
+                    $('#txtUMobile').val(js[i].MobileNo);
+                  
+             
+                    $('#txtULName').val(js[i].LastName);
+                   
+                    $('#txtUEmail').val(js[i].EmailId);
+                  
+                    $('#txtUAddress').val(js[i].Address);
+                   
+                }
+            
+            }
+            else {
+                //alert("NoData")
+            }
+
         }
 
 
@@ -597,30 +660,47 @@
 
                 </div>
 
+</form>
 
 
-                 <div class="container-fluid" id="flat_Request" style="margin:50px;">
-                      <div class="row">
+    <div class="container-fluid" id="User_Profile" style="margin:50px;background-color:white;">
+                      <div class="row" style="margin:10px;">
+                    <div class="col-xs-4">
+                        <img id="uploadPreview" class="img image_large" src="GetImages.ashx?UserID=<% =UserID %>&Name=<% =UserName %>&UserType=Owner" 
+                           />
+                    </div>
+                     <div class="col-xs-8">
+                          <label style="width:100px;" id="txtUFName"><% =UserName %></label>&nbsp<label style="width:100px;" id="txtULName"><% =UserLastName %></label><br />
+                           <label style="width:100px;" id="txtUEmail"><% =UserEmail %></label><br /> <label style="width:100px;" id="txtUMobile"><% =UserMobile %></label><br />
+                           <label style="width:100px;" id="txtUAddress"></label> <label style="width:300px;" id=""></label>
+
+                     </div>
+                          </div>
+                  
+                </div>
+
+             <div class="container-fluid" id="flat_Request" style="margin:50px;background-color:white;">
+                      <div class="row" style="margin:10px;">
                     <div class="col-xs-10"><h4 style="margin-bottom:0px;"> My Flats </h4></div>
                      <div class="col-xs-2"><button class="btn btn-primary btn-sm" onclick="NewFlat()" type="button">New Flat</button></div>
                           </div>
-                   <div class="row" id="FlatRequests" style="border-top: solid 1px black"></div>
+                   <div class="row" id="FlatRequests" style="border-top: solid 2px black; margin-top:10px;"></div>
                 </div>
 
-                 <div class="container-fluid" id="society_Request" style="margin:50px;">
-                     <div class="row">
+                 <div class="container-fluid" id="society_Request" style="margin:50px;background-color:white;">
+                     <div class="row" style="margin:10px;">
                      <div class="col-xs-10"><h4 style="margin-bottom:0px;" > My Societies </h4></div>
                      <div class="col-xs-2"><button class="btn btn-primary btn-sm" onclick="NewSociety()" type="button">New Society</button></div>
                          </div>
-                   <div class="row" id="SocietyRequests" style="border-top: solid 1px black"></div>
+                   <div class="row" id="SocietyRequests" style="border-top: solid 2px black;margin-top:10px;"></div>
                 </div>
 
-            <div class="container-fluid" id="House_Requests" style="margin:50px;">
-                <div class="row">
+            <div class="container-fluid" id="House_Requests" style="margin:50px;background-color:white;">
+                <div class="row" style="margin:10px;">
                     <div class="col-xs-10"><h4 style="margin-bottom:0px;">  My Independent House</h4></div>
                 <div class="col-xs-2"><button class="btn btn-primary btn-sm" onclick="NewHouse()" type="button">New House</button></div>
                     </div>
-                   <div class="row" id="HouseRequests" style="border-top: solid 1px black"></div>
+                   <div class="row" id="HouseRequests" style="border-top: solid 2px black;margin-top:10px;"></div>
                 </div>
                 
         <div id="addHouse" class="modal">
@@ -827,7 +907,6 @@
             </div>
 
 
-</form>
 
 
         <!-- WRAPPER -->

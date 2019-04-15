@@ -341,13 +341,13 @@ img.app_centre{
            <div class="col-sm-4 col-xs-6 zero-margin">
                <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse"> <i class="fa fa-bars"></i> </button>
                   <div class="navbar-collapse nav-main-collapse collapse pull-right" style="margin-top: 9px;color:white; text-align:center;">
-                  <nav class="nav-main mega-menu">
+                  <nav class="nav-main mega-menu nav-small">
                     <ul class="nav nav-pills nav-main scroll-menu" id="topMain">
                       <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
                       <li class=" "><a class="menu_text"  href="Aboutus.aspx">About Us</a></li>
        
                       <li class=" "><a  class="menu_text" href="Contact.aspx">Contact </a></li>
-                      <li class=" "><a  class="menu_text" href="#" id="login">Login</a></li>
+                   
                         <li class=" "><a  class="menu_text" href="register.aspx" id="register">Register</a></li>
                       <!-- GLOBAL SEARCH -->
                       <li class="search dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"  style="display:none;"> </li>

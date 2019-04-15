@@ -32,6 +32,16 @@
 }
 
 
+.image_large {
+    max-height: 150px;
+    min-height: 100px;
+    max-width: 150px;
+    min-width: 100px;
+    background-position: center;
+    text-align: center;
+    border-radius:50%;
+}
+
 .dropdown-content-edit {
      display:none;
     position:absolute;
@@ -298,4 +308,10 @@ float:right;
     margin: 0px;
     padding: 0px;
     margin: auto;
+}
+
+
+.nav-small li a {
+    font-size: 14px !important;
+    font-weight: 300 !important;
 }

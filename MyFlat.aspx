@@ -23,9 +23,9 @@
           
 
     <script>
-        var api_url, CurrentUserType, ResID, UserID, Type, BHK, FirstName, LastName, MobileNo, EmailId,FlatID, FlatNumber, Address, ParentName, SocietyID,SocietyName, Gender, ActiveDate, DeActiveDate,  TenantUserID;
+        var CurrentUserType, ResID, UserID, Type, BHK, FirstName, LastName, MobileNo, EmailId,FlatID, FlatNumber, Address, ParentName, SocietyID,SocietyName, Gender, ActiveDate, DeActiveDate,  TenantUserID;
         var MobileExist, EmailExist, TenantResID, chkExistingUser = false;
-
+        var api_url = "";
         var currentInvetoryID = 0;
 
         $(document).ready(function () {
@@ -638,11 +638,84 @@
         //**************add for rental*************//
 
           
-          $(document).ready(function () {
-            populateType();
-                populateSelect();
+        $(document).ready(function () {
+            api_url = '<%=Session["api_url"] %>';
+            // populateType();
+            //populateSelect();
+            GetInventoryTypeData();
+            GetAccomodationType(1);
+             $('#InventoryType').on('change', function () {
+                  GetAccomodationType( this.value );
+
+            });
+
+            
+
+
         });
 
+       
+
+
+        function GetInventoryTypeData() {
+
+            var abs_url = api_url + "/api/InventoryType";
+
+            $.ajax({
+                url: abs_url,
+                dataType: "json",
+                success: populateInventoryType,
+                failure: function (response) {
+                    alert(response.d);
+                    sessionStorage.clear();
+                }
+            });
+        }
+
+               function populateInventoryType(data) {
+          
+            var InventoryType = data.$values;
+
+            var ele = document.getElementById('InventoryType');
+              ele.innerHTML = "";
+            for (var i = 0; i < InventoryType.length; i++) {
+                // POPULATE SELECT ELEMENT WITH JSON.
+                ele.innerHTML = ele.innerHTML +
+                    '<option value="' + InventoryType[i].InventoryTypeID + '">' + InventoryType[i].InventoryType + '</option>';
+            }
+
+        }
+
+
+
+           function GetAccomodationType(id) {
+
+               var abs_url = api_url + "/api/Accomodation/" + id;
+
+            $.ajax({
+                url: abs_url,
+                dataType: "json",
+                success: populateAccomodationType,
+                failure: function (response) {
+                    alert(response.d);
+                    sessionStorage.clear();
+                }
+            });
+        }
+
+
+            function populateAccomodationType( data) {
+            // THE JSON ARRAY.
+            var Inventory =  data.$values;
+
+            var ele = document.getElementById('AccomodationType');
+            ele.innerHTML = "";
+            for (var i = 0; i < Inventory.length; i++) {
+                // POPULATE SELECT ELEMENT WITH JSON.
+                ele.innerHTML = ele.innerHTML +
+                    '<option value="' + Inventory[i].AccomodationTypeID + '">' + Inventory[i].AccomodationType + '</option>';
+            }
+        }
 
             function InitiateRent() {
               
@@ -655,48 +728,64 @@
             }
 
 
-            function populateType() {
-                // THE JSON ARRAY.
-                var InventoryType = [
-                    { "ID": 1, "Value": "Flat" },
-                    { "ID": 2, "Value": "PG" },
-                    { "ID": 3, "Value": "Studio" },
-                    { "ID": 4, "Value": "Independent" },
-                ];
-                var ele = document.getElementById('type');
-                for (var i = 0; i < InventoryType.length; i++) {
-                    // POPULATE SELECT ELEMENT WITH JSON.
-                    ele.innerHTML = ele.innerHTML +
-                        '<option value="' + InventoryType[i]['ID'] + '">' + InventoryType[i]['Value'] + '</option>';
-                }
+            //function populateType() {
+            //    // THE JSON ARRAY.
+            //    var InventoryType = [
+            //        { "ID": 1, "Value": "Flat" },
+            //        { "ID": 2, "Value": "PG" },
+            //        { "ID": 3, "Value": "ServiceApt" },
+            //        { "ID": 4, "Value": "Independent" },
+            //    ];
+            //    var ele = document.getElementById('type');
+            //    for (var i = 0; i < InventoryType.length; i++) {
+            //        // POPULATE SELECT ELEMENT WITH JSON.
+            //        ele.innerHTML = ele.innerHTML +
+            //            '<option value="' + InventoryType[i]['ID'] + '">' + InventoryType[i]['Value'] + '</option>';
+            //    }
 
-            }
+            //}
+
+        
+
+       
 
 
-            function populateSelect() {
-                // THE JSON ARRAY.
-                var Inventory = [
-                    { "ID": 1, "Value": "2BHK" },
-                    { "ID": 2, "Value": "3BHK" },
-                    { "ID": 3, "Value": "4BHK" },
-                    { "ID": 4, "Value": "Bed" },
-                    { "ID": 5, "Value": "Bed & Food" },
-                    { "ID": 6, "Value": "Floor" }
-                ];
+        //      function GetAccomodationType(id) {
 
-                var ele = document.getElementById('inventory');
-                for (var i = 0; i < Inventory.length; i++) {
-                    // POPULATE SELECT ELEMENT WITH JSON.
-                    ele.innerHTML = ele.innerHTML +
-                        '<option value="' + Inventory[i]['ID'] + '">' + Inventory[i]['Value'] + '</option>';
-                }
-            }
+        //       var abs_url = api_url + "/api/Accomodation/" + id;
+
+        //    $.ajax({
+        //        url: abs_url,
+        //        dataType: "json",
+        //        success: populateAccomodationType,
+        //        failure: function (response) {
+        //            alert(response.d);
+        //            sessionStorage.clear();
+        //        }
+        //    });
+        //}
+
+
+        //function populateAccomodationType( data) {
+        //    // THE JSON ARRAY.
+        //    var Inventory =  data.$values;
+
+        //    var ele = document.getElementById('selStyle');
+        //    ele.innerHTML = "";
+        //    for (var i = 0; i < Inventory.length; i++) {
+        //        // POPULATE SELECT ELEMENT WITH JSON.
+        //        ele.innerHTML = ele.innerHTML +
+        //            '<option value="' + Inventory[i].AccomodationTypeID + '">' + Inventory[i].AccomodationType + '</option>';
+        //    }
+        //}
+
+      
 
             function AddRentInventory() {
 
                 var RentInventory = {};
-                RentInventory.InventoryID = $("#inventory").val();
-                RentInventory.RentTypeID = $("#type").val();
+                RentInventory.AccomodationTypeID = $("#AccomodationType").val();
+                RentInventory.InventoryTypeID = $("#InventoryType").val();
                 RentInventory.RentValue = $("#inRent").val();
                 RentInventory.Available = 1;
                 RentInventory.Description = $("#description").val();
@@ -763,10 +852,10 @@
                     async: false,
                     contentType: 'application/json',
                     success: function (data) {
-                     
+                       $("#closeInventoryModal").hide();
                         var Response = data.Response;
-                        if (Response == "OK") {
-                            $("#closeInventoryModal").hide();
+                        if (Response == "Ok") {
+                          
                             GetRentalInfo(FlatNumber);
                         }
                         else {
@@ -1097,19 +1186,19 @@
                                 <form name="AddRent">
 
                                     <div class="row " style="margin-top: 20px;">
-
                                         <div class="col-sm-6">
-                                            <label class="labelwidth col-sm-4 col-form-label ">Inventory:</label>
+                                            <label class="labelwidth col-sm-4 col-form-label ">Inventory Type:</label>
                                             <div class="col-sm-8">
-                                                <select id="inventory" onblur="" class="form-control form-control-sm"></select>
+                                                <select id="InventoryType" onblur="" class="form-control form-control-sm "></select>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <label class="labelwidth col-sm-4 col-form-label ">Type:</label>
+                                            <label class="labelwidth col-sm-4 col-form-label ">Accomodation:</label>
                                             <div class="col-sm-8">
-                                                <select id="type" onblur="" class="form-control form-control-sm "></select>
+                                                <select id="AccomodationType" onblur="" class="form-control form-control-sm"></select>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                     <div class="row" style="margin-top: 10px;">
                                         <div class="col-sm-6">

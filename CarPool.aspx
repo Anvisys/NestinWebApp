@@ -47,7 +47,7 @@
             $.ajax({
                 url: abs_url,
                 dataType: "json",
-                success: OnSuccess,
+                success: DisplayPoolData,
                 failure: function (response) {
                     alert(response.d);
                     sessionStorage.clear();
@@ -56,26 +56,11 @@
 
         };
 
-        function GetMyPoolOffers() {
-            var abs_url = api_url + "/api/CarPool/self/" + SocietyID + "/" + _ResID + "/0/20";
+   
 
-            $.ajax({
-                url: abs_url,
-                dataType: "json",
-                success: MyPoolData,
-                failure: function (response) {
-                    alert(response.d);
-                    sessionStorage.clear();
-                }
-            });
-
-        };
-
-        function OnSuccess(response) {
-            $("#ProgressBar").show();
-            var strPoolData = "";
-            $("#CarPool").html("");
-
+        function DisplayPoolData(response) {
+            $("#progressBarGetData").hide();
+           
             var strData = "";
             $("#CarPool").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
@@ -108,17 +93,37 @@
                         + "</div>"
                         +"</div>"
                         + "</div>";
-                     alert ('1');
+                   
                 }
-              
-                $("#CarPool").html(strData);
-                 $("#progressBarGetData").hide();
+
 
             }
+            else {
+                       strData = "<div class=\"col-xs-12\" style=\"margin:0px;padding:10px;\"> No Car Pool Data to display</div>"
+
+            }
+            
+              
+                $("#CarPool").html(strData);
+               
         }
 
         
+             function GetMyPoolOffers() {
 
+            var abs_url = api_url + "/api/CarPool/self/" + SocietyID + "/" + _ResID + "/0/20";
+
+            $.ajax({
+                url: abs_url,
+                dataType: "json",
+                success: MyPoolData,
+                failure: function (response) {
+                    alert(response.d);
+                    sessionStorage.clear();
+                }
+            });
+
+        };
 
         function MyPoolData(response) {
             var strMyData = "";
@@ -132,8 +137,8 @@
                     var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
                     var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
 
-                    strMyData = strMyData + "<div class=\"col-xs-4\" style=\"margin:0px;padding:10px;\">" 
-                        +"<div class=\"panel panel-success\" >"
+                    strMyData = strMyData + "<div class=\"col-xs-4\" style=\"margin:0px;padding:10px;\">"
+                        + "<div class=\"panel panel-success\" >"
                         + "<div class='panel-heading'><label class='small_label'> Destination :</label><div> " + results[i].Destination
                         + "</div><label class='small_label'> Start Time : </label><div> " + JourneyDTime + "</div><label class='small_label'> Return Time : </label><div> " + ReturnDTime + "</div></div>"
                         + "<div class='panel-body'> <label class='small_label'> Vehicle:  </label>" + results[i].VehicleType
@@ -146,13 +151,15 @@
                         + "</div>"
                         + "</div>"
                         + "</div>";
-                    
+
                 }
-                
-                $("#MyPool").html(strMyData);
+               
+            }
+            else {
+                       strMyData = "<div class=\"col-xs-12\" style=\"margin:0px;padding:10px;\"> No Car Pool From me</div>"
 
             }
-           
+            $("#MyPool").html(strMyData);
         }
 
         function ShowPoolModal() {

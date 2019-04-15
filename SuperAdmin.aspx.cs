@@ -45,4 +45,30 @@ public partial class SuperAdmin : System.Web.UI.Page
     }
 
 
+    [System.Web.Services.WebMethod]
+    [System.Web.Script.Services.ScriptMethod]
+    public static bool ApproveSocietyRequest(Society society)
+    {
+        Society _society = new Society();
+        bool result = _society.ApproveSociety(society.SocietyID);
+
+        //Update status to 2
+        // Update SocietyUserTable with UserID and SocietyID
+
+        return result;
+    }
+
+    [System.Web.Services.WebMethod]
+    [System.Web.Script.Services.ScriptMethod]
+    public static bool RejectSocietyRequest(Society society)
+    {
+        Society _society = new Society();
+        bool result = _society.RejectSociety(society.SocietyID);
+
+        //Update status to 2
+        // Update SocietyUserTable with UserID and SocietyID
+
+        return result;
+    }
+
 }

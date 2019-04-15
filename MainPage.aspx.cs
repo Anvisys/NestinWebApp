@@ -40,10 +40,21 @@ public partial class MainPage : System.Web.UI.Page
         {
             if (!IsPostBack)
             {
+                string ResID = Request.QueryString["Res"];
 
+                if (ResID != null)
+                {
+                    Resident currentResident = (Resident)muser.AllResidents.FirstOrDefault(f => f.ResID.ToString() == ResID);
+                    if (currentResident != null)
+                    {
+                        muser.currentResident = currentResident;
+                        initializePageControl(currentResident);
+
+                    }
+                }
 
                 //currentResident = (Resident)muser.AllResidents[0];
-                if (muser.AllResidents.Count > 0)
+               else if (muser.AllResidents.Count > 0)
                 {
                     if (muser.currentResident.UserType == "Individual")
                     {
@@ -135,7 +146,7 @@ public partial class MainPage : System.Web.UI.Page
 
            
         }
-        else if (muser.currentResident.UserType == "Owner" || muser.currentResident.UserType == "Tenant" || muser.currentResident.UserType == "ResidentAdmin")
+        else if (muser.currentResident.UserType == "Owner" || muser.currentResident.UserType == "Tenant" )
         {
             lblsocietyname.Text = muser.currentResident.SocietyName ;
 
@@ -153,14 +164,20 @@ public partial class MainPage : System.Web.UI.Page
             GetProfileImage(muser.UserID);
 
         }
-        if (muser.currentResident.UserType == "Employee")
+       else if (muser.currentResident.UserType == "Employee")
         {
 
             lblUserName.Text = muser.FirstName + " as " + muser.currentResident.UserType;
             
             GetProfileImage(muser.UserID);
         }
+        else if(muser.currentResident.UserType == "SuperAdmin") {
+            lblsocietyname.Text = "Super Administrator";
 
+            lblUserName.Text = muser.FirstName + " as " + muser.currentResident.UserType; ;
+
+            GetProfileImage(muser.UserID);
+        }
     }
 
 

@@ -18,6 +18,26 @@ public partial class Role : System.Web.UI.Page
         get { return mUser.UserID; }
     }
 
+    public String UserName
+    {
+        get { return mUser.FirstName; }
+    }
+
+    public String UserLastName
+    {
+        get { return mUser.LastName; }
+    }
+
+    public String UserMobile
+    {
+        get { return mUser.MobileNumber; }
+    }
+
+    public String UserEmail
+    {
+        get { return mUser.EmailID; }
+    }
+
     public int ResCount
     {
         get { return mUser.AllResidents.Count; }
@@ -175,6 +195,26 @@ public partial class Role : System.Web.UI.Page
             TableCell statusCell = e.Row.Cells[6];
             statusCell.Text = txtStatus;
         }
+
+    }
+
+    [System.Web.Services.WebMethod]
+    public static string GetUserData(String userLogin)
+    {
+        try
+        {
+            List<string> Emp = new List<string>();
+            string query = string.Format("select * from dbo.TotalUsers where UserLogin ='" + userLogin + "'");
+
+            DataAccess da = new DataAccess();
+            DataSet ds = da.GetData(query);
+            return JsonConvert.SerializeObject(ds.Tables[0]);
+        }
+        catch (Exception ex)
+        {
+            return "{'result:''Error'}";
+        }
+
 
     }
 
