@@ -25,6 +25,7 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>  
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>  
     <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <link href="Login/css/settings.css" rel="stylesheet" type="text/css" />
     <!-- THEME CSS -->
@@ -593,7 +594,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-                    <header id="topNav" class="layout_header" style="height: 75px; background-color: #fff; color: #fff;">
+                    <header id="topNav" class="layout_header" style="height: 75px; background-color: #727cf5; color: #fff;">
 
                         <div class="container-fluid">
                             <div class="col-sm-4 col-xs-6 zero-margin">
@@ -606,7 +607,7 @@
                             <div class="col-sm-4 hidden-xs zero-margin">
                                 <!-- Logo text or image -->
 
-                                <div class="title" style="color: #00baed; padding-top: 11px; text-align: center; font-size: x-large;">Society Management System</div>
+                                <div class="title" style="color: #fff; padding-top: 11px; text-align: center; font-size: xx-large;">Society Management System</div>
                                 <!-- Top Nav -->
 
                             </div>
@@ -663,21 +664,37 @@
 </form>
 
 
-    <div class="container-fluid" id="User_Profile" style="margin:50px;background-color:white;">
-                      <div class="row" style="margin:10px;">
-                    <div class="col-xs-4">
-                        <img id="uploadPreview" class="img image_large" src="GetImages.ashx?UserID=<% =UserID %>&Name=<% =UserName %>&UserType=Owner" 
-                           />
-                    </div>
-                     <div class="col-xs-8">
-                          <label style="width:100px;" id="txtUFName"><% =UserName %></label>&nbsp<label style="width:100px;" id="txtULName"><% =UserLastName %></label><br />
-                           <label style="width:100px;" id="txtUEmail"><% =UserEmail %></label><br /> <label style="width:100px;" id="txtUMobile"><% =UserMobile %></label><br />
-                           <label style="width:100px;" id="txtUAddress"></label> <label style="width:300px;" id=""></label>
-
-                     </div>
+                <div class="container-fluid" id="User_Profile" style="margin: 50px; background-color: white;">                  
+                    <div class="row" style="margin: 10px;">                        
+                        <div class="col-sm-2">
+                            <img id="uploadPreview" class="img image_large" src="GetImages.ashx?UserID=<% =UserID %>&Name=<% =UserName %>&UserType=Owner" />
+                        </div>
+                         <div class="col-sm-8">
+                            <table class="w3-table w3-striped w3-bordered">
+                                <tr>
+                                    <td>FirstName</td>
+                                    <td><% =UserName %></td>
+                                </tr>
+                                <tr>
+                                    <td>LastName</td>
+                                    <td><% =UserLastName %></td>
+                                </tr>
+                                <tr>
+                                     <td>Email</td>
+                                    <td><% =UserEmail %></td>
+                                </tr>
+                                <tr>
+                                     <td>Mobile</td>
+                                    <td><% =UserMobile %></td>
+                                </tr>
+                                <tr>
+                                     <td>Address</td>
+                                    <td>XXXXXXXXXXX</td>
+                                </tr>
+                            </table>
                           </div>
-                  
-                </div>
+                        </div>
+                    </div>
 
              <div class="container-fluid" id="flat_Request" style="margin:50px;background-color:white;">
                       <div class="row" style="margin:10px;">

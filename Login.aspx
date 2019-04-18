@@ -387,7 +387,7 @@
                 <button type="button" id="submitbutton" style="width: 200px; height: 30px; color: white;" tabindex="3">Submit </button>
             </div>
             <div>
-                <img class="dvLoading_first" src="Images/Icon/ajax-loader.gif" alt="loader" style="border: 0;" />
+                <img class="dvLoading_first" src="images/icon/ajax-loader.gif" alt="loader" style="border: 0;" />
             </div>
 
             <asp:Label ID="lblerror" runat="server" Text="" CssClass="lblerror"></asp:Label><br />

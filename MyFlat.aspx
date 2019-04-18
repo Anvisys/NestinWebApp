@@ -1198,7 +1198,7 @@
                 </div>
 
                 <div id="progressBar" class="container-fluid" style="text-align: center; height: 200px;">
-                    <img src="Images/Icon/ajax-loader.gif" style="width: 20px; height: 20px; margin-top: 50px;" />
+                    <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
                 </div>
 
 

@@ -430,13 +430,13 @@
     
                                  if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
       
-                                    $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                                    //$("#errmsg").html("Digits Only").show().fadeOut("slow");
                                            return false;
                                         }
                            });
                 });
 
-s
+
     </script>
 
     <style>
@@ -660,7 +660,7 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [
                             <form name="newActivity" style="display: none" >
 
                                 <div class="form-group row">
-                                    <label for="colFormLabelsm" class="col-sm-3 col-form-label col-form-label-sm">Email</label>
+                                    <label class="col-sm-3 col-form-label col-form-label-sm">Email</label>
                                     <div class="col-sm-9">
                                         <input type="email" name="Email" class="form-control form-control-sm" id="email" placeholder="Enter Email" required autocomplete="off" />
                                     </div>
@@ -675,13 +675,13 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label col-form-label-sm">First Name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="firstName" class="form-control form-control-sm" id="firstname" placeholder="Enter first name" required autocomplete="off" />
+                                        <input type="text" name="firstName" class="form-control form-control-sm" id="firstname" placeholder="Enter first name" required maxlength="15" autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Last Name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="LastName" class="form-control form-control-sm" id="lastname" placeholder="Enter last name" required autocomplete="off" />
+                                        <input type="text" name="LastName" class="form-control form-control-sm" id="lastname" placeholder="Enter last name" required maxlength="15" autocomplete="off" />
                                     </div>
                                 </div>
                                 <!-- Radio button for GENDER -->
@@ -689,10 +689,10 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Gender</label>
                                     <div class="col-sm-9">
                                         <label class="radio-inline">
-                                            <input type="radio" name="optradio" id="rdMale" />Male
+                                            <input type="radio" name="optradio" id="rdMale" required checked />Male
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="optradio" id="rdFemale" />Female
+                                            <input type="radio" name="optradio" id="rdFemale" required />Female
                                         </label>
                                     </div>
                                 </div>
@@ -701,13 +701,13 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Parent Name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="ParentName" class="form-control form-control-sm" id="parentname" placeholder="Enter parent name" required autocomplete="off" />
+                                        <input type="text" name="ParentName" class="form-control form-control-sm" id="parentname" placeholder="Enter parent name" required maxlength="15" autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Address</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="Address" class="form-control form-control-sm" id="address" placeholder="Enter address" required autocomplete="off" />
+                                        <input type="text" name="Address" class="form-control form-control-sm" id="address" placeholder="Enter address" required maxlength="100" autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -720,8 +720,6 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                </div>
             </div>
         </div>
     </section>
@@ -729,7 +727,7 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [
     </form>
 
 
-    <header id="topNav" class="layout_header" style="height: 75px; background-color: #fff; color: #fff;">
+    <header id="topNav" class="layout_header" style="height: 75px; background-color: #727cf5; color: #fff;">
 
         <div class="container-fluid">
             <div class="col-sm-4 col-xs-6 zero-margin">
@@ -742,14 +740,14 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [
             <div class="col-sm-4 hidden-xs zero-margin">
                 <!-- Logo text or image -->
 
-                <div class="title" style="color: #00baed; padding-top: 11px; text-align: center; font-size: x-large;">Society Management System</div>
+                <div class="title" style="color: #fff; padding-top: 11px; text-align: center; font-size: x-large;">Society Management System</div>
                 <!-- Top Nav -->
 
             </div>
             <div class="col-sm-4 col-xs-6 zero-margin">
                 <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse"><i class="fa fa-bars"></i></button>
                 <div class="navbar-collapse nav-main-collapse collapse pull-right" style="margin-top: 9px; color: white; text-align: center;">
-                    <nav class="nav-main mega-menu nav-small">
+                    <nav class="nav-main mega-menu nav-small-sm">
                         <ul class="nav nav-pills nav-main scroll-menu" id="topMain">
                             <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
                          
@@ -765,12 +763,6 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [
 
     <!-- WRAPPER -->
     <span itemtype="http://schema.org/SoftwareApplication" />
-
-
-
-
-
-
 
     <!-- /WRAPPER -->
     <section id="download" class="download">

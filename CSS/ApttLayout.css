@@ -33,10 +33,10 @@
 
 
 .image_large {
-    max-height: 150px;
-    min-height: 100px;
-    max-width: 150px;
-    min-width: 100px;
+    max-height: 200px;
+    min-height: 150px;
+    max-width: 200px;
+    min-width: 150px;
     background-position: center;
     text-align: center;
     border-radius:50%;
@@ -314,4 +314,28 @@ float:right;
 .nav-small li a {
     font-size: 14px !important;
     font-weight: 300 !important;
+}
+
+/*Scroll bar indication*/
+
+.header {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+/* The progress container (grey background) */
+.progress-container {
+    width: 100%;
+    height: 5px;
+    background: #727cf5;
+}
+
+/* The progress bar (scroll indicator) */
+.progress-bar {
+    height: 5px;
+    background: #4dd2ff;
+    width: 0%;
 }
