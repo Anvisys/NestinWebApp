@@ -138,6 +138,14 @@
             lastname = document.getElementById("lastname").value;
             parentname = document.getElementById("parentname").value;
             address = document.getElementById("address").value;
+
+             var Gender;
+            if (document.getElementById('rdMale').checked) {
+                Gender = "Male";
+            }
+            else {
+                Gender = "Female";
+            }
     
             //alert(visitDate);
             var start = new Date();
@@ -198,9 +206,10 @@
             //var strURL = "visitor.aspx/AddVisitor";
 
             var reqBody = "{\"UserLogin\":\"" + email + "\",\"Password\":\"Password@123\",\"MiddleName\":\"K\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname + " \",\"MobileNo\":\""
-                + mobile + "\",\"StartTime\":\"" + strStartDate + "\",\"EndTime\":\"" + strEndDate +
-                "\",\"EmailId\":\"" + email + "\",\"Gender\":\"male\",\"Parentname\":\"" + parentname + "\",\"Address\":\"" + address
+                + mobile + "\",\"StartTime\":\"" + startDateISO + "\",\"EndTime\":\"" + endDateISO +
+                "\",\"EmailId\":\"" + email + "\",\"Gender\":\""+ Gender + "\",\"Parentname\":\"" + parentname + "\",\"Address\":\"" + address
                 + "\",\"SocietyID\":\"" + 1 + "\",\"UserType\":\"Demo\"}";
+
 
           
 
@@ -246,6 +255,14 @@
             lastname = document.getElementById("lastname").value;
             parentname = document.getElementById("parentname").value;
             address = document.getElementById("address").value;
+
+             var Gender;
+            if (document.getElementById('rdMale').checked) {
+                Gender = "Male";
+            }
+            else {
+                Gender = "Female";
+            }
     
             //alert(visitDate);
             var start = new Date();
@@ -302,13 +319,13 @@
 
       document.getElementById("post_loading").style.display = "block";
 
-            var strURL = "http://www.kevintech.in/GAService/api/User/Add/Demo";
+            var strURL = api_url +  "/api/User/Add/Demo";
             //var strURL = "visitor.aspx/AddVisitor";
 
             var user = "{\"UserLogin\":\"" + email + "\",\"Password\":\"Password@123\",\"MiddleName\":\"K\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname
-                        + " \",\"MobileNumber\":\""  + mobile + "\",\"StartTime\":\"" + strStartDate + "\",\"EndTime\":\"" + strEndDate +
-                        "\",\"EmailID\":\"" + email + "\",\"Gender\":\"male\",\"ParentName\":\"" + parentname + "\",\"Address\":\"" + address
-                        + "\",\"SocietyID\":\"" + 1 + "\",\"UserType\":\"Demo\"}";
+                + " \",\"MobileNumber\":\"" + mobile + "\",\"StartTime\":\"" + startDateISO + "\",\"EndTime\":\"" + endDateISO +
+                "\",\"EmailID\":\"" + email + "\",\"Gender\":\""+ Gender + "\",\"ParentName\":\"" + parentname + "\",\"Address\":\"" + address
+                + "\",\"SocietyID\":\"" + 1 + "\",\"UserType\":\"Demo\"}";
 
             var user1 = "{\"UserLogin\":\"" + email + "\"}";
 
@@ -382,7 +399,44 @@
                         $('.content').hide();
                         $('#' + $(this).val()).show();
                     });
+        });
+
+
+         //Disable button........
+
+                   (function() {
+            $('form > input').keyup(function() {
+
+                var empty = false;
+                $('form > input').each(function() {
+                    if ($(this).val() == '') {
+                        empty = true;
+                    }
                 });
+
+                if (empty) {
+                    $('#register').attr('disabled', 'disabled');
+                } else {
+                    $('#register').removeAttr('disabled'); 
+                }
+            });
+        })()
+
+                //End of Disable Button.......
+
+                $(document).ready(function () {
+ 
+                         $("#mobile").keypress(function (e) {
+    
+                                 if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+      
+                                    $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                                           return false;
+                                        }
+                           });
+                });
+
+s
     </script>
 
     <style>
@@ -428,7 +482,7 @@
 
         .dvLoading_first {
             display: none;
-            background: url(Images/Icon/ajax-loader.gif) no-repeat center center;
+            background: url(images/icon/ajax-loader.gif) no-repeat center center;
             opacity: 0.5;
             height: 50px;
             width: 50px;
@@ -528,11 +582,45 @@
 </head>
 <body>
 
-    <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    
+    <form method="post" action="./register.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTI1Nzg2MjM3OGRkGPuSJneDwVbZ8UN7oxYhsDImO6Mw15dK3JQzlv7JptM=" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
 
 
+<script src="/WebResource.axd?d=zLck5f-ldBc-KL5zMDmBuCj6aySYKxTAIiKBptdFGBTnV0bHLDYFTrmg5X7yw4DWDUc8EF5KiwiFFVURqcHqqIfbB9Fgw2o0WTJD1p08bB01&amp;t=636765212300000000" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=tC-thnSaQceZynYl8Gh3jya73qHN9Jgf2Rg6iifjya_jBtjL2pizyHt1Pc0LsuF6ESjPcP58AxVlN2HPLa-QNK0EEE7cZ_DesdOQ7BGGQT3de0Vr34QN40qGmKS-5lahjRaEFJdHAvJMUcsRV46HANPRFeHPpL8hgxOQ_KaZmWE1&amp;t=ffffffff999c3159" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=-01qgRVlaQXkeLC6GYpz1esHUAgfUtuDAglg0-qLawlR6ziEt-X1_GfNvyfVfKhL86408wBPrOU-y6ewLFG8ZuhXlUzhColkKT-awLN55agf4tmrzpvBpmm5s1g9tEITnre5zU2NMhfgUD1A_zaBH0F_cnYcvl6oyNjSwmLJqRBK3yMGh59g6LOYIi1_9zi40&amp;t=ffffffff999c3159" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="799CC77D" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAISJKo+bgRbSzw0vcwp/GjpESCFkFW/RuhzY1oLb/NUVBsPXGP7uZ2eJ+9/J2d59bUHiTUQTprTlbja6BgqD/kC" />
+</div>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [], 90, '');
+//]]>
+</script>
 
         <div class="login_div" id="select_flat" style="display: none;">
 
@@ -544,88 +632,93 @@
                 Resident Admin, Gaur<br />
             </div>
 
-            <asp:TextBox ID="TextBox1" runat="server" CssClass="login_txtbox" onfocus="if (this.value == 'Username or Email') this.value = '';" onblur="if (this.value == '') this.value = 'Username or Email';" value="Username or Email" BorderStyle="None"></asp:TextBox><br />
+            <input name="TextBox1" type="text" id="TextBox1" class="login_txtbox" onfocus="if (this.value == &#39;Username or Email&#39;) this.value = &#39;&#39;;" onblur="if (this.value == &#39;&#39;) this.value = &#39;Username or Email&#39;;" value="Username or Email" style="border-style:None;" /><br />
             <br />
-            <asp:Label ID="Label5" runat="server" Text="" CssClass="lblerror"></asp:Label>
+            <span id="Label5" class="lblerror"></span>
             <a href="#" id="GoMain" class="forgot_pass">Next</a><br />
-            <asp:Label ID="Label6" runat="server"></asp:Label>
+            <span id="Label6"></span>
 
 
         </div>
 
             <section id="contact">
 
-        <div class="jumbotron text-center" style="height: 150px;">
-            <h3 style="padding-top: 50px; color: #000;"><lable id="lblRegisterUser"></lable></h3>
+        <div class="jumbotron text-center" style="height: 140px;">
+            <h2 style="padding-top: 40px; color: #ffffff;"><lable id="lblRegisterUser"></lable></h2>
 
 
         </div>
         <div class="container">
             <div class="row">
-
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                 </div>
-                <div  class="col-sm-6 shadow p-3 mb-5 bg-white rounded">
+                <div class="col-sm-5 shadow p-3 mb-5 bg-white rounded ">
 
                     <div id="formRegister">
-                    <div class="layout_modal_body container-fluid">
-                    <form name="newActivity" style="display:none;">
-                   
-                        <div class="form-group row">
-                            <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg">Email</label>
-                            <div class="col-sm-9">
-                                <input type="email" name="Email" class="form-control form-control-lg" id="email" placeholder="Enter Email" />
-                            </div>
+                        <div class="layout_modal_body container-fluid">
+                           
+                            <form name="newActivity" style="display: none" >
+
+                                <div class="form-group row">
+                                    <label for="colFormLabelsm" class="col-sm-3 col-form-label col-form-label-sm">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" name="Email" class="form-control form-control-sm" id="email" placeholder="Enter Email" required autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label col-form-label-sm">Mobile No.</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="Mobile" class="form-control form-control-sm" id="mobile" placeholder="Enter Mobile No."  pattern="^\d{10}$" required maxlength="10" autocomplete="off" />
+                                        <span id="errmsg"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label col-form-label-sm">First Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="firstName" class="form-control form-control-sm" id="firstname" placeholder="Enter first name" required autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label col-form-label-sm">Last Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="LastName" class="form-control form-control-sm" id="lastname" placeholder="Enter last name" required autocomplete="off" />
+                                    </div>
+                                </div>
+                                <!-- Radio button for GENDER -->
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label col-form-label-sm">Gender</label>
+                                    <div class="col-sm-9">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="optradio" id="rdMale" />Male
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="optradio" id="rdFemale" />Female
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- END of Radio button for GENDER -->
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label col-form-label-sm">Parent Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="ParentName" class="form-control form-control-sm" id="parentname" placeholder="Enter parent name" required autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label col-form-label-sm">Address</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="Address" class="form-control form-control-sm" id="address" placeholder="Enter address" required autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-sm-9" style="text-align: end">
+                                        <button type="submit" onclick="AddUser()" id="register" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label col-form-label-lg">Mobile No.</label>
-                            <div class="col-sm-9">
-                                <input type="number" name="Mobile"  class="form-control form-control-lg" id="mobile" placeholder="Enter Mobile No." required />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label col-form-label-lg">First Name</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="firstName" class="form-control form-control-lg" id="firstname" placeholder="Enter first name" required />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label col-form-label-lg">Last Name</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="LastName" class="form-control form-control-lg" id="lastname" placeholder="Enter last name" required />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label col-form-label-lg">Parent Name</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="ParentName" class="form-control form-control-lg" id="parentname" placeholder="Enter parent name" required />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label col-form-label-lg">Address</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="Address" class="form-control form-control-lg" id="address" placeholder="Enter address" required />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label col-form-label-lg"></label>
-                            <div class="col-sm-9" style="text-align:end">
-                                <button type="button" onclick="AddUser()"  id="btnsubmit" class="btn btn-primary">Submit</button>
-                            </div>    
-                        </div>
-        
-                     <div id="post_loading" class="container-fluid" style="text-align:center;width:100%; height:200px;background-color:#090909;opacity:0.2;display:none;position:fixed; top:100px; z-index:99;">
-                    <img src="Images/Icon/ajax-loader.gif" style="width:20px;height:20px; margin-top:50px;" />
-                  </div>
-                    </form>
-                </div>
-               </div>
-                   <%-- <div class="layout_modal_footer" style="margin-right:7px;">
-                    <button type="button" class="btn btn-success" onclick="AddUser()" id="btnsubmit" disabled="register.Email.$invalid || register.Mobile.$invalid || register.firstName.$invalid|| register.LastName.$invalid|| register.ParentName.$invalid|| register.Address.$invalid">
-                    Submit</button>
-                    &nbsp;&nbsp;
-                    <button type="button" class="btn btn-warning" onclick="Cancel()">Cancel</button>
-                </div>--%>
+                    </div>
                 </div>
                 <div class="col-sm-3">
                 </div>
@@ -642,7 +735,7 @@
             <div class="col-sm-4 col-xs-6 zero-margin">
                 <!-- Mobile Menu Button -->
 
-                <a class="logo" href="#">
+                <a class="logo" href="Login.aspx">
                     <img src="Images/Icon/Logo1.png" height="50" alt="logo" />
                 </a>
             </div>
@@ -656,7 +749,7 @@
             <div class="col-sm-4 col-xs-6 zero-margin">
                 <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse"><i class="fa fa-bars"></i></button>
                 <div class="navbar-collapse nav-main-collapse collapse pull-right" style="margin-top: 9px; color: white; text-align: center;">
-                    <nav class="nav-main mega-menu">
+                    <nav class="nav-main mega-menu nav-small">
                         <ul class="nav nav-pills nav-main scroll-menu" id="topMain">
                             <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
                          
@@ -758,4 +851,4 @@
 
 
 </body>
-</html>
+</html>
