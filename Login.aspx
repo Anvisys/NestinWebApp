@@ -322,7 +322,13 @@
                 }
         }
 
-
+        .main-point{
+            font-family:"Open Sans", Arial, sans-serif;
+            font-style:normal;
+            font-weight:100!important;
+            font-size:20px;
+            color:#2e363f;
+        }
     
 
     </style>
@@ -440,7 +446,7 @@
     </form>
 
 
-    <header id="topNav" class="layout_header" style="height: 75px; background-color: #fff; color: #fff;">
+    <header id="topNav" class="layout_header" style="height: 75px; background-color: #727cf5; color: #fff;">
 
         <div class="container-fluid">
             <div class="col-sm-4 col-xs-6 zero-margin">
@@ -453,7 +459,7 @@
             <div class="col-sm-4 hidden-xs zero-margin">
                 <!-- Logo text or image -->
 
-                <h1 class="title" style="color: #00baed; padding-top: 11px; text-align: center; font-size: x-large;">Society Management System</h1>
+                <h1 class="title" style="color: #fff; padding-top: 11px; text-align: center; font-size: x-large;">Society Management System</h1>
                 <!-- Top Nav -->
 
             </div>
@@ -492,12 +498,12 @@
 
 
             <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox" style="margin-top: 45px;">
+            <div class="carousel-inner" role="listbox" style="margin-top: 45px; ">
 
                 <div class="item active">
-                    <img src="Images/Icon/ro1.jpg" alt="Banner" />
+                    <img src="Images/Icon/ro1.jpg" alt="Banner"  />
 
-                    <h3 style="line-height: 32px; margin-top: 60px; color: #000; margin-left: 90px;" class="item-1"><span class="fa fa-check" style="color: #009688;"></span>Get instant Payment, activity alerts via Email/SMS.<br />
+                    <h3 style="line-height: 32px; margin-top: 60px; color: #000; margin-left: 90px;" class="item-1 main-point"><span class="fa fa-check" style="color: #009688;"></span>Get instant Payment, activity alerts via Email/SMS.<br />
                         <span class="fa fa-check" style="color: #009688;"></span>A SMART Housing Society Management Solution<br />
                         <span class="fa fa-check" style="color: #009688;"></span>Fast Complaint resolution with effective Ticket System<br />
                         <span class="fa fa-check" style="color: #009688;"></span>Get Popular, Reliable Vendors At your doorstep<br />
@@ -517,7 +523,7 @@
     </div>
     <!-- /REVOLUTION SLIDER -->
 
-    <section class="goletfullwidth text-center" style="background-color: #f9f9f9; color: blue;">
+    <section class="goletfullwidth text-center" style="background-color: #d9d9d9; color: blue;">
         <div class="container">
             <div class="row">
 

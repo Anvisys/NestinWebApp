@@ -394,7 +394,7 @@
 
             <div class="col-md-2 hidden-sm hidden-xs margin-zero">
 
-                <div id="Admin_Navigation" style="position:fixed;height:100%;background-color:#727cf5;width:inherit;" >
+                <div id="Admin_Navigation" style="position:fixed;height:100%;background-color:#98c8dc;width:inherit;" >
                     <div class="Left-Nav">
                         <ul >
 
@@ -426,7 +426,7 @@
                         </ul>
                         </div>
                     </div>
-                    <div id="Resident_Navigation" style="position:fixed;height:100%;background-color:#727cf5;width:inherit;" >
+                    <div id="Resident_Navigation" style="position:fixed;height:100%;background-color:#98c8dc;width:inherit;" >
                     <div class="Left-Nav">
                         <ul id="bs-example-navbar-collapse-2">
 
@@ -447,7 +447,7 @@
                         </ul>
                         </div>
                     </div>
-                  <div id="Employee_Navigation" style="position:fixed;height:100%;background-color:#727cf5;width:inherit;" >
+                  <div id="Employee_Navigation" style="position:fixed;height:100%;background-color:#98c8dc;width:inherit;" >
                     <div class="Left-Nav">
                         <ul id="bs-example-navbar-collapse-4">
 
@@ -462,7 +462,7 @@
                         </ul>
                         </div>
                     </div>
-                <div id="Individual_Navigation" style="position:fixed;height:100%;background-color:#727cf5;width:inherit;" >
+                <div id="Individual_Navigation" style="position:fixed;height:100%;background-color:#98c8dc;width:inherit;" >
                     <div class="Left-Nav">
                         <ul id="navbar-individual">
 

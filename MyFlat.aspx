@@ -728,56 +728,9 @@
             }
 
 
-            //function populateType() {
-            //    // THE JSON ARRAY.
-            //    var InventoryType = [
-            //        { "ID": 1, "Value": "Flat" },
-            //        { "ID": 2, "Value": "PG" },
-            //        { "ID": 3, "Value": "ServiceApt" },
-            //        { "ID": 4, "Value": "Independent" },
-            //    ];
-            //    var ele = document.getElementById('type');
-            //    for (var i = 0; i < InventoryType.length; i++) {
-            //        // POPULATE SELECT ELEMENT WITH JSON.
-            //        ele.innerHTML = ele.innerHTML +
-            //            '<option value="' + InventoryType[i]['ID'] + '">' + InventoryType[i]['Value'] + '</option>';
-            //    }
-
-            //}
-
-        
-
+       
        
 
-
-        //      function GetAccomodationType(id) {
-
-        //       var abs_url = api_url + "/api/Accomodation/" + id;
-
-        //    $.ajax({
-        //        url: abs_url,
-        //        dataType: "json",
-        //        success: populateAccomodationType,
-        //        failure: function (response) {
-        //            alert(response.d);
-        //            sessionStorage.clear();
-        //        }
-        //    });
-        //}
-
-
-        //function populateAccomodationType( data) {
-        //    // THE JSON ARRAY.
-        //    var Inventory =  data.$values;
-
-        //    var ele = document.getElementById('selStyle');
-        //    ele.innerHTML = "";
-        //    for (var i = 0; i < Inventory.length; i++) {
-        //        // POPULATE SELECT ELEMENT WITH JSON.
-        //        ele.innerHTML = ele.innerHTML +
-        //            '<option value="' + Inventory[i].AccomodationTypeID + '">' + Inventory[i].AccomodationType + '</option>';
-        //    }
-        //}
 
       
 
@@ -804,7 +757,7 @@
                     url: url,
                     data: JSON.stringify(RentInventory),
                     type: 'post',
-                    async: false,
+                    //async: false,
                     contentType: 'application/json',
                     success: function (data) {
                         //var da = JSON.stringify(data);
