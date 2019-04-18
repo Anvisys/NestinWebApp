@@ -194,7 +194,7 @@
 
       document.getElementById("post_loading").style.display = "block";
 
-            var strURL = "http://www.kevintech.in/GAService/api/User/Add/Demo";
+            var strURL = api_url +  "/api/User/Add/Demo";
             //var strURL = "visitor.aspx/AddVisitor";
 
             var reqBody = "{\"UserLogin\":\"" + email + "\",\"Password\":\"Password@123\",\"MiddleName\":\"K\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname + " \",\"MobileNo\":\""
