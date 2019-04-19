@@ -32,18 +32,18 @@
             UserId = <%=UserID %>;
             SocietyID = '<%=Session["SocietyID"] %>';
              api_url = '<%=Session["api_url"] %>';
-            GetSocietyRequest();
+            GetRentInventory();
 
         });
 
 
-        function GetSocietyRequest() {
+        function GetRentInventory() {
             var abs_url =  api_url + "/api/RentInventory/" + SocietyID;
        
              $.ajax({
                 url: abs_url,
                 dataType: "json",
-                success: OnSuccess,
+                success: ShowRentInventory,
                 failure: function (response) {
                     alert(response.d);
                     sessionStorage.clear();
@@ -53,7 +53,7 @@
         };
 
 
-         function OnSuccess(response) {
+         function ShowRentInventory(response) {
               // alert(JSON.stringify(response));
               var strData = "";
 
@@ -67,8 +67,8 @@
                     strData = strData + "<div class=\"col-xs-3 panel panel-success \" style=\"margin:20px;padding:0px; \">" +
                         "<div class='panel-heading'>" 
                            +"<div class='row'><div class='col-xs-8'>"
-                        + " <label class='data_label'>Inventory  :  </label>" + results[i].Inventory
-                        + "<br/><label class='data_label'> Type : </label>" + results[i].RentType + "<br/><label class='data_label'>Rent : </label>"
+                        + " <label class='data_label'>Inventory  :  </label>" + results[i].InventoryType
+                        + "<br/><label class='data_label'> Type : </label>" + results[i].AccomodationType + "<br/><label class='data_label'>Rent : </label>"
                         + results[i].RentValue
 
                         +"</div><div class='col-xs-4'>"

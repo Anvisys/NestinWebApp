@@ -14,6 +14,15 @@ public partial class MyFlat : System.Web.UI.Page
         get { return muser.UserID; }
     }
 
+    public int ResID
+    {
+        get { return muser.currentResident.ResID; }
+    }
+    public int SocietyID
+    {
+        get { return muser.currentResident.SocietyID; }
+    }
+
     public string UserFirstName
     {
         get { return muser.FirstName; }

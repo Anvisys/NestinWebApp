@@ -144,11 +144,12 @@
 
 
     <script>
-        var userType;
+        var userType, api_url;
+
          $(document).ready(function () {
             userType = '<%=Session["UserType"] %>';
               api_url = '<%=Session["api_url"] %>';
-
+           
             if (screen.width >= 768) {
               //  document.getElementById("content_frame").height = (screen.height - 100) + "px";
 
@@ -161,9 +162,9 @@
 
             SetMenu();
 
-            var url = '<%=Session["CurrentPage"] %>';
+            var currentPage = '<%=Session["CurrentPage"] %>';
 
-            $('#content_frame').attr('src', url);
+            $('#content_frame').attr('src', currentPage);
              GetAdvertisementData();
              $("#changeLoggedinSociety").hide();
         });
@@ -268,7 +269,8 @@
 
         function GetAdvertisementData() {
            
-          var url = api_url + "/api/Ads";
+            var url = api_url + "/api/Ads";
+
             $.ajax({
                 type: "Get",
                 url: url,
