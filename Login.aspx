@@ -42,6 +42,9 @@
     <link rel="stylesheet" href="Login/CSS/footer.css" />
     <link rel="stylesheet" href="CSS/NewAptt.css" />
 
+    <link rel="stylesheet" href="CSS/Nestin.css" />
+    <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />
+
     <script>
         var api_url;
 
@@ -446,7 +449,7 @@
     </form>
 
 
-    <header id="topNav" class="layout_header" style="height: 75px; background-color: #727cf5; color: #fff;">
+    <header id="topNav" class="layout_header top-NavigationBar" >
 
           <!-- scroll bar progress -->
              <div class="progress-container">
@@ -458,14 +461,14 @@
             <div class="col-sm-4 col-xs-6 zero-margin">
                 <!-- Mobile Menu Button -->
 
-                <a class="logo" href="#">
+                <a class="logo" href="Login.aspx">
                     <img src="Images/Icon/Logo1.png" height="50" alt="Logo" />
                 </a>
             </div>
             <div class="col-sm-4 hidden-xs zero-margin">
                 <!-- Logo text or image -->
 
-                <h1 class="title" style="color: #fff; padding-top: 11px; text-align: center; font-size: x-large;">Society Management System</h1>
+                <h1 class="title" style="color:#fff;padding-top:11px;text-align:center;font-size:x-large;"> Society Management System</h1>
                 <!-- Top Nav -->
 
             </div>
@@ -474,7 +477,7 @@
                 <div class="navbar-collapse nav-main-collapse collapse pull-right" style="margin-top: 9px; color: white; text-align: center;">
                     <nav class="nav-main mega-menu">
                         <ul class="nav nav-pills nav-main scroll-menu nav-small" id="topMain">
-                            <li class=" active"><a class="menu_text" href="#">Home</a></li>
+                            <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
                             <li class=" "><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
 
                             <li class=" "><a class="menu_text" href="contact.aspx">Contact </a></li>
@@ -536,7 +539,7 @@
                 <h3 class="text-center" style="color: black; margin-bottom: 20px;"><span class="">Meets all your Society Management needs</span> </h3>
                 <div class="col-xs-6 col-sm-3 ">
                     <div class="item-box box">
-                        <span class="bosre"><span class="fa fa-user fontsize theme_third_main" aria-hidden="true"></span></span>
+                        <span class="bosre"><span class="fa fa-user fontsize theme_third_main" aria-hidden="true"></span></span>                   
                         <h5>Owners/ Residents records</h5>
                     </div>
                 </div>
@@ -574,7 +577,7 @@
                     <h3>NestIn</h3>
                     <p class="lead" style="font-size: 18px;">NestIn is developed by Anvisys Technologies  for the Apartment Societies. </p>
                     <p style="text-align: justify;">
-                        NestIn is developed by <a href="www.Anvisys.net" target="_blank">Anvisys Technologies Pvt. Ltd.</a> To cater the needs of RWA operations and society management needs. While the trend of residential complex is increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing demand of a management system to manage these operations and communication mechanism to involve residents in operations.<br />
+                        NestIn is developed by <a href="www.anvisys.net">Anvisys Technologies Pvt. Ltd.</a> To cater the needs of RWA operations and society management needs. While the trend of residential complex is increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing demand of a management system to manage these operations and communication mechanism to involve residents in operations.<br />
                         NestIn is our attempt to provide a state of the art, user friendly and secure Society Management System. We are good but not complacent, hence we are improving, enhancing the capabilities, taking the users feedback and working on them. Our dedicated team is working continuously to improve the system to better serve our customer.
                     </p>
                     <a class="btn btn-primary" style="color: #fff;" href="Aboutus.aspx">Read More</a><br />

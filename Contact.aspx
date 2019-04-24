@@ -23,21 +23,24 @@
             <!-- Latest compiled JavaScript -->
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+                <link rel="stylesheet" href="CSS/Nestin.css" />
+                <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />
 
-        <link href="Login/css/settings.css" rel="stylesheet" type="text/css"/>
-        <!-- THEME CSS -->
 
-        <link href="Login/css/essentials.css" rel="stylesheet" type="text/css"/>
-        <link href="Login/css/layout.css" rel="stylesheet" type="text/css"/>
-        <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css"/>
+                <link href="Login/css/settings.css" rel="stylesheet" type="text/css" />
+                <!-- THEME CSS -->
 
-        <link href="Styles/layout.css" rel="stylesheet" />
-        <link href="Styles/Responsive.css" rel="stylesheet" />
+                <link href="Login/css/essentials.css" rel="stylesheet" type="text/css" />
+                <link href="Login/css/layout.css" rel="stylesheet" type="text/css" />
+                <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css" />
 
-    <link rel="stylesheet" href="CSS/ApttTheme.css" />
-  <link rel="stylesheet" href="CSS/ApttLayout.css" />
-       <link rel="stylesheet" href="Login/CSS/footer.css" />
-    <link rel="stylesheet" href="CSS/NewAptt.css" />
+                <link href="Styles/layout.css" rel="stylesheet" />
+                <link href="Styles/Responsive.css" rel="stylesheet" />
+
+                <link rel="stylesheet" href="CSS/ApttTheme.css" />
+                <link rel="stylesheet" href="CSS/ApttLayout.css" />
+                <link rel="stylesheet" href="Login/CSS/footer.css" />
+                <link rel="stylesheet" href="CSS/NewAptt.css" />
    
     <script>
       
@@ -292,15 +295,6 @@ img.app_centre{
       font-weight: 400;
       margin-bottom: 30px;
   }  
-   .jumbotron {
-      background-color: #00baed;
-      color: #fff;
-      
-      font-family: Montserrat, sans-serif;
-  }
-
-
-
 
     </style>
 
@@ -323,7 +317,7 @@ img.app_centre{
         </form>
 
 
-   <header id="topNav" class="layout_header" style="height: 75px; background-color:#fff; color:#fff;">
+   <header id="topNav" class="layout_header top-NavigationBar" >
 
               <div class="container-fluid" > 
          <div class="col-sm-4 col-xs-6 zero-margin">
@@ -334,7 +328,7 @@ img.app_centre{
            <div class="col-sm-4 hidden-xs zero-margin">
                     <!-- Logo text or image --> 
                     
-                      <div class="title" style="color:#00baed;padding-top:11px;text-align:center;font-size:x-large;"> Society Management System</div>
+                      <h1 class="title" style="color:#fff;padding-top:11px;text-align:center;font-size:x-large;"> Society Management System</h1>
                     <!-- Top Nav -->
 
           </div>
@@ -376,17 +370,16 @@ img.app_centre{
 </header>
 
 <!-- WRAPPER -->
-    <span  itemtype="http://schema.org/SoftwareApplication"/>
-  
+    <span itemtype="http://schema.org/SoftwareApplication" />
+    <section id="contact">
+        <%--    <div class="jumbotron text-center">
+  <h1 style="padding-top:70px;">Contact us</h1> --%>
+        <div class="jumbotron-local text-center" style="height: 120px;">
+            <h3 style="padding-top: 85px; color: #ffffff;">Contact us</h3>
+        </div>
 
+        <br />
 
-<section id="contact">
-  
-       <div class="jumbotron text-center">
-  <h1 style="padding-top:70px;">Contact us</h1> 
- 
-
-</div>
 	<div class="container">
 	<div class="row">
 	  <div class="col-md-7">

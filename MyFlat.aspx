@@ -1182,16 +1182,16 @@
                     </div>
 
                     <div id="OwnerDetail" class="content_div">
-                        <div class="row" style="margin-top: 5px; margin-bottom: 5px; text-align: center;">
-                            <div class="col-xs-12">
-                                <h4 style="padding-right: 141px; font-family: Verdana;">Owner Info</h4>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="col-sm-3">
+                                <img src="Images/Icon/profile.jpg" id="OwnerImage" height="150" width="150" style="border-radius: 50%;" />
                             </div>
-                        </div>
-                        <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
-                            <div class="col-sm-4">
-                                <img src="Images/Icon/profile.jpg" id="OwnerImage" height="110" width="110" style="border-radius: 50%;" />
+                            <div class="col-sm-6">
+                                <h3 style="font-family: Open Sans; text-align: center;"><b>Owner Info</b></h3>
                             </div>
-                            <div class="col-sm-8">
+                       
+                        <div class="row" style="margin-top: 5px; margin-bottom: 10px;">                        
+                            <div class="col-sm-5">
                                 <label style="width: 100px;" class="data_heading">Name :</label>
                                 <label style="width: 50%;" class="data_label" id="lblFlatOwner">...</label><br />
                                 <label style="width: 100px;" class="data_heading">Email :</label>
@@ -1199,11 +1199,11 @@
                                 <label style="width: 100px;" class="data_heading">Contact :</label>
                                 <label style="width: 50%;" class="data_label" id="lblFlatOwnerMobile">...</label>
                             </div>
-
+                            </div>
+                            </div>
                         </div>
                     </div>
 
-                    Tenant / Rental Data
                     <div id="TenantDetail" class="content_div">
                         <div class="row" style="margin-top: 5px; margin-bottom: 5px; text-align: center;">
                             <div class="col-xs-12">
@@ -1237,22 +1237,24 @@
 
                         </div>
                     </div>
-                     <div class="row">
-                        <div class="col-sm-12">
-                            <button id="btnAdd" class="btn btn-info btn-sm" onclick="PopulateAddModal()" style="display: none" type="button">Add Tenant</button>
+                     <div class="row" style="margin-left:10px; margin-right:10px;">
+                         <div class="col-sm-12">
+                             <button id="btnAdd" class="btn btn-info btn-sm" onclick="PopulateAddModal()" type="button">Add Tenant</button>
+                             <button id="btnAddForRent" class="btn btn-primary btn-sm" onclick="InitiateRent()" type="button">Add for Rent</button>
+                        
+                             <%--<button id="" type="button" class="btn btn-primary btn-sm" onclick="InitiateRent()">Add for Rent</button>--%>
+                         </div>
 
-                            <button id="btnAddForRent" type="button" class="btn btn-primary btn-sm" onclick="InitiateRent()">Add for Rent</button>
-                        </div>
 
                     </div>
                     <div id="RentalDetail" class="content_div">
-                        <div class="row" style="margin-top: 5px; margin-bottom: 5px; text-align: center;">
+                        <div class="row" style="margin-bottom: 5px; text-align: center;">
                             <div class="col-xs-12">
-                                <h4 style="padding-right: 141px; font-family: Verdana;">Rental offer</h4>
+                                <h3 style="font-family: Open Sans; text-align: center;"><b>Rental offer</b></h3>
 
                             </div>
                         </div>
-                        <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                        <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
 
                             <div class="col-sm-4">
                                 <label style="width: 100px;" class="data_heading">Type :</label>
@@ -1267,13 +1269,13 @@
                                 <label class="data_label" id="lblRentContactName">...</label><br />
                             </div>
                             <div class="col-sm-4">
-                                <label style="width: 100px;" class="data_heading">Number</label>
+                                <label style="width: 100px;" class="data_heading">Number :</label>
                                 <label class="data_label" id="lblRentContactNumber">...</label><br />
                                 <label style="width: 100px;" class="data_heading">other</label>
                                 <label class="data_label" id="">...</label>
                             </div>
-                            <div class="row">
-                                <label style="width: 100px;" class="data_heading">Description</label>
+                            <div class="col-sm-12">
+                                <label style="width: 100px;" class="data_heading">Description :</label>
                                 <label class="data_label" id="lblRentDescription">...</label>
                             </div>
 
@@ -1285,18 +1287,13 @@
 
                     </div>
 
-                    <div id="PoolData" class="content_div" > 
-                         <button class="btn btn-primary" onclick="ShowPoolModal()">Add New Trip</button>
-                        <div id="MyPool"></div>
-
-                    </div>
-                     
-
-                   
-
-
-                   
-
+                                <div id="PoolData" class="content_div" style="margin-left:10px; margin-right:10px;">
+                                    <button class="btn btn-primary" onclick="ShowPoolModal()">Add New Trip</button>
+                                </div>
+                                        
+                <div id="MyPool"></div>
+                                
+             
                     <div id="addTenantModal" class="modal">
                         <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
 
@@ -1626,6 +1623,7 @@
             </div>
         </div>
 
+           
 
                    <div id="showCloseModal" class="modal">
                     <div class="modal-content"style="border-radius:5px; width: 350px; margin: auto; margin-top:150px;position:relative;">
@@ -1668,6 +1666,7 @@
                     </div>
                     </div>
 
+            <br />
 
                 <div id="showInterestedInPool" class="modal">
                     <div class="modal-content"style="border-radius:5px; width: 350px; margin: auto; margin-top:150px;position:relative;">

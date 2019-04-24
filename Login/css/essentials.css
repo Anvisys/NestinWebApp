@@ -99,7 +99,12 @@
 	header#topNav nav ul.nav-main li.dropdown:hover > a:after {
 		border-bottom:#2E363F 10px solid;/* arrow color */
 	}
-	header#topNav nav.mega-menu ul.nav-main li.mega-menu-item .mega-menu-sub-title {
+	header#topNav nav.mega-menu ul.nav-main li.mega-menu-item .mega-menu-sub-
+    
+    
+    
+    
+    {
 		color: #ffffff; 				/* mega menu subtitle */
 	}
 	header#topNav nav.mega-menu ul.nav-main li.mega-menu-item ul.sub-menu a,

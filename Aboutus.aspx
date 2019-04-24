@@ -21,23 +21,29 @@
             <!-- Latest compiled JavaScript -->
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+                    <link rel="stylesheet" href="CSS/Nestin.css" />
+                    <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />
 
-        <link href="Login/css/settings.css" rel="stylesheet" type="text/css"/>
-        <!-- THEME CSS -->
+                    <link href="Login/css/settings.css" rel="stylesheet" type="text/css" />
+                    <!-- THEME CSS -->
 
-        <link href="Login/css/essentials.css" rel="stylesheet" type="text/css"/>
-        <link href="Login/css/layout.css" rel="stylesheet" type="text/css"/>
-        <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css"/>
+                    <link href="Login/css/essentials.css" rel="stylesheet" type="text/css" />
+                    <link href="Login/css/layout.css" rel="stylesheet" type="text/css" />
+                    <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css" />
 
-        <link href="Styles/layout.css" rel="stylesheet" />
-        <link href="Styles/Responsive.css" rel="stylesheet" />
+                    <link href="Styles/layout.css" rel="stylesheet" />
+                    <link href="Styles/Responsive.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="CSS/ApttTheme.css" />
-  <link rel="stylesheet" href="CSS/ApttLayounavt.css" />
-      <link rel="stylesheet" href="CSS/ApttLayout.css" />
-     
-    <link rel="stylesheet" href="CSS/NewAptt.css" />
-   <link rel="stylesheet" href="Login/CSS/footer.css" />
+                    <link rel="stylesheet" href="CSS/ApttTheme.css" />
+
+                    <link rel="stylesheet" href="CSS/ApttLayout.css" />
+
+                    <link rel="stylesheet" href="CSS/NewAptt.css" />
+                    <link rel="stylesheet" href="Login/CSS/footer.css" />
+
+
+
+
     <script>
 
 
@@ -187,12 +193,6 @@
       font-weight: 400;
       margin-bottom: 30px;
   }  
-  .jumbotron {
-      background-color: #00baed;
-      color: #fff;
-      
-      font-family: Montserrat, sans-serif;
-  }
  
   .bg-grey {
       background-color: #f6f6f6;
@@ -379,95 +379,23 @@ img.app_centre{
         
     <form id="form1" runat="server">
          <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>    
-        <%--Login Popup --%>
       
-        <div class="login_div" id="loginModal" style="display:none;padding:0% 0 3% 0;">
-        <img id="close" class="close" src="Images/Icon/close_red.png" alt="close" width="25" height="25"  style="background-size:contain;"/> <br />    
-           
-            <div style="padding:0 1% 3% 1%;color:#6eab91; font-family:'Baskerville Old Face';font-size:x-large;">
-               <%-- <img src="Images/Icon/login_icon.png"  width="25" height="25"/>--%>
-               <i class="fa fa-user-circle-o" style="color:#000;" aria-hidden="true"></i>
-
-                
-                                <asp:Label ID="lbltext" runat="server" style="color:#000;" Text="Account Login "></asp:Label>    
-                         
-              <h4 style="margin-bottom:0;"> 
-                  <asp:Label ID="lblPasswordRes" runat="server" Text="" Font-Size="small" ForeColor="#000"></asp:Label></h4> 
-
-            </div>
-           
-                    <asp:TextBox ID="TxtUserID" runat="server" CssClass="login_txtbox" placeholder="Username/MobileNumber"   BorderStyle="None"  TabIndex="1" ></asp:TextBox><br /><br />
-                   <asp:TextBox ID="txtPwd" runat="server" CssClass="login_txtbox"  placeholder="Password"  TextMode="Password" BorderStyle="None"  TabIndex="2"></asp:TextBox><br /><br />
-                   <div id="Login_background" style="padding:0.5% 0% 0.5% 0%;background-color:#000;">
-                        <button  type="button" id="submitbutton" style="width:200px;height:30px;color:white;" tabindex="3"> Submit </button>                
-                   </div>
-                   <div>
-                       <img  class="dvLoading_first" src="Images/Icon/ajax-loader.gif" alt="loading..." style="border:0;"/>  
-                   </div>
-
-                  <asp:Label ID="lblerror" runat="server" Text="" CssClass="lblerror"></asp:Label><br />
-                  <a href="#" id="Forgotpass" class="forgot_pass" tabindex="4">Forgot Password</a><br />
-        </div>     
-          <%--Login Popup --%>
-
-          <%--Forgot Popup --%>
-
-            <div class="login_div" id="Forgot_div" style="display:none;">
-                        <%--<img id="closed" class="close" src="Images/Icon/close.png" width="25" height="25"  style="background-size:contain;"/> <br />--%>
-                        <span id="closed" class="close fa fa-close"  style="background-size:contain; "></span> <br />
-                            <div >
-                             <%--   <img src="Images/icon/login_icon.png"  width="25" height="25"/>--%>
-                                <asp:Label ID="Label1" runat="server" Text="Forgot Password "></asp:Label><br />
-
-                                <asp:Label ID="Label2" runat="server" ForeColor="#666666" Font-Size="Small"  CssClass="forgottxt" Text="We will send  your New password to  your Email  which  is  associated with this UserId."></asp:Label>
-                            </div>
-           
-                       <asp:TextBox ID="txtForgotText" runat="server" CssClass="login_txtbox" onfocus="if (this.value == 'Username or Email') this.value = '';" onblur="if (this.value == '') this.value = 'Username or Email';" value="Username or Email" BorderStyle="None"></asp:TextBox><br /><br />
-                              <div id="Login_backgroundd" style="padding:2% 1% 2% 1%;background-color:#f19e64;">                 
-                                   <asp:Button ID="btnForgotpass" runat="server" Text="Reset Password" CssClass="login_Submit"  OnClick="btnForgotpass_Click"   BorderStyle="None"/><br />                                            
-                               </div>
-
-                              <asp:Label ID="lblEmailerror" runat="server" Text="" CssClass="lblerror"></asp:Label>
-                              <a href="#" id="GoLogin" class="forgot_pass" >Go to Login</a><br />
-                    <asp:Label ID="lblres" runat="server"></asp:Label>
-
-
-            </div>
-
-          <%--Forgot  Popup Ends --%>
-
-
-         <div class="login_div" id="select_flat" style="display:none;">
-                        
-                          <div>
-                               <input type="radio" name="gender" value="1" checked="checked" /> A502, Owner, ATS<br/>
-                               <input type="radio" name="gender" value="2" checked="checked" />A203, Owner, ATS<br/>
-                              <input type="radio" name="gender" value="3" checked="checked" /> Resident Admin, Gaur<br/>
-                            </div>
-           
-                       <asp:TextBox ID="TextBox1" runat="server" CssClass="login_txtbox" onfocus="if (this.value == 'Username or Email') this.value = '';" onblur="if (this.value == '') this.value = 'Username or Email';" value="Username or Email" BorderStyle="None"></asp:TextBox><br /><br />
-                             <asp:Label ID="Label5" runat="server" Text="" CssClass="lblerror"></asp:Label>
-                              <a href="#" id="GoMain" class="forgot_pass" >Next</a><br />
-                    <asp:Label ID="Label6" runat="server"></asp:Label>
-
-
-            </div>
 
         </form>
 
-
-   <header id="topNav" class="layout_header" style="height: 75px; background-color:#fff; color:#fff;">
+     
+   <header id="topNav" class="layout_header top-NavigationBar" >
 
               <div class="container-fluid" > 
          <div class="col-sm-4 col-xs-6 zero-margin">
                     <!-- Mobile Menu Button -->
                     
-             <a class="logo" href="login.aspx"> <img src="Images/Icon/Logo1.png" height="50" alt="Logo"/> </a> 
+             <a class="logo" href="login.aspx"> <img src="Images/Icon/Logo1.png" height="50px" alt="Logo"/> </a> 
          </div>
            <div class="col-sm-4 hidden-xs zero-margin">
                     <!-- Logo text or image --> 
                     
-                      <div class="title" style="color:#00baed;padding-top:12px;text-align:center;font-size:x-large;"> Society Management System</div>
+                      <h1 class="title" style="color:#fff;padding-top:11px;text-align:center;font-size:x-large;"> Society Management System</h1>
                     <!-- Top Nav -->
 
           </div>
@@ -480,11 +408,7 @@ img.app_centre{
                       <li class=" "><a class="menu_text"  href="Aboutus.aspx">About Us</a></li>
        
                       <li class=" "><a  class="menu_text" href="contact.aspx">Contact </a></li>
-                      <li class=" "><a  class="menu_text" href="#" id="login">Login</a></li>
-                        <li class=" "><a  class="menu_text" href="register.aspx" id="register">Register</a></li>
-                      <!-- GLOBAL SEARCH -->
-                      <li class="search dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"  style="display:none;"> </li>
-            
+                               
                         <!-- search form -->
                         <ul class="dropdown-menu">
                           <li>
@@ -510,11 +434,12 @@ img.app_centre{
 
 <!-- WRAPPER -->
     <span  itemtype="http://schema.org/SoftwareApplication"/>
-    <div class="jumbotron text-center">
-  <h1 style="padding-top:70px;">About us</h1> 
- 
+    <%--<div class="jumbotron text-center" style="height: 130px;">
+  <h2 style="padding-top:70px;">About us</h2> --%>
 
-</div>
+      <div class="jumbotron-local text-center" style="height: 120px;">
+            <h3 style="padding-top: 85px; color: #ffffff;">About us</h3>
+      </div>
 
 
 <div id="about" class="container-fluid container-size">

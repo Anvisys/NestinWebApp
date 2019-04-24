@@ -22,3 +22,74 @@
     width: 60px;
     height: 60px;
 }
+
+
+.top-NavigationBar {
+    height:75px;
+    background-color: #727cf5;
+    color: #fff;
+}
+
+.main-headertop {
+    color: #fff;
+    padding-top: 11px;
+    text-align: center;
+    font-size: x-large !important;
+    font-family: Montserrat, sans-serif;
+}
+
+.jumbotron-local {
+    background-color: #00baed;
+    color: #fff;
+    font-family: 'Open Sans';
+    font-weight: 300;
+}
+.download_overlay {
+    background: url(../Images/Icon/downloadbg.png) repeat-y;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.download {
+    position: relative;
+    padding-top: 35px;
+}
+
+.download_item h5 {
+    line-height: 1.5rem;
+    width: 70%;
+}
+
+.download_item img.app_right {
+    position: relative;
+    bottom: -32px;
+    padding-left: 195px;
+}
+
+img.app_centre {
+    margin: auto;
+    padding-top: 15px;
+    margin-left: 115px
+}
+
+.download_app {
+    margin-left: -10px;
+}
+
+    .download_app a {
+        margin-left: 10px;
+    }
+
+.container-size {
+    padding: 60px 50px;
+}
+.header-title {
+    margin: 0;
+    color: #333;
+    font-family: 'Open Sans';
+    font-weight: 300;
+    letter-spacing: -1px;
+}

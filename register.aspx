@@ -23,21 +23,24 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+                <link rel="stylesheet" href="CSS/Nestin.css" />
+                <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />
 
-    <link href="Login/css/settings.css" rel="stylesheet" type="text/css" />
-    <!-- THEME CSS -->
 
-    <link href="Login/css/essentials.css" rel="stylesheet" type="text/css" />
-    <link href="Login/css/layout.css" rel="stylesheet" type="text/css" />
-    <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css" />
+                <link href="Login/css/settings.css" rel="stylesheet" type="text/css" />
+                <!-- THEME CSS -->
 
-    <link href="Styles/layout.css" rel="stylesheet" />
-    <link href="Styles/Responsive.css" rel="stylesheet" />
+                <link href="Login/css/essentials.css" rel="stylesheet" type="text/css" />
+                <link href="Login/css/layout.css" rel="stylesheet" type="text/css" />
+                <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css" />
 
-    <link rel="stylesheet" href="CSS/ApttTheme.css" />
-    <link rel="stylesheet" href="CSS/ApttLayout.css" />
-    <link rel="stylesheet" href="Login/CSS/footer.css" />
-    <link rel="stylesheet" href="CSS/NewAptt.css" />
+                <link href="Styles/layout.css" rel="stylesheet" />
+                <link href="Styles/Responsive.css" rel="stylesheet" />
+
+                <link rel="stylesheet" href="CSS/ApttTheme.css" />
+                <link rel="stylesheet" href="CSS/ApttLayout.css" />
+                <link rel="stylesheet" href="Login/CSS/footer.css" />
+                <link rel="stylesheet" href="CSS/NewAptt.css" />
 
     <script>
 
@@ -642,9 +645,8 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [
         </div>
 
             <section id="contact">
-
-        <div class="jumbotron text-center" style="height: 140px;">
-            <h2 style="padding-top: 40px; color: #ffffff;"><lable id="lblRegisterUser"></lable></h2>
+        <div class="jumbotron text-center" style="height: 130px;">
+            <h3 style="padding-top: 40px; color: #ffffff;"><lable id="lblRegisterUser"></lable></h3>
 
 
         </div>
@@ -740,7 +742,7 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [
             <div class="col-sm-4 hidden-xs zero-margin">
                 <!-- Logo text or image -->
 
-                <div class="title" style="color: #fff; padding-top: 11px; text-align: center; font-size: x-large;">Society Management System</div>
+                <h1 class="title" style="color: #fff; padding-top: 11px; text-align: center; font-size: x-large;">Society Management System</h1>
                 <!-- Top Nav -->
 
             </div>

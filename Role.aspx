@@ -25,21 +25,23 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>  
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>  
     <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
 
     <link href="Login/css/settings.css" rel="stylesheet" type="text/css" />
     <!-- THEME CSS -->
 
-   <%-- <link href="Login/css/essentials.css" rel="stylesheet" type="text/css" />--%>
-    <link href="Login/css/layout.css" rel="stylesheet" type="text/css" />
-    <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css" />
+            <%-- <link href="Login/css/essentials.css" rel="stylesheet" type="text/css" />--%>
+            <link href="Login/css/layout.css" rel="stylesheet" type="text/css" />
+            <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css" />
 
-    <link href="Styles/layout.css" rel="stylesheet" />
-    <link href="Styles/Responsive.css" rel="stylesheet" />
+            <link href="Styles/layout.css" rel="stylesheet" />
+            <link href="Styles/Responsive.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="CSS/ApttTheme.css" />
-    <link rel="stylesheet" href="CSS/ApttLayout.css" />
-    <link rel="stylesheet" href="Login/CSS/footer.css" />
+            <link rel="stylesheet" href="CSS/ApttTheme.css" />
+            <link rel="stylesheet" href="CSS/ApttLayout.css" />
+            <link rel="stylesheet" href="Login/CSS/footer.css" />
+            <link rel="stylesheet" href="CSS/Nestin.css" />
+            <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />
 
 
     <script type="text/javascript" src="Scripts/datetime.js"></script>
@@ -590,6 +592,8 @@
         .hiddencol{
             display:none;
         }
+
+
     </style>
 </head>
 <body>
@@ -600,14 +604,14 @@
                             <div class="col-sm-4 col-xs-6 zero-margin">
                                 <!-- Mobile Menu Button -->
 
-                                <a class="logo" href="#">
+                                <a class="logo" href="MainPage.aspx">
                                     <img src="Images/Icon/Logo1.png" height="50" alt="logo" />
                                 </a>
                             </div>
                             <div class="col-sm-4 hidden-xs zero-margin">
                                 <!-- Logo text or image -->
 
-                                <div class="title" style="color: #fff; padding-top: 11px; text-align: center; font-size: xx-large;">Society Management System</div>
+                                  <h1 class="header-title" style="color:#fff;padding-top:11px;text-align:center;font-size:x-large;"> Society Management System</h1>
                                 <!-- Top Nav -->
 
                             </div>
