@@ -30,6 +30,8 @@
       <link rel="stylesheet" href="CSS/NewAptt.css" />
 
 
+     <link rel="stylesheet" href="CSS/Nestin.css" />
+
     <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>  
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>  
     <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />  
@@ -697,7 +699,7 @@
 
                                          <div class="col-sm-2 col-xs-6">
 
-                                             <asp:Image CssClass="UserImage" ID="user_image" runat="server" Style="border-radius: 50%; border: 2px solid #dcdbdb; width: 40px; height: 40px;"
+                                             <asp:Image CssClass="image_small" ID="user_image" runat="server" 
                                                  ImageUrl='<%# "GetImages.ashx?ResID="+ Eval("ResidentID")+"&Name="+Eval("FirstName") +"&UserType=Owner" %>' /><br />
                                              <asp:Label ID="lblComName" runat="server" Text='<%# Eval("FirstName") + ", " + Eval("FlatNumber") %>'></asp:Label>
 

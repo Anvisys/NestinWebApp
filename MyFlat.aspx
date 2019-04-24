@@ -14,23 +14,35 @@
     <link rel="stylesheet" href="CSS/ApttTheme.css" />
     <link rel="stylesheet" href="CSS/ApttLayout.css" />
 
+     <link rel="stylesheet" href="CSS/Nestin.css" />
+
+
              <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
             <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
             <!-- jQuery library -->
             <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    
             <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>  
+
+      <script type="text/javascript" src="Scripts/datetime.js"></script>
+   
+    <script type="text/javascript" src="https://momentjs.com/downloads/moment.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css"/>
+ 
           
 
-    <script>
+    <script id="MyFlatData">
         var CurrentUserType, ResID, UserID, Type, BHK, FirstName, LastName, MobileNo, EmailId,FlatID, FlatNumber, Address, ParentName, SocietyID,SocietyName, Gender, ActiveDate, DeActiveDate,  TenantUserID;
         var MobileExist, EmailExist, TenantResID, chkExistingUser = false;
         var api_url = "";
+          var _ResID = 0;
         var currentInvetoryID = 0;
 
         $(document).ready(function () {
 
             api_url = '<%=Session["api_url"] %>';
+               _ResID = <%=ResID%>;
             GetData();
             var x = document.getElementById("inAddTMobile");
             // x.addEventListener("focusin", myFocusFunction);
@@ -206,8 +218,8 @@
                 $("#btnAddForRent").hide();
                 currentInvetoryID = obj[0].RentInventoryID;
                 
-                document.getElementById("lblRentalType").innerHTML = obj[0].RentType;
-                document.getElementById("lblInventory").innerHTML = obj[0].Inventory;
+                document.getElementById("lblRentalType").innerHTML = obj[0].AccomodationType;
+                document.getElementById("lblInventory").innerHTML = obj[0].InventoryType;
                 document.getElementById("lblRentValue").innerHTML = obj[0].RentValue;
                 document.getElementById("lblRentContactName").innerHTML = obj[0].ContactName;
                 document.getElementById("lblRentContactNumber").innerHTML = obj[0].ContactNumber;
@@ -632,39 +644,85 @@
                $("#addTenantModal").hide();
             });
         });
+        </script>
+      
+   
+    <script id="Pool-Script">
 
+        var MyPoolCount = 0;
 
+         $(document).ready(function () {
+               
+                GetMyPoolOffers();
 
-        //**************add for rental*************//
+                 });
 
-          
-        $(document).ready(function () {
-            api_url = '<%=Session["api_url"] %>';
-            // populateType();
-            //populateSelect();
-            GetInventoryTypeData();
-            GetAccomodationType(1);
-             $('#InventoryType').on('change', function () {
-                  GetAccomodationType( this.value );
+        
+             function GetMyPoolOffers() {
 
-            });
-
-            
-
-
-        });
-
-       
-
-
-        function GetInventoryTypeData() {
-
-            var abs_url = api_url + "/api/InventoryType";
+            var abs_url = api_url + "/api/CarPool/self/" + SocietyID + "/" + _ResID + "/0/20";
 
             $.ajax({
                 url: abs_url,
                 dataType: "json",
-                success: populateInventoryType,
+                success: MyPoolData,
+                failure: function (response) {
+                    alert(response.d);
+                    sessionStorage.clear();
+                }
+            });
+
+        };
+
+        function MyPoolData(response) {
+            var strMyData = "";
+            $("#MyPool").html("");
+            var results = response.$values;// jQuery.parseJSON(response.$values);
+            MyPoolCount = results.length;
+            if (results.length > 0) {
+                for (var i = 0; i < results.length; i++) {
+
+                    var JourneyDTime = DisplayDateTime(results[i].JourneyDateTime);
+                    var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
+                    var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
+
+                    strMyData = strMyData + "<div class=\"col-xs-4\" style=\"margin:0px;padding:10px;\">"
+                        + "<div class=\"panel panel-success\" >"
+                        + "<div class='panel-heading'>"
+                            +"<div> " + results[i].Destination + "<p> on </p>" + JourneyDTime + "</div>"
+                            + "<div><label class='small_label'> " + results[i].InitiatedDateTime + " </label>" + "</div>"
+                        + "</div>"
+                        + "<div class='panel-body'> "
+                            
+                        + "<div> <label class='data_label'> Description :  </label>  " + results[i].Description + "</div>"
+                        + "<div> <label class='data_label'> Available :  </label>  " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
+                        +"<a class='dropdown-toggle' id='dropdownMenu1' onclick='ShowEngagement(" + results[i].VehiclePoolID + ")'><span class='fa fa-automobile' style='color:green;'></span></a>"
+                      
+                        + "<div id='detail_"+results[i].VehiclePoolID +"' ></div>"
+                        + "</div>"
+                        + "<div class='panel-footer'><a onclick='CloseThisPool(" + results[i].VehiclePoolID + ")'><span class='fa fa-trash'></span></a>" + results[i].InterestedCount
+                        + "</div>"
+                        + "</div>"
+                        + "</div>";
+
+                }
+               
+            }
+            else {
+                       strMyData = "<div class=\"col-xs-12\" style=\"margin:0px;padding:10px;\"> No Car Pool From me</div>"
+
+            }
+            $("#MyPool").html(strMyData);
+        }
+
+
+        function ShowEngagement(VehiclePoolID) {
+             var abs_url = api_url + "/api/CarPool/self/" + VehiclePoolID ;
+            console.log(api_url);
+            $.ajax({
+                url: abs_url,
+                dataType: "json",
+                success: DisplayEngagement,
                 failure: function (response) {
                     alert(response.d);
                     sessionStorage.clear();
@@ -672,25 +730,241 @@
             });
         }
 
-               function populateInventoryType(data) {
+        function DisplayEngagement(data) {
+            console.log(data);
+            var engData = data.$values;
           
-            var InventoryType = data.$values;
 
-            var ele = document.getElementById('InventoryType');
-              ele.innerHTML = "";
-            for (var i = 0; i < InventoryType.length; i++) {
-                // POPULATE SELECT ELEMENT WITH JSON.
-                ele.innerHTML = ele.innerHTML +
-                    '<option value="' + InventoryType[i].InventoryTypeID + '">' + InventoryType[i].InventoryType + '</option>';
+            var id = "detail_" + engData[0].VehiclePoolId;
+            console.log(id);
+           
+            var strMyData = "";
+             $("#poolInterest").html(strMyData);
+
+            if (engData.length > 0) {
+                for (var i = 0; i < engData.length; i++) {
+                     var ImageSource = "GetImages.ashx?ResID=" + engData[i].ResID + "&Name=" + engData[i].FirstName + "&UserType= Owner";
+                    //var JourneyDTime = DisplayDateTime(results[i].JourneyDateTime);
+                    //var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
+                    //var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
+
+                    strMyData = strMyData
+
+                        + "<div class='row' syle='border-bottom: solid 1 px #c9c9c9'>"
+                        + "<div class='col-xs-2'></div>"
+                        + "<div class=\"col-xs-4\" style=\"margin:0px;padding:10px;\">" +engData[0].FirstName+ engData[0].LastName +"<br/>" + engData[0].FlatNumber+"<br/>" + engData[0].Mobile + "</div>"
+                        + "<div class=\"col-xs-4\" style=\"margin:0px;padding:10px;\">" + "<img class='image_medium' src='" + ImageSource + "' />" + "</div>"
+                          + "<div class='col-xs-2'></div>"
+                        + "</div>";
+
+                }
+
+                $("#poolInterest").html(strMyData);
+
+                $("#showInterestedInPool").show();
+               
+            }
+            else {
+                alert('No Data to Display');
+
             }
 
         }
+
+        function ClosePoolInterested() {
+             $("#showInterestedInPool").hide();
+        }
+        
+
+         function CloseThisPool(VehiclePoolID) {
+            selectedPoolId = VehiclePoolID;
+            $("#showCloseModal").show();
+        }
+           function CloseCloseThisPool() {
+            $("#showCloseModal").hide();
+        }
+
+
+         function ClosePoolOffer() {
+            var CarPool = {};
+            CarPool.VehiclePoolID = selectedPoolId;
+            CarPool.ResID = <%=ResID%>;
+            CarPool.Active = 0;
+
+            var url = api_url + "/api/CarPool/Status";
+            var CarPoolString = JSON.stringify(CarPool);
+
+            $.ajax({
+                dataType: "json",
+                url: url,
+                data: CarPoolString,
+                type: 'post',
+                async: false,
+                contentType: 'application/json',
+                success: function (data) {
+                    if (data.Response == "Ok") {
+                        $("#showCloseModal").hide();
+                        GetMyPoolOffers();
+                    }
+                    else {
+                        alert('Could not close : try later');
+                    }
+
+                },
+                error: function (data, errorThrown) {
+                    alert('Could not close :' + errorThrown);
+                    // sessionStorage.clear();
+                }
+
+            });
+        }
+   
+        $(function () {
+            $('#time_return').datetimepicker({
+                format: 'HH:mm'
+            });
+        });
+         $(function () {
+            $('#time_when').datetimepicker({
+                format: 'HH:mm'
+            });
+        });
+         $(function () {
+            $('#date_when').datetimepicker({
+            format: 'YYYY-MM-DD' 
+            });
+        });
+        $(function () {
+            $('#date_return').datetimepicker({format: 'YYYY-MM-DD' });
+        });
+
+        function ShowPoolModal() {
+
+            if (MyPoolCount >= 2) {
+                alert("You already have 2 pool offer. Close existing pools to create new");
+            }
+            else {
+                  $("#addCarPoolModal").show();
+            }
+
+          
+        }
+
+
+        function ClosePoolModal() {
+            $("#addCarPoolModal").hide();
+        }
+
+        function AddPoolOffer() {
+            $("#ProgressBar").show();
+            var CarPool = {};
+            CarPool.OneWay = 0;  // pool_type
+            CarPool.PoolTypeID = 1; //pool_cycle   // 1, onetime, 2 for regular
+            CarPool.Active = 1;
+            CarPool.Destination = $("#destination").val();
+            CarPool.InitiatedDateTime = GetDateTimeinISO(new Date());
+            var date = $("#date_when").val();
+            var time = $("#time_when").val();
+            var datetime = date + "T" + time + ":00";
+            CarPool.JourneyDateTime = datetime;
+            var date_return = $("#date_return").val();
+            var time_return = $("#time_return").val();
+
+
+            var datetime_return = date_return + "T" + time_return + ":00";
+
+            CarPool.ReturnDateTime = datetime_return;
+
+            CarPool.VehicleType = $("#vehicle_type").val();
+            CarPool.AvailableSeats = $("#seats").val();
+            CarPool.SharedCost = $("#Shared_cost").val();
+            CarPool.Description = $("#pool_description").val();
+            CarPool.ResID = <%=ResID%>;
+            CarPool.SocietyID = <%=SocietyID%>;
+
+            var url = api_url + "/api/CarPool/Add";
+
+            var CarPoolString = JSON.stringify(CarPool);
+
+
+            $.ajax({
+                dataType: "json",
+                url: url,
+                data: CarPoolString,
+                type: 'post',
+                async: false,
+                contentType: 'application/json',
+                success: function (data) {
+                    if (data.Response == "Ok") {
+                        $("#addCarPoolModal").hide();
+                        GetMyPoolOffers();
+                    }
+                    else {
+                        alert('Could not add : try later');
+                    }
+
+                },
+                error: function (data, errorThrown) {
+                    alert('CarPool Creation failed :' + errorThrown);
+                    // sessionStorage.clear();
+                }
+
+            });
+            $("#ProgressBar").hide();
+        }
+
+
+    </script>
+
+   <script id="inventoryData">
+       
+       $(document).ready(function () {
+                api_url = '<%=Session["api_url"] %>';
+                // populateType();
+                //populateSelect();
+                GetInventoryTypeData();
+                GetAccomodationType(1);
+                 $('#InventoryType').on('change', function () {
+                      GetAccomodationType( this.value );
+
+                });
+                 });
+
+
+                    function GetInventoryTypeData() {
+
+                        var abs_url = api_url + "/api/InventoryType";
+
+                        $.ajax({
+                            url: abs_url,
+                            dataType: "json",
+                            success: populateInventoryType,
+                            failure: function (response) {
+                                alert(response.d);
+                                sessionStorage.clear();
+                            }
+                        });
+                    }
+
+                   function populateInventoryType(data) {
+
+                       var InventoryType = data.$values;
+
+                       var ele = document.getElementById('InventoryType');
+                       ele.innerHTML = "";
+                       for (var i = 0; i < InventoryType.length; i++) {
+                           // POPULATE SELECT ELEMENT WITH JSON.
+                           ele.innerHTML = ele.innerHTML +
+                               '<option value="' + InventoryType[i].InventoryTypeID + '">' + InventoryType[i].InventoryType + '</option>';
+                       }
+
+                   }
 
 
 
            function GetAccomodationType(id) {
 
-               var abs_url = api_url + "/api/Accomodation/" + id;
+            var abs_url = api_url + "/api/Accomodation/" + id;
 
             $.ajax({
                 url: abs_url,
@@ -739,8 +1013,8 @@
                 var RentInventory = {};
                 RentInventory.AccomodationTypeID = $("#AccomodationType").val();
                 RentInventory.InventoryTypeID = $("#InventoryType").val();
-                RentInventory.RentValue = $("#inRent").val();
-                RentInventory.Available = 1;
+                RentInventory.RentValue =  $("#inRent").val();
+                RentInventory.Available = true;
                 RentInventory.Description = $("#description").val();
                 RentInventory.ContactName = $("#contactName").val();
                 RentInventory.ContactNumber = $("#contactNumber").val();
@@ -748,9 +1022,7 @@
                 RentInventory.HouseID =0;
                 RentInventory.FlatID = FlatID;
 
-                console.log(RentInventory);
-
-                var url = api_url + "api/RentInventory/New"
+                var url = api_url + "/api/RentInventory/New"
 
                 $.ajax({
                     dataType: "json",
@@ -931,6 +1203,7 @@
                         </div>
                     </div>
 
+                    Tenant / Rental Data
                     <div id="TenantDetail" class="content_div">
                         <div class="row" style="margin-top: 5px; margin-bottom: 5px; text-align: center;">
                             <div class="col-xs-12">
@@ -964,7 +1237,14 @@
 
                         </div>
                     </div>
+                     <div class="row">
+                        <div class="col-sm-12">
+                            <button id="btnAdd" class="btn btn-info btn-sm" onclick="PopulateAddModal()" style="display: none" type="button">Add Tenant</button>
 
+                            <button id="btnAddForRent" type="button" class="btn btn-primary btn-sm" onclick="InitiateRent()">Add for Rent</button>
+                        </div>
+
+                    </div>
                     <div id="RentalDetail" class="content_div">
                         <div class="row" style="margin-top: 5px; margin-bottom: 5px; text-align: center;">
                             <div class="col-xs-12">
@@ -1005,16 +1285,17 @@
 
                     </div>
 
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <button id="btnAdd" class="btn btn-info btn-sm" onclick="PopulateAddModal()" style="display: none" type="button">Add Tenant</button>
-
-                            <button id="btnAddForRent" type="button" class="btn btn-primary btn-sm" onclick="InitiateRent()">Add for Rent</button>
-                        </div>
+                    <div id="PoolData" class="content_div" > 
+                         <button class="btn btn-primary" onclick="ShowPoolModal()">Add New Trip</button>
+                        <div id="MyPool"></div>
 
                     </div>
+                     
 
+                   
+
+
+                   
 
                     <div id="addTenantModal" class="modal">
                         <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
@@ -1222,6 +1503,190 @@
 
                             </div>
                         </div>
+                    </div>
+
+                 <div id="addCarPoolModal" class="modal">
+                       <div class="modal-content" style="border-radius:5px; width: 580px; margin: auto;margin-top:0px">
+
+                <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
+                    <i class="fa fa-close" style="float:right;cursor:pointer;" onclick="ClosePoolModal()"></i>
+                    
+                    <h4 id="" class="modal-title" style="margin-top: 5px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif; font-size:14px">Offer for Pool:</h4>
+                </div>
+                <div class="layout_modal_body container-fluid">
+                    <form name="CarPool">
+                      
+                        <div class="row" style="margin-top: 20px;">
+
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Type :</label>
+                                <div class="col-sm-8">
+                                <select id="pool_type" class="form-control form-control-sm" onblur="" tabindex="1" >
+                                    <option "1">One Way</option>
+                                    <option "2">Two Way</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Duration</label>
+                                <div class="col-sm-8">
+                                <select id="pool_cycle" class="form-control form-control-sm" onblur="" tabindex="2" >
+                                    <option>One Time</option>
+                                    <option>Daily</option>
+                                </select>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row"style="margin-top: 10px;" >
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Where: </label>
+                                <div class="col-sm-8">
+                                <input type="text" id="destination" class="form-control form-control-sm" onblur="" tabindex="3" />
+                               </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Available Seat</label>
+                                <div class="col-sm-8">
+                                <input type="number" id="seats"  class="form-control form-control-sm" tabindex="4" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" style="margin-top: 0px;">
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">When: </label>
+                                <div class="col-sm-8">
+                                <%--<div class="form-group">
+                                <div class='input-group date'>--%>
+                                    <input type='text'  id='date_when' class="form-control" placeholder="DD/MM/YYYY" tabindex="5"  />
+                              <%--      <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                             </div>--%>
+                                </div>
+                                </div>
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Time:</label>
+                                <div class="col-sm-8">
+                                
+                                         <input type='text'  id='time_when' class="form-control" placeholder="00 : 00 AM" tabindex="6" />
+                                        
+                               </div>
+                            </div>
+                        </div>
+                         <div class="row" style="margin-top: 10px;">
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Return:</label>
+                             <div class="col-sm-8">  
+                               
+                                    <input type='text'  id='date_return' class="form-control"  placeholder="DD/MM/YYYY"/ tabindex="7" />
+                                 
+                              </div>
+                            </div>
+                             <div class="col-sm-6">
+                                 <label class="labelwidth col-sm-4 col-form-label">Time:</label>
+                                 <div class="col-sm-8">
+                                         <input id='time_return' type='text' placeholder="00 : 00 AM" class="form-control" tabindex="8" />
+                                 </div>
+                             </div>
+                        </div>
+                        <div class="row" style="margin-top:10px;">
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Vehicle Type:</label>
+                                 <div class="col-sm-8">
+                                <input id="vehicle_type" class="form-control form-control-sm" tabindex="9" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="labelwidth col-sm-4 col-form-label">Cost / Seat</label>
+                                <div class="col-sm-8">
+                                <input id="Shared_cost" type="number" class="form-control form-control-sm" tabindex="10" />
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 5px; margin-bottom: 15px">
+                            <div class="col-sm-12">
+                                <label class="labelwidth col-sm-2 col-form-label">Description:</label>
+                                <div class="col-sm-10">
+                                <input type="text" id="pool_description" class="form-control form-control-lg" style="max-height:inherit" tabindex="11"  />
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+
+                    <div class="panel-footer" style="text-align: right;">
+                        <button type="button" id="btnPoolCancel" style="margin-top: 5px;" onclick="ClosePoolModal()" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                        <button type="button" id="btnPoolSubmit" style="margin-top: 5px;" onclick="AddPoolOffer();" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+
+            <div id="invProgressBar" class="container-fluid" style="text-align: center; height: 200px; display: none;">
+                <img src="Images/Icon/ajax-loader.gif" style="width: 20px; height: 20px; margin-top: 50px;" />
+            </div>
+        </div>
+
+
+                   <div id="showCloseModal" class="modal">
+                    <div class="modal-content"style="border-radius:5px; width: 350px; margin: auto; margin-top:150px;position:relative;">
+
+                        <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
+                              <i class="fa fa-close" style="float:right;cursor:pointer;" onclick="CloseCloseThisPool()"></i>
+                            <h4 id="close_Close" class="modal-title" style="margin-top: 5px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif; font-size:14px">Close Selected Pool</h4>
+                   
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label class="labelwidth col-sm-4 col-form-label">Seats: </label>
+                                    <div class="col-sm-8">
+                                    <input id="close_seats" type="number" onblur="" class="form-control form-control-sm" tabindex="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 10px; margin-bottom: 10px">
+                                <div class="col-sm-12">
+                                    <label class="labelwidth col-sm-4 col-form-label">Comments:</label>
+                                 <div class="col-sm-8">
+                                    <input id="close_comments"  class="form-control rows="2" form-control-sm" tabindex="2" />
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-footer" style="text-align: right;">
+                            <button type="button" id="btnCloseClosePool" style="margin-top: 5px;" onclick="CloseCloseThisPool()" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                            <button type="button" id="btnClosePoolSubmit" style="margin-top: 5px;" onclick="ClosePoolOffer();" class="btn btn-primary">Submit</button>
+
+                        </div>
+
+                          <div id="closeProgressBar" class="container-fluid" style="text-align: center; height: 200px; position:absolute;">
+                                <img src="Images/Icon/ajax-loader.gif" style="width: 20px; height: 20px; margin-top: 50px;" />
+                            </div>
+
+                    </div>
+                    </div>
+
+
+                <div id="showInterestedInPool" class="modal">
+                    <div class="modal-content"style="border-radius:5px; width: 350px; margin: auto; margin-top:150px;position:relative;">
+
+                        <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
+                              <i class="fa fa-close" style="float:right;cursor:pointer;" onclick="ClosePoolInterested()"></i>
+                            <h4 id="PoolInterested_Close" class="modal-title" style="margin-top: 5px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif; font-size:14px">Interested in Pool</h4>
+                   
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row" id="poolInterest">
+                               
+                            </div>
+                     
+                        </div>
+
+                    
+                    </div>
                     </div>
 
             </div>
