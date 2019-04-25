@@ -495,7 +495,7 @@ public partial class Poll : System.Web.UI.Page
 
             if(Deactivedate > Presentdate)
             {
-                String PollQuery = "Insert into dbo.PollingData(Question,Answer1,Answer2,Answer3,Answer4,StartDate,EndDate, SocietyID)values('" 
+                String PollQuery = "Insert into dbo.PollingData (Question,Answer1,Answer2,Answer3,Answer4,StartDate,EndDate, SocietyID) values('" 
                     + txtPollQ.Text + "','" + txtPollAns1.Text + "','" + txtPollAns2.Text + "','" + txtPollAns3.Text + "','" 
                     + txtPollAns4.Text + "','" + DateString(date) + "','" + DateString(Deactivedate) + "','" + muser.currentResident.SocietyID + "')";
                 bool result = dacess.Update(PollQuery);

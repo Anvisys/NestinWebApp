@@ -54,6 +54,13 @@ public static class Utility
 
 
 
+    public static String ChangeDateTimeLocalToSQLServerFormat(DateTime _date)
+    {
+        return _date.ToUniversalTime().ToString("yyyy-MM-dd HH:MM:ss");
+    }
+
+
+
     public static int GetDifferenceinDays(DateTime EarlierDate, DateTime LaterDate)
     {
         return (LaterDate - EarlierDate).Days;

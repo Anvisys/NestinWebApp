@@ -220,7 +220,7 @@ public class PollData
         try {
             if (PreviousAnswer == 0 || PreviousAnswer == null)
             {
-                stringQuery = "Insert into dbo.PollingAnswer(PollID,ResID,SelectedAnswer,LastUpdated) Values('" + PollID + "','" + ResID + "','" + PollAnswer + "','" + Utility.GetCurrentDateTimeinUTC() + "')";
+                stringQuery = "Insert into dbo.PollingAnswer(PollID,ResID,SelectedAnswer,LastUpdated) Values('" + PollID + "','" + ResID + "','" + PollAnswer + "','" + DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss") + "')";
 
             }
             else

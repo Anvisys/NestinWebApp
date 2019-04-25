@@ -740,8 +740,8 @@ public partial class Totalusers : System.Web.UI.Page
     {
         bool result;
         try {
-            DateTime Deactivedate = DateTime.ParseExact(txtEndDate.Text, "dd-MM-yyyy", System.Globalization.CultureInfo.CurrentUICulture);
-            DateTime Activedate = DateTime.ParseExact(txtStartDate.Text, "dd-MM-yyyy", System.Globalization.CultureInfo.CurrentUICulture);
+            DateTime Deactivedate = DateTime.ParseExact(txtEndDate.Text, "dd-MM-yyyy", System.Globalization.CultureInfo.CurrentUICulture); 
+            DateTime Activedate = DateTime.ParseExact(txtStartDate.Text, "dd-MM-yyyy", System.Globalization.CultureInfo.CurrentUICulture); 
             var UserId = Convert.ToInt32(HiddenField1.Value);
             var ResID = Convert.ToInt32(HiddenField2.Value);
 

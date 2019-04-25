@@ -885,7 +885,11 @@ public partial class Viewcomplaints : System.Web.UI.Page
         
             }
     }
-    protected void btnUpdate_Click(object sender, EventArgs e)
+
+    protected void btnUpdate_Click2(object sender, EventArgs e)
+    {
+    }
+        protected void btnUpdate_Click(object sender, EventArgs e)
     {
         try
         {

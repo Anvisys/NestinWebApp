@@ -402,7 +402,8 @@
         function ShowAssignConfirmation(CompId, FlatNumber,ServiceType, Status, StatusText)
         {
              $("#myModalAssignComplaint").show();
-          SetEmployeeForService(ServiceType);
+
+            SetEmployeeForService(ServiceType);
             $("#HiddenFlatNumber").val(FlatNumber);
             $("#HiddenCompID").val(CompId);
             $("#HiddenDesc").val("");
@@ -582,12 +583,11 @@
 
         }
         .glyphicon {
-       padding: 10px;
-    background-color: #607d8b;
-   
-    border-radius: 2px;
-    top: 0px!important;
-    margin-left: -17px;
+            padding: 12px 0;
+            background-color: #607d8b;
+            border-radius: 2px;
+            top: 0px !important;
+            margin-left: -10px;
         }
 
         /*.form-control {
@@ -926,15 +926,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
                  <%------------------------------------------------------ Add Complaint Section Starts from here------------------------------------------------------------- --%>
            <%--      <div id="wrongAddComplaintPopup" class="modal">
                      <div class="panel panel-primary" style="width: 400px; margin: auto;">
@@ -1249,7 +1240,7 @@
                              <asp:TextBox ID="lblComplaintStatus" Style="margin: 14px;" runat="server"></asp:TextBox><br />
 
                              <button style="margin-left: 92px;" type="button" onclick="ConfirmClose()">Cancel</button>
-                             <asp:Button ID="btnUpdate2" runat="server" CausesValidation="false" Text="Update" OnClick="btnUpdate_Click"></asp:Button>
+                             <asp:Button ID="btnUpdate2" runat="server" CausesValidation="false" Text="Update" OnClick="btnUpdate_Click2"></asp:Button>
                          </div>
 
                      </div>

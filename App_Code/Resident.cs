@@ -409,8 +409,8 @@ public class Resident
         {
             DataAccess dacess = new DataAccess();
             String UpdateQuery = "update " + CONSTANTS.Table_SocietyUser
-                               + " set ActiveDate = '" + _activeDate + "', DeActiveDate = '" + _deactiveDate 
-                               + "', Status = 0 Where ResID = " + _ResId+")";
+                               + " set ActiveDate = '" + Utility.ChangeDateTimeLocalToSQLServerFormat(_activeDate) + "', DeActiveDate = '" + Utility.ChangeDateTimeLocalToSQLServerFormat(_deactiveDate)
+                               + "', Status = 0 Where ResID = " + _ResId;
             
             bool result = dacess.Update(UpdateQuery);
             return result;

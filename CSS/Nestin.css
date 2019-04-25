@@ -93,3 +93,11 @@ img.app_centre {
     font-weight: 300;
     letter-spacing: -1px;
 }
+.Space label {
+    margin-left: 10px;
+}
+
+.rad {
+    font-family: 'Open Sans';
+    font-size: medium;
+}
