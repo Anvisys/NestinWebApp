@@ -1,6 +1,6 @@
 ﻿
-<%@ Page Language="C#" AutoEventWireup="true"  CodeFile="Viewcomplaints.aspx.cs" EnableEventValidation="false"  Inherits="Viewcomplaints" %>
-
+<%@ Page Language="C#" AutoEventWireup="true"  CodeFile="Viewcomplaints.aspx.cs" Inherits="Viewcomplaints" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <!DOCTYPE html>
 <!--  This Total  code  is  licenced
     Developed By Anvisys Technologies Pvt Ltd.
@@ -789,6 +789,51 @@
                  </div>
 
 
+                 
+                     <div id="myModalAssignComplaint" class="modal">
+                         <div class="container-fluid" style="width: 500px;">
+                             <div class="panel panel-primary">
+                                 <div class="panel-heading">
+                                     Confirm:
+                                     <label id="lblassignHeading">Assign</label>
+
+                                     <span class="fa fa-times" onclick="btnCancelAssign()" style="float: right; cursor: pointer;"></span>
+                                 </div>
+
+                                 <div class="panel-body">
+                                     <div class="row">
+                                         <div class="col-xs-6">
+                                             Flat:
+                                             <label id="lblassignFlat"></label>
+                                         </div>
+                                         <div class="col-xs-6">
+                                             Complaint ID:
+                                             <label id="lblAssignCompID" runat="server"></label>
+                                         </div>
+                                     </div>
+                                     <div class="row">
+                                         <div class="col-xs-6">
+                                             New Status:  
+                                             <asp:Label ID="lblAssignStatus" runat="server"></asp:Label>
+                                         </div>
+                                         <div class="col-xs-6">
+                                             Employee:   
+                                            <select id="selectEmployee" onchange="SelectEmployee()" style="width: 100px; padding: 4px; border: none;">
+                                               </select>
+                                         </div>
+                                     </div>
+
+                                 </div>
+
+                                 <div class="panel-footer" style="text-align: right; margin-top: 15px;">
+                                     <button class="btn btn-danger" type="button" onclick="btnCancelAssign()">Cancel</button>
+                                     <asp:Button  ID="btnUpdate" runat="server" CausesValidation="false" Text="Assign" CssClass="btn btn-success" OnClick="btnUpdate_Click"/>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+               
+
 
 
         
@@ -1174,53 +1219,6 @@
                              </tr>
                          </table>
                      </div>
-                     <div id="myModalAssignComplaint" class="modal">
-                         <div class="container-fluid" style="width: 500px;">
-                             <div class="panel panel-primary">
-                                 <div class="panel-heading">
-                                     Confirm:
-                                     <label id="lblassignHeading">Assign</label>
-
-                                     <span class="fa fa-times" onclick="btnCancelAssign()" style="float: right; cursor: pointer;"></span>
-                                 </div>
-
-                                 <div class="panel-body">
-                                     <div class="row">
-                                         <div class="col-xs-6">
-                                             Flat:
-                                             <label id="lblassignFlat"></label>
-                                         </div>
-                                         <div class="col-xs-6">
-                                             Complaint ID:
-                                             <label id="lblAssignCompID" runat="server"></label>
-                                         </div>
-                                     </div>
-                                     <div class="row">
-                                         <div class="col-xs-6">
-                                             New Status:  
-                                             <asp:Label ID="lblAssignStatus" runat="server"></asp:Label>
-                                         </div>
-                                         <div class="col-xs-6">
-                                             Employee:   
-                                            <select id="selectEmployee" onchange="SelectEmployee()" style="width: 100px; padding: 4px; border: none;">
-                                                <%--<option><a href="#">Suresh</a></option>--%>
-                                                <%-- <option><a href="#">Ramesh</a></option>
-                                              <option><a href="#">Ganesh</a></option>--%>
-                                            </select>
-                                         </div>
-                                     </div>
-
-                                 </div>
-
-                                 <div class="panel-footer" style="text-align: right; margin-top: 15px;">
-                                     <button class="btn btn-danger" type="button" onclick="btnCancelAssign()">Cancel</button>
-                                     <asp:Button CssClass="btn btn-success" ID="btnUpdate" runat="server" CausesValidation="false" Text="Assign"
-                                         OnClick="btnUpdate_Click"></asp:Button>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-               
 
 
 
