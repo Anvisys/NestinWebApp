@@ -442,19 +442,19 @@ public partial class Poll : System.Web.UI.Page
 
     public void HidePieChart2()
     {
-        lblQ2.Text = "";
-        lblPie2Date.Visible = false;
-        
-       
-        lblPollP2.Visible = false;
-       // lblPie2Yourvote.Visible = false;
-       
-        RadioChart2Opt4.Visible = false;
-        RadioChart2Opt2.Visible = false;
-        RadioChart2Opt3.Visible = false;
-        RadioChart2Opt1.Visible = false;
-      
+        // lblQ2.Text = "";
+        // lblPie2Date.Visible = false;
 
+
+        // lblPollP2.Visible = false;
+        //// lblPie2Yourvote.Visible = false;
+
+        // RadioChart2Opt4.Visible = false;
+        // RadioChart2Opt2.Visible = false;
+        // RadioChart2Opt3.Visible = false;
+        // RadioChart2Opt1.Visible = false;
+
+        pnlchart2.Visible = false;
         
 
     }

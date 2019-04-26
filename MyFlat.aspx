@@ -33,16 +33,16 @@
           
 
     <script id="MyFlatData">
-        var CurrentUserType, ResID, UserID, Type, BHK, FirstName, LastName, MobileNo, EmailId,FlatID, FlatNumber, Address, ParentName, SocietyID,SocietyName, Gender, ActiveDate, DeActiveDate,  TenantUserID;
+        var CurrentUserType, ResID, UserID, Type, BHK, FirstName, LastName, MobileNo, EmailId, FlatID, FlatNumber, Address, ParentName, SocietyID, SocietyName, Gender, ActiveDate, DeActiveDate, TenantUserID;
         var MobileExist, EmailExist, TenantResID, chkExistingUser = false;
         var api_url = "";
-          var _ResID = 0;
+        var _ResID = 0;
         var currentInvetoryID = 0;
 
         $(document).ready(function () {
 
             api_url = '<%=Session["api_url"] %>';
-               _ResID = <%=ResID%>;
+            _ResID = <%=ResID%>;
             GetData();
             var x = document.getElementById("inAddTMobile");
             // x.addEventListener("focusin", myFocusFunction);
@@ -50,52 +50,52 @@
 
             window.parent.FrameSourceChanged();
 
-                  $(window).scroll(function() {
-                   if ($(this).scrollTop() > 2){  
-                      $('#header').addClass("medicom-header medical-nav");
-		             // $("#social_icon").hide();
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 2) {
+                    $('#header').addClass("medicom-header medical-nav");
+                    // $("#social_icon").hide();
                 }
-                else{
-                   $('#header').removeClass("medicom-header medical-nav");
-	                $("#social_icon").show();
+                else {
+                    $('#header').removeClass("medicom-header medical-nav");
+                    $("#social_icon").show();
                 }
             });
-   
-	});
+
+        });
 
 
         function GetData() {
-        FlatID = '<%=Session["FlatID"] %>';
-	    FlatNumber = '<%=Session["FlatNumber"] %>';
-	    SocietyID = '<%=Session["SocietyID"] %>';
-	    CurrentUserType = '<%=Session["UserType"] %>';
-        SocietyName = '<%=Session["SocietyName"] %>';
-        UserName = '<%=Session["FirstName"] %>';
-         ResID = '<%=Session["ResiID"] %>';
-      UserID= '<%=Session["UserID"] %>';
-        
+            FlatID = '<%=Session["FlatID"] %>';
+            FlatNumber = '<%=Session["FlatNumber"] %>';
+            SocietyID = '<%=Session["SocietyID"] %>';
+            CurrentUserType = '<%=Session["UserType"] %>';
+            SocietyName = '<%=Session["SocietyName"] %>';
+            UserName = '<%=Session["FirstName"] %>';
+            ResID = '<%=Session["ResiID"] %>';
+            UserID = '<%=Session["UserID"] %>';
+
             GetFlatInfo(FlatNumber);
             GetRentalInfo(FlatNumber);
-	   
-	}
-        
+
+        }
+
 
         function GetFlatInfo(FlatNumber) {
 
             // alert("minimum val is "+minvalue);
             // alert("maximum value is "+maxvalue);
             $("#TenantDetail").hide();
-         
+
             var url = api_url + "/api/Flat/" + FlatID;
-            
-                 $.ajax({
+
+            $.ajax({
                 dataType: "json",
                 url: url,
                 success: function (data) {
                     $("#progressBar").hide();
                     $("#main_div").show();
                     $("#ad_div").show();
-                    
+
                     SetFlatInfo(data);
                 },
                 error: function (data, errorThrown) {
@@ -110,7 +110,7 @@
         };
 
         function SetFlatInfo(data) {
-          
+
             var da = JSON.stringify(data);
             var js = jQuery.parseJSON(da);
             document.getElementById("lblFlatNumber").innerHTML = js.FlatNumber;
@@ -121,42 +121,42 @@
             document.getElementById("lblIntercomNumber").innerHTML = js.IntercomNumber;
             document.getElementById("lblFlatOwner").innerHTML = js.OwnerFirstName + " " + js.OwnerLastName;
             document.getElementById("lblFlatOwnerMobile").innerHTML = js.OwnerMobile;
-             TenantResID =  js.TenantResID;
-              document.getElementById("OwnerImage").src =  "GetImages.ashx?UserID=<% =UserID %>&Name=<% =UserFirstName %>&UserType=Owner";;
+            TenantResID = js.TenantResID;
+            document.getElementById("OwnerImage").src =  "GetImages.ashx?UserID=<% =UserID %>&Name=<% =UserFirstName %>&UserType=Owner";;
 
             TenantUserID = js.TenantUserID;
             var OwnerElement = document.getElementById("OwnerImage");
             //GetImageByMobile(js.Ownermobile, OwnerElement);
 
             document.getElementById("lblFlatOwnerEmail").innerHTML = js.OwnerEmail;
-           
-        
+
+
             if (js.TenantMobile != null) {
                 $("#TenantDetail").show();
                 document.getElementById("lblFlatTenantName").innerHTML = js.TenantFirstName + " " + js.TenantLastName;
                 document.getElementById("lblFlatTenantEmail").innerHTML = js.TenantEmail;
                 document.getElementById("lblFlatTenantMobile").innerHTML = js.TenantMobile;
                 var TenantElement = document.getElementById("TenantImage");
-               // GetImageByMobile(js.TenantMobile, TenantElement);
+                // GetImageByMobile(js.TenantMobile, TenantElement);
                 document.getElementById("lblFlatTenantAddress").innerHTML = js.TenantAddress;
                 ActiveDate = ChangeDateformat(js.TenantFrom);
                 document.getElementById("lblFlatTenantFrom").innerHTML = ActiveDate;
                 DeActiveDate = ChangeDateformat(js.TenantTo);
                 document.getElementById("lblFlatTenantTo").innerHTML = DeActiveDate;
 
-               document.getElementById("TenantImage").src =  "GetImages.ashx?UserID=" + js.TenantUserID + "&Name=" + js.TenantFirstName + "&UserType=Tenant";
+                document.getElementById("TenantImage").src = "GetImages.ashx?UserID=" + js.TenantUserID + "&Name=" + js.TenantFirstName + "&UserType=Tenant";
 
             }
             else {
-                
+
                 document.getElementById("lblFlatTenantEmail").innerHTML = "No Tenant in Flat";
                 document.getElementById("lblFlatTenantMobile").innerHTML = js.TenantMobile;
                 document.getElementById("TenantImage");
                 $("#btnAdd").show();
-                
+
             }
-           
-           
+
+
             if (CurrentUserType == "Owner") {
                 if (js.TenantFirstName != null) {
                     // alert(js.TenantFirstName);
@@ -174,27 +174,27 @@
                 $("#btnAdd").hide();
             }
             else {
-                 $("#btnEdit").hide();
+                $("#btnEdit").hide();
                 $("#btnAdd").hide();
             }
         };
 
 
-            function GetRentalInfo(FlatNumber) {
+        function GetRentalInfo(FlatNumber) {
 
-           
-         
-            var url = api_url + "/api/RentInventory/Find/" + FlatID + "/0"; 
-            
-                 $.ajax({
+
+
+            var url = api_url + "/api/RentInventory/Find/" + FlatID + "/0";
+
+            $.ajax({
                 dataType: "json",
                 url: url,
                 success: function (data) {
-                    
+
                     SetRentalInfo(data);
                 },
                 error: function (data, errorThrown) {
-                 
+
                     alert('request failed :' + errorThrown);
                 }
 
@@ -217,7 +217,7 @@
                 $("#RentalDetail").show();
                 $("#btnAddForRent").hide();
                 currentInvetoryID = obj[0].RentInventoryID;
-                
+
                 document.getElementById("lblRentalType").innerHTML = obj[0].AccomodationType;
                 document.getElementById("lblInventory").innerHTML = obj[0].InventoryType;
                 document.getElementById("lblRentValue").innerHTML = obj[0].RentValue;
@@ -229,8 +229,43 @@
 
         }
 
+        //For tenant popup//
 
-        function GetImageByMobile(Mobile,element) {
+        function PopulateAddModal2() {
+            var url = api_url + "/api/RentInventory/Find/" + FlatID + "/0";
+
+            $.ajax({
+                dataType: "json",
+                url: url,
+                success: function (data) {
+
+                    if (data.length == 0) {
+                        
+                        PopulateAddModal();
+
+                    }
+                    else {
+                        
+                        openForm();
+
+                    }
+                },
+                error: function (data, errorThrown) {
+
+                    alert('request failed :' + errorThrown);
+                }
+
+            });
+
+
+            //  sessionStorage.setItem("maxvalue", maxvalue);
+
+        }
+
+        //End//
+
+
+        function GetImageByMobile(Mobile, element) {
 
             var url = api_url + "/api/Image/GetByMobile/" + Mobile + "/";
             $.ajax({
@@ -244,10 +279,10 @@
                         UserExist = true;
                         ResID = js.ID;
                         var ImageString = js.ImageString;
-                       // alert("SettingImage:" + ImageString);
+                        // alert("SettingImage:" + ImageString);
                         var Source = "data:image/jpeg;charset=utf-8;base64," + ImageString;
                         element.src = Source;
-                       // element.src = Source;
+                        // element.src = Source;
                     }
                     else {
                         UserExist = false;
@@ -257,41 +292,37 @@
 
                 },
                 error: function (data, errorThrown) {
-                   // alert("Error getting Image");
+                    // alert("Error getting Image");
                 }
 
             });
 
         }
 
-        function ShowDialog()
-        {
+        function ShowDialog() {
             document.getElementById("modalAdd").style.display = "block";
             //document.getElementsByClassName("loader").hide();
         }
 
-        function ModalClose()
-        {
+        function ModalClose() {
             document.getElementById("modalAdd").hide();
         }
 
 
-        function ValidateMobile(element)
-        {
-            
-            if (element.value.length<10)
-            {
+        function ValidateMobile(element) {
+
+            if (element.value.length < 10) {
                 document.getElementById("lblMessage").textContent = "Enter valid Mobile Number";
                 element.focus();
                 return;
             }
             // document.getElementsByClassName("txtbox_style").disabled = true;
             document.getElementById("lblMessage").textContent = "Validating Mobile Number"
-           // document.getElementById("inAddTEmailID").disabled = true;
+            // document.getElementById("inAddTEmailID").disabled = true;
             $("input").disabled = true;
             var url = api_url + "/api/Resident/Mobile/" + element.value;
 
-           
+
             $.ajax({
                 dataType: "json",
                 url: url,
@@ -312,12 +343,12 @@
                             document.getElementById("lblMessage").textContent = "Mobile No Exist"
                             //document.getElementById("inAddTEmailID").disabled = false;
                             document.getElementById("lblMessage").style.color = "Blue";
-                           // alert(chkExistingUser);
+                            // alert(chkExistingUser);
 
                             //set focus to email id box
                         }
                         else {
-                             document.getElementById("lblMessage").textContent = "Mobile No is in use. Either check the Existing User or use another mobile"
+                            document.getElementById("lblMessage").textContent = "Mobile No is in use. Either check the Existing User or use another mobile"
                             //document.getElementById("inAddTEmailID").disabled = false;
                             document.getElementById("lblMessage").style.color = "Red";
                             // alert(chkExistingUser);
@@ -325,29 +356,28 @@
                     }
                     else {
                         MobileExist = false;
-                      
+
                         document.getElementById("lblMessage").textContent = "Mobile number is available";
                         document.getElementById("lblMessage").style.color = "Blue";
                         document.getElementById("inAddTEmailID").disabled = false;
                     }
-                    
+
                 },
                 error: function (data, errorThrown) {
                     document.getElementById("lblMessage").innerHTML = "Could not validate, try again or later"
-                    
+
                     document.getElementById("inAddTEmailID").disabled = false;
                 }
-                
+
             });
-            
+
         }
 
-        function ValidateEmail(element)
-        {
+        function ValidateEmail(element) {
             try {
-                
+
                 document.getElementById("lblMessage").textContent = "Validating Email ID"
-              
+
                 if (MobileExist == true) {
                     if (EmailId.toLowerCase() == element.value.toLowerCase()) {
                         EmailExist = true;
@@ -360,29 +390,26 @@
                     }
                 }
                 else {
-                   
+
                     GetUserByMail(element.value);
                 }
-              
+
             }
-            catch (err)
-            {
+            catch (err) {
                 document.getElementById("lblMessage").innerHTML = "Error validating mail"
             }
         }
 
-        function GetUserByMail(mail)
-        {
-          
+        function GetUserByMail(mail) {
+
             var url = api_url + "/api/Resident/Email/" + mail + "/";
             $.ajax({
                 dataType: "json",
                 url: url,
                 success: function (data) {
-                    if (data != null)
-                    {
-                       
-                       var da = JSON.stringify(data);
+                    if (data != null) {
+
+                        var da = JSON.stringify(data);
                         var js = jQuery.parseJSON(da);
                         EmailExist = true;
                         ResID = js.ResID;
@@ -393,7 +420,7 @@
                         LastName = js.LastName;
                         MobileNo = js.MobileNo;
                         EmailId = js.EmailId;
-                        
+
                         document.getElementById("lblMessage").textContent = "Email already exist with some Mobile, use other Email"
                         document.getElementById("inAddTEmailID").disabled = false;
                     }
@@ -414,8 +441,7 @@
 
         }
 
-        function FillUserData()
-        {
+        function FillUserData() {
             document.getElementById("inAddTFirstName").value = FirstName;
             document.getElementById("inAddTAddress").value = BHK;
             document.getElementById("inAddTLastName").value = LastName;
@@ -425,8 +451,7 @@
         }
 
 
-        function AddUser()
-        {
+        function AddUser() {
             if ((MobileExist == true && EmailExist == false) || (MobileExist == false && EmailExist == true)) {
                 document.getElementById("lblMessage").innerHTML = "Either of Mobile and Email does not match, other propert match;";
                 return;
@@ -444,9 +469,9 @@
             UserLogin = EmailId
             //Password = document.getElementById("inAddPassword").value;
             Password = "Password@123";
-            ActiveDate =ChangeDateformat(document.getElementById("inAddTActiveDate").value);
-            DeActiveDate =ChangeDateformat(document.getElementById("inAddTDeactiveDate").value);
-            
+            ActiveDate = ChangeDateformat(document.getElementById("inAddTActiveDate").value);
+            DeActiveDate = ChangeDateformat(document.getElementById("inAddTDeactiveDate").value);
+
             var e = document.getElementById("mgender");
             Gender = e.options[e.selectedIndex].text;
 
@@ -458,8 +483,8 @@
 
                 var url = "http://www.kevintech.in/MyApttUserService/api/AddUser";
 
-              //  alert(reqBody);
-               
+                //  alert(reqBody);
+
                 //AddTenant(100111);
 
                 $.ajax({
@@ -471,9 +496,9 @@
                     contentType: 'application/json',
                     success: function (data) {
                         var da = JSON.stringify(data);
-                      //  alert(da);
+                        //  alert(da);
                         var js = jQuery.parseJSON(da);
-                          var Response = js.Response;
+                        var Response = js.Response;
                         if (Response == "OK") {
                             document.getElementById("lblMessage").innerHTML = "User Login Created. Attaching User with Flat...";
                             var UserID = js.UserID;
@@ -500,11 +525,10 @@
             }
         }
 
-        function AddTenant(UserID)
-        {
+        function AddTenant(UserID) {
             var reqBody2 = "{\"UserID\":" + UserID + ",\"FlatID\":\"" + FlatID + "\",\"Type\":\"Tenant\",\"FirstName\":\"" + FirstName +
                 "\",\"LastName\":\"" + LastName + "\",\"MobileNo\":\"" + MobileNo + "\",\"EmailId\":\"" + EmailId + "\",\"Addres\":\"" + Address +
-                "\",\"SocietyID\":\"" + SocietyID   + "\",\"ActiveDate\":\"" + ActiveDate + "\",\"DeActiveDate\":\"" + DeActiveDate + "\"}";
+                "\",\"SocietyID\":\"" + SocietyID + "\",\"ActiveDate\":\"" + ActiveDate + "\",\"DeActiveDate\":\"" + DeActiveDate + "\"}";
             document.getElementById("lblMessage").innerHTML = reqBody2;
             //alert(reqBody2);
             var url = api_url + "/api/Tenant/New";
@@ -530,49 +554,46 @@
                 },
                 error: function (data, errorThrown) {
                     alert('request failed :' + errorThrown);
-                   // sessionStorage.clear();
+                    // sessionStorage.clear();
                 }
 
             });
         }
-        
+
         function ChangeDateformat(inputdate) {
-           
+
             var date = new Date(inputdate);
             var day = date.getDate().toString();
-            if (day.length == 1)
-            { day = "0" + day; }
+            if (day.length == 1) { day = "0" + day; }
 
             var month = (date.getMonth() + 1).toString();
-            if (month.length == 1)
-            { month = "0" + month;}
+            if (month.length == 1) { month = "0" + month; }
 
             var strDate = day + "/" + month + "/" + date.getFullYear();
             return strDate;
         }
 
-        function ReverseDateFormat(inputDate)
-        {
-            if (inputDate != undefined)
-            {
+        function ReverseDateFormat(inputDate) {
+            if (inputDate != undefined) {
                 var date = inputDate.split("/");
                 var newdate = date[2] + "-" + date[1] + "-" + date[0];
                 return newdate;
             }
         }
 
-       function PopulateAddModal()
-        {
-           var title = "Add Tenant to: " + FlatNumber;
-           $("#title").text(title);
+        function PopulateAddModal() {
 
-           $("#inAddTActiveDate").attr("min", ReverseDateFormat(DeActiveDate));
 
-           $("#addTenantModal").show();
+            var title = "Add Tenant to: " + FlatNumber;
+            $("#title").text(title);
 
-       }
+            $("#inAddTActiveDate").attr("min", ReverseDateFormat(DeActiveDate));
 
-    
+            $("#addTenantModal").show();
+
+        }
+
+
         $(document).ajaxStart(function () {
             $('.loader').show();
         }).ajaxStop(function () {
@@ -583,17 +604,15 @@
             $(this).css("background-color", "#FFFFFF");
         });
 
-        function ChangeDeactiveDate()
-        {
+        function ChangeDeactiveDate() {
             document.getElementById("ChangeDate").style.display = "block";
             $('#newDeactiveDate').attr("min", ReverseDateFormat(ActiveDate))
         }
 
-        function UpdateDeactiveDate()
-        {
+        function UpdateDeactiveDate() {
             DeActiveDate = ChangeDateformat(document.getElementById("newDeactiveDate").value);
             var reqBody3 = "{\"id\":" + TenantResID + ",\"date\":\"" + DeActiveDate + "\"}";
-           // alert(reqBody3);
+            // alert(reqBody3);
             var url = api_url + "/api/Tenant/Update";
 
             $.ajax({
@@ -603,7 +622,7 @@
                 type: 'post',
                 contentType: 'application/json',
                 success: function (data) {
-                   
+
                     var da = JSON.stringify(data);
                     var js = jQuery.parseJSON(da);
                     var Response = js.Response;
@@ -623,25 +642,25 @@
             });
         }
 
-      
+
         jQuery(document).ready(function () {
 
-        $("#chkUser").click(function () {
-            $('#inAddTFirstName,#inAddTLastName,#inAddTParentName,#mgender,#inAddTAddress,#inAddPassword,#inTConfirmPassword').attr("disabled", $(this).is(":checked"));
-            if ($(this).is(":checked")) {
-               
-                chkExistingUser = true;
-            }
-            else {
-                
-                 chkExistingUser = false;
-            }
+            $("#chkUser").click(function () {
+                $('#inAddTFirstName,#inAddTLastName,#inAddTParentName,#mgender,#inAddTAddress,#inAddPassword,#inTConfirmPassword').attr("disabled", $(this).is(":checked"));
+                if ($(this).is(":checked")) {
+
+                    chkExistingUser = true;
+                }
+                else {
+
+                    chkExistingUser = false;
+                }
+            });
         });
-       });
-        
-          $(document).ready(function () {
+
+        $(document).ready(function () {
             $("#btnCancel,#Close_mod").click(function () {
-               $("#addTenantModal").hide();
+                $("#addTenantModal").hide();
             });
         });
         </script>
@@ -651,14 +670,14 @@
 
         var MyPoolCount = 0;
 
-         $(document).ready(function () {
-               
-                GetMyPoolOffers();
+        $(document).ready(function () {
 
-                 });
+            GetMyPoolOffers();
 
-        
-             function GetMyPoolOffers() {
+        });
+
+
+        function GetMyPoolOffers() {
 
             var abs_url = api_url + "/api/CarPool/self/" + SocietyID + "/" + _ResID + "/0/20";
 
@@ -689,16 +708,16 @@
                     strMyData = strMyData + "<div class=\"col-xs-4\" style=\"margin:0px;padding:10px;\">"
                         + "<div class=\"panel panel-success\" >"
                         + "<div class='panel-heading'>"
-                            +"<div> " + results[i].Destination + "<p> on </p>" + JourneyDTime + "</div>"
-                            + "<div><label class='small_label'> " + results[i].InitiatedDateTime + " </label>" + "</div>"
+                        + "<div> " + results[i].Destination + "<p> on </p>" + JourneyDTime + "</div>"
+                        + "<div><label class='small_label'> " + results[i].InitiatedDateTime + " </label>" + "</div>"
                         + "</div>"
                         + "<div class='panel-body'> "
-                            
+
                         + "<div> <label class='data_label'> Description :  </label>  " + results[i].Description + "</div>"
                         + "<div> <label class='data_label'> Available :  </label>  " + SeatRemaining + " of " + results[i].AvailableSeats + "</div>"
-                        +"<a class='dropdown-toggle' id='dropdownMenu1' onclick='ShowEngagement(" + results[i].VehiclePoolID + ")'><span class='fa fa-automobile' style='color:green;'></span></a>"
-                      
-                        + "<div id='detail_"+results[i].VehiclePoolID +"' ></div>"
+                        + "<a class='dropdown-toggle' id='dropdownMenu1' onclick='ShowEngagement(" + results[i].VehiclePoolID + ")'><span class='fa fa-automobile' style='color:green;'></span></a>"
+
+                        + "<div id='detail_" + results[i].VehiclePoolID + "' ></div>"
                         + "</div>"
                         + "<div class='panel-footer'><a onclick='CloseThisPool(" + results[i].VehiclePoolID + ")'><span class='fa fa-trash'></span></a>" + results[i].InterestedCount
                         + "</div>"
@@ -706,10 +725,10 @@
                         + "</div>";
 
                 }
-               
+
             }
             else {
-                       strMyData = "<div class=\"col-xs-12\" style=\"margin:0px;padding:10px;\"> No Car Pool From me</div>"
+                strMyData = "<div class=\"col-xs-12\" style=\"margin:0px;padding:10px;\"> No Car Pool From me</div>"
 
             }
             $("#MyPool").html(strMyData);
@@ -717,7 +736,7 @@
 
 
         function ShowEngagement(VehiclePoolID) {
-             var abs_url = api_url + "/api/CarPool/self/" + VehiclePoolID ;
+            var abs_url = api_url + "/api/CarPool/self/" + VehiclePoolID;
             console.log(api_url);
             $.ajax({
                 url: abs_url,
@@ -733,17 +752,17 @@
         function DisplayEngagement(data) {
             console.log(data);
             var engData = data.$values;
-          
+
 
             var id = "detail_" + engData[0].VehiclePoolId;
             console.log(id);
-           
+
             var strMyData = "";
-             $("#poolInterest").html(strMyData);
+            $("#poolInterest").html(strMyData);
 
             if (engData.length > 0) {
                 for (var i = 0; i < engData.length; i++) {
-                     var ImageSource = "GetImages.ashx?ResID=" + engData[i].ResID + "&Name=" + engData[i].FirstName + "&UserType= Owner";
+                    var ImageSource = "GetImages.ashx?ResID=" + engData[i].ResID + "&Name=" + engData[i].FirstName + "&UserType= Owner";
                     //var JourneyDTime = DisplayDateTime(results[i].JourneyDateTime);
                     //var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
                     //var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
@@ -752,9 +771,9 @@
 
                         + "<div class='row' syle='border-bottom: solid 1 px #c9c9c9'>"
                         + "<div class='col-xs-2'></div>"
-                        + "<div class=\"col-xs-4\" style=\"margin:0px;padding:10px;\">" +engData[0].FirstName+ engData[0].LastName +"<br/>" + engData[0].FlatNumber+"<br/>" + engData[0].Mobile + "</div>"
+                        + "<div class=\"col-xs-4\" style=\"margin:0px;padding:10px;\">" + engData[0].FirstName + engData[0].LastName + "<br/>" + engData[0].FlatNumber + "<br/>" + engData[0].Mobile + "</div>"
                         + "<div class=\"col-xs-4\" style=\"margin:0px;padding:10px;\">" + "<img class='image_medium' src='" + ImageSource + "' />" + "</div>"
-                          + "<div class='col-xs-2'></div>"
+                        + "<div class='col-xs-2'></div>"
                         + "</div>";
 
                 }
@@ -762,7 +781,7 @@
                 $("#poolInterest").html(strMyData);
 
                 $("#showInterestedInPool").show();
-               
+
             }
             else {
                 alert('No Data to Display');
@@ -772,20 +791,20 @@
         }
 
         function ClosePoolInterested() {
-             $("#showInterestedInPool").hide();
+            $("#showInterestedInPool").hide();
         }
-        
 
-         function CloseThisPool(VehiclePoolID) {
+
+        function CloseThisPool(VehiclePoolID) {
             selectedPoolId = VehiclePoolID;
             $("#showCloseModal").show();
         }
-           function CloseCloseThisPool() {
+        function CloseCloseThisPool() {
             $("#showCloseModal").hide();
         }
 
 
-         function ClosePoolOffer() {
+        function ClosePoolOffer() {
             var CarPool = {};
             CarPool.VehiclePoolID = selectedPoolId;
             CarPool.ResID = <%=ResID%>;
@@ -818,24 +837,24 @@
 
             });
         }
-   
+
         $(function () {
             $('#time_return').datetimepicker({
                 format: 'HH:mm'
             });
         });
-         $(function () {
+        $(function () {
             $('#time_when').datetimepicker({
                 format: 'HH:mm'
             });
         });
-         $(function () {
+        $(function () {
             $('#date_when').datetimepicker({
-            format: 'YYYY-MM-DD' 
+                format: 'YYYY-MM-DD'
             });
         });
         $(function () {
-            $('#date_return').datetimepicker({format: 'YYYY-MM-DD' });
+            $('#date_return').datetimepicker({ format: 'YYYY-MM-DD' });
         });
 
         function ShowPoolModal() {
@@ -844,10 +863,10 @@
                 alert("You already have 2 pool offer. Close existing pools to create new");
             }
             else {
-                  $("#addCarPoolModal").show();
+                $("#addCarPoolModal").show();
             }
 
-          
+
         }
 
 
@@ -917,212 +936,229 @@
     </script>
 
    <script id="inventoryData">
-       
+
        $(document).ready(function () {
-                api_url = '<%=Session["api_url"] %>';
-                // populateType();
-                //populateSelect();
-                GetInventoryTypeData();
-                GetAccomodationType(1);
-                 $('#InventoryType').on('change', function () {
-                      GetAccomodationType( this.value );
+           api_url = '<%=Session["api_url"] %>';
+           // populateType();
+           //populateSelect();
+           GetInventoryTypeData();
+           GetAccomodationType(1);
+           $('#InventoryType').on('change', function () {
+               GetAccomodationType(this.value);
 
-                });
-                 });
+           });
+       });
 
 
-                    function GetInventoryTypeData() {
+       function GetInventoryTypeData() {
 
-                        var abs_url = api_url + "/api/InventoryType";
+           var abs_url = api_url + "/api/InventoryType";
 
-                        $.ajax({
-                            url: abs_url,
-                            dataType: "json",
-                            success: populateInventoryType,
-                            failure: function (response) {
-                                alert(response.d);
-                                sessionStorage.clear();
-                            }
-                        });
-                    }
+           $.ajax({
+               url: abs_url,
+               dataType: "json",
+               success: populateInventoryType,
+               failure: function (response) {
+                   alert(response.d);
+                   sessionStorage.clear();
+               }
+           });
+       }
 
-                   function populateInventoryType(data) {
+       function populateInventoryType(data) {
 
-                       var InventoryType = data.$values;
+           var InventoryType = data.$values;
 
-                       var ele = document.getElementById('InventoryType');
-                       ele.innerHTML = "";
-                       for (var i = 0; i < InventoryType.length; i++) {
-                           // POPULATE SELECT ELEMENT WITH JSON.
-                           ele.innerHTML = ele.innerHTML +
-                               '<option value="' + InventoryType[i].InventoryTypeID + '">' + InventoryType[i].InventoryType + '</option>';
-                       }
+           var ele = document.getElementById('InventoryType');
+           ele.innerHTML = "";
+           for (var i = 0; i < InventoryType.length; i++) {
+               // POPULATE SELECT ELEMENT WITH JSON.
+               ele.innerHTML = ele.innerHTML +
+                   '<option value="' + InventoryType[i].InventoryTypeID + '">' + InventoryType[i].InventoryType + '</option>';
+           }
 
+       }
+
+
+
+       function GetAccomodationType(id) {
+
+           var abs_url = api_url + "/api/Accomodation/" + id;
+
+           $.ajax({
+               url: abs_url,
+               dataType: "json",
+               success: populateAccomodationType,
+               failure: function (response) {
+                   alert(response.d);
+                   sessionStorage.clear();
+               }
+           });
+       }
+
+
+       function populateAccomodationType(data) {
+           // THE JSON ARRAY.
+           var Inventory = data.$values;
+
+           var ele = document.getElementById('AccomodationType');
+           ele.innerHTML = "";
+           for (var i = 0; i < Inventory.length; i++) {
+               // POPULATE SELECT ELEMENT WITH JSON.
+               ele.innerHTML = ele.innerHTML +
+                   '<option value="' + Inventory[i].AccomodationTypeID + '">' + Inventory[i].AccomodationType + '</option>';
+           }
+       }
+
+       function InitiateRent() {
+
+           $("#addInventoryModal").show();
+       }
+
+       function CloseRentalBox() {
+           $("#addInventoryModal").hide();
+
+       }
+
+
+
+
+
+
+
+
+       function AddRentInventory() {
+
+           var RentInventory = {};
+           RentInventory.AccomodationTypeID = $("#AccomodationType").val();
+           RentInventory.InventoryTypeID = $("#InventoryType").val();
+           RentInventory.RentValue = $("#inRent").val();
+           RentInventory.Available = true;
+           RentInventory.Description = $("#description").val();
+           RentInventory.ContactName = $("#contactName").val();
+           RentInventory.ContactNumber = $("#contactNumber").val();
+           RentInventory.UserID = <%=UserID%>;
+           RentInventory.HouseID = 0;
+           RentInventory.FlatID = FlatID;
+
+           var url = api_url + "/api/RentInventory/New"
+
+           $.ajax({
+               dataType: "json",
+               url: url,
+               data: JSON.stringify(RentInventory),
+               type: 'post',
+               //async: false,
+               contentType: 'application/json',
+               success: function (data) {
+                   //var da = JSON.stringify(data);
+                   //var js = jQuery.parseJSON(da);
+                   alert(JSON.stringify(data));
+                   var Response = data.Response;
+                   if (Response == "OK") {
+                       document.getElementById("lblMessage").innerHTML = "Your inventory is submitted for Rent";
+                   }
+                   else {
+                       document.getElementById("lblMessage").innerHTML = "Could not submitt, Please contact admin";
                    }
 
+               },
+               error: function (data, errorThrown) {
+                   alert('Error submitting Rent Inventory :' + errorThrown);
+                   // sessionStorage.clear();
+               }
+
+           });
+       }
+
+       function CloseRental() {
+
+           $("#closeInventoryModal").show();
+       }
 
 
-           function GetAccomodationType(id) {
+       function CloseCloseBox() {
+           $("#closeInventoryModal").hide();
+       }
 
-            var abs_url = api_url + "/api/Accomodation/" + id;
+       function CloseRentInventory() {
+           var InventoryUpdate = {};
+           InventoryUpdate.InventoryId = currentInvetoryID;
+           InventoryUpdate.Status = 0;
 
-            $.ajax({
-                url: abs_url,
-                dataType: "json",
-                success: populateAccomodationType,
-                failure: function (response) {
-                    alert(response.d);
-                    sessionStorage.clear();
-                }
-            });
-        }
+           var url = api_url + "/api/RentInventory/Close"
 
+           $.ajax({
+               dataType: "json",
+               url: url,
+               data: JSON.stringify(InventoryUpdate),
+               type: 'post',
+               async: false,
+               contentType: 'application/json',
+               success: function (data) {
+                   $("#closeInventoryModal").hide();
+                   var Response = data.Response;
+                   if (Response == "Ok") {
 
-            function populateAccomodationType( data) {
-            // THE JSON ARRAY.
-            var Inventory =  data.$values;
+                       GetRentalInfo(FlatNumber);
+                   }
+                   else {
+                       document.getElementById("lblMessage").innerHTML = "Could not submitt, Please contact admin";
+                   }
 
-            var ele = document.getElementById('AccomodationType');
-            ele.innerHTML = "";
-            for (var i = 0; i < Inventory.length; i++) {
-                // POPULATE SELECT ELEMENT WITH JSON.
-                ele.innerHTML = ele.innerHTML +
-                    '<option value="' + Inventory[i].AccomodationTypeID + '">' + Inventory[i].AccomodationType + '</option>';
-            }
-        }
+               },
+               error: function (data, errorThrown) {
+                   alert('Error submitting Rent Inventory :' + errorThrown);
+                   // sessionStorage.clear();
+               }
 
-            function InitiateRent() {
-              
-                $("#addInventoryModal").show();
-            }
-
-            function CloseRentalBox() {
-                $("#addInventoryModal").hide();
-
-            }
+           });
 
 
-       
-       
+       }
+       function openForm() {
+           document.getElementById("myForm").style.display = "block";
+       }
 
+       function closeForm() {
+           document.getElementById("myForm").style.display = "none";
+       }
 
-      
+       function pop_close() {
+           CloseRental();
+           PopulateAddModal();
+       }
+       function pop_open() {
 
-            function AddRentInventory() {
+           PopulateAddModal();
+       }
 
-                var RentInventory = {};
-                RentInventory.AccomodationTypeID = $("#AccomodationType").val();
-                RentInventory.InventoryTypeID = $("#InventoryType").val();
-                RentInventory.RentValue =  $("#inRent").val();
-                RentInventory.Available = true;
-                RentInventory.Description = $("#description").val();
-                RentInventory.ContactName = $("#contactName").val();
-                RentInventory.ContactNumber = $("#contactNumber").val();
-                RentInventory.UserID = <%=UserID%>;
-                RentInventory.HouseID =0;
-                RentInventory.FlatID = FlatID;
-
-                var url = api_url + "/api/RentInventory/New"
-
-                $.ajax({
-                    dataType: "json",
-                    url: url,
-                    data: JSON.stringify(RentInventory),
-                    type: 'post',
-                    //async: false,
-                    contentType: 'application/json',
-                    success: function (data) {
-                        //var da = JSON.stringify(data);
-                        //var js = jQuery.parseJSON(da);
-                        alert(JSON.stringify(data));
-                        var Response = data.Response;
-                        if (Response == "OK") {
-                            document.getElementById("lblMessage").innerHTML = "Your inventory is submitted for Rent";
-                        }
-                        else {
-                            document.getElementById("lblMessage").innerHTML = "Could not submitt, Please contact admin";
-                        }
-
-                    },
-                    error: function (data, errorThrown) {
-                        alert('Error submitting Rent Inventory :' + errorThrown);
-                        // sessionStorage.clear();
-                    }
-
-                });
-            }
-
-        function CloseRental() {
-
-            $("#closeInventoryModal").show();
-        }
-
-
-        function CloseCloseBox() {
-             $("#closeInventoryModal").hide();
-        }
-
-        function CloseRentInventory() {
-            var InventoryUpdate = {};
-            InventoryUpdate.InventoryId = currentInvetoryID;
-            InventoryUpdate.Status = 0;
-
-            var url = api_url + "/api/RentInventory/Close"
-
-                $.ajax({
-                    dataType: "json",
-                    url: url,
-                    data: JSON.stringify(InventoryUpdate),
-                    type: 'post',
-                    async: false,
-                    contentType: 'application/json',
-                    success: function (data) {
-                       $("#closeInventoryModal").hide();
-                        var Response = data.Response;
-                        if (Response == "Ok") {
-                          
-                            GetRentalInfo(FlatNumber);
-                        }
-                        else {
-                            document.getElementById("lblMessage").innerHTML = "Could not submitt, Please contact admin";
-                        }
-
-                    },
-                    error: function (data, errorThrown) {
-                        alert('Error submitting Rent Inventory :' + errorThrown);
-                        // sessionStorage.clear();
-                    }
-
-                });
-
-
-        }
 
     </script>
 
 <style>
     .data_label {
-        color:#000;
+        color: #000;
     }
 
-   
- 
-      .modal {
-            display: none;  /*  Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 100; /* Sit on top */
-            padding-top: 8%; /* Location of the box */
-             padding-bottom: 2%;
-            left: 0px;
-            border-radius:5px;
-            top: 0px;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto;  /*Enable scroll if needed  */
-            background-color: #e6e2e2;
-            background-color: rgba(0,0,0,0.4); 
-        }
-     </style>
+
+
+    .modal {
+        display: none; /*  Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 100; /* Sit on top */
+        padding-top: 8%; /* Location of the box */
+        padding-bottom: 2%;
+        left: 0px;
+        border-radius: 5px;
+        top: 0px;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /*Enable scroll if needed  */
+        background-color: #e6e2e2;
+        background-color: rgba(0,0,0,0.4);
+    }
+</style>
 </head>
 <body style="background-color:#f7f7f7;">
     <form id="form1" runat="server">
@@ -1204,42 +1240,41 @@
                         </div>
                     </div>
 
-                    <div id="TenantDetail" class="content_div">
-                        <div class="row" style="margin-top: 5px; margin-bottom: 5px; text-align: center;">
-                            <div class="col-xs-12">
-                                <h4 style="padding-right: 141px; font-family: Verdana;">Tenant Info</h4>
-
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
-                            <div class="col-sm-4">
-                                <img id="TenantImage" src="Images/Icon/profile.jpg" height="110" width="110" style="border-radius: 50%;" />
-                            </div>
-                            <div class="col-sm-8">
-                                <label style="width: 100px;" class="data_heading">Name :</label>
-                                <label class="data_label" id="lblFlatTenantName">...</label><br />
-                                <label style="width: 100px;" class="data_heading">Email :</label>
-                                <label class="data_label" id="lblFlatTenantEmail">...</label><br />
-                                <label style="width: 100px;" class="data_heading">Contact :</label>
-                                <label class="data_label" id="lblFlatTenantMobile">...</label><br />
-                                <label style="width: 100px;" class="data_heading">Address :</label>
-                                <label class="data_label" id="lblFlatTenantAddress">...</label><br />
-                                <label style="width: 100px;" class="data_heading">From :</label>
-                                <label class="data_label" id="lblFlatTenantFrom">...</label><br />
-                                <label style="width: 100px;" class="data_heading">Till :</label>
-                                <label class="data_label" id="lblFlatTenantTo">...</label>
-                                <button id="btnEdit" type="button" class="btn btn-danger" style="display: none" onclick="ChangeDeactiveDate()">Set End Date</button>
-                                <div id="ChangeDate" style="display: none">
-                                    <input type="date" id="newDeactiveDate" style="width: 150px" />
-                                    <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
+                        <div id="TenantDetail" class="content_div">
+                             <div class="row" style="margin-bottom: 5px;">
+                                <div class="col-sm-3" style="margin-top: 40px; margin-left: 10px;">
+                                    <img id="TenantImage" src="Images/Icon/profile.jpg" height="150" width="150" style="border-radius: 50%;" />
                                 </div>
+                                  <div class="col-sm-6">
+                                         <h3 style="font-family: Open Sans; text-align: center;"><b>Tenant Info</b></h3>
+                                  </div>
+                               <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
+                                <div class="col-sm-5">
+                                    <label style="width: 100px;" class="data_heading">Name :</label>
+                                    <label class="data_label" id="lblFlatTenantName">...</label><br />
+                                    <label style="width: 100px;" class="data_heading">Email :</label>
+                                    <label style="width: 50px;" class="data_label" id="lblFlatTenantEmail">...</label><br />
+                                    <label style="width: 100px;" class="data_heading">Contact :</label>
+                                    <label style="width: 50px;" class="data_label" id="lblFlatTenantMobile">...</label><br />
+                                    <label style="width: 100px;" class="data_heading">Address :</label>
+                                    <label class="data_label" id="lblFlatTenantAddress">...</label><br />
+                                    <label style="width: 100px;" class="data_heading">From :</label>
+                                    <label style="width: 50px;" class="data_label" id="lblFlatTenantFrom">...</label><br />
+                                    <label style="width: 100px;" class="data_heading">Till :</label>
+                                    <label style="width: 50px;" class="data_label" id="lblFlatTenantTo">...</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                    <button id="btnEdit" type="button" class="btn btn-danger" style="display: none" onclick="ChangeDeactiveDate()">Set End Date</button>
+                                    <div id="ChangeDate" style="display: none">
+                                        <input type="date" id="newDeactiveDate" style="width: 150px" />
+                                        <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
+                                    </div>
+                                 </div> 
+                                </div>
+                               </div>
                             </div>
-
-                        </div>
-                    </div>
+        
                      <div class="row" style="margin-left:10px; margin-right:10px;">
                          <div class="col-sm-12">
-                             <button id="btnAdd" class="btn btn-info btn-sm" onclick="PopulateAddModal()" type="button">Add Tenant</button>
+                             <button id="btnAdd" class="btn btn-info btn-sm" onclick="PopulateAddModal2()" type="button">Add Tenant</button>
                              <button id="btnAddForRent" class="btn btn-primary btn-sm" onclick="InitiateRent()" type="button">Add for Rent</button>
                         
                              <%--<button id="" type="button" class="btn btn-primary btn-sm" onclick="InitiateRent()">Add for Rent</button>--%>
@@ -1485,13 +1520,12 @@
                         <div class="modal-content" style="border-radius: 5px; width: 580px; margin: auto; margin-top: 120px">
 
                             <div class="modal-header" style="color: white; background-color: #337ab7; height: 50px;">
-                                <i class="fa fa-close" style="float: right; cursor: pointer;" onclick="CloseCloseBox()"></i>
-                                <h4 id="close" class="modal-title" >Close for Rent:
-                                        <var>House Number</var></h4>
+                            <i class="fa fa-close" style="float: right; cursor: pointer;" onclick="CloseCloseBox()"></i>
+                            
+                            <h4 id="close" class="modal-title" >Close for Rent:<var>House Number</var></h4>
                             </div>
-
                             <div class="layout_modal_body container-fluid">
-                              ! please confirm if you want to cose
+                              ! please confirm if you want to close
                             </div>
 
                             <div class="panel-footer" style="text-align: right;">
@@ -1501,6 +1535,7 @@
                             </div>
                         </div>
                     </div>
+
 
                  <div id="addCarPoolModal" class="modal">
                        <div class="modal-content" style="border-radius:5px; width: 580px; margin: auto;margin-top:0px">
@@ -1692,9 +1727,20 @@
 
 
         </div>
-    </div>
+    <!-- Alert popup -->
+    
+                <button id="pop_pop" class="open-button" onclick="openForm()" hidden></button>
+                <div class="form-popup" id="myForm">
+                  <form action="/action_page.php" class="form-container">     
+                      <p style="font-family: 'Times New Roman'; font-size: 20px; text-align: center;">Do you want to remove your rental Information ?</p>
+                      <button type="button" class="btn btn-primary " onclick="pop_close()">YES</button>
+                      <button type="button" class="btn btn-primary " onclick="pop_open()">No</button>
+                      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                  </form>
+                </div>
+
    
-        
+        <!-- Alert popup End-->
   
 </body>
 </html>

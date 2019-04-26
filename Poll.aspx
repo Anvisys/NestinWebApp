@@ -413,10 +413,10 @@
 
                                 </div>
                             </div>
-
-                            <div id="chart2-data" class="col-xs-12 col-sm-6 col-md-6 ">
-                                <div class="layout_shadow_box">
-                                    <div class="row">
+                            <asp:Panel runat="server" ID="pnlchart2">
+                                <div id="chart2-data" class="col-xs-12 col-sm-6 col-md-6 ">
+                                    <div class="layout_shadow_box">
+                                         <div class="row">
                                         <asp:Label ID="lblPollP2" runat="server" ForeColor="#0066CC" Text="Poll"></asp:Label><br />
                                         <asp:Label ID="lblQ2" runat="server" Height="30px" Font-Size="Small" ForeColor="#4A4A4A"></asp:Label>
                                     </div>
@@ -458,6 +458,7 @@
 
                                 </div>
                             </div>
+                            </asp:Panel>
                             <div class="row" style="height: 25px;">
                                 <div class="col-sm-4 col-xs-6" style="padding: 15px;">
                                     <asp:LinkButton ID="btnPreBottom" runat="server" Text="Prev" Height="20" Width="20px" ForeColor="Black" OnClick="btnPreBottom_Click" CausesValidation="False"></asp:LinkButton>
