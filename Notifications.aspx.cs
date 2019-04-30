@@ -302,7 +302,7 @@ public partial class Notifications : System.Web.UI.Page
                     if ((extension == ".pdf") || (extension == ".doc") || (extension == ".docx") || (extension == ".xls") || (extension == ".xlsx"))
                     {
                         String strQuery = "Insert Into "+ TABLE_NOTIFICATION+" (Notification,EndDate,send_by,Date,AttachName,SocietyID) Values ('" + txtNotificationText.Text + "','" 
-                            + TillDate + "','" + muser.currentResident.ResID + "','" + Notice_time_stamp + "','" + Filename + "','" + muser.currentResident.SocietyID + "')";
+                            + Utility.ChangeDateTimeLocalToSQLServerFormat(TillDate) + "','" + muser.currentResident.ResID + "','" + Utility.ChangeDateTimeLocalToSQLServerFormat(Notice_time_stamp) + "','" + Filename + "','" + muser.currentResident.SocietyID + "')";
                         SqlCommand cmd = new SqlCommand(strQuery, con1);
                         UpdateCount = cmd.ExecuteNonQuery();
                         if (UpdateCount > 0)
@@ -323,7 +323,7 @@ public partial class Notifications : System.Web.UI.Page
                     else
                     {
                         String strQuery = "Insert Into "+ TABLE_NOTIFICATION +" (Notification,EndDate,send_by,Date,AttachName,SocietyID) Values ('" + txtNotificationText.Text + "','" 
-                            + TillDate + "','" + muser.currentResident.ResID + "','" + Notice_time_stamp + "','" + Filename + "','" + muser.currentResident.SocietyID + "')";
+                            + Utility.ChangeDateTimeLocalToSQLServerFormat(TillDate) + "','" + muser.currentResident.ResID + "','" + Utility.ChangeDateTimeLocalToSQLServerFormat(Notice_time_stamp) + "','" + Filename + "','" + muser.currentResident.SocietyID + "')";
                         SqlCommand cmd = new SqlCommand(strQuery, con1);
                       
                         UpdateCount = cmd.ExecuteNonQuery();
@@ -349,7 +349,8 @@ public partial class Notifications : System.Web.UI.Page
                     DataAccess dacess = new DataAccess();
 
                     string NotificationQuery = "Insert into "+ TABLE_NOTIFICATION   + " (Notification,EndDate,send_by, Date,SocietyID) values('" + txtNotificationText.Text + "','" 
-                        + TillDate + "','" + muser.currentResident.ResID + "','" + Notice_time_stamp + "','" + muser.currentResident.SocietyID + "' )";
+                        + Utility.ChangeDateTimeLocalToSQLServerFormat(TillDate) + "','" + muser.currentResident.ResID + "','" + Utility.ChangeDateTimeLocalToSQLServerFormat(Notice_time_stamp) + "','" + muser.currentResident.SocietyID + "' )";
+
                     SqlCommand cmd = new SqlCommand(NotificationQuery, con1);
                     UpdateCount = cmd.ExecuteNonQuery();
                     if (UpdateCount > 0)
@@ -375,7 +376,7 @@ public partial class Notifications : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-
+            int a = 1;
         }
         return newItemID;
     }

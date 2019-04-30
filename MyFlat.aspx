@@ -528,7 +528,7 @@
         function AddTenant(UserID) {
             var reqBody2 = "{\"UserID\":" + UserID + ",\"FlatID\":\"" + FlatID + "\",\"Type\":\"Tenant\",\"FirstName\":\"" + FirstName +
                 "\",\"LastName\":\"" + LastName + "\",\"MobileNo\":\"" + MobileNo + "\",\"EmailId\":\"" + EmailId + "\",\"Addres\":\"" + Address +
-                "\",\"SocietyID\":\"" + SocietyID + "\",\"ActiveDate\":\"" + ActiveDate + "\",\"DeActiveDate\":\"" + DeActiveDate + "\"}";
+                 "\",\"Status\":\"2\",\"SocietyID\":\"" + SocietyID + "\",\"ActiveDate\":\"" + ActiveDate + "\",\"DeActiveDate\":\"" + DeActiveDate + "\"}";
             document.getElementById("lblMessage").innerHTML = reqBody2;
             //alert(reqBody2);
             var url = api_url + "/api/Tenant/New";
