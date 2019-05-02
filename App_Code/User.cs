@@ -50,9 +50,10 @@ public class User
     public string TotalFlats;
     public String ParentName;
     public String Gender;
-    public Resident currentResident;
 
-   
+
+
+    public Resident currentResident;
 
     private List<Resident> allResidents = new List<Resident>();
 
@@ -443,6 +444,7 @@ public class User
     }
     public string EncryptPassword(string userID, string userPWD)
     {
+        userID = userID.ToLower();
         MD5CryptoServiceProvider encoder = new MD5CryptoServiceProvider();
         byte[] bytDataToHash = Encoding.UTF8.GetBytes(userID + userPWD);
         byte[] bytHashValue = new System.Security.Cryptography.MD5CryptoServiceProvider().ComputeHash(bytDataToHash);
@@ -546,7 +548,7 @@ public class User
             }
             else
             {
-                string strEncPassword = this.EncryptPassword(EmailID, Password);
+                string strEncPassword = this.EncryptPassword(EmailID.ToLower(), Password);
 
                 String UpdateQuery = "Insert into " + CONSTANTS.Table_Users
                     + " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address) output INSERTED.UserID Values('"

@@ -364,7 +364,7 @@
 
                     <li  class="dropdown">
                         <span id="image">
-                             <asp:Image runat="server" ID="ImgProfileIcon" Style="height: 40px; width: 40px; border-radius: 50%;" />
+                             <asp:Image runat="server" ID="ImgProfileIcon" Style="height: 40px; width: 40px; border-radius: 50%;" ImageUrl="GetImages.ashx?UserID=100181&Name=A&UserType=" />
                         </span>
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                            <asp:Label ID="lblUserName" runat="server" ForeColor="white"></asp:Label>

@@ -42,6 +42,8 @@
                 <link rel="stylesheet" href="Login/CSS/footer.css" />
                 <link rel="stylesheet" href="CSS/NewAptt.css" />
 
+     <script type="text/javascript" src="Scripts/datetime.js"></script>
+
     <script>
 
 
@@ -148,7 +150,8 @@
             }
             else {
                 Gender = "Female";
-            }
+            }
+
     
             //alert(visitDate);
             var start = new Date();
@@ -212,7 +215,8 @@
                 + mobile + "\",\"StartTime\":\"" + startDateISO + "\",\"EndTime\":\"" + endDateISO +
                 "\",\"EmailId\":\"" + email + "\",\"Gender\":\""+ Gender + "\",\"Parentname\":\"" + parentname + "\",\"Address\":\"" + address
                 + "\",\"SocietyID\":\"" + 1 + "\",\"UserType\":\"Demo\"}";
-
+
+
 
           
 
@@ -265,10 +269,13 @@
             }
             else {
                 Gender = "Female";
-            }
-    
+            }
+
+         //   alert(1);
             //alert(visitDate);
             var start = new Date();
+            var startDateForDBInsertion = GetDateTimeinISO(start);
+
             // alert(start);
 
             var month = start.getMonth() + 1;
@@ -291,7 +298,7 @@
             }
 
             var endDate = new Date(new Date().getTime() + (15 * 24 * 60 * 60 * 1000));
-
+             var endDateForDBInsertion = GetDateTimeinISO(start);
 
              var endMonth = endDate.getMonth() + 1;
 
@@ -313,6 +320,7 @@
                 strEndDay = endDay.toString();
             }
            
+            //alert(strEndDay);
 
 
             var strStartDate = start.getFullYear() + "-" + strMonth + "-" + strDay + "T00:00:00";
@@ -320,20 +328,20 @@
 
             var strEndDate = endDate.getFullYear() + "-" + strEndMonth + "-" + strEndDay + "T00:00:00";
 
-      document.getElementById("post_loading").style.display = "block";
-
+             document.getElementById("post_loading").style.display = "block";
+          //    alert(3);
             var strURL = api_url +  "/api/User/Add/Demo";
             //var strURL = "visitor.aspx/AddVisitor";
-
+           //   alert(4);
             var user = "{\"UserLogin\":\"" + email + "\",\"Password\":\"Password@123\",\"MiddleName\":\"K\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname
-                + " \",\"MobileNumber\":\"" + mobile + "\",\"StartTime\":\"" + startDateISO + "\",\"EndTime\":\"" + endDateISO +
+                + " \",\"MobileNumber\":\"" + mobile + "\",\"StartTime\":\"" + startDateForDBInsertion + "\",\"EndTime\":\"" + endDateForDBInsertion +
                 "\",\"EmailID\":\"" + email + "\",\"Gender\":\""+ Gender + "\",\"ParentName\":\"" + parentname + "\",\"Address\":\"" + address
-                + "\",\"SocietyID\":\"" + 1 + "\",\"UserType\":\"Demo\"}";
+                + "\",\"SocietyID\":\"" + 1 + "\",\"UserType\":\"Demo\"}";
 
-            var user1 = "{\"UserLogin\":\"" + email + "\"}";
-
+        //    var user1 = "{\"UserLogin\":\"" + email + "\"}";
+          //  alert(user);
            
-            var url
+            var url="";
             if (role == "Demo") {
               url= "register.aspx/AddDemoUser";
 
@@ -343,7 +351,7 @@
             }
 
          var jData =  JSON.parse(user)
-
+      //      alert(2);
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -353,13 +361,13 @@
                 success: function (response) {
                    document.getElementById("post_loading").style.display = "none";
                     if (response.d > 0) {
-                       
+                     //   alert(role);
                         if (role == "Demo") {
 
-                            window.location = "Role.aspx";
+                            window.location = "MainPage.aspx";
                         }
                         else {
-                            window.location = "MainPage.aspx";
+                            window.location = "Role.aspx";
                         }
                     }
                     else if(response.d < 0)
@@ -439,7 +447,8 @@
                            });
                 });
 
-
+
+
     </script>
 
     <style>
@@ -586,13 +595,15 @@
 <body>
 
     <form method="post" action="./register.aspx" id="form1">
-<div class="aspNetHidden">
+
+            </form>
+<%--<%--<div class="aspNetHidden">
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTI1Nzg2MjM3OGRkGPuSJneDwVbZ8UN7oxYhsDImO6Mw15dK3JQzlv7JptM=" />
-</div>
+</div>--%>
 
-<script type="text/javascript">
+<%--<script type="text/javascript">
 //<![CDATA[
 var theForm = document.forms['form1'];
 if (!theForm) {
@@ -606,24 +617,25 @@ function __doPostBack(eventTarget, eventArgument) {
     }
 }
 //]]>
-</script>
+</script>--%>
 
 
-<script src="/WebResource.axd?d=zLck5f-ldBc-KL5zMDmBuCj6aySYKxTAIiKBptdFGBTnV0bHLDYFTrmg5X7yw4DWDUc8EF5KiwiFFVURqcHqqIfbB9Fgw2o0WTJD1p08bB01&amp;t=636765212300000000" type="text/javascript"></script>
+<<%--script src="/WebResource.axd?d=zLck5f-ldBc-KL5zMDmBuCj6aySYKxTAIiKBptdFGBTnV0bHLDYFTrmg5X7yw4DWDUc8EF5KiwiFFVURqcHqqIfbB9Fgw2o0WTJD1p08bB01&amp;t=636765212300000000" type="text/javascript"></script>--%>
+<%--<script src="/ScriptResource.axd?d=tC-thnSaQceZynYl8Gh3jya73qHN9Jgf2Rg6iifjya_jBtjL2pizyHt1Pc0LsuF6ESjPcP58AxVlN2HPLa-QNK0EEE7cZ_DesdOQ7BGGQT3de0Vr34QN40qGmKS-5lahjRaEFJdHAvJMUcsRV46HANPRFeHPpL8hgxOQ_KaZmWE1&amp;t=ffffffff999c3159" type="text/javascript"></script>--%>
 
+<%--<script src="/ScriptResource.axd?d=-01qgRVlaQXkeLC6GYpz1esHUAgfUtuDAglg0-qLawlR6ziEt-X1_GfNvyfVfKhL86408wBPrOU-y6ewLFG8ZuhXlUzhColkKT-awLN55agf4tmrzpvBpmm5s1g9tEITnre5zU2NMhfgUD1A_zaBH0F_cnYcvl6oyNjSwmLJqRBK3yMGh59g6LOYIi1_9zi40&amp;t=ffffffff999c3159" type="text/javascript"></script>--%>
+<%--<div class="aspNetHidden">--%>
 
-<script src="/ScriptResource.axd?d=tC-thnSaQceZynYl8Gh3jya73qHN9Jgf2Rg6iifjya_jBtjL2pizyHt1Pc0LsuF6ESjPcP58AxVlN2HPLa-QNK0EEE7cZ_DesdOQ7BGGQT3de0Vr34QN40qGmKS-5lahjRaEFJdHAvJMUcsRV46HANPRFeHPpL8hgxOQ_KaZmWE1&amp;t=ffffffff999c3159" type="text/javascript"></script>
-<script src="/ScriptResource.axd?d=-01qgRVlaQXkeLC6GYpz1esHUAgfUtuDAglg0-qLawlR6ziEt-X1_GfNvyfVfKhL86408wBPrOU-y6ewLFG8ZuhXlUzhColkKT-awLN55agf4tmrzpvBpmm5s1g9tEITnre5zU2NMhfgUD1A_zaBH0F_cnYcvl6oyNjSwmLJqRBK3yMGh59g6LOYIi1_9zi40&amp;t=ffffffff999c3159" type="text/javascript"></script>
-<div class="aspNetHidden">
+<%--	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="799CC77D" />--%>
+	
+<%--<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAISJKo+bgRbSzw0vcwp/GjpESCFkFW/RuhzY1oLb/NUVBsPXGP7uZ2eJ+9/J2d59bUHiTUQTprTlbja6BgqD/kC" />--%>
 
-	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="799CC77D" />
-	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAISJKo+bgRbSzw0vcwp/GjpESCFkFW/RuhzY1oLb/NUVBsPXGP7uZ2eJ+9/J2d59bUHiTUQTprTlbja6BgqD/kC" />
-</div>
-        <script type="text/javascript">
+<%--</div>--%>
+<%--        <script type="text/javascript">
 //<![CDATA[
 Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [], 90, '');
-//]]>
-</script>
+//]]>--%>
+<%--</script>--%>
 
         <div class="login_div" id="select_flat" style="display: none;">
 
@@ -656,10 +668,10 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [
                 </div>
                 <div class="col-sm-5 shadow p-3 mb-5 bg-white rounded ">
 
-                    <div id="formRegister">
-                        <div class="layout_modal_body container-fluid">
+                    <div id="formRegister" >
+                        <div class="layout_modal_body container-fluid"  style="position:relative;">
                            
-                            <form name="newActivity" style="display: none" >
+                            <form name="newActivity" >
 
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Email</label>
@@ -719,14 +731,20 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [
                                     </div>
                                 </div>
                             </form>
+
+                               <div id="post_loading" class="container-fluid" style="text-align: center; height: 100px; display:none; position:absolute;">
+                            <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
                         </div>
+                        </div>
+                      
                     </div>
+                   
                 </div>
             </div>
         </div>
     </section>
 
-    </form>
+
 
 
     <header id="topNav" class="layout_header" style="height: 75px; background-color: #727cf5; color: #fff;">
@@ -845,4 +863,5 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [
 
 
 </body>
-</html>
+</html>
+

@@ -65,7 +65,7 @@ public class Resident
 
             DataAccess dacess = new DataAccess();
             String UserSearchQuery = "select * from " + CONSTANTS.View_SocietyUser + " Where UserID =" + UserId + 
-                                     " and Status = 2 and DeActiveDate > GetDate()";
+                                     " and StatusID = 2 and DeActiveDate > GetDate()";
             dsResidentUserFlat = dacess.GetData(UserSearchQuery);
         }
         catch (Exception ex)
@@ -169,7 +169,7 @@ public class Resident
 
             else if (FlatNumber == "" && ResType == "All")
             {
-                ResidentGenQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type = 'Owner' or Type = 'Tenant' and societyID = '" + SocietyID + "'";
+                ResidentGenQuery = "select * from " + CONSTANTS.View_SocietyUser + " where (Type = 'Owner' or Type = 'Tenant') and societyID = '" + SocietyID + "'";
             }
 
             DataAccess dacess = new DataAccess();
@@ -186,7 +186,7 @@ public class Resident
     {
         try
         { 
-        String ResidentGenQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type = 'Owner' and Status = 1 and societyID = '" + _SocietyID + "'";
+        String ResidentGenQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type = 'Owner' and StatusID = 1 and societyID = '" + _SocietyID + "'";
         DataAccess dacess = new DataAccess();
         return dacess.GetData(ResidentGenQuery);
          }

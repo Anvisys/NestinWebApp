@@ -40,6 +40,8 @@
             <link rel="stylesheet" href="CSS/ApttTheme.css" />
             <link rel="stylesheet" href="CSS/ApttLayout.css" />
             <link rel="stylesheet" href="Login/CSS/footer.css" />
+           
+         <link rel="stylesheet" href="CSS/IP.css" />
             <link rel="stylesheet" href="CSS/Nestin.css" />
             <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />
 
@@ -80,8 +82,7 @@
 
         
         $(function () {
-
-
+            
               $("#selectSociety").autocomplete({
                 select: onSociety_select, 
                 source: function (request, response) {
@@ -224,7 +225,7 @@
             House.State = document.getElementById("state").value;
             House.PinCode = document.getElementById("pincode").value;
 
-            console.log(House);
+            
             $.ajax({
                 type: 'POST',
                 url: "Role.aspx/AddHouse",
@@ -235,7 +236,7 @@
                 success: function (response) {
                   // document.getElementById("post_loading").style.display = "none";
                     if (response.d >0) {
-                            window.location = "main.aspx";
+                            window.location = "MainPage.aspx";
                     }
                    else if (response.d <0) {
                             alert('House number is in use');
@@ -278,7 +279,7 @@
                 success: function (response) {
                    //document.getElementById("post_loading").style.display = "none";
                     if (response.d >0) {
-                            window.location = "main.aspx";
+                            window.location = "Role.aspx";
                     }
                     else if (response.d <0) {
                             alert('House number is in use');
@@ -302,20 +303,22 @@
 
          function GetMyFlats() {
              var abs_url = api_url + "/api/Society/Flats/" + <%=UserID%>;
-
+             console.log(abs_url);
+             $("#flat_progressBar").show();
             $.ajax({
                 url: abs_url,
                 dataType: "json",
                 success: DisplayFlats,
                 failure: function (response) {
+                      $("#flat_progressBar").hide();
                     alert(response.d);
                     sessionStorage.clear();
                 }
             });
         }
 
-          function DisplayFlats(response) {
-
+        function DisplayFlats(response) {
+           $("#flat_progressBar").hide();
             var strData = "";
             $("#FlatRequests").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
@@ -350,19 +353,23 @@
                         + "</div>";
                     
                 }
-                
+               
                 $("#FlatRequests").html(strData);
+
 
             }
             else {
+                var noData = "<h3> No data for Flats</h3>"
+                $("#FlatRequests").html(noData);
 
+             
             }
 
         }
 
 
         function GetMySocietyRequests() {
-            $("#ProgressBar").show();
+             $("#society_progressBar").show();
             var abs_url = api_url + "/api/Society/" + <%=UserID%>;
 
             $.ajax({
@@ -370,6 +377,7 @@
                 dataType: "json",
                 success: SocietyRequest,
                 failure: function (response) {
+                    $("#society_progressBar").hide();
                     alert(response.d);
                     sessionStorage.clear();
                 }
@@ -377,7 +385,7 @@
         }
 
         function SocietyRequest(response) {
-            $("#ProgressBar").show();
+          $("#society_progressBar").hide();
             var strData = "";
             $("#SocietyRequests").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
@@ -413,21 +421,24 @@
 
             }
             else {
+                 var noData = "<h3> No data for Society</h3>"
 
+                 $("#SocietyRequests").html(noData);
             }
-            $("#ProgressBar").hide();
+           
         }
 
 
         function GetMyHouses() {
-            
+            $("#house_progressBar").show();
             var abs_url = api_url + "/api/Society/House/" + <%=UserID%>;
 
             $.ajax({
                 url: abs_url,
                 dataType: "json",
-                success: HouseRequests,
+                success: ListHouseRequests,
                 failure: function (response) {
+                   $("#house_progressBar").hide();
                     alert(response.d);
                     sessionStorage.clear();
                 }
@@ -435,8 +446,8 @@
         }
 
 
-        function HouseRequests(response) {
-            $("#ProgressBar").show();
+        function ListHouseRequests(response) {
+        $("#house_progressBar").hide();
             var strData = "";
             $("#HouseRequests").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
@@ -461,9 +472,11 @@
 
             }
             else {
+                 var noData = "<h3> No Independent House</h3>"
 
+                 $("#HouseRequests").html(noData);
             }
-            $("#ProgressBar").hide();
+            
         }
 
 
@@ -483,6 +496,8 @@
                     //document.getElementById("post_loading").style.display = "none";
                     if (response.d == true) {
                         alert('Your Request has been successfully Submitted');
+                        $("#addFlat").hide();
+                        GetMyFlats();
                     }
                     else {
                         alert('Request could not be submitted');
@@ -700,29 +715,61 @@
                         </div>
                     </div>
 
-             <div class="container-fluid" id="flat_Request" style="margin:50px;background-color:white;">
-                      <div class="row" style="margin:10px;">
-                    <div class="col-xs-10"><h4 style="margin-bottom:0px;"> My Flats </h4></div>
-                     <div class="col-xs-2"><button class="btn btn-primary btn-sm" onclick="NewFlat()" type="button">New Flat</button></div>
-                          </div>
-                   <div class="row" id="FlatRequests" style="border-top: solid 2px black; margin-top:10px;"></div>
+    <div  class="container-fluid" id="flat_Request" style="min-height:200px; margin: 50px;  background-color: white;">
+        <div class="ProgressBar-Parent">
+            <div class="row ProgressBar-Sibling" style="margin: 10px; width:84%;">
+            <div class="row " >
+                <div class="col-xs-10">
+                    <h4 style="margin-bottom: 0px;">My Flats </h4>
                 </div>
-
-                 <div class="container-fluid" id="society_Request" style="margin:50px;background-color:white;">
-                     <div class="row" style="margin:10px;">
-                     <div class="col-xs-10"><h4 style="margin-bottom:0px;" > My Societies </h4></div>
-                     <div class="col-xs-2"><button class="btn btn-primary btn-sm" onclick="NewSociety()" type="button">New Society</button></div>
-                         </div>
-                   <div class="row" id="SocietyRequests" style="border-top: solid 2px black;margin-top:10px;"></div>
+                <div class="col-xs-2">
+                    <button class="btn btn-primary btn-sm" onclick="NewFlat()" type="button">New Flat</button>
                 </div>
+            </div>
+            <div id="FlatRequests" class="row " style="border-top: solid 2px black; margin-top: 10px; "></div>
+             </div>
+            <div id="flat_progressBar" class="ProgressBar" style="text-align: center; min-height: 200px; width:100%;">
+                <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
+            </div>
+        </div>
+    </div>
 
-            <div class="container-fluid" id="House_Requests" style="margin:50px;background-color:white;">
-                <div class="row" style="margin:10px;">
-                    <div class="col-xs-10"><h4 style="margin-bottom:0px;">  My Independent House</h4></div>
-                <div class="col-xs-2"><button class="btn btn-primary btn-sm" onclick="NewHouse()" type="button">New House</button></div>
+    <div class="container-fluid" id="society_Request" style="margin: 50px;min-height:200px; background-color: white;">
+        <div class="ProgressBar-Parent">
+            <div class="ProgressBar-Sibling" style="margin:10px; width:84%;">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <h4 style="margin-bottom: 0px;">My Societies </h4>
                     </div>
-                   <div class="row" id="HouseRequests" style="border-top: solid 2px black;margin-top:10px;"></div>
+                    <div class="col-xs-2">
+                        <button class="btn btn-primary btn-sm" onclick="NewSociety()" type="button">New Society</button></div>
                 </div>
+                <div class="row" id="SocietyRequests" style="border-top: solid 2px black; margin-top: 10px; width:100%;"></div>
+            </div>
+            <div id="society_progressBar" class="ProgressBar" style="text-align: center; min-height: 200px;width:100%;">
+                <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid " id="House_Requests" style="margin: 50px;min-height:200px; background-color: white;">
+        <div class="ProgressBar-Parent">
+            <div class="ProgressBar-Sibling" style="width:84%; margin:10px;">
+                <div class="row" >
+                    <div class="col-xs-10">
+                        <h4 style="margin-bottom: 0px;">My Independent House</h4>
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn btn-primary btn-sm" onclick="NewHouse()" type="button">New House</button></div>
+
+                </div>
+                <div class="row" id="HouseRequests" style="border-top: solid 2px black; margin-top: 10px;"></div>
+            </div>
+            <div id="house_progressBar" class="ProgressBar" style="text-align: center; height: 200px;width:100%; ">
+                <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
+            </div>
+        </div>
+    </div>
                 
         <div id="addHouse" class="modal">
             <div class="panel panel-primary" style="border: 0px; width: 670px; background-color: #fff; margin: auto;">
@@ -923,9 +970,9 @@
             </div>
         </div>
 
-         <div id="ProgressBar" class="container-fluid" style="text-align: center; height: 200px;">
+         <%--<div id="ProgressBar" class="container-fluid" style="text-align: center; height: 200px;">
                 <img src="Images/Icon/ajax-loader.gif" style="width: 40px; height: 40px;" />
-            </div>
+            </div>--%>
 
 
 

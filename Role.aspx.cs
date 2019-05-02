@@ -119,7 +119,7 @@ public partial class Role : System.Web.UI.Page
     public static String GetFlatNumber(FlatSearch flat)
     {
         
-        string query = string.Format("Select * from dbo.Flats where SocietyID = "+ flat.SocietyId + " and FlatNumber like '" + flat.FlatNumber + "%'");
+        string query = string.Format("Select * from dbo.ViewFlats where SocietyID = "+ flat.SocietyId + " and OwnerUserID = 0 and FlatNumber like '" + flat.FlatNumber + "%'");
         DataAccess da = new DataAccess();
         DataSet ds = da.GetData(query);
         return JsonConvert.SerializeObject(ds.Tables[0]);

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Rent.aspx.cs" Inherits="Rent" %>
+﻿rrrr<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Rent.aspx.cs" Inherits="Rent" %>
 
 <!DOCTYPE html>
 
