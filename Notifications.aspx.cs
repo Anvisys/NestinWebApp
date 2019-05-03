@@ -57,6 +57,8 @@ public partial class Notifications : System.Web.UI.Page
        
         if (!IsPostBack)
         {
+            //if(SessionVariables.UserType.Equals("Admin"))
+            //    New_Notification.Visible = true;
             this.ViewState["vs"] = 0;
             pos = (int)this.ViewState["vs"];   
 

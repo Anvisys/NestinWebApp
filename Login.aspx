@@ -27,23 +27,24 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-    <link href="Login/css/settings.css" rel="stylesheet" type="text/css" />
+    <link href="CSS_3rdParty/settings.css" rel="stylesheet" type="text/css" />
     <!-- THEME CSS -->
+    <link href="CSS_3rdParty/essentials.css" rel="stylesheet" type="text/css" />
+    <link href="CSS_3rdParty/layout.css" rel="stylesheet" type="text/css" />
+    <link href="CSS_3rdParty/layout-responsive.css" rel="stylesheet" type="text/css" />
+     <link  href="CSS_3rdParty/footer.css" rel="stylesheet" type="text/css"/>
 
-    <link href="Login/css/essentials.css" rel="stylesheet" type="text/css" />
-    <link href="Login/css/layout.css" rel="stylesheet" type="text/css" />
-    <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css" />
+     <link href="CSS_3rdParty/mythirdpartystylesheets.css" rel="stylesheet" type="text/css" />
 
-    <link href="Styles/layout.css" rel="stylesheet" />
-    <link href="Styles/Responsive.css" rel="stylesheet" />
-
+    <%--<link href="CSS/layout.css" rel="stylesheet" />
+    <link href="CSS/Responsive.css" rel="stylesheet" />
     <link rel="stylesheet" href="CSS/ApttTheme.css" />
     <link rel="stylesheet" href="CSS/ApttLayout.css" />
-    <link rel="stylesheet" href="Login/CSS/footer.css" />
     <link rel="stylesheet" href="CSS/NewAptt.css" />
-
     <link rel="stylesheet" href="CSS/Nestin.css" />
-    <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />
+    <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />--%>
+
+     <link href="CSS/IP.css" rel="stylesheet" />
 
     <script>
         var api_url;
@@ -181,11 +182,12 @@
             color: #000 !important;
         }
 
-        img.close {
+        a.close {
             position: absolute;
-            right: -14px;
-            top: -14px;
+            right: -7px;
+            top: -7px;
             cursor: pointer;
+            color:indianred;
         }
 
         .bosre {
@@ -366,15 +368,17 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <%--Login Popup --%>
 
-        <div class="login_div" id="loginModal" style="display: none; padding: 0% 0 3% 0;">
-            <img id="close" class="close" src="Images/Icon/close_red.png" alt="close" width="25" height="25" style="background-size: contain;" />
+        <div class="login_div" id="loginModal">
+           <%-- <img id="close" class="close" src="Images/Icon/close_red.png" alt="close" width="25" height="25" style="background-size: contain;" />--%>
+
+            <a id="close" class="close"><span  class="fa fa-times-circle"></span></a>
             <br />
 
-            <div style="padding: 0 1% 3% 1%; color: #6eab91; font-family: 'Baskerville Old Face'; font-size: x-large;">
+            <div class="login_div_body" >
                 <%-- <img src="Images/Icon/login_icon.png"  width="25" height="25"/>--%>
                 <i class="fa fa-user-circle-o" style="color: #000;" aria-hidden="true"></i>
 
-
+              
                 <asp:Label ID="lbltext" runat="server" Style="color: #000;" Text="Account Login "></asp:Label>
 
                 <h4 style="margin-bottom: 0;">

@@ -1,4 +1,4 @@
-﻿mm<%@ Page Language="C#" AutoEventWireup="true" CodeFile="MyFlat.aspx.cs" Inherits="MyFlat" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="MyFlat.aspx.cs" Inherits="MyFlat" %>
 
 <!DOCTYPE html>
 

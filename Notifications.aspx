@@ -39,9 +39,12 @@
           var userType = '<%=Session["UserType"] %>';
       
           if (userType == "Admin") {
-             
+
               document.getElementById("New_Notification").style.visibility = 'visible';
 
+          }
+          else {
+                $("#New_Notification").hide();
           }
 
           $("#initial_loading").hide();
@@ -338,7 +341,7 @@
 
                                        <div class="col-sm-3  col-xs-3" >
                                            
-                                         <button id="New_Notification" style="margin-top:10px;" type="button" class="btn btn-primary btn-sm pull-right ">Add</button>
+                                         <asp:Button runat="server" ID="New_Notification" style="margin-top:10px;" type="button" CssClass="btn btn-primary btn-sm pull-right " Text="Add" Visible="false"></asp:Button>
                                      </div>
                                      
                          </div>

@@ -250,20 +250,64 @@
             
         }
 
-                      .font_secondary{
-           font-family: "Comic Sans MS";
-      }
+    .font_secondary
+    {
+       font-family: "Comic Sans MS";
+    }
 
 
-    .theme-btn-primary{
-        color:#fff;background-color:#6eab91;border-color:#2c7a59}
+    .theme-btn-primary
+    {
+        color:#fff;
+        background-color:#6eab91;
+        border-color:#2c7a59
+
+    }
 
     .theme-btn-primary.focus,.btn-primary:focus
-    {color:#fff;background-color:#459372;border-color:#2c7a59}
+    {
+        color:#fff;
+        background-color:#459372;
+        border-color:#2c7a59
 
-    .theme-btn-primary:hover{color:#fff;background-color:#459372;border-color:#2c7a59}
-                                                                                                                                                                                           .btn-primary.active,.btn-primary:active,.open>.dropdown-toggle.btn-primary{color:#fff;background-color:#286090;border-color:#204d74}
-                label {
+    }
+
+    .theme-btn-primary:hover
+    {
+        color:#fff;
+        background-color:#459372;
+        border-color:#2c7a59
+
+    }
+                                                                                                                                                                                          
+    .btn-primary.active,
+    .btn-primary:active,
+    .open>.dropdown-toggle.btn-primary
+    {
+        color:#fff;
+        background-color:#286090;
+        border-color:#204d74
+
+    }
+
+ label {
  
     font-weight: 200 !important;
-}                                                                                                                                                                                                                                                       .btn-primary.active.focus,.btn-primary.active:focus,.btn-primary.active:hover,.btn-primary:active.focus,.btn-primary:active:focus,.btn-primary:active:hover,.open>.dropdown-toggle.btn-primary.focus,.open>.dropdown-toggle.btn-primary:focus,.open>.dropdown-toggle.btn-primary:hover{color:#fff;background-color:#204d74;border-color:#122b40}
+}                                                                                                                                                                                                                                                       
+     
+                
+ .btn-primary.active.focus,
+ .btn-primary.active:focus,
+ .btn-primary.active:hover,
+ .btn-primary:active.focus,
+ .btn-primary:active:focus,
+ .btn-primary:active:hover,
+ .open>.dropdown-toggle.btn-primary.focus,
+ .open>.dropdown-toggle.btn-primary:focus,
+ .open>.dropdown-toggle.btn-primary:hover
+ {
+     color:#fff;
+     background-color:#204d74;
+     border-color:#122b40
+
+ }

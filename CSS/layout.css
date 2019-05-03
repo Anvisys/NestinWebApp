@@ -1,0 +1,70 @@
+﻿
+
+
+
+.iframe_left{
+
+  width:15%;
+}
+
+.iframe_right{
+
+ width:15%;
+}
+
+.iframe_center
+{
+    width:85%;
+    height:auto;
+    overflow:scroll;
+}
+
+
+.content_top_header
+{
+   
+    font-family:'Bookman Old Style';
+    color:white;
+    text-align:center;
+  
+ }
+
+.content_top_header_td1
+{ 
+  
+    text-align:center;
+    font-weight:bold;
+background-color:#31a8e6;
+ }
+
+.content_top_header_td2
+{
+     color:white;
+    font-size:small;  
+    text-align:center;
+    background-color:crimson;
+background-color:#31a8e6;
+ }
+
+
+
+
+
+    .lblerror{
+        color:#aca9a9;
+        padding:2% 0 2% 0;
+    }
+
+     .ad_banner {
+            width: 150px;
+            height: 200px;
+            border: 1px solid #c3c3c3;
+            display: -webkit-flex;
+           -webkit-flex-wrap: wrap;
+           -webkit-align-content: center;
+            align-content: center;
+            text-align:center;
+            elevation:above;
+            text-decoration:none;
+     
+        }

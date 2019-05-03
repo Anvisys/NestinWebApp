@@ -564,9 +564,26 @@
                                                      </div>
                                           </ItemTemplate>
                               
+
+
                                       <EditItemStyle Height="0px" BackColor="Transparent" />                       
                                     <SeparatorStyle BackColor="Transparent" Height="50px" />
                           </asp:DataList>
+   
+                                   <div class="row">
+
+                                        <div class="col-xs-4" style="text-align: center; padding: 8px;">
+                                            <asp:Button ID="btnprevious" CausesValidation="false" runat="server" Font-Bold="true" Text="Prev" Height="31px" Width="60px" OnClick="btnprevious_Click" />
+
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <asp:Label ID="lblPage" runat="server" Font-Size="Small" ForeColor="#f9f9f9f"></asp:Label>
+                                        </div>
+                                        <div class="col-xs-4" style="text-align: center; padding: 8px;">
+                                            <asp:Button ID="btnnext" CausesValidation="false" runat="server" Font-Bold="true" Text="Next" Height="31px" Width="60px" OnClick="btnnext_Click"  />
+                                        </div>
+                                    </div>
+
 
 
          </div>

@@ -19,6 +19,8 @@ public partial class Flats : System.Web.UI.Page
     static User newUser;
     static bool ExistingUser = false;
     static int ExistingUserID = 0;
+    PagedDataSource adsource;
+    int pos;
     protected void Page_Load(object sender, EventArgs e)
     {
         //Added by Aarshi on 18 auh 2017 for session storage
@@ -33,6 +35,8 @@ public partial class Flats : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            this.ViewState["vs"] = 0;
+            pos = (int)this.ViewState["vs"];
             FillFlatdata();
             btnFltsShwall.Visible = false;
         }
@@ -85,9 +89,18 @@ public partial class Flats : System.Web.UI.Page
                     //FlatGrid.DataSource = ds;
                     //FlatGrid.DataBind();
                     btnFltsShwall.Visible = false;
-
-                    dataListFlats.DataSource = ds;
+                    adsource = new PagedDataSource();
+                    adsource.DataSource = ds.Tables[0].DefaultView;
+                    adsource.PageSize = 5;
+                    adsource.AllowPaging = true;
+                    adsource.CurrentPageIndex = pos;
+                    dataListFlats.DataSource = adsource ;
+                    //dataListFlats.DataSource = ds;
+                    btnprevious.Visible = !adsource.IsFirstPage;
+                    btnnext.Visible = !adsource.IsLastPage;
                     dataListFlats.DataBind();
+
+                    lblPage.Text = "Page " + (adsource.CurrentPageIndex + 1) + " of " + adsource.PageCount;
                 }
             }
             else
@@ -1691,5 +1704,21 @@ public partial class Flats : System.Web.UI.Page
 
         Notification notification = new Notification();
         notification.SendMail(EmailId, EmailSubject, EmailBody);
+    }
+
+    protected void btnprevious_Click(object sender, EventArgs e)
+    {
+        pos = (int)this.ViewState["vs"];
+        pos -= 1;
+        this.ViewState["vs"] = pos;
+       FillFlatdata();
+    }
+
+    protected void btnnext_Click(object sender, EventArgs e)
+    {
+        pos = (int)this.ViewState["vs"];
+        pos += 1;
+        this.ViewState["vs"] = pos;
+        FillFlatdata();
     }
 }

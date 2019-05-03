@@ -29,7 +29,7 @@ public partial class Dashboard : System.Web.UI.Page
         PollData();
         VendorData();
 
-
+        
 
     }
 
@@ -57,7 +57,7 @@ public partial class Dashboard : System.Web.UI.Page
                     {
                         Tenant = Convert.ToInt32(ds.Tables[0].Rows[i]["value"]);
                     }
-
+                    
                 }
 
                 Owner = TotalFlat - Tenant;
@@ -252,7 +252,8 @@ public partial class Dashboard : System.Web.UI.Page
 
     private void SetForumData()
     {
-        String forumQuery = "Select Top 3 * from dbo.ViewThreadSummaryNoImageCount order by UpdatedAt desc";
+        String forumQuery = "Select Top 3 * from dbo.ViewThreadSummaryNoImageCount where SocietyID="+SessionVariables.SocietyID+" order by UpdatedAt desc";
+       // String forumQuery = "Select Top 3 * from dbo.ViewThreadSummaryNoImageCount  order by UpdatedAt desc";
 
         DataAccess da = new DataAccess();
         DataSet ds = da.GetData(forumQuery);
@@ -293,14 +294,14 @@ public partial class Dashboard : System.Web.UI.Page
         {
             DataAccess dacess = new DataAccess();
 
-            String BarChartQuery = "Select Count(*) as 'Number_Of_Complaints' , Age from dbo.ViewComplaintSummary where LastStatusID=4 Group By Age";
+            //String BarChartQuery = "Select Count(*) as 'Number_Of_Complaints' , Age from dbo.ViewComplaintSummary where LastStatusID=4 Group By Age";
 
             String query = " select t.range as [Age_range], count(*) as [Number_Of_Complaints]"
                           + "from (  select case  "
                                + " when Age between 0 and 1 then ' 0- 1'"
                                + " when Age between 2 and 5 then '2-5'"
                                + " else '6-10' end as range"
-                                + " from dbo.ViewComplaintSummary) t group by t.range";
+                                + " from dbo.ViewComplaintSummary where SocietyID="+SessionVariables.SocietyID+") t group by t.range";
 
             DataSet databarchart = dacess.ReadData(query);
             if (databarchart == null)
