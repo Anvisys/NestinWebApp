@@ -368,7 +368,7 @@
                 </div>
             </div>--%>
                         <div class="row" style="margin-top: 15px">
-                            <div id="chart1-data" class=" col-xs-12 col-sm-6 col-md-6 ">
+                            <div id="chartData" runat="server" class=" col-xs-12 col-sm-6 col-md-6 ">
                                 <div class="layout_shadow_box">
                                     <div class="row">
                                         <asp:Label ID="lblPollP1" runat="server" ForeColor="#0066CC" Text="Poll"></asp:Label><br />
@@ -414,7 +414,7 @@
                                 </div>
                             </div>
                             <asp:Panel runat="server" ID="pnlchart2">
-                                <div id="chart2-data" class="col-xs-12 col-sm-6 col-md-6 ">
+                                <div id="chart2data" runat="server" class="col-xs-12 col-sm-6 col-md-6 ">
                                     <div class="layout_shadow_box">
                                          <div class="row">
                                         <asp:Label ID="lblPollP2" runat="server" ForeColor="#0066CC" Text="Poll"></asp:Label><br />

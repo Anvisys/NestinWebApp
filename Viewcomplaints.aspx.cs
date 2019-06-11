@@ -102,7 +102,7 @@ public partial class Viewcomplaints : System.Web.UI.Page
                 dsComplaint = complainData.GetComplaints(muser.currentResident.SocietyID, muser.currentResident.FlatNumber, "", ComplaintStatus, month);
             }
 
-            if (dsComplaint.Tables.Count > 0)
+            if (dsComplaint.Tables[0].Rows.Count > 0)
             {
                 adsource = new PagedDataSource();
                 adsource.DataSource = dsComplaint.Tables[0].DefaultView;
@@ -118,6 +118,13 @@ public partial class Viewcomplaints : System.Web.UI.Page
                 
 
                 lblPage.Text = "Page " + (adsource.CurrentPageIndex +1) + " of " + adsource.PageCount;
+            }
+            else
+            {
+                topnav.Visible = false;
+                lblPage.Text = "<h4>No Complaints are available !!!</h4>";
+                btnnext.Visible = false;
+                btnprevious.Visible = false;
             }
         }
         catch (Exception ex)
@@ -171,7 +178,7 @@ public partial class Viewcomplaints : System.Web.UI.Page
     {
         btnCompHistory.Visible = false;
         // btnEdit.Visible = false;
-      
+        topnav.Visible = false;
         drpVCompStatusF.Visible = false;
         txtVcompFlatSrch.Visible = false;
         lblEmptyDataText.Visible = true;
@@ -307,15 +314,22 @@ public partial class Viewcomplaints : System.Web.UI.Page
     {
        
         drpComplaintcategory.DataSource = Utility.ComplaintType;
-        drpComplaintcategory.DataTextField = "Key";
-        drpComplaintcategory.DataValueField = "value";
-        drpComplaintcategory.DataBind();
-        drpComplaintcategory.Items.Insert(0, new ListItem("Select", "NA"));
-
-        drpAddcomAssign.Items.Insert(0, new ListItem("Select", "NA"));
-        if (muser.currentResident.UserType == "Resident")
+        if (drpComplaintcategory == null)
         {
-            drpAddcomAssign.Items.Insert(0, new ListItem("Admin", "Admin"));
+            topnav.Visible = false;
+        }
+        else
+        {
+            drpComplaintcategory.DataTextField = "Key";
+            drpComplaintcategory.DataValueField = "value";
+            drpComplaintcategory.DataBind();
+            drpComplaintcategory.Items.Insert(0, new ListItem("Select", "NA"));
+
+            drpAddcomAssign.Items.Insert(0, new ListItem("Select", "NA"));
+            if (muser.currentResident.UserType == "Resident")
+            {
+                drpAddcomAssign.Items.Insert(0, new ListItem("Admin", "Admin"));
+            }
         }
     }
 

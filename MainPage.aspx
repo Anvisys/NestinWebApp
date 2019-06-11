@@ -177,6 +177,7 @@
                 document.getElementById("Resident_Navigation").style.display = "none";
                 document.getElementById("Employee_Navigation").style.display = "none";
                 document.getElementById("Individual_Navigation").style.display = "none";
+                 document.getElementById("SuperAdmin_Navigation").style.display = "none";
 
             }
 
@@ -185,6 +186,7 @@
                 document.getElementById("Admin_Navigation").style.display = "none";
                 document.getElementById("Employee_Navigation").style.display = "none";
                 document.getElementById("Individual_Navigation").style.display = "none";
+                 document.getElementById("SuperAdmin_Navigation").style.display = "none";
             }
 
             else if (userType == "Employee") {
@@ -192,6 +194,7 @@
                 document.getElementById("Admin_Navigation").style.display = "none";
                 document.getElementById("Resident_Navigation").style.display = "none";
                 document.getElementById("Individual_Navigation").style.display = "none";
+                 document.getElementById("SuperAdmin_Navigation").style.display = "none";
 
             }
             else if (userType == "Individual") {
@@ -200,7 +203,19 @@
                 document.getElementById("Admin_Navigation").style.display = "none";
                 document.getElementById("Resident_Navigation").style.display = "none";
                 document.getElementById("Individual_Navigation").style.display = "visible";
+                 document.getElementById("SuperAdmin_Navigation").style.display = "none";
             }
+             else if (userType == "SuperAdmin") {
+                Individual_Navigation
+                document.getElementById("Employee_Navigation").style.visibility = "none";
+                document.getElementById("Admin_Navigation").style.display = "none";
+                document.getElementById("Resident_Navigation").style.display = "none";
+                document.getElementById("Individual_Navigation").style.display = "none";
+                 document.getElementById("SuperAdmin_Navigation").style.display = "visible";
+            }
+
+
+            
         }
 
 
@@ -472,6 +487,21 @@
                             <li><a href="Vendors.aspx" target="targetframe">Vendors</a></li>
                             <li> <a href="Services.aspx" target="targetframe">Services</a></li>
                       
+
+
+
+                        </ul>
+                        </div>
+                    </div>
+
+                <div id="SuperAdmin_Navigation" style="position:fixed;height:100%;background-color:#98c8dc;width:inherit;" >
+                    <div class="Left-Nav">
+                        <ul id="navbar-SuperAdmin">
+
+                            <li> <a href="SuperAdmin.aspx" target="targetframe">Requests</a></li>
+                            <li><a href="Vendors.aspx" target="targetframe">Vendors</a></li>
+                            <li> <a href="Services.aspx" target="targetframe">Services</a></li>
+                             <li> <a href="Societies.aspx" target="targetframe">Societies</a></li>
 
 
 

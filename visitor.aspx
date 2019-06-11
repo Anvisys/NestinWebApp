@@ -17,7 +17,7 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
          <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>  
     
-         <link rel='stylesheet' type='text/css'href="Styles/timepicki.css"/>
+         <link rel='stylesheet' type='text/css'href="CSS_3rdParty/timepicki.css"/>
         <link rel="stylesheet" href="CSS/ApttLayout.css"/>
         <link rel="stylesheet" href="CSS/ApttTheme.css" />
         <link rel="stylesheet" href="CSS/NewAptt.css" />
@@ -132,6 +132,11 @@
             SocietyId = '<%=Session["SocietyID"]%>';
             FlatNumber = '<%=Session["FlatNumber"]%>';
 
+            console.log(SocietyId);
+            if (UserType != "Admin") {
+                $("#btnVerifyVisitor").hide();
+            }
+
             $("#btnAddVisitor").click(function () {
 
                 var currentDate = new Date();
@@ -235,6 +240,12 @@
                 UpdateCheckIn();
 
             });
+            $("#txtmobile").blur(function () {
+              //  alert("1");
+                getByDataMobile();
+
+            });
+
 
             GetVisitorData();
 
@@ -310,10 +321,23 @@
         }
 
         function GetVisitorData() {
-            document.getElementById("data_loading").style.display = "block";
+
+            var loadingWindow = document.getElementById("data_loading");
+            loadingWindow.style.display = "block";
+            loadingWindow.style.height = "100%";
+            loadingWindow.style.top = "4em";
+            var oneprev = document.getElementById("oneprev");
+            var onenext = document.getElementById("onenext");
+            var current = document.getElementById("current");
+            oneprev.innerText = page - 1;
+            onenext.innerText = page + 1;
+            current.innerText = page;
+
+       
+          
           
            var  url = api_url + "/api/Visitor/Soc/" + SocietyId +"/" + page + "/" + size;
-
+           // alert(url);
             if (UserType == 'Admin') {
                 url = api_url+  "/api/Visitor/Soc/" + SocietyId  +"/" + page + "/" + size;
             }
@@ -327,22 +351,40 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                   
+
                     document.getElementById("data_loading").style.display = "none";
+                    if (data.value != null) {
+                        // alert(page);
+                        if (page > 1) {
+                            $("#btnPrevious").show();
+                            $('#btnNext').show();
+                            oneprev.addEventListener("click", ShowPrevious);
+                        }
+                        else {
+                            $("#btnPrevious").hide();
+                            oneprev.removeEventListener("click", ShowPrevious);
+                        }
+                        if (data.$values.length < size) {
+                            $("#btnNext").hide();
+                            onenext.removeEventListener("click", ShowNext);
+                        }
+                        else {
+                            onenext.addEventListener("click", ShowNext);
+                        }
 
-                    if (page > 1) {
-                        $("#btnPrevious").show();
-                     
-                    }
-                    if (data.$values.length < size) {
-                         $("#btnNext").hide();
-                    }
-                    if (page = 1) {
-                        $("#btnPrevious").hide();
-                     
+                        /*  if (page = 1) {
+                              $("#btnPrevious").hide();
+                           
+                          }*/
+
+                        SetData(data);
                     }
 
-                    SetData(data);
+                    else {
+                        $("#pagination>nav").hide();
+                        $("#pagination").html("<h4>NO Visitor Data!!</h4>");
+                       // alert("NO Data!!");                        
+                    }
                 },
                 failure: function (response) {
                     document.getElementById("data_loading").style.display = "none";
@@ -375,21 +417,42 @@
                 var HostName = jarray[i].FirstName + jarray[i].LastName;
                 var HostType = jarray[i].Type;
                 var FlatNumber = jarray[i].Flat;
+                var endDate = jarray[i].endDate;
+
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+                today = mm + '/' + dd + '/' + yyyy;
+                var todaydate = new Date(today);
 
                 var inTime = new Date(InTime);
                 var stTime = new Date(startTime);
                 var status = "";
                 var time = "";
                 var bgClass;
-                if (inTime > stTime) {
-                    status = "Done";
-                    time =  ChangeDateformat(InTime);
-                    bgClass = "Done";
+               
+                if (todaydate > endDate) {
+                    status = "Expired...";
+                    time = ChangeDateformat(InTime);
+                    bgClass = "Expired...";
+                }
+                else if (todaydate == endDate) {
+                    if (inTime > stTime) {
+                        status = "Checked In...";
+                        time = ChangeDateformat(InTime);
+                        bgClass = "Checked In...";
+                    }
+                    else {
+                         status = "Expired...";
+                    time = ChangeDateformat(InTime);
+                    bgClass = "Expired...";
+                    }
                 }
                 else {
-                    status = "Pending";
+                    status = "Waiting...";
                     time = "Start After :" + ChangeDateformat(startTime);
-                    bgClass = "Pending";
+                    bgClass = "Waiting...";
                 }
 
 
@@ -423,11 +486,28 @@
             visitDate = document.getElementById("btnEntryDate").value;
           
 
-            //alert(visitDate);
+            alert(visitDate);
             var start = new Date(visitDate);
+
+           // var strStartDate = GetDateTimeinISO(start);
+
+            var strStartDate = new Date(visitDate).toISOString();
+
+           // alert(strStartDate.getMonth());
+            //alert(strStartDate.getDate());
+             //alert(strStartDate.getTime());
+
+            var endDate = start.setHours(start.getHours + 1);
+
+            var strEndDate = "10/02/2012";
+            // var strEndDate = GetDateTimeinISO(endDate);
+           // var strEndDate = new Date(endDate).toISOString();
+
+
            // alert(start);
 
-            var month = +start.getMonth() + 1;
+            var month = start.getMonth() + 1;
+
             var strMonth="";
             if (month < 10) {
                 strMonth = 0 + month.toString();
@@ -436,7 +516,8 @@
                 strMonth = month.toString();
             }
 
-             var day = +start.getDate();
+            var day = start.getDate();
+
             var strDay="";
             if (day < 10) {
                 strDay = 0 + day.toString();
@@ -464,10 +545,10 @@
             }
 
 
-            var strStartDate = start.getFullYear() + "-" + strMonth + "-" + strDay + "T" + startHrs + ":00:00";
+          //  var strStartDate = start.getFullYear() + "-" + strMonth + "-" + strDay + "T" + startHrs + ":00:00";
             
 
-            var strEndDate = start.getFullYear() + "-" + strMonth + "-" + strDay +  "T" + endHrs + ":00:00" ;
+          ///  var strEndDate = start.getFullYear() + "-" + strMonth + "-" + strDay +  "T" + endHrs + ":00:00" ;
            
            // alert(strStartDate);
            
@@ -478,7 +559,7 @@
 
 
             
-             var strURL = "http://www.kevintech.in/GaurMahagun/api/Visitor/New";
+             var strURL = api_url +  "/api/Visitor/New";
              //var strURL = "visitor.aspx/AddVisitor";
              
             var reqBody = "{\"VisitorName\":\"" + name + "\",\"VisitorMobile\":\"" + mobile + "\",\"VisitorAddress\":\"" + address + " \",\"VisitPurpose\":\"" + purpose + "\",\"StartTime\":\"" + strStartDate + "\",\"EndTime\":\"" + strEndDate +
@@ -500,8 +581,12 @@
                     if (data.Response == "Fail") {
                         alert('Could not update');
                     }
-                    else {
+                    else if (data.Response == "Ok") {
+                         $("#AddVisitorModal").hide();
                         alert('Updated Successfully');
+                    }
+                    else {
+                         alert('Undefined');
                     }
                     
                 },
@@ -511,16 +596,22 @@
                     alert('Error Updating comment, try again');
                 }
             });
-
+            closefn();
         }
 
+        function closefn() {
+            document.getElementById('btnEndTime').innerText = null;
+            document.forms["form1"].reset();
+           document.getElementById('AddVisitorModal').style.display="none";
+      
+        }
 
         function UpdateCheckIn() {
             document.getElementById("verify_loading").style.display = "block";
 
 
 
-            var strURL = "http://www.kevintech.in/GaurMahagun/api/Visitor/CheckIn";
+            var strURL = api_url +  "/api/Visitor/CheckIn";
 
             var reqBody = "{\"RequestId\":\"" + RequestID + "\"}"
 
@@ -616,6 +707,33 @@
             return true;
         }
 
+        function getByDataMobile() {
+            var MobileNo = document.getElementById("txtmobile").value;
+            console.log(MobileNo);
+            url = "http://localhost:5103" + "/api/Visitor/" + SocietyId + "/Mob/" + MobileNo;
+
+
+            $.ajax({
+                type: "Get",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+                    $("#idName").val(data.VisitorName);
+                    $("#Address").text(data.VisitorAddress);
+                    //console.log(data);
+                },
+                failure: function (response) {
+                    // document.getElementById("verify_loading").style.display = "none";
+                    alert("None");
+                    // alert(response.d);
+                    //sessionStorage.clear();
+                }
+            });
+
+        }
       
 
     </script>
@@ -627,10 +745,19 @@
                                  <div class="col-xs-3">
                                      <div><h4 class="pull-left ">Visitor </h4></div>
                                  </div>
-                             <div class="col-xs-6 " style="padding-left:10px; padding-right:10px;">
-                                <button type="button" onclick="ShowPrevious()" class="btn btn-default btn-sm pull-left" style="display:none;" id="btnPrevious">Previous</button>
+                             <div class="col-xs-6 " style="padding-left:10px; padding-right:10px;" id="pagination">
+                                   <%-- <button type="button" onclick="ShowPrevious()" class="btn btn-default btn-sm pull-left" style="display:none;" id="btnPrevious">Previous</button>
+                                  <button type="button" onclick="ShowNext()" class="btn btn-default btn-sm pull-right" id="btnNext">Next</button>--%>
 
-                                  <button type="button" onclick="ShowNext()" class="btn btn-default btn-sm pull-right" id="btnNext">Next</button>
+                                 <nav aria-label="Page navigation example">
+                                     <ul class="pagination">
+                                         <li class="page-item"><a class="page-link" href="#"  onclick="ShowPrevious()" id="btnPrevious" >Previous</a></li>
+                                         <li class="page-item"><a class="page-link" id="oneprev" href="#">1</a></li>
+                                         <li class="page-item"><a class="page-link" id="current" href="#">2</a></li>
+                                         <li class="page-item"><a class="page-link" id="onenext" href="#">3</a></li>
+                                         <li class="page-item"><a class="page-link" href="#"  id="btnNext" onclick="ShowNext()" >Next</a></li>
+                                     </ul>
+                                 </nav>
                            </div>
 
                              <div class="col-xs-3 pull-right">
@@ -659,19 +786,21 @@
                               <div class="panel-body" >
                                   <form name="visitor" autocomplete="off">
                                       <div class="container-fluid">
-                                          <div class="row" style="margin-top:0px">
-                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Name: </label>
-                                            <div class="col-xs-8">
-                                                <input type="text" class="form-control col-xs-8" id="Name"   placeholder="Enter Name" name="Name" />
-                                            </div>
-                                          </div>
-                                          <div class="row"style="margin-top:5px">
+                                           <div class="row"style="margin-top:5px">
                                             <label class="col-xs-4" for="MobileNo">Mobile No:</label>
                                             <div class="col-xs-8">
-                                                 <input type="text" onkeypress="return isNumberKey(event)" class="form-control col-xs-8" id="MobileNo"  placeholder="Enter Mobile No." name="MobileNo"/>
+                                                 <input id="txtmobile" type="text" onkeypress="return isNumberKey(event)" class="form-control col-xs-8"  placeholder="Enter Mobile No." name="MobileNo" onblur="blur()" />
   
                                             </div>
                                           </div>
+
+                                          <div class="row" style="margin-top:0px">
+                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Name: </label>
+                                            <div class="col-xs-8">
+                                                <input type="text" class="form-control col-xs-8" id="idName"   placeholder="Enter Name" name="Name" />
+                                            </div>
+                                          </div>
+                                         
                                           <div class="row"style="margin-top:5px">
                                             <label for="colFormLabel" class="col-xs-4 col-form-label">Address: </label>
                                             <div class="col-xs-8">
@@ -705,7 +834,7 @@
                               </div>
 
                               <div class="panel-footer" style="text-align:right; background-color:#f7f7f7;">
-                                   <button type="button" id="btnSubmit"  style="margin-top:5px;" class="btn-sm btn btn-primary">Submit</button>
+                                   <button type="button" id="btnSubmit"  style="margin-top:5px;"  class="btn-sm btn btn-primary">Submit</button>
                                   <button type="button" id="btnCancel"  style="margin-top:5px;" class="btn-sm btn btn-danger">Cancel</button>
                                    
                               </div>

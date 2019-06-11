@@ -561,6 +561,11 @@ public partial class Poll : System.Web.UI.Page
 
     private void ShowEmptyPage()
     {
+      //  WebControl myControlControl = (WebControl)Page.FindControl("chartdata");
+       // myControlControl.Visible = false;
+        chartData.Visible = false;
+        chart2data.Visible = false;
+        //chart1 - data
         PieChart1.Visible = false;
         PieChart1.Width = 0;
         PieChart1.Height = 0;

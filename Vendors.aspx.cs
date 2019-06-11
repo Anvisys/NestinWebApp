@@ -34,7 +34,7 @@ public partial class Vendors : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
-            FillVendorDataList(muser.currentResident.SocietyID);
+            FillVendorDataList(muser.currentResident.SocietyID ,muser.currentResident.UserType);
             FillDropDownlist();       
         }
 
@@ -87,13 +87,20 @@ public partial class Vendors : System.Web.UI.Page
 
 
     [System.Web.Services.WebMethod]
-    public void FillVendorDataList(int SocietyID)
+    public void FillVendorDataList(int SocietyID ,String UserType)
     {
         try
         {
             DataAccess dacess = new DataAccess();
+            String DatalistQuery;
 
-            String DatalistQuery = "Select ID, ShopCategory, VendorName, ContactNum,ContantNumber2, Address,Address2 from dbo.Vendors where SocietyID ='" + SocietyID + "' order by ShopCategory asc  ";
+            if (UserType.Equals("SuperAdmin"))
+                DatalistQuery= "Select ID, ShopCategory, VendorName, ContactNum,ContantNumber2, Address,Address2 from dbo.Vendors order by ShopCategory asc  ";
+
+
+            //DatalistQuery = "Select ID, ShopCategory, VendorName, ContactNum,ContantNumber2, Address,Address2 from dbo.Vendors where SocietyID ='" + SocietyID + "' order by ShopCategory asc  ";
+            else
+            DatalistQuery = "Select ID, ShopCategory, VendorName, ContactNum,ContantNumber2, Address,Address2 from dbo.Vendors where SocietyID ='" + SocietyID + "' order by ShopCategory asc  ";
 
             DataSet DatasetVendors = dacess.ReadData(DatalistQuery);
 
@@ -158,7 +165,7 @@ public partial class Vendors : System.Web.UI.Page
 
             if (drpvendorfilter.SelectedItem.Text == "All")
             {
-                FillVendorDataList(muser.currentResident.SocietyID);
+                FillVendorDataList(muser.currentResident.SocietyID , muser.currentResident.UserType);
 
             }
 
@@ -294,7 +301,7 @@ public partial class Vendors : System.Web.UI.Page
                             if (count == 1)
                             {
                                 
-                                FillVendorDataList(muser.currentResident.SocietyID);
+                                FillVendorDataList(muser.currentResident.SocietyID,muser.currentResident.UserType);
                                
                             }
 
@@ -523,7 +530,7 @@ public partial class Vendors : System.Web.UI.Page
 
         if (result == true)
         {
-            FillVendorDataList(muser.currentResident.SocietyID);
+            FillVendorDataList(muser.currentResident.SocietyID , muser.currentResident.UserType);
             //lblVendrActionlMsg.Text = VendorName + " " + "Deleted Sucessfully";
             String javascriptQuery = "function HideVendorAuctionstatusLabel() { alert(\"working inside javascript\") ; document.getElementById(\"lblVendrActionlMsg\").style.display = \"block\";}";
           //  ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "HideVendorAuctionstatusLabel()", true);
@@ -607,7 +614,7 @@ public partial class Vendors : System.Web.UI.Page
                 bool result = dacess.Update(NewvendorQuery);
                 if (result == true)
                 {
-                    FillVendorDataList(muser.currentResident.SocietyID);
+                    FillVendorDataList(muser.currentResident.SocietyID , muser.currentResident.UserType);
                     
                 }
                 else
@@ -678,7 +685,7 @@ public partial class Vendors : System.Web.UI.Page
                         {
                             
                             //lblEditResult.Text = VendorName + " " + "Edited Sucessfully";
-                            FillVendorDataList(muser.currentResident.SocietyID);
+                            FillVendorDataList(muser.currentResident.SocietyID , muser.currentResident.UserType);
                             ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "UpdateSuccess()", true);
                         }
 

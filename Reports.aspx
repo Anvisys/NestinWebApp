@@ -41,12 +41,12 @@
                 <div class="container-fluid">
                     <div class="row hidden-xs">
                        <div class="col-sm-12 ">
-                              <h4>Reports :</h4>
+                            <h4>  <asp:label ID="lblmessage" runat="server" Text="Reports :"></asp:label></h4>
                         </div>
                     </div>
 
-                    <div class ="row" style="margin-top:5px;">
-                        <div class="col-sm-6 hcenter" style="margin-top:10px;">
+                    <div class ="row" style="margin-top:5px;" id="reports" runat="server">
+                        <div class="col-sm-6 hcenter" style="margin-top:10px;" >
                                <div class="layout_shadow_box">
                                    <asp:Chart ID="ReportBarchart" runat="server" IsMapAreaAttributesEncoded="True" Height="250px" BackColor="white">
                                    <Titles>
@@ -101,8 +101,9 @@
                 </form>
                  </div>
                
-                
+               
                     </div>
                 </div>
+
 </body>
 </html>

@@ -40,6 +40,7 @@ public partial class Reports : System.Web.UI.Page
     DataAccess dacess = new DataAccess();
     private void Bindchart()
     {
+        bool nocompage = false ,nopiedata=false;
         try
         {
             String BarChartQuery = "";
@@ -62,6 +63,7 @@ public partial class Reports : System.Web.UI.Page
             {
                 ReportBarchart.Visible = false;
                 lblbarchart.Text = "Complaints Age data is Empty";
+                nocompage = true;
             }
             else
             {
@@ -120,7 +122,13 @@ public partial class Reports : System.Web.UI.Page
                 ReportPieChart.Visible = false;
 
                 lblpiechart.Text = "Pie Chart Data is Empty";
+                nopiedata = true;
+            }
 
+            if (nopiedata && nocompage)
+            {
+                reports.Visible = false;
+                lblmessage.Text = "No Rport Data Available!! ";
             }
         }
 
