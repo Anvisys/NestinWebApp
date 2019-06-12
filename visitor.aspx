@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
             <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-   
+     <script src="Scripts/datetime.js"></script>
      <!-- jQuery library -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
          <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>  
@@ -111,6 +111,7 @@
 
         var UserType, ResId, SocietyId, FlatNumber, RequestID, VisitorEntryHour,api_url;
         var page = 1;
+        var pagecount=0;
         var size = 5;
 
         function CloseAddVisitor() {
@@ -136,6 +137,7 @@
             if (UserType != "Admin") {
                 $("#btnVerifyVisitor").hide();
             }
+            //GetVisitorData();
 
             $("#btnAddVisitor").click(function () {
 
@@ -151,7 +153,7 @@
                 VisitorEntryHour = currentHrs; 
              
                 var hrs;
-
+                var num = (currentHrs+1) + ":00 Hrs";
                 for (hrs = currentHrs; hrs < 25; hrs++) {
                    
                    // console.log(hrs);
@@ -159,10 +161,8 @@
                     // console.log(str);
                     $("#timeList").append(str);
                 }
-
-                //var num = Number($("#timeList").val()) + 1; 
                 //alert(num);
-                //$("#btnEndTime").append(num);
+                $("#btnEndTime").append(num);
 
           
            
@@ -173,6 +173,7 @@
 
             function Select(hr) {
                 $("#btnEndTime").append(num);
+               // console.log("at Select  ==> num=" + num);
             }
 
             $('#timeList').on('change', function () {
@@ -201,15 +202,23 @@
 
             });
        
-
+            function clearModalFields() {
+                $("#txtmobile").val("");
+                $("#idName").val("");
+                $("#Address").val("");
+                $("#Purpose").val("");
+                $("#btnEndTime").html("");
+            }
 
             $("#btnSubmit").click(function () {
-               
+
+            //    alert("atsubmit 213");
                 AddVisitor();
             });
             $(document).ready(function () {
                 $("#btnCancel,#icon_close").click(function () {
                     $("#AddVisitorModal").hide();
+                    clearModalFields();
                 });
 
 
@@ -321,7 +330,7 @@
         }
 
         function GetVisitorData() {
-
+            
             var loadingWindow = document.getElementById("data_loading");
             loadingWindow.style.display = "block";
             loadingWindow.style.height = "100%";
@@ -333,8 +342,8 @@
             onenext.innerText = page + 1;
             current.innerText = page;
 
-       
-          
+
+           // alert("at 345==>> societyid= " + SocietyId);
           
            var  url = api_url + "/api/Visitor/Soc/" + SocietyId +"/" + page + "/" + size;
            // alert(url);
@@ -351,10 +360,11 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-
+                    //console.log(data);
                     document.getElementById("data_loading").style.display = "none";
-                    if (data.value != null) {
-                        // alert(page);
+                    if (data != null) {
+                       //  alert(data.values +" at 365 ==>> is not null");
+
                         if (page > 1) {
                             $("#btnPrevious").show();
                             $('#btnNext').show();
@@ -362,6 +372,7 @@
                         }
                         else {
                             $("#btnPrevious").hide();
+                            $("#oneprev").hide();
                             oneprev.removeEventListener("click", ShowPrevious);
                         }
                         if (data.$values.length < size) {
@@ -376,7 +387,9 @@
                               $("#btnPrevious").hide();
                            
                           }*/
-
+                       
+                        //pagecount = data.values.count;
+                        //alert("at 391===>> "+pagecount);
                         SetData(data);
                     }
 
@@ -398,7 +411,7 @@
 
 
         function SetData(data) {
-
+           //alert("at set data");
             var jarray = data.$values;
             var length = jarray.length;
             var viewString = "";
@@ -476,84 +489,92 @@
 
 
         function AddVisitor() {
-            
+           // alert("at 485 add visitor");
             var name, mobile, address, purpose,visitDate;
 
-            name = document.getElementById("Name").value;
-            mobile = document.getElementById("MobileNo").value;
+            name = document.getElementById("idName").value;
+            alert("at 450==> name=" + name);
+            mobile = document.getElementById("txtmobile").value;
             address = document.getElementById("Address").value;
             purpose = document.getElementById("Purpose").value;
             visitDate = document.getElementById("btnEntryDate").value;
-          
-
-            alert(visitDate);
+            startTime = $("#timeList").val();
             var start = new Date(visitDate);
-
-           // var strStartDate = GetDateTimeinISO(start);
-
-            var strStartDate = new Date(visitDate).toISOString();
-
-           // alert(strStartDate.getMonth());
-            //alert(strStartDate.getDate());
-             //alert(strStartDate.getTime());
-
-            var endDate = start.setHours(start.getHours + 1);
-
-            var strEndDate = "10/02/2012";
-            // var strEndDate = GetDateTimeinISO(endDate);
-           // var strEndDate = new Date(endDate).toISOString();
-
-
-           // alert(start);
-
-            var month = start.getMonth() + 1;
-
-            var strMonth="";
-            if (month < 10) {
-                strMonth = 0 + month.toString();
-            }
-            else {
-                strMonth = month.toString();
-            }
-
-            var day = start.getDate();
-
-            var strDay="";
-            if (day < 10) {
-                strDay = 0 + day.toString();
-            }
-            else {
-                strDay = day.toString();
-            }
-
-            var startHrs = "";
-            var endHrs = "";
-
-            if (VisitorEntryHour < 9) {
-                 startHrs = 0 + VisitorEntryHour.toString();
-               endHrs = 0 + (VisitorEntryHour+1).toString();
-
-            }
-            else if (VisitorEntryHour = 9) {
-                 startHrs = 0+ VisitorEntryHour.toString();
-               endHrs = (VisitorEntryHour+1).toString();
-            }
-            else {
-               startHrs = VisitorEntryHour.toString();
-               endHrs = (VisitorEntryHour+1).toString();
-
-            }
-
-
-          //  var strStartDate = start.getFullYear() + "-" + strMonth + "-" + strDay + "T" + startHrs + ":00:00";
+            var strStartDate = GetDateTimeinISO(start);
+            alert("at 498==> " + strStartDate);
+            var strEndDate="2020-05-10T00:00:00"
+            
             
 
-          ///  var strEndDate = start.getFullYear() + "-" + strMonth + "-" + strDay +  "T" + endHrs + ":00:00" ;
+        //   // var strStartDate = GetDateTimeinISO(start);
+
+        //    var strStartDate = new Date(visitDate).toISOString();
+        ////    splitstring1 = strStartDate.split(".")[0];
+        //  //  splitstring2 = splitstring1.split("T");
+        //    var start = new Date(visitDate);
+        //   //var startdate = new Date(start.getFullYear() + "/" + start.getMonth() + "/" +start.getDate()+" 00:00:00.000");
+        //    //alert(startdate);
+        //   // alert(strStartDate.getMonth());
+        //    //alert(strStartDate.getDate());
+        //     //alert(strStartDate.getTime());
+
+        //    var endDate = start.setHours(start.getHours + 1);
+
+        //    var strEndDate = "2012/02/10";
+        //    // var strEndDate = GetDateTimeinISO(endDate);
+        //   // var strEndDate = new Date(endDate).toISOString();
+
+
+        //   // alert(start);
+
+        //    var month = start.getMonth() + 1;
+
+        //    var strMonth="";
+        //    if (month < 10) {
+        //        strMonth = 0 + month.toString();
+        //    }
+        //    else {
+        //        strMonth = month.toString();
+        //    }
+
+        //    var day = start.getDate();
+
+        //    var strDay="";
+        //    if (day < 10) {
+        //        strDay = 0 + day.toString();
+        //    }
+        //    else {
+        //        strDay = day.toString();
+        //    }
+
+        //    var startHrs = "";
+        //    var endHrs = "";
+
+        //    if (VisitorEntryHour < 9) {
+        //         startHrs = 0 + VisitorEntryHour.toString();
+        //       endHrs = 0 + (VisitorEntryHour+1).toString();
+
+        //    }
+        //    else if (VisitorEntryHour = 9) {
+        //         startHrs = 0+ VisitorEntryHour.toString();
+        //       endHrs = (VisitorEntryHour+1).toString();
+        //    }
+        //    else {
+        //       startHrs = VisitorEntryHour.toString();
+        //       endHrs = (VisitorEntryHour+1).toString();
+
+        //    }
+
+
+        //    var strStartDate = start.getFullYear() + "-" + strMonth + "-" + strDay + "T" + startHrs + ":00:00";
+            
+
+        //    var strEndDate = start.getFullYear() + "-" + strMonth + "-" + strDay +  "T" + endHrs + ":00:00" ;
            
-           // alert(strStartDate);
+        //   // alert(strStartDate);
            
      
-        //   endTime = document.getElementById("btnStartTime").value;
+        ////   endTime = document.getElementById("btnStartTime").value;
        
             document.getElementById("post_loading").style.display = "block";
 
@@ -561,7 +582,7 @@
             
              var strURL = api_url +  "/api/Visitor/New";
              //var strURL = "visitor.aspx/AddVisitor";
-             
+
             var reqBody = "{\"VisitorName\":\"" + name + "\",\"VisitorMobile\":\"" + mobile + "\",\"VisitorAddress\":\"" + address + " \",\"VisitPurpose\":\"" + purpose + "\",\"StartTime\":\"" + strStartDate + "\",\"EndTime\":\"" + strEndDate +
                            "\",\"ResID\":\"" + ResId + "\",\"FlatNumber\":\"" + FlatNumber + "\",\"SocietyId\":\"" + SocietyId + "\"}"
             console.log(reqBody);
@@ -584,6 +605,7 @@
                     else if (data.Response == "Ok") {
                          $("#AddVisitorModal").hide();
                         alert('Updated Successfully');
+                        GetVisitorData();
                     }
                     else {
                          alert('Undefined');
@@ -710,7 +732,7 @@
         function getByDataMobile() {
             var MobileNo = document.getElementById("txtmobile").value;
             console.log(MobileNo);
-            url = "http://localhost:5103" + "/api/Visitor/" + SocietyId + "/Mob/" + MobileNo;
+            url = api_url + "/api/Visitor/" + SocietyId + "/Mob/" + MobileNo;
 
 
             $.ajax({
@@ -720,10 +742,10 @@
                 dataType: "json",
                 success: function (data) {
 
-                    console.log(data);
-                    $("#idName").val(data.VisitorName);
-                    $("#Address").text(data.VisitorAddress);
                     //console.log(data);
+                    $("#idName").val(data.VisitorName);
+                    $("#Address").val(data.VisitorAddress);
+                    console.log(data.VisitorAddress);
                 },
                 failure: function (response) {
                     // document.getElementById("verify_loading").style.display = "none";
