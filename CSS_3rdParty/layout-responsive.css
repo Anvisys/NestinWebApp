@@ -406,11 +406,10 @@
 		-o-overflow-scrolling: touch;
 		overflow-scrolling: touch;
 		top: 0 !important;
-		left: 0 !important;
-		width: 100%;
-		height: auto;
-		max-height: 460px;
-		margin: 0;
+		left: -10px !important;
+		width: 150px;
+		height: auto;	
+		margin: 20px;
 		border-left: none;
 		border-right: none;
 		-webkit-border-radius: 0 !important;
