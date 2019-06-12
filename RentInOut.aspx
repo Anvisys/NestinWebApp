@@ -8,7 +8,7 @@
         <meta charset="utf-8"/>
    <meta name="viewport" content="width=device-width, initial-scale=1"/>
       
-    <link href="Styles/MyFlat.css" rel="stylesheet" type="text/css" />
+   <%-- <link href="Styles/MyFlat.css" rel="stylesheet" type="text/css" />--%>
       <script src="Scripts/jquery-1.11.1.min.js"></script>
      
     <link rel="stylesheet" href="CSS/ApttTheme.css" />
@@ -38,8 +38,8 @@
 
 
         function GetRentInventory() {
-            var abs_url =  api_url + "/api/RentInventory/" + SocietyID;
-       
+            var abs_url = api_url + "/api/RentInventory/" + SocietyID;
+          //  console.log(abs_url);
              $.ajax({
                 url: abs_url,
                 dataType: "json",
@@ -53,8 +53,9 @@
         };
 
 
-         function ShowRentInventory(response) {
-              // alert(JSON.stringify(response));
+        function ShowRentInventory(response) {
+               $("#ProgressBar").hide();
+            // alert(JSON.stringify(response));
               var strData = "";
 
             var results = response.$values;
@@ -94,15 +95,17 @@
                 }
 
 
-            $("#RentInView").html(strData);
+          
 
 
-            $("#ProgressBar").hide();
+          
               
             }
             else {
-                
+                strData = "No Rent Information Available!!";
+
             }
+              $("#RentInView").html(strData);
 
         }
 
@@ -124,13 +127,13 @@
         function AddInterest() {
                         var RentInterest = {};
             RentInterest.InventoryID = selectedInventoryID;
-            RentInterest.InterestedResId = <%=UserID%>;
+            RentInterest.InterestedUserId = <%=UserID%>;
             RentInterest.DealStatus = 1;
             RentInterest.Comments = $("#in_comments").val();
 
             var url = api_url + "/api/RentInventory/Add/Interest";
             var carPoolInterestData = JSON.stringify(RentInterest);
-
+            console.log(carPoolInterestData);
             $.ajax({
                 dataType: "json",
                 url: url,
@@ -141,6 +144,7 @@
                 success: function (data) {
 
                     $("#showInterestModal").hide();
+                    document.location.reload();
                 },
                 error: function (data, errorThrown) {
                     alert('User Creation failed :' + errorThrown);

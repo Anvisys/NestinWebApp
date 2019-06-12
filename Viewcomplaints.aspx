@@ -631,7 +631,7 @@
                          <div class="col-xs-3">
                              <h4>Complaints:</h4>
                          </div>
-                         <div class="col-xs-6 zero-margin" style="align-content: center;">
+                         <div class="col-xs-6 zero-margin" style="align-content: center;" runat="server" id="topnav">
 
                              <asp:DropDownList EnableViewState="true" ID="drpVCompStatusF" runat="server" CssClass="search-dropdown">
                              </asp:DropDownList>

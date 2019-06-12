@@ -1017,6 +1017,7 @@
 
        function CloseRentalBox() {
            $("#addInventoryModal").hide();
+           document.location.reload();
 
        }
 
@@ -1056,6 +1057,7 @@
                    alert(JSON.stringify(data));
                    var Response = data.Response;
                    if (Response == "OK") {
+                       
                        document.getElementById("lblMessage").innerHTML = "Your inventory is submitted for Rent";
                    }
                    else {

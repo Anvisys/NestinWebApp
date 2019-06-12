@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Totalusers.aspx.cs" Inherits="Totalusers" %>
+﻿rr<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Totalusers.aspx.cs" Inherits="Totalusers" %>
 
 <!DOCTYPE html>
 <!--  This Total  code  is  licenced
@@ -395,7 +395,7 @@
         function ActivateResult(result) {
 
             if (result) {
-                $("#confirmActivateBox").hide();
+                $("#confirmAcconfirmActivateBoxtivateBox").hide();
                 $("#lblHeaderMessage").text("Resident Activated");
             }
             else {

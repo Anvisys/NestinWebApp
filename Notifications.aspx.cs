@@ -102,7 +102,12 @@ public partial class Notifications : System.Web.UI.Page
             {
                 drpNotifiFilter.Visible = false;
                 lblEmptyTitle.Visible = true;
-                lblEmptyTitle.Text = "Hello ! Welcome  to the Notifications, Here you  will get  all the  Notifications Regarding  this  Society sent  by Admin.";
+                btnnext.Visible = false;
+                btnprevious.Visible = false;
+                showOpen.Visible = false;
+                showClose.Visible = false;
+                showAll.Visible = false;
+                lblEmptyTitle.Text = "<h4>Notice Board is Empty Right Now!!</h4>";
             }
 
             else

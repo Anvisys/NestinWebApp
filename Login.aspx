@@ -764,7 +764,9 @@
             </div>
         </div>
         <div class="footer-copyright">
+
             <p>© 2019 <a href="www.Anvisys.net" target="_blank">ANVISYS TECHNOLOGIES</a>| ALL RIGHTS RESERVED. </p>
+
         </div>
     </footer>
 

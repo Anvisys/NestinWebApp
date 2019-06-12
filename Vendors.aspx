@@ -152,12 +152,16 @@ hr {
 
         $(document).ready(function () {
             userType = '<%=Session["UserType"] %>';
-            if (userType == "Admin"|| userType == "ResidentAdmin") {
-               document.getElementById("Add_Vendor").style.visibility = 'visible';
-               document.getElementById("Edit_Vendor").style.visibility = 'visible';
+            if (userType == "Admin") {
+                document.getElementById("Add_Vendor").style.visibility = 'visible';
+               // document.getElementById("Edit_Vendor").style.visibility = 'visible';
                 //document.getElementById("vendor_delete").style.visibility = 'visible';
                 $('.Vendor_edit_icon').show();
-               }
+            }
+            else {
+                 document.getElementById("Add_Vendor").style.visibility = 'none';
+            }
+
 
         });
 
@@ -259,18 +263,21 @@ hr {
      
         $(document).ready(function () {
             $("#Add_Vendor").click(function () {
+                alert(1);
                 $("#myVendorAddForm").show();
                 $('#headingAddEdit').text('Add Vendor');
                 $('#checkAddImage').text('Add Image');
                 $('#checkAddImage').prop('checked', false);
                 $("#HiddenVendorEditID").val("");
                 $("#HiddenVendorName").val("");
+                 alert(2);
                 $('#<%=txtvendorname.ClientID %>').val("");
                 $('#<%=txtMobile2.ClientID %>').val("");
                   $('#<%=txtMobile2.ClientID %>').val("");
                 $('#<%=txtvendoraddress.ClientID %>').val("");
                 $('#<%=txtvendoraddress2.ClientID %>').val("");
                 //Added by Aarshi on 22 aug 2017 for image crop code
+                   alert(3);
                 $("#FileVendorImg").hide();
                 document.getElementById("htmlImage").src = "Images/Icon/downloadbg.png";
                 $("#lblstatus").text = "";
@@ -654,7 +661,7 @@ hr {
                                 <asp:DropDownList ID="drpvendorfilter" CssClass="layout_ddl_filter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="drpvendorfilter_SelectedIndexChanged">
                                 </asp:DropDownList>
                             </div>
-                            <div class="col-sm-3  hidden-xs" style="vertical-align: middle;">
+                            <div class=" hidden-xs col-sm-3  " style="vertical-align: middle;">
                                 <div>
                                     <a id="Add_Vendor" class="Add_Button pull-right btn btn-primary btn-sm fa fa-plus" style="visibility: hidden;margin-top:10px; cursor: pointer;">Add Vendor</a>
 

@@ -27,20 +27,23 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>  
     <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" /> 
 
-    <link href="Login/css/settings.css" rel="stylesheet" type="text/css" />
+    <link href="css_3rdParty/settings.css" rel="stylesheet" type="text/css" />
     <!-- THEME CSS -->
 
-    <link href="Login/css/essentials.css" rel="stylesheet" type="text/css" />
-    <link href="Login/css/layout.css" rel="stylesheet" type="text/css" />
-    <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css" />
+    <link href="css_3rdParty/essentials.css" rel="stylesheet" type="text/css" />
+    <link href="css_3rdParty/layout.css" rel="stylesheet" type="text/css" />
+    <link href="css_3rdParty/layout-responsive.css" rel="stylesheet" type="text/css" />
+      <link href="css_3rdParty/layout.css" rel="stylesheet" type="text/css" />
 
-    <link href="Styles/layout.css" rel="stylesheet" />
-    <link href="Styles/Responsive.css" rel="stylesheet" />
+  <!--  <link href="Styles/layout.css" rel="stylesheet" />
+    <link href="Styles/Responsive.css" rel="stylesheet" />-->
 
-    <link rel="stylesheet" href="CSS/ApttTheme.css" />
+    <link href="CSS/mystylesheets.css" rel="stylesheet" />
+     <link rel="stylesheet" href="css_3rdParty/footer.css" />
+ 
+    <%--<link rel="stylesheet" href="CSS/ApttTheme.css" />
     <link rel="stylesheet" href="CSS/ApttLayout.css" />
-    <link rel="stylesheet" href="Login/CSS/footer.css" />
-    <link rel="stylesheet" href="CSS/NewAptt.css" />
+    <link rel="stylesheet" href="CSS/NewAptt.css" />--%>
 
 
 
@@ -98,16 +101,16 @@
 
                      strData = strData + "<div class=\"row \" style=\"margin-top:5px;margin-left:100px;border-top:solid 1px black;\">" 
                          + "<div class='row'><div class='col-xs-4'>" + results[i].SocietyID + "<b style='color:blue;'> " + results[i].SocietyName + "</b></div>"
-                         + "<div class='col-xs-4'> Total Flats: 1000" + "</div><div class='col-xs-4'> column 4</div>"
+                         + "<div class='col-xs-4'> Total Flats: 1000" + "</div><div class='col-xs-4'></div>"
                          + "</div>"
                          +"<div class='row'>"
-                         + "<div class='col-xs-4'> Sector " + results[i].Sector + "</div> <div class='col-xs-4'> " + results[i].PinCode + ", " + results[i].State + "</div> <div class='col-xs-4'> City" + results[i].City + "</div>"
+                         + "<div class='col-xs-4'> Sector " + results[i].Sector + "</div> <div class='col-xs-4'> " + results[i].PinCode + ", " + results[i].State + "</div> <div class='col-xs-4'> City : " + results[i].City + "</div>"
                          +"</div>"
                          + "<div class='row'><div class='col-xs-12'>" + results[i].Status + "&nbsp&nbsp" + strButton + "</div></div>" 
 
                  
                         + "</div>"
-                 
+                
                 }
 
 
