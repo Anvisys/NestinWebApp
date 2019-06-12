@@ -8,7 +8,7 @@
     <meta charset="utf-8"/>
    <meta name="viewport" content="width=device-width, initial-scale=1"/>
       
-    <link href="Styles/MyFlat.css" rel="stylesheet" type="text/css" />
+   <%-- <link href="Styles/MyFlat.css" rel="stylesheet" type="text/css" />--%>
       <script src="Scripts/jquery-1.11.1.min.js"></script>
      
     <link rel="stylesheet" href="CSS/ApttTheme.css" />
@@ -46,7 +46,7 @@
             GetData();
             var x = document.getElementById("inAddTMobile");
             // x.addEventListener("focusin", myFocusFunction);
-            x.addEventListener("focusout", ValidateMobile);
+           // x.addEventListener("focusout", ValidateMobile);
 
             window.parent.FrameSourceChanged();
 
@@ -233,22 +233,16 @@
 
         function PopulateAddModal2() {
             var url = api_url + "/api/RentInventory/Find/" + FlatID + "/0";
+            // var url = api_url + "/api/RentInventory/Find";
 
             $.ajax({
                 dataType: "json",
                 url: url,
                 success: function (data) {
-
-                    if (data.length == 0) {
-                        
+                        //alert("In poppulateadd modal ===>244");
                         PopulateAddModal();
 
-                    }
-                    else {
-                        
-                        openForm();
-
-                    }
+                    
                 },
                 error: function (data, errorThrown) {
 
@@ -310,10 +304,12 @@
 
 
         function ValidateMobile(element) {
-
+            var MobileNo = element.value;
+           // alert(MobileNo);
+          //  alert(MobileNo.length);
             if (element.value.length < 10) {
                 document.getElementById("lblMessage").textContent = "Enter valid Mobile Number";
-                element.focus();
+               // element.focus();
                 return;
             }
             // document.getElementsByClassName("txtbox_style").disabled = true;
@@ -402,6 +398,11 @@
 
         function GetUserByMail(mail) {
 
+            if (mail.length < 3) {
+
+                return;
+            }
+
             var url = api_url + "/api/Resident/Email/" + mail + "/";
             $.ajax({
                 dataType: "json",
@@ -474,16 +475,17 @@
 
             var e = document.getElementById("mgender");
             Gender = e.options[e.selectedIndex].text;
+            var HouseID = 0;
 
-            if (MobileExist == false && EmailExist == false) {
+            if (true/*MobileExist == false && EmailExist == false*/) {
                 // var reqBody = "{\"StartIndex\":" + minvalue + ",\"EndIndex\":" + maxvalue + "}";
                 var reqBody = "{\"UserType\":\"Tenant\", \"FirstName\":\"" + FirstName + "\",\"LastName\":\"" + LastName + "\", \"MobileNo\":\"" + MobileNo
                     + "\", \"EmailId\":\"" + EmailId + "\", \"Address\":\"" + Address + "\", \"Gender\":\"" + Gender + "\", \"Parentname\":\"" + ParentName
-                    + "\", \"SocietyId\":" + SocietyID + ", \"UserLogin\":\"" + UserLogin + "\", \"Password\":\"" + Password + "\" }";
+                    + "\", \"SocietyId\":" + SocietyID + ", \"UserLogin\":\"" + UserLogin + "\", \"Password\":\"" + Password + "\", \"FlatID\":\"" + FlatID + "\", \"HouseID\":\"" + HouseID + "}";
 
-                var url = "http://www.kevintech.in/MyApttUserService/api/AddUser";
+                var url = api_url + "/api/Tenant/New";
 
-                //  alert(reqBody);
+                  alert(reqBody);
 
                 //AddTenant(100111);
 
@@ -501,9 +503,9 @@
                         var Response = js.Response;
                         if (Response == "OK") {
                             document.getElementById("lblMessage").innerHTML = "User Login Created. Attaching User with Flat...";
-                            var UserID = js.UserID;
+                            //var UserID = js.UserID;
                             //alert(UserID);
-                            AddTenant(UserID);
+                           // AddTenant(UserID);
                         }
                         else {
                             document.getElementById("lblMessage").innerHTML = "Could not Add User, try again or later";
@@ -511,6 +513,7 @@
 
                     },
                     error: function (data, errorThrown) {
+                       
                         alert('User Creation failed :' + errorThrown);
                         // sessionStorage.clear();
                     }
@@ -519,7 +522,8 @@
             }
             else {
                 if (UserID != null) {
-                    AddTenant(UserID);
+                    //AddTenant(UserID);
+
                 }
 
             }
