@@ -459,7 +459,8 @@
              <div class="progress-container">
              <div class="progress-bar" id="myBar"></div>
              </div>
-        <!-- End progress -->
+        <!-- End progress -->
+
 
         <div class="container-fluid">
             <div class="col-sm-4 col-xs-6 zero-margin">
@@ -763,7 +764,7 @@
             </div>
         </div>
         <div class="footer-copyright">
-            <p>© 2019 <a href="www.Anvisys.net" target="_blank">ANVISYS TECHNOLOGIES</a>, ALL RIGHTS RESERVED. </p>
+            <p>© 2019 <a href="www.Anvisys.net" target="_blank">ANVISYS TECHNOLOGIES</a>| ALL RIGHTS RESERVED. </p>
         </div>
     </footer>
 
@@ -775,7 +776,8 @@
               var scrolled = (winScroll / height) * 100;
               document.getElementById("myBar").style.width = scrolled + "%";
             }
-    </script>
+    </script>
+
 
 </body>
 </html>
