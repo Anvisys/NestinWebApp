@@ -13,6 +13,14 @@
 
     <link rel="stylesheet" href="CSS/Nestin.css" />
     <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />
+    <link href="CSS_3rdParty/settings.css" rel="stylesheet" type="text/css" />
+    <!-- THEME CSS -->
+    <link href="CSS_3rdParty/essentials.css" rel="stylesheet" type="text/css" />
+    <link href="CSS_3rdParty/layout.css" rel="stylesheet" type="text/css" />
+    <link href="CSS_3rdParty/layout-responsive.css" rel="stylesheet" type="text/css" />
+    <link href="CSS_3rdParty/footer.css" rel="stylesheet" type="text/css" />
+
+    <link href="CSS_3rdParty/mythirdpartystylesheets.css" rel="stylesheet" type="text/css" />
 
 
     <link rel="stylesheet" type="text/css" href="CSS/ApttLayout.css" />
@@ -216,6 +224,7 @@
             background-color: #D1D1D1;
             padding-bottom: 100px;
         }
+       
 
         .result_row {
             /* border-bottom: 1px solid #bfbfbf; */
@@ -273,6 +282,11 @@
             width: 80px;
         }
     </style>
+    <style>
+        .nav-color {
+            background: #727CF5;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -284,52 +298,45 @@
 
     <header id="topNav" class="layout_header top-NavigationBar">
 
+        <!-- scroll bar progress -->
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div>
+        <!-- End progress -->
+
+
         <div class="container-fluid">
-            <div class="col-sm-4 col-xs-6 zero-margin">
-                <!-- Mobile Menu Button -->
-
-                <a class="logo" href="Login.aspx">
-                    <img src="Images/Icon/Logo1.png" height="50px" alt="Logo" />
-                </a>
-            </div>
-
-            <div class="col-sm-4 hidden-xs zero-margin">
-                <h1 class="header-title main-headertop" style="color: #fff;">Society Management System</h1>
-            </div>
-
-
-            <div class="col-sm-4 col-xs-6 zero-margin">
-                <div class="navbar-collapse nav-main-collapse collapse pull-right" style="margin-top: 9px; color: white; text-align: center;">
-                    <nav class="nav-main mega-menu nav-small">
-                        <ul class="nav nav-pills nav-main scroll-menu" id="topMain">
-                            <li><a class="menu_text" href="Login.aspx">Home</a></li>
-                            <li><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
-                            <li><a class="menu_text" href="contact.aspx">Contact</a></li>
-                            <!-- GLOBAL SEARCH -->
-                            <li class="search dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" style="display: none;"></li>
-
-                            <!-- search form -->
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <form method="get" action="#" class="input-group pull-right" style="">
-                                        <input type="text" class="form-control" name="k" id="k" value="" placeholder="Search" />
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary notransition" style="margin-top: 8px;"><i class="fa fa-search"></i></button>
-                                        </span>
-                                    </form>
-                                </li>
+            <div class="row">
+                <div class="col-md-5 col-xs-12">
+                    <div class="navbar-header">
+                        <a class="logo col-xs-2" href="Login.aspx">
+                            <img src="Images/Icon/Logo1.png" height="50" alt="Logo" />
+                        </a>
+                        <div class="navbar-inverse">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <%-- <h1 class="title hidden-xs" style="color: #fff; padding-top: 11px; font-size:30px;">Society Management System</h1>--%>
+                </div>
+                <div class="col-md-7">
+                    <div class="collapse navbar-collapse pull-right" id="myNavbar" style="margin-top: 9px; text-align: center;">
+                        <nav class="nav navbar-nav nav-color">
+                            <ul class="nav nav-pills nav-main scroll-menu nav-small" id="topMain">
+                                <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
+                                <li class=" "><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
+                                <li class=" "><a class="menu_text" href="contact.aspx">Contact </a></li>
                             </ul>
-
-                            <!-- /search form -->
-                        </ul>
-                    </nav>
+                        </nav>
+                    </div>
                 </div>
             </div>
-
-
-            <!-- /Top Nav -->
-
         </div>
+
+
     </header>
 
     <span itemtype="http://schema.org/SoftwareApplication" />
@@ -370,45 +377,18 @@
     </div>
 
     <!-- /WRAPPER -->
-    <section id="download" class="download">
-        <div class="download_overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="main_download ">
-                    <div class="col-md-6 col-xs-12">
-                        <div class="download_item roomy-100">
-                            <h2 class="text-white" style="padding-top: 65px;">How Download the app?</h2>
-                            <h4>Just download the app from the store.
-                                        Simple, nice and user-friendly application of theweather.
-                                        Only relevant and useful information.</h4>
-
-                            <div class="download_app m-top-30">
-
-                                <a href="https://play.google.com/store/apps/details?id=net.anvisys.NestIn" target="_blank">
-                                    <img src="Images/Icon/googleplay.png" style="height: 50px;" alt="Download" /></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xs-12">
-                        <div class="download_item m-top-70">
-                            <img class="app_centre" src="Images/Icon/appdownload1.png" alt="Dowmload" height="340" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- FOOTER -->
 
     <footer id="myFooter">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-md-3 hidden-xs">
                     <h2 class="logo1">
-                        <img src="Images/Icon/iconHome.png" height="50" alt="Logo" /></h2>
+                        <img src="Images/Icon/iconHome.png" height="50" alt="" /></h2>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-md-2 col-xs-4">
                     <h5>Get started</h5>
                     <ul>
                         <li><a href="Login.aspx">Home</a></li>
@@ -416,7 +396,7 @@
                         <li><a href="contact.aspx">Contact us</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-md-2 col-xs-4">
                     <h5>Quick Link</h5>
                     <ul>
                         <li><a href="Aboutus.aspx">About us</a></li>
@@ -424,7 +404,7 @@
                         <li><a href="PrivacyPolicy.aspx">Privacy policy</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-md-2 col-xs-4">
                     <h5>Support</h5>
                     <ul>
                         <li><a href="#">FAQ</a></li>
@@ -432,18 +412,22 @@
                         <li><a href="#">Terms Of Use</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-xs-12">
                     <div class="social-networks">
                         <a href="https://www.facebook.com/NestIn.Online/" target="_blank" class="facebook"><i class="fa fa-facebook" style="color: dodgerblue; border: solid 1px; padding: 5px;"></i></a>
                         <a href="https://in.linkedin.com/company/anvisys" target="_blank" class="twitter"><i class="fa fa-linkedin" style="color: deepskyblue; border: solid 1px; padding: 5px;"></i></a>
                         <a href="#" class="google"><i class="fa fa-google-plus" style="color: red; border: solid 1px; padding: 5px;"></i></a>
                     </div>
-                    <button type="button" class="btn btn-default"><a href="contact.aspx">Contact us</a> </button>
+                    <button type="button" class="btn btn-default">
+                        <a href="contact.aspx">Contact us</a>
+                    </button>
                 </div>
             </div>
         </div>
         <div class="footer-copyright">
-            <p>© 2018 ANVISYS TECHNOLOGIES, ALL RIGHTS RESERVED. </p>
+
+            <p>© 2019 <a href="www.Anvisys.net" target="_blank">ANVISYS TECHNOLOGIES</a>| ALL RIGHTS RESERVED. </p>
+
         </div>
     </footer>
     </div>

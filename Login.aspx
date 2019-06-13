@@ -200,8 +200,8 @@
         .bosre {
             padding: 8px 0 0 0;
             border-radius: 100%;
-            height: 30px;
-            width: 60px;
+            height: 50px;
+            width: 50px;
             display: inline-block;
         }
 
@@ -246,12 +246,9 @@
         }
 
         .download_overlay {
-            background: url(../Images/Icon/downloadbg.png) repeat-y;
+            background: url(../Images/Icon/downloadbg.jpg);
             width: 100%;
             height: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
         }
 
         .download {
@@ -271,9 +268,7 @@
         }
 
         img.app_centre {
-            margin: auto;
-            padding-top: 15px;
-            margin-left: 115px
+            position: center;
         }
 
         .download_app {
@@ -368,6 +363,11 @@
     <style>
         .nav-color {
             background: #727CF5;
+        }
+
+        .main-boxs {
+            height: 20vh;
+            width: 15vw;
         }
     </style>
 
@@ -530,14 +530,15 @@
                 <div class="item active">
 
                     <img src="Images/Icon/ro1.jpg" alt="Banner" />
-                    <p style="line-height: 40px; margin-top: 50px; margin-left: 130px;" class="item-1 main-point">
-                        <span style="font-size: 35px; font-weight: bold; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: #727CF5;" class="hidden-xs">Society Management System</span><br />
+                    <p style="line-height: 35px; margin-top: 60px; margin-left: 130px;" class="item-1 main-point">
+                        <span style="font-size: 40px; font-family: 'Arial Rounded MT'; color: #727CF5; letter-spacing: -3px;" class="hidden-xs">Society Management System</span><br />
                         <br />
-                        <span style="font-size: 30px; font-weight: bold; font-family:'Arial Rounded MT'; color: black;">Why Us?</span><br />
-                        <br />
-                        <span style="font-size: 25px; color: darkgray;">&nbsp;Free Demo for 15 days!</span><br />
-                        <span style="font-size: 25px; color: darkgray;">&nbsp;No issue in cost estimation! Simple Rs 5 per Flat!</span><br />
-                        <span style="font-size: 25px; color: darkgray;">&nbsp;Share your Ride.</span>
+                        <%--<span style="font-size: 30px; font-weight: bold; font-family: 'Arial Rounded MT'; color: black;">Why Us?</span><br />--%>
+                        <img src="Images/Icon/why.png" style="height: 150px; width: 380px" /><br />
+
+                        <span style="font-size: 20px; color: darkgray;">&nbsp;Free Demo for 15 days!</span><br />
+                        <span style="font-size: 20px; color: darkgray;">&nbsp;No issue in cost estimation! Simple Rs 5 per Flat!</span><br />
+                        <span style="font-size: 20px; color: darkgray;">&nbsp;Share your Ride.</span>
 
 
                         <%-- <span style="font-size: 2vw; color: #009688;" class="fa fa-check" >Now manage large records with a click.</span><br />
@@ -548,18 +549,19 @@
             </div>
         </div>
     </div>
-    
+
     <div class="container-fluid hidden-lg hidden-md" style="padding: 0px;">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox" style="margin-top: 50px;">
                 <div class="item active">
 
                     <img src="Images/Icon/ro1.jpg" alt="Banner" />
-                    <p style="line-height: 40px; margin-top: 50px; margin-left: 200px;" class="item-1 main-point">                        
-                        <span style="font-size: 20px; font-weight: bold; font-family: 'Arial Rounded MT'; color: black;">Why Us?</span><br /> <br />
-                        <span style="font-size: 4vw; color: #009688;" class="fa fa-cube">&nbsp;Free Demo for 15 days!</span><br />
-                        <span style="font-size: 4vw; color: #009688;" class="fa fa-cube">&nbsp;No issue in cost estimation! Simple Rs 5 per Flat!</span><br />
-                        <span style="font-size: 4vw; color: #009688;" class="fa fa-cube">&nbsp;Share your Ride.</span>
+                    <p style="line-height: 50px; margin-top: 50px; margin-left: 200px;" class="item-1 main-point">
+                        <span style="font-size: 20px; font-weight: bold; font-family: 'Arial Rounded MT'; color: black;">Why Us?</span><br />
+                        <br />
+                        <span style="font-size: 3vw; color: darkgray;">&nbsp;Free Demo for 15 days!</span><br />
+                        <span style="font-size: 3vw; color: darkgray;">&nbsp;No issue in cost estimation! Simple Rs 5 per Flat!</span><br />
+                        <span style="font-size: 3vw; color: darkgray;">&nbsp;Share your Ride.</span>
                     </p>
                 </div>
             </div>
@@ -582,27 +584,27 @@
 
                 <h3 class="text-center hidden-xs" style="color: black; margin-bottom: 20px; font-size: 2vw"><span>Meets all your Society Management needs</span> </h3>
                 <h3 class="hidden-md hidden-lg" style="color: black; margin-bottom: 20px; font-size: 4vw"><span>Meets all your Society Management needs</span> </h3>
-                <div class="col-xs-3 col-sm-3 ">
-                    <div class="item-box box">
-                        <span class="bosre"><span class="fa fa-user fontsize theme_third_main" aria-hidden="true"></span></span>
+                <div class="col-md-3 col-xs-3 col-sm-3 ">
+                    <div class="main-boxs item-box box">
+                        <span class="fa fa-user fa-3x white" aria-hidden="true"></span>
                         <h5>Owners/Residents records</h5>
                     </div>
                 </div>
-                <div class="col-xs-3 col-sm-3">
-                    <div class="item-box box">
-                        <span class="bosre"><span class="fa fa-cubes fontsize theme_third_main" aria-hidden="true"></span></span>
+                <div class="col-md-3 col-xs-3 col-sm-3">
+                    <div class="main-boxs item-box box">
+                        <span class="fa fa-cube fa-3x white" aria-hidden="true"></span>
                         <h5>Complaints Management</h5>
                     </div>
                 </div>
-                <div class="col-xs-3 col-sm-3">
-                    <div class="item-box box">
-                        <span class="bosre"><span class="fa fa-external-link-square fontsize theme_third_main" aria-hidden="true"></span></span>
+                <div class="col-md-3 col-xs-3 col-sm-3">
+                    <div class="main-boxs item-box box">
+                        <span class="fa fa-external-link-square fa-3x white" aria-hidden="true"></span>
                         <h5>Internal Forum Discussion</h5>
                     </div>
                 </div>
-                <div class="col-xs-3 col-sm-3 col-sm-4">
-                    <div class="item-box box">
-                        <span class="bosre"><span class="fa fa-bell-o fontsize theme_third_main" aria-hidden="true"></span></span>
+                <div class="col-md-3 col-xs-3 col-sm-3">
+                    <div class="main-boxs item-box box">
+                        <span class="fa fa-bell-o fa-3x white" aria-hidden="true"></span>
                         <h5>Instant Notifications</h5>
                     </div>
                 </div>
@@ -622,8 +624,15 @@
                     <h3>NestIn</h3>
                     <p class="lead" style="font-size: 18px;">NestIn is developed by Anvisys Technologies  for the Apartment Societies. </p>
                     <p style="text-align: justify;">
-                        NestIn is developed by <a href="http://www.anvisys.net" style="color: red;">Anvisys Technologies Pvt. Ltd.</a> To cater the needs of RWA operations and society management needs. While the trend of residential complex is increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing demand of a management system to manage these operations and communication mechanism to involve residents in operations.<br />
-                        NestIn is our attempt to provide a state of the art, user friendly and secure Society Management System. We are good but not complacent, hence we are improving, enhancing the capabilities, taking the users feedback and working on them. Our dedicated team is working continuously to improve the system to better serve our customer.
+                        NestIn is developed by <a href="http://www.anvisys.net" style="color: red;">Anvisys Technologies Pvt. Ltd.</a> To 
+                        cater the needs of RWA operations and society management needs. While the trend of residential complex is
+                        increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing 
+                        demand of a management system to manage these operations and communication mechanism to involve residents in operations
+                        .<br />
+                        NestIn is our attempt to provide a state of the art, user friendly
+                        and secure Society Management System. We are good but not complacent, hence we are improving,
+                        enhancing the capabilities, taking the users feedback and working on them. Our dedicated team
+                        is working continuously to improve the system to better serve our customer.
                     </p>
                     <a class="btn btn-primary" style="color: #fff;" href="Aboutus.aspx">Read More</a>
 
@@ -646,28 +655,28 @@
     <section class="container">
         <div class="row" style="color: #000;">
             <div class="col-md-3 col-sm-6 col-xs-6">
-                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black;height:230px;">
+                <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-address-book fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Tenant Records</h4>
                     <p>The System has access for Residents, Employee, RWA and Administrator</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6">
-                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black;height:230px;">
+                <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-comments fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Society Forum</h4>
                     <p>Keep the data well organized and well recorded</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6">
-                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black;height:230px;">
+                <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-shopping-bag fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Vendor Directory</h4>
                     <p>Maintian interation among residents, Maintainence activities, Maintain Billing</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6">
-                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black;height:230px;">
+                <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-money fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Society Billing</h4>
                     <p>We belive in evalution and continuous improvement, hence open for customization</p>
@@ -678,7 +687,7 @@
     <section class="container">
         <div class="row" style="color: #000;">
             <div class="col-md-3 col-sm-6 col-xs-6">
-                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black; height:230px;">
+                <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class=" fa fa-bullhorn fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Notice Board</h4>
                     <p>The System has access for Residents, Employee, RWA and Administrator</p>
@@ -686,37 +695,41 @@
             </div>
 
             <div class="col-md-3 col-sm-6 col-xs-6">
-                <div class="featured-box nobg border-only" style="text-align: justify;border: solid 1px black; height:230px;">
+                <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-pie-chart fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Opinion Poll</h4>
                     <p>Keep the data well organized and well recorded</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6">
-                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black; height:230px;">
+                <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-check-square fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>InHouse Services</h4>
                     <p>Maintian interation among residents, Maintainence activities, Maintain Billing</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6">
-                <div class="featured-box nobg border-only" style="text-align: justify;border: solid 1px black; height:230px;">
+                <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-question-circle fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Helpdesk</h4>
                     <p>We belive in evalution and continuous improvement, hence open for customization</p>
                 </div>
             </div>
         </div>
+
+        <br />
+        <br />
     </section>
     <div class="clearfix"></div>
+
     <section class="parallax delayed margin-footer parallax-init" data-stellar-background-ratio="0.7">
         <span class="overlay" style="background-color: #eee;"></span>
         <div class="container">
             <div class="row">
                 <!-- left content -->
                 <div class="col-md-6 animation_fade_in" style="margin-bottom: 20px;">
-                    <h2 style="font-size: 30px;">Pricing</h2>
-                    <p style="font-size: 20px;">
+                    <h3>Pricing</h3>
+                    <p style="font-size: 18px; font-family:'Arial'">
                         We don’t have complex pricing like many other software available as a service. Our is not based on complex 
                         features combination, not on number of users not for duration.
                            It’s Simple<span style="color: blue;"> Rs. 5.00 per flat per month </span>for all society Management Features.
@@ -735,34 +748,75 @@
     </section>
 
     <!-- /WRAPPER -->
-    <section id="download" class="download">
-        <div class="download_overlay"></div>
+
+    <%--<div class="download_overlay"></div>
         <div class="container">
+
             <div class="row">
                 <div class="main_download ">
-                    <div class="col-md-6 col-xs-12">
+                    <div class="col-md-6 col-xs-6">
                         <div class="download_item roomy-100">
                             <h2 class="text-white" style="padding-top: 65px;">How Download the app?</h2>
                             <h4>Just download the app from the store.
                                         Simple, nice and user-friendly application of theweather.
                                         Only relevant and useful information.</h4>
-
-                            <div class="download_app m-top-30">
-
-                                <a href="https://play.google.com/store/apps/details?id=net.anvisys.NestIn" target="_blank">
-                                    <img src="Images/Icon/googleplay.png" style="height: 50px;" alt="Download" /></a>
-                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-xs-12">
-                        <div class="download_item m-top-70">
-                            <img class="app_centre" src="Images/Icon/appdownload1.png" alt="Download App" height="340" />
-                        </div>
+                    <div class="col-md-6 col-xs-6">
+
+                        <img class="app_centre" src="Images/Icon/appdownload1.png" alt="Download App" height="340" />
+
                     </div>
+                </div>
+            </div>
+
+            <div class="download_app m-top-30">
+                <a href="https://play.google.com/store/apps/details?id=net.anvisys.NestIn" target="_blank">
+                    <img src="Images/Icon/googleplay.png" style="height: 50px;" alt="Download" /></a>
+            </div>
+
+
+        </div>--%>
+
+    <section id="download" class="download">
+        <div class="download_overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="hidden-xs hidden-sm col-md-8">
+                    <h2 style="padding-top: 65px; color: white;">How Download the app?</h2>
+                    <h4 style="color: white; text-align:justify;">
+                         Just download the app from the store.
+                         Simple, nice and user-friendly application of the weather.
+                         Only relevant and useful information.
+                    </h4>
+                    <a href="https://play.google.com/store/apps/details?id=net.anvisys.NestIn" target="_blank">
+                        <img src="Images/Icon/googleplay.png" style="height: 50px;" alt="Download" />
+                    </a>
+                </div>
+                <div class="hidden-xs hidden-sm col-md-4">
+                    <img src="Images/Icon/appdownload1.png" style="height: 50vh; width:100%;" />
+                </div>
+            </div>
+
+             <div class="row">
+                <div class="col-xs-12 hidden-md hidden-lg">
+                    <h2 style="padding-top: 65px; color: white;">How Download the app?</h2>
+                    <h4 style="color: white; text-align:justify;">
+                         Just download the app from the store.
+                         Simple, nice and user-friendly application of the weather.
+                         Only relevant and useful information.
+                    </h4>
+                    <a href="https://play.google.com/store/apps/details?id=net.anvisys.NestIn" target="_blank">
+                        <img src="Images/Icon/googleplay.png" style="height: 50px; width:50%;" alt="Download" />
+                    </a>
+                </div>
+                <div class="col-xs-12 hidden-md hidden-lg">
+                    <img src="Images/Icon/appdownload1.png" style="height: 40vh; width:100%;" />
                 </div>
             </div>
         </div>
     </section>
+
     <!-- FOOTER -->
     <footer id="myFooter">
         <div class="container">
@@ -813,6 +867,7 @@
 
         </div>
     </footer>
+
 
     <script>
         window.onscroll = function () { myFunction() };
