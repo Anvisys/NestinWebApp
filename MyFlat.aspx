@@ -47,7 +47,8 @@
             var x = document.getElementById("inAddTMobile");
             // x.addEventListener("focusin", myFocusFunction);
            // x.addEventListener("focusout", ValidateMobile);
-
+            $("#chkUser").prop("checked", true);
+            checkbox();
             window.parent.FrameSourceChanged();
 
             $(window).scroll(function () {
@@ -308,7 +309,7 @@
            // alert(MobileNo);
           //  alert(MobileNo.length);
             if (element.value.length < 10) {
-                document.getElementById("lblMessage").textContent = "Enter valid Mobile Number";
+                document.getElementById("lblMessage").textContent = "Mobile Number Should be of 10 digits..";
                // element.focus();
                 return;
             }
@@ -325,6 +326,7 @@
                 success: function (data) {
                     var da = JSON.stringify(data);
                     if (da != 'null') {
+                        //alert("329 ===>> " +da.length);
                         var js = jQuery.parseJSON(da);
                         MobileExist = true;
                         ResID = js.ResID;
@@ -336,7 +338,7 @@
                         MobileNo = js.MobileNo;
                         EmailId = js.EmailId;
                         if (chkExistingUser == true) {
-                            document.getElementById("lblMessage").textContent = "Mobile No Exist"
+                            document.getElementById("lblMessage").textContent = "Mobile Number Exist341"
                             //document.getElementById("inAddTEmailID").disabled = false;
                             document.getElementById("lblMessage").style.color = "Blue";
                             // alert(chkExistingUser);
@@ -344,16 +346,17 @@
                             //set focus to email id box
                         }
                         else {
-                            document.getElementById("lblMessage").textContent = "Mobile No is in use. Either check the Existing User or use another mobile"
-                            //document.getElementById("inAddTEmailID").disabled = false;
-                            document.getElementById("lblMessage").style.color = "Red";
-                            // alert(chkExistingUser);
+                            //document.getElementById("lblMessage").textContent = "Mobile No is in use. Either check the Existing User or use another mobile"
+                            ////document.getElementById("inAddTEmailID").disabled = false;
+                            //document.getElementById("lblMessage").style.color = "Red";
+                            //// alert(chkExistingUser);
                         }
+                         MobileExist = true;
                     }
                     else {
                         MobileExist = false;
 
-                        document.getElementById("lblMessage").textContent = "Mobile number is available";
+                        document.getElementById("lblMessage").textContent = "User does not exist..! register first 359";
                         document.getElementById("lblMessage").style.color = "Blue";
                         document.getElementById("inAddTEmailID").disabled = false;
                     }
@@ -374,20 +377,23 @@
 
                 document.getElementById("lblMessage").textContent = "Validating Email ID"
 
-                if (MobileExist == true) {
+                if (MobileExist == true)
+                {
                     if (EmailId.toLowerCase() == element.value.toLowerCase()) {
                         EmailExist = true;
-                        document.getElementById("lblMessage").innerHTML = "User Data Matches"
+                        document.getElementById("lblMessage").innerHTML = "Email Address Exists.."
                         FillUserData();
                     }
                     else {
-                        EmailExist = false;
-                        document.getElementById("lblMessage").innerHTML = "EMail do not match with Mobile Number"
+                        //EmailExist = false;
+                        //document.getElementById("lblMessage").innerHTML = "Email Address do not Exist"                        
+                       // alert("Your Mobile Number Matches with our records... do we know you ?");
                     }
                 }
-                else {
-
-                    GetUserByMail(element.value);
+                else
+                {
+                      document.getElementById("lblMessage").textContent = "New User ? Click Here to Register first.";
+                //    GetUserByMail(element.value);
                 }
 
             }
@@ -422,12 +428,13 @@
                         MobileNo = js.MobileNo;
                         EmailId = js.EmailId;
 
-                        document.getElementById("lblMessage").textContent = "Email already exist with some Mobile, use other Email"
+                        document.getElementById("lblMessage").textContent = "Email Address Exist2"
                         document.getElementById("inAddTEmailID").disabled = false;
+                        EmailExist = true;
                     }
                     else {
                         EmailExist = false;
-                        document.getElementById("lblMessage").textContent = "Email is available"
+                        document.getElementById("lblMessage").textContent = "Email does not Exist2"
                         document.getElementById("inAddTEmailID").disabled = false;
                     }
 
@@ -502,12 +509,13 @@
                         //  alert(da);
                         var js = JSON.parse(da);
                         var Response = js.result;
-                        alert(Response)
-                        if (Response == "OK") {
+                        alert(jQuery.type(Response));
+                        alert(Response.localeCompare("Ok"));
+                        if (Response.localeCompare("Ok")===0) {
                             document.getElementById("lblMessage").innerHTML = "User Login Created. Attaching User with Flat...";
-                            //var UserID = js.UserID;
-                            //alert(UserID);
-                           // AddTenant(UserID);
+                            var UserID = js.UserData.UserID;
+                            alert(UserID);
+                            AddTenant(UserID);
                         }
                         else {
                             document.getElementById("lblMessage").innerHTML = "Could not Add User, try again or later";
@@ -649,20 +657,38 @@
         }
 
 
-        jQuery(document).ready(function () {
+        //jQuery(document).ready(function () {
 
-            $("#chkUser").click(function () {
-                $('#inAddTFirstName,#inAddTLastName,#inAddTParentName,#mgender,#inAddTAddress,#inAddPassword,#inTConfirmPassword').attr("disabled", $(this).is(":checked"));
-                if ($(this).is(":checked")) {
+        //    //$("#chkUser").click(function () {
+        //    //    $('#inAddTFirstName,#inAddTLastName,#inAddTParentName,#mgender,#inAddTAddress,#inAddPassword,#inTConfirmPassword').attr("disabled", $(this).is(":checked"));
+        //    //    if ($(this).is(":checked")) {
 
-                    chkExistingUser = true;
-                }
-                else {
+        //    //        chkExistingUser = true;
+        //    //    }
+        //    //    else {
 
+        //    //        chkExistingUser = false;
+        //    //    }
+        //    //});
+        //    checkbox();
+        //});
+
+        function checkbox()
+        {
+          //  alert("672 ==>> " + jQuery.type($("#chkUser").is(":checked")));
+            if ($("#chkUser").is(":checked"))
+            {
+               // alert("675 in if");
+                $('#inAddTFirstName,#inAddTLastName,#inAddTParentName,#mgender,#inAddTAddress,#inAddPassword,#inTConfirmPassword').attr("disabled", "disabled");
+                 chkExistingUser = true;
+            }
+            else
+            {
+                //alert("681 in else");
                     chkExistingUser = false;
-                }
-            });
-        });
+            }
+
+        }
 
         $(document).ready(function () {
             $("#btnCancel,#Close_mod").click(function () {
@@ -1141,6 +1167,22 @@
            PopulateAddModal();
        }
 
+       function fill() {
+           var emailfield = document.getElementById("inAddTEmailID").value;
+           var numberfield = document.getElementById("inAddTMobile").value;
+           if (emailfield == null || numberfield == null) {
+               alert("Email Address or Mobile Number should not be empty ..!");
+           }
+           else if (MobileExist && EmailExist) {
+               GetUserByMail(emailfield);
+               FillUserData();
+           }
+           else
+           {
+              
+           }
+       }
+
 
     </script>
 
@@ -1348,8 +1390,8 @@
 
                             <div class="modal-body">
 
-                                <label class="labelwidth">Existing Users :</label>
-                                <input id="chkUser" type="checkbox" />
+                               
+                                <input id="chkUser" type="checkbox" style="display:none;"/>
                                 &nbsp;
                             <label id="lblMessage"></label>
                                 <br />
@@ -1365,7 +1407,8 @@
 
                                     </div>
 
-
+                                  
+                           
                                 </div>
                                 <hr />
                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
