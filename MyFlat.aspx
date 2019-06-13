@@ -454,7 +454,7 @@
 
         function AddUser() {
             if ((MobileExist == true && EmailExist == false) || (MobileExist == false && EmailExist == true)) {
-                document.getElementById("lblMessage").innerHTML = "Either of Mobile and Email does not match, other propert match;";
+                document.getElementById("lblMessage").innerHTML = "Either of Mobile and Email does not match, other property match;";
                 return;
             }
 
@@ -477,15 +477,16 @@
             Gender = e.options[e.selectedIndex].text;
             var HouseID = 0;
 
-            if (true/*MobileExist == false && EmailExist == false*/) {
+            if (MobileExist == false && EmailExist == false) {
                 // var reqBody = "{\"StartIndex\":" + minvalue + ",\"EndIndex\":" + maxvalue + "}";
-                var reqBody = "{\"UserType\":\"Tenant\", \"FirstName\":\"" + FirstName + "\",\"LastName\":\"" + LastName + "\", \"MobileNo\":\"" + MobileNo
-                    + "\", \"EmailId\":\"" + EmailId + "\", \"Address\":\"" + Address + "\", \"Gender\":\"" + Gender + "\", \"Parentname\":\"" + ParentName
-                    + "\", \"SocietyId\":" + SocietyID + ", \"UserLogin\":\"" + UserLogin + "\", \"Password\":\"" + Password + "\", \"FlatID\":\"" + FlatID + "\", \"HouseID\":\"" + HouseID + "}";
+                //var reqBody = "{\"UserType\":\"Tenant\", \"FirstName\":\"" + FirstName + "\",\"LastName\":\"" + LastName + "\", \"MobileNo\":\"" + MobileNo
+                //    + "\", \"EmailId\":\"" + EmailId + "\", \"Address\":\"" + Address + "\", \"Gender\":\"" + Gender + "\", \"Parentname\":\"" + ParentName
+                //    + "\", \"SocietyId\":" + SocietyID + ", \"UserLogin\":\"" + UserLogin + "\", \"Password\":\"" + Password + "\", \"FlatID\":\"" + FlatID + "\", \"HouseID\":\"" + HouseID + "}";
 
-                var url = api_url + "/api/Tenant/New";
+                var reqBody = "{\"FirstName\":\"" + FirstName + "\",\"LastName\":\"" + LastName + "\",\"Parentname\":\"" + ParentName + "\",\"Gender\":\"" + Gender + "\",\"Address\":\"" + Address + "\",\"MobileNo\":\"" + MobileNo + "\",\"EmailId\":\"" + EmailId + "\",\"UserLogin\":\"" + EmailId + "\",\"Password\":\"" + Password + "\"} ";
+                var url = api_url + "/api/User/Add/Register";
 
-                  alert(reqBody);
+                alert(url);
 
                 //AddTenant(100111);
 
@@ -499,8 +500,9 @@
                     success: function (data) {
                         var da = JSON.stringify(data);
                         //  alert(da);
-                        var js = jQuery.parseJSON(da);
-                        var Response = js.Response;
+                        var js = JSON.parse(da);
+                        var Response = js.result;
+                        alert(Response)
                         if (Response == "OK") {
                             document.getElementById("lblMessage").innerHTML = "User Login Created. Attaching User with Flat...";
                             //var UserID = js.UserID;

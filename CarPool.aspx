@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link href="Styles/MyFlat.css" rel="stylesheet" type="text/css" />
+    <%--<link href="Styles/MyFlat.css" rel="stylesheet" type="text/css" />--%>
     <script src="Scripts/jquery-1.11.1.min.js"></script>
 
     <link rel="stylesheet" href="CSS/ApttTheme.css" />
@@ -36,7 +36,7 @@
             api_url = '<%=Session["api_url"] %>';
             _ResID = <%=ResID%>;
             GetPoolOffers();
-            GetMyPoolOffers();
+           // GetMyPoolOffers();
 
         });
 
@@ -64,7 +64,7 @@
             var strData = "";
             $("#CarPool").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
-            console.log(results);
+          //  console.log(results);
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
 
@@ -141,6 +141,7 @@
                 success: function (data) {
 
                     $("#showInterestModal").hide();
+                    document.location.reload();
                 },
                 error: function (data, errorThrown) {
                     alert('User Creation failed :' + errorThrown);
