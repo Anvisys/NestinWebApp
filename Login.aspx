@@ -27,14 +27,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
+    <!-- New bootstrap -->
+
+
+
+    <!-- End New bootstrap -->
+
+
     <link href="CSS_3rdParty/settings.css" rel="stylesheet" type="text/css" />
     <!-- THEME CSS -->
     <link href="CSS_3rdParty/essentials.css" rel="stylesheet" type="text/css" />
     <link href="CSS_3rdParty/layout.css" rel="stylesheet" type="text/css" />
     <link href="CSS_3rdParty/layout-responsive.css" rel="stylesheet" type="text/css" />
-     <link  href="CSS_3rdParty/footer.css" rel="stylesheet" type="text/css"/>
+    <link href="CSS_3rdParty/footer.css" rel="stylesheet" type="text/css" />
 
-     <link href="CSS_3rdParty/mythirdpartystylesheets.css" rel="stylesheet" type="text/css" />
+    <link href="CSS_3rdParty/mythirdpartystylesheets.css" rel="stylesheet" type="text/css" />
 
     <%--<link href="CSS/layout.css" rel="stylesheet" />
     <link href="CSS/Responsive.css" rel="stylesheet" />
@@ -44,7 +51,7 @@
     <link rel="stylesheet" href="CSS/Nestin.css" />
     <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />--%>
 
-     <link href="CSS/IP.css" rel="stylesheet" />
+    <link href="CSS/IP.css" rel="stylesheet" />
 
     <script>
         var api_url;
@@ -74,11 +81,11 @@
                     success: function (response) {
 
                         if (response.d == 1) {
-                         
+
                             window.location = "MainPage.aspx";
                         }
                         else if (response.d == 0) {
-                        
+
                             window.location = "Role.aspx";
                         }
                         else if (response.d == -1) {
@@ -187,16 +194,15 @@
             right: -7px;
             top: -7px;
             cursor: pointer;
-            color:indianred;
+            color: indianred;
         }
 
         .bosre {
             padding: 8px 0 0 0;
-            border-radius: 50%;
-            height: 78px;
-            width: 78px;
+            border-radius: 100%;
+            height: 30px;
+            width: 60px;
             display: inline-block;
-            margin: 0 0 12px 0;
         }
 
         .Forgot_button {
@@ -327,15 +333,13 @@
                 }
         }
 
-        .main-point{
-            font-family:"Open Sans", Arial, sans-serif;
-            font-style:normal;
-            font-weight:100!important;
-            font-size:20px;
-            color:#2e363f;
+        .main-point {
+            font-family: "Open Sans", Arial, sans-serif;
+            font-style: normal;
+            font-weight: 100 !important;
+            font-size: 20px;
+            color: #2e363f;
         }
-    
-
     </style>
 
 
@@ -346,7 +350,7 @@
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
                 n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
             if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
             n.queue = []; t = b.createElement(e); t.async = !0;
@@ -361,6 +365,17 @@
           src="https://www.facebook.com/tr?id=277102566548362&ev=PageView&noscript=1"
         /></noscript>
     <!-- End Facebook Pixel Code -->
+    <style>
+        .nav-color {
+            background: #727CF5;
+        }
+    </style>
+
+    <!-- For RENT -->
+
+
+    <!-- end Rent -->
+
 </head>
 <body>
 
@@ -369,16 +384,16 @@
         <%--Login Popup --%>
 
         <div class="login_div" id="loginModal">
-           <%-- <img id="close" class="close" src="Images/Icon/close_red.png" alt="close" width="25" height="25" style="background-size: contain;" />--%>
+            <%-- <img id="close" class="close" src="Images/Icon/close_red.png" alt="close" width="25" height="25" style="background-size: contain;" />--%>
 
-            <a id="close" class="close"><span  class="fa fa-times-circle"></span></a>
+            <a id="close" class="close"><span class="fa fa-times-circle"></span></a>
             <br />
 
-            <div class="login_div_body" >
+            <div class="login_div_body">
                 <%-- <img src="Images/Icon/login_icon.png"  width="25" height="25"/>--%>
                 <i class="fa fa-user-circle-o" style="color: #000;" aria-hidden="true"></i>
 
-              
+
                 <asp:Label ID="lbltext" runat="server" Style="color: #000;" Text="Account Login "></asp:Label>
 
                 <h4 style="margin-bottom: 0;">
@@ -453,114 +468,139 @@
     </form>
 
 
-    <header id="topNav" class="layout_header top-NavigationBar" >
+    <header id="topNav" class="layout_header top-NavigationBar">
 
-          <!-- scroll bar progress -->
-             <div class="progress-container">
-             <div class="progress-bar" id="myBar"></div>
-             </div>
+        <!-- scroll bar progress -->
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div>
         <!-- End progress -->
 
 
         <div class="container-fluid">
-            <div class="col-sm-4 col-xs-6 zero-margin">
-                <!-- Mobile Menu Button -->
-
-                <a class="logo" href="Login.aspx">
-                    <img src="Images/Icon/Logo1.png" height="50" alt="Logo" />
-                </a>
-            </div>
-            <div class="col-sm-4 hidden-xs zero-margin">
-                <!-- Logo text or image -->
-
-                <h1 class="title" style="color:#fff;padding-top:11px;text-align:center;font-size:x-large;"> Society Management System</h1>
-                <!-- Top Nav -->
-
-            </div>
-            <div class="col-sm-4 col-xs-6 zero-margin">
-                <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse"><i class="fa fa-bars"></i></button>
-                <div class="navbar-collapse nav-main-collapse collapse pull-right" style="margin-top: 9px; color: white; text-align: center;">
-                    <nav class="nav-main mega-menu">
-                        <ul class="nav nav-pills nav-main scroll-menu nav-small" id="topMain">
-                            <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
-                            <li class=" "><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
-
-                            <li class=" "><a class="menu_text" href="contact.aspx">Contact </a></li>
-                            <li class=" "><a class="menu_text" href="#" id="login">Login</a></li>
-                            <li class=" "><a class="menu_text" href="register.aspx" id="register">Register</a></li>
-                            <!-- GLOBAL SEARCH -->
-                            <li class=""><a class="menu_text" href="Rent.aspx" id="rent">Rent</a> </li>
-
-                        </ul>
-                    </nav>
+            <div class="row">
+                <div class="col-md-5 col-xs-12">
+                    <div class="navbar-header">
+                        <a class="logo col-xs-2" href="Login.aspx">
+                            <img src="Images/Icon/Logo1.png" height="50" alt="Logo" />
+                        </a>
+                        <div class="navbar-inverse">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <%-- <h1 class="title hidden-xs" style="color: #fff; padding-top: 11px; font-size:30px;">Society Management System</h1>--%>
+                </div>
+                <div class="col-md-7">
+                    <div class="collapse navbar-collapse pull-right" id="myNavbar" style="margin-top: 9px; text-align: center;">
+                        <nav class="nav navbar-nav nav-color">
+                            <ul class="nav nav-pills nav-main scroll-menu nav-small" id="topMain">
+                                <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
+                                <li class=" "><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
+                                <li class=" "><a class="menu_text" href="contact.aspx">Contact </a></li>
+                                <li class=" "><a class="menu_text" href="#" id="login">Login</a></li>
+                                <li class=" "><a class="menu_text" href="register.aspx" id="register">Register</a></li>
+                                <li class=""><a class="menu_text" href="Rent.aspx" id="rent">Rent</a> </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
-            <!-- /Top Nav -->
-
         </div>
+
+
     </header>
 
+
+
+    <%--new navigation bar @SB--%>
+
+
     <!-- WRAPPER -->
-    <span itemtype="http://schema.org/SoftwareApplication" />
+
 
     <!-- REVOLUTION SLIDER -->
 
-    <div class="container-fluid" style="padding: 0px;">
-
+    <div class="container-fluid hidden-xs hidden-sm" style="padding: 0px;">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox" style="margin-top: 45px; ">
-
+            <div class="carousel-inner" role="listbox" style="margin-top: 50px;">
                 <div class="item active">
-                    <img src="Images/Icon/ro1.jpg" alt="Banner"  />
 
-                    <h3 style="line-height: 32px; margin-top: 60px; color: #000; margin-left: 90px;" class="item-1 main-point"><span class="fa fa-check" style="color: #009688;"></span>Get instant Payment, activity alerts via Email/SMS.<br />
-                        <span class="fa fa-check" style="color: #009688;"></span>A SMART Housing Society Management Solution<br />
-                        <span class="fa fa-check" style="color: #009688;"></span>Fast Complaint resolution with effective Ticket System<br />
-                        <span class="fa fa-check" style="color: #009688;"></span>Get Popular, Reliable Vendors At your doorstep<br />
-                        <span class="fa fa-check" style="color: #009688;"></span>Manage all registers, documents and MOM effectively<br />
-                        <span class="fa fa-check" style="color: #009688;"></span>Replace the Manual Visitor Register
-                    </h3>
+                    <img src="Images/Icon/ro1.jpg" alt="Banner" />
+                    <p style="line-height: 40px; margin-top: 50px; margin-left: 130px;" class="item-1 main-point">
+                        <span style="font-size: 35px; font-weight: bold; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: #727CF5;" class="hidden-xs">Society Management System</span><br />
+                        <br />
+                        <span style="font-size: 30px; font-weight: bold; font-family:'Arial Rounded MT'; color: black;">Why Us?</span><br />
+                        <br />
+                        <span style="font-size: 25px; color: darkgray;">&nbsp;Free Demo for 15 days!</span><br />
+                        <span style="font-size: 25px; color: darkgray;">&nbsp;No issue in cost estimation! Simple Rs 5 per Flat!</span><br />
+                        <span style="font-size: 25px; color: darkgray;">&nbsp;Share your Ride.</span>
 
 
-                    <%--<div class="carousel-caption hidden-xs" ><h1 style="color:#fff;margin-bottom:-34px;font-size:28px;" > Housing Society Management and connecting with your neighbour</h1></div>--%>
+                        <%-- <span style="font-size: 2vw; color: #009688;" class="fa fa-check" >Now manage large records with a click.</span><br />
+                        <span style="font-size: 2vw; color: #009688;" class="fa fa-check" >Get instant notification via Sms/Mail.</span><br />
+                        <span style="font-size: 2vw; color: #009688;" class="fa fa-check" >Rent in, Rent out, Flats/Villa/Houses with no third party involvement.</span><br />--%>
+                    </p>
                 </div>
-
-
-                <!-- Controls -->
-
             </div>
         </div>
     </div>
-    <!-- /REVOLUTION SLIDER -->
+    
+    <div class="container-fluid hidden-lg hidden-md" style="padding: 0px;">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" role="listbox" style="margin-top: 50px;">
+                <div class="item active">
+
+                    <img src="Images/Icon/ro1.jpg" alt="Banner" />
+                    <p style="line-height: 40px; margin-top: 50px; margin-left: 200px;" class="item-1 main-point">                        
+                        <span style="font-size: 20px; font-weight: bold; font-family: 'Arial Rounded MT'; color: black;">Why Us?</span><br /> <br />
+                        <span style="font-size: 4vw; color: #009688;" class="fa fa-cube">&nbsp;Free Demo for 15 days!</span><br />
+                        <span style="font-size: 4vw; color: #009688;" class="fa fa-cube">&nbsp;No issue in cost estimation! Simple Rs 5 per Flat!</span><br />
+                        <span style="font-size: 4vw; color: #009688;" class="fa fa-cube">&nbsp;Share your Ride.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- RENT -->
+
+
+
+    <!-- END RENT -->
+
 
     <section class="goletfullwidth text-center" style="background-color: #d9d9d9; color: blue;">
         <div class="container">
             <div class="row">
 
-                <h3 class="text-center" style="color: black; margin-bottom: 20px;"><span class="">Meets all your Society Management needs</span> </h3>
-                <div class="col-xs-6 col-sm-3 ">
+                <h3 class="text-center hidden-xs" style="color: black; margin-bottom: 20px; font-size: 2vw"><span>Meets all your Society Management needs</span> </h3>
+                <h3 class="hidden-md hidden-lg" style="color: black; margin-bottom: 20px; font-size: 4vw"><span>Meets all your Society Management needs</span> </h3>
+                <div class="col-xs-3 col-sm-3 ">
                     <div class="item-box box">
-                        <span class="bosre"><span class="fa fa-user fontsize theme_third_main" aria-hidden="true"></span></span>                   
-                        <h5>Owners/ Residents records</h5>
+                        <span class="bosre"><span class="fa fa-user fontsize theme_third_main" aria-hidden="true"></span></span>
+                        <h5>Owners/Residents records</h5>
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-3">
+                <div class="col-xs-3 col-sm-3">
                     <div class="item-box box">
                         <span class="bosre"><span class="fa fa-cubes fontsize theme_third_main" aria-hidden="true"></span></span>
                         <h5>Complaints Management</h5>
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-3">
+                <div class="col-xs-3 col-sm-3">
                     <div class="item-box box">
                         <span class="bosre"><span class="fa fa-external-link-square fontsize theme_third_main" aria-hidden="true"></span></span>
                         <h5>Internal Forum Discussion</h5>
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-3 col-sm-4">
+                <div class="col-xs-3 col-sm-3 col-sm-4">
                     <div class="item-box box">
                         <span class="bosre"><span class="fa fa-bell-o fontsize theme_third_main" aria-hidden="true"></span></span>
                         <h5>Instant Notifications</h5>
@@ -582,13 +622,13 @@
                     <h3>NestIn</h3>
                     <p class="lead" style="font-size: 18px;">NestIn is developed by Anvisys Technologies  for the Apartment Societies. </p>
                     <p style="text-align: justify;">
-                        NestIn is developed by <a href="www.anvisys.net">Anvisys Technologies Pvt. Ltd.</a> To cater the needs of RWA operations and society management needs. While the trend of residential complex is increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing demand of a management system to manage these operations and communication mechanism to involve residents in operations.<br />
+                        NestIn is developed by <a href="http://www.anvisys.net" style="color: red;">Anvisys Technologies Pvt. Ltd.</a> To cater the needs of RWA operations and society management needs. While the trend of residential complex is increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing demand of a management system to manage these operations and communication mechanism to involve residents in operations.<br />
                         NestIn is our attempt to provide a state of the art, user friendly and secure Society Management System. We are good but not complacent, hence we are improving, enhancing the capabilities, taking the users feedback and working on them. Our dedicated team is working continuously to improve the system to better serve our customer.
                     </p>
-                    <a class="btn btn-primary" style="color: #fff;" href="Aboutus.aspx">Read More</a><br />
-                    <br />
+                    <a class="btn btn-primary" style="color: #fff;" href="Aboutus.aspx">Read More</a>
 
-                    <a class="btn btn-primary" style="color: #fff;" href="Register.aspx">RegisterNow</a>
+
+                    <a class="btn btn-warning" style="color: #fff;" href="Register.aspx">RegisterNow</a>
                 </div>
 
                 <!-- right image -->
@@ -605,32 +645,31 @@
     <!-- hr line -->
     <section class="container">
         <div class="row" style="color: #000;">
-            <div class="col-md-3">
-                <div class="featured-box nobg border-only" style="text-align: center;">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black;height:230px;">
                     <span class="bosre"><span class="fa fa-address-book fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Tenant Records</h4>
                     <p>The System has access for Residents, Employee, RWA and Administrator</p>
                 </div>
             </div>
-
-            <div class="col-md-3">
-                <div class="featured-box nobg border-only left-separator" style="text-align: center;">
-                    <span class="bosre" style="align-self: center;"><span class="fa fa-comments fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black;height:230px;">
+                    <span class="bosre"><span class="fa fa-comments fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Society Forum</h4>
                     <p>Keep the data well organized and well recorded</p>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="featured-box nobg border-only left-separator">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black;height:230px;">
                     <span class="bosre"><span class="fa fa-shopping-bag fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Vendor Directory</h4>
                     <p>Maintian interation among residents, Maintainence activities, Maintain Billing</p>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="featured-box nobg border-only left-separator">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black;height:230px;">
                     <span class="bosre"><span class="fa fa-money fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
-                    <h4>Society billing</h4>
+                    <h4>Society Billing</h4>
                     <p>We belive in evalution and continuous improvement, hence open for customization</p>
                 </div>
             </div>
@@ -638,30 +677,30 @@
     </section>
     <section class="container">
         <div class="row" style="color: #000;">
-            <div class="col-md-3">
-                <div class="featured-box nobg border-only" style="text-align: center;">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black; height:230px;">
                     <span class="bosre"><span class=" fa fa-bullhorn fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Notice Board</h4>
                     <p>The System has access for Residents, Employee, RWA and Administrator</p>
                 </div>
             </div>
 
-            <div class="col-md-3">
-                <div class="featured-box nobg border-only left-separator" style="text-align: center;">
-                    <span class="bosre" style="align-self: center;"><span class="fa fa-pie-chart fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify;border: solid 1px black; height:230px;">
+                    <span class="bosre"><span class="fa fa-pie-chart fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Opinion Poll</h4>
                     <p>Keep the data well organized and well recorded</p>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="featured-box nobg border-only left-separator">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black; height:230px;">
                     <span class="bosre"><span class="fa fa-check-square fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>InHouse Services</h4>
                     <p>Maintian interation among residents, Maintainence activities, Maintain Billing</p>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="featured-box nobg border-only left-separator">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify;border: solid 1px black; height:230px;">
                     <span class="bosre"><span class="fa fa-question-circle fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Helpdesk</h4>
                     <p>We belive in evalution and continuous improvement, hence open for customization</p>
@@ -676,14 +715,17 @@
             <div class="row">
                 <!-- left content -->
                 <div class="col-md-6 animation_fade_in" style="margin-bottom: 20px;">
-                    <h2>Pricing</h2>
-                    <h4 style="text-align: justify;">We don’t have complex pricing like many other software available as a service. Our is not based on complex features combination, not on number of users not for duration.
-                           It’s Simple<span style="color: blue;"> Rs. 5.00 per flat per month </span>for all society Management Features.</h4>
+                    <h2 style="font-size: 30px;">Pricing</h2>
+                    <p style="font-size: 20px;">
+                        We don’t have complex pricing like many other software available as a service. Our is not based on complex 
+                        features combination, not on number of users not for duration.
+                           It’s Simple<span style="color: blue;"> Rs. 5.00 per flat per month </span>for all society Management Features.
+                    </p>
 
                     <a class="btn btn-primary" style="color: #fff;" href="register.aspx?Role=demo">Start Free Trial</a>
                 </div>
 
-                <div class="col-md-6 animation_fade_in">
+                <div class="col-md-6 hidden-xs animation_fade_in">
                     <img src="Images/Icon/test1.png" alt="Pricing" width="500" height="400" />
                 </div>
                 <!-- left image -->
@@ -725,11 +767,11 @@
     <footer id="myFooter">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-md-3 hidden-xs">
                     <h2 class="logo1">
                         <img src="Images/Icon/iconHome.png" height="50" alt="" /></h2>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-md-2 col-xs-4">
                     <h5>Get started</h5>
                     <ul>
                         <li><a href="Login.aspx">Home</a></li>
@@ -737,7 +779,7 @@
                         <li><a href="contact.aspx">Contact us</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-md-2 col-xs-4">
                     <h5>Quick Link</h5>
                     <ul>
                         <li><a href="Aboutus.aspx">About us</a></li>
@@ -745,7 +787,7 @@
                         <li><a href="PrivacyPolicy.aspx">Privacy policy</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-md-2 col-xs-4">
                     <h5>Support</h5>
                     <ul>
                         <li><a href="#">FAQ</a></li>
@@ -753,13 +795,15 @@
                         <li><a href="#">Terms Of Use</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-xs-12">
                     <div class="social-networks">
                         <a href="https://www.facebook.com/NestIn.Online/" target="_blank" class="facebook"><i class="fa fa-facebook" style="color: dodgerblue; border: solid 1px; padding: 5px;"></i></a>
                         <a href="https://in.linkedin.com/company/anvisys" target="_blank" class="twitter"><i class="fa fa-linkedin" style="color: deepskyblue; border: solid 1px; padding: 5px;"></i></a>
                         <a href="#" class="google"><i class="fa fa-google-plus" style="color: red; border: solid 1px; padding: 5px;"></i></a>
                     </div>
-                    <button type="button" class="btn btn-default"><a href="contact.aspx">Contact us</a> </button>
+                    <button type="button" class="btn btn-default">
+                        <a href="contact.aspx">Contact us</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -770,14 +814,14 @@
         </div>
     </footer>
 
-      <script>
-           window.onscroll = function() {myFunction()};
-              function myFunction() {
-              var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-              var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-              var scrolled = (winScroll / height) * 100;
-              document.getElementById("myBar").style.width = scrolled + "%";
-            }
+    <script>
+        window.onscroll = function () { myFunction() };
+        function myFunction() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        }
     </script>
 
 

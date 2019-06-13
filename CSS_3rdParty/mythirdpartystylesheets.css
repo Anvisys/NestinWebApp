@@ -1541,7 +1541,7 @@ p {
 }
 
 .text-center {
-    text-align: center
+    text-align: center;
 }
 
 .text-justify {
@@ -1847,7 +1847,8 @@ pre {
 
 @media (min-width:1200px) {
     .container {
-        width: 1170px
+        width: 1170px;
+        
     }
 }
 
@@ -1855,7 +1856,8 @@ pre {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
-    margin-left: auto
+    margin-left: auto;
+    
 }
 
 .row {
@@ -3093,16 +3095,16 @@ select[multiple].input-sm, textarea.input-sm {
     padding: 5px 10px;
     font-size: 12px;
     line-height: 1.5;
-    border-radius: 3px
+    border-radius: 5px;
 }
 
 .form-group-sm select.form-control {
     height: 30px;
-    line-height: 30px
+    line-height: 30px;
 }
 
 .form-group-sm select[multiple].form-control, .form-group-sm textarea.form-control {
-    height: auto
+    height: auto;
 }
 
 .form-group-sm .form-control-static {
@@ -3110,7 +3112,7 @@ select[multiple].input-sm, textarea.input-sm {
     min-height: 32px;
     padding: 6px 10px;
     font-size: 12px;
-    line-height: 1.5
+    line-height: 1.5;
 }
 
 .input-lg {
@@ -3135,7 +3137,7 @@ select[multiple].input-lg, textarea.input-lg {
     padding: 10px 16px;
     font-size: 18px;
     line-height: 1.3333333;
-    border-radius: 6px
+    border-radius: 10px;
 }
 
 .form-group-lg select.form-control {
@@ -6680,7 +6682,7 @@ button.close {
     }
 
 .carousel {
-    position: relative
+    position: initial;
 }
 
 .carousel-inner {
@@ -8190,7 +8192,7 @@ h3.page-header a {
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    top: -10px;
     bottom: 0;
     -webkit-transition: all 1s;
     -moz-transition: all 1s;

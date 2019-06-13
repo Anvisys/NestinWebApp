@@ -1492,7 +1492,8 @@ header#topHead {
         }
 
 .carousel-inner > .item > a > img, .carousel-inner > .item > img {
-    width: 100%
+    width: 100%;
+    height: 100%;
 }
 
 header#topNav.topHead {
@@ -1700,7 +1701,7 @@ header#topNav {
 }
 
 .fontsize {
-    font-size: 50px;
+    font-size: 30px;
     color: #fff;
 }
 
@@ -1996,9 +1997,9 @@ body {
 ********************/
 
 body {
-    background-color: #f7f7f7 !important;
-    margin: 0px;
-    padding: 0px;
+    background-color: #ffffff !important;
+    margin-top: 10px;
+    
 }
 
 .glyphicon {
