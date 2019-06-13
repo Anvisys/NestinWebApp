@@ -223,7 +223,7 @@ public class Resident
     public bool UpdateResidentDeactive(DateTime Date, string UserID)
     {
         DataAccess dacess = new DataAccess();
-        String DeactiveUserQuery = "Update " + CONSTANTS.Table_SocietyUser + "  set DeActiveDate = '" + Date + "' where UserID = '" + UserID + "'";
+        String DeactiveUserQuery = "Update " + CONSTANTS.Table_SocietyUser + "  set DeActiveDate = '" + Date + "' , where UserID = '" + UserID + "'";
         bool result = dacess.Update(DeactiveUserQuery);
         return result;
     }
@@ -410,7 +410,7 @@ public class Resident
             DataAccess dacess = new DataAccess();
             String UpdateQuery = "update " + CONSTANTS.Table_SocietyUser
                                + " set ActiveDate = '" + Utility.ChangeDateTimeLocalToSQLServerFormat(_activeDate) + "', DeActiveDate = '" + Utility.ChangeDateTimeLocalToSQLServerFormat(_deactiveDate)
-                               + "', Status = 0 Where ResID = " + _ResId;
+                               + "', Status = 2 Where ResID = " + _ResId;
             
             bool result = dacess.Update(UpdateQuery);
             return result;
