@@ -8192,7 +8192,7 @@ h3.page-header a {
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    top: -10px;
     bottom: 0;
     -webkit-transition: all 1s;
     -moz-transition: all 1s;

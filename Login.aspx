@@ -202,9 +202,7 @@
             border-radius: 100%;
             height: 30px;
             width: 60px;
-            margin-top: 20px;
             display: inline-block;
-            margin: 0 0 12px 0;
         }
 
         .Forgot_button {
@@ -494,8 +492,8 @@
                             </button>
                         </div>
                     </div>
-                   <%-- <h1 class="title hidden-xs" style="color: #fff; padding-top: 11px; font-size:30px;">Society Management System</h1>--%>
-              </div>
+                    <%-- <h1 class="title hidden-xs" style="color: #fff; padding-top: 11px; font-size:30px;">Society Management System</h1>--%>
+                </div>
                 <div class="col-md-7">
                     <div class="collapse navbar-collapse pull-right" id="myNavbar" style="margin-top: 9px; text-align: center;">
                         <nav class="nav navbar-nav nav-color">
@@ -522,24 +520,27 @@
 
 
     <!-- WRAPPER -->
-    <span itemtype="http://schema.org/SoftwareApplication" />
+
 
     <!-- REVOLUTION SLIDER -->
 
-    <div class="container-fluid" style="padding: 0px;">
+    <div class="container-fluid hidden-xs hidden-sm" style="padding: 0px;">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox" style="margin-top: 50px;">
                 <div class="item active">
 
                     <img src="Images/Icon/ro1.jpg" alt="Banner" />
-                    <p style="line-height: 40px; margin-top: 80px; margin-left: 200px;" class="item-1 main-point">
-                        <span style="font-size: 35px; font-weight:bold; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: #727CF5;" class="hidden-xs">Society Management System</span><br /><br />
-                        <span style="font-size: 25px; font-weight:bold; font-family: cursive, 'Arial Narrow', Arial, sans-serif; color: black;">Why Us?</span><br /><br />
-                        <span style="font-size: 18px; color: #009688;" class="fa fa-cube">&nbsp;Free Demo for 15 days!</span><br />
-                        <span style="font-size: 18px; color: #009688;" class="fa fa-cube">&nbsp;No issue in cost estimation! Simple Rs 5 per Flat!</span><br />
-                        <span style="font-size: 18px; color: #009688;" class="fa fa-cube">&nbsp;Share your Ride.</span><br />
-                        <%-- <span style="font-size: 2vw; color: #009688;" class="fa fa-check" >Easy and better Vendor Management.</span><br />
-                        <span style="font-size: 2vw; color: #009688;" class="fa fa-check" >Now manage large records with a click.</span><br />
+                    <p style="line-height: 40px; margin-top: 50px; margin-left: 130px;" class="item-1 main-point">
+                        <span style="font-size: 35px; font-weight: bold; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: #727CF5;" class="hidden-xs">Society Management System</span><br />
+                        <br />
+                        <span style="font-size: 30px; font-weight: bold; font-family:'Arial Rounded MT'; color: black;">Why Us?</span><br />
+                        <br />
+                        <span style="font-size: 25px; color: darkgray;">&nbsp;Free Demo for 15 days!</span><br />
+                        <span style="font-size: 25px; color: darkgray;">&nbsp;No issue in cost estimation! Simple Rs 5 per Flat!</span><br />
+                        <span style="font-size: 25px; color: darkgray;">&nbsp;Share your Ride.</span>
+
+
+                        <%-- <span style="font-size: 2vw; color: #009688;" class="fa fa-check" >Now manage large records with a click.</span><br />
                         <span style="font-size: 2vw; color: #009688;" class="fa fa-check" >Get instant notification via Sms/Mail.</span><br />
                         <span style="font-size: 2vw; color: #009688;" class="fa fa-check" >Rent in, Rent out, Flats/Villa/Houses with no third party involvement.</span><br />--%>
                     </p>
@@ -547,28 +548,26 @@
             </div>
         </div>
     </div>
-    <%-- <br />
-    <div class="container-fluid" style="background: white;">
-        <div class="row">
-            <div class="col-md-7 col-xs-4">
-                <p style="line-height: 25px; margin-top: 90px; margin-left: 5px;">
-                    <span style="font-size: 3vw; font-family: 'Times New Roman', Times, serif; color: black;">Why Us?</span><br />
-                    <span style="font-size: 2vw; color: #009688;" class="fa fa-check">Free Demo for 15 days!</span><br />
-                    <span style="font-size: 2vw; color: #009688;" class="fa fa-check">No issue in cost estimation! Simple Rs 5 per Flat!</span><br />
-                    <span style="font-size: 2vw; color: #009688;" class="fa fa-check">Share your Ride.</span><br />
-                    <span style="font-size: 2vw; color: #009688;" class="fa fa-check">Easy and better Vendor Management.</span><br />
-                    <span style="font-size: 2vw; color: #009688;" class="fa fa-check">Now manage large records with a click.</span><br />
-                    <span style="font-size: 2vw; color: #009688;" class="fa fa-check">Get instant notification via Sms/Mail.</span><br />
-                    <span style="font-size: 2vw; color: #009688;" class="fa fa-check">Rent in, Rent out, Flats/Villa/Houses with no third party involvement.</span><br />
-                </p>
-            </div>
-            <div class="col-md-5 col-xs-8">
-                <img src="Images/Icon/ro1.jpg" style="position: initial;" alt="Banner" />
+    
+    <div class="container-fluid hidden-lg hidden-md" style="padding: 0px;">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" role="listbox" style="margin-top: 50px;">
+                <div class="item active">
+
+                    <img src="Images/Icon/ro1.jpg" alt="Banner" />
+                    <p style="line-height: 40px; margin-top: 50px; margin-left: 200px;" class="item-1 main-point">                        
+                        <span style="font-size: 20px; font-weight: bold; font-family: 'Arial Rounded MT'; color: black;">Why Us?</span><br /> <br />
+                        <span style="font-size: 4vw; color: #009688;" class="fa fa-cube">&nbsp;Free Demo for 15 days!</span><br />
+                        <span style="font-size: 4vw; color: #009688;" class="fa fa-cube">&nbsp;No issue in cost estimation! Simple Rs 5 per Flat!</span><br />
+                        <span style="font-size: 4vw; color: #009688;" class="fa fa-cube">&nbsp;Share your Ride.</span>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>--%>
+    </div>
 
-    <!-- /REVOLUTION SLIDER -->
+
+
 
     <!-- RENT -->
 
@@ -623,7 +622,7 @@
                     <h3>NestIn</h3>
                     <p class="lead" style="font-size: 18px;">NestIn is developed by Anvisys Technologies  for the Apartment Societies. </p>
                     <p style="text-align: justify;">
-                        NestIn is developed by <a href="www.anvisys.net" style="color: red;">Anvisys Technologies Pvt. Ltd.</a> To cater the needs of RWA operations and society management needs. While the trend of residential complex is increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing demand of a management system to manage these operations and communication mechanism to involve residents in operations.<br />
+                        NestIn is developed by <a href="http://www.anvisys.net" style="color: red;">Anvisys Technologies Pvt. Ltd.</a> To cater the needs of RWA operations and society management needs. While the trend of residential complex is increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing demand of a management system to manage these operations and communication mechanism to involve residents in operations.<br />
                         NestIn is our attempt to provide a state of the art, user friendly and secure Society Management System. We are good but not complacent, hence we are improving, enhancing the capabilities, taking the users feedback and working on them. Our dedicated team is working continuously to improve the system to better serve our customer.
                     </p>
                     <a class="btn btn-primary" style="color: #fff;" href="Aboutus.aspx">Read More</a>
@@ -646,32 +645,31 @@
     <!-- hr line -->
     <section class="container">
         <div class="row" style="color: #000;">
-            <div class="col-md-3 col-xs-6">
-                <div class="featured-box nobg border-only" style="text-align: center;">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black;height:230px;">
                     <span class="bosre"><span class="fa fa-address-book fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Tenant Records</h4>
                     <p>The System has access for Residents, Employee, RWA and Administrator</p>
                 </div>
             </div>
-
-            <div class="col-md-3 col-xs-6">
-                <div class="featured-box nobg border-only left-separator" style="text-align: center;">
-                    <span class="bosre" style="align-self: center;"><span class="fa fa-comments fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black;height:230px;">
+                    <span class="bosre"><span class="fa fa-comments fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Society Forum</h4>
                     <p>Keep the data well organized and well recorded</p>
                 </div>
             </div>
-            <div class="col-md-3 col-xs-6">
-                <div class="featured-box nobg border-only left-separator">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black;height:230px;">
                     <span class="bosre"><span class="fa fa-shopping-bag fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Vendor Directory</h4>
                     <p>Maintian interation among residents, Maintainence activities, Maintain Billing</p>
                 </div>
             </div>
-            <div class="col-md-3 col-xs-6">
-                <div class="featured-box nobg border-only left-separator">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black;height:230px;">
                     <span class="bosre"><span class="fa fa-money fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
-                    <h4>Society billing</h4>
+                    <h4>Society Billing</h4>
                     <p>We belive in evalution and continuous improvement, hence open for customization</p>
                 </div>
             </div>
@@ -679,30 +677,30 @@
     </section>
     <section class="container">
         <div class="row" style="color: #000;">
-            <div class="col-md-3 col-xs-6">
-                <div class="featured-box nobg border-only" style="text-align: center;">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black; height:230px;">
                     <span class="bosre"><span class=" fa fa-bullhorn fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Notice Board</h4>
                     <p>The System has access for Residents, Employee, RWA and Administrator</p>
                 </div>
             </div>
 
-            <div class="col-md-3 col-xs-6">
-                <div class="featured-box nobg border-only left-separator" style="text-align: center;">
-                    <span class="bosre" style="align-self: center;"><span class="fa fa-pie-chart fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify;border: solid 1px black; height:230px;">
+                    <span class="bosre"><span class="fa fa-pie-chart fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Opinion Poll</h4>
                     <p>Keep the data well organized and well recorded</p>
                 </div>
             </div>
-            <div class="col-md-3 col-xs-6">
-                <div class="featured-box nobg border-only left-separator">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify; border: solid 1px black; height:230px;">
                     <span class="bosre"><span class="fa fa-check-square fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>InHouse Services</h4>
                     <p>Maintian interation among residents, Maintainence activities, Maintain Billing</p>
                 </div>
             </div>
-            <div class="col-md-3 col-xs-6">
-                <div class="featured-box nobg border-only left-separator">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="featured-box nobg border-only" style="text-align: justify;border: solid 1px black; height:230px;">
                     <span class="bosre"><span class="fa fa-question-circle fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Helpdesk</h4>
                     <p>We belive in evalution and continuous improvement, hence open for customization</p>

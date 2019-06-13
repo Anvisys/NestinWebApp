@@ -1997,9 +1997,9 @@ body {
 ********************/
 
 body {
-    background-color: #f7f7f7 !important;
-    margin: 0px;
-    padding: 0px;
+    background-color: #ffffff !important;
+    margin-top: 10px;
+    
 }
 
 .glyphicon {
