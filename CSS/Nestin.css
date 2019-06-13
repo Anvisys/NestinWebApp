@@ -44,14 +44,7 @@
     font-family: 'Open Sans';
     font-weight: 300;
 }
-.download_overlay {
-    background: url(../Images/Icon/downloadbg.png) repeat-y;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-}
+
 
 .download {
     position: relative;
