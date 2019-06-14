@@ -50,6 +50,16 @@
             $("#chkUser").prop("checked", true);
             checkbox();
             window.parent.FrameSourceChanged();
+            $("#inAddTDeactiveDate").click(function () {
+               // $("#inAddTDeactiveDate").attr("min", ReverseDateFormat(ChangeDateformat($("#inAddTActiveDate").val())));
+                var ele = ReverseDateFormat(ChangeDateformat($("#inAddTActiveDate").val()));
+                $("#inAddTDeactiveDate").attr("min",ele);
+                //alert(ele);
+            });
+
+             $('#date_return').datetimepicker( {
+            format: 'DD-MM-YYYY'
+        });
 
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 2) {
@@ -338,9 +348,9 @@
                         MobileNo = js.MobileNo;
                         EmailId = js.EmailId;
                         if (chkExistingUser == true) {
-                            document.getElementById("lblMessage").textContent = "Mobile Number Exist341"
+                            document.getElementById("lblMessage").innerHTML = "Registered Mobile Number.."
                             //document.getElementById("inAddTEmailID").disabled = false;
-                            document.getElementById("lblMessage").style.color = "Blue";
+                            document.getElementById("lblMessage").style.color = "Green";
                             // alert(chkExistingUser);
 
                             //set focus to email id box
@@ -356,15 +366,15 @@
                     else {
                         MobileExist = false;
 
-                        document.getElementById("lblMessage").textContent = "User does not exist..! register first 359";
-                        document.getElementById("lblMessage").style.color = "Blue";
+                        document.getElementById("lblMessage").textContent = "Mobile Number is not registered.. register first !! 359";
+                        document.getElementById("lblMessage").style.color = "Red";
                         document.getElementById("inAddTEmailID").disabled = false;
                     }
 
                 },
                 error: function (data, errorThrown) {
                     document.getElementById("lblMessage").innerHTML = "Could not validate, try again or later"
-
+                     document.getElementById("lblMessage").style.color = "Red";
                     document.getElementById("inAddTEmailID").disabled = false;
                 }
 
@@ -377,28 +387,46 @@
 
                 document.getElementById("lblMessage").textContent = "Validating Email ID"
 
-                if (MobileExist == true)
+                if ($("#inAddTMobile").val()=="" || EmailId == null)
+                {
+                          document.getElementById("lblMessage").innerHTML = "<b>Email Address and Mobile Number field should not be empty...!!</b>";  
+                          document.getElementById("lblMessage").style.color = "Blue";
+                }
+
+                else if (MobileExist == true)
                 {
                     if (EmailId.toLowerCase() == element.value.toLowerCase()) {
                         EmailExist = true;
-                        document.getElementById("lblMessage").innerHTML = "Email Address Exists.."
+                        document.getElementById("lblMessage").innerHTML = "<b>User Details Found...</b>"
+                          document.getElementById("lblMessage").style.color = "Green";
+
                         FillUserData();
                     }
+                    //else if (EmailId == null)
+                    //{
+                    //     document.getElementById("lblMessage").innerHTML = "Email Address and Mobile Number field should not be empty...!!"  
+                    //      document.getElementById("lblMessage").style.color = "Blue";
+                    //}
                     else {
-                        //EmailExist = false;
-                        //document.getElementById("lblMessage").innerHTML = "Email Address do not Exist"                        
+                        EmailExist = false;
+                        document.getElementById("lblMessage").innerHTML = "<b>Email Address is not registred with Mobile Number Entered...</b>"  
+                          document.getElementById("lblMessage").style.color = "Red";
                        // alert("Your Mobile Number Matches with our records... do we know you ?");
                     }
                 }
+               
                 else
                 {
-                      document.getElementById("lblMessage").textContent = "New User ? Click Here to Register first.";
+                   // alert("at 409 ==>>" + $("#inAddTMobile").val() == null);
+                    document.getElementById("lblMessage").innerHTML = "<b>Mobile Number is not registered.. Register first.!!</b>"  
+                          document.getElementById("lblMessage").style.color = "Red";
                 //    GetUserByMail(element.value);
                 }
 
             }
             catch (err) {
                 document.getElementById("lblMessage").innerHTML = "Error validating mail"
+                 document.getElementById("lblMessage").style.color = "Red";
             }
         }
 
@@ -428,13 +456,13 @@
                         MobileNo = js.MobileNo;
                         EmailId = js.EmailId;
 
-                        document.getElementById("lblMessage").textContent = "Email Address Exist2"
+                        document.getElementById("lblMessage").textContent = "Email Address Exist2";
                         document.getElementById("inAddTEmailID").disabled = false;
                         EmailExist = true;
                     }
                     else {
                         EmailExist = false;
-                        document.getElementById("lblMessage").textContent = "Email does not Exist2"
+                        document.getElementById("lblMessage").textContent = "Email Adress is not registered.. Register first.!! getbyemail";
                         document.getElementById("inAddTEmailID").disabled = false;
                     }
 
@@ -484,7 +512,7 @@
             Gender = e.options[e.selectedIndex].text;
             var HouseID = 0;
 
-            if (MobileExist == false && EmailExist == false) {
+            if (MobileExist == true && EmailExist == true) {
                 // var reqBody = "{\"StartIndex\":" + minvalue + ",\"EndIndex\":" + maxvalue + "}";
                 //var reqBody = "{\"UserType\":\"Tenant\", \"FirstName\":\"" + FirstName + "\",\"LastName\":\"" + LastName + "\", \"MobileNo\":\"" + MobileNo
                 //    + "\", \"EmailId\":\"" + EmailId + "\", \"Address\":\"" + Address + "\", \"Gender\":\"" + Gender + "\", \"Parentname\":\"" + ParentName
@@ -493,46 +521,48 @@
                 var reqBody = "{\"FirstName\":\"" + FirstName + "\",\"LastName\":\"" + LastName + "\",\"Parentname\":\"" + ParentName + "\",\"Gender\":\"" + Gender + "\",\"Address\":\"" + Address + "\",\"MobileNo\":\"" + MobileNo + "\",\"EmailId\":\"" + EmailId + "\",\"UserLogin\":\"" + EmailId + "\",\"Password\":\"" + Password + "\"} ";
                 var url = api_url + "/api/User/Add/Register";
 
-                alert(url);
+               // alert(url);
 
                 //AddTenant(100111);
+                AddTenant(UserID);
+                //$.ajax({
+                //    dataType: "json",
+                //    url: url,
+                //    data: reqBody,
+                //    type: 'post',
+                //    async: false,
+                //    contentType: 'application/json',
+                //    success: function (data) {
+                //        var da = JSON.stringify(data);
+                //        //  alert(da);
+                //        var js = JSON.parse(da);
+                //        var Response = js.result;
+                //        alert(jQuery.type(Response));
+                //        alert(Response.localeCompare("Ok"));
+                //        if (Response.localeCompare("Ok")===0) {
+                //            document.getElementById("lblMessage").innerHTML = "User Login Created. Attaching User with Flat...";
+                //            var UserID = js.UserData.UserID;
+                //            alert(UserID);
+                //            AddTenant(UserID);
+                //        }
+                //        else {
+                //            document.getElementById("lblMessage").innerHTML = "Could not Add User, try again or later";
+                //        }
 
-                $.ajax({
-                    dataType: "json",
-                    url: url,
-                    data: reqBody,
-                    type: 'post',
-                    async: false,
-                    contentType: 'application/json',
-                    success: function (data) {
-                        var da = JSON.stringify(data);
-                        //  alert(da);
-                        var js = JSON.parse(da);
-                        var Response = js.result;
-                        alert(jQuery.type(Response));
-                        alert(Response.localeCompare("Ok"));
-                        if (Response.localeCompare("Ok")===0) {
-                            document.getElementById("lblMessage").innerHTML = "User Login Created. Attaching User with Flat...";
-                            var UserID = js.UserData.UserID;
-                            alert(UserID);
-                            AddTenant(UserID);
-                        }
-                        else {
-                            document.getElementById("lblMessage").innerHTML = "Could not Add User, try again or later";
-                        }
-
-                    },
-                    error: function (data, errorThrown) {
+                //    },
+                //    error: function (data, errorThrown) {
                        
-                        alert('User Creation failed :' + errorThrown);
-                        // sessionStorage.clear();
-                    }
+                //        alert('User Creation failed :' + errorThrown);
+                //        // sessionStorage.clear();
+                //    }
 
-                });
+                //});
+                location.reload();
             }
             else {
                 if (UserID != null) {
                     //AddTenant(UserID);
+                    document.getElementById("lblMessage").innerHTML = "Could not Add User, try again or later";
 
                 }
 
@@ -543,7 +573,7 @@
             var reqBody2 = "{\"UserID\":" + UserID + ",\"FlatID\":\"" + FlatID + "\",\"Type\":\"Tenant\",\"FirstName\":\"" + FirstName +
                 "\",\"LastName\":\"" + LastName + "\",\"MobileNo\":\"" + MobileNo + "\",\"EmailId\":\"" + EmailId + "\",\"Addres\":\"" + Address +
                  "\",\"Status\":\"2\",\"SocietyID\":\"" + SocietyID + "\",\"ActiveDate\":\"" + ActiveDate + "\",\"DeActiveDate\":\"" + DeActiveDate + "\"}";
-            document.getElementById("lblMessage").innerHTML = reqBody2;
+            //document.getElementById("lblMessage").innerHTML = reqBody2;
             //alert(reqBody2);
             var url = api_url + "/api/Tenant/New";
             //alert(url);
@@ -875,19 +905,26 @@
                 format: 'HH:mm'
             });
         });
+
+      
         $(function () {
             $('#time_when').datetimepicker({
                 format: 'HH:mm'
             });
-        });
-        $(function () {
+
             $('#date_when').datetimepicker({
-                format: 'YYYY-MM-DD'
+              //  format: 'YYYY-MM-DD'
+                format: 'DD-MM-YYYY'
             });
+
+
+            //$('#date_return').datetimepicker({ format: 'YYYY-MM-DD' });
+
+            //$('#date_return').attr("min", "10-10-2020");
+            //$('#newDeactiveDate').attr("min", "2020-06-10")
+
         });
-        $(function () {
-            $('#date_return').datetimepicker({ format: 'YYYY-MM-DD' });
-        });
+    
 
         function ShowPoolModal() {
 
@@ -1103,6 +1140,36 @@
                }
 
            });
+       }
+
+       function AddTenantDetails()
+       {
+           var data = "<div class=\"row\" style=\"margin-bottom: 5px;\">"+
+                                 "<div class=\"col-sm-3 style=\"margin-top: 40px; margin-left: 10px;\">"+
+                                    "<img id=\"TenantImage\" src=\"Images/Icon/profile.jpg\" height=\"150\" width=\"150\" style=\"border-radius: 50%;\" />"+
+                                "</div> <div class=\"col-sm-6\"> <h3 style=\"font-family: Open Sans; text-align: center;\"><b>Tenant Info</b></h3> </div>"+
+                              " <div class=\"row\" style=\"margin-top: 5px; margin-bottom: 5px;\">"+
+                               " <div class=\"col-sm-5\">"+
+                                    "<label style=\"width: 100px;\" class=\"data_heading\">Name :</label>"+
+                                    "<label class=\"data_label\" id=\"lblFlatTenantName\">...</label><br />"+
+                                    "<label style=\"width: 100px;\" class=\"data_heading\">Email :</label>"+
+                                   " <label style=\"width: 50px;\" class=\"data_label\" id=\"lblFlatTenantEmail\">...</label><br />"+
+                                   " <label style=\"width: 100px;\" class=\"data_heading\">Contact :</label>"+
+                                   " <label style=\"width: 50px;\" class=\"data_label\" id=\"lblFlatTenantMobile\">...</label><br />"+
+                                    "<label style=\"width: 100px;\" class=\"data_heading\">Address :</label>"+
+                                    "<label class=\"data_label\" id=\"lblFlatTenantAddress\">...</label><br />"+
+                                    "<label style=\"width: 100px;\" class=\"data_heading\">From :</label>"+
+                                    "<label style=\"width: 50px;\" class=\"data_label\" id=\"lblFlatTenantFrom\">...</label><br />"+
+                                    "<label style=\"width: 100px;\" class=\"data_heading\">Till :</label>"+
+                                    "<label style=\"width: 50px;\" class=\"data_label\" id=\"lblFlatTenantTo\">...</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+
+                                    "<button id=\"btnEdit\" type=\"button\" class=\"btn btn-danger\" style=\"display: none\" onclick=\"ChangeDeactiveDate()\">Set End Date</button>"+
+                                   " <div id=\"ChangeDate\" style=\"display: none\">"+
+                                        "<input type=\"date\" id=\"newDeactiveDate\" style=\"width: 150px\" />"+
+                                        "<button id=\"btnUpdate\" type=\"button\" onclick=\"UpdateDeactiveDate();\">Update</button>"+
+                                    "</div>"+
+                                 "</div>" +
+                                "</div>"+
+                               "</div>"
        }
 
        function CloseRental() {
@@ -1390,7 +1457,7 @@
 
                             <div class="modal-body">
 
-                               
+                           <b style="color:midnightblue; font-weight:600; font-size:14px">  Enter Mobile Number and Email Address of a Registered User ...</b>
                                 <input id="chkUser" type="checkbox" style="display:none;"/>
                                 &nbsp;
                             <label id="lblMessage"></label>
@@ -1662,7 +1729,8 @@
                                 <label class="labelwidth col-sm-4 col-form-label">Return:</label>
                              <div class="col-sm-8">  
                                
-                                    <input type='text'  id='date_return' class="form-control"  placeholder="DD/MM/YYYY"/ tabindex="7" />
+                                    <%--<input type='date'  id='date_return' max='' min='10-09-2019' class="form-control"  tabindex="7" />--%>
+                                 <input type='text'  id='date_return' class="form-control" placeholder="DD/MM/YYYY" tabindex="5"  />
                                  
                               </div>
                             </div>
