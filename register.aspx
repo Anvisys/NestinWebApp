@@ -352,14 +352,15 @@
             var url = "";
             if (role == "Demo") {
                 url = "register.aspx/AddDemoUser";
-
+                  
             }
             else {
                 url = "register.aspx/AddUser";
+                   
             }
 
             var jData = JSON.parse(user)
-            //      alert(2);
+                  alert(url);
             $.ajax({
                 type: 'POST',
                 url: url,

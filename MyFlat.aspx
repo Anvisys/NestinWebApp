@@ -44,22 +44,47 @@
             api_url = '<%=Session["api_url"] %>';
             _ResID = <%=ResID%>;
             GetData();
+            filladmindata();
             var x = document.getElementById("inAddTMobile");
             // x.addEventListener("focusin", myFocusFunction);
-           // x.addEventListener("focusout", ValidateMobile);
+            // x.addEventListener("focusout", ValidateMobile);
             $("#chkUser").prop("checked", true);
             checkbox();
             window.parent.FrameSourceChanged();
             $("#inAddTDeactiveDate").click(function () {
-               // $("#inAddTDeactiveDate").attr("min", ReverseDateFormat(ChangeDateformat($("#inAddTActiveDate").val())));
+                // $("#inAddTDeactiveDate").attr("min", ReverseDateFormat(ChangeDateformat($("#inAddTActiveDate").val())));
                 var ele = ReverseDateFormat(ChangeDateformat($("#inAddTActiveDate").val()));
-                $("#inAddTDeactiveDate").attr("min",ele);
+                $("#inAddTDeactiveDate").attr("min", ele);
                 //alert(ele);
             });
 
-             $('#date_return').datetimepicker( {
-            format: 'DD-MM-YYYY'
-        });
+            function filladmindata() {
+                var url = "http://localhost:5103/" + "api/admin/society/" + SocietyID;
+
+                  $.ajax({
+                dataType: "json",
+                url: url,
+                success: function (data) {
+                     var da = JSON.stringify(data);
+                    var js = jQuery.parseJSON(da);
+                    $("#lblAdminName").val(js.FirstName +"  "+ js.LastName);
+                    $("#lblAdminemail").val(js.EmailId);
+                    $("#lblAdminContact").val(js.MobileNo);
+                },
+                error: function (data, errorThrown) {
+
+                    alert('request failed :' + errorThrown);
+                }
+
+            });
+            }
+
+            $('#date_return').datetimepicker({
+                //format: 'DD-MM-YYYY'
+                format:"YYYY-MM-DD"
+            });
+
+         
 
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 2) {
@@ -250,10 +275,10 @@
                 dataType: "json",
                 url: url,
                 success: function (data) {
-                        //alert("In poppulateadd modal ===>244");
-                        PopulateAddModal();
+                    //alert("In poppulateadd modal ===>244");
+                    PopulateAddModal();
 
-                    
+
                 },
                 error: function (data, errorThrown) {
 
@@ -316,11 +341,11 @@
 
         function ValidateMobile(element) {
             var MobileNo = element.value;
-           // alert(MobileNo);
-          //  alert(MobileNo.length);
+            // alert(MobileNo);
+            //  alert(MobileNo.length);
             if (element.value.length < 10) {
                 document.getElementById("lblMessage").textContent = "Mobile Number Should be of 10 digits..";
-               // element.focus();
+                // element.focus();
                 return;
             }
             // document.getElementsByClassName("txtbox_style").disabled = true;
@@ -361,7 +386,7 @@
                             //document.getElementById("lblMessage").style.color = "Red";
                             //// alert(chkExistingUser);
                         }
-                         MobileExist = true;
+                        MobileExist = true;
                     }
                     else {
                         MobileExist = false;
@@ -374,7 +399,7 @@
                 },
                 error: function (data, errorThrown) {
                     document.getElementById("lblMessage").innerHTML = "Could not validate, try again or later"
-                     document.getElementById("lblMessage").style.color = "Red";
+                    document.getElementById("lblMessage").style.color = "Red";
                     document.getElementById("inAddTEmailID").disabled = false;
                 }
 
@@ -387,18 +412,16 @@
 
                 document.getElementById("lblMessage").textContent = "Validating Email ID"
 
-                if ($("#inAddTMobile").val()=="" || EmailId == null)
-                {
-                          document.getElementById("lblMessage").innerHTML = "<b>Email Address and Mobile Number field should not be empty...!!</b>";  
-                          document.getElementById("lblMessage").style.color = "Blue";
+                if ($("#inAddTMobile").val() == "" || EmailId == null) {
+                    document.getElementById("lblMessage").innerHTML = "<b>Email Address and Mobile Number field should not be empty...!!</b>";
+                    document.getElementById("lblMessage").style.color = "Blue";
                 }
 
-                else if (MobileExist == true)
-                {
+                else if (MobileExist == true) {
                     if (EmailId.toLowerCase() == element.value.toLowerCase()) {
                         EmailExist = true;
                         document.getElementById("lblMessage").innerHTML = "<b>User Details Found...</b>"
-                          document.getElementById("lblMessage").style.color = "Green";
+                        document.getElementById("lblMessage").style.color = "Green";
 
                         FillUserData();
                     }
@@ -409,24 +432,23 @@
                     //}
                     else {
                         EmailExist = false;
-                        document.getElementById("lblMessage").innerHTML = "<b>Email Address is not registred with Mobile Number Entered...</b>"  
-                          document.getElementById("lblMessage").style.color = "Red";
-                       // alert("Your Mobile Number Matches with our records... do we know you ?");
+                        document.getElementById("lblMessage").innerHTML = "<b>Email Address is not registred with Mobile Number Entered...</b>"
+                        document.getElementById("lblMessage").style.color = "Red";
+                        // alert("Your Mobile Number Matches with our records... do we know you ?");
                     }
                 }
-               
-                else
-                {
-                   // alert("at 409 ==>>" + $("#inAddTMobile").val() == null);
-                    document.getElementById("lblMessage").innerHTML = "<b>Mobile Number is not registered.. Register first.!!</b>"  
-                          document.getElementById("lblMessage").style.color = "Red";
-                //    GetUserByMail(element.value);
+
+                else {
+                    // alert("at 409 ==>>" + $("#inAddTMobile").val() == null);
+                    document.getElementById("lblMessage").innerHTML = "<b>Mobile Number is not registered.. Register first.!!</b>"
+                    document.getElementById("lblMessage").style.color = "Red";
+                    //    GetUserByMail(element.value);
                 }
 
             }
             catch (err) {
                 document.getElementById("lblMessage").innerHTML = "Error validating mail"
-                 document.getElementById("lblMessage").style.color = "Red";
+                document.getElementById("lblMessage").style.color = "Red";
             }
         }
 
@@ -521,7 +543,7 @@
                 var reqBody = "{\"FirstName\":\"" + FirstName + "\",\"LastName\":\"" + LastName + "\",\"Parentname\":\"" + ParentName + "\",\"Gender\":\"" + Gender + "\",\"Address\":\"" + Address + "\",\"MobileNo\":\"" + MobileNo + "\",\"EmailId\":\"" + EmailId + "\",\"UserLogin\":\"" + EmailId + "\",\"Password\":\"" + Password + "\"} ";
                 var url = api_url + "/api/User/Add/Register";
 
-               // alert(url);
+                // alert(url);
 
                 //AddTenant(100111);
                 AddTenant(UserID);
@@ -551,7 +573,7 @@
 
                 //    },
                 //    error: function (data, errorThrown) {
-                       
+
                 //        alert('User Creation failed :' + errorThrown);
                 //        // sessionStorage.clear();
                 //    }
@@ -572,7 +594,7 @@
         function AddTenant(UserID) {
             var reqBody2 = "{\"UserID\":" + UserID + ",\"FlatID\":\"" + FlatID + "\",\"Type\":\"Tenant\",\"FirstName\":\"" + FirstName +
                 "\",\"LastName\":\"" + LastName + "\",\"MobileNo\":\"" + MobileNo + "\",\"EmailId\":\"" + EmailId + "\",\"Addres\":\"" + Address +
-                 "\",\"Status\":\"2\",\"SocietyID\":\"" + SocietyID + "\",\"ActiveDate\":\"" + ActiveDate + "\",\"DeActiveDate\":\"" + DeActiveDate + "\"}";
+                "\",\"Status\":\"2\",\"SocietyID\":\"" + SocietyID + "\",\"ActiveDate\":\"" + ActiveDate + "\",\"DeActiveDate\":\"" + DeActiveDate + "\"}";
             //document.getElementById("lblMessage").innerHTML = reqBody2;
             //alert(reqBody2);
             var url = api_url + "/api/Tenant/New";
@@ -605,15 +627,19 @@
         }
 
         function ChangeDateformat(inputdate) {
-
+            //var chkdate = new Date("10-12-1970");
             var date = new Date(inputdate);
+             //alert("alert 607 ==>>inputdate date obj== " + chkdate);
             var day = date.getDate().toString();
             if (day.length == 1) { day = "0" + day; }
 
             var month = (date.getMonth() + 1).toString();
             if (month.length == 1) { month = "0" + month; }
 
-            var strDate = day + "/" + month + "/" + date.getFullYear();
+            var year = date.getFullYear();
+
+            var strDate = day + "/" + month + "/" + year;
+           // alert("616 ===> strDate==" +  inputdate.getDate());
             return strDate;
         }
 
@@ -651,12 +677,17 @@
         function ChangeDeactiveDate() {
             document.getElementById("ChangeDate").style.display = "block";
             $('#newDeactiveDate').attr("min", ReverseDateFormat(ActiveDate))
+                 $('#newDeactiveDate').datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
+
         }
 
         function UpdateDeactiveDate() {
             DeActiveDate = ChangeDateformat(document.getElementById("newDeactiveDate").value);
+
             var reqBody3 = "{\"id\":" + TenantResID + ",\"date\":\"" + DeActiveDate + "\"}";
-            // alert(reqBody3);
+           //  alert("662 ===>> "+DeActiveDate);
             var url = api_url + "/api/Tenant/Update";
 
             $.ajax({
@@ -672,6 +703,7 @@
                     var Response = js.Response;
                     if (Response == "OK") {
                         document.getElementById("lblFlatTenantTo").innerHTML = DeActiveDate;
+                        $("#ChangeDate").hide();
                     }
                     else {
                         alert("Failed to Update");
@@ -703,19 +735,16 @@
         //    checkbox();
         //});
 
-        function checkbox()
-        {
-          //  alert("672 ==>> " + jQuery.type($("#chkUser").is(":checked")));
-            if ($("#chkUser").is(":checked"))
-            {
-               // alert("675 in if");
+        function checkbox() {
+            //  alert("672 ==>> " + jQuery.type($("#chkUser").is(":checked")));
+            if ($("#chkUser").is(":checked")) {
+                // alert("675 in if");
                 $('#inAddTFirstName,#inAddTLastName,#inAddTParentName,#mgender,#inAddTAddress,#inAddPassword,#inTConfirmPassword').attr("disabled", "disabled");
-                 chkExistingUser = true;
+                chkExistingUser = true;
             }
-            else
-            {
+            else {
                 //alert("681 in else");
-                    chkExistingUser = false;
+                chkExistingUser = false;
             }
 
         }
@@ -906,15 +935,15 @@
             });
         });
 
-      
+
         $(function () {
             $('#time_when').datetimepicker({
                 format: 'HH:mm'
             });
 
             $('#date_when').datetimepicker({
-              //  format: 'YYYY-MM-DD'
-                format: 'DD-MM-YYYY'
+                  format: 'YYYY-MM-DD'
+               // format: 'DD-MM-YYYY'
             });
 
 
@@ -924,7 +953,7 @@
             //$('#newDeactiveDate').attr("min", "2020-06-10")
 
         });
-    
+
 
         function ShowPoolModal() {
 
@@ -974,7 +1003,7 @@
 
             var CarPoolString = JSON.stringify(CarPool);
 
-
+            console.log("CarPoolString " + CarPoolString);
             $.ajax({
                 dataType: "json",
                 url: url,
@@ -1126,7 +1155,7 @@
                    alert(JSON.stringify(data));
                    var Response = data.Response;
                    if (Response == "OK") {
-                       
+
                        document.getElementById("lblMessage").innerHTML = "Your inventory is submitted for Rent";
                    }
                    else {
@@ -1142,34 +1171,33 @@
            });
        }
 
-       function AddTenantDetails()
-       {
-           var data = "<div class=\"row\" style=\"margin-bottom: 5px;\">"+
-                                 "<div class=\"col-sm-3 style=\"margin-top: 40px; margin-left: 10px;\">"+
-                                    "<img id=\"TenantImage\" src=\"Images/Icon/profile.jpg\" height=\"150\" width=\"150\" style=\"border-radius: 50%;\" />"+
-                                "</div> <div class=\"col-sm-6\"> <h3 style=\"font-family: Open Sans; text-align: center;\"><b>Tenant Info</b></h3> </div>"+
-                              " <div class=\"row\" style=\"margin-top: 5px; margin-bottom: 5px;\">"+
-                               " <div class=\"col-sm-5\">"+
-                                    "<label style=\"width: 100px;\" class=\"data_heading\">Name :</label>"+
-                                    "<label class=\"data_label\" id=\"lblFlatTenantName\">...</label><br />"+
-                                    "<label style=\"width: 100px;\" class=\"data_heading\">Email :</label>"+
-                                   " <label style=\"width: 50px;\" class=\"data_label\" id=\"lblFlatTenantEmail\">...</label><br />"+
-                                   " <label style=\"width: 100px;\" class=\"data_heading\">Contact :</label>"+
-                                   " <label style=\"width: 50px;\" class=\"data_label\" id=\"lblFlatTenantMobile\">...</label><br />"+
-                                    "<label style=\"width: 100px;\" class=\"data_heading\">Address :</label>"+
-                                    "<label class=\"data_label\" id=\"lblFlatTenantAddress\">...</label><br />"+
-                                    "<label style=\"width: 100px;\" class=\"data_heading\">From :</label>"+
-                                    "<label style=\"width: 50px;\" class=\"data_label\" id=\"lblFlatTenantFrom\">...</label><br />"+
-                                    "<label style=\"width: 100px;\" class=\"data_heading\">Till :</label>"+
-                                    "<label style=\"width: 50px;\" class=\"data_label\" id=\"lblFlatTenantTo\">...</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+
-                                    "<button id=\"btnEdit\" type=\"button\" class=\"btn btn-danger\" style=\"display: none\" onclick=\"ChangeDeactiveDate()\">Set End Date</button>"+
-                                   " <div id=\"ChangeDate\" style=\"display: none\">"+
-                                        "<input type=\"date\" id=\"newDeactiveDate\" style=\"width: 150px\" />"+
-                                        "<button id=\"btnUpdate\" type=\"button\" onclick=\"UpdateDeactiveDate();\">Update</button>"+
-                                    "</div>"+
-                                 "</div>" +
-                                "</div>"+
-                               "</div>"
+       function AddTenantDetails() {
+           var data = "<div class=\"row\" style=\"margin-bottom: 5px;\">" +
+               "<div class=\"col-sm-3 style=\"margin-top: 40px; margin-left: 10px;\">" +
+               "<img id=\"TenantImage\" src=\"Images/Icon/profile.jpg\" height=\"150\" width=\"150\" style=\"border-radius: 50%;\" />" +
+               "</div> <div class=\"col-sm-6\"> <h3 style=\"font-family: Open Sans; text-align: center;\"><b>Tenant Info</b></h3> </div>" +
+               " <div class=\"row\" style=\"margin-top: 5px; margin-bottom: 5px;\">" +
+               " <div class=\"col-sm-5\">" +
+               "<label style=\"width: 100px;\" class=\"data_heading\">Name :</label>" +
+               "<label class=\"data_label\" id=\"lblFlatTenantName\">...</label><br />" +
+               "<label style=\"width: 100px;\" class=\"data_heading\">Email :</label>" +
+               " <label style=\"width: 50px;\" class=\"data_label\" id=\"lblFlatTenantEmail\">...</label><br />" +
+               " <label style=\"width: 100px;\" class=\"data_heading\">Contact :</label>" +
+               " <label style=\"width: 50px;\" class=\"data_label\" id=\"lblFlatTenantMobile\">...</label><br />" +
+               "<label style=\"width: 100px;\" class=\"data_heading\">Address :</label>" +
+               "<label class=\"data_label\" id=\"lblFlatTenantAddress\">...</label><br />" +
+               "<label style=\"width: 100px;\" class=\"data_heading\">From :</label>" +
+               "<label style=\"width: 50px;\" class=\"data_label\" id=\"lblFlatTenantFrom\">...</label><br />" +
+               "<label style=\"width: 100px;\" class=\"data_heading\">Till :</label>" +
+               "<label style=\"width: 50px;\" class=\"data_label\" id=\"lblFlatTenantTo\">...</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" +
+               "<button id=\"btnEdit\" type=\"button\" class=\"btn btn-danger\" style=\"display: none\" onclick=\"ChangeDeactiveDate()\">Set End Date</button>" +
+               " <div id=\"ChangeDate\" style=\"display: none\">" +
+               "<input type=\"date\" id=\"newDeactiveDate\" style=\"width: 150px\" />" +
+               "<button id=\"btnUpdate\" type=\"button\" onclick=\"UpdateDeactiveDate();\">Update</button>" +
+               "</div>" +
+               "</div>" +
+               "</div>" +
+               "</div>"
        }
 
        function CloseRental() {
@@ -1244,9 +1272,8 @@
                GetUserByMail(emailfield);
                FillUserData();
            }
-           else
-           {
-              
+           else {
+
            }
        }
 
@@ -1300,8 +1327,25 @@
                 </div>
 
 
+                
 
                 <div id="main_div" style="display: none; margin: 10px;">
+                     <div id="AdminDetils" class="content_div">
+                        <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                            <div class="col-sm-4">
+                                <label class="data_heading">Administrator </label>
+                                <label class="data_label" id="lblAdminName">:Sagar Srivastava</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="data_heading">Email </label>
+                                <label class="data_label" id="lblAdminemail">:SagarSrivastava123@tmail.com</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="data_heading">Contact Number </label>
+                                <label class="data_label" id="lblAdminContact">:9450122225</label>
+                            </div>
+                        </div>
+                    </div>
                     <div id="FlatDetails" class="content_div">
                         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
                             <div class="col-sm-4">
@@ -1379,11 +1423,29 @@
                                     <label style="width: 50px;" class="data_label" id="lblFlatTenantFrom">...</label><br />
                                     <label style="width: 100px;" class="data_heading">Till :</label>
                                     <label style="width: 50px;" class="data_label" id="lblFlatTenantTo">...</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                                    <button id="btnEdit" type="button" class="btn btn-danger" style="display: none" onclick="ChangeDeactiveDate()">Set End Date</button>
-                                    <div id="ChangeDate" style="display: none">
-                                        <input type="date" id="newDeactiveDate" style="width: 150px" />
-                                        <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
+                                    <button id="btnEdit" type="button" class="btn btn-danger" style="display: none;" onclick="ChangeDeactiveDate()">Set End Date</button>
+                                    <div id="ChangeDate" style="display: none; margin-top: 10px;" class="row" >
+                                      <%--  <input type="date" id="newDeactiveDate" style="width: 150px" />--%>
+
+                                    
+                          
+                                         <div class="col-sm-8">  
+                               
+                                   
+                                           <input type='text'  id='newDeactiveDate' class="form-control" placeholder="DD/MM/YYYY" tabindex="5"  />
+                                 
+                                          </div>
+                                        <div class=" col-sm-4 "> 
+                                
+                                            <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
+
+                                        </div>
+                             
                                     </div>
+
+
+                                        <%--<button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>--%>
+                                
                                  </div> 
                                 </div>
                                </div>

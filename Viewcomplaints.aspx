@@ -482,8 +482,8 @@
             $("#myModalCloseComplaint").hide();
             
 
-            alert("Updated Successfully");
-           //location.reload(true);
+           // alert("Updated Successfully");
+         //  location.reload();
         }
 
         $(document).ready(function () {
