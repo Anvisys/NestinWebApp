@@ -17,7 +17,7 @@ public class House
     public String City;
     public String State;
     public int PinCode;
-
+    public int StatusID = 1;
 
     public House()
     {
@@ -62,7 +62,7 @@ public class House
 
                         String societyUserQuery = "Insert Into "+ CONSTANTS.Table_SocietyUser 
                             + " (UserID,FlatID,Type,HouseID,ServiceType,CompanyName,ActiveDate, SocietyID,Status) output INSERTED.ResID Values('" +
-                                UserId + "','0','Individual','" + HouseId + "','0','NA','" + DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss") + "','0',0)";
+                                UserId + "','0','Individual','" + HouseId + "','0','NA','" + DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss") + "','0',2)";
                         sqlComm.CommandText = societyUserQuery;
 
                         HouseId = (int)sqlComm.ExecuteScalar();

@@ -27,19 +27,20 @@
     <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
 
-    <link href="Login/css/settings.css" rel="stylesheet" type="text/css" />
+    <link href="CSS_3rdParty/settings.css" rel="stylesheet" type="text/css" />
     <!-- THEME CSS -->
 
             <%-- <link href="Login/css/essentials.css" rel="stylesheet" type="text/css" />--%>
-            <link href="Login/css/layout.css" rel="stylesheet" type="text/css" />
-            <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css" />
+            <link href="CSS_3rdParty/layout.css" rel="stylesheet" type="text/css" />
+            <link href="CSS_3rdParty/layout-responsive.css" rel="stylesheet" type="text/css" />
 
-            <link href="Styles/layout.css" rel="stylesheet" />
-            <link href="Styles/Responsive.css" rel="stylesheet" />
+            <%--<link href="CSS/layout.css" rel="stylesheet" />--%>
+            <%--<link href="Styles/Responsive.css" rel="stylesheet" />--%>
+            <link href="CSS/mystylesheets.css" rel="stylesheet" />
 
-            <link rel="stylesheet" href="CSS/ApttTheme.css" />
-            <link rel="stylesheet" href="CSS/ApttLayout.css" />
-            <link rel="stylesheet" href="Login/CSS/footer.css" />
+            <%--<link rel="stylesheet" href="CSS/ApttTheme.css" />--%>
+            <%--<link rel="stylesheet" href="CSS/ApttLayout.css" />--%>
+            <link rel="stylesheet" href="CSS_3rdParty/footer.css" />
            
          <link rel="stylesheet" href="CSS/IP.css" />
             <link rel="stylesheet" href="CSS/Nestin.css" />
@@ -254,8 +255,8 @@
                   
                 }
             });
-             $("#ProgressBar").hide();
-
+            $("#ProgressBar").hide();
+            location.reload();
         }
 
         function AddNewSociety() {
@@ -461,7 +462,7 @@
                     strData = strData + "<div class=\"row\" style=\"margin:20px;padding:0px;\">"
                         + "<div class='col-xs-2'>ResId:" + results[i].ResID + "</div>"
                         + "<div class='col-xs-4'>" + results[i].HouseNUmber + "<br/>: " + results[i].Sector + ", " + results[i].City + ", " + results[i].State + "</div>"
-                        + "<div class='col-xs-2'> Active " + actDate + "</div>"
+                        + "<div class='col-xs-2'> Status : " + results[i].Status + "</div>"
                         + "<div class='col-xs-2'> Active Till" + inactDate + "</div>"
                         + "<div class='col-xs-2'><button class='btn btn-primary btn-sm' onclick='Select("+results[i].ResID +",2)'>Select</button></div>"
                         + "</div>";

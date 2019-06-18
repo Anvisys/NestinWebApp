@@ -45,6 +45,7 @@ public partial class MainPage : System.Web.UI.Page
                 if (ResID != null)
                 {
                     Resident currentResident = (Resident)muser.AllResidents.FirstOrDefault(f => f.ResID.ToString() == ResID);
+
                     if (currentResident != null)
                     {
                         muser.currentResident = currentResident;
@@ -58,7 +59,7 @@ public partial class MainPage : System.Web.UI.Page
                 {
                     if (muser.currentResident.UserType == "Individual")
                     {
-
+                        SessionVariables.CurrentPage = "MyHouse.aspx";
 
                     }
                     else if (muser.currentResident.UserType == "SuperAdmin")
@@ -84,7 +85,7 @@ public partial class MainPage : System.Web.UI.Page
         SessionVariables.SocietyID = current.SocietyID;
         SessionVariables.ResiID = current.ResID;
 
-        if (current.UserType == "Owner" || current.UserType == "Tenant" || current.UserType == "ResidentAdmin")
+        if (current.UserType == "Owner" || current.UserType == "Tenant" )
         {
             SessionVariables.FlatNumber = current.FlatNumber;
             SessionVariables.FlatID = current.FlatID;
@@ -95,7 +96,11 @@ public partial class MainPage : System.Web.UI.Page
             SessionVariables.ServiceType = current.ServiceType;
 
         }
+        else if (current.UserType == "Individual")
+        {
+            SessionVariables.CurrentPage = "MyHouse.aspx?Res="+ SessionVariables.ResiID;
 
+        }
 
         if (muser.AllResidents.Count > 1)
         {

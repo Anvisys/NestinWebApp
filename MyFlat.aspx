@@ -67,9 +67,11 @@
                 success: function (data) {
                      var da = JSON.stringify(data);
                     var js = jQuery.parseJSON(da);
-                    $("#lblAdminName").val(js.FirstName +"  "+ js.LastName);
-                    $("#lblAdminemail").val(js.EmailId);
-                    $("#lblAdminContact").val(js.MobileNo);
+                    
+                    $("#lblAdminName").html(js.FirstName +"  "+ js.LastName);
+                    $("#lblAdminemail").html(js.EmailId);
+                    $("#lblAdminContact").html(js.MobileNo);
+                   
                 },
                 error: function (data, errorThrown) {
 
@@ -1331,18 +1333,20 @@
 
                 <div id="main_div" style="display: none; margin: 10px;">
                      <div id="AdminDetils" class="content_div">
+                         <h4>Admin Details</h4>
+                         <hr />
                         <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
                             <div class="col-sm-4">
-                                <label class="data_heading">Administrator </label>
-                                <label class="data_label" id="lblAdminName">:Sagar Srivastava</label>
+                                <label class="data_heading">Administrator :</label>
+                                <label class="data_label" id="lblAdminName"></label>
                             </div>
                             <div class="col-sm-4">
-                                <label class="data_heading">Email </label>
-                                <label class="data_label" id="lblAdminemail">:SagarSrivastava123@tmail.com</label>
+                                <label class="data_heading">Email : </label>
+                                <label class="data_label" id="lblAdminemail"></label>
                             </div>
                             <div class="col-sm-4">
-                                <label class="data_heading">Contact Number </label>
-                                <label class="data_label" id="lblAdminContact">:9450122225</label>
+                                <label class="data_heading">Contact Number :</label>
+                                <label class="data_label" id="lblAdminContact"></label>
                             </div>
                         </div>
                     </div>
