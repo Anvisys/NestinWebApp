@@ -1,8 +1,8 @@
-﻿rrrr<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Rent.aspx.cs" Inherits="Rent" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Rent.aspx.cs" Inherits="Rent" %>
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head runat="server">
     <title></title>
 
@@ -166,18 +166,18 @@
                 var HouseNo = results[i].HouseNumber;
                 strData = strData + '<div class="row result_row" style="margin-top: 10px;">' +
 
-                    '<div class="col-xs-6" >' +
-                    '<div style="color: blue;">Nestin-properties from Owners only</div>' +
+                    '<div class="col-md-6" >' +
+                    '<div style="color: black;">Nestin-properties from Owners only</div>' +
                     '<div class="row">' +
-                    '<div class="col-xs-4">' +
+                    '<div class="col-md-4">' +
                     '<img class="property-image" src="Images/Icon/darkredbg.png" />' +
                     '</div>' +
-                    '<div class="col-xs-8">' +
-                    '<div style="margin-top:5px;font-weight:bold;"> Expected Rent:' +
+                    '<div class="col-md-8">' +
+                    '<div style="margin-top:5px;font-weight:bold;"> Expected Rent: ' +
                     results[i].RentValue +
                     '</div>' +
-                    '<div class="dropup" style="margin-top:5px;">' +
-                    'Contact: <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                    '<div class="dropup" style="margin-top:5px;font-weight:bold;">' +
+                    'Contact: <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                     results[i].OwnerName +
                     '</button >' +
                     '<ul class="dropdown-menu" style="padding:5px;"><li> Mob:' +
@@ -186,27 +186,27 @@
                     '</ul> </div> </div> </div>  </div>' +
 
 
-                    '<div class="col-xs-6">' +
-                    '<div class="col-xs-12"><b>' + results[i].Inventory + results[i].RentType + '</b><span class="normal-text"> is available in' + results[i].sector + '</span></div>' +
-                    '<div class="col-xs-12">' +
-                    '<div class="col-xs-3  well well-sm" style="text-align: center">' +
+                    '<div class="col-md-6">' +
+                    '<div class="col-md-10"><b>' + results[i].Inventory + ' ' + results[i].RentType + '</b><span class="normal-text"> is available in ' + results[i].sector + '</span></div>' +
+                    '<div class="col-md-12">' +
+                    '<div class="col-md-3 col-xs-3  well well-sm" style="text-align: center">' +
                     '<div class="summary-title">Area </div>' +
                     '<div class="summary-text">' + results[i].FlatArea + 'sqft</div>' +
                     '</div>' +
-                    '<div class="col-xs-3  well well-sm">' +
+                    '<div class="col-md-3 col-xs-3 well well-sm">' +
                     '<div class="summary-title">Status </div>' +
                     '<div class="summary-text">from 1st March</div>' +
                     '</div>' +
-                    '<div class="col-xs-3  well well-sm">' +
+                    '<div class="col-md-3 col-xs-3 well well-sm">' +
                     '<div class="summary-title">Floor </div>' +
                     '<div class="summary-text">G of 2 </div>' +
                     '</div>' +
-                    '<div class="col-xs-3  well well-sm">' +
+                    '<div class="col-md-3 col-xs-3 well well-sm">' +
                     '<div class="summary-title">Furnished</div>' +
-                    '<div class="summary-text">none </div>' +
+                    '<div class="summary-text"> Non </div>' +
                     '</div>' +
                     '</div>' +
-                    '<div class="col-xs-12">' +
+                    '<div class="col-md-12">' +
                     results[i].Description +
                     '</div>  </div> </div>';
 
@@ -221,10 +221,8 @@
 
     <style>
         .result-area {
-            background-color: #D1D1D1;
-            padding-bottom: 100px;
+            background-color: #F1F2F7;
         }
-       
 
         .result_row {
             /* border-bottom: 1px solid #bfbfbf; */
@@ -278,8 +276,8 @@
         }
 
         .property-image {
-            height: 80px;
-            width: 80px;
+            height: 60px;
+            width: 60px;
         }
     </style>
     <style>
@@ -287,100 +285,90 @@
             background: #727CF5;
         }
     </style>
+
+    <!-- GOOGLE ADSENS-->
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5831709708295912",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <!-- GOOGLE ADSENS END -->
+
 </head>
 <body>
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
-
     </form>
 
+    <header>
+        <nav class="navbar navbar-default nav-color navbar-fixed-top">
+            <div class="container-fluid">
 
-    <header id="topNav" class="layout_header top-NavigationBar">
-
-        <!-- scroll bar progress -->
-        <div class="progress-container">
-            <div class="progress-bar" id="myBar"></div>
-        </div>
-        <!-- End progress -->
-
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-5 col-xs-12">
-                    <div class="navbar-header">
-                        <a class="logo col-xs-2" href="Login.aspx">
-                            <img src="Images/Icon/Logo1.png" height="50" alt="Logo" />
-                        </a>
-                        <div class="navbar-inverse">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                    </div>
-                    <%-- <h1 class="title hidden-xs" style="color: #fff; padding-top: 11px; font-size:30px;">Society Management System</h1>--%>
+                <!-- Brand/logo -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#example-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="logo" href="Login.aspx">
+                        <img src="Images/Icon/Logo1.png" height="50" alt="Logo" />
+                    </a>
                 </div>
-                <div class="col-md-7">
-                    <div class="collapse navbar-collapse pull-right" id="myNavbar" style="margin-top: 9px; text-align: center;">
-                        <nav class="nav navbar-nav nav-color">
-                            <ul class="nav nav-pills nav-main scroll-menu nav-small" id="topMain">
-                                <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
-                                <li class=" "><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
-                                <li class=" "><a class="menu_text" href="contact.aspx">Contact </a></li>
-                            </ul>
-                        </nav>
-                    </div>
+
+                <!-- Collapsible Navbar -->
+                <div class="collapse navbar-collapse" id="example-1">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class=""><a class="menu_text" href="Login.aspx">Home</a></li>
+                        <li class=""><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
+                        <li class=""><a class="menu_text" href="contact.aspx">Contact </a></li>
+                    </ul>
                 </div>
+
             </div>
-        </div>
-
-
+        </nav>
     </header>
 
-    <span itemtype="http://schema.org/SoftwareApplication" />
-
-    <div class="jumbotron-local text-center" style="height: 100px;">
-        <h3 style="padding-top: 65px; color: #ffffff;">Rent</h3>
+    <div class="jumbotron-local text-center" style="height: 120px;">
+        <h2 style="padding-top: 70px; color: #ffffff;">RENT</h2>
     </div>
 
-    <div class="row jumbotron" style="background-color: #6094c1; height: 130px; border-radius: 0px; margin-top: 0px;">
-        <div class="col-sm-3 hidden-xs"></div>
-        <div class="col-sm-8 col-xs-12">
-
-            <form class="form-group" style="align-content: center; padding: 0px;">
-                <select id="selType" placeholder="Type" runat="server" class="search-dropdown" />
-
-                <select id="selStyle" placeholder="Style" runat="server" class="search-text" />
-                <input id="txtCity" placeholder="City" runat="server" class="search-text" />
-                <input id="txtRent" placeholder="Rent" runat="server" class="search-text" />
-                <i onclick="searchHouse()" class="search-button"><span class="fa fa-search fa-2x"></span></i>
+    <!-- Result Search Area -->
+    <div class="row jumbotron" style="background-color: #F1F2F7;">
+        <div class="col-md-3 col-xs-2"></div>
+        <div class="col-md-6 col-xs-8">
+            <form class="form-group" style="align-content: center;">
+                <select id="selType" placeholder="Type" runat="server" class="search-dropdown" style="background-color: antiquewhite; border: double; border-color: #e1e3ef;" />
+                <select id="selStyle" placeholder="Style" runat="server" class="search-text" style="background-color: antiquewhite; border: double; border-color: #e1e3ef;" />
+                <input id="txtCity" placeholder="City" runat="server" class="search-text" style="background-color: antiquewhite; border: double; border-color: #e1e3ef;" />
+                <input id="txtRent" placeholder="Rent" runat="server" class="search-text" style="background-color: antiquewhite; border: double; border-color: #e1e3ef;" />
+                <i onclick="searchHouse()" class="search-button fa fa-search fa-2x"></i>
             </form>
-            <div class="col-sm-2 hidden-xs"></div>
         </div>
+        <div class="col-md-3 col-xs-2"></div>
     </div>
 
-
+    <!-- Result Area -->
     <div class="row result-area">
-        <div class="col-sm-2 hidden-xs"></div>
-        <div class="col-sm-8 col-xs-12">
-            <label id="lblMessage" style="color: blue; font-size: medium;"></label>
-            <div id="searchData">
-            </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-10 col-xs-12">
+            <label id="lblMessage" style="color: black; font-size: medium;"></label>
+            <div id="searchData"></div>
         </div>
-        <div class="col-sm-2 hidden-xs"></div>
+        <div class="col-md-1"></div>
     </div>
-
+    <br />
+    <!-- Progress Bar Area -->
     <div id="progressBar" class="container-fluid" style="text-align: center; height: 200px; margin-top: 50px;">
         <img src="Images/Icon/ajax-loader.gif" style="width: 100px; height: 100px; margin-top: 50px;" />
     </div>
 
-    <!-- /WRAPPER -->
-    
-
     <!-- FOOTER -->
-
     <footer id="myFooter">
         <div class="container">
             <div class="row">
@@ -430,7 +418,6 @@
 
         </div>
     </footer>
-    </div>
-    </form>
+
 </body>
 </html>
