@@ -29,28 +29,15 @@
 
     <!-- New bootstrap -->
 
-
-
     <!-- End New bootstrap -->
 
 
     <link href="CSS_3rdParty/settings.css" rel="stylesheet" type="text/css" />
-    <!-- THEME CSS -->
     <link href="CSS_3rdParty/essentials.css" rel="stylesheet" type="text/css" />
     <link href="CSS_3rdParty/layout.css" rel="stylesheet" type="text/css" />
     <link href="CSS_3rdParty/layout-responsive.css" rel="stylesheet" type="text/css" />
     <link href="CSS_3rdParty/footer.css" rel="stylesheet" type="text/css" />
-
     <link href="CSS_3rdParty/mythirdpartystylesheets.css" rel="stylesheet" type="text/css" />
-
-    <%--<link href="CSS/layout.css" rel="stylesheet" />
-    <link href="CSS/Responsive.css" rel="stylesheet" />
-    <link rel="stylesheet" href="CSS/ApttTheme.css" />
-    <link rel="stylesheet" href="CSS/ApttLayout.css" />
-    <link rel="stylesheet" href="CSS/NewAptt.css" />
-    <link rel="stylesheet" href="CSS/Nestin.css" />
-    <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />--%>
-
     <link href="CSS/IP.css" rel="stylesheet" />
 
     <script>
@@ -362,13 +349,16 @@
     <!-- End Facebook Pixel Code -->
     <style>
         .nav-color {
-            background: #727CF5;
+            color: #ffffff !important;
+            background-color: #727CF5 !important;
+            
         }
 
         .main-boxs {
             height: 20vh;
             width: 15vw;
         }
+       
     </style>
 
     <!-- For RENT -->
@@ -468,7 +458,7 @@
     </form>
 
 
-    <header id="topNav" class="layout_header top-NavigationBar">
+    <%--<header id="topNav" class="layout_header top-NavigationBar">
 
         <!-- scroll bar progress -->
         <div class="progress-container">
@@ -479,7 +469,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-5 col-xs-12">
+                <div class="col-md-5 col-xs-12 col-sm-12">
                     <div class="navbar-header">
                         <a class="logo col-xs-2" href="Login.aspx">
                             <img src="Images/Icon/Logo1.png" height="50" alt="Logo" />
@@ -492,9 +482,9 @@
                             </button>
                         </div>
                     </div>
-                    <%-- <h1 class="title hidden-xs" style="color: #fff; padding-top: 11px; font-size:30px;">Society Management System</h1>--%>
+                     <h1 class="title hidden-xs" style="color: #fff; padding-top: 11px; font-size:30px;">Society Management System</h1>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7 col-sm-12">
                     <div class="collapse navbar-collapse pull-right" id="myNavbar" style="margin-top: 9px; text-align: center;">
                         <nav class="nav navbar-nav nav-color">
                             <ul class="nav nav-pills nav-main scroll-menu nav-small" id="topMain">
@@ -510,10 +500,46 @@
                 </div>
             </div>
         </div>
+    </header>--%>
+    <!-- New Header -->
 
 
+    <header>               
+        <nav class="navbar navbar-default nav-color navbar-fixed-top">
+            <div class="container-fluid">
+
+                <!-- Brand/logo -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#example-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="logo" href="Login.aspx">
+                        <img src="Images/Icon/Logo1.png" height="50" alt="Logo" />
+                    </a>
+                </div>
+
+                <!-- Collapsible Navbar -->
+                <div class="collapse navbar-collapse" id="example-1">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class=""><a class="menu_text" href="Login.aspx">Home</a></li>
+                        <li class=""><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
+                        <li class=""><a class="menu_text" href="contact.aspx">Contact </a></li>
+                        <li class=""><a class="menu_text" href="#" id="login">Login</a></li>
+                        <li class=""><a class="menu_text" href="register.aspx" id="register">Register</a></li>
+                        <li class=""><a class="menu_text" href="Rent.aspx" id="rent">Rent</a> </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
     </header>
 
+
+
+    <!-- End of new header -->
 
 
     <%--new navigation bar @SB--%>
@@ -530,7 +556,7 @@
                 <div class="item active">
 
                     <img src="Images/Icon/ro1.jpg" alt="Banner" />
-                    <p style="line-height: 35px; margin-top: 60px; margin-left: 130px;" class="item-1 main-point">
+                    <p style="line-height: 35px; margin-top: 60px; margin-left: 50px;" class="item-1 main-point">
                         <span style="font-size: 40px; font-family: 'Arial Rounded MT'; color: #727CF5; letter-spacing: -3px;" class="hidden-xs">Society Management System</span><br />
                         <br />
                         <%--<span style="font-size: 30px; font-weight: bold; font-family: 'Arial Rounded MT'; color: black;">Why Us?</span><br />--%>
@@ -556,11 +582,11 @@
                 <div class="item active">
 
                     <img src="Images/Icon/ro1.jpg" alt="Banner" />
-                    <p style="line-height: 50px; margin-top: 50px; margin-left: 200px;" class="item-1 main-point">
-                        <span style="font-size: 20px; font-weight: bold; font-family: 'Arial Rounded MT'; color: black;">Why Us?</span><br />
+                    <p style="line-height: 50px; margin-top: 0px; margin-left: 10px;" class="item-1 main-point">
+                        <span style="font-size: 20px; font-weight: bold; font-family: 'Arial Rounded MT'; color: black;">Why Us?</span>
                         <br />
                         <span style="font-size: 3vw; color: darkgray;">&nbsp;Free Demo for 15 days!</span><br />
-                        <span style="font-size: 3vw; color: darkgray;">&nbsp;No issue in cost estimation! Simple Rs 5 per Flat!</span><br />
+                        <span style="font-size: 3vw; color: darkgray;">&nbsp;No issue in cost estimation! Simple &nbsp;Rs 5 per Flat!</span><br />
                         <span style="font-size: 3vw; color: darkgray;">&nbsp;Share your Ride.</span>
                     </p>
                 </div>
@@ -568,17 +594,13 @@
         </div>
     </div>
 
-
-
-
     <!-- RENT -->
 
 
 
     <!-- END RENT -->
 
-
-    <section class="goletfullwidth text-center" style="background-color: #d9d9d9; color: blue;">
+    <section class="goletfullwidth text-center hidden-xs hidden-sm" style="background-color: #d9d9d9; color: blue;">
         <div class="container">
             <div class="row">
 
@@ -612,7 +634,41 @@
             </div>
         </div>
     </section>
+    
+    <!-- For Mobile -->
+    <section class="goletfullwidth text-center hidden-md hidden-lg" style="background-color: #d9d9d9; color: blue;">
+        <div class="container">
+            <div class="row ">
+                <h3 class="hidden-md hidden-lg" style="color: black; margin-bottom: 20px; font-size: 4vw"><span>Meets all your Society Management needs</span> </h3>
+                <h3 class="text-center hidden-xs" style="color: black; margin-bottom: 20px; font-size: 2vw"><span>Meets all your Society Management needs</span> </h3>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="main-boxs item-box box">
+                        <span class="fa fa-user fa-3x white" aria-hidden="true"></span>
+                        <h5>Owners/Residents records</h5>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="main-boxs item-box box">
+                        <span class="fa fa-cube fa-3x white" aria-hidden="true"></span>
+                        <h5>Complaints Management</h5>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="main-boxs item-box box">
+                        <span class="fa fa-external-link-square fa-3x white" aria-hidden="true"></span>
+                        <h5>Internal Forum Discussion</h5>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="main-boxs item-box box">
+                        <span class="fa fa-bell-o fa-3x white" aria-hidden="true"></span>
+                        <h5>Instant Notifications</h5>
+                    </div>
+                </div>
 
+            </div>
+        </div>
+    </section>
 
     <!-- PARALLAX -->
     <section class="parallax delayed margin-footer parallax-init" data-stellar-background-ratio="0.7">
@@ -654,28 +710,28 @@
     <!-- hr line -->
     <section class="container">
         <div class="row" style="color: #000;">
-            <div class="col-md-3 col-sm-6 col-xs-6">
+            <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-address-book fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Tenant Records</h4>
                     <p>The System has access for Residents, Employee, RWA and Administrator</p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-6">
+            <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-comments fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Society Forum</h4>
                     <p>Keep the data well organized and well recorded</p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-6">
+            <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-shopping-bag fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Vendor Directory</h4>
                     <p>Maintian interation among residents, Maintainence activities, Maintain Billing</p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-6">
+            <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-money fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Society Billing</h4>
@@ -684,9 +740,10 @@
             </div>
         </div>
     </section>
+
     <section class="container">
         <div class="row" style="color: #000;">
-            <div class="col-md-3 col-sm-6 col-xs-6">
+            <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class=" fa fa-bullhorn fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Notice Board</h4>
@@ -694,21 +751,21 @@
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6 col-xs-6">
+            <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-pie-chart fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Opinion Poll</h4>
                     <p>Keep the data well organized and well recorded</p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-6">
+            <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-check-square fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>InHouse Services</h4>
                     <p>Maintian interation among residents, Maintainence activities, Maintain Billing</p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-6">
+            <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="featured-box nobg border-only" style="text-align: center; height: 230px;">
                     <span class="bosre"><span class="fa fa-question-circle fa-3x" aria-hidden="true" style="color: #648cff;"></span></span>
                     <h4>Helpdesk</h4>
@@ -729,7 +786,7 @@
                 <!-- left content -->
                 <div class="col-md-6 animation_fade_in" style="margin-bottom: 20px;">
                     <h3>Pricing</h3>
-                    <p style="font-size: 18px; font-family:'Arial'">
+                    <p style="font-size: 18px; font-family: 'Arial'">
                         We don’t have complex pricing like many other software available as a service. Our is not based on complex 
                         features combination, not on number of users not for duration.
                            It’s Simple<span style="color: blue;"> Rs. 5.00 per flat per month </span>for all society Management Features.
@@ -784,8 +841,7 @@
             <div class="row">
                 <div class="hidden-xs hidden-sm col-md-8">
                     <h2 style="padding-top: 65px; color: white;">How Download the app?</h2>
-                    <h4 style="color: white; text-align:justify;">
-                         Just download the app from the store.
+                    <h4 style="color: white; text-align: justify;">Just download the app from the store.
                          Simple, nice and user-friendly application of the weather.
                          Only relevant and useful information.
                     </h4>
@@ -794,24 +850,23 @@
                     </a>
                 </div>
                 <div class="hidden-xs hidden-sm col-md-4">
-                    <img src="Images/Icon/appdownload1.png" style="height: 50vh; width:100%;" />
+                    <img src="Images/Icon/appdownload1.png" style="height: 50vh; width: 100%;" />
                 </div>
             </div>
 
-             <div class="row">
+            <div class="row">
                 <div class="col-xs-12 hidden-md hidden-lg">
                     <h2 style="padding-top: 65px; color: white;">How Download the app?</h2>
-                    <h4 style="color: white; text-align:justify;">
-                         Just download the app from the store.
+                    <h4 style="color: white; text-align: justify;">Just download the app from the store.
                          Simple, nice and user-friendly application of the weather.
                          Only relevant and useful information.
                     </h4>
                     <a href="https://play.google.com/store/apps/details?id=net.anvisys.NestIn" target="_blank">
-                        <img src="Images/Icon/googleplay.png" style="height: 50px; width:50%;" alt="Download" />
+                        <img src="Images/Icon/googleplay.png" style="height: 50px; width: 50%;" alt="Download" />
                     </a>
                 </div>
-                <div class="col-xs-12 hidden-md hidden-lg">
-                    <img src="Images/Icon/appdownload1.png" style="height: 40vh; width:100%;" />
+                <div class="col-xs-12 col-sm-6 hidden-md hidden-lg">
+                    <img src="Images/Icon/appdownload1.png" style="height: 40vh; width: 80%;" />
                 </div>
             </div>
         </div>
