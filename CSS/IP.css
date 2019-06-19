@@ -2016,8 +2016,8 @@ body {
 }
 
 .modal {
-    top: 80px;
-    left: 230px;
+    top: 0px;
+    left: 0px;
 }
 
 .myclass1 {
