@@ -746,15 +746,10 @@
 
     <!-- My Flat NEW -->
     <div class="container" id="flat_Request" style="background-color: white; margin-top: 40px;">
-        <div class="row">
-            <div class="col-md-2 col-xs-2"></div>
-            <div class="col-md-6 col-xs-6">
-                <h4 style="margin-left: 10px;">My Flats</h4>
-            </div>
-            <div class="col-md-2 col-xs-2">
-                <button class="btn btn-warning btn-sm" onclick="NewFlat()" type="button">New Flat</button>
-            </div>
-            <div class="col-md-2 col-xs-2"></div>
+         <div class="row">          
+            <div class="col-md-12 col-xs-12">
+                <h4 style="margin-left: 10px;"/>My Flats  <a onclick="NewFlat()" style="font-size:15px; color:blue;">Click Here To Add New Flat</a>
+            </div>          
         </div>
 
         <hr style="border: 1px solid black" />
@@ -771,22 +766,17 @@
 
     <!-- My Society NEW -->
     <div class="container" id="society_Request" style="background-color: white; margin-top: 40px;">
-        <div class="row">
-            <div class="col-md-2 col-xs-2"></div>
-            <div class="col-md-6 col-xs-6">
-                <h4 style="margin-left: 10px;">My Societies</h4>
-            </div>
-            <div class="col-md-2 col-xs-2">
-                <button class="btn btn-warning btn-sm" onclick="NewSociety()" type="button">New Society</button>
-            </div>
-            <div class="col-md-2 col-xs-2"></div>
+        <div class="row">          
+            <div class="col-md-12 col-xs-12">
+                <h4 style="margin-left: 10px;"/>My Societies  <a onclick="NewSociety()" style="font-size:15px; color:blue;">Click Here To Add New Request</a>
+            </div>          
         </div>
 
         <hr style="border: 1px solid black" />
 
         <div class="row">
             <div class="col-md-1"></div>
-            <div class="col-md-10 col-xs-12">
+            <div class="col-md-10 col-xs-12"> 
                 <div id="SocietyRequests"></div>
             </div>
             <div class="col-md-1"></div>
@@ -797,15 +787,10 @@
 
     <!-- My Independent House NEW -->
     <div class="container" id="House_Requests" style="background-color: white; margin-top: 40px;">
-        <div class="row">
-            <div class="col-md-2 col-xs-2"></div>
-            <div class="col-md-6 col-xs-6">
-                <h4 style="margin-left: 10px;">My Societies</h4>
-            </div>
-            <div class="col-md-2 col-xs-2">
-                <button class="btn btn-warning btn-sm" onclick="NewHouse()" type="button">New House</button>
-            </div>
-            <div class="col-md-2 col-xs-2"></div>
+        <div class="row">          
+            <div class="col-md-12 col-xs-12">
+                <h4 style="margin-left: 10px;"/>My Independent House  <a onclick="NewHouse()" style="font-size:15px; color:blue;">Click Here To Add New House</a>
+            </div>          
         </div>
 
         <hr style="border: 1px solid black" />
