@@ -336,21 +336,21 @@
 
                     }
                                      
-                    strData = strData + "<div class=\"row\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='col-xs-1'>" + results[i].SocietyID + "</div>" +
-                        "<div class='col-xs-5'> " + results[i].FlatNumber + "," + results[i].Status+ "<br/> Address:" +
+                    strData = strData + "<div class=\"row\" style=\"margin-top:10px; margin-right:40px;\">" +
+                        "<div class='col-md-1 col-xs-1'>" + results[i].SocietyID + "</div>" +
+                        "<div class='col-md-5 col-xs-4'> " + results[i].FlatNumber + "," + results[i].Status+ "<br/> Address:" +
                          results[i].SocietyName + ", " +  results[i].Address+
                         "</div>" +
-                        "<div class='col-xs-2'> Requested On:" +  reqDate + "</div>" +
-                        "<div class='col-xs-2'>Modified On :" + modDate + "</div>" +
-                          "<div class='col-xs-2'> Status: <br/>" + results[i].Status + "</div>" +
+                        "<div class='col-md-2 col-xs-3'> Requested On:" +  reqDate + "</div>" +
+                        "<div class='col-md-2 col-xs-2'>Modified On :" + modDate + "</div>" +
+                          "<div class='col-md-2 col-xs-2'> Status: <br/>" + results[i].Status + "</div>" +
 
                         //"<div class='panel-heading'>" + results[i].SocietyID + "<br/>: " + results[i].SocietyName + " <br/> Return " + results[i].Sector + "</div>"
                         //+ "<div class='panel-body'> City " + results[i].City
                         //+ "<div> State" + results[i].State + "</div>"
                         //   + "</div>"
-                         "<div class='col-xs-10'>" + "</div>" +
-                          "<div class='col-xs-2'>" + btnString + "</div>" 
+                         "<div class='col-md-10'>" + "</div>" +
+                          "<div class='col-md-2'>" + btnString + "</div>" 
                         + "</div>";
                     
                 }
@@ -684,12 +684,17 @@
 </form>
 
 
-                <div class="container-fluid" id="User_Profile" style="margin: 50px; background-color: white;">                  
-                    <div class="row" style="margin: 10px;">                        
-                        <div class="col-sm-2">
+        <div class="container-fluid" id="User_Profile" style="background-color: white;">                  
+                    <div class="row">                        
+                        <div class="col-md-2 hidden-xs hidden-sm" style="margin-left:60px; margin-top:30px;">
                             <img id="uploadPreview" class="img image_large" src="GetImages.ashx?UserID=<% =UserID %>&Name=<% =UserName %>&UserType=Owner" />
                         </div>
-                         <div class="col-sm-8">
+                        <center>
+                        <div class="col-xs-12  hidden-md hidden-lg">
+                            <img id="uploadPreview" class="img image_small" src="GetImages.ashx?UserID=<% =UserID %>&Name=<% =UserName %>&UserType=Owner" />
+                        </div>
+                        </center>
+                         <div class="col-md-8 col-xs-12">
                             <table class="w3-table w3-striped w3-bordered">
                                 <tr>
                                     <td>FirstName</td>
@@ -716,25 +721,30 @@
                         </div>
                     </div>
 
-    <div  class="container-fluid" id="flat_Request" style="min-height:200px; margin: 50px;  background-color: white;">
+    <!-- My Flats -->
+<div class="row">
+    <div class="col-md-12">
+    <div  class="container" id="flat_Request" style="min-height:700px; margin: 20px; background-color: white;">
         <div class="ProgressBar-Parent">
-            <div class="row ProgressBar-Sibling" style="margin: 10px; width:84%;">
+            <div class="row ProgressBar-Sibling" style="margin: 10px; width:100%;">
             <div class="row " >
-                <div class="col-xs-10">
-                    <h4 style="margin-bottom: 0px;">My Flats </h4>
+                <div class="col-md-9 col-xs-6">
+                    <h4 style="margin-left: 10px;">My Flats</h4>
                 </div>
-                <div class="col-xs-2">
-                    <button class="btn btn-primary btn-sm" onclick="NewFlat()" type="button">New Flat</button>
+                <div class="col-md-2 col-xs-3">
+                    <button class="btn btn-primary btn-block" onclick="NewFlat()" type="button">New Flat</button>
                 </div>
             </div>
             <div id="FlatRequests" class="row " style="border-top: solid 2px black; margin-top: 10px; "></div>
-             </div>
+            </div>
             <div id="flat_progressBar" class="ProgressBar" style="text-align: center; min-height: 200px; width:100%;">
                 <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
             </div>
         </div>
     </div>
-
+    </div>
+    <!-- My society -->
+    <div class="col-md-12">
     <div class="container-fluid" id="society_Request" style="margin: 50px;min-height:200px; background-color: white;">
         <div class="ProgressBar-Parent">
             <div class="ProgressBar-Sibling" style="margin:10px; width:84%;">
@@ -752,7 +762,9 @@
             </div>
         </div>
     </div>
-
+    </div>
+    <!-- My Independent House -->
+    <div class="col-md-12">
     <div class="container-fluid " id="House_Requests" style="margin: 50px;min-height:200px; background-color: white;">
         <div class="ProgressBar-Parent">
             <div class="ProgressBar-Sibling" style="width:84%; margin:10px;">
@@ -771,7 +783,11 @@
             </div>
         </div>
     </div>
-                
+    </div>
+
+</div>
+
+    <!-- Add House Button -->
         <div id="addHouse" class="modal">
             <div class="panel panel-primary" style="border: 0px; width: 670px; background-color: #fff; margin: auto;">
                 <div class="panel-heading">
@@ -833,8 +849,7 @@
             </form>
             </div>
         </div>
-              
-
+    <!-- Add Flat Button -->        
         <div id="addFlat" class="modal">
             <div class="panel panel-primary" style="border: 0px; width: 670px; background-color: #fff; margin: auto;">
                 <div class="panel-heading">
@@ -915,9 +930,8 @@
                 </div>
             </div>
         </div>
-
+    <!-- Add Society Button -->
         <div id="addSociety" class="modal">
-
             <div class="panel panel-primary" style="border: 0px; width: 600px; background-color: #fff; margin: auto;">
                 <div class="panel-heading">
                     Add Society <span class="fa fa-times" style="float: right; cursor: pointer;" onclick="HideAddSociety()" aria-hidden="true"></span>
@@ -971,24 +985,10 @@
             </div>
         </div>
 
-         <%--<div id="ProgressBar" class="container-fluid" style="text-align: center; height: 200px;">
-                <img src="Images/Icon/ajax-loader.gif" style="width: 40px; height: 40px;" />
-            </div>--%>
-
-
-
-
         <!-- WRAPPER -->
-    <span itemtype="http://schema.org/SoftwareApplication" />
-
-
-
-
-
-
-
+    
     <!-- /WRAPPER -->
-    <section id="download" class="download">
+<%--    <section id="download" class="download">
         <div class="download_overlay"></div>
         <div class="container">
             <div class="row">
@@ -1015,7 +1015,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>--%>
     <!-- FOOTER -->
     <footer id="myFooter">
         <div class="container">
