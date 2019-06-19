@@ -35,13 +35,14 @@
     <script id="MyFlatData">
         var CurrentUserType, ResID, UserID, Type, BHK, FirstName, LastName, MobileNo, EmailId, FlatID, FlatNumber, Address, ParentName, SocietyID, SocietyName, Gender, ActiveDate, DeActiveDate, TenantUserID;
         var MobileExist, EmailExist, TenantResID, chkExistingUser = false;
-        var api_url = "";
+        var api_url = "www.kevintech.in/";
         var _ResID = 0;
         var currentInvetoryID = 0;
 
         $(document).ready(function () {
 
             api_url = '<%=Session["api_url"] %>';
+           // alert("45 ==>> "+api_url);
             _ResID = <%=ResID%>;
             GetData();
             var x = document.getElementById("inAddTMobile");
@@ -55,6 +56,11 @@
                 var ele = ReverseDateFormat(ChangeDateformat($("#inAddTActiveDate").val()));
                 $("#inAddTDeactiveDate").attr("min",ele);
                 //alert(ele);
+            });
+
+            $('#newDeactiveDate').datetimepicker({
+                //  format: 'YYYY-MM-DD'
+                format: 'DD-MM-YYYY'
             });
 
              $('#date_return').datetimepicker( {
@@ -193,7 +199,7 @@
 
         function GetRentalInfo(FlatNumber) {
 
-
+         //   alert("197 ==>> " + api_url);
 
             var url = api_url + "/api/RentInventory/Find/" + FlatID + "/0";
 
@@ -225,6 +231,7 @@
                 $("#btnAddForRent").show();
             }
             else {
+ 
                 $("#RentalDetail").show();
                 $("#btnAddForRent").hide();
                 currentInvetoryID = obj[0].RentInventoryID;
@@ -1381,8 +1388,24 @@
                                     <label style="width: 50px;" class="data_label" id="lblFlatTenantTo">...</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                     <button id="btnEdit" type="button" class="btn btn-danger" style="display: none" onclick="ChangeDeactiveDate()">Set End Date</button>
                                     <div id="ChangeDate" style="display: none">
-                                        <input type="date" id="newDeactiveDate" style="width: 150px" />
-                                        <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
+                                        <%--<input type="date" id="newDeactiveDate" style="width: 150px" />--%>
+
+                                        <div class="row" style="margin-top: 10px;">
+                            
+                               
+                             <div class="col-sm-8">  
+                               
+                                    <%--<input type='date'  id='date_return' max='' min='10-09-2019' class="form-control"  tabindex="7" />--%>
+                                 <input type='text'  id='newDeactiveDate' class="form-control" placeholder="DD/MM/YYYY" tabindex="5"  />
+                                 
+                              </div>
+                          
+                              <div class="col-sm-4">
+                                  <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
+                              </div>
+                        
+
+                                        
                                     </div>
                                  </div> 
                                 </div>
