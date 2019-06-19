@@ -336,24 +336,37 @@
 
                     }
                                      
-                    strData = strData + "<div class=\"row\" style=\"margin-top:10px; margin-right:40px;\">" +
-                        "<div class='col-md-1 col-xs-1'>" + results[i].SocietyID + "</div>" +
-                        "<div class='col-md-5 col-xs-4'> " + results[i].FlatNumber + "," + results[i].Status+ "<br/> Address:" +
-                         results[i].SocietyName + ", " +  results[i].Address+
-                        "</div>" +
-                        "<div class='col-md-2 col-xs-3'> Requested On:" +  reqDate + "</div>" +
-                        "<div class='col-md-2 col-xs-2'>Modified On :" + modDate + "</div>" +
-                          "<div class='col-md-2 col-xs-2'> Status: <br/>" + results[i].Status + "</div>" +
+                    strData =
+                        strData + "<div class=\"row\" style=\"margin-top:10px; margin-right:40px;\">" +
+                                        "<div class='col-md-1 col-xs-1'>" + results[i].SocietyID + "</div>" +
+                                        "<div class='col-md-4 col-xs-3'>" + results[i].FlatNumber + "," + results[i].Status+ "<br/> Address:" + results[i].SocietyName + ", " +  results[i].Address + "</div>" +
+                                        "<div class='col-md-2 col-xs-2'>Requested On:" +  reqDate + "</div>" +
+                                        "<div class='col-md-2 col-xs-2'>Modified On :" + modDate + "</div>" +
+                                        "<div class='col-md-1 col-xs-2'>Status: <br/>" + results[i].Status + "</div>" +                                              
+                                        "<div class='col-md-2 col-xs-2'><button class='btn btn-primary btn-sm' id='btnSub' onclick='Select("+results[i].ResID +",2)'>Select</button></div>"
+                                + "</div>";
 
-                        //"<div class='panel-heading'>" + results[i].SocietyID + "<br/>: " + results[i].SocietyName + " <br/> Return " + results[i].Sector + "</div>"
-                        //+ "<div class='panel-body'> City " + results[i].City
-                        //+ "<div> State" + results[i].State + "</div>"
-                        //   + "</div>"
+                    //new data//
 
-                         "<div class='col-xs-8'>" + "</div>" +
-                        "<div class='col-xs-2'>" + btnString + "</div>" 
-                        + "<div class='col-xs-2'><button class='btn btn-primary btn-sm' id='btnSub' onclick='Select("+results[i].ResID +",2)'>Select</button></div>"
-                        + "</div>";
+                    //strData = 
+                    //    strData + "<div class=\"row\" style=\"margin-top:10px; margin-right:40px;\">" +
+                    //                     "<div class='col-md-1'></div>" +
+                    //                       "<div class='col-md-10 col-xs-12'>" +
+                    //                        "<table>" +
+                    //                            "<tr>" + 
+                    //                               "<td>" + results[i].SocietyID + "&nbsp;" + "</td>" +
+                    //                               "<td>" + results[i].FlatNumber + "," + results[i].Status + "<br/> Address:" + results[i].SocietyName + ", " + results[i].Address + "</td>" +
+                    //                               "<td>" + "RequestedOn: " +  reqDate  + "</td>" +
+                    //                               "<td>" + " ModifiedOn :" + modDate + "</td>" +
+                    //                               "<td>" + "Status: " + results[i].Status + "</td>" +
+                    //                               "<td>" + " <button class='btn btn-primary btn-sm' id='btnSub' onclick='Select("+results[i].ResID +",2)'>Select</button> " + "</td>" 
+                    //                            + "</tr>"
+                    //                      + "</table>"
+                    //                     + "</div>"
+                    //                   + "<div class='col-md-1'></div>"
+                    //              + "</div>";
+
+                     
 
                     
                 }
@@ -735,71 +748,150 @@
                         </div>
                     </div>
 
+   <!-- My Flat NEW -->
+        <div class="container"  id="flat_Request" style="background-color: white; margin-top:40px;">
+            <div class="row">
+                <div class="col-md-2 col-xs-2"></div>
+                <div class="col-md-6 col-xs-6">
+                     <h4 style="margin-left: 10px;">My Flats</h4>
+                </div>
+                <div class="col-md-2 col-xs-2">
+                     <button class="btn btn-primary btn-sm" onclick="NewFlat()" type="button">New Flat</button>
+                </div>
+                <div class="col-md-2 col-xs-2"></div>
+            </div>
+
+             <hr style="border: 1px solid black"/>
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 col-xs-12">
+                 <div id="FlatRequests"></div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+   <!-- My Flat new END -->
+
+   <!-- My Society NEW -->
+        <div class="container"  id="society_Request" style="background-color: white; margin-top:40px;">
+            <div class="row">
+                <div class="col-md-2 col-xs-2"></div>
+                <div class="col-md-6 col-xs-6">
+                     <h4 style="margin-left: 10px;">My Societies</h4>
+                </div>
+                <div class="col-md-2 col-xs-2">
+                     <button class="btn btn-primary btn-sm" onclick="NewSociety()" type="button">New Society</button>
+                </div>
+                <div class="col-md-2 col-xs-2"></div>
+            </div>
+
+             <hr style="border: 1px solid black"/>
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 col-xs-12">
+                 <div id="SocietyRequests"></div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        
+    </div>
+   <!-- My Society END -->
+
+   <!-- My Independent House NEW -->
+        <div class="container"  id="House_Requests" style="background-color: white; margin-top:40px;">
+            <div class="row">
+                <div class="col-md-2 col-xs-2"></div>
+                <div class="col-md-6 col-xs-6">
+                     <h4 style="margin-left: 10px;">My Societies</h4>
+                </div>
+                <div class="col-md-2 col-xs-2">
+                     <button class="btn btn-primary btn-sm" onclick="NewHouse()" type="button">New House</button>
+                </div>
+                <div class="col-md-2 col-xs-2"></div>
+            </div>
+
+             <hr style="border: 1px solid black"/>
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 col-xs-12">
+                 <div id="HouseRequests"></div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        
+    </div>
+   <!-- My Independent House END -->
+   <br />
+   <br />
+    
     <!-- My Flats -->
-<div class="row">
-    <div class="col-md-12">
-    <div  class="container" id="flat_Request" style="min-height:700px; margin: 20px; background-color: white;">
-        <div class="ProgressBar-Parent">
-            <div class="row ProgressBar-Sibling" style="margin: 10px; width:100%;">
-            <div class="row " >
-                <div class="col-md-9 col-xs-6">
-                    <h4 style="margin-left: 10px;">My Flats</h4>
+       <%-- <div class="col-md-12">
+        <div  class="container" id="flat_Request" style="min-height:700px; margin: 20px; background-color: white;">
+            <div class="ProgressBar-Parent">
+                <div class="row ProgressBar-Sibling" style="margin: 10px; width:100%;">
+                <div class="row " >
+                    <div class="col-md-9 col-xs-6">
+                        <h4 style="margin-left: 10px;">My Flats</h4>
+                    </div>
+                    <div class="col-md-2 col-xs-3">
+                        <button class="btn btn-primary btn-block" onclick="NewFlat()" type="button">New Flat</button>
+                    </div>
                 </div>
-                <div class="col-md-2 col-xs-3">
-                    <button class="btn btn-primary btn-block" onclick="NewFlat()" type="button">New Flat</button>
+                <div id="FlatRequests" class="row " style="border-top: solid 2px black; margin-top: 10px; "></div>
+                </div>
+                <div id="flat_progressBar" class="ProgressBar" style="text-align: center; min-height: 200px; width:100%;">
+                    <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
                 </div>
             </div>
-            <div id="FlatRequests" class="row " style="border-top: solid 2px black; margin-top: 10px; "></div>
-            </div>
-            <div id="flat_progressBar" class="ProgressBar" style="text-align: center; min-height: 200px; width:100%;">
-                <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
-            </div>
-        </div>
-    </div>
-    </div>
+        </div>--%>
+    
     <!-- My society -->
-    <div class="col-md-12">
-    <div class="container-fluid" id="society_Request" style="margin: 50px;min-height:200px; background-color: white;">
-        <div class="ProgressBar-Parent">
-            <div class="ProgressBar-Sibling" style="margin:10px; width:84%;">
-                <div class="row">
-                    <div class="col-xs-10">
-                        <h4 style="margin-bottom: 0px;">My Societies </h4>
+       <%--   <div class="col-md-12">
+        <div class="container-fluid" id="society_Request" style="margin: 50px;min-height:200px; background-color: white;">
+            <div class="ProgressBar-Parent">
+                <div class="ProgressBar-Sibling" style="margin:10px; width:84%;">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <h4 style="margin-bottom: 0px;">My Societies </h4>
+                        </div>
+                        <div class="col-xs-2">
+                            <button class="btn btn-primary btn-sm" onclick="NewSociety()" type="button">New Society</button></div>
                     </div>
-                    <div class="col-xs-2">
-                        <button class="btn btn-primary btn-sm" onclick="NewSociety()" type="button">New Society</button></div>
+                    <div class="row" id="SocietyRequests" style="border-top: solid 2px black; margin-top: 10px; width:100%;"></div>
                 </div>
-                <div class="row" id="SocietyRequests" style="border-top: solid 2px black; margin-top: 10px; width:100%;"></div>
-            </div>
-            <div id="society_progressBar" class="ProgressBar" style="text-align: center; min-height: 200px;width:100%;">
-                <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
+                <div id="society_progressBar" class="ProgressBar" style="text-align: center; min-height: 200px;width:100%;">
+                    <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
+                </div>
             </div>
         </div>
-    </div>
-    </div>
+        </div>--%>
+   
     <!-- My Independent House -->
-    <div class="col-md-12">
-    <div class="container-fluid " id="House_Requests" style="margin: 50px;min-height:200px; background-color: white;">
-        <div class="ProgressBar-Parent">
-            <div class="ProgressBar-Sibling" style="width:84%; margin:10px;">
-                <div class="row" >
-                    <div class="col-xs-10">
-                        <h4 style="margin-bottom: 0px;">My Independent House</h4>
-                    </div>
-                    <div class="col-xs-2">
-                        <button class="btn btn-primary btn-sm" onclick="NewHouse()" type="button">New House</button></div>
+       <%-- <div class="col-md-12">
+        <div class="container-fluid " id="House_Requests" style="margin: 50px;min-height:200px; background-color: white;">
+            <div class="ProgressBar-Parent">
+                <div class="ProgressBar-Sibling" style="width:84%; margin:10px;">
+                    <div class="row" >
+                        <div class="col-xs-10">
+                            <h4 style="margin-bottom: 0px;">My Independent House</h4>
+                        </div>
+                        <div class="col-xs-2">
+                            <button class="btn btn-primary btn-sm" onclick="NewHouse()" type="button">New House</button></div>
 
+                    </div>
+                    <div class="row" id="HouseRequests" style="border-top: solid 2px black; margin-top: 10px;"></div>
                 </div>
-                <div class="row" id="HouseRequests" style="border-top: solid 2px black; margin-top: 10px;"></div>
-            </div>
-            <div id="house_progressBar" class="ProgressBar" style="text-align: center; height: 200px;width:100%; ">
-                <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
+                <div id="house_progressBar" class="ProgressBar" style="text-align: center; height: 200px;width:100%; ">
+                    <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
+                </div>
             </div>
         </div>
-    </div>
-    </div>
+        </div>--%>
 
-</div>
+   
 
     <!-- Add House Button -->
         <div id="addHouse" class="modal">
