@@ -27,19 +27,20 @@
     <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
 
-    <link href="Login/css/settings.css" rel="stylesheet" type="text/css" />
+    <link href="CSS_3rdParty/settings.css" rel="stylesheet" type="text/css" />
     <!-- THEME CSS -->
 
             <%-- <link href="Login/css/essentials.css" rel="stylesheet" type="text/css" />--%>
-            <link href="Login/css/layout.css" rel="stylesheet" type="text/css" />
-            <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css" />
+            <link href="CSS_3rdParty/layout.css" rel="stylesheet" type="text/css" />
+            <link href="CSS_3rdParty/layout-responsive.css" rel="stylesheet" type="text/css" />
 
-            <link href="Styles/layout.css" rel="stylesheet" />
-            <link href="Styles/Responsive.css" rel="stylesheet" />
+            <%--<link href="CSS/layout.css" rel="stylesheet" />--%>
+            <%--<link href="Styles/Responsive.css" rel="stylesheet" />--%>
+            <link href="CSS/mystylesheets.css" rel="stylesheet" />
 
-            <link rel="stylesheet" href="CSS/ApttTheme.css" />
-            <link rel="stylesheet" href="CSS/ApttLayout.css" />
-            <link rel="stylesheet" href="Login/CSS/footer.css" />
+            <%--<link rel="stylesheet" href="CSS/ApttTheme.css" />--%>
+            <%--<link rel="stylesheet" href="CSS/ApttLayout.css" />--%>
+            <link rel="stylesheet" href="CSS_3rdParty/footer.css" />
            
          <link rel="stylesheet" href="CSS/IP.css" />
             <link rel="stylesheet" href="CSS/Nestin.css" />
@@ -254,8 +255,8 @@
                   
                 }
             });
-             $("#ProgressBar").hide();
-
+            $("#ProgressBar").hide();
+            location.reload();
         }
 
         function AddNewSociety() {
@@ -318,13 +319,29 @@
         }
 
         function DisplayFlats(response) {
-           $("#flat_progressBar").hide();
+            var color = "";
+            var str = "";
+            $("#flat_progressBar").hide();
             var strData = "";
             $("#FlatRequests").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
          
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
+
+                    var stat = results[i].Status;
+
+                    if (stat != 'Approved') {
+                        str = "disabled";
+                        color = "#ff6666";
+                        //   alert("in "+stat);
+                    }
+                    else {
+                        str = "";
+                        color = "#337ab7";
+                        //     alert("in "+stat);
+                    }
+
 
                     var reqDate = DisplayDateOnly(results[i].ActiveDate);
                     var modDate = DisplayDateOnly(results[i].DeActiveDate);
@@ -334,28 +351,43 @@
                         btnString = "<button class='btn btn-primary btn-sm' onclick='Select("+results[i].ResID +",2)'>Select</button>";
 
                     }
-                                     
-                    strData = strData + "<div class=\"row\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='col-xs-1'>" + results[i].SocietyID + "</div>" +
-                        "<div class='col-xs-5'> " + results[i].FlatNumber + "," + results[i].Status+ "<br/> Address:" +
-                         results[i].SocietyName + ", " +  results[i].Address+
-                        "</div>" +
-                        "<div class='col-xs-2'> Requested On:" +  reqDate + "</div>" +
-                        "<div class='col-xs-2'>Modified On :" + modDate + "</div>" +
-                          "<div class='col-xs-2'> Status: <br/>" + results[i].Status + "</div>" +
 
-                        //"<div class='panel-heading'>" + results[i].SocietyID + "<br/>: " + results[i].SocietyName + " <br/> Return " + results[i].Sector + "</div>"
-                        //+ "<div class='panel-body'> City " + results[i].City
-                        //+ "<div> State" + results[i].State + "</div>"
-                        //   + "</div>"
-                         "<div class='col-xs-10'>" + "</div>" +
-                          "<div class='col-xs-2'>" + btnString + "</div>" 
+
+                    strData =
+                        strData + "<div class=\"row\" style=\"margin-top:10px; margin-right:40px;\">" +
+                        "<div class='col-md-1 col-xs-1'>" + results[i].SocietyID + "</div>" +
+                        "<div class='col-md-4 col-xs-3'>" + results[i].FlatNumber + "," + results[i].Status + "<br/> Address:" + results[i].SocietyName + ", " + results[i].Address + "</div>" +
+                        "<div class='col-md-2 col-xs-2'>Requested On:" + reqDate + "</div>" +
+                        "<div class='col-md-2 col-xs-2'>Modified On :" + modDate + "</div>" +
+                        "<div class='col-md-1 col-xs-2'>Status: <br/>" + results[i].Status + "</div>" +
+                        "<div class='col-md-2 col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
                         + "</div>";
-                    
+
+
+                        
+
+                //     strData = 
+                //        strData + "<div class=\"row\" style=\"margin-top:10px; margin-right:40px;\">" +
+                //                         "<div class='col-md-1 col-xs-1'></div>" +
+                //                           "<div class='col-md-10 col-xs-10'>" +
+                //                            "<table>" +
+                //                                "<tr>" + 
+                //                                   "<td>" + results[i].SocietyID + "</td>" +
+                //                                   "<td>" + results[i].FlatNumber + "," + results[i].Status + "<br/> Address:" + results[i].SocietyName + ", " + results[i].Address + "</td>" +
+                //                                   "<td>" + "RequestedOn: " +  reqDate  + "</td>" +
+                //                                   "<td>" + " ModifiedOn :" + modDate + "</td>" +
+                //                                   "<td>" + "Status: " + results[i].Status + "</td>" +
+                //                                   "<td>" + "<div class='col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"+ "</td>" 
+                //                                + "</tr>"
+                //                          + "</table>"
+                //                         + "</div>"
+                //                       + "<div class='col-md-1 col-xs-1'></div>"
+                //                  + "</div>";
+
+                //    alert("392===>>> "+strData);
                 }
                
                 $("#FlatRequests").html(strData);
-
 
             }
             else {
@@ -371,7 +403,7 @@
         function GetMySocietyRequests() {
              $("#society_progressBar").show();
             var abs_url = api_url + "/api/Society/" + <%=UserID%>;
-
+            alert("406==>> UserID=" +<%=UserID%>);
             $.ajax({
                 url: abs_url,
                 dataType: "json",
@@ -385,7 +417,10 @@
         }
 
         function SocietyRequest(response) {
-          $("#society_progressBar").hide();
+            var color = "";
+            var str = "";
+
+            $("#society_progressBar").hide();
             var strData = "";
             $("#SocietyRequests").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
@@ -393,28 +428,34 @@
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
 
+                    var stat = results[i].Status;
+                    if (stat != 'Approved') {
+                        str = "disabled";
+                        color = " #ff6666";
+                    }
+                    else {
+                        str = "";
+                        color = "#337ab7";
+                    }
+
+
                     var reqDate = DisplayDateOnly(results[i].RequestDate);
                     var modDate = DisplayDateOnly(results[i].ModifiedDate);
                  
                   
 
                     strData = strData + "<div class=\"row\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='col-xs-1'>" + results[i].SocietyID + "</div>" +
-                        "<div class='col-xs-5'> " + results[i].SocietyName + "<br/> Address:" +
+                        "<div class='col-md-1 col-xs-1'>" + results[i].SocietyID + "</div>" +
+                        "<div class='col-md-4 col-xs-3'> " + results[i].SocietyName + "<br/> Address:" +
                         results[i].Sector + ", " + results[i].City + ", " + results[i].State +
                         "</div>" +
-                        "<div class='col-xs-2'> Requested On:" + reqDate + "</div>" +
-                        "<div class='col-xs-2'>Modified On :" + modDate + "</div>" +
-                        "<div class='col-xs-2'> Status: <br/>" + results[i].Status + "</div>"
+                        "<div class='col-md-2 col-xs-2'> Requested On:" + reqDate + "</div>" +
+                        "<div class='col-md-2 col-xs-2'>Modified On :" + modDate + "</div>" +
+                        "<div class='col-md-1 col-xs-2'> Status: <br/>" + results[i].Status + "</div>"
+                        + "<div class='col-md-2 col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
 
-                        //"<div class='panel-heading'>" + results[i].SocietyID + "<br/>: " + results[i].SocietyName + " <br/> Return " + results[i].Sector + "</div>"
-                        //+ "<div class='panel-body'> City " + results[i].City
-                        //+ "<div> State" + results[i].State + "</div>"
-                        //   + "</div>"
-                    
-                      
                         + "</div>";
-
+                    //alert("458===>> resId==" + results[i].ResID );
                 }
 
                 $("#SocietyRequests").html(strData);
@@ -447,29 +488,40 @@
 
 
         function ListHouseRequests(response) {
-        $("#house_progressBar").hide();
+            var str = "";
+            var color = "";
+            $("#house_progressBar").hide();
+
             var strData = "";
             $("#HouseRequests").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
           
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
+                    var stat = results[i].Status;
+                    if (stat != 'Approved') {
+                        str = "disabled";
+                        color = " #ff6666";
+                    }
+                    else {
+                        str = "";
+                        color = "#337ab7";
+                    }
 
                     var actDate = DisplayDateOnly(results[i].ActiveDate);
                     var inactDate = DisplayDateOnly(results[i].DeActiveDate);
 
                     strData = strData + "<div class=\"row\" style=\"margin:20px;padding:0px;\">"
-                        + "<div class='col-xs-2'>ResId:" + results[i].ResID + "</div>"
-                        + "<div class='col-xs-4'>" + results[i].HouseNUmber + "<br/>: " + results[i].Sector + ", " + results[i].City + ", " + results[i].State + "</div>"
-                        + "<div class='col-xs-2'> Active " + actDate + "</div>"
-                        + "<div class='col-xs-2'> Active Till" + inactDate + "</div>"
-                        + "<div class='col-xs-2'><button class='btn btn-primary btn-sm' onclick='Select("+results[i].ResID +",2)'>Select</button></div>"
+                        + "<div class='col-md-2 col-xs-2'>ResId:" + results[i].ResID + "</div>"
+                        + "<div class='col-md-4 col-xs-4'>" + results[i].HouseNUmber + "<br/>: " + results[i].Sector + ", " + results[i].City + ", " + results[i].State + "</div>"
+                        + "<div class='col-md-2 col-xs-2'> Status : " + results[i].Status + "</div>"
+                        + "<div class='col-md-2 col-xs-2'> Active Till" + inactDate + "</div>"
+                        + "<div class='col-md-2 col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
                         + "</div>";
 
                 }
 
                 $("#HouseRequests").html(strData);
-
             }
             else {
                  var noData = "<h3> No Independent House</h3>"
@@ -688,51 +740,83 @@
                         <div class="col-sm-2">
                             <img id="uploadPreview" class="img image_large" src="GetImages.ashx?UserID=<% =UserID %>&Name=<% =UserName %>&UserType=Owner" />
                         </div>
-                         <div class="col-sm-8">
-                            <table class="w3-table w3-striped w3-bordered">
-                                <tr>
-                                    <td>FirstName</td>
-                                    <td><% =UserName %></td>
-                                </tr>
-                                <tr>
-                                    <td>LastName</td>
-                                    <td><% =UserLastName %></td>
-                                </tr>
-                                <tr>
-                                     <td>Email</td>
-                                    <td><% =UserEmail %></td>
-                                </tr>
-                                <tr>
-                                     <td>Mobile</td>
-                                    <td><% =UserMobile %></td>
-                                </tr>
-                                <tr>
-                                     <td>Address</td>
-                                    <td>XXXXXXXXXXX</td>
-                                </tr>
-                            </table>
-                          </div>
-                        </div>
-                    </div>
 
-    <div  class="container-fluid" id="flat_Request" style="min-height:200px; margin: 50px;  background-color: white;">
-        <div class="ProgressBar-Parent">
-            <div class="row ProgressBar-Sibling" style="margin: 10px; width:84%;">
-            <div class="row " >
-                <div class="col-xs-10">
-                    <h4 style="margin-bottom: 0px;">My Flats </h4>
-                </div>
-                <div class="col-xs-2">
-                    <button class="btn btn-primary btn-sm" onclick="NewFlat()" type="button">New Flat</button>
-                </div>
-            </div>
-            <div id="FlatRequests" class="row " style="border-top: solid 2px black; margin-top: 10px; "></div>
-             </div>
-            <div id="flat_progressBar" class="ProgressBar" style="text-align: center; min-height: 200px; width:100%;">
-                <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
+                        </center>
+            <div class="col-md-8 col-xs-12">
+                <table class="w3-table w3-striped w3-bordered">
+                    <tr>
+                        <td>FirstName</td>
+                        <td><% =UserName %></td>
+                    </tr>
+                    <tr>
+                        <td>LastName</td>
+                        <td><% =UserLastName %></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><% =UserEmail %></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile</td>
+                        <td><% =UserMobile %></td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>XXXXXXXXXXX</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
+
+    <!-- My Flat NEW -->
+    <div class="container" id="flat_Request" style="background-color: white; margin-top: 40px;">
+         <div class="row">          
+            <div class="col-md-12 col-xs-12">
+                <h4 style="margin-left: 10px;"/>My Flats  <a onclick="NewFlat()" style="font-size:15px; color:blue;">Click Here To Add New Flat</a>
+            </div>          
+        </div>
+
+        <hr style="border: 1px solid black" />
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 col-xs-12">
+                <div id="FlatRequests"></div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+    <!-- My Flat new END -->
+
+    <!-- My Society NEW -->
+    <div class="container" id="society_Request" style="background-color: white; margin-top: 40px;">
+        <div class="row">          
+            <div class="col-md-12 col-xs-12">
+                <h4 style="margin-left: 10px;"/>My Societies  <a onclick="NewSociety()" style="font-size:15px; color:blue;">Click Here To Add New Request</a>
+            </div>          
+        </div>
+
+        <hr style="border: 1px solid black" />
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 col-xs-12"> 
+                <div id="SocietyRequests"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Society END -->
+
+    <!-- My Independent House NEW -->
+    <div class="container" id="House_Requests" style="background-color: white; margin-top: 40px;">
+        <div class="row">          
+            <div class="col-md-12 col-xs-12">
+                <h4 style="margin-left: 10px;"/>My Independent House  <a onclick="NewHouse()" style="font-size:15px; color:blue;">Click Here To Add New House</a>
+            </div>          
+        </div>
+
 
     <div class="container-fluid" id="society_Request" style="margin: 50px;min-height:200px; background-color: white;">
         <div class="ProgressBar-Parent">

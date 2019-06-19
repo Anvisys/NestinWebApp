@@ -324,7 +324,7 @@
                         <div class="row" style="margin-top: 10px;">
                             <div class="col-sm-3  col-xs-3">
                                 <div>
-                                    <h4 class="pull-left ">Polls : </h4>
+                                    <h4 class="pull-left ">Polls:</h4>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-xs-6" style="text-align: center;">
@@ -341,9 +341,6 @@
                             <div class="col-sm-3 col-xs-3">
                                 <div>
                                     <button id="Add_Poll" type="button" style="margin-top: 0px;" class="btn btn-primary pull-right btn-sm">Add Poll</button>
-
-                                    <%--                                             <a id="Add_Poll" class="btn btn-primary pull-right" style="visibility:hidden;cursor:pointer;">Add Poll</a>--%>
-                                </div>
                             </div>
                         </div>
                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -354,19 +351,6 @@
                             </div>
                         </div>
 
-                        <%--     <div class="row" style="height:25px;">
-                <div class="col-sm-4 col-xs-6">
-                    <asp:LinkButton ID="btnPreBottom" runat="server" CssClass="fa fa-angle-double-left pull-left" Height="20" Width="20px" ForeColor="Black" OnClick="btnPreBottom_Click" CausesValidation="False"></asp:LinkButton>
-                     
-                </div>
-                <div class="col-sm-4 hidden-xs">
-                    <asp:Label ID="lblPie1EmptyText" runat="server" Font-Size="Small" ForeColor="#3C9DFF"></asp:Label>
-                </div>
-                <div class="col-sm-4 col-xs-6" style="align-content:flex-end;">
-                    <asp:LinkButton ID="btnNextBottom" runat="server" CssClass="fa fa-angle-double-right pull-right" Height="20" Width="20px" ForeColor="Black" text="Next" OnClick="btnNextBottom_Click" CausesValidation="False"></asp:LinkButton>
-                    
-                </div>
-            </div>--%>
                         <div class="row" style="margin-top: 15px">
                             <div id="chartData" runat="server" class=" col-xs-12 col-sm-6 col-md-6 ">
                                 <div class="layout_shadow_box">
@@ -405,6 +389,7 @@
 
                                         <asp:Label ID="lblPie1date" runat="server" Text="Started On :" Font-Size="Small" ForeColor="#0055AA"></asp:Label>
                                         <br />
+                                        <br />
 
                                     </div>
 
@@ -413,6 +398,7 @@
 
                                 </div>
                             </div>
+                            
                             <asp:Panel runat="server" ID="pnlchart2">
                                 <div id="chart2data" runat="server" class="col-xs-12 col-sm-6 col-md-6 ">
                                     <div class="layout_shadow_box">
@@ -421,7 +407,7 @@
                                         <asp:Label ID="lblQ2" runat="server" Height="30px" Font-Size="Small" ForeColor="#4A4A4A"></asp:Label>
                                     </div>
                                     <div class="row rad">
-                                        <div class="col-xs-10" style="text-align: left; padding-left: 25px;">
+                                        <div class="col-md-10 col-xs-10" style="text-align: left; padding-left: 25px;">
                                             <ol>
                                                 <li>
                                                     <asp:RadioButton ID="RadioChart2Opt1" CssClass="Space" runat="server" GroupName="RadioGroup2" onchange="RadioButtonCheck2(5)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>

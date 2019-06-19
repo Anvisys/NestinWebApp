@@ -45,6 +45,7 @@ public partial class MainPage : System.Web.UI.Page
                 if (ResID != null)
                 {
                     Resident currentResident = (Resident)muser.AllResidents.FirstOrDefault(f => f.ResID.ToString() == ResID);
+
                     if (currentResident != null)
                     {
                         muser.currentResident = currentResident;
@@ -58,14 +59,14 @@ public partial class MainPage : System.Web.UI.Page
                 {
                     if (muser.currentResident.UserType == "Individual")
                     {
-
+                        SessionVariables.CurrentPage = "MyHouse.aspx";
 
                     }
                     else if (muser.currentResident.UserType == "SuperAdmin")
                     {
                         SessionVariables.CurrentPage = "SuperAdmin.aspx";
                     }
-
+                    
                     muser.currentResident = (Resident)muser.AllResidents[0];
                     initializePageControl(muser.currentResident);
                 }
@@ -84,16 +85,26 @@ public partial class MainPage : System.Web.UI.Page
         SessionVariables.SocietyID = current.SocietyID;
         SessionVariables.ResiID = current.ResID;
 
-        if (current.UserType == "Owner" || current.UserType == "Tenant" || current.UserType == "ResidentAdmin")
+        if (current.UserType == "Owner" || current.UserType == "Tenant" )
         {
             SessionVariables.FlatNumber = current.FlatNumber;
             SessionVariables.FlatID = current.FlatID;
-
+            SessionVariables.CurrentPage = "Dashboard.aspx";
         }
         else if (current.UserType == "Employee")
         {
             SessionVariables.ServiceType = current.ServiceType;
 
+        }
+        else if (current.UserType == "Individual")
+        {
+            SessionVariables.CurrentPage = "MyHouse.aspx?Res="+ SessionVariables.ResiID;
+
+        }
+        else if (muser.currentResident.UserType == "Admin")
+        {
+            SessionVariables.CurrentPage = "Dashboard.aspx";
+           
         }
 
 

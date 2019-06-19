@@ -493,7 +493,7 @@
             var name, mobile, address, purpose,visitDate;
 
             name = document.getElementById("idName").value;
-            alert("at 450==> name=" + name);
+           // alert("at 450==> name=" + name);
             mobile = document.getElementById("txtmobile").value;
             address = document.getElementById("Address").value;
             purpose = document.getElementById("Purpose").value;
@@ -501,7 +501,7 @@
             startTime = $("#timeList").val();
             var start = new Date(visitDate);
             var strStartDate = GetDateTimeinISO(start);
-            alert("at 498==> " + strStartDate);
+           // alert("at 498==> " + strStartDate);
             var strEndDate="2020-05-10T00:00:00"
             
             

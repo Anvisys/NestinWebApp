@@ -64,8 +64,9 @@ public class Resident
         {
 
             DataAccess dacess = new DataAccess();
-            String UserSearchQuery = "select * from " + CONSTANTS.View_SocietyUser + " Where UserID =" + UserId + 
-                                     " and StatusID = 2 and DeActiveDate > GetDate()";
+            String UserSearchQuery = "select * from " + CONSTANTS.View_SocietyUser + " Where UserID =" + UserId +" and StatusID = 2 and DeActiveDate > GetDate()";
+                                     
+            //
             dsResidentUserFlat = dacess.GetData(UserSearchQuery);
         }
         catch (Exception ex)

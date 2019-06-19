@@ -482,8 +482,8 @@
             $("#myModalCloseComplaint").hide();
             
 
-            alert("Updated Successfully");
-           //location.reload(true);
+           // alert("Updated Successfully");
+         //  location.reload();
         }
 
         $(document).ready(function () {
@@ -628,10 +628,10 @@
                      </div>
 
                      <div class="row" style="margin-top: 10px;">
-                         <div class="col-xs-3">
+                         <div class="col-md-3 col-xs-4">
                              <h4>Complaints:</h4>
                          </div>
-                         <div class="col-xs-6 zero-margin" style="align-content: center;" runat="server" id="topnav">
+                         <div class="col-md-3 col-xs-12" style="align-content: center;" runat="server" id="topnav">
 
                              <asp:DropDownList EnableViewState="true" ID="drpVCompStatusF" runat="server" CssClass="search-dropdown">
                              </asp:DropDownList>
@@ -641,7 +641,7 @@
                              <asp:LinkButton ID="ImgCompSearch" runat="server" CssClass="search-button" BackColor="Transparent" ForeColor="white" OnClick="ImgCompSearch_Click"> <span class="glyphicon glyphicon-search"></span></asp:LinkButton>
 
                          </div>
-                         <div class="col-xs-3 zero-margin" style="display: none;">
+                         <div class="col-md-3 col-xs-12" style="display: none;">
                              <asp:DropDownList ID="drpComplaintDateFilter" runat="server" OnSelectedIndexChanged="drpComplaintDateFilter_SelectedIndexChanged" CssClass="form-control">
                                  <asp:ListItem Selected="True">Current month</asp:ListItem>
                                  <asp:ListItem>Last month</asp:ListItem>
@@ -651,14 +651,14 @@
 
                              </asp:DropDownList>
                          </div>
-                         <div class="col-xs-3">
+                         <div class="col-md-3 col-xs-12">
                              <button type="button" id="btnAddComplaint" style="margin-top: 0px;" class="pull-right btn btn-primary btn-sm">Add Complaint</button>
                          </div>
                      </div>
 
 
                      <div class="row hidden" style="margin-top: 5px;">
-                         <div class="col-md-12 hidden-sm ">
+                         <div class="col-md-12 hidden-sm hidden-xs">
                              Initiated :<asp:Label ID="lblInitiatedcount" runat="server" Text="0" CssClass="Complaint_Category"></asp:Label>
                              Assigned :
                              <asp:Label ID="lblAssignedCount" runat="server" Text="0" CssClass="Complaint_Category"></asp:Label>
@@ -972,178 +972,7 @@
 
 
                  <%------------------------------------------------------ Add Complaint Section Starts from here------------------------------------------------------------- --%>
-           <%--      <div id="wrongAddComplaintPopup" class="modal">
-                     <div class="panel panel-primary" style="width: 400px; margin: auto;">
-                         <div class="panel-heading">
-                             Add complaint <span class="fa fa-times" onclick="funClear()" style="float: right; cursor: pointer;"></span>
-
-                         </div>
-                         <br />
-                         <div class="panel-body">
-
-                             <form name="complaints"  autocomplete="off">
-                                      <div class="container-fluid">
-                                          <div class="row">
-                                            <label for="colFormLabel" class="col-xs-4 col-form-label">FlatNumber : </label>
-                                            <div class="col-xs-8">
-                                                <input type="text" class="form-control col-xs-8" id="txtAddcompFlat1"   placeholder="Enter Name" name="Name" />
-                                            </div>
-                                          </div>
-                                          <div class="row"style="margin-top:5px">
-                                            <label class="col-xs-4" for="MobileNo">Mobile No:</label>
-                                            <div class="col-xs-8">
-                                                 <input type="text" onkeypress="return isNumberKey(event)" class="form-control col-xs-8" id="MobileNo"  placeholder="Enter Mobile No." name="MobileNo"/>
-  
-                                            </div>
-                                          </div>
-                                          <div class="row"style="margin-top:5px">
-                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Address: </label>
-                                            <div class="col-xs-8">
-                                                 <textarea class="form-control col-xs-8" rows="2" id="Address" style="resize:none;" name="Address" placeholder="Enter Address"></textarea>
-                                            </div>
-                                          </div>
-                                          <div class="row"style="margin-top:5px">
-                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Purpose: </label>
-                                            <div class="col-xs-8">
-                                             <input type="text" name="Purpose" class="form-control col-xs-8"id="Purpose" placeholder="Enter Purpose"/>
-                                            </div>
-                                          </div>
-                                          <div class="row"style="margin-top:5px">
-                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Time / Date </label>
-                                            <div class="col-xs-8">
-                                             <input type="text" class="form-control col-xs-4"   id="btnEntryDate"  name="StartDate"/>
-                                             <select class="form-control col-xs-4" id="timeList"></select>
-                                            </div>
-                                          </div>
-                                          <div class="row"style="margin-top:5px">
-                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Valid Till: </label>
-                                            <div class="col-xs-8">
-                                           <label  class="form-control col-xs-8" id="btnEndTime" ></label>
-                                            </div>
-                                          </div>
-                                      </div>
-                                 
-                                  </form>
-
-                             <table style="display:none;">
-
-                                 <tr>
-                                     <td colspan="3" style=""></td>
-                                 </tr>
-                                 <tr>
-                                     <td class="lbltxt" style="width: 50%;">FlatNumber : 
-                                     </td>
-                                     <td style="width: 50%;">
-                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                             <ContentTemplate>
-                                                 <asp:TextBox ID="txtAddcompFlat" runat="server" CssClass="txtbox_style" OnTextChanged="txtAddcompFlat_TextChanged" AutoPostBack="True" ValidationGroup="Add_Complaint"></asp:TextBox><br />
-
-                                                 <asp:Label ID="lblcomperror" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
-                                             </ContentTemplate>
-                                         </asp:UpdatePanel>
-                                     </td>
-                                     <td style="width: 1%;">
-                                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                             <ContentTemplate>
-                                                 <asp:RequiredFieldValidator ID="RequireComplainterflat" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtAddcompFlat" InitialValue="0" ValidationGroup="Add_Complaint"></asp:RequiredFieldValidator>
-                                             </ContentTemplate>
-                                         </asp:UpdatePanel>
-                                     </td>
-
-                                 </tr>
-                                 <tr>
-                                     <td class="lbltxt">Name :
-                                     </td>
-                                     <td>
-                                         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                                             <ContentTemplate>
-                                                 <asp:TextBox ID="txtComplaintername" runat="server" CssClass="txtbox_style"></asp:TextBox>
-
-                                             </ContentTemplate>
-                                         </asp:UpdatePanel>
-
-                                     </td>
-                                     <td>
-                                         <asp:RequiredFieldValidator ID="RequireAddAomplaintername" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtComplaintername" ValidationGroup="Add_Complaint"></asp:RequiredFieldValidator>
-                                     </td>
-
-                                 </tr>
-                                 <tr>
-                                     <td class="lbltxt">Category :
-                                     </td>
-                                     <td>
-                                         <asp:UpdatePanel ID="UpdatePanel5" runat="server">
-                                             <ContentTemplate>
-                                                 <asp:DropDownList ID="drpComplaintcategory" runat="server" OnSelectedIndexChanged="drpComplaintcategory_SelectedIndexChanged" CssClass="txtDrop" AutoPostBack="True" ValidationGroup="Add_Complaint">
-                                                 </asp:DropDownList>
-                                             </ContentTemplate>
-                                         </asp:UpdatePanel>
-
-                                     </td>
-                                     <td>
-
-                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="drpComplaintcategory" ErrorMessage="*" ForeColor="#FF5050" InitialValue="NA" ValidationGroup="Add_Complaint"></asp:RequiredFieldValidator>
-
-                                     </td>
-                                       <td> </td>
-                                 </tr>
-
-
-                                 <tr>
-                                     <td class="lbltxt">Description :
-                                     </td>
-                                     <td>
-                                         <asp:TextBox ID="txtComplaintdescription" runat="server" CssClass="txtbox_style" TextMode="MultiLine" Style="resize: none" ValidationGroup="Add_Complaint"></asp:TextBox><br />
-
-                                     </td>
-                                     <td>
-                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtComplaintdescription" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Complaint"></asp:RequiredFieldValidator>
-                                     </td>
-                                      <td> 
-                             
-                                  </td>
-                                 </tr>
-                                 <tr>
-                                     <td class="lbltxt">Assigned  To :
-                                     </td>
-                                     <td>
-                                         <asp:UpdatePanel ID="UpdatePanel6" runat="server">
-                                             <ContentTemplate>
-                                                 <asp:DropDownList ID="drpAddcomAssign" runat="server" CssClass="txtDrop" ValidationGroup="Add_Complaint">
-                                                 </asp:DropDownList>
-                                             </ContentTemplate>
-                                         </asp:UpdatePanel>
-
-                                     </td>
-                                     <td>
-                                         <asp:RequiredFieldValidator ID="requireassigned" runat="server" ControlToValidate="drpAddcomAssign" ErrorMessage="*" ForeColor="#FF5050" InitialValue="0" ValidationGroup="Add_Complaint"></asp:RequiredFieldValidator>
-                                     </td>
-                                     <td> </td>
-                                 </tr>
-                                 <tr>
-                                     <td colspan="3" style="height: 10px;"></td>
-                                 </tr>
-                                 <tr>
-                                     <td colspan="3" style="text-align: center;">
-                                         <asp:Label ID="lblCompstatus" runat="server" Font-Size="Small" ForeColor="#48A4FF"></asp:Label>
-                                     </td>
-
-                                 </tr>
-                                 <tr>
-                                     <td colspan="3" style="height: 10px;"></td>
-                                 </tr>
-
-                             </table>
-
-                         </div>
-
-                         <div class="panel-footer" style="text-align: right;">
-                             <asp:Button ID="btnAddcomplaintsubmit" runat="server" Text="Submit" CssClass="btn_style btn btn-success" OnClick="btnAddcomplaintsubmit_Click" ValidationGroup="Add_Complaint" />
-                             <button type="button" id="wrongCancelAddcomplaint" onclick="funClear()" class="btn_style btn btn-danger">Cancel</button>
-                         </div>
-                     </div>
-
-                       </div>--%>
+    
 
                      <%-----------------------------------------DataBindingEdit_Complaint_btn HistoryEventArgs Section Starts from here ------------------------------------------------------------------------------%>
 

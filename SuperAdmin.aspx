@@ -144,7 +144,7 @@
           
             var socData = {};
             socData.SocietyID = selectedSocietyId;
-
+            console.log("147===>" +JSON.stringify(socData));
             $.ajax({
                 dataType: "json",
                 url: "SuperAdmin.aspx/ApproveSocietyRequest",
@@ -153,6 +153,8 @@
                 async: false,
                 contentType: 'application/json',
                 success: function (data) {
+
+                    console.log("157===>> data=" + JSON.stringify(data));
                     if (data.d == true) {
                         $("#showApproveModal").hide();
                         GetSocietyRequest();
