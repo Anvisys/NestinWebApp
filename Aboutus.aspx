@@ -32,26 +32,6 @@
     <link rel="stylesheet" href="CSS/Nestin.css" />
     <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />
 
-    <%--<link href="Login/css/settings.css" rel="stylesheet" type="text/css" />--%>
-    <!-- THEME CSS -->
-
-   <%-- <link href="Login/css/essentials.css" rel="stylesheet" type="text/css" />
-    <link href="Login/css/layout.css" rel="stylesheet" type="text/css" />
-    <link href="Login/css/layout-responsive.css" rel="stylesheet" type="text/css" />--%>
-
-    <%--<link href="Styles/layout.css" rel="stylesheet" />
-    <link href="Styles/Responsive.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="CSS/ApttTheme.css" />
-
-    <link rel="stylesheet" href="CSS/ApttLayout.css" />
-
-    <link rel="stylesheet" href="CSS/NewAptt.css" />
-    <link rel="stylesheet" href="Login/CSS/footer.css" />--%>
-
-    
-
-    
     <style>
         body {
             font: 400 15px Lato, sans-serif;
@@ -83,12 +63,12 @@
             background-color: #fff;
         }
 
-        .logo-small {
+        .logo1-small {
             color: #03A9F4;
             font-size: 50px;
         }
 
-        .logo {
+        .logo1 {
             color: #03A9F4;
             font-size: 200px;
         }
@@ -184,9 +164,6 @@
             color: #f4511e;
         }
 
-
-
-
         .download_overlay {
             background: url(../Images/Icon/downloadbg.jpg);
             width: 100%;
@@ -244,50 +221,37 @@
     </form>
 
 
-    <header id="topNav" class="layout_header top-NavigationBar">
+    <header>
+        <nav class="navbar navbar-default nav-color navbar-fixed-top">
+            <div class="container-fluid">
 
-        <!-- scroll bar progress -->
-        <div class="progress-container">
-            <div class="progress-bar" id="myBar"></div>
-        </div>
-        <!-- End progress -->
-
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-5 col-xs-12">
-                    <div class="navbar-header">
-                        <a class="logo col-xs-2" href="Login.aspx">
-                            <img src="Images/Icon/Logo1.png" height="50" alt="Logo" />
-                        </a>
-                        <div class="navbar-inverse">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                    </div>
-                    <%-- <h1 class="title hidden-xs" style="color: #fff; padding-top: 11px; font-size:30px;">Society Management System</h1>--%>
+                <!-- Brand/logo -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#example-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="logo" href="Login.aspx">
+                        <img src="Images/Icon/Logo1.png" height="50" alt="Logo" />
+                    </a>
                 </div>
-                <div class="col-md-7">
-                    <div class="collapse navbar-collapse pull-right" id="myNavbar" style="margin-top: 9px; text-align: center;">
-                        <nav class="nav navbar-nav nav-color">
-                            <ul class="nav nav-pills nav-main scroll-menu nav-small" id="topMain">
-                                <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
-                                <li class=" "><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
-                                <li class=" "><a class="menu_text" href="contact.aspx">Contact </a></li>
-                            </ul>
-                        </nav>
-                    </div>
+
+                <!-- Collapsible Navbar -->
+                <div class="collapse navbar-collapse" id="example-1">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class=""><a class="menu_text" href="Login.aspx">Home</a></li>
+                        <li class=""><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
+                        <li class=""><a class="menu_text" href="contact.aspx">Contact </a></li>
+                    </ul>
                 </div>
+
             </div>
-        </div>
-
-
+        </nav>
     </header>
 
-    
+
 
     <div class="jumbotron-local text-center" style="height: 120px;">
         <h3 style="padding-top: 85px; color: #ffffff;">About us</h3>
@@ -296,7 +260,7 @@
 
     <div id="about" class="container-fluid container-size">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-md-8">
                 <h2>About Nestin</h2>
                 <br />
                 <h4 style="text-align: justify;"><strong>NESTIN</strong> is developed by Anvisys Technologies Pvt. Ltd. To cater the needs of RWA operations and society management needs. While the trend of residential complex is increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing demand of a management system to manage these operations and communication mechanism to involve residents in operations. Nested is our attempt to provide a state of the art, user friendly and secure Society Management System.<br />
@@ -305,8 +269,8 @@
                 <br />
                 <button class="btn btn-default btn-lg"><a href="contact.aspx">Get In Touch</a></button>
             </div>
-            <div class="col-sm-4">
-                <span class="glyphicon glyphicon-signal logo hidden-xs" style="padding-top: 150px;"></span>
+            <div class="col-md-2">
+                <span class="glyphicon glyphicon-signal logo1 hidden-xs" style="padding-top: 150px;"></span>
             </div>
         </div>
     </div>
@@ -314,16 +278,18 @@
     <div class="container-fluid bg-white container-size">
         <div class="row">
             <div class="col-sm-6">
-                <span class="glyphicon glyphicon-globe logo slideanim hidden-xs" style="margin-left: 120px; margin-top:100px;"></span>
+                <span class="glyphicon glyphicon-globe logo1 slideanim hidden-xs" style="margin-left: 120px; margin-top: 80px;"></span>
             </div>
             <div class="col-sm-6">
                 <h2>Our Values</h2>
                 <br />
-                <h4><strong>MISSION:</strong> Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4>
-                <br />
                 <p>
-                   <h4> <strong>VISION:</strong> Our vision Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4>
+                    <h4 style="text-align: justify;"><strong>VISION:</strong> The gated communities are small cities within walls 
+                        consisting of a large number of people residing in 
+                        more than hundred of apartments. Our Vision is to carter the emerging need for a better management
+                        solution of these gated communities.
+                        We pave the way for these communities to work in a well-integrated environment and help improve RWA operations.
+                        Our vision is to provide ease of living, better security, and better communications to the societies.</h4>
                 </p>
             </div>
         </div>
@@ -406,44 +372,7 @@
 
 
     <!-- /WRAPPER -->
-    <%--<section id="download" class="download">
-        <div class="download_overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="hidden-xs hidden-sm col-md-8">
-                    <h2 style="padding-top: 65px; color: white;">How Download the app?</h2>
-                    <h4 style="color: white; text-align:justify;">
-                         Just download the app from the store.
-                         Simple, nice and user-friendly application of the weather.
-                         Only relevant and useful information.
-                    </h4>
-                    <a href="https://play.google.com/store/apps/details?id=net.anvisys.NestIn" target="_blank">
-                        <img src="Images/Icon/googleplay.png" style="height: 50px;" alt="Download" />
-                    </a>
-                </div>
-                <div class="hidden-xs hidden-sm col-md-4">
-                    <img src="Images/Icon/appdownload1.png" style="height: 50vh; width:100%;" />
-                </div>
-            </div>
-
-             <div class="row">
-                <div class="col-xs-12 hidden-md hidden-lg">
-                    <h2 style="padding-top: 65px; color: Black;">How Download the app?</h2>
-                    <h4 style="color: black; text-align:justify;">
-                         Just download the app from the store.
-                         Simple, nice and user-friendly application of the weather.
-                         Only relevant and useful information.
-                    </h4>
-                    <a href="https://play.google.com/store/apps/details?id=net.anvisys.NestIn" target="_blank">
-                        <img src="Images/Icon/googleplay.png" style="height: 50px; width:50%;" alt="Download" />
-                    </a>
-                </div>
-                <div class="col-xs-12 hidden-md hidden-lg">
-                    <img src="Images/Icon/appdownload1.png" style="height: 40vh; width:100%;" />
-                </div>
-            </div>
-        </div>
-    </section>--%>
+ 
     <!-- FOOTER -->
 
     <footer id="myFooter">
@@ -496,6 +425,6 @@
         </div>
     </footer>
 
-  
+
 </body>
 </html>

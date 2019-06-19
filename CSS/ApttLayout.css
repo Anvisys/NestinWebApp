@@ -268,47 +268,6 @@ float:right;
 }
 
 
-.search-dropdown {
-    width: 150px;
-    height: 40px;
-    padding: 0px;
-    margin: 0px;
-    padding-left: 10px;
-    float: left;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border: 0px;
-}
-
-.search-text {
-    width: 150px;
-    height: 40px;
-    padding: 0px;
-    padding-left:10px;
-    margin: 0px;
-    display: inline;
-    float: left;
-    border:0px;
-}
-.search-button {
-    width: 40px;
-    height: 40px;
-    padding-left: 5px;
-    padding-top: 5px;
-    margin: 0px;
-    display: inline;
-    float: left;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background-color: chocolate;
-}
-.search-symbol {
-    height: 40px;
-    width: 40px;
-    margin: 0px;
-    padding: 0px;
-    margin: auto;
-}
 
 
 .nav-small li a {
