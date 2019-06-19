@@ -403,7 +403,7 @@
         function GetMySocietyRequests() {
              $("#society_progressBar").show();
             var abs_url = api_url + "/api/Society/" + <%=UserID%>;
-
+            alert("406==>> UserID=" +<%=UserID%>);
             $.ajax({
                 url: abs_url,
                 dataType: "json",
@@ -455,7 +455,7 @@
                         + "<div class='col-md-2 col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
 
                         + "</div>";
-
+                    //alert("458===>> resId==" + results[i].ResID );
                 }
 
                 $("#SocietyRequests").html(strData);

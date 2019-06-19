@@ -66,7 +66,7 @@ public partial class MainPage : System.Web.UI.Page
                     {
                         SessionVariables.CurrentPage = "SuperAdmin.aspx";
                     }
-
+                    
                     muser.currentResident = (Resident)muser.AllResidents[0];
                     initializePageControl(muser.currentResident);
                 }
@@ -101,6 +101,12 @@ public partial class MainPage : System.Web.UI.Page
             SessionVariables.CurrentPage = "MyHouse.aspx?Res="+ SessionVariables.ResiID;
 
         }
+        else if (muser.currentResident.UserType == "Admin")
+        {
+            SessionVariables.CurrentPage = "Dashboard.aspx";
+           
+        }
+
 
         if (muser.AllResidents.Count > 1)
         {
