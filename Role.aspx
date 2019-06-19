@@ -319,7 +319,7 @@
 
             var color = "";
             var str = "";
-           $("#flat_progressBar").hide();
+            $("#flat_progressBar").hide();
             var strData = "";
             $("#FlatRequests").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
@@ -328,17 +328,17 @@
                 for (var i = 0; i < results.length; i++) {
 
                     var stat = results[i].Status;
-                    
+
                     if (stat != 'Approved') {
                         str = "disabled";
                         color = "#ff6666";
-                     //   alert("in "+stat);
+                        //   alert("in "+stat);
                     }
                     else {
                         str = "";
                         color = "#337ab7";
-                   //     alert("in "+stat);
-                        }
+                        //     alert("in "+stat);
+                    }
 
 
                     var reqDate = DisplayDateOnly(results[i].ActiveDate);
@@ -350,18 +350,16 @@
 
                     }
 
-                                     
-                    strData = strData + "<div class=\"row\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='col-xs-1'>" + results[i].SocietyID + "</div>" +
-                        "<div class='col-xs-5'> " + results[i].FlatNumber + "," + results[i].Status+ "<br/> Address:" +
-                         results[i].SocietyName + ", " +  results[i].Address+
-                        "</div>" +
-                        "<div class='col-xs-2'> Requested On:" +  reqDate + "</div>" +
-                        "<div class='col-xs-2'>Modified On :" + modDate + "</div>" +
-                          "<div class='col-xs-2'> Status: <br/>" + results[i].Status + "</div>" +
-                         "<div class='col-xs-8'>" + "</div>" +
-                        "<div class='col-xs-2'>" + btnString + "</div>" 
-                        + "<div class='col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
+
+                    strData =
+                        strData + "<div class=\"row\" style=\"margin-top:10px; margin-right:40px;\">" +
+                        "<div class='col-md-1 col-xs-1'>" + results[i].SocietyID + "</div>" +
+                        "<div class='col-md-4 col-xs-3'>" + results[i].FlatNumber + "," + results[i].Status + "<br/> Address:" + results[i].SocietyName + ", " + results[i].Address + "</div>" +
+                        "<div class='col-md-2 col-xs-2'>Requested On:" + reqDate + "</div>" +
+                        "<div class='col-md-2 col-xs-2'>Modified On :" + modDate + "</div>" +
+                        "<div class='col-md-1 col-xs-2'>Status: <br/>" + results[i].Status + "</div>" +
+                        "<div class='col-md-2 col-xs-2'><button class='btn btn-primary btn-sm' id='btnSub' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
+                        + "</div>";
 
                     //new data//
 
@@ -390,7 +388,7 @@
                 }
 
                 $("#FlatRequests").html(strData);
-        
+
             }
             else {
                 var noData = "<h3> No data for Flats</h3>"
@@ -422,7 +420,7 @@
 
             var color = "";
             var str = "";
-          $("#society_progressBar").hide();
+            $("#society_progressBar").hide();
 
             var strData = "";
             $("#SocietyRequests").html(strData);
@@ -434,12 +432,12 @@
                     var stat = results[i].Status;
                     if (stat != 'Approved') {
                         str = "disabled";
-                        color=" #ff6666";
+                        color = " #ff6666";
                     }
                     else {
                         str = "";
                         color = "#337ab7";
-                        }
+                    }
 
 
                     var reqDate = DisplayDateOnly(results[i].RequestDate);
@@ -492,22 +490,22 @@
         function ListHouseRequests(response) {
             var str = "";
             var color = "";
-        $("#house_progressBar").hide();
-           var strData = "";
+            $("#house_progressBar").hide();
+            var strData = "";
             $("#HouseRequests").html(strData);
             var results = response.$values;// jQuery.parseJSON(response.$values);
 
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
-                   var stat = results[i].Status;
+                    var stat = results[i].Status;
                     if (stat != 'Approved') {
                         str = "disabled";
-                        color=" #ff6666";
+                        color = " #ff6666";
                     }
                     else {
                         str = "";
                         color = "#337ab7";
-                        }
+                    }
 
                     var actDate = DisplayDateOnly(results[i].ActiveDate);
                     var inactDate = DisplayDateOnly(results[i].DeActiveDate);
@@ -523,7 +521,7 @@
                 }
 
                 $("#HouseRequests").html(strData);
-                
+
             }
             else {
                 var noData = "<h3> No Independent House</h3>"
