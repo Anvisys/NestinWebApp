@@ -89,7 +89,7 @@ public partial class MainPage : System.Web.UI.Page
         {
             SessionVariables.FlatNumber = current.FlatNumber;
             SessionVariables.FlatID = current.FlatID;
-
+            SessionVariables.CurrentPage = "Dashboard.aspx";
         }
         else if (current.UserType == "Employee")
         {

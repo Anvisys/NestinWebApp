@@ -349,15 +349,22 @@
                         //+ "<div class='panel-body'> City " + results[i].City
                         //+ "<div> State" + results[i].State + "</div>"
                         //   + "</div>"
-                         "<div class='col-md-10'>" + "</div>" +
-                          "<div class='col-md-2'>" + btnString + "</div>" 
+
+                         "<div class='col-xs-8'>" + "</div>" +
+                        "<div class='col-xs-2'>" + btnString + "</div>" 
+                        + "<div class='col-xs-2'><button class='btn btn-primary btn-sm' id='btnSub' onclick='Select("+results[i].ResID +",2)'>Select</button></div>"
                         + "</div>";
+
                     
                 }
                
                 $("#FlatRequests").html(strData);
-
-
+                var stat = results[i].Status;
+                if (stat != 'Approved')
+                    $("#btnSub").attr("disabled", "true");
+                else {
+                    $("#btnSub").attr("disabled", "false");
+                }
             }
             else {
                 var noData = "<h3> No data for Flats</h3>"
@@ -464,12 +471,19 @@
                         + "<div class='col-xs-4'>" + results[i].HouseNUmber + "<br/>: " + results[i].Sector + ", " + results[i].City + ", " + results[i].State + "</div>"
                         + "<div class='col-xs-2'> Status : " + results[i].Status + "</div>"
                         + "<div class='col-xs-2'> Active Till" + inactDate + "</div>"
-                        + "<div class='col-xs-2'><button class='btn btn-primary btn-sm' onclick='Select("+results[i].ResID +",2)'>Select</button></div>"
+                        + "<div class='col-xs-2'><button id='btnSub' class='btn btn-primary btn-sm' onclick='Select("+results[i].ResID +",2)'>Select</button></div>"
                         + "</div>";
 
                 }
 
                 $("#HouseRequests").html(strData);
+                var stat = results[i].Status;
+                alert("481==>>"+stat);
+                if (stat != 'Approved')
+                    $("#btnSub").hide();
+                else {
+                    $("#btnSub").show();
+                }
 
             }
             else {
