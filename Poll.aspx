@@ -324,7 +324,7 @@
                         <div class="row" style="margin-top: 10px;">
                             <div class="col-sm-3  col-xs-3">
                                 <div>
-                                    <h4 class="pull-left ">Polls : </h4>
+                                    <h4 class="pull-left ">Polls:</h4>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-xs-6" style="text-align: center;">
@@ -389,6 +389,7 @@
 
                                         <asp:Label ID="lblPie1date" runat="server" Text="Started On :" Font-Size="Small" ForeColor="#0055AA"></asp:Label>
                                         <br />
+                                        <br />
 
                                     </div>
 
@@ -406,7 +407,7 @@
                                         <asp:Label ID="lblQ2" runat="server" Height="30px" Font-Size="Small" ForeColor="#4A4A4A"></asp:Label>
                                     </div>
                                     <div class="row rad">
-                                        <div class="col-xs-10" style="text-align: left; padding-left: 25px;">
+                                        <div class="col-md-10 col-xs-10" style="text-align: left; padding-left: 25px;">
                                             <ol>
                                                 <li>
                                                     <asp:RadioButton ID="RadioChart2Opt1" CssClass="Space" runat="server" GroupName="RadioGroup2" onchange="RadioButtonCheck2(5)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>

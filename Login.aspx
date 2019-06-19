@@ -458,49 +458,7 @@
     </form>
 
 
-    <%--<header id="topNav" class="layout_header top-NavigationBar">
-
-        <!-- scroll bar progress -->
-        <div class="progress-container">
-            <div class="progress-bar" id="myBar"></div>
-        </div>
-        <!-- End progress -->
-
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-5 col-xs-12 col-sm-12">
-                    <div class="navbar-header">
-                        <a class="logo col-xs-2" href="Login.aspx">
-                            <img src="Images/Icon/Logo1.png" height="50" alt="Logo" />
-                        </a>
-                        <div class="navbar-inverse">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                    </div>
-                     <h1 class="title hidden-xs" style="color: #fff; padding-top: 11px; font-size:30px;">Society Management System</h1>
-                </div>
-                <div class="col-md-7 col-sm-12">
-                    <div class="collapse navbar-collapse pull-right" id="myNavbar" style="margin-top: 9px; text-align: center;">
-                        <nav class="nav navbar-nav nav-color">
-                            <ul class="nav nav-pills nav-main scroll-menu nav-small" id="topMain">
-                                <li class=" active"><a class="menu_text" href="Login.aspx">Home</a></li>
-                                <li class=" "><a class="menu_text" href="Aboutus.aspx">About Us</a></li>
-                                <li class=" "><a class="menu_text" href="contact.aspx">Contact </a></li>
-                                <li class=" "><a class="menu_text" href="#" id="login">Login</a></li>
-                                <li class=" "><a class="menu_text" href="register.aspx" id="register">Register</a></li>
-                                <li class=""><a class="menu_text" href="Rent.aspx" id="rent">Rent</a> </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>--%>
+   
     <!-- New Header -->
 
 

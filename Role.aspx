@@ -740,51 +740,83 @@
                         <div class="col-sm-2">
                             <img id="uploadPreview" class="img image_large" src="GetImages.ashx?UserID=<% =UserID %>&Name=<% =UserName %>&UserType=Owner" />
                         </div>
-                         <div class="col-sm-8">
-                            <table class="w3-table w3-striped w3-bordered">
-                                <tr>
-                                    <td>FirstName</td>
-                                    <td><% =UserName %></td>
-                                </tr>
-                                <tr>
-                                    <td>LastName</td>
-                                    <td><% =UserLastName %></td>
-                                </tr>
-                                <tr>
-                                     <td>Email</td>
-                                    <td><% =UserEmail %></td>
-                                </tr>
-                                <tr>
-                                     <td>Mobile</td>
-                                    <td><% =UserMobile %></td>
-                                </tr>
-                                <tr>
-                                     <td>Address</td>
-                                    <td>XXXXXXXXXXX</td>
-                                </tr>
-                            </table>
-                          </div>
-                        </div>
-                    </div>
 
-    <div  class="container-fluid" id="flat_Request" style="min-height:200px; margin: 50px;  background-color: white;">
-        <div class="ProgressBar-Parent">
-            <div class="row ProgressBar-Sibling" style="margin: 10px; width:84%;">
-            <div class="row " >
-                <div class="col-xs-10">
-                    <h4 style="margin-bottom: 0px;">My Flats </h4>
-                </div>
-                <div class="col-xs-2">
-                    <button class="btn btn-primary btn-sm" onclick="NewFlat()" type="button">New Flat</button>
-                </div>
-            </div>
-            <div id="FlatRequests" class="row " style="border-top: solid 2px black; margin-top: 10px; "></div>
-             </div>
-            <div id="flat_progressBar" class="ProgressBar" style="text-align: center; min-height: 200px; width:100%;">
-                <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
+                        </center>
+            <div class="col-md-8 col-xs-12">
+                <table class="w3-table w3-striped w3-bordered">
+                    <tr>
+                        <td>FirstName</td>
+                        <td><% =UserName %></td>
+                    </tr>
+                    <tr>
+                        <td>LastName</td>
+                        <td><% =UserLastName %></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><% =UserEmail %></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile</td>
+                        <td><% =UserMobile %></td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>XXXXXXXXXXX</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
+
+    <!-- My Flat NEW -->
+    <div class="container" id="flat_Request" style="background-color: white; margin-top: 40px;">
+         <div class="row">          
+            <div class="col-md-12 col-xs-12">
+                <h4 style="margin-left: 10px;"/>My Flats  <a onclick="NewFlat()" style="font-size:15px; color:blue;">Click Here To Add New Flat</a>
+            </div>          
+        </div>
+
+        <hr style="border: 1px solid black" />
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 col-xs-12">
+                <div id="FlatRequests"></div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+    <!-- My Flat new END -->
+
+    <!-- My Society NEW -->
+    <div class="container" id="society_Request" style="background-color: white; margin-top: 40px;">
+        <div class="row">          
+            <div class="col-md-12 col-xs-12">
+                <h4 style="margin-left: 10px;"/>My Societies  <a onclick="NewSociety()" style="font-size:15px; color:blue;">Click Here To Add New Request</a>
+            </div>          
+        </div>
+
+        <hr style="border: 1px solid black" />
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 col-xs-12"> 
+                <div id="SocietyRequests"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Society END -->
+
+    <!-- My Independent House NEW -->
+    <div class="container" id="House_Requests" style="background-color: white; margin-top: 40px;">
+        <div class="row">          
+            <div class="col-md-12 col-xs-12">
+                <h4 style="margin-left: 10px;"/>My Independent House  <a onclick="NewHouse()" style="font-size:15px; color:blue;">Click Here To Add New House</a>
+            </div>          
+        </div>
+
 
     <div class="container-fluid" id="society_Request" style="margin: 50px;min-height:200px; background-color: white;">
         <div class="ProgressBar-Parent">

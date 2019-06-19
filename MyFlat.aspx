@@ -61,32 +61,32 @@
             function filladmindata() {
                 var url = "http://localhost:5103/" + "api/admin/society/" + SocietyID;
 
-                  $.ajax({
-                dataType: "json",
-                url: url,
-                success: function (data) {
-                     var da = JSON.stringify(data);
-                    var js = jQuery.parseJSON(da);
-                    
-                    $("#lblAdminName").html(js.FirstName +"  "+ js.LastName);
-                    $("#lblAdminemail").html(js.EmailId);
-                    $("#lblAdminContact").html(js.MobileNo);
-                   
-                },
-                error: function (data, errorThrown) {
+                $.ajax({
+                    dataType: "json",
+                    url: url,
+                    success: function (data) {
+                        var da = JSON.stringify(data);
+                        var js = jQuery.parseJSON(da);
 
-                    alert('request failed :' + errorThrown);
-                }
+                        $("#lblAdminName").html(js.FirstName + "  " + js.LastName);
+                        $("#lblAdminemail").html(js.EmailId);
+                        $("#lblAdminContact").html(js.MobileNo);
 
-            });
+                    },
+                    error: function (data, errorThrown) {
+
+                        alert('request failed :' + errorThrown);
+                    }
+
+                });
             }
 
             $('#date_return').datetimepicker({
                 //format: 'DD-MM-YYYY'
-                format:"YYYY-MM-DD"
+                format: "YYYY-MM-DD"
             });
 
-         
+
 
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 2) {
@@ -631,7 +631,7 @@
         function ChangeDateformat(inputdate) {
             //var chkdate = new Date("10-12-1970");
             var date = new Date(inputdate);
-             //alert("alert 607 ==>>inputdate date obj== " + chkdate);
+            //alert("alert 607 ==>>inputdate date obj== " + chkdate);
             var day = date.getDate().toString();
             if (day.length == 1) { day = "0" + day; }
 
@@ -641,7 +641,7 @@
             var year = date.getFullYear();
 
             var strDate = day + "/" + month + "/" + year;
-           // alert("616 ===> strDate==" +  inputdate.getDate());
+            // alert("616 ===> strDate==" +  inputdate.getDate());
             return strDate;
         }
 
@@ -679,7 +679,7 @@
         function ChangeDeactiveDate() {
             document.getElementById("ChangeDate").style.display = "block";
             $('#newDeactiveDate').attr("min", ReverseDateFormat(ActiveDate))
-                 $('#newDeactiveDate').datetimepicker({
+            $('#newDeactiveDate').datetimepicker({
                 format: 'YYYY-MM-DD'
             });
 
@@ -689,7 +689,7 @@
             DeActiveDate = ChangeDateformat(document.getElementById("newDeactiveDate").value);
 
             var reqBody3 = "{\"id\":" + TenantResID + ",\"date\":\"" + DeActiveDate + "\"}";
-           //  alert("662 ===>> "+DeActiveDate);
+            //  alert("662 ===>> "+DeActiveDate);
             var url = api_url + "/api/Tenant/Update";
 
             $.ajax({
@@ -944,8 +944,8 @@
             });
 
             $('#date_when').datetimepicker({
-                  format: 'YYYY-MM-DD'
-               // format: 'DD-MM-YYYY'
+                format: 'YYYY-MM-DD'
+                // format: 'DD-MM-YYYY'
             });
 
 
@@ -1120,12 +1120,6 @@
            document.location.reload();
 
        }
-
-
-
-
-
-
 
 
        function AddRentInventory() {
@@ -1384,15 +1378,15 @@
 
                     <div id="OwnerDetail" class="content_div">
                         <div class="row" style="margin-bottom: 5px;">
-                            <div class="col-sm-3">
+                            <div class="col-md-3">
                                 <img src="Images/Icon/profile.jpg" id="OwnerImage" height="150" width="150" style="border-radius: 50%;" />
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <h3 style="font-family: Open Sans; text-align: center;"><b>Owner Info</b></h3>
                             </div>
                        
                         <div class="row" style="margin-top: 5px; margin-bottom: 10px;">                        
-                            <div class="col-sm-5">
+                            <div class="col-mds-5">
                                 <label style="width: 100px;" class="data_heading">Name :</label>
                                 <label style="width: 50%;" class="data_label" id="lblFlatOwner">...</label><br />
                                 <label style="width: 100px;" class="data_heading">Email :</label>
@@ -1404,6 +1398,7 @@
                             </div>
                         </div>
                     </div>
+
 
                         <div id="TenantDetail" class="content_div">
                              <div class="row" style="margin-bottom: 5px;">
