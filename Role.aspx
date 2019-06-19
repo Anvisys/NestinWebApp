@@ -445,21 +445,15 @@
                   
 
                     strData = strData + "<div class=\"row\" style=\"margin:20px;padding:0px;\">" +
-                        "<div class='col-xs-1'>" + results[i].SocietyID + "</div>" +
-                        "<div class='col-xs-5'> " + results[i].SocietyName + "<br/> Address:" +
+                        "<div class='col-md-1 col-xs-1'>" + results[i].SocietyID + "</div>" +
+                        "<div class='col-md-4 col-xs-3'> " + results[i].SocietyName + "<br/> Address:" +
                         results[i].Sector + ", " + results[i].City + ", " + results[i].State +
                         "</div>" +
-                        "<div class='col-xs-2'> Requested On:" + reqDate + "</div>" +
-                        "<div class='col-xs-2'>Modified On :" + modDate + "</div>" +
-                        "<div class='col-xs-2'> Status: <br/>" + results[i].Status + "</div>"
-                        + "<div class='col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
+                        "<div class='col-md-2 col-xs-2'> Requested On:" + reqDate + "</div>" +
+                        "<div class='col-md-2 col-xs-2'>Modified On :" + modDate + "</div>" +
+                        "<div class='col-md-1 col-xs-2'> Status: <br/>" + results[i].Status + "</div>"
+                        + "<div class='col-md-2 col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
 
-                        //"<div class='panel-heading'>" + results[i].SocietyID + "<br/>: " + results[i].SocietyName + " <br/> Return " + results[i].Sector + "</div>"
-                        //+ "<div class='panel-body'> City " + results[i].City
-                        //+ "<div> State" + results[i].State + "</div>"
-                        //   + "</div>"
-                    
-                      
                         + "</div>";
 
                 }
@@ -518,11 +512,11 @@
                     var inactDate = DisplayDateOnly(results[i].DeActiveDate);
 
                     strData = strData + "<div class=\"row\" style=\"margin:20px;padding:0px;\">"
-                        + "<div class='col-xs-2'>ResId:" + results[i].ResID + "</div>"
-                        + "<div class='col-xs-4'>" + results[i].HouseNUmber + "<br/>: " + results[i].Sector + ", " + results[i].City + ", " + results[i].State + "</div>"
-                        + "<div class='col-xs-2'> Status : " + results[i].Status + "</div>"
-                        + "<div class='col-xs-2'> Active Till" + inactDate + "</div>"
-                        + "<div class='col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
+                        + "<div class='col-md-2 col-xs-2'>ResId:" + results[i].ResID + "</div>"
+                        + "<div class='col-md-4 col-xs-4'>" + results[i].HouseNUmber + "<br/>: " + results[i].Sector + ", " + results[i].City + ", " + results[i].State + "</div>"
+                        + "<div class='col-md-2 col-xs-2'> Status : " + results[i].Status + "</div>"
+                        + "<div class='col-md-2 col-xs-2'> Active Till" + inactDate + "</div>"
+                        + "<div class='col-md-2 col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
                         + "</div>";
 
                 }
