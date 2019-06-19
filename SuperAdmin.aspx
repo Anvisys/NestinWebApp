@@ -153,6 +153,8 @@
                 async: false,
                 contentType: 'application/json',
                 success: function (data) {
+
+                    console.log("157===>> data=" + data);
                     if (data.d == true) {
                         $("#showApproveModal").hide();
                         GetSocietyRequest();

@@ -319,6 +319,8 @@
         }
 
         function DisplayFlats(response) {
+            var color = "";
+            var str = "";
            $("#flat_progressBar").hide();
             var strData = "";
             $("#FlatRequests").html(strData);
@@ -326,6 +328,20 @@
          
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
+
+                    var stat = results[i].Status;
+                    
+                    if (stat != 'Approved') {
+                        str = "disabled";
+                        color = "#ff6666";
+                     //   alert("in "+stat);
+                    }
+                    else {
+                        str = "";
+                        color = "#337ab7";
+                   //     alert("in "+stat);
+                        }
+
 
                     var reqDate = DisplayDateOnly(results[i].ActiveDate);
                     var modDate = DisplayDateOnly(results[i].DeActiveDate);
@@ -351,20 +367,33 @@
                         //   + "</div>"
                          "<div class='col-xs-8'>" + "</div>" +
                         "<div class='col-xs-2'>" + btnString + "</div>" 
-                        + "<div class='col-xs-2'><button class='btn btn-primary btn-sm' id='btnSub' onclick='Select("+results[i].ResID +",2)'>Select</button></div>"
+                        + "<div class='col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
 
                         + "</div>";
 
-                    
+                //     strData = 
+                //        strData + "<div class=\"row\" style=\"margin-top:10px; margin-right:40px;\">" +
+                //                         "<div class='col-md-1 col-xs-1'></div>" +
+                //                           "<div class='col-md-10 col-xs-10'>" +
+                //                            "<table>" +
+                //                                "<tr>" + 
+                //                                   "<td>" + results[i].SocietyID + "</td>" +
+                //                                   "<td>" + results[i].FlatNumber + "," + results[i].Status + "<br/> Address:" + results[i].SocietyName + ", " + results[i].Address + "</td>" +
+                //                                   "<td>" + "RequestedOn: " +  reqDate  + "</td>" +
+                //                                   "<td>" + " ModifiedOn :" + modDate + "</td>" +
+                //                                   "<td>" + "Status: " + results[i].Status + "</td>" +
+                //                                   "<td>" + "<div class='col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"+ "</td>" 
+                //                                + "</tr>"
+                //                          + "</table>"
+                //                         + "</div>"
+                //                       + "<div class='col-md-1 col-xs-1'></div>"
+                //                  + "</div>";
+
+                //    alert("392===>>> "+strData);
                 }
                
                 $("#FlatRequests").html(strData);
-                var stat = results[i].Status;
-                if (stat != 'Approved')
-                    $("#btnSub").attr("disabled", "true");
-                else {
-                    $("#btnSub").attr("disabled", "false");
-                }
+        
             }
             else {
                 var noData = "<h3> No data for Flats</h3>"
@@ -393,6 +422,8 @@
         }
 
         function SocietyRequest(response) {
+            var color = "";
+            var str = "";
           $("#society_progressBar").hide();
             var strData = "";
             $("#SocietyRequests").html(strData);
@@ -400,6 +431,17 @@
           
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
+
+                    var stat = results[i].Status;
+                    if (stat != 'Approved') {
+                        str = "disabled";
+                        color=" #ff6666";
+                    }
+                    else {
+                        str = "";
+                        color = "#337ab7";
+                        }
+
 
                     var reqDate = DisplayDateOnly(results[i].RequestDate);
                     var modDate = DisplayDateOnly(results[i].ModifiedDate);
@@ -414,6 +456,7 @@
                         "<div class='col-xs-2'> Requested On:" + reqDate + "</div>" +
                         "<div class='col-xs-2'>Modified On :" + modDate + "</div>" +
                         "<div class='col-xs-2'> Status: <br/>" + results[i].Status + "</div>"
+                        + "<div class='col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
 
                         //"<div class='panel-heading'>" + results[i].SocietyID + "<br/>: " + results[i].SocietyName + " <br/> Return " + results[i].Sector + "</div>"
                         //+ "<div class='panel-body'> City " + results[i].City
@@ -455,6 +498,8 @@
 
 
         function ListHouseRequests(response) {
+            var str = "";
+            var color = "";
         $("#house_progressBar").hide();
             var strData = "";
             $("#HouseRequests").html(strData);
@@ -462,6 +507,15 @@
           
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
+                   var stat = results[i].Status;
+                    if (stat != 'Approved') {
+                        str = "disabled";
+                        color=" #ff6666";
+                    }
+                    else {
+                        str = "";
+                        color = "#337ab7";
+                        }
 
                     var actDate = DisplayDateOnly(results[i].ActiveDate);
                     var inactDate = DisplayDateOnly(results[i].DeActiveDate);
@@ -471,20 +525,12 @@
                         + "<div class='col-xs-4'>" + results[i].HouseNUmber + "<br/>: " + results[i].Sector + ", " + results[i].City + ", " + results[i].State + "</div>"
                         + "<div class='col-xs-2'> Status : " + results[i].Status + "</div>"
                         + "<div class='col-xs-2'> Active Till" + inactDate + "</div>"
-                        + "<div class='col-xs-2'><button id='btnSub' class='btn btn-primary btn-sm' onclick='Select("+results[i].ResID +",2)'>Select</button></div>"
+                        + "<div class='col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
                         + "</div>";
 
                 }
 
                 $("#HouseRequests").html(strData);
-                var stat = results[i].Status;
-                alert("481==>>"+stat);
-                if (stat != 'Approved')
-                    $("#btnSub").hide();
-                else {
-                    $("#btnSub").show();
-                }
-
             }
             else {
                  var noData = "<h3> No Independent House</h3>"
