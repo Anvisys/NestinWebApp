@@ -11,7 +11,7 @@
    <%-- <link href="Styles/MyFlat.css" rel="stylesheet" type="text/css" />--%>
       <script src="Scripts/jquery-1.11.1.min.js"></script>
      
-    <link rel="stylesheet" href="CSS/ApttTheme.css" />
+    <link rel="stylesheet" href="CSS/ApttTheme.css" /> 
     <link rel="stylesheet" href="CSS/ApttLayout.css" />
 
      <link rel="stylesheet" href="CSS/Nestin.css" />
@@ -35,13 +35,14 @@
     <script id="MyFlatData">
         var CurrentUserType, ResID, UserID, Type, BHK, FirstName, LastName, MobileNo, EmailId, FlatID, FlatNumber, Address, ParentName, SocietyID, SocietyName, Gender, ActiveDate, DeActiveDate, TenantUserID;
         var MobileExist, EmailExist, TenantResID, chkExistingUser = false;
-        var api_url = "";
+        var api_url = "www.kevintech.in/";
         var _ResID = 0;
         var currentInvetoryID = 0;
 
         $(document).ready(function () {
 
             api_url = '<%=Session["api_url"] %>';
+           // alert("45 ==>> "+api_url);
             _ResID = <%=ResID%>;
             GetData();
             filladmindata();
@@ -57,6 +58,16 @@
                 $("#inAddTDeactiveDate").attr("min", ele);
                 //alert(ele);
             });
+
+
+            $('#newDeactiveDate').datetimepicker({
+                //  format: 'YYYY-MM-DD'
+                format: 'DD-MM-YYYY'
+            });
+
+             $('#date_return').datetimepicker( {
+            format: 'DD-MM-YYYY'
+        });
 
             function filladmindata() {
                 var url = "http://localhost:5103/" + "api/admin/society/" + SocietyID;
@@ -85,6 +96,7 @@
                 //format: 'DD-MM-YYYY'
                 format: "YYYY-MM-DD"
             });
+
 
 
 
@@ -220,7 +232,7 @@
 
         function GetRentalInfo(FlatNumber) {
 
-
+         //   alert("197 ==>> " + api_url);
 
             var url = api_url + "/api/RentInventory/Find/" + FlatID + "/0";
 
@@ -252,6 +264,7 @@
                 $("#btnAddForRent").show();
             }
             else {
+ 
                 $("#RentalDetail").show();
                 $("#btnAddForRent").hide();
                 currentInvetoryID = obj[0].RentInventoryID;
@@ -1422,6 +1435,24 @@
                                     <label style="width: 50px;" class="data_label" id="lblFlatTenantFrom">...</label><br />
                                     <label style="width: 100px;" class="data_heading">Till :</label>
                                     <label style="width: 50px;" class="data_label" id="lblFlatTenantTo">...</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                    <button id="btnEdit" type="button" class="btn btn-danger" style="display: none" onclick="ChangeDeactiveDate()">Set End Date</button>
+                                    <div id="ChangeDate" style="display: none">
+                                        <%--<input type="date" id="newDeactiveDate" style="width: 150px" />--%>
+
+                                        <div class="row" style="margin-top: 10px;">
+                            
+                               
+                             <div class="col-sm-8">  
+                               
+                                    <%--<input type='date'  id='date_return' max='' min='10-09-2019' class="form-control"  tabindex="7" />--%>
+                                 <input type='text'  id='newDeactiveDate' class="form-control" placeholder="DD/MM/YYYY" tabindex="5"  />
+                                 
+                              </div>
+                          
+                              <div class="col-sm-4">
+                                  <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
+                              </div>
+
                                     <button id="btnEdit" type="button" class="btn btn-danger" style="display: none;" onclick="ChangeDeactiveDate()">Set End Date</button>
                                     <div id="ChangeDate" style="display: none; margin-top: 10px;" class="row" >
                                       <%--  <input type="date" id="newDeactiveDate" style="width: 150px" />--%>
@@ -1440,6 +1471,7 @@
 
                                         </div>
                              
+
                                     </div>
 
 
