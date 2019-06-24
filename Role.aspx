@@ -403,7 +403,7 @@
         function GetMySocietyRequests() {
              $("#society_progressBar").show();
             var abs_url = api_url + "/api/Society/" + <%=UserID%>;
-            alert("406==>> UserID=" +<%=UserID%>);
+        //    alert("406==>> UserID=" +<%=UserID%>);
             $.ajax({
                 url: abs_url,
                 dataType: "json",
@@ -417,6 +417,7 @@
         }
 
         function SocietyRequest(response) {
+           // alert("420==>> response" + response);
             var color = "";
             var str = "";
 
@@ -435,7 +436,7 @@
                     }
                     else {
                         str = "";
-                        color = "#337ab7";
+                        color = "#5cd65c";
                     }
 
 
@@ -451,11 +452,9 @@
                         "</div>" +
                         "<div class='col-md-2 col-xs-2'> Requested On:" + reqDate + "</div>" +
                         "<div class='col-md-2 col-xs-2'>Modified On :" + modDate + "</div>" +
-                        "<div class='col-md-1 col-xs-2'> Status: <br/>" + results[i].Status + "</div>"
-                        + "<div class='col-md-2 col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
-
+                        "<div class='col-md-1 col-xs-2'> Status: <br/><span style='color:"+color+";'>" + results[i].Status + "</span></div>"
                         + "</div>";
-                    //alert("458===>> resId==" + results[i].ResID );
+                 //   console.log("458===>> resId==" + results[i]);
                 }
 
                 $("#SocietyRequests").html(strData);
@@ -516,7 +515,7 @@
                         + "<div class='col-md-4 col-xs-4'>" + results[i].HouseNUmber + "<br/>: " + results[i].Sector + ", " + results[i].City + ", " + results[i].State + "</div>"
                         + "<div class='col-md-2 col-xs-2'> Status : " + results[i].Status + "</div>"
                         + "<div class='col-md-2 col-xs-2'> Active Till" + inactDate + "</div>"
-                        + "<div class='col-md-2 col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2)'>Select</button></div>"
+                        + "<div class='col-md-2 col-xs-2'><button " + str + " class='btn btn-primary btn-sm' style='background-color:" + color + "' onclick='Select(" + results[i].ResID + ",2 )'>Select</button></div>"
                         + "</div>";
 
                 }
@@ -567,7 +566,8 @@
         }
 
         function Select(ResId, status) {
-            window.location = "MainPage.aspx?Res=" + ResId;
+            alert("570==>> resid=" + ResId);
+            window.location = "MainPage.aspx?Res=" + ResId ;
 
             console.log(window.location);
             //if (status = 0) {
@@ -810,7 +810,7 @@
     <!-- My Society END -->
 
     <!-- My Independent House NEW -->
-    <div class="container" id="House_Requests" style="background-color: white; margin-top: 40px;">
+<%--    <div class="container" id="House_Requests" style="background-color: white; margin-top: 40px;">
         <div class="row">          
             <div class="col-md-12 col-xs-12">
                 <h4 style="margin-left: 10px;"/>My Independent House  <a onclick="NewHouse()" style="font-size:15px; color:blue;">Click Here To Add New House</a>
@@ -834,7 +834,7 @@
                 <img src="images/icon/ajax-loader.gif" style="width: 40px; height: 40px; margin-top: 50px;" />
             </div>
         </div>
-    </div>
+    </div>--%>
 
     <div class="container-fluid " id="House_Requests" style="margin: 50px;min-height:200px; background-color: white;">
         <div class="ProgressBar-Parent">

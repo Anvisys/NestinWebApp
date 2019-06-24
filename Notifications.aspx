@@ -38,10 +38,11 @@
             // GetImage();
             var userType = '<%=Session["UserType"] %>';
 
-          if (userType == "Admin") {
-
-              document.getElementById("New_Notification").style.visibility = 'visible';
-
+            if (userType == "Admin") {
+               // alert("42==");
+             // document.getElementById("New_Notification").style.visibility = 'visible';
+                $("#New_Notification").show();
+               // $('#<%=New_Notification.ClientID %>').show();
           }
           else {
               $("#New_Notification").hide();
@@ -82,8 +83,11 @@
         $(document).ready(function () {
             $("#New_Notification").click(function () {
 
-
+                $("#txtNotificationText").val("");
+                $("#lblNotificationCount").attr("text", "250");
+                $("#ValidTill").val("");
                 $("#myModalNewNotficationPopup").show();
+                
             });
 
 
@@ -294,7 +298,7 @@
 
                               </div>--%>
 
-                            <%--<div class="col-xs-6 myclass1">
+                           <%-- <div class="col-xs-6 myclass1">
                                   <button id="New_Notification" type="button" class="btn btn-primary pull-right"> New Notification</button>
 
                               </div>--%>
@@ -331,8 +335,9 @@
                             </div>
 
                             <div class="col-sm-3  col-xs-3">
+                            <button id="New_Notification" type="button" class="btn btn-primary pull-right"> New Notification</button>
 
-                                <asp:Button runat="server" ID="New_Notification" Style="margin-top: 10px;" type="button" CssClass="btn btn-primary btn-sm pull-right " Text="Add" Visible="false"></asp:Button>
+                             <!--   <asp:Button runat="server" ID="New_Notification" Style="margin-top: 10px;" type="button" CssClass="btn btn-primary btn-sm pull-right " Text="Add Notice" ></asp:Button>-->
                             </div>
 
                         </div>
@@ -417,7 +422,7 @@
                     <%------------------------------------------------------------------- New Notification Section Starts from here ----------------------------------------------------------------------------------------------------------   --%>
 
 
-                    <div id="myModalNewNotficationPopup" class="modal">
+                    <div id="myModalNewNotficationPopup" class="modal" >
                         <div class="container-fluid" style="max-width: 500px;">
                             <div class="panel panel-primary" style="position: relative;">
 

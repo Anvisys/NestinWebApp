@@ -597,7 +597,7 @@
                             </div>--%>
                     </div>
 
-                    <div id="confirmDeactivatBox" class="modal">
+                    <div id="confirmDeactivatBox" class="modal" >
                         <div class="container-fluid" style="margin-top: 50px; width: 350px;">
                             <div class="panel panel-primary" style="position: relative; margin: 0px;">
                                 <div class="panel-heading">
@@ -641,11 +641,11 @@
                                         </tr>
                                         <tr>
                                               <td  style="height: 15px;">  Active From </td>
-                                         <td  style="height: 15px;">   <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control" ></asp:TextBox></td>
+                                         <td  style="height: 15px;">   <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control"  autocomplete="off"></asp:TextBox></td>
                                         </tr>
                                         <tr>
                                              <td  style="height: 15px;">  Active Till </td>
-                                         <td  style="height: 15px;">   <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control"  onchange="ValidateDate()"  ></asp:TextBox></td>
+                                         <td  style="height: 15px;">   <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control"  onchange="ValidateDate()" autocomplete="off"  ></asp:TextBox></td>
                                         </tr>
                                     </table>
                                 </div>

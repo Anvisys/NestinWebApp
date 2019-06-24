@@ -267,17 +267,25 @@
         {
             var code = $("#SecurityCode").val();
             document.getElementById("verify_loading").style.display = "block";
-            var url = api_url + "/api/Visitor/Code/" + code;
+            var url = api_url+"/api/Visitor/Code"; 
 
-           
+            var jasondata = "{\"VisitorCode\""+":"+code+" ,\"SocietyID\""+":"+SocietyId+"}";
 
             $.ajax({
-                type: "Get",
+                data: jasondata,
+                async: false,
+                type: "Post",
                 url: url,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
                     document.getElementById("verify_loading").style.display = "none";
+                    if (data == null) {
+                        alert("no data");
+                    }
+                    else
+                    {
+                    
                     RequestID = data.RequestId;
                     $("#lblMobile").text(data.VisitorMobile);
                     $("#lblName").text(data.VisitorName);
@@ -289,11 +297,12 @@
                     $("#lblHostFlat").text(data.Flat);
                      $("#lblHostMobile").text(data.ResidentMobile);
                     $("#lblHostType").text(data.Type);
-                
+                }
                     
                 },
                 failure: function (response) {
                     document.getElementById("verify_loading").style.display = "none";
+                    alert("Error Occured");
                    // alert(response.d);
                     sessionStorage.clear();
                 }
@@ -353,7 +362,7 @@
             else if ((UserType == "Owner")||(UserType == "Tenant")) {
                 url = api_url + "/api/Visitor/"+ SocietyId+"/Res/" + ResId +"/" + page + "/" + size;
             }
-            console.log(url);
+           // console.log(url);
             $.ajax({
                 type: "Get",
                 url: url,

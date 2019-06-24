@@ -293,7 +293,8 @@ public partial class Vendors : System.Web.UI.Page
                         {
                             con1.Open();
                             // SqlCommand cmd = new SqlCommand("INSERT INTO Vendors (ShopCategory,VendorName,ContactNum,Address,VendorIcon,VendorIconFormat) VALUES (@ShopCategory,@VendorName,@ContactNum,@Address,@VendorIcon,@VendorIconFormat)", con1);
-                            SqlCommand cmd = new SqlCommand("Insert Into Vendors (ShopCategory,VendorName,ContactNum,ContantNumber2,Address,Address2,VendorIcon,VendorIconFormat,date,SocietyID,CmdType) Values ('" + VendorCat + "','" + Vendorname + "','" + contact + "','" + contact2 + "','" + Address + "','" + Address2 + "',@VendorIcon,'" + VendorIconFormat + "','" + date + "'," + SessionVariables.SocietyID + ",'Insert')", con1);
+                            SqlCommand cmd = new SqlCommand("Insert Into Vendors (ShopCategory,VendorName,ContactNum,ContantNumber2,Address,Address2,VendorIcon,VendorIconFormat,date,SocietyID,CmdType) Values ('" 
+                                + VendorCat + "','" + Vendorname + "','" + contact + "','" + contact2 + "','" + Address + "','" + Address2 + "',@VendorIcon,'" + VendorIconFormat + "','" + Utility.ChangeDateTimeLocalToSQLServerFormat(date) + "'," + SessionVariables.SocietyID + ",'Insert')", con1);
                             cmd.Parameters.Add("@VendorIcon", SqlDbType.Image).Value = bytesImages;
                             int count = cmd.ExecuteNonQuery();
                             con1.Close();

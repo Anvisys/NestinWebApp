@@ -83,6 +83,7 @@ public partial class Viewcomplaints : System.Web.UI.Page
     public void LoadComplaintsDataList()
     {
         try
+
         {
             String FlatNumber = txtVcompFlatSrch.Text;
             String ComplaintStatus = drpVCompStatusF.SelectedItem.Text;
@@ -97,9 +98,9 @@ public partial class Viewcomplaints : System.Web.UI.Page
             {
                 dsComplaint = complainData.GetComplaints( muser.currentResident.SocietyID , muser.currentResident.FlatNumber, "", ComplaintStatus, month);
             }
-            else
+            else if(muser.currentResident.UserType == "Admin")
             {
-                dsComplaint = complainData.GetComplaints(muser.currentResident.SocietyID, muser.currentResident.FlatNumber, "", ComplaintStatus, month);
+                dsComplaint = complainData.GetComplaints(muser.currentResident.SocietyID, FlatNumber, "", ComplaintStatus, month);
             }
 
             if (dsComplaint.Tables[0].Rows.Count > 0)

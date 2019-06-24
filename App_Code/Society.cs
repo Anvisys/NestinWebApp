@@ -127,11 +127,11 @@ public class Society
                     if (rowAffected > 0)
                     {
                         String societyUserQuery = "Insert Into " + CONSTANTS.Table_SocietyUser + " (UserID,FlatID,Type,ServiceType,CompanyName,ActiveDate, SocietyID,Status,HouseID) output INSERTED.ResID Values('" +
-                                                                             userId + "','0','Admin','0','0','" + DateTime.UtcNow + "','" + SocietyID + "','" + 2 + "',0)";
+                                                                             userId + "','0','Admin','0','0','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "','" + SocietyID + "','" + 2 + "',0)";
 
                         sqlComm.CommandText = societyUserQuery;
 
-                        rowAffected = (int)sqlComm.ExecuteScalar();
+                        rowAffected = (int)sqlComm.ExecuteNonQuery();
                     }
 
                 }

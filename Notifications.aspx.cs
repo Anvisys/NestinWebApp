@@ -54,20 +54,22 @@ public partial class Notifications : System.Web.UI.Page
         //txtNotificationText.Attributes.Add("onkeyup", "return GetCount(" + txtNotificationText.ClientID + "," + lblNotificationCount.ClientID + ");");
         txtNotificationText.Attributes.Add("onkeyup", "return GetCount(" + txtNotificationText.ClientID + "," + lblNotificationCount.ClientID + ");");
         txtNotificationText.Attributes.Add("onChange", "return GetCount(" + txtNotificationText.ClientID + "," + lblNotificationCount.ClientID + ");");
-       
+
         if (!IsPostBack)
         {
             //if(SessionVariables.UserType.Equals("Admin"))
             //    New_Notification.Visible = true;
             this.ViewState["vs"] = 0;
-            pos = (int)this.ViewState["vs"];   
-
+            pos = (int)this.ViewState["vs"];
 
             FillNotificationData(muser.currentResident.SocietyID);
 
-           
-
         }
+        //if (IsPostBack)
+        //{ 
+        //     New_Notification.Controls.Clear();
+        //     myModalNewNotficationPopup.Visible = true;
+        //}
     }
     protected void openbtn_Click(object sender, EventArgs e)
     {
@@ -107,6 +109,7 @@ public partial class Notifications : System.Web.UI.Page
                 showOpen.Visible = false;
                 showClose.Visible = false;
                 showAll.Visible = false;
+               // New_Notification.Visible = true;
                 lblEmptyTitle.Text = "<h4>Notice Board is Empty Right Now!!</h4>";
             }
 
@@ -153,7 +156,7 @@ public partial class Notifications : System.Web.UI.Page
         catch (Exception ex)
         { 
         }
-
+       // myModalNewNotficationPopup.Controls.Clear();
     }
 
     protected void btnprevious_Click(object sender, EventArgs e)
