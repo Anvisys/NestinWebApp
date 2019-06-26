@@ -66,11 +66,12 @@
             });
 
              $('#date_return').datetimepicker( {
-            format: 'DD-MM-YYYY'
+            format: 'YYYY-MM-DD'
         });
 
             function filladmindata() {
-                var url = "http://localhost:5103/" + "api/admin/society/" + SocietyID;
+                var url = api_url + "/api/admin/society/" + SocietyID;
+               // console.log("74==>"+ url);
 
                 $.ajax({
                     dataType: "json",
@@ -78,6 +79,7 @@
                     success: function (data) {
                         var da = JSON.stringify(data);
                         var js = jQuery.parseJSON(da);
+                      //  alert("82==>"+da);
 
                         $("#lblAdminName").html(js.FirstName + "  " + js.LastName);
                         $("#lblAdminemail").html(js.EmailId);
@@ -255,16 +257,20 @@
         };
 
 
-        function SetRentalInfo(data) {
+        function SetRentalInfo(obj) {
+           // var da = JSON.stringify(data);
+            //var js = jQuery.parseJSON(da);
+            //console.log("261"+js);
 
-            var obj = data.$values;
+           // var obj = da;
 
             if (obj.length == 0) {
+                alert("false");
                 $("#RentalDetail").hide();
                 $("#btnAddForRent").show();
             }
             else {
- 
+               // alert("true");
                 $("#RentalDetail").show();
                 $("#btnAddForRent").hide();
                 currentInvetoryID = obj[0].RentInventoryID;
@@ -785,8 +791,8 @@
 
         function GetMyPoolOffers() {
 
-            var abs_url = api_url + "/api/CarPool/self/" + SocietyID + "/" + _ResID + "/0/20";
-
+            var abs_url = api_url + "/api/CarPool/self/" + SocietyID + "/" + _ResID + "/1/20";
+         //   console.log(abs_url);
             $.ajax({
                 url: abs_url,
                 dataType: "json",
@@ -799,10 +805,11 @@
 
         };
 
-        function MyPoolData(response) {
+        function MyPoolData(results) {
             var strMyData = "";
             $("#MyPool").html("");
-            var results = response.$values;// jQuery.parseJSON(response.$values);
+           // var results = response.$values;// jQuery.parseJSON(response.$values);
+           // alert(results);
             MyPoolCount = results.length;
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
@@ -815,7 +822,7 @@
                         + "<div class=\"panel panel-success\" >"
                         + "<div class='panel-heading'>"
                         + "<div> " + results[i].Destination + "<p> on </p>" + JourneyDTime + "</div>"
-                        + "<div><label class='small_label'> " + results[i].InitiatedDateTime + " </label>" + "</div>"
+                        + "<div><label class='small_label'> " + /*results[i].InitiatedDateTime*/ ReturnDTime + " </label>" + "</div>"
                         + "</div>"
                         + "<div class='panel-body'> "
 
@@ -1066,7 +1073,7 @@
        function GetInventoryTypeData() {
 
            var abs_url = api_url + "/api/InventoryType";
-
+          // console.log(abs_url);
            $.ajax({
                url: abs_url,
                dataType: "json",
@@ -1078,9 +1085,9 @@
            });
        }
 
-       function populateInventoryType(data) {
+       function populateInventoryType(InventoryType) {
 
-           var InventoryType = data.$values;
+          // var InventoryType = data.$values;
 
            var ele = document.getElementById('InventoryType');
            ele.innerHTML = "";
@@ -1110,9 +1117,9 @@
        }
 
 
-       function populateAccomodationType(data) {
+       function populateAccomodationType(Inventory) {
            // THE JSON ARRAY.
-           var Inventory = data.$values;
+         //  var Inventory = data.$values;
 
            var ele = document.getElementById('AccomodationType');
            ele.innerHTML = "";
@@ -1220,10 +1227,10 @@
        }
 
        function CloseRentInventory() {
-           var InventoryUpdate = {};
+           var InventoryUpdate = "{\"RentInventoryID\":\"" + RentInventoryID + "\,\"InventoryTypeID\":\"\",\"AccomodationTypeID\":\"\",\"RentValue\":\"\",\"Available\":\"\",\[Description\":\"\",\"ContactName\":\"\",\"ContactNumber\":\"\",\"UserID\":\"\",\"FlatID\":\" \",\"HouseID\":\"\"} ";
            InventoryUpdate.InventoryId = currentInvetoryID;
            InventoryUpdate.Status = 0;
-
+           console.log("1233==" + InventoryUpdate);
            var url = api_url + "/api/RentInventory/Close"
 
            $.ajax({

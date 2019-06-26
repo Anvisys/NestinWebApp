@@ -44,7 +44,7 @@ public partial class Viewcomplaints : System.Web.UI.Page
     private int newComplaintResidentID = 0;
 
     protected void Page_Load(object sender, EventArgs e)
-    {
+     {
         //Added by Aarshi on 18 auh 2017 for session storage
         //muser = (User)Session["User"];
         muser = SessionVariables.User;
@@ -432,7 +432,7 @@ public partial class Viewcomplaints : System.Web.UI.Page
                     newComp.CurrentStatus = 1;
                     newComp.Descrption = txtComplaintdescription.Text;
 
-                if (muser.currentResident.UserType == "ResidentAdmin")
+                if (muser.currentResident.UserType == "Admin")
                 {
                  
                     newComp.ResidentID = muser.currentResident.ResID;
@@ -826,10 +826,11 @@ public partial class Viewcomplaints : System.Web.UI.Page
                     HtmlButton btnClose = (HtmlButton)e.Item.FindControl("btnClose");
                  HtmlButton btnComplete = (HtmlButton)e.Item.FindControl("btnComplete");
                  HtmlButton btnAssign = (HtmlButton)e.Item.FindControl("btnAssign");
+                HtmlButton btnReopen = (HtmlButton)e.Item.FindControl("btnReopen");
                 Label lblClosedDate = (Label)e.Item.FindControl("lblClosedDate");
 
                 DataRowView drv = e.Item.DataItem as DataRowView;
-                String CompSTatus = drv["LastStatus"].ToString();
+                String CompSTatus =  drv["LastStatus"].ToString();
                 if (CompSTatus != "New")
                 {
                     lblClosedDate.Visible = true;
@@ -838,16 +839,16 @@ public partial class Viewcomplaints : System.Web.UI.Page
                 {
                     lblClosedDate.Visible = false;
                 }
-                if (muser.currentResident.UserType == "ResidentAdmin"|| muser.currentResident.UserType == "Admin")
+                if (muser.currentResident.UserType == "Admin"|| muser.currentResident.UserType == "Admin")
                         {
                        
-                      if (CompSTatus == "Complete" || CompSTatus == "Closed") {
+                      if (CompSTatus.Equals("Complete") || CompSTatus.Equals("Closed")) {
                            btnClose.Visible=false;
                            btnOpen.Visible=false;
                            btnComplete.Visible=false;
                            btnAssign.Visible=false;
                         }
-                      else if(CompSTatus == "New" || CompSTatus == "InProgress"||CompSTatus == "Assigned")
+                      else if(CompSTatus.Equals("New") || CompSTatus.Equals("InProgress")||CompSTatus.Equals("Assigned"))
                          {
                            btnClose.Visible=false;
                            btnOpen.Visible=false;
@@ -858,21 +859,42 @@ public partial class Viewcomplaints : System.Web.UI.Page
             }
                 else if (muser.currentResident.UserType == "Owner" ||muser.currentResident.UserType == "Tenant")
                 {
-                      if (CompSTatus == "Complete" ) {
+                      if (CompSTatus.Equals("Complete") ) {
                                btnClose.Visible=false;
                                btnOpen.Visible=true;
                                btnComplete.Visible=false;
                                btnAssign.Visible=false;
+                               btnReopen.Visible = false;
                             }
-                          else if(CompSTatus == "New" || CompSTatus == "InProgress"||CompSTatus == "Assigned")
+                          else if(CompSTatus.Equals("New") || CompSTatus.Equals( "InProgress")||CompSTatus.Equals("Assigned"))
                              {
                                btnClose.Visible=true;
                                btnOpen.Visible=false;
                                btnComplete.Visible=false;
                                btnAssign.Visible=false;
-                             }
+                               btnReopen.Visible = false;
+                            }
+                           else if (CompSTatus.Equals("Closed"))
+                            {
+                                btnClose.Visible = false;
+                                btnReopen.Visible = true;
+                                btnOpen.Visible = false;
+                                btnComplete.Visible = false;
+                                btnAssign.Visible = false;
+                                
+                            }
+                           else if (CompSTatus.Equals("Re-Open"))
+                            {
+                                btnClose.Visible = true;
+                                btnReopen.Visible = false;
+                                btnOpen.Visible = false;
+                                btnComplete.Visible = false;
+                                btnAssign.Visible = false;
+
+                            }
+
                 }
-                        else if (muser.currentResident.UserType == "Employee")
+                        else if (muser.currentResident.UserType.Equals("Employee"))
                         {
                             btnClose.Visible = false;
                             btnOpen.Visible = false;
@@ -912,7 +934,7 @@ public partial class Viewcomplaints : System.Web.UI.Page
             updateComplaint.ExistingComplaintID = Convert.ToInt32(HiddenCompID.Value);
             updateComplaint.Assignedto = Convert.ToInt32(HiddenEmployeeID.Value);
             updateComplaint.CurrentStatus = Convert.ToInt32(HiddenCompStatus.Value);
-            updateComplaint.Descrption = txtComplaintdescription.Text;
+            updateComplaint.Descrption = form10.Text;
        
             bool result = updateComplaint.UpdateComplaint(updateComplaint.ExistingComplaintID, updateComplaint.Descrption, updateComplaint.Assignedto, updateComplaint.CurrentStatus);
 
@@ -925,6 +947,7 @@ public partial class Viewcomplaints : System.Web.UI.Page
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "alert('fail')", true);
             }
+            form10.Text = "";
         }
         catch(Exception ex)
         {
@@ -932,5 +955,6 @@ public partial class Viewcomplaints : System.Web.UI.Page
 
         }
 
+        Response.Redirect("Viewcomplaints.aspx");
     }
 }

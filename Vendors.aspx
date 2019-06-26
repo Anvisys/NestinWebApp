@@ -263,21 +263,21 @@ hr {
      
         $(document).ready(function () {
             $("#Add_Vendor").click(function () {
-                alert(1);
+               // alert(1);
                 $("#myVendorAddForm").show();
                 $('#headingAddEdit').text('Add Vendor');
                 $('#checkAddImage').text('Add Image');
                 $('#checkAddImage').prop('checked', false);
                 $("#HiddenVendorEditID").val("");
                 $("#HiddenVendorName").val("");
-                 alert(2);
+               //  alert(2);
                 $('#<%=txtvendorname.ClientID %>').val("");
                 $('#<%=txtMobile2.ClientID %>').val("");
                   $('#<%=txtMobile2.ClientID %>').val("");
                 $('#<%=txtvendoraddress.ClientID %>').val("");
                 $('#<%=txtvendoraddress2.ClientID %>').val("");
                 //Added by Aarshi on 22 aug 2017 for image crop code
-                   alert(3);
+              //     alert(3);
                 $("#FileVendorImg").hide();
                 document.getElementById("htmlImage").src = "Images/Icon/downloadbg.png";
                 $("#lblstatus").text = "";
@@ -696,12 +696,12 @@ hr {
                                                 <hr />
                                                 <p><i class="fa fa-map-marker" aria-hidden="true"></i><%# Eval("Address") %>, <%# "" + Eval("Address2") %></p>
                                                 <hr />
-                                                <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNum") %></p>
+                                                <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber") %></p>
                                                <hr />
-                                            <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContantNumber2") %></p>
+                                            <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber2") %></p>
                                                 <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px;">
                                                     <i class="fa fa-edit" id="Edit_Vendor" style="color: #fff;visibility:hidden; cursor: pointer; float: left;" 
-                                                        onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNum") %>','<%# Eval("ContantNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit
+                                                        onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit
                                                     </i><i class="fa fa-trash" id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff;visibility:hidden; float: right; cursor: pointer;" aria-hidden="true">Delete</i>
                                                 </p>
                                             
@@ -888,7 +888,7 @@ hr {
 
                                         <div class="col-sm-4" style="text-align: center;">
                                           
-                                            <img id="htmlImage" style="width: 150px; height: 100px" src="Images/Icon/downloadbg.png" />
+                                            <img id="htmlImage" style="width: 150px; height: 100px" src="Images/Icon/downloadbg.jpg" />
                                             <asp:ImageMap ID="ImgPreview" runat="server" Width="5px" Height="5px" CssClass="AddvendorimgPreview" Visible="false"></asp:ImageMap>
                                             <canvas id="canvas" height="5" width="5" style="display: none;"></canvas>
                                             <br />

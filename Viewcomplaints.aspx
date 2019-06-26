@@ -401,6 +401,7 @@
 
         function ShowAssignConfirmation(CompId, FlatNumber,ServiceType, Status, StatusText)
         {
+          //  alert("404==>"+StatusText);
              $("#myModalAssignComplaint").show();
 
             SetEmployeeForService(ServiceType);
@@ -416,7 +417,7 @@
              $("#lblAssignCompID").text(CompId);
             $("[id*=lblassignFlat]").text(FlatNumber);
 
-
+           // location.reload();
 
 
             //$("[id*=lblCompID]").text(CompId);
@@ -611,6 +612,7 @@
 
 
 
+
              <form id="form1" runat="server">
                  <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                  <div class="container-fluid" >
@@ -738,6 +740,7 @@
                                              <button id="btnComplete" class="btn-sm btn btn-success" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("CompType")+ "\",4,\"Complete\")"%>' runat="server" type="button">Work Complete</button>
                                              <button id="btnAssign" class="btn-sm btn btn-warning" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID") +",\""+ Eval("FlatNumber")+"\",\""+ Eval("CompType")+ "\",2,\"Assign\")"%>' runat="server" type="button">Assign</button>
                                              <button id="btnOpen" class="btn-sm btn btn-info" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("CompType")+ "\",3,\"Open\")"%>' runat="server" type="button">Open</button>
+                                             <button id="btnReopen" class="btn-sm btn btn-info" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("CompType")+ "\",6,\"Re-open\")"%>' runat="server" type="button">Reopen</button>
                                              <button id="btnClose" class="btn-sm btn btn-success" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("CompType")+ "\",5,\"Close\")"%>' runat="server" type="button">Close</button>
 
 
@@ -822,12 +825,22 @@
                                                </select>
                                          </div>
                                      </div>
+                                     <div class="row">
+                                         
+                                         <div class="col-xs-12"><div class="md-form">
+                                         <i class="fas fa-pencil-alt prefix"></i>
+                                                <label for="form10">Comments  
+                                         <asp:TextBox ID="form10" CssClass="md-textarea form-control" Rows="3" Style="resize:none;" runat="server" ValidationGroup="comment" TextMode="MultiLine"></asp:TextBox>
+                                         <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please give some comments...." ValidationGroup="comment" ControlToValidate="form10" ForeColor="#FF6600"></asp:RequiredFieldValidator></label>--%>
+                                        </div>
 
+                                         </div>
+                                     </div>
                                  </div>
 
                                  <div class="panel-footer" style="text-align: right; margin-top: 15px;">
                                      <button class="btn btn-danger" type="button" onclick="btnCancelAssign()">Cancel</button>
-                                     <asp:Button  ID="btnUpdate" runat="server" CausesValidation="false" Text="Assign" CssClass="btn btn-success" OnClick="btnUpdate_Click"/>
+                                     <asp:Button  ID="btnUpdate" runat="server" CausesValidation="true" Text="Assign" CssClass="btn btn-success" OnClick="btnUpdate_Click" ValidationGroup="comment" />
                                  </div>
                              </div>
                          </div>

@@ -306,9 +306,9 @@
         }
 
 
-        function SetAds(data) {
+        function SetAds(jarray) {
 
-            var jarray = data.$values;
+            //var jarray = data.$values;
             var length = jarray.length;
             var AdString = [];
             var con = document.getElementById("displayData");

@@ -95,12 +95,12 @@ public partial class Vendors : System.Web.UI.Page
             String DatalistQuery;
 
             if (UserType.Equals("SuperAdmin"))
-                DatalistQuery= "Select ID, ShopCategory, VendorName, ContactNum,ContantNumber2, Address,Address2 from dbo.Vendors order by ShopCategory asc  ";
+                DatalistQuery= "Select ID, ShopCategory, VendorName, ContactNumber,ContactNumber2, Address,Address2 from dbo.Vendors order by ShopCategory asc  ";
 
 
             //DatalistQuery = "Select ID, ShopCategory, VendorName, ContactNum,ContantNumber2, Address,Address2 from dbo.Vendors where SocietyID ='" + SocietyID + "' order by ShopCategory asc  ";
             else
-            DatalistQuery = "Select ID, ShopCategory, VendorName, ContactNum,ContantNumber2, Address,Address2 from dbo.Vendors where SocietyID ='" + SocietyID + "' order by ShopCategory asc  ";
+            DatalistQuery = "Select ID, ShopCategory, VendorName, ContactNumber,ContactNumber2, Address,Address2 from dbo.Vendors where SocietyID ='" + SocietyID + "' order by ShopCategory asc  ";
 
             DataSet DatasetVendors = dacess.ReadData(DatalistQuery);
 
@@ -232,7 +232,7 @@ public partial class Vendors : System.Web.UI.Page
                 {
                     drpVendorcategory.SelectedItem.Text = (myReader["ShopCategory"].ToString().Trim());
                     txtvendorname.Text = (myReader["VendorName"].ToString());
-                    txtvendromobile.Text = (myReader["ContactNum"].ToString());
+                    txtvendromobile.Text = (myReader["ContactNumber"].ToString());
                     txtvendoraddress.Text = (myReader["Address"].ToString());
 
                 }
@@ -292,8 +292,8 @@ public partial class Vendors : System.Web.UI.Page
                         using (SqlConnection con1 = new SqlConnection(Utility.SocietyConnectionString))
                         {
                             con1.Open();
-                            // SqlCommand cmd = new SqlCommand("INSERT INTO Vendors (ShopCategory,VendorName,ContactNum,Address,VendorIcon,VendorIconFormat) VALUES (@ShopCategory,@VendorName,@ContactNum,@Address,@VendorIcon,@VendorIconFormat)", con1);
-                            SqlCommand cmd = new SqlCommand("Insert Into Vendors (ShopCategory,VendorName,ContactNum,ContantNumber2,Address,Address2,VendorIcon,VendorIconFormat,date,SocietyID,CmdType) Values ('" 
+                            // SqlCommand cmd = new SqlCommand("INSERT INTO Vendors (ShopCategory,VendorName,ContactNumber,Address,VendorIcon,VendorIconFormat) VALUES (@ShopCategory,@VendorName,@ContactNum,@Address,@VendorIcon,@VendorIconFormat)", con1);
+                            SqlCommand cmd = new SqlCommand("Insert Into Vendors (ShopCategory,VendorName,ContactNumber,ContactNumber2,Address,Address2,VendorIcon,VendorIconFormat,date,SocietyID,CmdType) Values ('" 
                                 + VendorCat + "','" + Vendorname + "','" + contact + "','" + contact2 + "','" + Address + "','" + Address2 + "',@VendorIcon,'" + VendorIconFormat + "','" + Utility.ChangeDateTimeLocalToSQLServerFormat(date) + "'," + SessionVariables.SocietyID + ",'Insert')", con1);
                             cmd.Parameters.Add("@VendorIcon", SqlDbType.Image).Value = bytesImages;
                             int count = cmd.ExecuteNonQuery();
@@ -317,7 +317,7 @@ public partial class Vendors : System.Web.UI.Page
                 }
                 else
                 {
-                    String InsetdataQuery = "Insert Into Vendors (ShopCategory,VendorName,ContactNum,ContantNumber2,Address,Address2,date,SocietyID, CmdType) Values ('" + VendorCat + "','" + Vendorname + "','" + contact + "','" + contact2 + "','" + Address + "','" + Address2 + "','" + date + "'," + SessionVariables.SocietyID + ",'insert')";
+                    String InsetdataQuery = "Insert Into Vendors (ShopCategory,VendorName,ContactNumber,ContactNumber2,Address,Address2,date,SocietyID, CmdType) Values ('" + VendorCat + "','" + Vendorname + "','" + contact + "','" + contact2 + "','" + Address + "','" + Address2 + "','" + date + "'," + SessionVariables.SocietyID + ",'insert')";
                     bool result = dacess.Update(InsetdataQuery);
 
                     if (result == true)
@@ -611,7 +611,7 @@ public partial class Vendors : System.Web.UI.Page
 
             else
             {
-                NewvendorQuery = "Update  dbo.Vendors set ShopCategory = '" + VendorCat + "',   VendorName= '" + Vendorname + "', ContactNum='" + contact + "', Address = '" + Address + "' ,Date = '" + Updatedate + "' ,CmdType ='Update'   where ID = '" + VendorID + "'";
+                NewvendorQuery = "Update  dbo.Vendors set ShopCategory = '" + VendorCat + "',   VendorName= '" + Vendorname + "', ContactNumber='" + contact + "', Address = '" + Address + "' ,Date = '" + Updatedate + "' ,CmdType ='Update'   where ID = '" + VendorID + "'";
                 bool result = dacess.Update(NewvendorQuery);
                 if (result == true)
                 {
@@ -672,12 +672,12 @@ public partial class Vendors : System.Web.UI.Page
                     using (SqlConnection con1 = new SqlConnection(Utility.SocietyConnectionString))
                     {
                         con1.Open();
-                        String UpdateImageQuery = "Update dbo.Vendors set ShopCategory=@ShopCategory,VendorName=@VendorName,ContactNum=@ContactNum,Address= @Address,VendorIcon = @VendorIcon,VendorIconFormat ='" + format + "',Date = '" + date + "',CmdType ='Update'   where ID = '" + VendorID + "'";
+                        String UpdateImageQuery = "Update dbo.Vendors set ShopCategory=@ShopCategory,VendorName=@VendorName,ContactNumber=@ContactNumber,Address= @Address,VendorIcon = @VendorIcon,VendorIconFormat ='" + format + "',Date = '" + date + "',CmdType ='Update'   where ID = '" + VendorID + "'";
                         SqlCommand cmd = new SqlCommand(UpdateImageQuery, con1);
                         cmd.Parameters.Add("@VendorIcon", SqlDbType.Image).Value = bytesImages;
                         cmd.Parameters.Add("@ShopCategory", SqlDbType.VarChar, 50).Value = VendorCat;
                         cmd.Parameters.Add("@VendorName", SqlDbType.VarChar, 50).Value = Vendorname;
-                        cmd.Parameters.Add("@ContactNum", SqlDbType.VarChar, 50).Value = contact;
+                        cmd.Parameters.Add("@ContactNumber", SqlDbType.VarChar, 50).Value = contact;
                         cmd.Parameters.Add("@Address", SqlDbType.VarChar, 50).Value = Address;
                         int result = cmd.ExecuteNonQuery();
                         con1.Close();

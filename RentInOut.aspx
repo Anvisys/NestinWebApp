@@ -53,17 +53,17 @@
         };
 
 
-        function ShowRentInventory(response) {
+        function ShowRentInventory(results) {
                $("#ProgressBar").hide();
-            // alert(JSON.stringify(response));
+       var  js=  JSON.stringify(results);
               var strData = "";
 
-            var results = response.$values;
+       //     var js = response.$values;
        
 
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
-                          var ImageSource = "GetImages.ashx?UserID=" + results[i].UserID + "&Name=" + results[i].ContactName + "&UserType= Owner";
+                          var ImageSource = "GetImages.ashx?UserID=" + js[i].UserID + "&Name=" + results[i].ContactName + "&UserType= Owner";
 
                     strData = strData + "<div class=\"col-xs-3 panel panel-success \" style=\"margin:20px;padding:0px; \">" +
                         "<div class='panel-heading'>" 
