@@ -94,6 +94,12 @@ public partial class Vendors : System.Web.UI.Page
             DataAccess dacess = new DataAccess();
             String DatalistQuery;
 
+            if (UserType.Equals("Admin"))
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "visiblemang",
+       "document.getElementById('Edit_Vendor').style.visibility = 'visible';", true);
+            }
+
             if (UserType.Equals("SuperAdmin"))
                 DatalistQuery= "Select ID, ShopCategory, VendorName, ContactNumber,ContactNumber2, Address,Address2 from dbo.Vendors order by ShopCategory asc  ";
 
@@ -142,8 +148,7 @@ public partial class Vendors : System.Web.UI.Page
                 lblTotalVendors.Text = Totalvendors.ToString();
             }
 
-            
-
+           
         }
 
         catch (Exception ex)
@@ -443,6 +448,7 @@ public partial class Vendors : System.Web.UI.Page
         {
           
         } 
+
             
     }
 

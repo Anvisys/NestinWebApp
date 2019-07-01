@@ -861,7 +861,7 @@ public partial class Flats : System.Web.UI.Page
         newFlat.Floor = txtAddfltFlr.Text;
         newFlat.Intercom = Convert.ToInt32(txtAddflatIntrc.Text);
         newFlat.FlatNumber = txtFltAdd.Text;
-        newFlat.FlatArea = txtFlatArea.Text;
+       newFlat.FlatArea = txtFlatArea.Text;
         newFlat.BHK = Convert.ToInt32(drpAddflatBHK.SelectedItem.Text);
 
         newUser.Password = "Password@123";
@@ -1166,7 +1166,7 @@ public partial class Flats : System.Web.UI.Page
                     drpFlatGender.Items.Insert(1, new ListItem(newUser.Gender));
                     checkFlatsOnly.Visible = true;
                     //Added by Aarshi on 21-July-2017
-                    String ViewFlat = "select * from dbo.ViewFlats where Ownermobile = '" + txtAddfltMobile.Text + "' and OwnerEmail = '" + txtAddfltEmail.Text + "'";
+                  /*  String ViewFlat = "select * from dbo.ViewFlats where Ownermobile = '" + txtAddfltMobile.Text + "' and OwnerEmail = '" + txtAddfltEmail.Text + "'";
                     DataSet dsFlatsView = dacess.GetData(ViewFlat);
                     if (dsFlatsView != null && dsFlatsView.Tables[0].Rows.Count > 0)
                     {
@@ -1177,7 +1177,7 @@ public partial class Flats : System.Web.UI.Page
                         txtAddfltFlr.Text = dtFlatsView.Rows[0]["Floor"].ToString();
                         drpAddflatBHK.SelectedItem.Text = dtFlatsView.Rows[0]["BHK"].ToString();
                         txtAddflatIntrc.Text = dtFlatsView.Rows[0]["IntercomNumber"].ToString();
-                    }
+                    }*/
 
                     mobileMsg.ImageUrl = "~/Images/Icon/check-mark.png";
                     emailMsg.ImageUrl = "~/Images/Icon/check-mark.png";
@@ -1643,7 +1643,23 @@ public partial class Flats : System.Web.UI.Page
     }
 
 
+    protected bool SearchFlat(string Flatno)
+    {
+        bool validate = false;
+        using (SqlConnection con = new SqlConnection(Utility.SocietyConnectionString))
+        {
+            con.Open();
+            string query = string.Format("Select FlatNumber from dbo.Flats where FlatNumber = '" + Flatno);
+            SqlCommand cmd = new SqlCommand(query,con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                validate = true;
+            }
+        }
 
+        return validate;
+    }
 
 
     protected void checkFlatsOnly_CheckedChanged(object sender, EventArgs e)
@@ -1721,4 +1737,69 @@ public partial class Flats : System.Web.UI.Page
         this.ViewState["vs"] = pos;
         FillFlatdata();
     }
+
+  
+
+    protected void btnCreateNewFlat_Click(object sender, EventArgs e)
+    {
+        DataAccess daAccess = new DataAccess();
+
+        //User newUser = new User();
+        Flat newFlat = new Flat();
+
+        //newUser.FirstName = txtAddflatFirstname.Text;
+        //newUser.LastName = txtAddflatLastName.Text;
+        //newUser.Address = txtAddfltAddrs.Text;
+        //newUser.MobileNumber = txtAddfltMobile.Text;
+        //newUser.EmailID = txtAddfltEmail.Text;
+        //newUser.Gender = drpFlatGender.SelectedItem.Text;
+        //newUser.ParentName = txtAddfltParentName.Text;
+        //newUser.UserLogin = txtAddflatUserLogin.Text.ToLower();
+        ////user login is emilid
+        //newUser.UserLogin = newUser.EmailID;
+
+        newFlat.Block = txtblock.Text;
+        newFlat.Floor = txtfloor.Text;
+        newFlat.Intercom = Convert.ToInt32(txtintercom.Text);
+        newFlat.FlatNumber = txtflatno.Text;
+        newFlat.FlatArea = txtfltarea.Text;
+        newFlat.BHK = Convert.ToInt32(drpbhk.SelectedItem.Value);
+
+      //  newUser.Password = "Password@123";
+
+
+        DateTime ActiveDate = Utility.GetCurrentDateTimeinUTC();
+        try
+        {
+            if (ExistingUser == false)
+            {
+              int res =newFlat.AddFlat(newFlat);
+                // SendMail(newUser.EmailID, newUser.Password, newUser.EmailID, newUser.FirstName);
+                if (res > 0)
+                    lblassignHeading.Text = "success";
+                AddBillToFlat(newFlat.FlatNumber, newFlat.FlatArea);
+                GenerateInitialZeroBill(newFlat.FlatNumber, newFlat.FlatArea);
+                FillFlatdata();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:HideAddFlatModal()", true);
+            }
+            else
+            {
+                //newFlat.AddFlat(ExistingUserID);
+                //SendMail(newUser.EmailID, newUser.Password, newUser.EmailID, newUser.FirstName);
+                //AddBillToFlat(newFlat.FlatNumber, newFlat.FlatArea);
+                //GenerateInitialZeroBill(newFlat.FlatNumber, newFlat.FlatArea);
+                //FillFlatdata();
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:HideAddFlatModal()", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            Utility.log("Addflat:btnAddflatSubmit_Click Exception" + ex.Message);
+            lblAddflatStatus.ForeColor = System.Drawing.Color.Red;
+            lblAddflatStatus.Text = "Could not Submit  Flat try later or Contact Admin";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:HideAddFlatModal()", true);
+        }
+    }
 }
+
+
