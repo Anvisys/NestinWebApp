@@ -512,9 +512,9 @@
             var start = new Date(visitDate);
             var strStartDate = GetDateTimeinISO(start);
            // alert("at 498==> " + strStartDate);
-            var strEndDate="2020-05-10T00:00:00"
+            var strEndDate="2020-05-10 00:00:00.000";
             
-            
+         //   alert(strStartDate);
 
         //   // var strStartDate = GetDateTimeinISO(start);
 

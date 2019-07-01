@@ -392,7 +392,7 @@ public partial class Totalusers : System.Web.UI.Page
            
             //Added by Aarshi on 15 Aug 2017 for code restructuring
             Resident res = new Resident();
-            bool assuserresult = res.InsertUserResident(FirstName, LastName, MobileNo, EmailId, Password, Gender, Parentname, UserLogin, Address, "Owner", muser.currentResident.SocietyID.ToString());
+            bool assuserresult = res.InsertUserResident(FirstName, LastName, MobileNo, EmailId, Password, Gender, Parentname, UserLogin, Address);
 
             if (assuserresult == true)                             
             {
@@ -436,11 +436,14 @@ public partial class Totalusers : System.Web.UI.Page
             lblstatus.Text = ex.Message;
         }
 
-        finally
-        {
-
-        }
-
+        //lblstatus.Text = "";
+        //txtFirstname.Text = "";
+        //txtMiddleName.Text = "";
+        //txtLastname.Text = "";
+        //txtMobileno.Text= "";
+        //txtEmailId.Text = "";
+        //txtParentname.Text = "";
+        //txtAddress.Text = "";
     }
     protected void btnAddUserResident_Click(object sender, EventArgs e)
     {

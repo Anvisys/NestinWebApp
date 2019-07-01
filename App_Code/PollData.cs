@@ -242,7 +242,8 @@ public class PollData
 
     public List<PollData> GetData(int PageNumber, String order, int SocietyID, String Status)
     {
-        String orderby = "EndDate ASC";
+        order = "";
+        String orderby = "";
         String StatusCond = "";
         if (order == "EndDate Descending")
         {
@@ -257,7 +258,7 @@ public class PollData
             orderby = "StartDate ASC";
         }
         else {
-            orderby = "StartDate ASC";
+            orderby = "StartDate DESC";
         }
 
         if (Status == "All")
