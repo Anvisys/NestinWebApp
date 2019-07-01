@@ -112,6 +112,22 @@
             background-color: #e6e2e2;
             background-color: rgba(0,0,0,0.4);
         }
+
+       .offerbox-raised{
+           background: #ebfaf3;
+           border:1px solid lightgrey;
+           width:100%;
+           height:30px;
+           color:#2eb877;
+           font-size:18px;
+           font-family:serif;
+       }
+
+       .offerbox-raised:hover{
+           background-color:#009900;
+           color:white;
+       }
+       
        
        .vl {
     border-left: 3px solid green;
@@ -706,12 +722,24 @@ hr {
                                                 <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber") %></p>
                                                <hr />
                                             <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber2") %></p>
-                                                <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px;">
+
+                                             <!-- <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px;">
                                                     <i class="fa fa-edit" id="Edit_Vendor" style="color: #fff;  cursor: pointer; float: left; visibility:hidden" 
                                                       onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit
-                                                    </i><i class="fa fa-trash" id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer; visibility:hidden;" aria-hidden="true">Delete</i>
+                                                    </i><i class="fa fa-trash" id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer; visibility:hidden;" aria-hidden="true">Delete</i>--> 
+
+                                                <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px;margin-bottom:0px;">
+                                                    <i class="fa fa-edit" id="Edit_Vendor" style="color: #fff; cursor: pointer; float: left;" 
+                                                        onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit
+                                                    </i><i class="fa fa-trash" id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer;" aria-hidden="true">Delete</i>
                                                 </p>
-                                            
+                                          <%--  <p style="height:30px; width:100%; border:1px solid green;"></p>--%>
+
+                                            <p id="offer_color" class="offerbox-raised">
+                                                    Offers  <i class="fa fa-angle-right transit" style="float:right; padding-right:5px;font-size:25px; "></i>
+                                                <i class="fa fa-angle-right transit" style="float:right; padding-right:5px; font-size:25px;"></i>
+
+                                                </p>
                                         </div>
 
 
@@ -753,6 +781,8 @@ hr {
                                                 </div>
                                             </div>
                                         </div>--%>
+
+                                        <%--<div style="height:30px; width:100%; border:1px solid green;"></div>--%>
                                     </div>
                                 </ItemTemplate>
                             </asp:DataList>
