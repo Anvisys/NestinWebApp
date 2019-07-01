@@ -229,15 +229,15 @@ public class Resident
         return result;
     }
 
-    public bool InsertUserResident(string FirstName, string LastName, string MobileNo, string EmailId,String Password, string Gender, string Parentname, string UserLogin, string Address, string UserType, string SocietyID)
+    public bool InsertUserResident(string FirstName, string LastName, string MobileNo, string EmailId,String Password, string Gender, string Parentname, string UserLogin, string Address)
     {
         DataAccess dacess = new DataAccess();
         User newUser = new User();
         string strNewPassword = newUser.EncryptPassword(EmailId, Password);
         
         String UpdateQuery = "Insert into " + CONSTANTS.Table_Users + 
-            " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address,UserType,SocietyID) Values('" 
-            + FirstName + "','','" + LastName + "','" + MobileNo + "','" + EmailId + "','" + Gender + "','" + Parentname + "','" + UserLogin +"','" + strNewPassword + "','" + Address + "','" + UserType + "','" + SocietyID + "')";
+            " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address) Values('" 
+            + FirstName + "','','" + LastName + "','" + MobileNo + "','" + EmailId + "','" + Gender + "','" + Parentname + "','" + UserLogin +"','" + strNewPassword + "','" + Address +  "')";
 
 
 

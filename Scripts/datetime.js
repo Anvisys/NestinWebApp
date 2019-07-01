@@ -49,7 +49,7 @@
         dSec = Sec;
     }
      
-    return dYear + "-" + dMonth + "-" + dDay + "T" + dHour + ":" + dMin + ":" + dSec;   
+    return dYear + "-" + dMonth + "-" + dDay + " " + dHour + ":" + dMin + ":" + dSec+":000";   
 }
 
 

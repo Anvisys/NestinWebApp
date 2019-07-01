@@ -307,7 +307,20 @@
 
 
         function HideAddRes() {
+            clearmodelfields();
+            
             $("#myModalPopup").hide();
+        }
+
+        function clearmodelfields(){
+               $("#txtFirstname").val("");
+            $("#txtMiddleName").val("");
+            $("#txtLastname").val("");
+            $("#txtMobileno").val("");
+            $("#txtEmailId").val("");
+            $("#txtParentname").val("");
+            $("#txtAddress").val("");
+            $("#lblstatus").text("");
         }
 
         function AddUserClick() {
@@ -338,6 +351,7 @@
         }
 
         function CloseAddResident() {
+            clearmodelfields();
             $("#myModalPopup").hide();
         }
 
