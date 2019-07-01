@@ -34,6 +34,8 @@
      <link rel="stylesheet" href="CSS/ApttLayout.css" />
     <%--<link rel ="stylesheet" href="CSS/Vendor.css" />--%>
    
+    <link rel="stylesheet" href="CSS/mystylesheets.css" />
+
     <style>
  
         /*Added by Aarshi on 22 aug 2017 for image crop code*/
@@ -169,9 +171,10 @@ hr {
         $(document).ready(function () {
             userType = '<%=Session["UserType"] %>';
             if (userType == "Admin") {
+                alert("158");
                 document.getElementById("Add_Vendor").style.visibility = 'visible';
-               // document.getElementById("Edit_Vendor").style.visibility = 'visible';
-                //document.getElementById("vendor_delete").style.visibility = 'visible';
+                document.getElementById("Edit_Vendor").style.visibility = 'visible';
+                document.getElementById("vendor_delete").style.visibility = 'visible';
                 $('.Vendor_edit_icon').show();
             }
             else {
@@ -272,8 +275,10 @@ hr {
 
             // $("#Vendors_dropdown").hide();
                // $("#vendor_dropdown").hide();
-            });
+          });
+          if (userType == 'Admin') {
 
+          }
       });
 
      
@@ -564,7 +569,9 @@ hr {
             });
 
 
- 
+        function visiblemang() {
+             document.getElementById("Edit_Vendor").style.visibility = 'visible';
+        }
    
 
             function setCropImage(src) {
@@ -715,6 +722,12 @@ hr {
                                                 <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber") %></p>
                                                <hr />
                                             <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber2") %></p>
+
+                                             <!-- <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px;">
+                                                    <i class="fa fa-edit" id="Edit_Vendor" style="color: #fff;  cursor: pointer; float: left; visibility:hidden" 
+                                                      onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit
+                                                    </i><i class="fa fa-trash" id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer; visibility:hidden;" aria-hidden="true">Delete</i>--> 
+
                                                 <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px;margin-bottom:0px;">
                                                     <i class="fa fa-edit" id="Edit_Vendor" style="color: #fff; cursor: pointer; float: left;" 
                                                         onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit
@@ -725,6 +738,7 @@ hr {
                                             <p id="offer_color" class="offerbox-raised">
                                                     Offers  <i class="fa fa-angle-right transit" style="float:right; padding-right:5px;font-size:25px; "></i>
                                                 <i class="fa fa-angle-right transit" style="float:right; padding-right:5px; font-size:25px;"></i>
+
                                                 </p>
                                         </div>
 

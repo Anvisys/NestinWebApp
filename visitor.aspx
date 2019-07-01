@@ -384,7 +384,8 @@
                             $("#oneprev").hide();
                             oneprev.removeEventListener("click", ShowPrevious);
                         }
-                        if (data.$values.length < size) {
+                      //  if (data.length < size) {
+                        if (data.length < size) {
                             $("#btnNext").hide();
                             onenext.removeEventListener("click", ShowNext);
                         }
@@ -419,9 +420,9 @@
         }
 
 
-        function SetData(data) {
+        function SetData(jarray) {
            //alert("at set data");
-            var jarray = data.$values;
+           // var jarray = data.$values;
             var length = jarray.length;
             var viewString = "";
            

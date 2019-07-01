@@ -99,7 +99,7 @@
     <script>
 
 
-
+        var societyid, societyname;
         $(function () {
             $("#txtFlltsOwnernme").autocomplete({
                 source: function (request, response) {
@@ -165,8 +165,53 @@
                 },
                 minLength: 2 //This is the Char length of inputTextBox  
             });
+
+
+            $("#txtflatno").blur(function () {
+                checkFlat();
+            });
         });
-       
+
+
+        function checkFlat()
+        {
+
+            var param =  $('#txtflatno').val();
+                  
+            alert(param);
+        }
+
+        $("#txtflatno").blur(function () {
+            var param =  $('#txtflatno').val();
+                  
+            alert(param);
+
+           $.ajax({
+                        url: "Flats.aspx/SearchFlat",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                      
+                        success: function (data) {
+
+                            if (Data.value == true) {
+                                alert("Exist");
+                            }
+                            else {
+                                alert("Doesnt");
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                            console.log("Ajax Error!");
+                        }
+                    });
+                
+               //This is the Char length of inputTextBox  
+            });
+    
 
         $(function ShowSelected() {
             $("[id*=FlatGrid] td:has(button)").bind("click", function () {
@@ -189,6 +234,7 @@
 
 
         $(document).ready(function () {
+            $("#ModalNewFlat").hide();
             $('html').click(function () {
                 
                 $("#Flat_dropdown").hide();
@@ -379,8 +425,10 @@
 
         $(document).ready(function () {
 
-              $("#txtAddflatFirstname,#txtAddflatLastName,#txtAddfltParentName,#drpFlatGender,#txtAddfltAddrs").attr('disabled', true);
-
+            $("#txtAddflatFirstname,#txtAddflatLastName,#txtAddfltParentName,#drpFlatGender,#txtAddfltAddrs").attr('disabled', true);
+             societyid = '<%=Session["SocietyID"] %>';
+             societyname='<%=Session["SocietyName"]%>'
+            $("#lblassignHeading").text("Add New Flat to "+societyname.toString());
             $("#btncancel").click(function () {
                 $("#Popup").hide();
                 $("#HiddenImportPopup").val("");
@@ -420,7 +468,19 @@
              $("#Import_close").click(function () {
                 $("#myModalPopupImport").hide();
                 $("#lblFileUploadstatus").html('');
-              });
+            });
+
+            $("#Add_Flat_New").click(function () {
+                $("#txtflatno").val("");
+                $("#drpbhk").val("Select");
+                $("#txtfltarea").val("");
+                $("#txtintercom").val("");
+                $("#txtblock").val("");
+                $("#txtfloor").val("");
+                $("#ModalNewFlat").show();
+            //alert("Add_Flat_New");
+            });
+
         });
 
       
@@ -459,11 +519,22 @@
          if (charCode > 31 && (charCode < 48 || charCode > 57))
             return false;    
          return true;
-      }
+        }
+
+        function btnCancelModel() {
+            $("#ModalNewFlat").hide();
+        }
 
     </script>
 </head>
 <body  style="background-color:#f7f7f7;">
+
+                                        <!--Add New Flat Model-->
+
+
+ 
+
+                                                            
     <form id="form1" runat="server">
      <div class="container-fluid">
             <div class="row" style="height:50px;margin-top:15px">
@@ -483,6 +554,10 @@
                     <div style=" align-content">
                           <button id="Add_Flat_Button" type="button" class="btn-sm btn btn-primary pull-right" style="cursor:pointer;margin-right:30px;"><i class="fa fa-plus"></i> Add Flat</button>  
                          <a id="linkTemplate" type="button"  class="btn-sm btn btn-primary pull-right"  href="http://www.myaptt.com/NewTestApp/Excel_Format.zip" download="true" style="cursor:pointer;border-color:#2ECC71!important;"><i class="fa fa-plus"></i> Template</a>
+                    </div>
+
+                     <div style=" align-content">
+                          <button id="Add_Flat_New" type="button" class="btn-sm btn btn-primary pull-right" style="cursor:pointer;margin-right:30px;"><i class="fa fa-plus"></i> Add New Flat</button>  
                     </div>
                  </div>
              </div>
@@ -589,6 +664,72 @@
          </div>
 
 </div>
+                                            <!--Add New Flat Model-->
+
+            <div id="ModalNewFlat" class="modal" style="display: block;">
+                         <div class="container-fluid" style="width: 500px;">
+                             <div class="panel panel-primary">
+                                 <div class="panel-heading">
+                                    
+                                     <asp:Label runat="server" ID="lblassignHeading"> Add New Flat:</asp:Label>
+
+                                     <span class="fa fa-times" onclick="btnCancelModel()" style="float: right; cursor: pointer;"></span>
+                                 </div>
+
+                                 <div class="panel-body">
+                                     <div class="row" style="margin:5px;">
+                                         <div class="col-xs-6">
+                                             New Flat Number:<br />
+                                            <asp:TextBox runat="server" ID="txtflatno" Width="100px" on />
+                                         </div>
+                                         <div class="col-xs-6">
+                                             BHK:<br />
+                                                <asp:DropDownList runat="server" ID="drpbhk" Width="100px">
+                                                    <asp:ListItem Value="Select">Select BHK</asp:ListItem>
+                                                    <asp:ListItem Value="1" > 1 BHK</asp:ListItem>
+                                                     <asp:ListItem Value="2"> 2 BHK</asp:ListItem>
+                                                     <asp:ListItem Value="3"> 3 BHK</asp:ListItem>
+                                                     <asp:ListItem Value="4"> 4 BHK</asp:ListItem>
+                                                </asp:DropDownList>
+                                         </div>
+     
+                                     </div>
+                                     <div class="row" style="margin:5px;">
+                                         <div class="col-xs-6">
+                                             Flat Area :   <br />
+                                            <asp:TextBox runat="server" ID="txtfltarea" Width="100px"/>
+                                         </div>
+                                         <div class="col-xs-6">
+                                             Intercom Number:<br />
+                                            <asp:TextBox runat="server" ID="txtintercom" Width="100px"/>
+                                            
+                                         </div>
+                                     </div>
+
+                                      <div class="row" style="margin:5px;">
+                                         <div class="col-xs-6">
+                                             Block :<br />   
+                                           <asp:TextBox runat="server" ID="txtblock" Width="100px"/>
+                                         </div>
+                                         <div class="col-xs-6">
+                                             Floor : <br />
+                                            <asp:TextBox runat="server" ID="txtfloor" Width="100px"/>
+                                         </div>
+                                      
+                                     </div>
+                                   
+                                 </div>
+
+                                 <div class="panel-footer" style="text-align: right; margin-top: 15px;">
+                                     <button class="btn btn-danger" type="button" onclick="btnCancelModel()">Cancel</button>
+                                     <asp:Button runat="server"  name="btnUpdate" Text="Add New Flat" ID="btnCreateNewFlat" OnClick="btnCreateNewFlat_Click" CssClass="btn btn-success" />
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+
+
+                                                             <!--Add New Flat Model-->
 
    <table id="sample" style="margin-top: 1%; width: 100%;  border: 1px solid #f2f2f2; display:none; box-shadow: 2px 2px 5px #bfbfbf; border-collapse: collapse;min-height:500px;">
                         

@@ -38,8 +38,8 @@
 
 
         function GetRentInventory() {
-            var abs_url = api_url + "/api/RentInventory/" + SocietyID;
-          //  console.log(abs_url);
+            var abs_url = api_url + "/api/RentInventory/" + SocietyID+"/1/5";
+            console.log(abs_url);
              $.ajax({
                 url: abs_url,
                 dataType: "json",
@@ -54,6 +54,7 @@
 
 
         function ShowRentInventory(results) {
+            console.log(results);
                $("#ProgressBar").hide();
        var  js=  JSON.stringify(results);
               var strData = "";
