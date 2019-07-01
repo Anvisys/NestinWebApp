@@ -104,4 +104,19 @@ public class Flat
            
     }
 
+    public int AddFlat(Flat newFlat)
+    {
+        string connString = Utility.SocietyConnectionString;
+        using ( SqlConnection dbConnection = new SqlConnection(connString))
+        {
+            dbConnection.Open();
+            string querystring = "Insert into dbo.Flats(FlatNumber,FlatArea,Floor,Block,BHK,IntercomNumber,UserID,SocietyID) output INSERTED.ID values('" +
+                                newFlat.FlatNumber + "' ,'" + newFlat.FlatArea + "'," + newFlat.Floor + "  ,'" + newFlat.Block + "' ," + newFlat.BHK + " ," + newFlat.Intercom + "," + 0 + "," + SessionVariables.SocietyID + ")";
+
+            SqlCommand cmd = new SqlCommand(querystring ,dbConnection);
+            int result = (int)cmd.ExecuteScalar();
+            return result;
+        }
+    }
+
 }
