@@ -318,13 +318,13 @@
             });
         }
 
-        function DisplayFlats(response) {
+        function DisplayFlats(results) {
             var color = "";
             var str = "";
             $("#flat_progressBar").hide();
             var strData = "";
             $("#FlatRequests").html(strData);
-            var results = response.$values;// jQuery.parseJSON(response.$values);
+         //   var results = response.$values;// jQuery.parseJSON(response.$values);
          
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
@@ -416,7 +416,7 @@
             });
         }
 
-        function SocietyRequest(response) {
+        function SocietyRequest(results) {
            // alert("420==>> response" + response);
             var color = "";
             var str = "";
@@ -424,7 +424,7 @@
             $("#society_progressBar").hide();
             var strData = "";
             $("#SocietyRequests").html(strData);
-            var results = response.$values;// jQuery.parseJSON(response.$values);
+          //  var results = response.$values;// jQuery.parseJSON(response.$values);
           
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
@@ -486,14 +486,14 @@
         }
 
 
-        function ListHouseRequests(response) {
+        function ListHouseRequests(results) {
             var str = "";
             var color = "";
             $("#house_progressBar").hide();
 
             var strData = "";
             $("#HouseRequests").html(strData);
-            var results = response.$values;// jQuery.parseJSON(response.$values);
+           // var results = response.$values;// jQuery.parseJSON(response.$values);
           
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
