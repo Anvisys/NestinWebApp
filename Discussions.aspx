@@ -1,4 +1,4 @@
-﻿dddd<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Discussions.aspx.cs" Inherits="Discussions" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Discussions.aspx.cs" Inherits="Discussions" %>
 
 <!DOCTYPE html>
 
