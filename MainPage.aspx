@@ -154,6 +154,7 @@
               //  document.getElementById("content_frame").height = (screen.height - 100) + "px";
 
                 // document.getElementById("slider").height = (screen.height - 220) / 4 + "px";
+                $('#Admin_Navigation').show();
             }
 
             else {
@@ -223,8 +224,18 @@
         function ShowMenu() {
             var content = "";
           
+            if (userType == "Owner" || userType == "Tenant") {
 
-            var content_profile = document.getElementById("bs-example-navbar-collapse-2").innerHTML;
+                var content_profile = document.getElementById("bs-example-navbar-collapse-2").innerHTML;
+
+            }
+            else {
+                var content_profile = document.getElementById("admin-dd-Menu").innerHTML;
+               
+            }
+         
+
+
             var profile_dropdown = document.getElementById("profile_dropdown").innerHTML;
             var profile_image = document.getElementById("image").innerHTML;
             $("#Menu_x").empty();
@@ -237,6 +248,7 @@
             $("#Menu_x").toggle();
             //$("#menu1").toggle();
 
+
             
         }
 
@@ -245,12 +257,12 @@
             if (userType == "Owner" || userType == "Tenant") {
                
                 $('#Menu_x').slideUp('hide');
-                $('#Admin_Navigation').slideUp('hide');
+                $('#bs-example-navbar-collapse-2').slideUp('hide');
                 
             }
             else {
                 $('#Menu_x').slideUp('hide');
-                $('#Admin_Navigation').slideUp('hide');
+                $('#admin-dd-Menu').slideUp('hide');
             }
 
             //if (userType == "Admin") {
@@ -402,7 +414,7 @@
 
             </div>
             <div class="hidden-lg hidden-md hidden-sm col-xs-4">
-                <span class="fa fa-align-justify fa-2x" onclick="ShowMenu()" style="float:right;color:white;padding-top:10px;"></span>
+              <span class="fa fa-align-justify fa-2x" onclick="ShowMenu()" style="float:right;color:white;padding-top:10px;"></span>
 
                 <ul class="dropdown-menu" id="Menu_x" style="display:none;"></ul>
             </div>
@@ -416,7 +428,7 @@
 
                 <div id="Admin_Navigation" style="position:fixed;height:100%;background-color:#98c8dc;width:inherit;" >
                     <div class="Left-Nav">
-                        <ul >
+                        <ul  id="admin-dd-Menu">
 
                             <li> <a href="Dashboard.aspx" target="targetframe">Dashboard</a></li> <li> <a href="Reports.aspx" target="targetframe">Reports</a></li>
                             <li> <a href="Notifications.aspx" target="targetframe">Notifications</a></li>
@@ -489,11 +501,7 @@
                             <li> <a href="MyHouse.aspx" target="targetframe">My House</a></li>
                             <li><a href="Vendors.aspx" target="targetframe">Vendors</a></li>
                             <li> <a href="Services.aspx" target="targetframe">Services</a></li>
-                      
-
-
-
-                        </ul>
+                            </ul>
                         </div>
                     </div>
 
