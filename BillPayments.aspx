@@ -152,34 +152,34 @@
                                                             <asp:Label ID="lblBilltype" runat="server" ForeColor="Blue" Font-Size="Large"   Text='<%# Eval("BillType") %>'></asp:Label>
                                                         </div>
                                                      <hr />
-                                                    <div class="col-xs-4 col-md-3" style="margin-top:10px;">
+                                                    <div class="col-xs-3 col-md-3" style="margin-top:10px;">
                                                        Bill Month:   <asp:Label ID="lblBillMonth" runat="server" ForeColor="#000000" Text='<%# Eval("BillMonth","{0:MMM yyyy}") %>'></asp:Label>
                                                          </div>
-                                                    <div class ="col-xs-4 col-md-3" style="margin-top:10px;">
+                                                    <div class ="col-xs-3 col-md-3" style="margin-top:10px;">
                                                          Amount Paid: <asp:Label ID="lblAmountPaid" runat="server" ForeColor="#969696" Text='<%# Eval("AmountPaid") %>'></asp:Label>
                                                     </div>
-                                                     <div class ="col-xs-4 col-md-3" style="margin-top:10px;">
+                                                     <div class ="col-xs-3 col-md-3" style="margin-top:10px;">
                                                           Paid On:  <asp:Label ID="lblPaidOn" runat="server" ForeColor="#969696" Text='<%# Eval("AmountPaidDate","{0 :dd MMM yyyy}") %>'></asp:Label>
                                                      </div>
                                                
                                                
-                                                    <div class="col-xs-4 col-md-3" style="margin-top:10px;">
+                                                    <div class="col-xs-3 col-md-3" style="margin-top:10px;">
                                                         Prev Balance :  <asp:Label ID="lblPrevBalance" runat="server"   Font-Bold="true" ForeColor="#808080" Font-Size="Small"   Text='<%# Eval("PreviousMonthBalance") %>' ></asp:Label> <br />
                                                     </div>
-                                                     <div class="col-xs-4 col-md-3" style="margin-top:10px;">
+                                                     <div class="col-xs-3 col-md-3" style="margin-top:10px;">
                                                         Current Bill :  <asp:Label ID="lblCurrentBill" runat="server"   Font-Bold="true" ForeColor="#808080" Font-Size="Small"  Text='<%# Eval("CurrentBillAmount") %>' ></asp:Label>
                                          
                                                     </div>
-                                                    <div class="col-xs-4 col-md-3" style="margin-top:10px;">
+                                                    <div class="col-xs-3 col-md-3" style="margin-top:10px;">
                                                         Total Due:  <asp:Label ID="lblTotalDue" runat="server" ForeColor="#000000" Font-Bold="true" Font-Size="Small" Text='<%# Eval("CurrentMonthBalance") %>'></asp:Label>
                                                     </div>
-                                                    <div class="col-xs-4 col-md-3" style="margin-top:10px;">
+                                                    <div class="col-xs-3 col-md-3" style="margin-top:10px;">
                                                             Due On: <asp:Label ID="lblDueDate" runat="server" ForeColor="#333333" Font-Bold="true" Font-Size="Small" Text='<%# Eval("PaymentDueDate","{0:dd MMM yyyy}") %>'></asp:Label>
                                                     </div>
-                                                          <div class="col-xs-4" style="margin-top:10px;">
+                                                          <div class="col-xs-3" style="margin-top:10px;">
                                                         <asp:LinkButton ID="linkDetail" runat="server" OnCommand="linkDetails_Click" CommandArgument='<%# Eval("PayID") %>' ForeColor="#000000" Font-Size="small" CommandName="linkDetails_Click"> Show Details</asp:LinkButton>
                                                     </div>
-                                                    <div class="col-xs-4" style="margin-top:10px;">
+                                                    <div class="col-xs-3" style="margin-top:10px;">
                                                         <asp:LinkButton ID="linkPay" runat="server" OnCommand="PayLink_Click" CommandArgument='<%# Eval("PayID") %>' ForeColor="#ffffff" CssClass="btn btn-primary" Font-Size="small" CommandName="PayLink_Click"> Pay Now</asp:LinkButton>
                                                     </div>
                                                 </div>

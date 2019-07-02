@@ -49,6 +49,7 @@
         { }
 
         $(document).ready(function () {
+            window.parent.FrameSourceChanged();
 
             api_url = '<%=Session["api_url"] %>';
            Userlogin = '<%=Session["UserLogin"] %>';

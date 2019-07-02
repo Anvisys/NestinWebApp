@@ -109,7 +109,7 @@
     <script>
      
 
-        var UserType, ResId, SocietyId, FlatNumber, RequestID, VisitorEntryHour,api_url;
+        var UserType, ResId, SocietyId, FlatNumber, RequestID, VisitorEntryHour,api_url; 
         var page = 1;
         var pagecount=0;
         var size = 5;
@@ -127,6 +127,7 @@
 
 
         $(document).ready(function () {
+            window.parent.FrameSourceChanged();
              api_url = '<%=Session["api_url"] %>';
             UserType = '<%=Session["UserType"]%>';
             ResId = '<%=Session["ResiID"]%>';

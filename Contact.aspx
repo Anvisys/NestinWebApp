@@ -106,7 +106,7 @@
         };--%>
 
         $(document).ready(function () {
-
+            window.parent.FrameSourceChanged();
             $("#login").click(function () {
                 $("#loginModal").show();
                 $("#Forgot_div").hide();

@@ -67,7 +67,7 @@
         })
         
         $(document).ready(function () {
-
+            window.parent.FrameSourceChanged();
             $("#btnImport").click(function () {
                 document.getElementById("importModal").style.display = "block";
                 //$("#importModal").show();

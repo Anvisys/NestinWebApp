@@ -40,7 +40,7 @@
         var currentInvetoryID = 0;
 
         $(document).ready(function () {
-
+            window.parent.FrameSourceChanged();
             api_url = '<%=Session["api_url"] %>';
            // alert("45 ==>> "+api_url);
             _ResID = <%=ResID%>;
@@ -1406,7 +1406,7 @@
                             </div>
                        
                         <div class="row" style="margin-top: 5px; margin-bottom: 10px;">                        
-                            <div class="col-mds-5">
+                            <div class="col-md-5">
                                 <label style="width: 100px;" class="data_heading">Name :</label>
                                 <label style="width: 50%;" class="data_label" id="lblFlatOwner">...</label><br />
                                 <label style="width: 100px;" class="data_heading">Email :</label>
