@@ -127,6 +127,7 @@
 
 
         $(document).ready(function () {
+            window.parent.FrameSourceChanged();
              api_url = '<%=Session["api_url"] %>';
             UserType = '<%=Session["UserType"]%>';
             ResId = '<%=Session["ResiID"]%>';

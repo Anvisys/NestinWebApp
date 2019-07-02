@@ -30,7 +30,7 @@
     <script>
 
         $(document).ready(function () {
-
+            window.parent.FrameSourceChanged();
             GetSocietyData();
 
         });

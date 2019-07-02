@@ -26,9 +26,13 @@
       
     
            
-    <style>
-          
-    </style>
+    <script>
+
+        $(document).ready(function () {
+
+            window.parent.FrameSourceChanged();
+        });
+    </script>
 </head>
 <body style="background-color:#f7f7f7;"> 
 

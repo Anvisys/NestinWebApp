@@ -40,7 +40,7 @@
         var currentInvetoryID = 0;
 
         $(document).ready(function () {
-
+            window.parent.FrameSourceChanged();
             api_url = '<%=Session["api_url"] %>';
            // alert("45 ==>> "+api_url);
             _ResID = <%=ResID%>;

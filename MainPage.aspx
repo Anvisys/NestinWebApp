@@ -198,7 +198,7 @@
 
             }
             else if (userType == "Individual") {
-                Individual_Navigation
+           
                 document.getElementById("Employee_Navigation").style.visibility = "none";
                 document.getElementById("Admin_Navigation").style.display = "none";
                 document.getElementById("Resident_Navigation").style.display = "none";
@@ -206,7 +206,7 @@
                  document.getElementById("SuperAdmin_Navigation").style.display = "none";
             }
              else if (userType == "SuperAdmin") {
-                Individual_Navigation
+              
                 document.getElementById("Employee_Navigation").style.visibility = "none";
                 document.getElementById("Admin_Navigation").style.display = "none";
                 document.getElementById("Resident_Navigation").style.display = "none";
@@ -245,9 +245,12 @@
             if (userType == "Owner" || userType == "Tenant") {
                
                 $('#Menu_x').slideUp('hide');
+                $('#Admin_Navigation').slideUp('hide');
+                
             }
             else {
-                 $('#Menu_x').slideUp('hide');
+                $('#Menu_x').slideUp('hide');
+                $('#Admin_Navigation').slideUp('hide');
             }
 
             //if (userType == "Admin") {
@@ -407,7 +410,7 @@
 
         </div>
 
-        <div class="row" style="margin-top:67px;">
+        <div class="row" style="margin-top:67px; padding:0px;">
 
             <div class="col-md-2 hidden-sm hidden-xs margin-zero">
 

@@ -169,6 +169,7 @@ hr {
         var userType;
 
         $(document).ready(function () {
+            window.parent.FrameSourceChanged();
             userType = '<%=Session["UserType"] %>';
             if (userType == "Admin") {
                 alert("158");

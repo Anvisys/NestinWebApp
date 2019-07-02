@@ -86,6 +86,7 @@
          });
          
          $(document).ready(function () {
+             window.parent.FrameSourceChanged();
              $("#confirmActivate").hide();
              $('html').click(function () {
 

@@ -30,7 +30,7 @@
 
 
         $(document).ready(function () {
-
+            window.parent.FrameSourceChanged();
             UserId = <%=UserID %>;
             SocietyID = '<%=Session["SocietyID"] %>';
             api_url = '<%=Session["api_url"] %>';
