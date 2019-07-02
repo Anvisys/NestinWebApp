@@ -123,6 +123,13 @@
            font-family:serif;
        }
 
+       .setvisible{
+           visibility:visible;
+       }
+       .setinvisible{
+           visibility:hidden;
+       }
+
        .offerbox-raised:hover{
            background-color:#009900;
            color:white;
@@ -169,6 +176,7 @@ hr {
         var userType;
 
         $(document).ready(function () {
+            window.parent.FrameSourceChanged();
             userType = '<%=Session["UserType"] %>';
             if (userType == "Admin") {
                 // alert("158");
@@ -723,10 +731,11 @@ hr {
                                                <hr />
                                             <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber2") %></p>
 
-                                             <!-- <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px;">
-                                                    <i class="fa fa-edit" id="Edit_Vendor" style="color: #fff;  cursor: pointer; float: left; visibility:hidden" 
+                                              <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px;">
+                                                    <i class="fa fa-edit " id="Edit_Vendor" style="color: #fff;  cursor: pointer; float: left; visibility:hidden; " 
                                                       onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit
-                                                    </i><i class="fa fa-trash" id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer; visibility:hidden;" aria-hidden="true">Delete</i>--> 
+                                                    </i><i class="fa fa-trash " id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer;visibility:hidden; " aria-hidden="true">Delete</i> 
+
 
                                                 <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px;margin-bottom:0px;">
                                                     <i class="fa fa-edit" runat="server" id="Edit_Vendor" style="color: #fff; cursor: pointer; float: left; " Visible="false"

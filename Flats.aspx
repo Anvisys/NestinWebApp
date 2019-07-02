@@ -234,6 +234,7 @@
 
 
         $(document).ready(function () {
+            window.parent.FrameSourceChanged();
             $("#ModalNewFlat").hide();
             $('html').click(function () {
                 

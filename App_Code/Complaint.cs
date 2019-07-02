@@ -83,7 +83,7 @@ public class Complaint
         try
         {
             String ViewComplaintQuery = "";
-            String FlatCond, CompTypeCond, CompStatusCond, DateCond = "";
+            String FlatCond, CompTypeCond="", CompStatusCond, DateCond = "";
 
             if (FlatNumber != "")
             {
@@ -94,20 +94,13 @@ public class Complaint
                 FlatCond = "FlatNumber is not null";
             }
 
-            if (CompType != "")
-            {
-                CompTypeCond = "CompType = '" + CompType + "'";
-            }
-            else
-            {
-                CompTypeCond = "CompType is not null";
-            }
+           
 
             if (CompStatus != "" && CompStatus != "All")
             {
                 if (CompStatus == "Open")
                 {
-                    CompStatusCond = "LastStatus != 'Closed'";
+                    CompStatusCond = "LastStatus <> 'Closed'";
                 }
                 else if (CompStatus == "Closed")
                 {
@@ -140,12 +133,24 @@ public class Complaint
                 DateCond = "LastAt is not null";
             }
 
+            if (CompType != "")
+            {
+                CompTypeCond = "CompType = '" + CompType + "'";
+                ViewComplaintQuery = "Select * from [dbo].[ViewComplaintSummary] where SocietyID= " + SocietyID + " and " + FlatCond + " and " + CompTypeCond + " and "
+              + CompStatusCond + " and " + DateCond + " ORDER BY INITIATEDAT DESC";
+            }
+            else
+            {
+                ViewComplaintQuery = "Select * from [dbo].[ViewComplaintSummary] where SocietyID= " + SocietyID + " and " + FlatCond +  " and "
+              + CompStatusCond +" ORDER BY INITIATEDAT DESC";
+            }
+
             //Added by Aarshi on 22-Sept-2017 for bug fix
             //if (ComplaintLoad == "ComplaintLoad")
             //    ViewComplaintQuery = "Select top 10 * from [dbo].[ViewComplaintSummary] where " + FlatCond + " and " + CompTypeCond + " and " + CompStatusCond + " and " + DateCond;
             //else
-            ViewComplaintQuery = "Select * from [dbo].[ViewComplaintSummary] where SocietyID= " + SocietyID + " and " + FlatCond + " and " + CompTypeCond + " and " 
-                + CompStatusCond + " and " + DateCond + " ORDER BY INITIATEDAT DESC";
+            //ViewComplaintQuery = "Select * from [dbo].[ViewComplaintSummary] where SocietyID= " + SocietyID + " and " + FlatCond + " and " + CompTypeCond + " and " 
+            //    + CompStatusCond + " and " + DateCond + " ORDER BY INITIATEDAT DESC";
 
             DataAccess dacess = new DataAccess();
             return dacess.GetData(ViewComplaintQuery);

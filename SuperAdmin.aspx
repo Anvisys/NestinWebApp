@@ -53,7 +53,7 @@
         var selectedSocietyId = 0;
 
         $(document).ready(function () {
-        
+            window.parent.FrameSourceChanged();
             UserId = <%=UserID %>;
 
             GetSocietyRequest();
