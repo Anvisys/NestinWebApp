@@ -128,6 +128,7 @@ public partial class Vendors : System.Web.UI.Page
                 //lblVendrCatText.Visible = true;
                 DataTable dt = DatasetVendors.Tables[0];
                 Datavendors.DataSource = dt;
+                
                 Datavendors.DataBind();
                 Totalvendors = dt.Rows.Count;
                 //if (dt.Rows.Count > 0)
@@ -444,9 +445,9 @@ public partial class Vendors : System.Web.UI.Page
 
 
 
-        if (muser.currentResident.UserType == "Owner" || muser.currentResident.UserType == "Tenant")
+        if (muser.currentResident.UserType.Equals("Admin"))
         {
-          
+           vendor_delete
         } 
 
             
