@@ -13,6 +13,7 @@ using System.Configuration;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Web.UI.HtmlControls;
 
 public partial class Vendors : System.Web.UI.Page
 {
@@ -444,9 +445,12 @@ public partial class Vendors : System.Web.UI.Page
 
 
 
-        if (muser.currentResident.UserType == "Owner" || muser.currentResident.UserType == "Tenant")
+        if (muser.currentResident.UserType == "Admin")
         {
-          
+
+            HtmlGenericControl gc = new HtmlGenericControl("i");
+            gc.Style.Remove("visibility");
+            gc.Style.Add("visibility","visible ");
         } 
 
             
