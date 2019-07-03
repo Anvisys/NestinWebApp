@@ -422,7 +422,7 @@
                                             </div>
 
                                             <div class="row hcenter">
-                                                <asp:Chart ID="Piechart2" runat="server" Width="180px" Height="150px" BackColor="Transparent" BackSecondaryColor="192, 255, 255" BorderlineColor="Transparent">
+                                                <asp:Chart ID="Piechart2" runat="server" Width="180px" Height="173px" BackColor="Transparent" BackSecondaryColor="192, 255, 255" BorderlineColor="Transparent">
                                                     <Series>
                                                         <asp:Series Name="Series1" ChartType="Doughnut" LegendText="#PERCENT"></asp:Series>
                                                     </Series>
@@ -448,22 +448,12 @@
                            </div>  
                             <hr />
                            <div class="container">
-                                <div class="row">
-
-                                    <div class="col-md-2 col-xs-6">
+                                <div class="row" style="margin-left:300px;">                                                                    
+  
                                         <asp:LinkButton ID="btnNextBottom" runat="server" ForeColor="Black" BorderStyle="Groove" BorderColor="#0066ff" OnClick="btnNextBottom_Click" CausesValidation="False">&nbsp;&nbsp;Next&nbsp;&nbsp;</asp:LinkButton>
-                                    </div>
-
-                                    <div class="col-md-9"></div>
-
-                                    <div class="col-md-1 col-xs-6">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <asp:LinkButton ID="btnPreBottom" runat="server" BorderStyle="Groove" BorderColor="#0066ff" ForeColor="Black" OnClick="btnPreBottom_Click" CausesValidation="False">&nbsp;&nbsp;Prev&nbsp;&nbsp;</asp:LinkButton>
-                                    </div>
-                                
-                                   <%-- <div class="col-sm-4 hidden-xs">
-                                        <asp:Label ID="lblPie1EmptyText" runat="server" Font-Size="Small" ForeColor="#3C9DFF"></asp:Label>
-                                    </div>--%>
-                                   
+                                                                                          
                                 </div>
                            </div>
 
