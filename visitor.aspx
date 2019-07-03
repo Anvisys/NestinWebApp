@@ -484,12 +484,12 @@
 
 
                 viewString += '<div class=\"row layout_shadow_table\">' +
-                         '<div class=\"col-xs-2\"><b>Visitor: <span class="fa fa-circle" style="color:green;"></span></b> <img id="TenantImage" src="Images/Icon/profile.jpg" height="60" width="60" style="border-radius:50%;"/> </div>' +
-                         '<div class=\"col-xs-4\"> <br/> <span class="fa fa-user" style="color:#2b7a2d;"></span>  ' + VisitorName + '<br /><span class="fa fa-phone" style="color:#2b7a2d;"></span> ' + VisitorMobile + '<br /><span class="fa fa-home" style="color:#2b7a2d;"></span> ' + VisitorAddress + '</div>' +
-                         '<div class=\"col-xs-3 ' + bgClass + '\"><br/><span class="fa fa-question-circle" style="color:#2b7a2d;"></span> ' + VisitPurpose + '<br/>' + time + '<br /><span class="fa fa-info-circle" style="color:#2b7a2d;"></span><p1> ' + status + '</p1></div>' +
-       
-                    '<div class=\"col-xs-3 Host\"><b> Host: <br/><span class="fa fa-user" style="color:#2b7a2d;"></span> </b>' + HostName + ',' + HostType + '<br/><span class="fa fa-phone" style="color:#2b7a2d;"></span> </b>' + VisitorMobile + '<br/><span class="fa fa-home" style="color:#2b7a2d;"></span> </b>' + FlatNumber + '</div>' +
-                      '</div>';
+                         '<div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-6\"><b>Visitor: <span class="fa fa-circle" style="color:green;"></span></b> <img id="TenantImage" src="Images/Icon/profile.jpg" height="60" width="60" style="border-radius:50%;"/> </div>' +
+                         '<div class=\"col-lg-4 col-md-4 col-sm-4 col-xs-6\"> <br/> <span class="fa fa-user" style="color:#2b7a2d;"></span>  ' + VisitorName + '<br /><span class="fa fa-phone" style="color:#2b7a2d;"></span> ' + VisitorMobile + '<br /><span class="fa fa-home" style="color:#2b7a2d;"></span> ' + VisitorAddress + '</div>' +
+                         '<hr class=\"hidden-lg hidden-md hidden-sm\" style="margin-top:90px;" /> ' +
+                         '<div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-6 ' + bgClass + '\"><br/><span class="fa fa-question-circle" style="color:#2b7a2d;"></span> ' + VisitPurpose + '<br/>' + time + '<br /><span class="fa fa-info-circle" style="color:#2b7a2d;"></span><p1> ' + status + '</p1></div>' +
+                         '<div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-6 Host\"><b> Host: <br/><span class="fa fa-user" style="color:#2b7a2d;"></span> </b>' + HostName + ',' + HostType + '<br/><span class="fa fa-phone" style="color:#2b7a2d;"></span> </b>' + VisitorMobile + '<br/><span class="fa fa-home" style="color:#2b7a2d;"></span> </b>' + FlatNumber + '</div>' +
+                         '</div>';
 
             }
 
@@ -772,41 +772,47 @@
       
 
     </script>
+    <style>
+
+        .padd {
+            padding-right:5px !important;
+        }
+
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
      <div class="container-fluid" style="background-color:#f7f7f7;position:relative;">
                          <div class="row" style="margin-top:15px;">
-                                 <div class="col-xs-3">
+                               
+                             <div class="col-md-3 col-sm-3  hidden-xs">
                                      <div><h4 class="pull-left ">Visitor </h4></div>
                                  </div>
-                             <div class="col-xs-6 " style="padding-left:10px; padding-right:10px;" id="pagination">
-                                   <%-- <button type="button" onclick="ShowPrevious()" class="btn btn-default btn-sm pull-left" style="display:none;" id="btnPrevious">Previous</button>
-                                  <button type="button" onclick="ShowNext()" class="btn btn-default btn-sm pull-right" id="btnNext">Next</button>--%>
 
-                                 <nav aria-label="Page navigation example">
-                                     <ul class="pagination">
-                                         <li class="page-item"><a class="page-link" href="#"  onclick="ShowPrevious()" id="btnPrevious" >Previous</a></li>
-                                         <li class="page-item"><a class="page-link" id="oneprev" href="#">1</a></li>
-                                         <li class="page-item"><a class="page-link" id="current" href="#">2</a></li>
-                                         <li class="page-item"><a class="page-link" id="onenext" href="#">3</a></li>
-                                         <li class="page-item"><a class="page-link" href="#"  id="btnNext" onclick="ShowNext()" >Next</a></li>
-                                     </ul>
-                                 </nav>
-                           </div>
+                                 <div class="col-md-6 col-sm-6 col-xs-6" style="margin-top:-20px" id="pagination">                           
+                                     <nav aria-label="Page navigation example">
+                                         <ul class="pagination">
+                                             <li class="page-item"><a class="page-link" href="#"  onclick="ShowPrevious()" id="btnPrevious" >Previous</a></li>
+                                             <li class="page-item"><a class="page-link" id="oneprev" href="#">1</a></li>
+                                             <li class="page-item"><a class="page-link" id="current" href="#">2</a></li>
+                                             <li class="page-item"><a class="page-link" id="onenext" href="#">3</a></li>
+                                             <li class="page-item"><a class="page-link" href="#"  id="btnNext" onclick="ShowNext()" >Next</a></li>
+                                         </ul>
+                                     </nav>
+                                </div>
 
-                             <div class="col-xs-3 pull-right">
-                                     <button id="btnAddVisitor" class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus"></i> Add Visitor</button>
-
-                                    <button id="btnVerifyVisitor"  class="btn btn-primary btn-sm" type="button"><i class="fa fa-check"></i> Verify</button>
+                                 <div class="col-md-3 col-sm-3 col-xs-6">
+                                         <button id="btnAddVisitor" class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus"></i> Add Visitor</button>
+                                         <button id="btnVerifyVisitor"  class="btn btn-primary btn-sm" type="button"><i class="fa fa-check"></i> Verify</button>
                                  </div>
+
                              </div>
    
        
-
-         <div id="dataContainer" class="container-fluid" >
+          
+         <div id="dataContainer" class="container-fluid padd" >
              </div>
-              <div id="data_loading" class="container-fluid" style="text-align:center;width:100%; height:200px;background-color:#090909;opacity:0.2;position:fixed; top:100px; z-index:99;">
+              <div id="data_loading" class="container-fluid padd" style="text-align:center;width:100%; height:200px;background-color:#090909;opacity:0.2;position:fixed; top:100px; z-index:99;">
                     <img src="Images/Icon/ajax-loader.gif" style="width:20px;height:20px; margin-top:50px;" />
                   <%--<i class="fa fa-spinner"  style="width:50px; height:50px;margin-top:100px;"></i>--%>
                    </div>

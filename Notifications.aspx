@@ -253,7 +253,6 @@
             }
         }
 
-
     </script>
 
 
@@ -274,9 +273,15 @@
             background-color: rgba(0,0,0,0.4);
         }
 
+        .alg {
+            text-align: justify;
+        }
 
+
+      
         /* Style the active class, and buttons on mouse-over */
     </style>
+
 
 </head>
 <body style="margin: 0px; padding: 0px;">
@@ -307,9 +312,9 @@
 
 
                         <div class="row" style="height: 50px;">
-                            <div class="col-sm-3  col-xs-3">
+                            <div class="col-sm-3  col-xs-2">
                                 <div>
-                                    <p class="pull-left" style="margin-top: 16px; font-size: 15px; color: #000;">Notice : </p>
+                                    <p class="pull-left" style="margin-top: 16px; font-size: 15px; color: #000;">Notice: </p>
                                 </div>
                             </div>
                             <div id="myDIV" class="col-sm-6  col-xs-6" style="margin-top: 10px; text-align: center;">
@@ -335,7 +340,7 @@
 
                             </div>
 
-                            <div class="col-sm-3  col-xs-3">
+                            <div class="col-sm-3  col-xs-4" style="margin-top:10px;">
                             <button id="New_Notification" type="button" class="btn btn-primary pull-right"> New Notification</button>
 
                              <!--   <asp:Button runat="server" ID="New_Notification" Style="margin-top: 10px;" type="button" CssClass="btn btn-primary btn-sm pull-right " Text="Add Notice" ></asp:Button>-->
@@ -368,35 +373,39 @@
                                 FooterStyle-Font-Italic="True" Height="5px" ForeColor="#000" OnSelectedIndexChanged="DataNotifications_SelectedIndexChanged">
 
                                 <ItemStyle></ItemStyle>
+                            
                                 <ItemTemplate>
                                     <div class="row layout_shadow_table zero-margin">
 
-                                        <div class="col-sm-2 col-xs-2">
+                                        <div class="col-sm-2 col-xs-3">
 
                                             <asp:Image src='<%# "GetImages.ashx?UserID="+ Eval("UserID")+"&Name="+Eval("FirstName") +"&UserType=Admin"%>' CssClass="UserImage  profile-image" ID="user_image" runat="server" />
                                             <br />
 
                                             <%# Eval("FirstName") +" " + Eval("LastName")  %>
+                                            
                                         </div>
                                         
-                                        <div class="col-sm-7 col-xs-6">
-                                            <asp:Label ID="Label4" runat="server" Font-Names="Arial" ForeColor="#000000" Font-Size="Medium" Text='<%# Eval("Notification") %>'></asp:Label><br /><br />
-                                            <asp:Label ID="Label7" runat="server" Font-Names="Euphemia" Font-Size="small" ForeColor="green" CssClass="pull-right" Text='<%# "Entry date: " + Eval("Date", "{0:dd MMM,yy}") %>'></asp:Label> 
-                                            <asp:Label ID="Label8" runat="server" Font-Names="Euphemia" Font-Size="small" ForeColor="blue"  CssClass="pull-left" Text='<%#"Valid Till: "+ Eval("EndDate", "{0:dd MMM,yy}") %>'></asp:Label>
-
-                                            </a>  
+                                        <div class="col-sm-10 col-xs-9">
+                                            <asp:Label ID="Label4" runat="server" CssClass="alg" Font-Names="Arial" ForeColor="#000000" Font-Size="Medium" Text='<%# Eval("Notification") %>'></asp:Label><br /><br />
+                                            <asp:Label ID="Label5" runat="server" Font-Names="Euphemia" Font-Size="small" ForeColor="blue"   Text='<%#"Valid Till:"+ Eval("EndDate", "{0:dd MMM,yy}") %>'></asp:Label> &nbsp;
+                                            <asp:Label ID="Label1" runat="server" Font-Names="Euphemia" Font-Size="small" ForeColor="green"  Text='<%# "Entry date:" + Eval("Date", "{0:dd MMM,yy}") %>'></asp:Label> 
                                         </div>
-                                        <div class="col-sm-3 col-xs-4">
-                                            <asp:Image ID="ImageFile" with="50" Height="50" CssClass="ImgAttach pull-right"  ToolTip="Click to see" OnClientClick="DisplayFullImage(this)" CausesValidation="false" runat="server" />
+                                        <br />
 
-
+                                        <center>
+                                        <div class="col-sm-12 col-xs-12">
+                                            <asp:Image ID="ImageFile" with="50" Height="50" CssClass="ImgAttach"  ToolTip="Click to see" OnClientClick="DisplayFullImage(this)" CausesValidation="false" runat="server" />
                                             <asp:Label ID="lblFileName" runat="server" Text='<%# Eval("AttachName") %>'></asp:Label>
                                             <a href="#" onclick="window.open('OpenFile.aspx?NoticeID=<%#Eval("ID") %> &FileName=<%#Eval("AttachName")%>','pagename','resizable,height=560,width=570'); return false;">
-                                                <asp:ImageButton ID="ImageAttachemnt" runat="server" Width="15" Height="15" CssClass="ImgAttach" CausesValidation="false" ToolTip="Click to see the attachment" ImageUrl="Images/attachment_icon.png" OnClientClick='<%# "NotificationImage.ashx?NotifFileID="+ Eval("ID") %>' />
-                                                <span class="fa fa-paperclip" title="Click to see the attachment" onclick='<%# "NotificationImage.ashx?NotifFileID="+ Eval("ID") %>' id="attachment" runat="server"></span>
+                                                <asp:ImageButton ID="ImageAttachemnt" runat="server" Width="15" Height="15" CssClass="ImgAttach" CausesValidation="false" ToolTip="Click to View" ImageUrl="Images/attachment_icon.png" OnClientClick='<%# "NotificationImage.ashx?NotifFileID="+ Eval("ID") %>' />
+                                                <span class="fa fa-paperclip" title="Click to View" onclick='<%# "NotificationImage.ashx?NotifFileID="+ Eval("ID") %>' id="attachment" runat="server"></span>
+                                            </a>
+                                         </div>                                       
+                                        </center>        
+                                   
                                         </div>
-
-                                    </div>
+                                
 
                                 </ItemTemplate>
 
