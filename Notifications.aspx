@@ -25,9 +25,9 @@
 
     <script src="Scripts/jquery-1.11.1.min.js"></script>
 
-    <link rel="stylesheet" href="CSS/ApttTheme.css" />
+<%--    <link rel="stylesheet" href="CSS/ApttTheme.css" />
     <link rel="stylesheet" href="CSS/ApttLayout.css" />
-    <link rel="stylesheet" href="CSS/NewAptt.css" />
+    <link rel="stylesheet" href="CSS/NewAptt.css" />--%>
     <link rel="stylesheet" href="CSS/mystylesheets.css" />
 
     <script>
@@ -356,6 +356,7 @@
                             <asp:DataList ID="DataNotifications" runat="server" CellPadding="0"
                                 OnItemDataBound="DataNotifications_ItemDataBound"
                                 Width="100%"
+                                Margin-top="100px"
                                 headerstyle-font-name="Verdana"
                                 HeaderStyle-Font-Size="12pt"
                                 HeaderStyle-HorizontalAlign="center"
@@ -364,7 +365,7 @@
                                 HeaderStyle-Font-Bold="True"
                                 BackColor="Transparent"
                                 FooterStyle-Font-Size="9pt"
-                                FooterStyle-Font-Italic="True" Height="1px" ForeColor="#000" OnSelectedIndexChanged="DataNotifications_SelectedIndexChanged">
+                                FooterStyle-Font-Italic="True" Height="5px" ForeColor="#000" OnSelectedIndexChanged="DataNotifications_SelectedIndexChanged">
 
                                 <ItemStyle></ItemStyle>
                                 <ItemTemplate>
@@ -377,16 +378,16 @@
 
                                             <%# Eval("FirstName") +" " + Eval("LastName")  %>
                                         </div>
+                                        
                                         <div class="col-sm-7 col-xs-6">
-                                            <asp:Label ID="Label4" runat="server" ForeColor="#6699cc" Font-Size="medium" Text='<%# Eval("Notification") %>'></asp:Label><br />
-                                            <asp:Label ID="Label7" runat="server" Font-Names="Euphemia" Font-Size="small" ForeColor="green" Text='<%# "Entry date: " + Eval("Date", "{0:dd MMM,yy}") %>'></asp:Label>
-                                            &nbsp;&nbsp;
-                                                        <asp:Label ID="Label8" runat="server" Font-Names="Euphemia" Font-Size="small" ForeColor="red" Text='<%#"Valid Till: "+ Eval("EndDate", "{0:dd MMM,yy}") %>'></asp:Label>
+                                            <asp:Label ID="Label4" runat="server" Font-Names="Arial" ForeColor="#000000" Font-Size="Medium" Text='<%# Eval("Notification") %>'></asp:Label><br /><br />
+                                            <asp:Label ID="Label7" runat="server" Font-Names="Euphemia" Font-Size="small" ForeColor="green" CssClass="pull-right" Text='<%# "Entry date: " + Eval("Date", "{0:dd MMM,yy}") %>'></asp:Label> 
+                                            <asp:Label ID="Label8" runat="server" Font-Names="Euphemia" Font-Size="small" ForeColor="blue"  CssClass="pull-left" Text='<%#"Valid Till: "+ Eval("EndDate", "{0:dd MMM,yy}") %>'></asp:Label>
 
                                             </a>  
                                         </div>
                                         <div class="col-sm-3 col-xs-4">
-                                            <asp:Image ID="ImageFile" with="50" Height="50" CssClass="ImgAttach pull-right" ToolTip="Click to see" OnClientClick="DisplayFullImage(this)" CausesValidation="false" runat="server" />
+                                            <asp:Image ID="ImageFile" with="50" Height="50" CssClass="ImgAttach pull-right"  ToolTip="Click to see" OnClientClick="DisplayFullImage(this)" CausesValidation="false" runat="server" />
 
 
                                             <asp:Label ID="lblFileName" runat="server" Text='<%# Eval("AttachName") %>'></asp:Label>

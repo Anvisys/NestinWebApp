@@ -154,7 +154,7 @@
               //  document.getElementById("content_frame").height = (screen.height - 100) + "px";
 
                 // document.getElementById("slider").height = (screen.height - 220) / 4 + "px";
-                $('#Admin_Navigation').show();
+               // $('#Admin_Navigation').show();
             }
 
             else {
@@ -257,12 +257,12 @@
             if (userType == "Owner" || userType == "Tenant") {
                
                 $('#Menu_x').slideUp('hide');
-                $('#bs-example-navbar-collapse-2').slideUp('hide');
+                //$('#bs-example-navbar-collapse-2').slideUp('hide');
                 
             }
             else {
                 $('#Menu_x').slideUp('hide');
-                $('#admin-dd-Menu').slideUp('hide');
+              //  $('#admin-dd-Menu').slideUp('hide');
             }
 
             //if (userType == "Admin") {

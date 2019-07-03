@@ -356,7 +356,7 @@
                                 <div class="layout_shadow_box">
                                     <div class="row">
                                         <asp:Label ID="lblPollP1" runat="server" ForeColor="#0066CC" Text="Poll"></asp:Label><br />
-                                        <asp:Label ID="lblQ1" runat="server" Height="30px" Font-Size="Smaller" ForeColor="#4A4A4A"></asp:Label>
+                                        <asp:Label ID="lblQ1" runat="server" Height="30px" Font-Size="10px" Font-Bold="true" ForeColor="#4A4A4A"></asp:Label>
                                     </div>
                                     <div class="row rad">
                                         <div class="col-xs-10" style="text-align: left; padding-left: 25px;">
@@ -446,14 +446,15 @@
                             </div>
                             </asp:Panel>
                             <div class="row" style="height: 25px;">
-                                <div class="col-sm-4 col-xs-6" style="padding: 15px;">
+                                <div class="col-md-2 col-sm-4 col-xs-6">
                                     <asp:LinkButton ID="btnPreBottom" runat="server" Text="Prev" Height="20" Width="20px" ForeColor="Black" OnClick="btnPreBottom_Click" CausesValidation="False"></asp:LinkButton>
 
                                 </div>
+                                 <div class="col-md-2"></div>
                                 <div class="col-sm-4 hidden-xs">
                                     <asp:Label ID="lblPie1EmptyText" runat="server" Font-Size="Small" ForeColor="#3C9DFF"></asp:Label>
                                 </div>
-                                <div class="col-sm-4 col-xs-6" style="padding: 30px; padding-left: 210px;">
+                                <div class="col-md-2 col-sm-4 col-xs-6" style="padding: 30px; padding-left: 210px;">
                                     <asp:LinkButton ID="btnNextBottom" runat="server" ForeColor="Black" Text="Next" OnClick="btnNextBottom_Click" CausesValidation="False"></asp:LinkButton>
 
                                 </div>
