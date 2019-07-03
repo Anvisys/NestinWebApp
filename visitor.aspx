@@ -17,10 +17,11 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
          <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>  
     
-         <link rel='stylesheet' type='text/css'href="CSS_3rdParty/timepicki.css"/>
-        <link rel="stylesheet" href="CSS/ApttLayout.css"/>
+        <link rel='stylesheet' type='text/css'href="CSS_3rdParty/timepicki.css"/>
+       <%-- <link rel="stylesheet" href="CSS/ApttLayout.css"/>
         <link rel="stylesheet" href="CSS/ApttTheme.css" />
-        <link rel="stylesheet" href="CSS/NewAptt.css" />
+        <link rel="stylesheet" href="CSS/NewAptt.css" />--%>
+        <link rel="stylesheet" href="CSS/mystylesheets.css" />
     
     
     <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>  
@@ -469,11 +470,12 @@
                     }
                     else {
                          status = "Expired...";
-                    time = ChangeDateformat(InTime);
-                    bgClass = "Expired...";
+                         time = ChangeDateformat(InTime);
+                         bgClass = "Expired...";
                     }
                 }
-                else {
+                else
+                {
                     status = "Waiting...";
                     time = "Start After :" + ChangeDateformat(startTime);
                     bgClass = "Waiting...";
@@ -482,11 +484,11 @@
 
 
                 viewString += '<div class=\"row layout_shadow_table\">' +
-                         '<div class=\"col-xs-2\"><b>Visitor: <span class="fa fa-circle" style="color:red;"></span></b> <img id="TenantImage" src="Images/Icon/profile.jpg" height="60" width="60" style="border-radius:50%;"/> </div>' +
+                         '<div class=\"col-xs-2\"><b>Visitor: <span class="fa fa-circle" style="color:green;"></span></b> <img id="TenantImage" src="Images/Icon/profile.jpg" height="60" width="60" style="border-radius:50%;"/> </div>' +
                          '<div class=\"col-xs-4\"> <br/> <span class="fa fa-user" style="color:#2b7a2d;"></span>  ' + VisitorName + '<br /><span class="fa fa-phone" style="color:#2b7a2d;"></span> ' + VisitorMobile + '<br /><span class="fa fa-home" style="color:#2b7a2d;"></span> ' + VisitorAddress + '</div>' +
                          '<div class=\"col-xs-3 ' + bgClass + '\"><br/><span class="fa fa-question-circle" style="color:#2b7a2d;"></span> ' + VisitPurpose + '<br/>' + time + '<br /><span class="fa fa-info-circle" style="color:#2b7a2d;"></span><p1> ' + status + '</p1></div>' +
        
-                         '<div class=\"col-xs-3 Host\"><b> Host: <br/><span class="fa fa-user" style="color:#2b7a2d;"></span> </b>' + HostName + ',' + HostType+ '<br/><span class="fa fa-phone" style="color:#2b7a2d;"></span>' + VisitorMobile + '<br/><span class="fa fa-home" style="color:#2b7a2d;"></span>' + FlatNumber + '</div>' +
+                    '<div class=\"col-xs-3 Host\"><b> Host: <br/><span class="fa fa-user" style="color:#2b7a2d;"></span> </b>' + HostName + ',' + HostType + '<br/><span class="fa fa-phone" style="color:#2b7a2d;"></span> </b>' + VisitorMobile + '<br/><span class="fa fa-home" style="color:#2b7a2d;"></span> </b>' + FlatNumber + '</div>' +
                       '</div>';
 
             }

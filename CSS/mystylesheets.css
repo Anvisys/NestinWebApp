@@ -2048,12 +2048,13 @@ body {
 
 .layout_shadow_table {
     width: 100%;
-    color: #808080;
+    color: black;
+    font-size: small;
     background-color: #fff;
-    border-radius: 2px;
+    border-radius: 10px;
     border-collapse: collapse;
     margin-top: 10px;
-    padding: 10px;
+    padding: 10px !important;
     box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
     transition: box-shadow 83ms;
 }
@@ -2142,6 +2143,7 @@ h4 {
 }
 
 .profile-image {
+   
     border-radius: 50%;
     border: 2px solid #dcdbdb;
     width: 40px;

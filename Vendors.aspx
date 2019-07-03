@@ -736,8 +736,10 @@ hr {
                                                   <i class="fa fa-edit " id="Edit_Vendor" style="color: #fff;  cursor: pointer; float: left; visibility:hidden; " 
                                                       onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit
                                                     </i><i class="fa fa-trash " id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer;visibility:hidden; " aria-hidden="true">Delete</i> 
+
                                                             </asp:panel>
                                                                                           
+
 
                                                <%-- <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px;margin-bottom:0px;">
                                                     <i class="fa fa-edit" runat="server" id="Edit_Vendor" style="color: #fff; cursor: pointer; float: left; " Visible="false"
