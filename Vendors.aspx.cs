@@ -450,9 +450,7 @@ public partial class Vendors : System.Web.UI.Page
         if (muser.currentResident.UserType == "Admin")
         {
 
-            HtmlGenericControl gc = new HtmlGenericControl("i");
-            gc.Style.Remove("visibility");
-            gc.Style.Add("visibility","visible ");
+         
 
         } 
 

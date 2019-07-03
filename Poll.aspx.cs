@@ -67,6 +67,9 @@ public partial class Poll : System.Web.UI.Page
         int Poll1Count = (PageNumber - 1) * 2 + 1;
         int Poll2Count = (PageNumber - 1) * 2 + 2;
 
+        p = new PollData();
+        pollCount = p.GetTotalPollCount(muser.currentResident.SocietyID, DisplayStatus);
+
         lblPollP1.Text = "Poll " + Poll1Count + " of " + pollCount;
 
         lblPollP2.Text = "Poll " + Poll2Count + " of " + pollCount;
@@ -93,6 +96,8 @@ public partial class Poll : System.Web.UI.Page
             else
             {
                 btnNextBottom.Visible = true;
+                
+                pnlchart2.Visible = true;
             }
 
             CreatePieChart1(pollList[0]);
