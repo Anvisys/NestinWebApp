@@ -151,6 +151,8 @@
         .no-resize {
             resize: none;
         }
+        
+       
     </style>
     <script>
 
@@ -356,10 +358,10 @@
                                     <div class="layout_shadow_box">
                                         <div class="row">
                                             <asp:Label ID="lblPollP1" runat="server" ForeColor="#0066CC" Text="Poll"></asp:Label><br />
-                                            <asp:Label ID="lblQ1" runat="server" Height="30px" Font-Size="10px" Font-Bold="true" ForeColor="#4A4A4A"></asp:Label>
+                                            <asp:Label ID="lblQ1" runat="server" Height="30px" Font-Bold="true" ForeColor="#4A4A4A"></asp:Label>
                                         </div>
                                         <div class="row rad">
-                                            <div class="col-xs-10" style="text-align: left; padding-left: 25px;">
+                                            <div class="col-xs-10" style="text-align: left; padding-left: 25px; padding-top: 20px;">
                                                 <ol>
                                                     <li>
                                                         <asp:RadioButton ID="RadioChart1Opt1" CssClass="Space" runat="server" GroupName="RadioGroup1" onchange="RadioButtonCheck1(1)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
@@ -404,10 +406,10 @@
                                         <div class="layout_shadow_box">
                                             <div class="row">
                                                 <asp:Label ID="lblPollP2" runat="server" ForeColor="#0066CC" Text="Poll"></asp:Label><br />
-                                                <asp:Label ID="lblQ2" runat="server" Height="30px" Font-Size="Small" ForeColor="#4A4A4A"></asp:Label>
+                                                <asp:Label ID="lblQ2" runat="server" Height="30px" Font-Bold="true" ForeColor="#4A4A4A"></asp:Label>
                                             </div>
                                             <div class="row rad">
-                                                <div class="col-md-10 col-xs-10" style="text-align: left; padding-left: 25px;">
+                                                <div class="col-md-10 col-xs-10" style="text-align: left; padding-left: 25px; padding-top: 20px;"">
                                                     <ol>
                                                         <li>
                                                             <asp:RadioButton ID="RadioChart2Opt1" CssClass="Space" runat="server" GroupName="RadioGroup2" onchange="RadioButtonCheck2(5)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
@@ -422,7 +424,7 @@
                                             </div>
 
                                             <div class="row hcenter">
-                                                <asp:Chart ID="Piechart2" runat="server" Width="180px" Height="173px" BackColor="Transparent" BackSecondaryColor="192, 255, 255" BorderlineColor="Transparent">
+                                                <asp:Chart ID="Piechart2" runat="server" Width="180px" Height="178px" BackColor="Transparent" BackSecondaryColor="192, 255, 255" BorderlineColor="Transparent">
                                                     <Series>
                                                         <asp:Series Name="Series1" ChartType="Doughnut" LegendText="#PERCENT"></asp:Series>
                                                     </Series>
@@ -447,16 +449,31 @@
                                 </asp:Panel>
                            </div>  
                             <hr />
-                           <div class="container">
-                                <div class="row" style="margin-left:300px;">                                                                    
-  
+                        <%--   <div class="container">
+                                <div class="row" style="margin-left:300px;">                                                                                                  
                                         <asp:LinkButton ID="btnNextBottom" runat="server" ForeColor="Black" BorderStyle="Groove" BorderColor="#0066ff" OnClick="btnNextBottom_Click" CausesValidation="False">&nbsp;&nbsp;Next&nbsp;&nbsp;</asp:LinkButton>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <asp:LinkButton ID="btnPreBottom" runat="server" BorderStyle="Groove" BorderColor="#0066ff" ForeColor="Black" OnClick="btnPreBottom_Click" CausesValidation="False">&nbsp;&nbsp;Prev&nbsp;&nbsp;</asp:LinkButton>
-                                                                                          
-                                </div>
-                           </div>
+                                </div>                                 
+                           </div>--%>
 
+                            <div class="container">
+                                <div class="row">
+                                    
+                                    <div class="col-md-10 col-xs-4"></div>
+
+                                    <div class="col-md-2 col-xs-8">
+
+                                        <asp:LinkButton ID="btnNextBottom" runat="server" CssClass="btn btn-sm btn-primary" ForeColor="Black" OnClick="btnNextBottom_Click" CausesValidation="False">&nbsp;&nbsp;Next&nbsp;&nbsp;</asp:LinkButton>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <asp:LinkButton ID="btnPreBottom" runat="server" CssClass="btn btn-sm btn-primary" ForeColor="Black" OnClick="btnPreBottom_Click" CausesValidation="False">&nbsp;&nbsp;Prev&nbsp;&nbsp;</asp:LinkButton>
+
+                                                                         
+                                    </div>
+                             
+                                </div>
+                             </div>
+                           
                             
 
                             <%------------------------------------------------------------------------------------Add- Poll section Starts from here ------------------------------------------------------------------------------%>
