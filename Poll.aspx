@@ -12,25 +12,25 @@
 
 
 
-            <!-- Latest compiled and minified CSS -->
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 
-            <!-- jQuery library -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-            <!-- Latest compiled JavaScript -->
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
 
-            <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
-            <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
-            <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
-            <link rel="stylesheet" href="CSS/NewAptt.css" />
-            <link rel="stylesheet" href="CSS/ApttLayout.css" />
-            <link rel="stylesheet" href="CSS/ApttTheme.css" />
-            <link rel="stylesheet" href="CSS/Nestin.css" />
-            <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+    <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+    <link rel="stylesheet" href="CSS/NewAptt.css" />
+    <link rel="stylesheet" href="CSS/ApttLayout.css" />
+    <link rel="stylesheet" href="CSS/ApttTheme.css" />
+    <link rel="stylesheet" href="CSS/Nestin.css" />
+    <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />
 
 
 
@@ -341,247 +341,255 @@
                             <div class="col-sm-3 col-xs-3">
                                 <div>
                                     <button id="Add_Poll" type="button" style="margin-top: 0px;" class="btn btn-primary pull-right btn-sm">Add Poll</button>
+                                </div>
                             </div>
-                        </div>
-                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <asp:Label ID="lblEmptyPie1" runat="server" Visible="false" ForeColor="#E91E63"></asp:Label>
-
-                            </div>
-                        </div>
-
-                        <div class="row" style="margin-top: 15px">
-                            <div id="chartData" runat="server" class=" col-xs-12 col-sm-6 col-md-6 ">
-                                <div class="layout_shadow_box">
-                                    <div class="row">
-                                        <asp:Label ID="lblPollP1" runat="server" ForeColor="#0066CC" Text="Poll"></asp:Label><br />
-                                        <asp:Label ID="lblQ1" runat="server" Height="30px" Font-Size="10px" Font-Bold="true" ForeColor="#4A4A4A"></asp:Label>
-                                    </div>
-                                    <div class="row rad">
-                                        <div class="col-xs-10" style="text-align: left; padding-left: 25px;">
-                                            <ol>
-                                                <li>
-                                                    <asp:RadioButton ID="RadioChart1Opt1" CssClass="Space" runat="server" GroupName="RadioGroup1" onchange="RadioButtonCheck1(1)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
-                                                <li>
-                                                    <asp:RadioButton ID="RadioChart1Opt2" CssClass="Space" runat="server" GroupName="RadioGroup1" onchange="RadioButtonCheck1(2)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
-                                                <li>
-                                                    <asp:RadioButton ID="RadioChart1Opt3" CssClass="Space" runat="server" GroupName="RadioGroup1" onchange="RadioButtonCheck1(3)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
-                                                <li>
-                                                    <asp:RadioButton ID="RadioChart1Opt4" CssClass="Space" runat="server" GroupName="RadioGroup1" onchange="RadioButtonCheck1(4)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
-                                            </ol>
-                                        </div>
-                                    </div>
-
-                                    <div class="row hcenter">
-                                        <asp:Chart ID="PieChart1" runat="server" Width="180px" Height="150px" BackColor="Transparent">
-                                            <Series>
-                                                <asp:Series Name="Series1" ChartType="Doughnut" LegendText="#PERCENT"></asp:Series>
-                                            </Series>
-                                            <ChartAreas>
-                                                <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
-                                            </ChartAreas>
-                                        </asp:Chart>
-                                        <br />
-                                        <asp:Label ID="lblTotalVote1" runat="server" Font-Size="Small" ForeColor="#0055AA"></asp:Label>
-                                        <br />
-
-
-                                        <asp:Label ID="lblPie1date" runat="server" Text="Started On :" Font-Size="Small" ForeColor="#0055AA"></asp:Label>
-                                        <br />
-                                        <br />
-
-                                    </div>
-
-                                    <asp:HiddenField ID="HiddenField1" runat="server" />
-                                    <asp:Button ID="btnPieChart1" runat="server" CssClass="btnPiechart1" OnClick="btnPieChart1_Click" CausesValidation="false" Text="Submit" />
+                            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <asp:Label ID="lblEmptyPie1" runat="server" Visible="false" ForeColor="#E91E63"></asp:Label>
 
                                 </div>
                             </div>
-                            
-                            <asp:Panel runat="server" ID="pnlchart2">
-                                <div id="chart2data" runat="server" class="col-xs-12 col-sm-6 col-md-6 ">
+
+                            <div class="row" style="margin-top: 15px">
+                                <div id="chartData" runat="server" class=" col-xs-12 col-sm-6 col-md-6 ">
                                     <div class="layout_shadow_box">
-                                         <div class="row">
-                                        <asp:Label ID="lblPollP2" runat="server" ForeColor="#0066CC" Text="Poll"></asp:Label><br />
-                                        <asp:Label ID="lblQ2" runat="server" Height="30px" Font-Size="Small" ForeColor="#4A4A4A"></asp:Label>
+                                        <div class="row">
+                                            <asp:Label ID="lblPollP1" runat="server" ForeColor="#0066CC" Text="Poll"></asp:Label><br />
+                                            <asp:Label ID="lblQ1" runat="server" Height="30px" Font-Size="10px" Font-Bold="true" ForeColor="#4A4A4A"></asp:Label>
+                                        </div>
+                                        <div class="row rad">
+                                            <div class="col-xs-10" style="text-align: left; padding-left: 25px;">
+                                                <ol>
+                                                    <li>
+                                                        <asp:RadioButton ID="RadioChart1Opt1" CssClass="Space" runat="server" GroupName="RadioGroup1" onchange="RadioButtonCheck1(1)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
+                                                    <li>
+                                                        <asp:RadioButton ID="RadioChart1Opt2" CssClass="Space" runat="server" GroupName="RadioGroup1" onchange="RadioButtonCheck1(2)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
+                                                    <li>
+                                                        <asp:RadioButton ID="RadioChart1Opt3" CssClass="Space" runat="server" GroupName="RadioGroup1" onchange="RadioButtonCheck1(3)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
+                                                    <li>
+                                                        <asp:RadioButton ID="RadioChart1Opt4" CssClass="Space" runat="server" GroupName="RadioGroup1" onchange="RadioButtonCheck1(4)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
+                                                </ol>
+                                            </div>
+                                        </div>
+
+                                        <div class="row hcenter">
+                                            <asp:Chart ID="PieChart1" runat="server" Width="180px" Height="150px" BackColor="Transparent">
+                                                <Series>
+                                                    <asp:Series Name="Series1" ChartType="Doughnut" LegendText="#PERCENT"></asp:Series>
+                                                </Series>
+                                                <ChartAreas>
+                                                    <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+                                                </ChartAreas>
+                                            </asp:Chart>
+                                            <br />
+                                            <asp:Label ID="lblTotalVote1" runat="server" Font-Size="Small" ForeColor="#0055AA"></asp:Label>
+                                            <br />
+
+
+                                            <asp:Label ID="lblPie1date" runat="server" Text="Started On :" Font-Size="Small" ForeColor="#0055AA"></asp:Label>
+                                            <br />
+                                            <br />
+
+                                        </div>
+
+                                        <asp:HiddenField ID="HiddenField1" runat="server" />
+                                        <asp:Button ID="btnPieChart1" runat="server" CssClass="btnPiechart1" OnClick="btnPieChart1_Click" CausesValidation="false" Text="Submit" />
+
                                     </div>
-                                    <div class="row rad">
-                                        <div class="col-md-10 col-xs-10" style="text-align: left; padding-left: 25px;">
-                                            <ol>
-                                                <li>
-                                                    <asp:RadioButton ID="RadioChart2Opt1" CssClass="Space" runat="server" GroupName="RadioGroup2" onchange="RadioButtonCheck2(5)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
-                                                <li>
-                                                    <asp:RadioButton ID="RadioChart2Opt2" CssClass="Space" runat="server" GroupName="RadioGroup2" onchange="RadioButtonCheck2(6)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
-                                                <li>
-                                                    <asp:RadioButton ID="RadioChart2Opt3" CssClass="Space" runat="server" GroupName="RadioGroup2" onchange="RadioButtonCheck2(7)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
-                                                <li>
-                                                    <asp:RadioButton ID="RadioChart2Opt4" CssClass="Space" runat="server" GroupName="RadioGroup2" onchange="RadioButtonCheck2(8)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
-                                            </ol>
+                                </div>
+
+                                <asp:Panel runat="server" ID="pnlchart2">
+                                    <div id="chart2data" runat="server" class="col-xs-12 col-sm-6 col-md-6 ">
+                                        <div class="layout_shadow_box">
+                                            <div class="row">
+                                                <asp:Label ID="lblPollP2" runat="server" ForeColor="#0066CC" Text="Poll"></asp:Label><br />
+                                                <asp:Label ID="lblQ2" runat="server" Height="30px" Font-Size="Small" ForeColor="#4A4A4A"></asp:Label>
+                                            </div>
+                                            <div class="row rad">
+                                                <div class="col-md-10 col-xs-10" style="text-align: left; padding-left: 25px;">
+                                                    <ol>
+                                                        <li>
+                                                            <asp:RadioButton ID="RadioChart2Opt1" CssClass="Space" runat="server" GroupName="RadioGroup2" onchange="RadioButtonCheck2(5)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
+                                                        <li>
+                                                            <asp:RadioButton ID="RadioChart2Opt2" CssClass="Space" runat="server" GroupName="RadioGroup2" onchange="RadioButtonCheck2(6)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
+                                                        <li>
+                                                            <asp:RadioButton ID="RadioChart2Opt3" CssClass="Space" runat="server" GroupName="RadioGroup2" onchange="RadioButtonCheck2(7)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
+                                                        <li>
+                                                            <asp:RadioButton ID="RadioChart2Opt4" CssClass="Space" runat="server" GroupName="RadioGroup2" onchange="RadioButtonCheck2(8)" ViewStateMode="enabled" Font-Size="Smaller" required /></li>
+                                                    </ol>
+                                                </div>
+                                            </div>
+
+                                            <div class="row hcenter">
+                                                <asp:Chart ID="Piechart2" runat="server" Width="180px" Height="150px" BackColor="Transparent" BackSecondaryColor="192, 255, 255" BorderlineColor="Transparent">
+                                                    <Series>
+                                                        <asp:Series Name="Series1" ChartType="Doughnut" LegendText="#PERCENT"></asp:Series>
+                                                    </Series>
+                                                    <ChartAreas>
+                                                        <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+                                                    </ChartAreas>
+                                                </asp:Chart>
+                                                <br />
+                                                <asp:Label ID="lblTotalVote2" runat="server" Font-Size="Small" ForeColor="#0055AA"></asp:Label>
+                                                <br />
+
+                                                <asp:Label ID="lblPie2Date" runat="server" Text="Started On :" Font-Size="Small" ForeColor="#0052A4"></asp:Label>
+                                                <br />
+                                            </div>
+
+                                            <asp:HiddenField ID="HiddenField2" runat="server" />
+
+                                            <asp:Button ID="btnPieChart2" runat="server" CssClass="btnPiechart2" OnClick="btnPieChart2_Click" CausesValidation="false" Text="Submit" />
+
                                         </div>
                                     </div>
+                                </asp:Panel>
+                           </div>  
+                            <hr />
+                           <div class="container">
+                                <div class="row">
 
-                                    <div class="row hcenter">
-                                        <asp:Chart ID="Piechart2" runat="server" Width="180px" Height="150px" BackColor="Transparent" BackSecondaryColor="192, 255, 255" BorderlineColor="Transparent">
-                                            <Series>
-                                                <asp:Series Name="Series1" ChartType="Doughnut" LegendText="#PERCENT"></asp:Series>
-                                            </Series>
-                                            <ChartAreas>
-                                                <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
-                                            </ChartAreas>
-                                        </asp:Chart>
-                                        <br />
-                                        <asp:Label ID="lblTotalVote2" runat="server" Font-Size="Small" ForeColor="#0055AA"></asp:Label>
-                                        <br />
-
-                                        <asp:Label ID="lblPie2Date" runat="server" Text="Started On :" Font-Size="Small" ForeColor="#0052A4"></asp:Label>
-                                        <br />
+                                    <div class="col-md-2 col-xs-6">
+                                        <asp:LinkButton ID="btnNextBottom" runat="server" ForeColor="Black" BorderStyle="Groove" BorderColor="#0066ff" OnClick="btnNextBottom_Click" CausesValidation="False">&nbsp;&nbsp;Next&nbsp;&nbsp;</asp:LinkButton>
                                     </div>
 
-                                    <asp:HiddenField ID="HiddenField2" runat="server" />
+                                    <div class="col-md-9"></div>
 
-                                    <asp:Button ID="btnPieChart2" runat="server" CssClass="btnPiechart2" OnClick="btnPieChart2_Click" CausesValidation="false" Text="Submit" />
-
+                                    <div class="col-md-1 col-xs-6">
+                                        <asp:LinkButton ID="btnPreBottom" runat="server" BorderStyle="Groove" BorderColor="#0066ff" ForeColor="Black" OnClick="btnPreBottom_Click" CausesValidation="False">&nbsp;&nbsp;Prev&nbsp;&nbsp;</asp:LinkButton>
+                                    </div>
+                                
+                                   <%-- <div class="col-sm-4 hidden-xs">
+                                        <asp:Label ID="lblPie1EmptyText" runat="server" Font-Size="Small" ForeColor="#3C9DFF"></asp:Label>
+                                    </div>--%>
+                                   
                                 </div>
-                            </div>
-                            </asp:Panel>
-                            <div class="row" style="height: 25px;">
-                                <div class="col-md-2 col-sm-4 col-xs-6">
-                                    <asp:LinkButton ID="btnPreBottom" runat="server" Text="Prev" Height="20" Width="20px" ForeColor="Black" OnClick="btnPreBottom_Click" CausesValidation="False"></asp:LinkButton>
+                           </div>
 
-                                </div>
-                                 <div class="col-md-2"></div>
-                                <div class="col-sm-4 hidden-xs">
-                                    <asp:Label ID="lblPie1EmptyText" runat="server" Font-Size="Small" ForeColor="#3C9DFF"></asp:Label>
-                                </div>
-                                <div class="col-md-2 col-sm-4 col-xs-6" style="padding: 30px; padding-left: 210px;">
-                                    <asp:LinkButton ID="btnNextBottom" runat="server" ForeColor="Black" Text="Next" OnClick="btnNextBottom_Click" CausesValidation="False"></asp:LinkButton>
+                            
 
-                                </div>
-                            </div>
-                        </div>
-
-                        <%------------------------------------------------------------------------------------Add- Poll section Starts from here ------------------------------------------------------------------------------%>
+                            <%------------------------------------------------------------------------------------Add- Poll section Starts from here ------------------------------------------------------------------------------%>
 
 
 
 
-                        <div id="myModal" class="modal">
-                            <div class="container-fluid" style="width: 100%;">
-                                <div class="panel panel-primary popup_box_size">
-                                    <div class="panel-heading">
-                                        Add Poll 
+                            <div id="myModal" class="modal">
+                                <div class="container-fluid" style="width: 100%;">
+                                    <div class="panel panel-primary popup_box_size">
+                                        <div class="panel-heading">
+                                            Add Poll 
                                             <span class="fa fa-times" style="float: right; cursor: pointer;" onclick="funClear()" aria-hidden="true"></span>
-                                    </div>
-                                    <div class="panel-body">
-                                        <form class="form-group" autocomplete="off">
+                                        </div>
+                                        <div class="panel-body">
+                                            <form class="form-group" autocomplete="off">
 
-                                            <div class="row">
-                                                <div class="col-xs-1"></div>
-                                                <div class="col-xs-3">Question :</div>
-                                                <div class="col-xs-7">
-                                                    <asp:TextBox ID="txtPollQ" runat="server" CssClass="form-control no-resize" MaxLength="250" TextMode="MultiLine"></asp:TextBox><br />
+                                                <div class="row">
+                                                    <div class="col-xs-1"></div>
+                                                    <div class="col-xs-3">Question :</div>
+                                                    <div class="col-xs-7">
+                                                        <asp:TextBox ID="txtPollQ" runat="server" CssClass="form-control no-resize" MaxLength="250" TextMode="MultiLine"></asp:TextBox><br />
 
-                                                </div>
-                                                <div class="col-xs-1">
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="*" ValidationExpression="[a-zA-Z0-9 \s . & _ , ? @]+$" Font-Size="Small" ForeColor="#FF4040" ControlToValidate="txtPollQ" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtPollQ" ErrorMessage="*" ForeColor="#FF5050" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                                                    </div>
+                                                    <div class="col-xs-1">
+                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="*" ValidationExpression="[a-zA-Z0-9 \s . & _ , ? @]+$" Font-Size="Small" ForeColor="#FF4040" ControlToValidate="txtPollQ" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtPollQ" ErrorMessage="*" ForeColor="#FF5050" SetFocusOnError="True"></asp:RequiredFieldValidator>
 
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-xs-1"></div>
-                                                <div class="col-xs-3">
-                                                    Answer1 :
-                                                </div>
-                                                <div class="col-xs-7">
-                                                    <asp:TextBox ID="txtPollAns1" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox><br />
-
-
-                                                </div>
-                                                <div class="col-xs-1">
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtPollAns1" ValidationExpression="^[a-zA-Z0-9 \s ?,.&_ ! ]{1,30}$" ErrorMessage="*" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
-
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtPollAns1" ErrorMessage="*" ForeColor="#FF5050" SetFocusOnError="True"></asp:RequiredFieldValidator>
-
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xs-1"></div>
-                                                <div class="col-xs-3">Answer2 :</div>
-                                                <div class="col-xs-7">
-                                                    <asp:TextBox ID="txtPollAns2" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox><br />
-
-
-                                                </div>
-                                                <div class="col-xs-1">
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtPollAns2" ValidationExpression="^[a-zA-Z 0-9\s ?&,._ !]{1,40}$" ErrorMessage="*" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
-
-                                                    <asp:RequiredFieldValidator ID="RequireAddflatOwnername" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtPollAns2" SetFocusOnError="True"></asp:RequiredFieldValidator>
-
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xs-1"></div>
-                                                <div class="col-xs-3">Answer3 :</div>
-                                                <div class="col-xs-7">
-                                                    <asp:TextBox ID="txtPollAns3" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox><br />
-
-
-                                                </div>
-                                                <div class="col-xs-1">
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="Speacial character not allowed" ValidationExpression="^[a-zA-Z 0-9\s ?,&._ !]{1,50}$" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtPollAns3" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                    </div>
                                                 </div>
 
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xs-1"></div>
-                                                <div class="col-xs-3">Answer4 :</div>
-                                                <div class="col-xs-7">
-                                                    <asp:TextBox ID="txtPollAns4" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox><br />
+                                                <div class="row">
+                                                    <div class="col-xs-1"></div>
+                                                    <div class="col-xs-3">
+                                                        Answer1 :
+                                                    </div>
+                                                    <div class="col-xs-7">
+                                                        <asp:TextBox ID="txtPollAns1" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox><br />
+
+
+                                                    </div>
+                                                    <div class="col-xs-1">
+                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtPollAns1" ValidationExpression="^[a-zA-Z0-9 \s ?,.&_ ! ]{1,30}$" ErrorMessage="*" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
+
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtPollAns1" ErrorMessage="*" ForeColor="#FF5050" SetFocusOnError="True"></asp:RequiredFieldValidator>
+
+                                                    </div>
                                                 </div>
-                                                <div class="col-xs-1">
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtPollAns4" ValidationExpression="^[a-zA-Z 0-9\s ?&._ !]{1,30}$" ErrorMessage="Speacial character not allowed" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                <div class="row">
+                                                    <div class="col-xs-1"></div>
+                                                    <div class="col-xs-3">Answer2 :</div>
+                                                    <div class="col-xs-7">
+                                                        <asp:TextBox ID="txtPollAns2" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox><br />
+
+
+                                                    </div>
+                                                    <div class="col-xs-1">
+                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtPollAns2" ValidationExpression="^[a-zA-Z 0-9\s ?&,._ !]{1,40}$" ErrorMessage="*" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
+
+                                                        <asp:RequiredFieldValidator ID="RequireAddflatOwnername" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtPollAns2" SetFocusOnError="True"></asp:RequiredFieldValidator>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-1"></div>
+                                                    <div class="col-xs-3">Answer3 :</div>
+                                                    <div class="col-xs-7">
+                                                        <asp:TextBox ID="txtPollAns3" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox><br />
+
+
+                                                    </div>
+                                                    <div class="col-xs-1">
+                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="Speacial character not allowed" ValidationExpression="^[a-zA-Z 0-9\s ?,&._ !]{1,50}$" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtPollAns3" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-1"></div>
+                                                    <div class="col-xs-3">Answer4 :</div>
+                                                    <div class="col-xs-7">
+                                                        <asp:TextBox ID="txtPollAns4" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox><br />
+                                                    </div>
+                                                    <div class="col-xs-1">
+                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtPollAns4" ValidationExpression="^[a-zA-Z 0-9\s ?&._ !]{1,30}$" ErrorMessage="Speacial character not allowed" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
+
+                                                    </div>
 
                                                 </div>
 
-                                            </div>
+                                                <div class="row">
+                                                    <div class="col-xs-1"></div>
+                                                    <div class="col-xs-3">
+                                                        End Date :
+                                                    </div>
+                                                    <div class="col-xs-7">
+                                                        <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control" onchange="ValidateDate()"></asp:TextBox>
+                                                    </div>
+                                                    <div class="col-xs-1">
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtEndDate" SetFocusOnError="True"></asp:RequiredFieldValidator>
 
-                                            <div class="row">
-                                                <div class="col-xs-1"></div>
-                                                <div class="col-xs-3">
-                                                    End Date :
+                                                    </div>
                                                 </div>
-                                                <div class="col-xs-7">
-                                                    <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control" onchange="ValidateDate()"></asp:TextBox>
+                                                <div class="row">
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtPollAns1" ValidationExpression="^[a-zA-Z0-9 \s ?,.&_ ! ]{1,30}$" ErrorMessage="Speacial character not allowed" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                    <asp:Label ID="lblPollstatus" runat="server" ForeColor="#409FFF" Font-Size="Small"></asp:Label>
                                                 </div>
-                                                <div class="col-xs-1">
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtEndDate" SetFocusOnError="True"></asp:RequiredFieldValidator>
-
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtPollAns1" ValidationExpression="^[a-zA-Z0-9 \s ?,.&_ ! ]{1,30}$" ErrorMessage="Speacial character not allowed" Font-Size="Small" ForeColor="#FF5050" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                <asp:Label ID="lblPollstatus" runat="server" ForeColor="#409FFF" Font-Size="Small"></asp:Label>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="panel-footer" style="text-align: right;">
-                                        <button type="button" id="CancelPoll_Button" onclick="funClear()" class="btn btn-danger">Cancel</button>
-                                        <asp:Button ID="btnPollSubmit" runat="server" Text="Submit" CssClass="btn btn-success" OnClick="btnPollSubmit_Click" />
+                                            </form>
+                                        </div>
+                                        <div class="panel-footer" style="text-align: right;">
+                                            <button type="button" id="CancelPoll_Button" onclick="funClear()" class="btn btn-danger">Cancel</button>
+                                            <asp:Button ID="btnPollSubmit" runat="server" Text="Submit" CssClass="btn btn-success" OnClick="btnPollSubmit_Click" />
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
 
+
+
+
+
+
                         </div>
-
-
-
-
-
-
-                    </div>
                 </form>
             </div>
 
