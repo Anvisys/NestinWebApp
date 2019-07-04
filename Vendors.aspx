@@ -183,7 +183,7 @@ hr {
                // document.getElementsByTagName("Add_Vendor").style.visibility = 'visible';
                 //document.getElementById("Edit_Vendor").style.visibility = 'visible';
                 //document.getElementById("vendor_delete").style.visibility = 'visible';
-                $('i').attr('visibility' ,'visible');
+              //  $('i').attr('visibility' ,'visible');
             }
             else {
                  document.getElementById("Add_Vendor").style.visibility = 'none';
@@ -578,7 +578,7 @@ hr {
 
 
         function visiblemang() {
-             document.getElementById("Edit_Vendor").style.visibility = 'visible';
+            // document.getElementById("Edit_Vendor").style.visibility = 'visible';
         }
    
 
@@ -730,16 +730,14 @@ hr {
                                                 <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber") %></p>
                                                <hr />
                                             <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber2") %></p>
-                                         
-                                              <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px;">
-                                                       <asp:panel runat="server" ID="pnledit">
-                                                  <i class="fa fa-edit " id="Edit_Vendor" style="color: #fff;  cursor: pointer; float: left; visibility:hidden; " 
-                                                      onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit
-                                                    </i><i class="fa fa-trash " id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer;visibility:hidden; " aria-hidden="true">Delete</i> 
-
-                                                            </asp:panel>
-                                                                                          
-
+                                         <asp:panel runat="server" ID="pnledit" Visible="false">
+                                              <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px; margin:0px;">
+                                                       
+                                                  <i class="fa fa-edit " id="Edit_Vendor" style="color: #fff;  cursor: pointer; float: left;" onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit    </i>
+                                                  <i class="fa fa-trash " id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer; " aria-hidden="true">Delete</i> 
+                                                        
+                                              </p>                                      
+                                            </asp:panel>
 
                                                <%-- <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px;margin-bottom:0px;">
                                                     <i class="fa fa-edit" runat="server" id="Edit_Vendor" style="color: #fff; cursor: pointer; float: left; " Visible="false"
@@ -749,8 +747,11 @@ hr {
                                           <%--  <p style="height:30px; width:100%; border:1px solid green;"></p>--%>
 
                                             <p id="offer_color" class="offerbox-raised">
-                                                    Offers  <i class="fa fa-angle-right transit" style="float:right; padding-right:5px;font-size:25px; "></i>
-                                                <i class="fa fa-angle-right transit" style="float:right; padding-right:5px; font-size:25px;"></i>
+                                                    Offers  
+                                                <asp:Literal ID="ltradd" runat="server" ><i class="fa fa-plus transit" style="float:right; padding-right:5px; padding-top:5px; font-size:15px;"></i></asp:Literal>
+                                                <%--<i class="fa fa-angle-right " style="float:right; padding-right:5px;font-size:25px; "></i>
+                                                <i class="fa fa-angle-right " style="float:right; padding-right:5px; font-size:25px;"></i>--%>
+                                                
 
                                                 </p>
                                         </div>

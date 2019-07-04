@@ -450,7 +450,8 @@ public partial class Vendors : System.Web.UI.Page
         if (muser.currentResident.UserType == "Admin")
         {
 
-         
+            Panel panel=(Panel)e.Item.FindControl("pnledit");
+            panel.Visible = true;
 
         } 
 
