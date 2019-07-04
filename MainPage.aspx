@@ -146,7 +146,8 @@
     <script>
         var userType, api_url;
 
-         $(document).ready(function () {
+        $(document).ready(function () {
+
             userType = '<%=Session["UserType"] %>';
               api_url = '<%=Session["api_url"] %>';
            

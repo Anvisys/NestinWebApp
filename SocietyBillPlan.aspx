@@ -78,7 +78,7 @@
 
 
         $(document).ready(function () {
-
+            window.parent.FrameSourceChanged();
 
             $("#BillCancel_Button").click(function () {
                $('#NewEditSocietyPlanForm').hide();
@@ -197,8 +197,7 @@
                                      <div><h4 class="pull-left ">Bill Plans : </h4></div>
                                  </div>
                                 <div class="col-sm-6 col-xs-12" style="padding:0px;">
-                                                         
-                                                      </div>
+                                </div>
                                  <div class="col-sm-3 hidden-xs" style="vertical-align:middle; margin-top:10px;">
                                     <div>
                                         <button type="button" id="IDNewBill" class="btn-sm btn btn-primary"><i class="fa fa-plus"></i> Add Plan</button>  
@@ -221,12 +220,13 @@
                 
                                       <asp:DataList 
                                           ID="BillPlanDataList" runat="server" HorizontalAlign="Center" 
-                                          RepeatColumns="3" RepeatDirection="Horizontal" Width="80%"  CellSpacing="5" 
+                                          RepeatColumns="2" RepeatDirection="Horizontal" Width="100%"  
                                            OnItemDataBound="SocietyBillPlan_ItemDataBound"> 
                                        
                                         <ItemStyle />
                                         <ItemTemplate>
-                                    <table class="BillCycle_table" >
+                                   <div class="col-xs-6">
+                                     <table class="col-xs-6 BillCycle_table" >
                                         <tr class="layout_header theme_third_bg" style="height:35px; ">
                                             <td colspan="2" style="text-align:center;margin-top:5px;">
                                                 <asp:Label ID="Label3" runat="server" ForeColor="White" Text='<%# Eval("BillType") %>'> </asp:Label>
@@ -280,10 +280,11 @@
                  </tr>
                                           
                                     </table>
+                                       </div>
                                 </ItemTemplate>
                                 <AlternatingItemStyle />
 
-                                
+                                                                    
                             </asp:DataList>
 
                 </td>

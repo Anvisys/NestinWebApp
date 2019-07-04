@@ -10,6 +10,7 @@
     <link rel="Stylesheet" href="CSS/ApttLayout.css"/>
     <link rel="stylesheet" href="CSS/ApttTheme.css" />
       <link rel="stylesheet" href="CSS/NewAptt.css" />
+     <link rel="stylesheet" href="CSS/mystylesheets.css" />
    
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -539,25 +540,22 @@
     <form id="form1" runat="server">
      <div class="container-fluid">
             <div class="row" style="height:50px;margin-top:15px">
-                 <div class="col-sm-2 hidden-xs" >
-                     <div><h4 class="pull-left " style="margin:0px;">Flats : </h4></div>
+                 <div class="col-sm-3 hidden-xs" >
+                     <div><h4 class="pull-left " style="margin:0px;">Flats: </h4></div>
                       
                  </div>
-                <div class="col-sm-6 col-xs-12">
+                <div class="col-sm-5 col-xs-12">
                                           <div class="form-group" >
                                             <asp:TextBox ID="txtFltsFlatNmbr" placeholder="Flat" runat="server"  CssClass="form-control"></asp:TextBox>
                                             <asp:TextBox ID="txtFlltsOwnernme" placeholder="First Name" runat="server" CssClass="form-control" ></asp:TextBox>
-                                          <asp:LinkButton runat="server" BackColor="Transparent" CausesValidation="false" ForeColor="Black" OnClick="btnFlatnumbrSrch_Click"> <span class="glyphicon glyphicon-search"></span></asp:LinkButton>
+                                          <asp:LinkButton runat="server" BackColor="Transparent" CausesValidation="false" ForeColor="Black" OnClick="btnFlatnumbrSrch_Click"> <span class="glyphicon glyphicon-search" style="background-color:chocolate;"></span></asp:LinkButton>
                                               
                                               </div>
                                       </div>
-                 <div class="col-sm-4 hidden-xs" style="vertical-align:middle;">
+                 <div class="col-sm-4 col-xs-12" style="vertical-align:middle;">
                     <div style=" align-content">
                           <button id="Add_Flat_Button" type="button" class="btn-sm btn btn-primary pull-right" style="cursor:pointer;margin-right:30px;"><i class="fa fa-plus"></i> Add Flat</button>  
-                         <a id="linkTemplate" type="button"  class="btn-sm btn btn-primary pull-right"  href="http://www.myaptt.com/NewTestApp/Excel_Format.zip" download="true" style="cursor:pointer;border-color:#2ECC71!important;"><i class="fa fa-plus"></i> Template</a>
-                    </div>
-
-                     <div style=" align-content">
+                          <%--<a id="linkTemplate" type="button"  class="btn-sm btn btn-primary pull-right"  href="http://www.myaptt.com/NewTestApp/Excel_Format.zip" download="true" style="cursor:pointer;border-color:#2ECC71!important;"><i class="fa fa-plus"></i> Template</a>--%>
                           <button id="Add_Flat_New" type="button" class="btn-sm btn btn-primary pull-right" style="cursor:pointer;margin-right:30px;"><i class="fa fa-plus"></i> Add New Flat</button>  
                     </div>
                  </div>
@@ -591,7 +589,7 @@
                                                 <div class="row layout_shadow_table ">
                                                
                                                     <table>
-                                                        <div class="col-sm-3" style="text-align:center;">
+                                                        <div class="col-sm-4 col-xs-12" style="text-align:center;">
                                                             
                                                             <%-- <asp:Image CssClass="UserImage" ID="user_image" runat="server" style="border-radius:50%;border:2px solid #dcdbdb;width:40px;height:40px;" ImageUrl='<%# "GetImages.ashx?ResID="+ Eval("ResidentID") %>' /><br />--%>
                                                                <img src='<%# "GetImages.ashx?UserID="+ Eval("OwnerUserID")+"&Name="+Eval("OwnerFirstName") +"&UserType=Owner" %>' class="profile-image" /> <br /> 
@@ -602,7 +600,7 @@
                                                       
                                                                 
                                                          </div>
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-4 col-xs-6">
                                                         
                                                             
                                                                 Floor: <asp:Label ID="lblFloor" runat="server" Text='<%# Eval("Floor") %>'></asp:Label><br />
@@ -610,8 +608,7 @@
                                                            
                                                                Block: <asp:Label ID="lblBlock" runat="server" Text='<%# Eval("Block") %>'></asp:Label>
                                                             
-                                                        </div>
-                                                         <div class="col-sm-3">
+                                                       
                                                           
                                                                 Intercom <asp:Label ID="Label2" runat="server" Text='<%# Eval("IntercomNumber") %>'></asp:Label><br />
                                                            
@@ -625,7 +622,7 @@
                                                               </td>
                                                         </div>
 
-                                                        <div class="col-sm-3" style="border-left:solid 2px black;">
+                                                        <div class="col-sm-4 col-xs-6" style="border-left:solid 2px black;">
                                                             
                                                                  Owner Name: <asp:Label ID="Label1" runat="server" Text='<%# Eval("OwnerFirstName") + " "+ Eval("OwnerLastName") %>'></asp:Label><br />
 
@@ -926,12 +923,12 @@
                                  <div class="col-xs-12"><asp:RegularExpressionValidator ID="RegularExpressionValidator15" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Please enter valid Email" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtAddfltEmail" ValidationGroup="Add_Flat" Display="Dynamic"></asp:RegularExpressionValidator> </div>
                              </div>
                              <div class="row"  style="border-top-left-radius:10px;">
-                                 <div class="col-xs-12">
+                                 <div class="col-sm-12 col-xs-12">
                                     <b> User Details:</b>
                                  </div>
                                  </div>
                                  <div class="row">
-                                     <div class="col-xs-6 ">
+                                     <div class="col-sm-6 col-xs-12">
 
                                          <label style="width: 100px;">
                                              Mobile :
@@ -942,7 +939,7 @@
                                          <asp:Image ID="mobileMsg" Height="1px" Width="1px" runat="server" />
                                          <i id='mobInvalid' class="fa fa-circle" style="color: green; display: none;" aria-hidden="true"></i>
                                      </div>
-                                     <div class="col-xs-6">
+                                     <div class="col-sm-6 col-xs-12">
 
                                          <label style="width: 100px;">
                                              Email :
@@ -958,7 +955,7 @@
                                  </div>
                         <hr />
                            <div class="row">
-                                       <div class="col-xs-6">
+                                       <div class="col-sm-6 col-xs-12">
                                          <label style="width: 100px;">
                                              FirstName :
                                          </label>
@@ -966,7 +963,7 @@
                                          <asp:RequiredFieldValidator ID="RequireAddflatOwnername" runat="server" ErrorMessage="*" ForeColor="Red" ControlToValidate="txtAddflatFirstname" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator>
 
                                      </div>
-                                     <div class="col-xs-6">
+                                     <div class="col-sm-6 col-xs-12">
                                          <label style="width: 100px;">
                                              LastName :
                                          </label>
@@ -977,7 +974,7 @@
                                      </div>
                                  </div>
                                  <div class="row">
-                                     <div class="col-xs-6">
+                                     <div class="col-sm-6 col-xs-12">
                                          <label style="width: 100px;">
                                              Gender :
                                          </label>
@@ -987,7 +984,7 @@
                                              <asp:ListItem>Female</asp:ListItem>
                                          </asp:DropDownList>
                                      </div>
-                                     <div class="col-xs-6">
+                                     <div class="col-sm-6 col-xs-12">
                                          <label style="width: 100px;">
                                              Parent Name :
                                          </label>

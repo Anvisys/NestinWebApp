@@ -13,9 +13,8 @@
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
      
      <script src="Scripts/jquery-1.12.0.js"></script>
-    <link rel="Stylesheet" href="CSS/ApttLayout.css"/>
-    <link rel="stylesheet" href="CSS/ApttTheme.css" />
-   <link rel="stylesheet" href="CSS/NewAptt.css" />
+
+   <link rel="stylesheet" href="CSS/mystylesheets.css" />
    
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -32,7 +31,7 @@
    
 
      <script>
-        
+
          $(function () {
              $("#txtEmpNamesrch").autocomplete({
                  source: function (request, response) {
@@ -66,7 +65,7 @@
              });
          });
 
-         
+
          $(function ShowSelected() {
              $("[id*=EmployeeGrid] td:has(button)").bind("click", function () {
                  var row = $(this).parent();
@@ -84,7 +83,7 @@
                  });
              });
          });
-         
+
          $(document).ready(function () {
              window.parent.FrameSourceChanged();
              $("#confirmActivate").hide();
@@ -117,11 +116,11 @@
          });
 
 
-         function ShowDialog(UserID, FlatNumber,DeactiveDate, Element) {
+         function ShowDialog(UserID, FlatNumber, DeactiveDate, Element) {
              document.getElementById("HiddenEmpUserID").value = UserID;
              document.getElementById("HiddenEmpFName").value = FlatNumber;
              document.getElementById("HiddenDeactivedate").value = DeactiveDate;
-             
+
              var Posx = 0;
              var Posy = 0;
 
@@ -130,13 +129,13 @@
                  Posy += Element.offsetTop;
                  Element = Element.offsetParent;
              }
-             
-                 $("#dropdown-menu").slideDown();
-             
+
+             $("#dropdown-menu").slideDown();
+
              document.getElementById("dropdown-menu").style.top = Posy + 'px';
          }
 
-    
+
 
          function DConfirmationbox() {
              var result = confirm('Are you sure you want to delete selected User(s)?');
@@ -149,7 +148,7 @@
          }
 
          function HideLabel() {
-           
+
              document.getElementById('<%= lblDeactiveMsg.ClientID %>').style.display = "none";
          }
          setTimeout("HideLabel();", 4000);
@@ -159,8 +158,8 @@
                  $("#AddEmployeeModal").show();
              });
          });
-         
-    
+
+
 
          $(document).ready(function () {
              $("#Cancel_AddEmployee").click(function () {
@@ -169,7 +168,7 @@
                  $("#lblstatus").html('');
              });
          });
-            $(document).ready(function () {
+         $(document).ready(function () {
              $("#Cancel_cross").click(function () {
                  $("#AddEmployeeModal").hide();
                  $("input:text").val("");
@@ -182,7 +181,7 @@
                  $("#myModalEditPopup").hide();
                  $("#EditHiddenID").val("");
                  $("#lblEditEmpMobChck").html('');
-                 
+
              });
 
              $("#btnActivateCancel,#Cancel_decativate").click(function () {
@@ -191,9 +190,9 @@
                  $("#HiddenEmpUserID").val("");
                  return false;
              });
-           
+
          });
-         
+
          $(document).ready(function () {
              $("#btnDactiveEmpCancel,#Cancel_delete").click(function () {
                  $("#confirmBox").hide();
@@ -209,83 +208,77 @@
              });
          });
 
-         function CloseAddEmployee()
-         {
+         function CloseAddEmployee() {
              $("#AddEmployeeModal").hide();
          }
-         
+
          function EmployeeAdded(result) {
-             
+
              if (result == 'true') {
                  $("#AddEmployeeModal").hide();
                  alert("Employee Added Successfully");
              }
              else if (result = 'false') {
-                  alert("Employee Could not be added");
+                 alert("Employee Could not be added");
              }
 
          }
 
-         function ShowEditForm(UserID, FirstName,LastName,Email,MobileNo)
-         {
+         function ShowEditForm(UserID, FirstName, LastName, Email, MobileNo) {
              $("#HiddenEmpUserID").val(UserID);
              $("[id*=txtEmpFname]").val(FirstName);
              $("[id*=txtEmpLname]").val(LastName);
-            // $("[id*=txtAddress]").val(Address);
+             // $("[id*=txtAddress]").val(Address);
              $("[id*=txtEditEmpMobile]").val(MobileNo);
              $("[id*=txtEditEmpEmail]").val(Email);
-           
+
              $("#myModalEditPopup").show();
 
          }
 
-         function ShowDeativeForm(UserID)
-         {
-             
+         function ShowDeativeForm(UserID) {
+
              $("#HiddenEmpUserID").val(UserID);
              $("#HiddenEmpDeactiveID").val(UserID);
              $("#confirmBox").show();
          }
-        
+
          function ShowActivateForm(UserID) {
 
              $("#HiddenEmpUserID").val(UserID);
              $("#HiddenEmpDeactiveID").val(UserID);
              $("#confirmActivate").show();
          }
-             $(document).ready(function () {
+         $(document).ready(function () {
              $("#edit_cross").click(function () {
                  $("#myModalEditPopup").hide();
                  $("#EditHiddenID").val("");
                  $("#lblEditEmpMobChck").html('');
-                 
+
              });
          });
 
-           function isNumberKey(evt)
-      {
-         var charCode = (evt.which) ? evt.which : evt.keyCode;
-         if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;    
-         return true;
-      }
+         function isNumberKey(evt) {
+             var charCode = (evt.which) ? evt.which : evt.keyCode;
+             if (charCode > 31 && (charCode < 48 || charCode > 57))
+                 return false;
+             return true;
+         }
 
    </script>
 
     <style>
-           .selected_row
-        {
-
-            color:#579ed4;
+        .selected_row {
+            color: #579ed4;
         }
 
-         .lbltxt{
-          padding-left:3%;
-          font-size:small;
-               }
+        .lbltxt {
+            padding-left: 3%;
+            font-size: small;
+        }
 
-       .modal {
-            display: none;  /*  Hidden by default */
+        .modal {
+            display: none; /*  Hidden by default */
             position: fixed; /* Stay in place */
             z-index: 1; /* Sit on top */
             padding-top: 2%; /* Location of the box */
@@ -293,71 +286,60 @@
             top: 0;
             width: 100%; /* Full width */
             height: 100%; /* Full height */
-            overflow: auto;  /*Enable scroll if needed  */
+            overflow: auto; /*Enable scroll if needed  */
             background-color: #e6e2e2;
-            background-color: rgba(0,0,0,0.4); 
+            background-color: rgba(0,0,0,0.4);
         }
 
 
-.confirmBox
-{
-    display: none; 
-    position: fixed;
-    width: 300px;
-    left: 45%;
-    top:20%;
-    margin-left: -150px;
-  
-    
-    text-align: center;
-   
-}
-#confirmBox button:hover
-{
-   
-}
- .message
-{
-    text-align: center;
-    color:#f2eeee;
-    padding:2% 0 2% 0;
-    margin-bottom: 8px;
-    
-    font-size:medium;
-    font-family:'Bookman Old Style';
-    background-color:#286090;
-       
-}
- .message_Below{
+        .confirmBox {
+            display: none;
+            position: fixed;
+            width: 300px;
+            left: 45%;
+            top: 20%;
+            margin-left: -150px;
+            text-align: center;
+        }
 
-     text-align:center;
-     padding:3% 0 5% 0;
-    
-     color:#000;
- }
-  .form-control1 {
+        #confirmBox button:hover {
+        }
+
+        .message {
+            text-align: center;
+            color: #f2eeee;
+            padding: 2% 0 2% 0;
+            margin-bottom: 8px;
+            font-size: medium;
+            font-family: 'Bookman Old Style';
+            background-color: #286090;
+        }
+
+        .message_Below {
+            text-align: center;
+            padding: 3% 0 5% 0;
+            color: #000;
+        }
+
+        .form-control1 {
             display: inline;
             width: 41%;
-            margin-left:-5px;
+            margin-left: -5px;
             border-radius: 1px;
-       
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
         }
-
-
     </style>
          
 
@@ -379,25 +361,15 @@
                                      <div class="col-sm-6 col-xs-12"  >
                                          
                                           <div class="form-group">
-                                                 <asp:DropDownList ID="drpEmpServtFilter" runat="server" CssClass="form-control1" >
-                                                                           
-                                                                        </asp:DropDownList>
-                            
-                                                    <asp:TextBox ID="txtEmpNamesrch" runat="server"  placeholder="First Name" CssClass="form-control1" ValidationGroup="Search"></asp:TextBox>
-                                                       <asp:LinkButton runat="server"  CausesValidation="false" OnClick="ImgFlatSearch_Click"> <span class="glyphicon glyphicon-search"></span></asp:LinkButton>
-                                                 
-                                          
-                        
-                                             </div>
-
-
-
+                                                 <asp:DropDownList ID="drpEmpServtFilter" runat="server" CssClass="form-control1" >                                                                          
+                                                 </asp:DropDownList>
+                                                 <asp:TextBox ID="txtEmpNamesrch" runat="server"  placeholder="First Name" CssClass="form-control1" ValidationGroup="Search"></asp:TextBox>
+                                                       <asp:LinkButton runat="server"  CausesValidation="false" OnClick="ImgFlatSearch_Click"> <span class="glyphicon glyphicon-search" style="background-color: chocolate;"></span></asp:LinkButton>
+                                          </div>
 
                                       </div>
-                                     <div class="col-sm-3 hidden-xs" style="vertical-align:middle;">
-                                       
-                                               <button type="button" id="Add_Employee" style="margin-right:0px;"  class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Add Employee</button>
-                                       
+                                     <div class="col-sm-3 col-xs-8 pull-right" style="">
+                                               <button type="button" id="Add_Employee" style="margin-right:0px;"  class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add Employee</button>
                                      </div>
                          </div>
      
@@ -469,15 +441,12 @@
      <table style="width:100%; margin:10px;">
  
          <tr>
-             <td colspan="9" style="text-align:center;">
-                 <asp:Label ID="lblDeactivestatus" runat="server" Font-Size="Small" ForeColor="#5BADFF"></asp:Label>
-             </td>
+             
          </tr>
          
          <tr>
          <td >  </td>
              <td colspan="5" >
-
 
                     <asp:GridView ID="EmployeeGrid" runat="server" 
                         AutoGenerateColumns="false" 
@@ -497,38 +466,27 @@
                         ForeColor="#666666" Font-Names="Calibri" OnRowDataBound="Employee_RowDataBound">
                        
                          <AlternatingRowStyle BackColor="#f7f7f7" />
-                        <Columns>
-                          
-                            <%--<asp:BoundField DataField="UserID" HeaderText="ID" ControlStyle-CssClass="extra"  ItemStyle-Width="50px" HeaderStyle-Width="50px">
-                                 <ItemStyle Width="50px"></ItemStyle>
-                            </asp:BoundField>
-                            <asp:TemplateField HeaderText="Name" >
-                                    <ItemTemplate>
-                                         
-                                    </ItemTemplate>
-                             </asp:TemplateField>--%>
-
-
+                        <Columns>                                    
                             <asp:TemplateField>
                                 <ItemTemplate>
                                     <div class="row layout_shadow_table">
-                                     <div class="col-xs-4" style="padding:10px;text-align:left;">
+                                     <div class="col-sm-4 col-xs-12" style="padding:10px;text-align:left;">
+
                                     <img src='<%# "GetImages.ashx?ResID="+ Eval("UserID")+"&Name="+Eval("FirstName") +"&UserType=Employee"%>' height="40" width="40" style="border-radius:50%;" /> <br /> 
                                       <asp:Label ID="Label2" runat="server" Text='<%#Eval("FirstName")+ " " + Eval("LastName")%>' ></asp:Label> <br /> 
-                                  
                                     <asp:Label ID="lblName" runat="server" Text='<%#Eval("MobileNo")%>' ></asp:Label>
-                                    
                                      </div>
 
-                                        <div class="col-xs-4" style="padding:10px;text-align:left;">
-                                            <%#Eval("Emailid")%><br />
-                                           Company : <%#Eval("CompanyName")%><br />
-                                             <%#Eval("CompType")%>
-                                         <%#Eval("Address")%>
-                                        
-                                     </div>
+                                        <div class="col-sm-4 col-xs-12" style="padding:10px;text-align:left;">
 
-                                        <div class="col-xs-4" style="padding:10px;text-align:left;">
+                                        <span class="fa fa-user" style="color:#2b7a2d;"></span>&nbsp;&nbsp;Email : <%#Eval("Emailid")%><br />
+                                        <span class="fa fa-envira" style="color:#2b7a2d;"></span>&nbsp;&nbsp;Company : <%#Eval("CompanyName")%><br />
+                                        <span class="fa fa-info-circle" style="color:#2b7a2d;"></span>&nbsp;&nbsp;Type: <%#Eval("CompType")%>
+                                        <%#Eval("Address")%>
+                                        </div>
+
+                                        <div class="col-sm-4 col-xs-12" style="padding:10px;text-align:left;">
+
                                           Form:<asp:Label ID="Label6"  runat="server" Text='<%# "Active Date " + Eval("ActiveDate","{0:dd MMM,yy}")%>' ></asp:Label><br />
                                           <asp:Label ID="Label7" runat="server" Text='<%# "Till: " + Eval("DeActiveDate","{0:dd MMM,yy}")%>' >Till</asp:Label><br />
                                          <button id="button" onclick="ShowDialog('<%# Eval("UserID") %>' , '<%# Eval("FirstName") %>'  ,'<%# Eval("DeActiveDate") %>'  ,this)" type="button" style="display:none;  background-color:transparent;border:none;outline:0; height:20px;background-repeat:no-repeat;">
@@ -546,23 +504,7 @@
 
                             </asp:TemplateField>
                        
-                         <%--  <asp:BoundField DataField="MobileNo" HeaderText="MobileNo" ItemStyle-Width="100px" HeaderStyle-Width="100px"/>
-                 
-                        <asp:BoundField DataField="Emailid" HeaderText="Emailid"  ItemStyle-Width="150px" HeaderStyle-Width="150px"/>
-                     
-                        <asp:BoundField DataField="CompanyName" HeaderText="Company" ItemStyle-Width="100px" HeaderStyle-Width="100px"/>
-                        
-                        <asp:BoundField DataField="ServiceType" HeaderText="Service"  ItemStyle-Width="150px" HeaderStyle-Width="100px"/>                     
-                          
-                        <asp:BoundField DataField="ActiveDate" HeaderText="ActiveDate"  HeaderStyle-Width="150px" DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-Font-Size="small" />
-                            
-                        <asp:BoundField DataField="DeActiveDate" HeaderText="DeActiveDate" HeaderStyle-Width="150px" DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-Font-Size="small"/>                         
-                        
-                        <asp:TemplateField>
-                           <ItemTemplate>   
-                                                                       
-                           </ItemTemplate>
-                        </asp:TemplateField>--%>
+                      
                          </Columns>
 
 
@@ -720,25 +662,7 @@
                                            </div>
                                       
                                     </div>
-                                  <%-- <div class="row">
-                                         <div class="col-xs-12 col-sm-6">
-                                              <div class="col-xs-4">
-                                           UserType:
-                                            </div>
-                                             <div class="col-xs-7">
-                                                    <asp:DropDownList ID="drpAddEmpUserType" runat="server"  CssClass="form-control" TabIndex="7">
-                                                        <asp:ListItem>Employee</asp:ListItem>
-                                                    </asp:DropDownList>
-                                             </div>
-                                             <div class="col-xs-1">
-                                             
-                                             </div>
-                                         </div>
-                                           <div class="col-xs-12 col-sm-6">
-
-                                           </div>
-                                    </div>--%>
-                                   
+                                                                  
                              <hr />
                                 <div class="row">
                                 <span style="text-align:center; padding-left:30px; font-size:16px;margin-bottom:10px; color:cornflowerblue;">Employee Details</span>
@@ -794,18 +718,7 @@
                                          </div>
                                            </div>
                                     </div>
-
-                                          <%--  <div class="row">
-                                        <div class="col-xs-4">
-                                           Middle Name :
-                                        </div>
-                                         <div class="col-xs-7">
-                                           <asp:TextBox ID="txtAddEmpMName" runat="server"  CssClass="form-control"  TabIndex="3"></asp:TextBox>
-                                         </div>
-                                         <div class="col-xs-1">
-                                             
-                                         </div>
-                                    </div>  --%>              
+       
                                  
                                    <div class="row">
                                         
