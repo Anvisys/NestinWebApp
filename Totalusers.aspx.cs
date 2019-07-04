@@ -737,6 +737,7 @@ public partial class Totalusers : System.Web.UI.Page
     protected void btnReview_OnClick(object sender, EventArgs e)
     {
         MultiView1.ActiveViewIndex = 1;
+        pnlhidden.Visible = false;
     }
 
     protected void btnActivateUser_Click(object sender, EventArgs e)

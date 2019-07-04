@@ -15,7 +15,7 @@
 
 
     <script src="Scripts/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="CSS/NewAptt.css" />
+    <link rel="stylesheet" href="CSS/mystylesheets.css" />
     <link rel="Stylesheet" href="CSS/ApttTheme.css" />
     <link rel="stylesheet" href="CSS/ApttLayout.css" />
 
@@ -33,7 +33,7 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
     <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
-    
+
     <script type="text/javascript">
 
         var CurrentUserType;
@@ -51,15 +51,15 @@
 
         }
 
-      
+
 
         $(function () {
             $("#txtUserSrch,#txtFlatNoFilter").autocomplete({
                 source: function (request, response) {
-                   
+
                     var param = {
                         FlatNumber: $('#txtUserSrch,#txtFlatNoFilter').val(),
-                                          };
+                    };
 
                     $.ajax({
                         url: "Totalusers.aspx/GetFlatNumber",
@@ -117,6 +117,7 @@
         });
 
         $(document).ready(function () {
+            window.parent.FrameSourceChanged();
             $(document).on('click', function () {
                 console.log("click");
             });
@@ -135,6 +136,7 @@
         });
 
         $(document).ready(function () {
+
 
 
             $("[id*=UserGrid] td:has(button)").bind("click", function (event) {
@@ -237,7 +239,7 @@
 
         $(document).ready(function () {
 
-                $('#chkChangePassword').click(function () {
+            $('#chkChangePassword').click(function () {
                 if ($(this).is(':checked')) {
                     $("#tdCnfPwd").show();
                     $("#tdNewPwd").show();
@@ -252,15 +254,15 @@
                 }
             });
 
-             $("#Users_Add_Data").click(function () {
+            $("#Users_Add_Data").click(function () {
                 $(".dropdown-content").toggle();
             });
 
-              $("#dropdown-sample").mouseleave(function () {
+            $("#dropdown-sample").mouseleave(function () {
                 $("#dropdown-sample").hide();
             });
 
-             $("#Add_Resident").click(function () {
+            $("#Add_Resident").click(function () {
 
                 $("#myModalPopup").show();
 
@@ -273,30 +275,30 @@
 
             });
 
-              $("#Edit_Cancel,#Cross_Cancel").click(function () {
+            $("#Edit_Cancel,#Cross_Cancel").click(function () {
                 $("#myModalEditPopup").hide();
                 // $("#EditHidedenFlat").val("");
                 $("#lblEditMobileCheck").html('');
                 $("#lblEditEmailCheck").html('');
             });
 
-             $("#btnDactiveUsrCancel,#Cross_cancel").click(function () {
+            $("#btnDactiveUsrCancel,#Cross_cancel").click(function () {
                 $("#confirmDeactivatBox").hide();
                 //$("#HiddenCompDeactiveID").val("");
             });
 
-              $("#btnDeactiveUserConfirm").click(function () {
+            $("#btnDeactiveUserConfirm").click(function () {
                 $("#confirmDeactivatBox").hide();
                 $("#HiddenCompDeactiveID").val("");
             });
 
             $("#txtEndDate").datepicker({ dateFormat: 'dd-mm-yy' });
 
-             $("#txtStartDate").datepicker({ dateFormat: 'dd-mm-yy' });
+            $("#txtStartDate").datepicker({ dateFormat: 'dd-mm-yy' });
         });
 
-       
-          
+
+
 
         function ShowAddTenant() {
             setTimeout(function () {
@@ -308,12 +310,12 @@
 
         function HideAddRes() {
             clearmodelfields();
-            
+
             $("#myModalPopup").hide();
         }
 
-        function clearmodelfields(){
-               $("#txtFirstname").val("");
+        function clearmodelfields() {
+            $("#txtFirstname").val("");
             $("#txtMiddleName").val("");
             $("#txtLastname").val("");
             $("#txtMobileno").val("");
@@ -324,7 +326,7 @@
         }
 
         function AddUserClick() {
-           
+
             // $('[id$=btnAdduserres]').attr("disabled", "disabled")
 
         }
@@ -362,8 +364,8 @@
         //});
 
 
-        function ShowEditForm(UserID, FirstName, LastName, MobileNo,ParentName, EmailId, type, FlatNumber, DeactiveDate) {
-           // document.getElementById("EditHidedenFlat").value = UserLogin;
+        function ShowEditForm(UserID, FirstName, LastName, MobileNo, ParentName, EmailId, type, FlatNumber, DeactiveDate) {
+            // document.getElementById("EditHidedenFlat").value = UserLogin;
             document.getElementById("HiddenField1").value = UserID;
             document.getElementById("HiddenField2").value = FlatNumber;
             document.getElementById("HiddenDeactivedate").value = DeactiveDate;
@@ -380,7 +382,7 @@
             $("#txtEditMobileNo").val(MobileNo);
             $("#txtEditEmailID").val(EmailId);
 
-           
+
 
             $("#myModalEditPopup").show();
         }
@@ -395,15 +397,15 @@
 
         function ShowActivateForm(UserID, type, ResID, DeactiveDate) {
 
-             document.getElementById("HiddenField1").value = UserID;
+            document.getElementById("HiddenField1").value = UserID;
             document.getElementById("HiddenField2").value = ResID;
-       
+
             $("#confirmActivateBox").show();
 
         }
 
         function CancelActivate() {
-             $("#confirmActivateBox").hide();
+            $("#confirmActivateBox").hide();
         }
 
         function ActivateResult(result) {
@@ -413,30 +415,28 @@
                 $("#lblHeaderMessage").text("Resident Activated");
             }
             else {
-                 $("#confirmActivateBox").hide();
+                $("#confirmActivateBox").hide();
                 $("#lblHeaderMessage").text("Failed to Activate Resident");
             }
         }
 
 
-        function validateEmail(emailField){
-        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        function validateEmail(emailField) {
+            var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
-        if (reg.test(emailField.value) == false) 
-        {
-            alert('Invalid Email Address');
-            return false;
+            if (reg.test(emailField.value) == false) {
+                alert('Invalid Email Address');
+                return false;
+            }
+
+            return true;
+
         }
-
-        return true;
-
-}
-         function isNumberKey(evt)
-      {
-         var charCode = (evt.which) ? evt.which : evt.keyCode;
-         if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;    
-         return true;
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
         }
 
 
@@ -444,27 +444,31 @@
 
 
     <style>
-            .glyphicon {
-                   background-color: #607d8b;
-    padding: 10px;
-    margin-left: -3px;
-    top: 0px!important;
-    
-            }
+        .glyphicon {
+            background-color: #607d8b;
+            padding: 10px;
+            margin-left: -3px;
+            top: 0px !important;
+        }
+
         .lbltxt {
-            font-size:16px!important;
+            font-size: 16px !important;
         }
+
         .txtbox_style {
-            height:30px;
+            height: 30px;
             margin-top: 3px;
-                width: 100%!important;
+            width: 100% !important;
         }
+
         .Zero_margin {
             margin: 0px;
         }
+
         .lblHead {
-    width: 48%!important;
-}
+            width: 48% !important;
+        }
+
         .selected_row {
             background-color: #4598c8;
             color: white;
@@ -509,8 +513,9 @@
             text-align: center;
             padding: 4%;
         }
+
         .topbar_style {
-            border-radius:0px;
+            border-radius: 0px;
         }
 
         .message {
@@ -541,77 +546,74 @@
         .odd-row :nth-child(odd) {
             background-color: #aaaaaa;
         }
+
+        .btnnn {
+            padding: 4px 12px !important;
+        }
+
+        .padd {
+            padding-right: 0px !important;
+        }
     </style>
 
 </head>
 <body onresize="myFunction()" style="background-color: #f7f7f7">
 
     <div class="container-fluid">
+
         <div class="row">
             <div class="col-md-10">
 
                 <form id="form1" runat="server">
                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                     <div>
-                        <div class="container-fluid">
+                        <asp:Panel runat="server" ID="pnlhidden">
+                            <div class="container-fluid">
 
-                            <div class="row" style="height: 56px; margin-top: 15px;">
-                                <div class="col-sm-4 hidden-xs">
-                                    <h4 style="margin: 0px">Resident:</h4>
-                                </div>
-                                <div class="col-sm-3 col-xs-4 zero-margin">
-                                    <div class="form-group">
-                                        <asp:DropDownList ID="drpResidentFilter" runat="server" CssClass="topbar_style form-control">
-                                            <asp:ListItem Selected="True">Owner & Tenant</asp:ListItem>
-                                            <asp:ListItem>Owner</asp:ListItem>
-                                            <asp:ListItem>Tenant</asp:ListItem>
+                                <div class="row" style="height: 56px; margin-top: 15px;">
 
-                                        </asp:DropDownList>
+                                    <div class="col-sm-2 hidden-xs">
+                                        <h4 style="margin: 0px">Resident:</h4>
                                     </div>
-                                </div>
-                                <div class="col-sm-2 col-xs-2 zero-margin">
-                                    <asp:TextBox ID="txtFlatNoFilter" placeholder="Flat Number" runat="server" CssClass="form-control"></asp:TextBox>
-                                </div>
-                                <div class="col-sm-1 col-xs-1 zero-margin">
-                                    <asp:LinkButton runat="server" BackColor="Transparent" ForeColor="Black" ValidationGroup="Flat_Search" OnClick="btnSearch_OnClick"> 
+
+                                    <div class="col-sm-4 col-xs-6 zero-margin">
+                                        <div class="form-group">
+                                            <asp:DropDownList ID="drpResidentFilter" runat="server" CssClass="topbar_style form-control">
+                                                <asp:ListItem Selected="True">Owner & Tenant</asp:ListItem>
+                                                <asp:ListItem>Owner</asp:ListItem>
+                                                <asp:ListItem>Tenant</asp:ListItem>
+
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2 col-xs-4 zero-margin">
+                                        <asp:TextBox ID="txtFlatNoFilter" placeholder="Flat Number" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </div>
+
+                                    <div class="col-sm-1 col-xs-2 zero-margin">
+                                        <asp:LinkButton runat="server" BackColor="Transparent" ForeColor="Black" ValidationGroup="Flat_Search" OnClick="btnSearch_OnClick"> 
                                        <span class="glyphicon glyphicon-search"></span></asp:LinkButton>
-                                </div>
-                                <div class="col-sm-2 col-xs-5">
-                                    <asp:LinkButton ID="btnReview" CausesValidation="false" runat="server" OnClick="btnReview_OnClick">
-                                        <asp:Label runat="server" ID="lblInReview" ForeColor="Black"></asp:Label></asp:LinkButton>
-                                    <button type="button" id="Add_Resident" class="btn btn-sm btn-primary pull-right">Add User</button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label id="lblHeaderMessage"></label>
-                            </div>
-                            <%--   <div class="row layout_header theme_third_bg font_size_2 vcenter" style="height: 40px; margin: 0px; display: none;">
-                                <div class="col-xs-3 hidden-xs">
-                                    <div>
-                                        <label class="pull-left ">Resident : </label>
                                     </div>
-                                </div>
-                                <div class="col-xs-6 col-xs-6">
 
-                                    <div class="layout_filter_box" style="width: 260px;">
-                                        <asp:DropDownList ID="drpUserResTypeFilter" runat="server" CssClass="layout_ddl_filter">
-                                            <asp:ListItem Value="0">Owner & Tenant</asp:ListItem>
-                                            <asp:ListItem>Owner</asp:ListItem>
-                                            <asp:ListItem>Tenant</asp:ListItem>
-                                        </asp:DropDownList>
-                                        <asp:TextBox ID="txtUserSrch" runat="server" Width="100px" placeholder="Flat Number" CssClass="layout_txtbox_filter" ValidationGroup="Search"></asp:TextBox>
-                                        <asp:LinkButton runat="server" BackColor="Transparent" ForeColor="Black" CausesValidation="false" OnClick="ImgFltSearch_Click"><span class="glyphicon glyphicon-search"></span></asp:LinkButton>
+                                    <div class="col-sm-3 col-xs-12">
+
+                                        <asp:LinkButton ID="btnReview" CausesValidation="false" runat="server" CssClass="btn btn-warning btnnn" OnClick="btnReview_OnClick">
+                                            <asp:Label runat="server" ID="lblInReview" ForeColor="White"></asp:Label>
+                                        </asp:LinkButton>
+
+                                        <button type="button" id="Add_Resident" class="btn btn-sm btn-primary pull-right">Add User</button>
                                     </div>
                                 </div>
-                                <div class="col-xs-3 hidden-xs" style="vertical-align: middle;">
-                                    <div>
-                                        <%--<a  id="Add_Resident" class="Add_Button" style="cursor:pointer;">Add Resident</a> --%>
-                        </div>
-                        <%-- </div>
-                            </div>--%>
+
+                                <div class="row">
+                                    <label id="lblHeaderMessage"></label>
+                                </div>
+                            </div>
+                        </asp:Panel>
                     </div>
 
-                    <div id="confirmDeactivatBox" class="modal" >
+                    <div id="confirmDeactivatBox" class="modal">
                         <div class="container-fluid" style="margin-top: 50px; width: 350px;">
                             <div class="panel panel-primary" style="position: relative; margin: 0px;">
                                 <div class="panel-heading">
@@ -639,7 +641,7 @@
                         </div>
                     </div>
 
-                        <div id="confirmActivateBox" class="modal">
+                    <div id="confirmActivateBox" class="modal">
                         <div class="container-fluid" style="margin-top: 50px; width: 350px;">
                             <div class="panel panel-primary" style="position: relative; margin: 0px;">
                                 <div class="panel-heading">
@@ -654,12 +656,14 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                              <td  style="height: 15px;">  Active From </td>
-                                         <td  style="height: 15px;">   <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control"  autocomplete="off"></asp:TextBox></td>
+                                            <td style="height: 15px;">Active From </td>
+                                            <td style="height: 15px;">
+                                                <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox></td>
                                         </tr>
                                         <tr>
-                                             <td  style="height: 15px;">  Active Till </td>
-                                         <td  style="height: 15px;">   <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control"  onchange="ValidateDate()" autocomplete="off"  ></asp:TextBox></td>
+                                            <td style="height: 15px;">Active Till </td>
+                                            <td style="height: 15px;">
+                                                <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control" onchange="ValidateDate()" autocomplete="off"></asp:TextBox></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -687,7 +691,7 @@
 
                                             <div class="row layout_shadow_table" style="margin-left: 10px;">
 
-                                                <div class="col-sm-4 col-xs-4" style="text-align: center;">
+                                                <div class="col-sm-4 col-xs-12" style="text-align: center;">
 
                                                     <img class="profile-image" src='<%# "GetImages.ashx?ResID="+ Eval("ResID")+"&Name="+Eval("FirstName") +"&UserType="+Eval("Type") %>' />
                                                     <br />
@@ -698,21 +702,18 @@
                                                     <%# Eval("Type") %>
                                                 </div>
 
-                                                <div class="col-sm-4 col-xs-4">
+                                                <div class="col-sm-4 col-xs-12">
                                                     <br />
-                                                    <span class="fa fa-envelope" style="color: blue;"></span><%# Eval("Emailid") %>
+                                                    <span class="fa fa-envelope" style="color: blue;"></span>&nbsp;&nbsp;<%# Eval("Emailid") %>
                                                     <br />
-
-                                                    <%--<span class="fa fa-phone-square" style="color:blue;"></span> <%# Eval("IntercomNumber") %><br />--%>
-                                                    <span class="fa fa-phone" style="color: blue;"></span><%# Eval("MobileNo") %>
+                                                    <span class="fa fa-phone" style="color: blue;"></span>&nbsp;&nbsp;<%# Eval("MobileNo") %>
                                                     <%# Eval("ParentName") %>
                                                     <br />
-                                                    <span class="fa fa-clock-o" style="color: blue;"></span><%# Eval("ActiveDate","{0:dd MMM,yy}") %>
+                                                    <span class="fa fa-clock-o" style="color: blue;"></span>&nbsp;&nbsp;<%# Eval("ActiveDate","{0:dd MMM,yy}") %>
                                                     <br />
                                                 </div>
 
-
-                                                <div class="col-sm-4 col-xs-4">
+                                                <div class="col-sm-4 col-xs-12">
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             Action <span class="caret"></span>
@@ -734,32 +735,46 @@
                                         </ItemTemplate>
                                         <AlternatingItemStyle />
 
-
+                                        
                                     </asp:DataList>
 
                                     <div class="row">
 
-                                        <div class="col-xs-4" style="text-align: center; padding: 8px;">
+                                        <div class="col-xs-3" style="text-align: center; padding: 8px;">
                                             <asp:Button ID="btnprevious" CausesValidation="false" runat="server" Font-Bold="true" Text="Prev" Height="31px" Width="60px" OnClick="btnprevious_Click" />
 
                                         </div>
-                                        <div class="col-xs-4">
+                                        <div class="col-xs-6">
                                             <asp:Label ID="lblPage" runat="server" Font-Size="Small" ForeColor="#f9f9f9f"></asp:Label>
                                         </div>
-                                        <div class="col-xs-4" style="text-align: center; padding: 8px;">
+                                        <div class="col-xs-3" style="text-align: center; padding: 8px;">
                                             <asp:Button ID="btnnext" CausesValidation="false" runat="server" Font-Bold="true" Text="Next" Height="31px" Width="60px" OnClick="btnnext_Click" />
                                         </div>
                                     </div>
                                 </asp:View>
-                                  <asp:View ID="View2" runat="server">
-                                       <asp:DataList
+
+                                <asp:View ID="View2" runat="server">
+                                    <div class="row">
+                                    
+                                        <div class="col-sm-12 col-xs-12">        
+                                                <a href="Totalusers.aspx" class="btn btn-block" style="background-color:gainsboro; color: black; text-decoration:none; margin-top: 10px; margin-left: -20px !important;"> Show Resident Users </a>                                         
+                                        </div>
+                                        
+                                    </div>
+
+                                    <asp:DataList
                                         ID="dataListReview" runat="server" HorizontalAlign="Center"
                                         RepeatColumns="1" RepeatDirection="Horizontal" Width="100%" OnSelectedIndexChanged="ResidentList_DataBound">
-                                        <ItemStyle />
-                                        <ItemTemplate>
-                                            <div class="row layout_shadow_table" style="margin-left: 10px;">
 
-                                                <div class="col-sm-4 col-xs-4" style="text-align: center;">
+                                        <ItemStyle />
+
+                                        <ItemTemplate>
+
+
+
+                                            <div class="row layout_shadow_table">
+
+                                                <div class="col-sm-4 col-xs-12" style="text-align: center;">
 
                                                     <img class="profile-image" src='<%# "GetImages.ashx?ResID="+ Eval("ResID")+"&Name="+Eval("FirstName") +"&UserType="+Eval("Type") %>' />
                                                     <br />
@@ -770,25 +785,25 @@
                                                     <%# Eval("Type") %>
                                                 </div>
 
-                                                <div class="col-sm-4 col-xs-4">
+                                                <div class="col-sm-4 col-xs-12">
                                                     <br />
-                                                    <span class="fa fa-envelope" style="color: blue;"></span><%# Eval("Emailid") %>
+                                                    <span class="fa fa-envelope" style="color: blue;"></span>&nbsp;&nbsp;<%# Eval("Emailid") %>
                                                     <br />
 
                                                     <%--<span class="fa fa-phone-square" style="color:blue;"></span> <%# Eval("IntercomNumber") %><br />--%>
-                                                    <span class="fa fa-phone" style="color: blue;"></span><%# Eval("MobileNo") %>
+                                                    <span class="fa fa-phone" style="color: blue;"></span>&nbsp;&nbsp;<%# Eval("MobileNo") %>
                                                     <%# Eval("ParentName") %>
                                                     <br />
-                                                    <span class="fa fa-clock-o" style="color: blue;"></span><%# Eval("ActiveDate","{0:dd MMM,yy}") %>
+                                                    <span class="fa fa-clock-o" style="color: blue;"></span>&nbsp;&nbsp;<%# Eval("ActiveDate","{0:dd MMM,yy}") %>
                                                     <br />
                                                 </div>
-                                                <div class="col-sm-4 col-xs-4">
+                                                <div class="col-sm-4 col-xs-12 pull-right">
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-primary btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                                             onclick="ShowActivateForm('<%# Eval("UserID") %>' ,'<%# Eval("Type") %>', '<%# Eval("ResID") %>','<%# Eval("DeActiveDate") %>')">
-                                                           Activate
+                                                            Activate
                                                         </button>
-                                                       
+
                                                     </div>
                                                 </div>
 
@@ -799,7 +814,8 @@
 
 
                                     </asp:DataList>
-                                  </asp:View>
+                                </asp:View>
+
                             </asp:MultiView>
                         </div>
 
