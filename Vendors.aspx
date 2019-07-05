@@ -513,6 +513,12 @@ hr {
                     $('#Image_crop').data("Jcrop").destroy();
                     $('#Image_crop').removeAttr('style');
                 });
+            $(document).ready(function () {
+                    $("#btnCan").click(function () {
+                        $("#image_modal_div").hide();
+                        $('#Image_crop').data("Jcrop").destroy();
+                        $('#Image_crop').removeAttr('style');
+                    });
 
 
 
@@ -744,16 +750,14 @@ hr {
                                                         onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit
                                                     </i><i runat="server" Visible="false" class="fa fa-trash" id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff;  float: right; cursor: pointer;" aria-hidden="true">Delete</i>
                                                 </p>--%>
-                                          <%--  <p style="height:30px; width:100%; border:1px solid green;"></p>--%>
+                                    
 
                                             <p id="offer_color" class="offerbox-raised">
-                                                    Offers  
-                                                <asp:Literal ID="ltradd" runat="server" ><i class="fa fa-plus transit" style="float:right; padding-right:5px; padding-top:5px; font-size:15px;"></i></asp:Literal>
-                                                <%--<i class="fa fa-angle-right " style="float:right; padding-right:5px;font-size:25px; "></i>
-                                                <i class="fa fa-angle-right " style="float:right; padding-right:5px; font-size:25px;"></i>--%>
-                                                
+                                               Offers  
+                                            <asp:Literal ID="ltradd" runat="server" ><i class="fa fa-plus transit" style="float:right; padding-right:5px; padding-top:5px; font-size:15px;">
+                                            </i></asp:Literal>
 
-                                                </p>
+                                            </p>
                                         </div>
 
 
@@ -802,6 +806,43 @@ hr {
                             </asp:DataList>
                             
                         </div>
+
+               <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+                <div id="addoffermodel" class="modal">
+                        <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
+                            <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
+                                <button type="button" id="Close_mod" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
+                                <h4 id="title" class="modal-title" style="margin-top: 5px;">Add Offers</h4>
+                            </div>
+                         <div class="modal-body">
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Offer Discription :</label>
+                                        <input id="inaddoffer" style="width: 120px"/>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth" style="width: 105px;">Start date :</label>
+                                        <input type="date" id="inAddTActiveDate" max="" style="width: 120px" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth" style="width: 105px;">End date :</label>
+                                        <input type="date" id="inAddTDeactiveDate" style="width: 120px" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer" style="text-align: right;">
+                                <button type="button" id="btnCancel" style="margin-top: 5px;" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                                <button type="button" id="btnSubmit" style="margin-top: 5px;" onclick="AddUser();" class="btn btn-primary">Submit</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+            <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
 
                         <div class="row">
@@ -1014,7 +1055,7 @@ hr {
                     </div>
                     <div style="height: 40px; width: auto; background-color: white;">
                         <button type="button" id="btnOK" value="OK" class="btnModal_style" style="margin-left: 25px;">OK</button>
-                        <button type="button" id="btnCancel" value="CANCEL" class="btnModal_style" style="margin-right: 25px; float: right">Cancel</button>
+                        <button type="button" id="btnCan" value="CANCEL" class="btnModal_style" style="margin-right: 25px; float: right">Cancel</button>
                     </div>
                 </div>
 
