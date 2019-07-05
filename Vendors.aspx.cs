@@ -97,8 +97,7 @@ public partial class Vendors : System.Web.UI.Page
 
             if (UserType.Equals("Admin"))
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "visiblemang",
-       "document.getElementById('Edit_Vendor').style.visibility = 'visible';", true);
+                //ScriptManager.RegisterStartupScript(this, GetType(), "visiblemang","document.getElementById('Edit_Vendor').style.visibility = 'visible';", true);
             }
 
             if (UserType.Equals("SuperAdmin"))

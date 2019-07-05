@@ -696,6 +696,35 @@ hr {
          return true;
       }
 
+
+        
+        function AddOffers(vendorid) {
+            var societyid =<%=Session["SocietyID"]%>;
+            var description = $("#inaddoffer").val();
+            var startdate = $("#txtstart").val();
+            var enddate = $("#txtend").val();
+
+            var req = "{\"VendorID\":" + vendorid + ",\"offerdescription\":\"" + description + "\",\"StartDate\":\"" + startdate + "\",\"EndDate\":\"" + enddate + "\",\"SocietyID\":" + societyid + "} ";
+            console.log(req);
+
+            var url = "http://localhost:5103/" + "api/Offers/New";
+            $.ajax({
+                datatype:"jason",
+                data: req,
+                type: 'post',
+                url: url,
+                async: false,
+                contentType: 'application/json',
+                success: function (data) {
+                    var da = JSON.stringify(data);
+                    console.log(da);
+                },
+                error: function () {
+                    alert("Error in submitting data");
+                }
+
+            });
+        }
       
    </script>
     </head>
@@ -772,15 +801,13 @@ hr {
                                                Offers  
                                             <asp:Literal ID="ltradd" runat="server" ><i class="fa fa-plus transit" onclick="ShowAddOfferModel ();" style="float:right; padding-right:5px; padding-top:5px; font-size:15px;">
                                             </i></asp:Literal>
-
+                                         
                                             </p>
+                                             
                                         </div>
                                     </div>
-                                </ItemTemplate>
-                            </asp:DataList>
-                        </div>
 
-               <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                      <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
                 <div id="addoffermodel" class="modal">
@@ -791,21 +818,60 @@ hr {
                             </div>
                          <div class="modal-body">
                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-
                                     <div class="col-sm-6">
-                                        <label class="labelwidth">Offer Discription :</label>
-                                        <input id="inaddoffer" style="width: 100%"/>
+                                        <label class="labelwidth">Offer Description:</label>
+                                         <textarea id="inaddoffer" rows = "5" cols = "30" name = "description" style="width: 100%;">Add Offer Description ...</textarea>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="labelwidth" style="width: 105px;">Start date :</label>
-
-                                        <input type="text" id="txtstart"  style="width: 120px" />
+                                        <input type="text" id="txtstart"  style="width: 120px"/>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="labelwidth" style="width: 105px;">End date :</label>
                                         <input type="text" id="txtend" style="width: 120px" />
+                                        <img src="Images/Icon/offer.png" style="width:200px; height:100px; margin-top:10px;"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer" style="text-align: right;">
+                                <button type="button" id="btnCancel"  style="margin-top: 5px;" data-dismiss="modal" onclick="HideOfferModel()" class="btn btn-danger">Cancel</button>
+                                <button type="button" id="btnSubmit" style="margin-top: 5px;" onclick="AddOffers('<%# Eval("ID") %>');" class="btn btn-primary">Submit</button>
 
-                                   
+                            </div>
+                        </div>
+                    </div>
+
+            <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+
+                                </ItemTemplate>
+                            </asp:DataList>
+                        </div>
+
+              <%-- <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+                <div id="addoffermodel" class="modal">
+                        <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
+                            <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
+                                <button type="button" id="Close_mod" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
+                                <h4 id="title" class="modal-title" style="margin-top: 5px;">Add Offers</h4>
+                            </div>
+                         <div class="modal-body">
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Offer Description:</label>
+                                         <textarea id="inaddoffer" rows = "5" cols = "30" name = "description" style="width: 100%;">Add Offer Description ...</textarea>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth" style="width: 105px;">Start date :</label>
+                                        <input type="text" id="txtstart"  style="width: 120px"/>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth" style="width: 105px;">End date :</label>
+                                        <input type="text" id="txtend" style="width: 120px" />
+                                        <img src="Images/Icon/offer.png" style="width:200px; height:100px; margin-top:10px;"/>
                                     </div>
                                 </div>
                             </div>
@@ -818,7 +884,7 @@ hr {
                     </div>
 
             <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->--%>
 
 
                         <div class="row">
