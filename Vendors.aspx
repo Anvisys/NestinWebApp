@@ -28,6 +28,10 @@
 
     <script  type="text/javascript" src="http://jcrop-cdn.tapmodo.com/v2.0.0-RC1/js/Jcrop.js"></script>
     <link  rel="stylesheet" href="http://jcrop-cdn.tapmodo.com/v2.0.0-RC1/css/Jcrop.css" type="text/css"/>
+
+    <script type="text/javascript" src="https://momentjs.com/downloads/moment.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" />
       
   <link rel="stylesheet" href="CSS/NewAptt.css" />
       <link rel="stylesheet" href="CSS/ApttTheme.css" />
@@ -174,8 +178,18 @@ hr {
     <script>
 
         var userType;
-
         $(document).ready(function () {
+
+            $("#txtend").datetimepicker({
+                //  format: 'YYYY-MM-DD'
+                format: 'DD-MM-YYYY'
+            });
+
+            $("#txtstart").datetimepicker({
+                //  format: 'YYYY-MM-DD'
+                format: 'DD-MM-YYYY'
+            });
+
             window.parent.FrameSourceChanged();
             userType = '<%=Session["UserType"] %>';
             if (userType == "Admin") {
@@ -191,6 +205,17 @@ hr {
 
 
         });
+
+        
+         function ShowAddOfferModel() {
+        //    $("#lblvendorid").val(vendorid)
+             $("#addoffermodel").show();
+            // alert("In Model 213");
+        }
+
+        function HideOfferModel() {
+            $("#addoffermodel").hide();
+        }
 
         $(document).ready(function () {
 
@@ -477,33 +502,33 @@ hr {
             var box_dimen;
             var AddOrEdit;
 
-            $(function () {
-                $('#FileVendorImg').change(function () {
-                    // $('#Image1').hide();
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        AddOrEdit = "ADD";
-                        setCropImage(e.target.result);
-                        $('#image_modal_div').show();
+        $(function () {
+            $('#FileVendorImg').change(function () {
+                // $('#Image1').hide();
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    AddOrEdit = "ADD";
+                    setCropImage(e.target.result);
+                    $('#image_modal_div').show();
 
-                    }
-                    reader.readAsDataURL($(this)[0].files[0]);
-                });
+                }
+                reader.readAsDataURL($(this)[0].files[0]);
+            });
 
 
-                $('#FileVendorEdit').change(function () {
-                    // $('#Image1').hide();
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        AddOrEdit = "EDIT";
-                        setCropImage(e.target.result);
-                        $('#image_modal_div').show();
+            $('#FileVendorEdit').change(function () {
+                // $('#Image1').hide();
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    AddOrEdit = "EDIT";
+                    setCropImage(e.target.result);
+                    $('#image_modal_div').show();
 
-                    }
-                    reader.readAsDataURL($(this)[0].files[0]);
+                }
+                reader.readAsDataURL($(this)[0].files[0]);
 
-                });
-            })
+            });
+        });
 
 
 
@@ -513,22 +538,22 @@ hr {
                     $('#Image_crop').data("Jcrop").destroy();
                     $('#Image_crop').removeAttr('style');
                 });
-            $(document).ready(function () {
+                $(document).ready(function () {
                     $("#btnCan").click(function () {
                         $("#image_modal_div").hide();
                         $('#Image_crop').data("Jcrop").destroy();
                         $('#Image_crop').removeAttr('style');
                     });
 
-
-
-                $(".close").click(function () {
-                      $("#image_modal_div").hide();
-                      $('#Image_crop').data("Jcrop").destroy();
-                      $('#Image_crop').removeAttr('style');
-                
                 });
-            });
+
+                    $(".close").click(function () {
+                        $("#image_modal_div").hide();
+                        $('#Image_crop').data("Jcrop").destroy();
+                        $('#Image_crop').removeAttr('style');
+
+                    });
+                });
 
     
             //Added by Aarshi on 23 aug 2017 for image crop code
@@ -673,8 +698,6 @@ hr {
 
       
    </script>
-
- 
     </head>
 <body style="background-color: #fcfcfc;">
 
@@ -700,7 +723,7 @@ hr {
                             </div>
                             <div class=" hidden-xs col-sm-3  " style="vertical-align: middle;">
                                 <div>
-                                    <a id="Add_Vendor" class="Add_Button pull-right btn btn-primary btn-sm fa fa-plus" style="visibility: hidden;margin-top:10px; cursor: pointer;">Add Vendor</a>
+                                    <a id="Add_Vendor" class="Add_Button pull-right btn btn-primary btn-sm fa fa-plus"   style="visibility: hidden;margin-top:10px; cursor: pointer;">Add Vendor</a>
 
                                 </div>
                             </div>
@@ -747,7 +770,7 @@ hr {
 
                                             <p id="offer_color" class="offerbox-raised">
                                                Offers  
-                                            <asp:Literal ID="ltradd" runat="server" ><i class="fa fa-plus transit" style="float:right; padding-right:5px; padding-top:5px; font-size:15px;">
+                                            <asp:Literal ID="ltradd" runat="server" ><i class="fa fa-plus transit" onclick="ShowAddOfferModel ();" style="float:right; padding-right:5px; padding-top:5px; font-size:15px;">
                                             </i></asp:Literal>
 
                                             </p>
@@ -775,16 +798,19 @@ hr {
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="labelwidth" style="width: 105px;">Start date :</label>
-                                        <input type="text" id="inAddTActiveDate" style="width: 150px" />
+
+                                        <input type="text" id="txtstart"  style="width: 120px" />
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="labelwidth" style="width: 105px;">End date :</label>
-                                        <input type="text" id="inAddTDeactiveDate" style="width: 150px" />
+                                        <input type="text" id="txtend" style="width: 120px" />
+
+                                   
                                     </div>
                                 </div>
                             </div>
                             <div class="panel-footer" style="text-align: right;">
-                                <button type="button" id="btnCancel" style="margin-top: 5px;" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                                <button type="button" id="btnCancel"  style="margin-top: 5px;" data-dismiss="modal" onclick="HideOfferModel()" class="btn btn-danger">Cancel</button>
                                 <button type="button" id="btnSubmit" style="margin-top: 5px;" onclick="AddUser();" class="btn btn-primary">Submit</button>
 
                             </div>
