@@ -1227,12 +1227,14 @@
        }
 
        function CloseRentInventory() {
-           var InventoryUpdate = "{\"RentInventoryID\":\"" + RentInventoryID + "\,\"InventoryTypeID\":\"\",\"AccomodationTypeID\":\"\",\"RentValue\":\"\",\"Available\":\"\",\[Description\":\"\",\"ContactName\":\"\",\"ContactNumber\":\"\",\"UserID\":\"\",\"FlatID\":\" \",\"HouseID\":\"\"} ";
+          
+           var InventoryUpdate = "{\"RentInventoryID\":\"\",\"InventoryTypeID\":\"\",\"AccomodationTypeID\":\"\",\"RentValue\":\"\",\"Available\":\"\",Description\":\"\",\"ContactName\":\"\",\"ContactNumber\":\"\",\"UserID\":\"\",\"FlatID\":\" \",\"HouseID\":\"\"} ";
            InventoryUpdate.InventoryId = currentInvetoryID;
            InventoryUpdate.Status = 0;
            console.log("1233==" + InventoryUpdate);
            var url = api_url + "/api/RentInventory/Close"
 
+          // console.log(RentInventoryID);
            $.ajax({
                dataType: "json",
                url: url,
@@ -1452,16 +1454,16 @@
                              <div class="col-sm-8">  
                                
                                     <%--<input type='date'  id='date_return' max='' min='10-09-2019' class="form-control"  tabindex="7" />--%>
-                                 <input type='text'  id='newDeactiveDate' class="form-control" placeholder="DD/MM/YYYY" tabindex="5"  />
+                                 <%--<input type='text'  id='newDeactiveDate' class="form-control" placeholder="DD/MM/YYYY" tabindex="5"  />--%>
                                  
                               </div>
                           
                               <div class="col-sm-4">
-                                  <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
+                                 <%-- <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>--%>
                               </div>
 
-                                    <button id="btnEdit" type="button" class="btn btn-danger" style="display: none;" onclick="ChangeDeactiveDate()">Set End Date</button>
-                                    <div id="ChangeDate" style="display: none; margin-top: 10px;" class="row" >
+                                   <%-- <button id="btnEdit" type="button" class="btn btn-danger" style="display: none;" onclick="ChangeDeactiveDate()">Set End Date</button>
+                                    <div id="ChangeDate" style="display: none; margin-top: 10px;" class="row" >--%>
                                       <%--  <input type="date" id="newDeactiveDate" style="width: 150px" />--%>
 
                                     
