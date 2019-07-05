@@ -791,21 +791,18 @@ hr {
                             </div>
                          <div class="modal-body">
                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-
                                     <div class="col-sm-6">
-                                        <label class="labelwidth">Offer Discription :</label>
-                                        <input id="inaddoffer" style="width: 100%"/>
+                                        <label class="labelwidth">Offer Description:</label>
+                                         <textarea id="inaddoffer" rows = "5" cols = "30" name = "description" style="width: 100%;">Add Offer Description ...</textarea>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="labelwidth" style="width: 105px;">Start date :</label>
-
-                                        <input type="text" id="txtstart"  style="width: 120px" />
+                                        <input type="text" id="txtstart"  style="width: 120px"/>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="labelwidth" style="width: 105px;">End date :</label>
                                         <input type="text" id="txtend" style="width: 120px" />
-
-                                   
+                                        <img src="Images/Icon/offer.png" style="width:200px; height:100px; margin-top:10px;"/>
                                     </div>
                                 </div>
                             </div>

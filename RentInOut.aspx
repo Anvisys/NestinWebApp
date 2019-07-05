@@ -66,14 +66,14 @@
                 for (var i = 0; i < results.length; i++) {
                           var ImageSource = "GetImages.ashx?UserID=" + js[i].UserID + "&Name=" + results[i].ContactName + "&UserType= Owner";
 
-                    strData = strData + "<div class=\"col-xs-3 panel panel-success \" style=\"margin:20px;padding:0px; \">" +
+                    strData = strData + "<div class=\"col-sm-3 col-xs-12 panel panel-success \" style=\"margin:20px;padding:0px; \">" +
                         "<div class='panel-heading'>" 
-                           +"<div class='row'><div class='col-xs-8'>"
+                        +"<div class='row'><div class='col-sm-8 col-xs-12'>"
                         + " <label class='data_label'>Inventory  :  </label>" + results[i].InventoryType
                         + "<br/><label class='data_label'> Type : </label>" + results[i].AccomodationType + "<br/><label class='data_label'>Rent : </label>"
                         + results[i].RentValue
 
-                        +"</div><div class='col-xs-4'>"
+                        +"</div><div class='col-sm-4 col-xs-12'>"
                         +"<img class='profile-image' src='" + ImageSource + "' />" 
 
                         + "</div></div></div>"
@@ -95,12 +95,6 @@
                         + "</div>";
                 }
 
-
-          
-
-
-          
-              
             }
             else {
                 strData = "No Rent Information Available!!";
