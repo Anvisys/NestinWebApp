@@ -66,7 +66,7 @@
                 for (var i = 0; i < results.length; i++) {
                           var ImageSource = "GetImages.ashx?UserID=" + js[i].UserID + "&Name=" + results[i].ContactName + "&UserType= Owner";
 
-                    strData = strData + "<div class=\"col-sm-3 col-xs-12 panel panel-success \" style=\"margin:20px;padding:0px; \">" +
+                    strData = strData + "<div class=\"col-sm-3 col-xs-12 panel panel-success \" style=\"margin:10px; margin-right:10px; padding:0px; \">" +
                         "<div class='panel-heading'>" 
                         +"<div class='row'><div class='col-sm-8 col-xs-12'>"
                         + " <label class='data_label'>Inventory  :  </label>" + results[i].InventoryType
