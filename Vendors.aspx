@@ -757,23 +757,16 @@ hr {
                                                 <p><i class="fa fa-map-marker" aria-hidden="true"></i><%# Eval("Address") %>, <%# "" + Eval("Address2") %></p>
                                                 <hr />
                                                 <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber") %></p>
-                                               <hr />
-                                            <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber2") %></p>
-                                         <asp:panel runat="server" ID="pnledit" Visible="false">
-                                              <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px; margin:0px;">
+                                                <hr />
+                                                <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber2") %></p>
+                                                <asp:panel runat="server" ID="pnledit" Visible="false">
+                                                <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px; margin:0px;">
                                                        
                                                   <i class="fa fa-edit " id="Edit_Vendor" style="color: #fff;  cursor: pointer; float: left;" onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit    </i>
                                                   <i class="fa fa-trash " id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer; " aria-hidden="true">Delete</i> 
                                                         
                                               </p>                                      
                                             </asp:panel>
-
-                                               <%-- <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px;margin-bottom:0px;">
-                                                    <i class="fa fa-edit" runat="server" id="Edit_Vendor" style="color: #fff; cursor: pointer; float: left; " Visible="false"
-                                                        onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit
-                                                    </i><i runat="server" Visible="false" class="fa fa-trash" id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff;  float: right; cursor: pointer;" aria-hidden="true">Delete</i>
-                                                </p>--%>
-                                    
 
                                             <p id="offer_color" class="offerbox-raised">
                                                Offers  
@@ -782,52 +775,9 @@ hr {
 
                                             </p>
                                         </div>
-
-
-
-                                        <%--<div class="panel-group">
-                                            <div class="panel panel-info layout_shadow_box">
-                                                <div class="panel-heading">
-                                                    <asp:Label ID="LinkButton2" runat="server" ForeColor="#000" Font-Size="Large" Font-Bold="true" Text='<%# Eval("VendorName") %>'>LinkButton</asp:Label>&nbsp;-&nbsp;<asp:Label ID="label" runat="server" ForeColor="#005cb9" Text='<%# Eval("ShopCategory") %>'>LinkButton</asp:Label></div>
-                                                <div class="panel-body" style="background-color: #fff">
-                                                    <div class="vendor-main">
-
-                                                        <div class="vendor-top">
-                                                            <div class="vendor-left">
-                                                                <asp:ImageMap ID="ImageMap1" runat="server" CssClass="Vendor_Images" Height="100px" Width="100px"
-                                                                    ImageUrl='<%# "GetImages.ashx?VendorID=" + Eval("ID")  %>'>
-                                                                </asp:ImageMap>
-                                                            </div>
-                                                            <div class="vendor-right">
-                                                                <div class="vendor-phone">
-                                                                    <asp:Label ID="LinkButton3" runat="server" class="fa fa-mobile fa-1x" ForeColor="#000" Text='<%# " " + Eval("ContactNum") %>'>LinkButton</asp:Label><br>
-                                                                    <asp:Label ID="Label1" runat="server" class="fa fa-mobile fa-1x" ForeColor="#000" Text='<%# " " + Eval("ContantNumber2") %>'>LinkButton</asp:Label>
-                                                                </div>
-
-                                                                <div class="vendor-address">
-                                                                    <asp:Label ID="label3" runat="server" Class="fa fa-map-marker fa-1.3x" ForeColor="#000" Text='<%# " " + Eval("Address") %>'>LinkButton</asp:Label>
-                                                                    <asp:Label ID="label5" runat="server" ForeColor="gray" Text='<%# "" + Eval("Address2") %>'>LinkButton</asp:Label>
-                                                                </div>
-                                                            </div>
-                                                        </div>                                                       
-
-                                                    </div>
-                                                     <div class="vendor-bottom" style="text-align:right;">
-                                                     
-                                                                <button class="btn btn-danger btn-sm"  id="edit_icon_button" type="button" 
-                                                                    onclick="SetValues('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNum") %>','<%# Eval("Address") %>',this)">Edit
-                                                                </button>
-                                                        
-                                                        </div>
-                                                </div>
-                                            </div>
-                                        </div>--%>
-
-                                        <%--<div style="height:30px; width:100%; border:1px solid green;"></div>--%>
                                     </div>
                                 </ItemTemplate>
                             </asp:DataList>
-                            
                         </div>
 
                <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -844,15 +794,18 @@ hr {
 
                                     <div class="col-sm-6">
                                         <label class="labelwidth">Offer Discription :</label>
-                                        <input id="inaddoffer" style="width: 120px"/>
+                                        <input id="inaddoffer" style="width: 100%"/>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="labelwidth" style="width: 105px;">Start date :</label>
+
                                         <input type="text" id="txtstart"  style="width: 120px" />
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="labelwidth" style="width: 105px;">End date :</label>
                                         <input type="text" id="txtend" style="width: 120px" />
+
+                                   
                                     </div>
                                 </div>
                             </div>
@@ -1074,7 +1027,7 @@ hr {
                 <div id="image_modal_div" class="modal" style="height: auto; width: auto;">
                     <div style="height: 30px; width: auto; background-color: white; margin-top: 0px;"><span class="close">&times;</span></div>
                     <div style="padding-left: 5px; padding-right: 5px;">
-                        <img id="Image_crop" src="" alt="" style="background-color: white; margin: auto;" />
+                        <img id="Image_crop" alt="" style="background-color: white; margin: auto;" />
                     </div>
                     <div style="height: 40px; width: auto; background-color: white;">
                         <button type="button" id="btnOK" value="OK" class="btnModal_style" style="margin-left: 25px;">OK</button>
