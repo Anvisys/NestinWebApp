@@ -5577,3 +5577,12 @@ h4 {
     overflow: visible;
     clip: auto;
 }
+
+/* Read More Function */
+
+#more {
+    display: none;
+}
+
+/* Read More Function */
+

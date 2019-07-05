@@ -42,7 +42,7 @@
         $(document).ready(function () {
             window.parent.FrameSourceChanged();
             api_url = '<%=Session["api_url"] %>';
-           // alert("45 ==>> "+api_url);
+            // alert("45 ==>> "+api_url);
             _ResID = <%=ResID%>;
             GetData();
             filladmindata();
@@ -65,13 +65,13 @@
                 format: 'DD-MM-YYYY'
             });
 
-             $('#date_return').datetimepicker( {
-            format: 'YYYY-MM-DD'
-        });
+            $('#date_return').datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
 
             function filladmindata() {
                 var url = api_url + "/api/admin/society/" + SocietyID;
-               // console.log("74==>"+ url);
+                // console.log("74==>"+ url);
 
                 $.ajax({
                     dataType: "json",
@@ -79,7 +79,7 @@
                     success: function (data) {
                         var da = JSON.stringify(data);
                         var js = jQuery.parseJSON(da);
-                      //  alert("82==>"+da);
+                        //  alert("82==>"+da);
 
                         $("#lblAdminName").html(js.FirstName + "  " + js.LastName);
                         $("#lblAdminemail").html(js.EmailId);
@@ -234,7 +234,7 @@
 
         function GetRentalInfo(FlatNumber) {
 
-         //   alert("197 ==>> " + api_url);
+            //   alert("197 ==>> " + api_url);
 
             var url = api_url + "/api/RentInventory/Find/" + FlatID + "/0";
 
@@ -258,11 +258,11 @@
 
 
         function SetRentalInfo(obj) {
-           // var da = JSON.stringify(data);
+            // var da = JSON.stringify(data);
             //var js = jQuery.parseJSON(da);
             //console.log("261"+js);
 
-           // var obj = da;
+            // var obj = da;
 
             if (obj.length == 0) {
                 alert("false");
@@ -270,7 +270,7 @@
                 $("#btnAddForRent").show();
             }
             else {
-               // alert("true");
+                // alert("true");
                 $("#RentalDetail").show();
                 $("#btnAddForRent").hide();
                 currentInvetoryID = obj[0].RentInventoryID;
@@ -792,7 +792,7 @@
         function GetMyPoolOffers() {
 
             var abs_url = api_url + "/api/CarPool/self/" + SocietyID + "/" + _ResID + "/1/20";
-         //   console.log(abs_url);
+            //   console.log(abs_url);
             $.ajax({
                 url: abs_url,
                 dataType: "json",
@@ -808,8 +808,8 @@
         function MyPoolData(results) {
             var strMyData = "";
             $("#MyPool").html("");
-           // var results = response.$values;// jQuery.parseJSON(response.$values);
-           // alert(results);
+            // var results = response.$values;// jQuery.parseJSON(response.$values);
+            // alert(results);
             MyPoolCount = results.length;
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
@@ -1073,7 +1073,7 @@
        function GetInventoryTypeData() {
 
            var abs_url = api_url + "/api/InventoryType";
-          // console.log(abs_url);
+           // console.log(abs_url);
            $.ajax({
                url: abs_url,
                dataType: "json",
@@ -1087,7 +1087,7 @@
 
        function populateInventoryType(InventoryType) {
 
-          // var InventoryType = data.$values;
+           // var InventoryType = data.$values;
 
            var ele = document.getElementById('InventoryType');
            ele.innerHTML = "";
@@ -1119,7 +1119,7 @@
 
        function populateAccomodationType(Inventory) {
            // THE JSON ARRAY.
-         //  var Inventory = data.$values;
+           //  var Inventory = data.$values;
 
            var ele = document.getElementById('AccomodationType');
            ele.innerHTML = "";
@@ -1366,66 +1366,67 @@
                             </div>
                         </div>
                     </div>
-                    <div id="FlatDetails" class="content_div">
-                        <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
-                            <div class="col-sm-4">
-                                <label class="data_heading">Flat Number :</label>
-                                <label class="data_label" id="lblFlatNumber">...</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <label class="data_heading">Flat Floor :</label>
-                                <label class="data_label" id="lblFlatFloor">...</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <label class="data_heading">Intercom Number :</label>
-                                <label class="data_label" id="lblIntercomNumber">...</label>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
-                            <div class="col-sm-4">
-                                <label class="data_heading">BHK :</label>
-                                <label class="data_label" id="lblFlatBHK">...</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <label class="data_heading">Block :</label>
-                                <label class="data_label" id="lblFlatBlock">...</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <label class="data_heading">Flat Area :</label>
-                                <label class="data_label" id="lblFlatArea">...</label>
-                            </div>
-                        </div>
-
-                    </div>
+                  
 
                     <div id="OwnerDetail" class="content_div">
-                        <div class="row" style="margin-bottom: 5px;">
-                            <div class="col-md-3">
-                                <img src="Images/Icon/profile.jpg" id="OwnerImage" height="150" width="150" style="border-radius: 50%;" />
-                            </div>
-                            <div class="col-md-6">
-                                <h3 style="font-family: Open Sans; text-align: center;"><b>Owner Info</b></h3>
-                            </div>
-                       
-                        <div class="row" style="margin-top: 5px; margin-bottom: 10px;">                        
-                            <div class="col-md-5">
+                        <div class="row">
+                                <div class="col-sm-3 col-xs-12" style="margin-top: 40px; margin-left: 10px;">
+                               <img id="OwnerImage" src="Images/Icon/profile.jpg" height="100" width="100" style="border-radius: 50%;" />
+                                </div>
+                                  <div class="col-sm-6 col-xs-12">
+                                         <h3 style="font-family: Open Sans; text-align: center;"><b>Owner Info</b></h3>
+                                  </div>
+                            
+                               <div class="row" style="margin-top: 5px; margin-bottom: 5px; margin-left:10px;">
+                                <div class="col-sm-5 col-xs-12">
+
                                 <label style="width: 100px;" class="data_heading">Name :</label>
                                 <label style="width: 50%;" class="data_label" id="lblFlatOwner">...</label><br />
                                 <label style="width: 100px;" class="data_heading">Email :</label>
                                 <label style="width: 50%;" class="data_label" id="lblFlatOwnerEmail">...</label><br />
                                 <label style="width: 100px;" class="data_heading">Contact :</label>
                                 <label style="width: 50%;" class="data_label" id="lblFlatOwnerMobile">...</label>
+                                </div>
+                               </div>
+                            <hr />
+                               <div id="FlatDetails">
+                                <div class="row" style="margin-top: 10px; margin-bottom: 10px; margin-left:5px;">
+                                    <div class="col-sm-4 col-xs-12">
+                                        <label class="data_heading">Flat Number :</label>
+                                        <label class="data_label" id="lblFlatNumber">...</label>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-12">
+                                        <label class="data_heading">Flat Floor :</label>
+                                        <label class="data_label" id="lblFlatFloor">...</label>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-12">
+                                        <label class="data_heading">Intercom Number :</label>
+                                        <label class="data_label" id="lblIntercomNumber">...</label>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 10px; margin-bottom: 10px; margin-left:5px;">
+                                    <div class="col-sm-4 col-xs-12">
+                                        <label class="data_heading">BHK :</label>
+                                        <label class="data_label" id="lblFlatBHK">...</label>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-12">
+                                        <label class="data_heading">Block :</label>
+                                        <label class="data_label" id="lblFlatBlock">...</label>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-12">
+                                        <label class="data_heading">Flat Area :</label>
+                                        <label class="data_label" id="lblFlatArea">...</label>
+                                    </div>
+                                </div>
                             </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+                      </div>
+                     </div>
 
 
                         <div id="TenantDetail" class="content_div">
                              <div class="row" style="margin-bottom: 5px;">
                                 <div class="col-sm-3" style="margin-top: 40px; margin-left: 10px;">
-                                    <img id="TenantImage" src="Images/Icon/profile.jpg" height="150" width="150" style="border-radius: 50%;" />
+                                    <img id="TenantImage" src="Images/Icon/profile.jpg" height="100" width="100" style="border-radius: 50%;" />
                                 </div>
                                   <div class="col-sm-6">
                                          <h3 style="font-family: Open Sans; text-align: center;"><b>Tenant Info</b></h3>
@@ -1448,55 +1449,27 @@
                                     <div id="ChangeDate" style="display: none">
                                         <%--<input type="date" id="newDeactiveDate" style="width: 150px" />--%>
 
-                                        <div class="row" style="margin-top: 10px;">
-                            
-                               
-                             <div class="col-sm-8">  
-                               
-                                    <%--<input type='date'  id='date_return' max='' min='10-09-2019' class="form-control"  tabindex="7" />--%>
-                                 <%--<input type='text'  id='newDeactiveDate' class="form-control" placeholder="DD/MM/YYYY" tabindex="5"  />--%>
-                                 
-                              </div>
-                          
-                              <div class="col-sm-4">
-                                 <%-- <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>--%>
-                              </div>
-
-                                   <%-- <button id="btnEdit" type="button" class="btn btn-danger" style="display: none;" onclick="ChangeDeactiveDate()">Set End Date</button>
-                                    <div id="ChangeDate" style="display: none; margin-top: 10px;" class="row" >--%>
-                                      <%--  <input type="date" id="newDeactiveDate" style="width: 150px" />--%>
-
-                                    
-                          
-                                         <div class="col-sm-8">  
-                               
-                                   
-                                           <input type='text'  id='newDeactiveDate' class="form-control" placeholder="DD/MM/YYYY" tabindex="5"  />
-                                 
-                                          </div>
-                                        <div class=" col-sm-4 "> 
-                                
-                                            <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
-
-                                        </div>
-                             
-
                                     </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                      <div class="col-sm-8">                                                                   
+                                           <input type='text'  id='newDeactiveDate' class="form-control" placeholder="DD/MM/YYYY" tabindex="5"  />                                
+                                      </div>
+                                      <div class=" col-sm-4 ">                                 
 
-
-                                        <%--<button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>--%>
-                                
-                                 </div> 
-                                </div>
-                               </div>
+                                            <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
+                                      </div>
+                                    </div>                                
+                                    </div>
+                                   </div>
+                                 </div>
                             </div>
-        
+                                 
+      
+
                      <div class="row" style="margin-left:10px; margin-right:10px;">
                          <div class="col-sm-12">
                              <button id="btnAdd" class="btn btn-info btn-sm" onclick="PopulateAddModal2()" type="button">Add Tenant</button>
                              <button id="btnAddForRent" class="btn btn-primary btn-sm" onclick="InitiateRent()" type="button">Add for Rent</button>
-                        
-                             <%--<button id="" type="button" class="btn btn-primary btn-sm" onclick="InitiateRent()">Add for Rent</button>--%>
                          </div>
 
 

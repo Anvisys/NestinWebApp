@@ -18,7 +18,6 @@
     <script>
         var api_url = "";
 
-
         $(document).ready(function () {
             api_url = '<%=Session["api_url"] %>';
 

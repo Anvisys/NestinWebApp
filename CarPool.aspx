@@ -58,12 +58,12 @@
 
    
 
-        function DisplayPoolData(response) {
+        function DisplayPoolData(results) {
             $("#progressBarGetData").hide();
            
             var strData = "";
             $("#CarPool").html(strData);
-            var results = response.$values;// jQuery.parseJSON(response.$values);
+          //  var results = response.$values;// jQuery.parseJSON(response.$values);
           //  console.log(results);
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
@@ -198,14 +198,8 @@
            </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="AllPool">
-
                         <div id="CarPool"></div>
                     </div>
-
-                    <%--<div class="tab-pane fade" id="selfPool" style="margin-top: 10px; margin-left: 10px;">
-                        <button class="btn btn-primary" onclick="ShowPoolModal()">Add New Trip</button>
-                        <div id="MyPool"></div>
-                    </div>--%>
                 </div>
         </div>
 

@@ -862,7 +862,9 @@ hr {
                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
                                     <div class="col-sm-6">
                                         <label class="labelwidth">Offer Description:</label>
-                                         <textarea id="inaddoffer" rows = "5" cols = "30" name = "description" style="width: 100%;">Add Offer Description ...</textarea>
+
+                                         <textarea id="inaddoffer" rows = "5" cols = "30" name = "description" placeholder="Add Offer here!!" style="width: 100%;"></textarea>
+
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="labelwidth" style="width: 105px;">Start date :</label>
