@@ -897,7 +897,7 @@ hr {
 
 <!-- MOdel for display offer to owner -->
 
-                 <div id="offershow" class="modal">
+                 <div id="Offerdetails" class="modal">
                         <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
                             <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
                                 <button type="button" id="Close_mod1"  onclick="HideOfferModel()" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
@@ -906,16 +906,17 @@ hr {
                          <div class="modal-body">
                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
                                     <div class="col-sm-6">
-                                         <textarea id="add_offer" rows = "5" cols = "30" name = "description" style="width: 100%;" disabled="disabled"></textarea>
+                                         <textarea id="lblofferdescription<%# Eval("ID") %>" rows = "5" cols = "30" name = "description" style="width: 100%;" disabled="disabled"></textarea>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label class="labelwidth" style="width: 105px;">Start on :</label>
+                                        <label class="lblstartdate<%# Eval("ID") %>" style="width: 105px;">Start on :</label>
                                         <input type="text" id="txt_start"  style="width: 120px" disabled="disabled"/>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label class="labelwidth" style="width: 105px;">Valid Till :</label>
+                                        <label class="lblenddate<%# Eval("ID") %>" style="width: 105px;">Valid Till :</label>
                                         <input type="text" id="txt_end" style="width: 120px" disabled="disabled" />
                                     </div>
+                                     <i class="fa fa-edit" onclick="ShowAddOfferModel('<%# Eval("ID") %>');"></i>
                                 </div>
                             </div>
                             <div class="panel-footer" style="text-align: right;">
@@ -929,12 +930,12 @@ hr {
 
 
  </p>
- <p id="Offerdetails<%# Eval("ID") %>" style="display:none;">
+ <%--<p id="Offerdetails<%# Eval("ID") %>" style="display:none;">
                  <label id="lblofferdescription<%# Eval("ID") %>"></label><br>
                  From : <label id="lblstartdate<%# Eval("ID") %>"></label><br>
                  Valid Till : <label id="lblenddate<%# Eval("ID") %>"></label><br />
                   <i class="fa fa-edit" onclick="ShowAddOfferModel('<%# Eval("ID") %>');"></i>
-             </p>
+             </p>--%>
                                              
                                         </div>
                                     </div>
