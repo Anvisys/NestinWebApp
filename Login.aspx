@@ -40,6 +40,14 @@
     <link href="CSS_3rdParty/footer.css" rel="stylesheet" type="text/css" />
     <link href="CSS_3rdParty/mythirdpartystylesheets.css" rel="stylesheet" type="text/css" />
     <link href="CSS/IP.css" rel="stylesheet" />
+  
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-5831709708295912",
+        enable_page_level_ads: true
+    });
+    </script>
 
     <script>
         var api_url;
