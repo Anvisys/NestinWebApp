@@ -930,7 +930,7 @@ hr {
 
 
  </p>
- <%--<p id="Offerdetails<%# Eval("ID") %>" style="display:none;">
+             <%--<p id="Offerdetails<%# Eval("ID") %>" style="display:none;">
                  <label id="lblofferdescription<%# Eval("ID") %>"></label><br>
                  From : <label id="lblstartdate<%# Eval("ID") %>"></label><br>
                  Valid Till : <label id="lblenddate<%# Eval("ID") %>"></label><br />
