@@ -179,6 +179,9 @@ hr {
     <script>
 
         var userType;
+        var offer;
+        var startdate;
+        var enddate;
         $(document).ready(function () {
 
             $("#txtend").datetimepicker({
@@ -704,20 +707,28 @@ hr {
          return true;
       }
 
-
+        function EditOffers(vendorid) {
+            $('#inaddoffer').html(offer);
+            $('#txtstart').val(startdate);
+            $('#txtend').val(enddate);
+                $("#lblvendor").text(vendorid);
+             $("#addoffermodel").show();
+         
+            //AddOffers();
+        }
         
         function AddOffers() {
             var vendorid = $("#lblvendor").text();
             //alert(vendorid);
-            var societyid =<%=Session["SocietyID"]%>;
-            var description = $("#inaddoffer").val();
-            var startdate = $("#txtstart").val();
-            var enddate = $("#txtend").val();
+             societyid =<%=Session["SocietyID"]%>;
+             description = $("#inaddoffer").val();
+             startdate = $("#txtstart").val();
+             enddate = $("#txtend").val();
 
             var req = "{\"VendorID\":" + vendorid + ",\"offerdescription\":\"" + description + "\",\"StartDate\":\"" + GetDateTimeinISO(new Date(startdate)) + "\",\"EndDate\":\"" + GetDateTimeinISO(new Date(enddate)) + "\",\"SocietyID\":" + societyid + "} ";
             console.log(req);
 
-            var url = "http://localhost:5103/" + "api/Offers/New";
+            var url = api_url + "api/Offers/New";
             $.ajax({
                 datatype:"jason",
                 data: req,
@@ -755,7 +766,9 @@ hr {
                     var js = jQuery.parseJSON(da);
                  //   console.log("#lblofferdescription".vendorid);
                     if (da != null) {
-
+                        offer = js.offerdescription;
+                        startdate = DisplayDateOnly(new Date(js.startDate));
+                        enddate = DisplayDateOnly(new Date(js.EndDate));
                         $("#lblofferdescription" + vendorid).html(js.offerdescription);
                         $('#lblstartdate' + vendorid).html(DisplayDateOnly(new Date(js.startDate)));
                         $('#lblenddate' + vendorid).html(DisplayDateOnly(new Date(js.EndDate)));
@@ -894,7 +907,7 @@ hr {
                  <label id="lblofferdescription<%# Eval("ID") %>"></label><br>
                  From : <label id="lblstartdate<%# Eval("ID") %>"></label><br>
                  Valid Till : <label id="lblenddate<%# Eval("ID") %>"></label><br />
-                  <i class="fa fa-edit" onclick="ShowAddOfferModel('<%# Eval("ID") %>');"></i>
+                  <i class="fa fa-edit" onclick="EditOffers('<%# Eval("ID") %>');"></i>
              </p>
                                              
                                         </div>
