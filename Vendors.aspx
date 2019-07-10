@@ -183,23 +183,28 @@ hr {
 
         var userType;
         var offer;
+        var vendorid;
         var startdate;
         var enddate;
+         var api_url = "http://www.kevintech.in/Nestin-WebApi/";
         $(document).ready(function () {
 
             $("#txtend").datetimepicker({
                 //  format: 'YYYY-MM-DD'
                 format: 'DD-MM-YYYY'
             });
-            $("#Offerdetails").toggle(
-                function () { $("#Offerdetails").show(); },
-                function () { $("#Offerdetails").hide(); },
-                function () { },
-    );
+           
             $("#txtstart").datetimepicker({
                 //  format: 'YYYY-MM-DD'
                 format: 'DD-MM-YYYY'
             });
+
+            
+            $(".time").datetimepicker({
+                //  format: 'YYYY-MM-DD'
+                format: 'DD-MM-YYYY'
+            });
+
 
             window.parent.FrameSourceChanged();
             userType = '<%=Session["UserType"] %>';
@@ -230,6 +235,7 @@ hr {
             $("#txtend").val("");
             $("#addoffermodel").hide();
         }
+
 
         $(document).ready(function () {
 
@@ -711,12 +717,42 @@ hr {
       }
 
         function EditOffers(vendorid) {
-            $('#inaddoffer').html(offer);
-            $('#txtstart').val(startdate);
-            $('#txtend').val(enddate);
-                $("#lblvendor").text(vendorid);
-             $("#addoffermodel").show();
-         
+           
+        // var vendorid = $("#lblvendor").text();
+            //alert(vendorid);
+             societyid =<%=Session["SocietyID"]%>;
+             description = $("#lblofferdescription"+vendorid).val();
+             startdate = $("#lblstartdate"+vendorid).val();
+            enddate = $("#lblenddate" + vendorid).val();
+            Start = GetDateTimeinISO(new Date(startdate));
+            end = GetDateTimeinISO(new Date(enddate));
+            alert("Start Date="+startdate +"</br> End date="+end );
+
+            var req = "{\"VendorID\":" + vendorid + ",\"offerdescription\":\"" + description + "\",\"StartDate\":\"" + Start + "\",\"EndDate\":\"" +end + "\",\"SocietyID\":" + societyid + "} ";
+            console.log(req);
+
+            var url = "http://localhost:5103/" + "api/Offers/New";
+            $.ajax({
+                datatype:"jason",
+                data: req,
+                type: 'post',
+                url: url,
+                async: false,
+                contentType: 'application/json',
+                success: function (data) {
+                    var da = JSON.stringify(data);
+                    var js = JSON.parse(da);
+                   // alert(jQuery.type(js));
+                    if (js=="ok")
+                    {
+                        alert("New Offer Added");
+                    }
+                },
+                error: function () {
+                    alert("Error in submitting data");
+                }
+
+            });
             //AddOffers();
         }
         
@@ -727,7 +763,7 @@ hr {
              description = $("#inaddoffer").val();
              startdate = $("#txtstart").val();
              enddate = $("#txtend").val();
-
+          //  alert("Start Date="+startdate +"</br> End date="+enddate);
             var req = "{\"VendorID\":" + vendorid + ",\"offerdescription\":\"" + description + "\",\"StartDate\":\"" + GetDateTimeinISO(new Date(startdate)) + "\",\"EndDate\":\"" + GetDateTimeinISO(new Date(enddate)) + "\",\"SocietyID\":" + societyid + "} ";
             console.log(req);
 
@@ -755,7 +791,16 @@ hr {
             });
         }
 
+        function HideOfferDetails(vendorid) {
+         //   alert(id);
+              $("#lblofferdescription" + vendorid).prop("disabled", true);
+            $('#lblstartdate' + vendorid).prop("disabled", true);
+             $('#lblenddate' + vendorid).prop("disabled", true);
+            $("#Offerdetails" + vendorid).hide();
+        }
+
         function GetOffers(vendorid) {
+            vendorid = vendorid;
             var societyid =<%=Session["SocietyID"]%>;
 
             var url = api_url + "api/Offers/Society/" + societyid + "/Vendor/" + vendorid + "/";
@@ -772,25 +817,31 @@ hr {
                         offer = js.offerdescription;
                         startdate = DisplayDateOnly(new Date(js.startDate));
                         enddate = DisplayDateOnly(new Date(js.EndDate));
-                        $("#lblofferdescription" + vendorid).html(js.offerdescription);
-                        $('#lblstartdate' + vendorid).html(DisplayDateOnly(new Date(js.startDate)));
-                        $('#lblenddate' + vendorid).html(DisplayDateOnly(new Date(js.EndDate)));
+                        $("#lblofferdescription" + vendorid).text(js.offerdescription);
+                        $('#lblstartdate' + vendorid).val(DisplayDateOnly(new Date(js.startDate)));
+                        $('#lblenddate' + vendorid).val(DisplayDateOnly(new Date(js.EndDate)));
                         document.getElementById("Offerdetails" + vendorid).style.display = 'block';
                        
                     }
                     else
                         document.getElementById("Offerdetails" + vendorid).style.display = 'none';
                    
-                    //alert(da);
+                   
                 },
                 error: function () {
                     alert("Error in Getting data");
                 }
 
-            });
-          
+            });  
+        }    
+
+        function enable(vendorid) {
+            $("#lblofferdescription" + vendorid).prop("disabled", false);
+            $('#lblstartdate' + vendorid).prop("disabled", false);
+            $('#lblenddate' + vendorid).prop("disabled", false);
+            
         }
-      
+
    </script>
     </head>
 <body style="background-color: #fcfcfc;">
@@ -912,10 +963,10 @@ hr {
 <!-- MOdel for display offer to owner -->
 
 
-                 <div id="Offerdetails" class="modal">
+                 <div id="Offerdetails<%# Eval("ID") %>" class="modal">
                         <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
                             <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
-                                <button type="button" id="Close_mod1"  onclick="HideOfferModel()" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
+                                <button type="button" id="Close_mod1"  onclick="HideOfferDetails(<%# Eval("ID") %>);" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
                                 <h4 id="title1" class="modal-title" style="margin-top: 5px;">OFFERS</h4>
                             </div>
                          <div class="modal-body">
@@ -924,19 +975,19 @@ hr {
                                          <textarea id="lblofferdescription<%# Eval("ID") %>" rows = "5" cols = "30" name = "description" style="width: 100%;" disabled="disabled"></textarea>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label class="lblstartdate<%# Eval("ID") %>" style="width: 105px;">Start on :</label>
-                                        <input type="text" id="txt_start"  style="width: 120px" disabled="disabled"/>
+                                        <label  style="width: 105px;">Start on :</label>
+                                        <input type="text" class="time" id="lblstartdate<%# Eval("ID") %>"  style="width: 120px" disabled="disabled"/>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label class="lblenddate<%# Eval("ID") %>" style="width: 105px;">Valid Till :</label>
-                                        <input type="text" id="txt_end" style="width: 120px" disabled="disabled" />
+                                        <label style="width: 105px;">Valid Till :</label>
+                                        <input type="text" class="time" id="lblenddate<%# Eval("ID") %>" style="width: 120px" disabled="disabled" />
                                     </div>
-                                     <i class="fa fa-edit" onclick="ShowAddOfferModel('<%# Eval("ID") %>');"></i>
+                                     <i class="fa fa-edit" onclick="enable(<%# Eval("ID") %>);"></i>
                                 </div>
                             </div>
                             <div class="panel-footer" style="text-align: right;">
-                                <button type="button" id="btn_Cancel"  style="margin-top: 5px;" data-dismiss="modal" onclick="HideOfferModel()" class="btn btn-danger">Back</button>
-                                <button type="button" id="btn_Submit" style="margin-top: 5px;" onclick="AddOffers();" class="btn btn-primary">Ok</button>
+                                <button type="button" id="btn_Cancel"  style="margin-top: 5px;" data-dismiss="modal"  onclick="HideOfferDetails(<%# Eval("ID") %>);"  class="btn btn-danger">Back</button>
+                                <button type="button" id="btn_Submit" style="margin-top: 5px;"  onclick="EditOffers(<%# Eval("ID") %>);" class="btn btn-primary">Ok</button>
 
                             </div>
                         </div>
