@@ -39,6 +39,7 @@
     <%--<link rel ="stylesheet" href="CSS/Vendor.css" />--%>
    
     <link rel="stylesheet" href="CSS/mystylesheets.css" />
+      <script type="text/javascript" src="Scripts/datetime.js"></script>
 
     <style>
  
@@ -184,7 +185,11 @@ hr {
                 //  format: 'YYYY-MM-DD'
                 format: 'DD-MM-YYYY'
             });
-
+            $("#Offerdetails").toggle(
+                function () { $("#Offerdetails").show(); },
+                function () { $("#Offerdetails").hide(); },
+                function () { },
+    );
             $("#txtstart").datetimepicker({
                 //  format: 'YYYY-MM-DD'
                 format: 'DD-MM-YYYY'
@@ -207,13 +212,16 @@ hr {
         });
 
         
-         function ShowAddOfferModel() {
-        //    $("#lblvendorid").val(vendorid)
+         function ShowAddOfferModel(vendorsid) {
+             $("#lblvendor").text(vendorsid);
              $("#addoffermodel").show();
             // alert("In Model 213");
         }
 
         function HideOfferModel() {
+            $("#inaddoffer").val("");
+            $("#txtstart").val("");
+            $("#txtend").val("");
             $("#addoffermodel").hide();
         }
 
@@ -698,13 +706,15 @@ hr {
 
 
         
-        function AddOffers(vendorid) {
+        function AddOffers() {
+            var vendorid = $("#lblvendor").text();
+            //alert(vendorid);
             var societyid =<%=Session["SocietyID"]%>;
             var description = $("#inaddoffer").val();
             var startdate = $("#txtstart").val();
             var enddate = $("#txtend").val();
 
-            var req = "{\"VendorID\":" + vendorid + ",\"offerdescription\":\"" + description + "\",\"StartDate\":\"" + startdate + "\",\"EndDate\":\"" + enddate + "\",\"SocietyID\":" + societyid + "} ";
+            var req = "{\"VendorID\":" + vendorid + ",\"offerdescription\":\"" + description + "\",\"StartDate\":\"" + GetDateTimeinISO(new Date(startdate)) + "\",\"EndDate\":\"" + GetDateTimeinISO(new Date(enddate)) + "\",\"SocietyID\":" + societyid + "} ";
             console.log(req);
 
             var url = "http://localhost:5103/" + "api/Offers/New";
@@ -717,13 +727,52 @@ hr {
                 contentType: 'application/json',
                 success: function (data) {
                     var da = JSON.stringify(data);
-                    console.log(da);
+                    var js = JSON.parse(da);
+                   // alert(jQuery.type(js));
+                    if (js=="ok")
+                    {
+                        alert("New Offer Added");
+                    }
                 },
                 error: function () {
                     alert("Error in submitting data");
                 }
 
             });
+        }
+
+        function GetOffers(vendorid) {
+            var societyid =<%=Session["SocietyID"]%>;
+            
+            var url = "http://localhost:5103/" + "api/Offers/Society/" + societyid + "/Vendor/" + vendorid + "/";
+            console.log(url);
+            $.ajax({
+                datatype:"jason",
+                url: url,
+                success: function (data) {
+                    var da = JSON.stringify(data[0]);
+                  
+                    var js = jQuery.parseJSON(da);
+                 //   console.log("#lblofferdescription".vendorid);
+                    if (da != null) {
+
+                        $("#lblofferdescription" + vendorid).html(js.offerdescription);
+                        $('#lblstartdate' + vendorid).html(DisplayDateOnly(new Date(js.startDate)));
+                        $('#lblenddate' + vendorid).html(DisplayDateOnly(new Date(js.EndDate)));
+                        document.getElementById("Offerdetails" + vendorid).style.display = 'block';
+                       
+                    }
+                    else
+                        document.getElementById("Offerdetails" + vendorid).style.display = 'none';
+                   
+                    //alert(da);
+                },
+                error: function () {
+                    alert("Error in Getting data");
+                }
+
+            });
+          
         }
       
    </script>
@@ -797,24 +846,20 @@ hr {
                                               </p>                                      
                                             </asp:panel>
 
-                                            <p id="offer_color" class="offerbox-raised">
-                                               Offers  
-                                            <asp:Literal ID="ltradd" runat="server" ><i class="fa fa-plus transit" onclick="ShowAddOfferModel ();" style="float:right; padding-right:5px; padding-top:5px; font-size:15px;">
-                                            </i></asp:Literal>
-                                         
-                                            </p>
-                                             
-                                        </div>
-                                    </div>
-
-                                      <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                            <p id="offer_color" class="offerbox-raised" >
+                                              <span  onclick="GetOffers('<%# Eval("ID") %>');" > Offers  </span>
+                                            <asp:Label ID="ltradd" runat="server" ><i class="fa fa-plus transit" onclick="ShowAddOfferModel('<%# Eval("ID") %>');" style="float:right; padding-right:5px; padding-top:5px; font-size:15px;">
+                                            </i></asp:Label>
+                                                   
+                                                  <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
                 <div id="addoffermodel" class="modal">
                         <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
                             <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
-                                <button type="button" id="Close_mod" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
+                                <button type="button" id="Close_mod"  onclick="HideOfferModel()" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
                                 <h4 id="title" class="modal-title" style="margin-top: 5px;">Add Offers</h4>
+                                <label class="labelwidth" style="visibility:hidden;" id="lblvendor"></label>
                             </div>
                          <div class="modal-body">
                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
@@ -835,7 +880,7 @@ hr {
                             </div>
                             <div class="panel-footer" style="text-align: right;">
                                 <button type="button" id="btnCancel"  style="margin-top: 5px;" data-dismiss="modal" onclick="HideOfferModel()" class="btn btn-danger">Cancel</button>
-                                <button type="button" id="btnSubmit" style="margin-top: 5px;" onclick="AddOffers('<%# Eval("ID") %>');" class="btn btn-primary">Submit</button>
+                                <button type="button" id="btnSubmit" style="margin-top: 5px;" onclick="AddOffers();" class="btn btn-primary">Submit</button>
 
                             </div>
                         </div>
@@ -844,6 +889,18 @@ hr {
             <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
+                                            </p>
+                                             <p id="Offerdetails<%# Eval("ID") %>" style="display:none;">
+                 <label id="lblofferdescription<%# Eval("ID") %>"></label><br>
+                 From : <label id="lblstartdate<%# Eval("ID") %>"></label><br>
+                 Valid Till : <label id="lblenddate<%# Eval("ID") %>"></label><br />
+                  <i class="fa fa-edit" onclick="ShowAddOfferModel('<%# Eval("ID") %>');"></i>
+             </p>
+                                             
+                                        </div>
+                                    </div>
+
+            
 
                                 </ItemTemplate>
                             </asp:DataList>

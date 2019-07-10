@@ -4,7 +4,7 @@
     var dHour = "00";
     var dMin = "00";
     var dSec = "00";
-   // var datetime = new Date();
+    var datetime = new Date();
 
     var dYear = datetime.getFullYear();
 
@@ -49,7 +49,7 @@
         dSec = Sec;
     }
      
-    return dYear + "-" + dMonth + "-" + dDay + " " + dHour + ":" + dMin + ":" + dSec+":000";   
+    return dYear + "-" + dMonth + "-" + dDay + " " + dHour + ":" + dMin + ":" + dSec;   
 }
 
 
