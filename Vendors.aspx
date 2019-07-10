@@ -161,7 +161,10 @@
   color: grey;
   font-size: 14px;
 }
-
+.title1 {
+  color: grey;
+  font-size: 14px;
+}
 
 
 a {
@@ -743,8 +746,8 @@ hr {
 
         function GetOffers(vendorid) {
             var societyid =<%=Session["SocietyID"]%>;
-            
-            var url = "http://localhost:5103/" + "api/Offers/Society/" + societyid + "/Vendor/" + vendorid + "/";
+
+            var url = api_url + "api/Offers/Society/" + societyid + "/Vendor/" + vendorid + "/";
             console.log(url);
             $.ajax({
                 datatype:"jason",
@@ -786,6 +789,7 @@ hr {
 
                 <form id="form1" runat="server" autocomplete="off">
 
+                  
                     <%-------------------------------------------------------------Vendor  Datalist  starts from here ------------------------------------------------------------------ --%>
                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                     <div class="container-fluid">
@@ -850,9 +854,11 @@ hr {
                                               <span  onclick="GetOffers('<%# Eval("ID") %>');" > Offers  </span>
                                             <asp:Label ID="ltradd" runat="server" ><i class="fa fa-plus transit" onclick="ShowAddOfferModel('<%# Eval("ID") %>');" style="float:right; padding-right:5px; padding-top:5px; font-size:15px;">
                                             </i></asp:Label>
-                                                   
-                                                  <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                             
+                                                
+                                                
+     <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+           !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
                 <div id="addoffermodel" class="modal">
                         <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
@@ -889,8 +895,41 @@ hr {
             <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
-                                            </p>
-                                             <p id="Offerdetails<%# Eval("ID") %>" style="display:none;">
+<!-- MOdel for display offer to owner -->
+
+                 <div id="offershow" class="modal">
+                        <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
+                            <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
+                                <button type="button" id="Close_mod1"  onclick="HideOfferModel()" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
+                                <h4 id="title1" class="modal-title" style="margin-top: 5px;">OFFERS</h4>
+                            </div>
+                         <div class="modal-body">
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+                                    <div class="col-sm-6">
+                                         <textarea id="add_offer" rows = "5" cols = "30" name = "description" style="width: 100%;" disabled="disabled"></textarea>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth" style="width: 105px;">Start on :</label>
+                                        <input type="text" id="txt_start"  style="width: 120px" disabled="disabled"/>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth" style="width: 105px;">Valid Till :</label>
+                                        <input type="text" id="txt_end" style="width: 120px" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer" style="text-align: right;">
+                                <button type="button" id="btn_Cancel"  style="margin-top: 5px;" data-dismiss="modal" onclick="HideOfferModel()" class="btn btn-danger">Back</button>
+                                <button type="button" id="btn_Submit" style="margin-top: 5px;" onclick="AddOffers();" class="btn btn-primary">Ok</button>
+
+                            </div>
+                        </div>
+                    </div>
+<!-- MOdel for display offer to owner -->
+
+
+ </p>
+ <p id="Offerdetails<%# Eval("ID") %>" style="display:none;">
                  <label id="lblofferdescription<%# Eval("ID") %>"></label><br>
                  From : <label id="lblstartdate<%# Eval("ID") %>"></label><br>
                  Valid Till : <label id="lblenddate<%# Eval("ID") %>"></label><br />
@@ -905,46 +944,6 @@ hr {
                                 </ItemTemplate>
                             </asp:DataList>
                         </div>
-
-              <%-- <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-
-                <div id="addoffermodel" class="modal">
-                        <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
-                            <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
-                                <button type="button" id="Close_mod" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
-                                <h4 id="title" class="modal-title" style="margin-top: 5px;">Add Offers</h4>
-                            </div>
-                         <div class="modal-body">
-                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-                                    <div class="col-sm-6">
-                                        <label class="labelwidth">Offer Description:</label>
-
-                                         <textarea id="inaddoffer" rows = "5" cols = "30" name = "description" placeholder="Add Offer here!!" style="width: 100%;"></textarea>
-
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="labelwidth" style="width: 105px;">Start date :</label>
-                                        <input type="text" id="txtstart"  style="width: 120px"/>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="labelwidth" style="width: 105px;">End date :</label>
-                                        <input type="text" id="txtend" style="width: 120px" />
-                                        <img src="Images/Icon/offer.png" style="width:200px; height:100px; margin-top:10px;"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel-footer" style="text-align: right;">
-                                <button type="button" id="btnCancel"  style="margin-top: 5px;" data-dismiss="modal" onclick="HideOfferModel()" class="btn btn-danger">Cancel</button>
-                                <button type="button" id="btnSubmit" style="margin-top: 5px;" onclick="AddUser();" class="btn btn-primary">Submit</button>
-
-                            </div>
-                        </div>
-                    </div>
-
-            <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->--%>
-
 
                         <div class="row">
 
