@@ -883,10 +883,11 @@
                 </div>
             </div>
         </div>
+
         <div class="footer-copyright">
-
-            <p>© 2019 <a href="www.Anvisys.net" target="_blank">ANVISYS TECHNOLOGIES</a>| ALL RIGHTS RESERVED. </p>
-
+            <p>© 2019 <a href="www.Anvisys.net" target="_blank">ANVISYS TECHNOLOGIES</a>| ALL RIGHTS RESERVED. 
+               <img class="pull-right" src="http://hitwebcounter.com/counter/counter.php?page=7115764&style=0005&nbdigits=4&type=ip&initCount=0" title="website counter" Alt="website counter"   border="0"  />     
+            </p>
         </div>
     </footer>
 
