@@ -126,6 +126,7 @@
            color:#2eb877;
            font-size:18px;
            font-family:serif;
+          
        }
 
        .setvisible{
@@ -199,6 +200,7 @@ hr {
                 format: 'DD-MM-YYYY'
             });
 
+            CheckOffers();
             
             $(".time").datetimepicker({
                 //  format: 'YYYY-MM-DD'
@@ -214,9 +216,12 @@ hr {
                 //document.getElementById("Edit_Vendor").style.visibility = 'visible';
                 //document.getElementById("vendor_delete").style.visibility = 'visible';
               //  $('i').attr('visibility' ,'visible');
+                //document.getElementById("editoffer").style.visibility = 'visible';
+               // alert("220");
             }
             else {
-                 document.getElementById("Add_Vendor").style.visibility = 'none';
+                document.getElementById("Add_Vendor").style.visibility = 'hidden';
+                $("#btn_Submit").css("display", "none");
             }
 
 
@@ -242,15 +247,7 @@ hr {
             window.parent.FrameSourceChanged();
         });
 
-     
-        $(document).ready(function () {
-            $('.toggle-footer-btn').click(function () {
-                $(this).html($(this).html() == '+' ? '-' : '+');
-                $('#footer').slideToggle(2000);
-                return false;
-            });
-        });
-
+       
 
         $(document).ready(function () {
             $(".update").click(function () {          
@@ -720,6 +717,7 @@ hr {
            
         // var vendorid = $("#lblvendor").text();
             //alert(vendorid);
+            
              societyid =<%=Session["SocietyID"]%>;
              description = $("#lblofferdescription"+vendorid).val();
              startdate = $("#lblstartdate"+vendorid).val();
@@ -802,7 +800,14 @@ hr {
         function GetOffers(vendorid) {
             vendorid = vendorid;
             var societyid =<%=Session["SocietyID"]%>;
-
+          //  $("#btn_Submit" + vendorid).css("disabled", true);
+            if (userType == "Admin") {
+                document.getElementById("editoffer" + vendorid).style.visibility = 'visible';
+               $('#btn_Submit' + vendorid).prop("disabled", true);
+            }
+            else {
+                $("#btn_Submit" + vendorid).css("display", "none");
+            }
             var url = api_url + "api/Offers/Society/" + societyid + "/Vendor/" + vendorid + "/";
             console.log(url);
             $.ajax({
@@ -839,7 +844,41 @@ hr {
             $("#lblofferdescription" + vendorid).prop("disabled", false);
             $('#lblstartdate' + vendorid).prop("disabled", false);
             $('#lblenddate' + vendorid).prop("disabled", false);
-            
+             $('#btn_Submit' + vendorid).prop("disabled", false);
+        }
+
+        function CheckOffers() {
+            var url = "http://localhost:5103/"+"api/Offers/Society/"+<%=Session["SocietyID"]%>
+            $.ajax({
+                datatype:"json",
+                url: url,
+                success: function (data) {
+                    var da = JSON.stringify(data);
+                    var js = jQuery.parseJSON(da);
+                 //   console.log(jQuery.type(js));
+                    js.forEach(element => {
+                        if (userType == "Admin") {
+                            $("#offer_color" + element.VendorID).css("display", "block");
+                            $("#offer_color" + element.VendorID).css("background-color", "#ffcc99");
+                            $("#offer_color" + element.VendorID).text("Add New Offer");
+                            $("#offer_color" + element.VendorID).css("color", "white");
+                            $("#btn_Submit" + element.VendorID).css("display", "block");
+                            $("#offer_color" + element.VendorID).prop("disabled", false);
+                        }
+                            
+                        else {
+                            $("#offer_color" + element.VendorID).text("No Offer Available");
+                            $("#offer_color" + element.VendorID).css("display", "block");
+                            $("#offer_color" + element.VendorID).prop("disabled", true);
+                           
+                        }
+                    });
+
+                },
+                error: function () {
+
+                }
+            });
         }
 
    </script>
@@ -914,7 +953,7 @@ hr {
                                               </p>                                      
                                             </asp:panel>
 
-                                            <p id="offer_color" class="offerbox-raised" >
+                                            <p id="offer_color<%# Eval("ID") %>" class="offerbox-raised" >
                                               <span  onclick="GetOffers('<%# Eval("ID") %>');" > Offers  </span>
                                             <asp:Label ID="ltradd" runat="server" ><i class="fa fa-plus transit" onclick="ShowAddOfferModel('<%# Eval("ID") %>');" style="float:right; padding-right:5px; padding-top:5px; font-size:15px;">
                                             </i></asp:Label>
@@ -972,7 +1011,7 @@ hr {
                          <div class="modal-body">
                                 <div class="row" style="margin-top: 5px; margin-bottom: 5px">
                                     <div class="col-sm-6">
-                                         <textarea id="lblofferdescription<%# Eval("ID") %>" rows = "5" cols = "30" name = "description" style="width: 100%;" disabled="disabled"></textarea>
+                                         <textarea id="lblofferdescription<%# Eval("ID") %>" rows = "5" cols = "30"  name = "description" style="width: 100%; resize:none;" disabled="disabled"></textarea>
                                     </div>
                                     <div class="col-sm-6">
                                         <label  style="width: 105px;">Start on :</label>
@@ -982,12 +1021,12 @@ hr {
                                         <label style="width: 105px;">Valid Till :</label>
                                         <input type="text" class="time" id="lblenddate<%# Eval("ID") %>" style="width: 120px" disabled="disabled" />
                                     </div>
-                                     <i class="fa fa-edit" onclick="enable(<%# Eval("ID") %>);"></i>
+                                     <i class="fa fa-edit" id="editoffer<%# Eval("ID") %>" style="visibility:hidden;" onclick="enable(<%# Eval("ID") %>);"></i>
                                 </div>
                             </div>
                             <div class="panel-footer" style="text-align: right;">
                                 <button type="button" id="btn_Cancel"  style="margin-top: 5px;" data-dismiss="modal"  onclick="HideOfferDetails(<%# Eval("ID") %>);"  class="btn btn-danger">Back</button>
-                                <button type="button" id="btn_Submit" style="margin-top: 5px;"  onclick="EditOffers(<%# Eval("ID") %>);" class="btn btn-primary">Ok</button>
+                                <button type="button" id="btn_Submit<%# Eval("ID") %>" style="margin-top: 5px;"  onclick="EditOffers(<%# Eval("ID") %>);" class="btn btn-primary">Ok</button>
 
                             </div>
                         </div>
