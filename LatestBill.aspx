@@ -23,7 +23,8 @@
         <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>  
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>  
         <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" /> 
-
+        <script type="text/javascript" src="https://momentjs.com/downloads/moment.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
      
       <link rel="stylesheet" href="CSS/NewAptt.css"/>
               <link rel="stylesheet" href="CSS/ApttLayout.css"/>
@@ -74,6 +75,14 @@
 
             });
 
+            //$("#lbltill").datetimepicker({
+            //    format:'DD-MM-YYYY'
+            //});
+
+             $("#txtBillDate").datetimepicker({
+                //  format: 'YYYY-MM-DD'
+                format: 'DD-MM-YYYY'
+            });
 
             $("#btnClose").click(function () {
                 document.getElementById("importModal").style.display = "none";
@@ -817,7 +826,7 @@
                               <asp:Label width="100" ID="lblFlatNuber"  runat="server" Font-Size="Small"></asp:Label> <br />
                                       
                              <label  class="lbltxt" style="width:150px;">Cycle Type :</label>
-                              <asp:Label width="100" ID="Label1"  runat="server" Font-Size="Small"></asp:Label> <br />
+                              <asp:Label width="100" ID="lblCycle"  runat="server" Font-Size="Small"></asp:Label> <br />
 
                                       
                              <label  class="lbltxt" style="width:150px;"> Bill Type :  </label>
@@ -829,10 +838,10 @@
                               <asp:Label width="100" ID="lblFlatArea" runat="server" Font-Size="Small"></asp:Label> <br />
                              
                              <label  class="lbltxt" style="width:150px;">Society BillID :</label>
-                              <asp:Label width="100" ID="Label3"  runat="server" Font-Size="Small"></asp:Label> <br />
+                              <asp:Label width="100" ID="lblsocietybillid"  runat="server" Font-Size="Small"></asp:Label> <br />
                                      
                              <label  class="lbltxt" style="width:150px;">Current MonthBalance :</label>
-                              <asp:Label width="100" ID="Label4"  runat="server" Font-Size="Small"></asp:Label> <br />
+                              <asp:Label width="100" ID="lblCurrentmonthbal"  runat="server" Font-Size="Small"></asp:Label> <br />
 
 
                              <label  class="lbltxt"  style="width:150px;"> Charge Type :</label>
@@ -849,10 +858,10 @@
                               <asp:Label width="100" ID="lblPreviousBalance" runat="server" Font-Size="Small"></asp:Label> <br />
                           <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                                               <ContentTemplate>
-                             <label class="lbltxt" style="width:150px;">Till Date : </label>
+                             <label class="lbltill" style="width:150px;">Till Date : </label>
                             
                                                
-                                           <asp:TextBox ID="txtBillDate" CssClass="form-control" runat="server"></asp:TextBox>                     
+                                           <asp:TextBox ID="txtBillDate"  CssClass="form-control" runat="server"></asp:TextBox>                     
                                 <%-- >  <asp:Label ID="lblTillDate" runat="server" Font-Size="Small"></asp:Label>--%>
                                  
                            
