@@ -148,14 +148,14 @@ public class BillCycle
 
                
                 GenerateBill emptyBill = new GenerateBill();
-                emptyBill.FlatNumber = FlatRow["FlatNumber"].ToString();
-                emptyBill.BillID = BillID;
+                emptyBill.op_FlatNumber = FlatRow["FlatNumber"].ToString();
+                emptyBill.SocietyBillID = BillID;
                 emptyBill.CurrentBillAmount = 0;
                 emptyBill.CycleType = CycleType;
                 emptyBill.PaymentDueDate = Convert.ToDateTime(CycleStart).AddDays(7);
                 emptyBill.BillMonth = Convert.ToDateTime(CycleStart);
                 emptyBill.PreviousMonthBalance = 0;
-                emptyBill.SAmountPaidDate = null;
+                emptyBill.op_AmountPaidDate = null;
                 emptyBill.AmountPaid = 0;
                 emptyBill.PaymentMode = "0";
                 emptyBill.TransactionID = null;
@@ -164,8 +164,8 @@ public class BillCycle
                 emptyBill.BillDescription = "First Empty Bill";
                 emptyBill.BillStartDate = Convert.ToDateTime(CycleStart).AddDays(-1);
                 emptyBill.BillEndDate = Convert.ToDateTime(CycleStart).AddDays(-1);
-                tempBillCycle.Rows.Add(emptyBill.FlatNumber, emptyBill.BillID, emptyBill.CurrentBillAmount, emptyBill.CycleType, emptyBill.PaymentDueDate, emptyBill.BillMonth, 
-                    emptyBill.PreviousMonthBalance, emptyBill.SAmountPaidDate, emptyBill.AmountPaid, emptyBill.PaymentMode, emptyBill.TransactionID, emptyBill.InvoiceID, emptyBill.ModifiedAt, 
+                tempBillCycle.Rows.Add(emptyBill.op_FlatNumber, emptyBill.SocietyBillID, emptyBill.CurrentBillAmount, emptyBill.CycleType, emptyBill.PaymentDueDate, emptyBill.BillMonth, 
+                    emptyBill.PreviousMonthBalance, emptyBill.op_AmountPaidDate, emptyBill.AmountPaid, emptyBill.PaymentMode, emptyBill.TransactionID, emptyBill.InvoiceID, emptyBill.ModifiedAt, 
                     emptyBill.BillDescription, emptyBill.BillStartDate, emptyBill.BillEndDate);
 
             }
@@ -220,61 +220,7 @@ public class BillCycle
         return result;
     }
 
-    public DataSet GetActivatedBill(string BillStatus,string BillType,string FlatNumber)
-    {
-        String BillStatusCondition = "", FlatCondition, BillCondition;
-
-        if (BillStatus == "Active")
-        {
-            BillStatusCondition = " and CycleStart <= GETDATE()+1  and GETDATE() < CycleEnD";
-
-        }
-        else if (BillStatus == "DeActive")
-        {
-            BillStatusCondition = " and GETDATE() >= CycleEnD and CycleEnD != CycleStart";
-
-        }
-        else if (BillStatus == "InActive")
-        {
-            BillStatusCondition = " and CycleStart = CycleEnD";
-
-        }
-        else if (BillStatus == "Show All")
-        {
-            BillStatusCondition = "";
-        }
-
-        if (FlatNumber == "")
-        {
-
-            FlatCondition = " FlatID is not null";
-        }
-        else
-        {
-            FlatCondition = " FlatID = '" + FlatNumber + "'";
-        }
-
-        if (BillType == "Show All")
-        {
-
-            BillCondition = " BillType is not null";
-        }
-        else
-        {
-            BillCondition = " BillType = '" + BillType + "'";
-        }
-
-        //Added by Aarshi on 14 - Sept - 2017 for bug fix
-        String BillGenQuery = "select * from " + ViewName + "  Where " + FlatCondition + " and " + BillCondition + BillStatusCondition;
-        BillGenQuery += " Select Count(*) FROM " + ViewName + " WHERE CycleStart <= GETDATE()+1  and GETDATE() < CycleEnD";
-        BillGenQuery += " Select Count(*) FROM " + ViewName + " WHERE GETDATE() >= CycleEnD and CycleEnD != CycleStart";
-        BillGenQuery += " Select Count(*) FROM " + ViewName + " WHERE CycleStart = CycleEnD";
-
-
-        DataAccess dacess = new DataAccess();
-        DataSet dsActivatedBill = dacess.GetData(BillGenQuery);
-        return dsActivatedBill;
-    }
+   
 
     public List<string> GetFlatNumber(string FlatNumber)
     {

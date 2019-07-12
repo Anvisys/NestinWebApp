@@ -9,17 +9,17 @@ using System.Web;
 public class GenerateBill
 {
     public int PayID;
-    public String FlatNumber;
-    public int BillID;
+    public int FlatID;
+    public int SocietyBillID;
+    //public String FlatNumber;
+    public int BillTypeID;
+
     public int CurrentBillAmount;
     public String CycleType;
     public DateTime PaymentDueDate;
-    public DateTime BillMonth;
-    public String BillType;
     public int AmountTobePaid;
     public int PreviousMonthBalance;
     public DateTime AmountPaidDate;
-    public string SAmountPaidDate;
     public int AmountPaid;
     public String PaymentMode;
     public String TransactionID;
@@ -29,14 +29,22 @@ public class GenerateBill
     public String BillDescription;
     public DateTime BillStartDate;
     public DateTime BillEndDate;
+    public DateTime BillMonth;
+    public int SocietyID;
+    public String ActionType;
+    public int Activated;
+
+    public String op_BillType;
+    public string op_AmountPaidDate;
+    public DateTime op_CycleStartDate;
+    public DateTime op_CycleEndDate;
+    public String op_ChargeType;
+    public Double op_Rate;
+    public int op_FlatArea;
+    public int op_Days;
+    public String op_FlatNumber;
 
 
-    public DateTime CycleStartDate;
-    public DateTime CycleEndDate;
-    public String ChargeType;
-    public Double Rate;
-    public int FlatArea;
-    public int Days;
 
 
     public GenerateBill()
@@ -52,7 +60,7 @@ public class GenerateBill
     {
        // String GenerateCycle = "";
         DateTime newstartdate = previousBill.BillEndDate.AddDays(1);
-        int day = previousBill.CycleEndDate.Day;
+        int day = previousBill.op_CycleEndDate.Day;
 
         if (GenerateCycle == "Manual")
         {
@@ -97,34 +105,34 @@ public class GenerateBill
             Double Amount = 1;
 
 
-            if (ChargeType == "Fixed")
+            if (op_ChargeType == "Fixed")
             {
-                Amount = Convert.ToDouble(Rate);
+                Amount = Convert.ToDouble(op_Rate);
 
                 if (CycleType == "Monthly")
                 {
-                    Amount = Convert.ToDouble(Rate) / 30 * days;
+                    Amount = Convert.ToDouble(op_Rate) / 30 * days;
                 }
                 else if (CycleType == "Yearly")
                 {
-                    Amount = Convert.ToDouble(Rate) / 365 * days;
+                    Amount = Convert.ToDouble(op_Rate) / 365 * days;
 
                 }
             }
 
-            if (ChargeType == "Rate")
+            if (op_ChargeType == "Rate")
             {
                 if (CycleType == "Monthly")
                 {
-                    Amount = Amount = Convert.ToDouble(Rate) * Convert.ToDouble(FlatArea) / 30 * days;
+                    Amount = Amount = Convert.ToDouble(op_Rate) * Convert.ToDouble(op_FlatArea) / 30 * days;
                 }
                 else if (CycleType == "Yearly")
                 {
-                    Amount = Amount = Convert.ToDouble(Rate) * Convert.ToDouble(FlatArea) / 365 * days;
+                    Amount = Amount = Convert.ToDouble(op_Rate) * Convert.ToDouble(op_FlatArea) / 365 * days;
 
                 }
             }
-            if (ChargeType == "Mannual")
+            if (op_ChargeType == "Mannual")
             {
                 Amount = 0;
             }

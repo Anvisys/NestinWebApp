@@ -60,8 +60,18 @@ public partial class ActiveBillPlan : System.Web.UI.Page
             String BillStatus = drpBillStatusype.SelectedItem.Text;
             String BillType = drpActivatedBillType.SelectedItem.Text;
             String FlatNumber = txtActBillsFlats.Text;
-            BillCycle billCycle = new BillCycle();
-            DataSet dsActivatedBill = billCycle.GetActivatedBill(BillStatus, BillType, FlatNumber);
+            Bill billCycle = new Bill();
+            DataSet dsActivatedBill;// = billCycle.GetActivatedBill(BillStatus, BillType, FlatNumber);
+
+            if (BillStatus == "Active")
+            {
+                dsActivatedBill = billCycle.GetActivatedBill(BillStatus, BillType, FlatNumber);
+            }
+            else 
+            {
+                dsActivatedBill = billCycle.GetDeActivatedBill(BillStatus, BillType, FlatNumber);
+            }
+
             if (dsActivatedBill != null)
             {
                 if (dsActivatedBill.Tables.Count > 0)
@@ -75,12 +85,12 @@ public partial class ActiveBillPlan : System.Web.UI.Page
                     DataTable model = dsActivatedBill.Tables[0];
 
                     //Added by Aarshi on 14 - Sept - 2017 for bug fix
-                    if (dsActivatedBill.Tables[1].Rows[0][0].ToString() != string.Empty)
+                   /* if (dsActivatedBill.Tables[1].Rows[0][0].ToString() != string.Empty)
                         lblActivateCount.Text = dsActivatedBill.Tables[1].Rows[0][0].ToString();
                     if (dsActivatedBill.Tables[2].Rows[0][0].ToString() != string.Empty)
                         lblDeactivateCount.Text = dsActivatedBill.Tables[2].Rows[0][0].ToString();
                     if (dsActivatedBill.Tables[3].Rows[0][0].ToString() != string.Empty)
-                        lblNotActivateCount.Text = dsActivatedBill.Tables[3].Rows[0][0].ToString();
+                        lblNotActivateCount.Text = dsActivatedBill.Tables[3].Rows[0][0].ToString();*/
                     //Ends here
 
                 }
@@ -122,7 +132,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
             {
                 DateTime Currentdate = Utility.GetCurrentDateTimeinUTC();
                 string id = drv.Row[0].ToString();
-                String strStartDate = drv.Row["CycleStart"].ToString();
+                /*String strStartDate = drv.Row["CycleStart"].ToString();
                 String strEndDate = drv.Row["CycleEnd"].ToString();
                 DateTime StartDate, EndDate;
 
@@ -160,7 +170,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
                 else if (Currentdate > StartDate && EndDate == Currentdate || EndDate < Currentdate)
                 {
                     statusCell.Text = "DeActive";
-                }
+                }*/
             }
         }
     }
@@ -201,8 +211,8 @@ public partial class ActiveBillPlan : System.Web.UI.Page
 
         //Added by Aarshi on 17 Aug 2017 for code restructuring
         BillCycle billCycle = new BillCycle();
-        int ID = billCycle.GetFlatID(FlatNumber);
-
+        //   int ID = billCycle.GetFlatID(FlatNumber);
+        int ID = Convert.ToInt32(FlatNumber);
         int count = 0;
         if (ID != 0)
         {
@@ -211,12 +221,44 @@ public partial class ActiveBillPlan : System.Web.UI.Page
 
             //BillCycle billCycle = new BillCycle();
             // Bill.ActivateBillForFlat(Convert.ToInt32(billid), FlatNumber, Convert.ToDateTime(CycleStart), Convert.ToDateTime(CycleEnD));
-            bool result = billCycle.AddSingleFlatBillCycle(Convert.ToInt32(billid), FlatNumber, Convert.ToDateTime(startdate), Convert.ToDateTime(enddate), "Activate Bill");
+          //  bool result = true;   // = billCycle.AddSingleFlatBillCycle(Convert.ToInt32(billid), FlatNumber, Convert.ToDateTime(startdate), Convert.ToDateTime(enddate), "Activate Bill");
 
-            if (result)
+            GenerateBill genBill = new GenerateBill();
+            genBill.AmountTobePaid = Convert.ToInt32(Rate);
+            genBill.AmountPaid = 0;
+            genBill.AmountPaidDate = DateTime.Now;
+            genBill.BillDescription = Description;
+            genBill.BillEndDate = enddate;
+            genBill.BillMonth = enddate;
+            genBill.BillTypeID = 5;
+            genBill.BillStartDate= DateTime.UtcNow;
+            genBill.CurrentBillAmount = 500;
+            genBill.ActionType = "Activate";
+            genBill.Activated = 1;
+            genBill.CycleType = "Quaterly";
+            genBill.FlatID = ID;
+            genBill.InvoiceID = "";
+            genBill.ModifiedAt = DateTime.UtcNow;
+            genBill.PaymentDueDate = DateTime.UtcNow.AddDays(7);
+            genBill.PaymentMode = "";
+            genBill.PreviousMonthBalance = 0;
+            genBill.SocietyBillID = 2;
+            genBill.SocietyID = 1;
+            genBill.TransactionID = "";
+            
+
+            genBill.op_BillType = ""; 
+
+            Bill bill = new Bill();
+
+           bool isInserted = bill.InsertNewBillPay(genBill);
+
+
+
+          /*  if (result)
             {
-                count = Bill.InsertFirstZeroBill(FlatNumber, billid, CycleType, CycleStart);
-            }
+               // count = Bill.InsertFirstZeroBill(FlatNumber, billid, CycleType, CycleStart);
+            }*/
         }
 
         else
@@ -371,7 +413,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
                 ctrl.Items.Clear();
                 foreach (DataRow dtRow in dsBillType.Tables[0].Rows)
                 {
-                    ctrl.Items.Add(new ListItem(dtRow["BillType"].ToString(), dtRow["BillID"].ToString()));
+                    ctrl.Items.Add(new ListItem(dtRow["BillType"].ToString(), dtRow["BillTypeID"].ToString()));
                 }
 
                 if (ctrl.ID == "drpCurrentBillType" || ctrl.ID == "drpActivatedBillType" || ctrl.ID == "drpGeneratedBillType")
@@ -396,7 +438,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
 
         newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, CurrentBillEndDate);
 
-        if (newBill.Days <= 0)
+        if (newBill.op_Days <= 0)
         {
             lblBillDuplicate.Text = "Bill is Already Generated";
         }
@@ -406,9 +448,9 @@ public partial class ActiveBillPlan : System.Web.UI.Page
             lblBillDuplicate.Text = "";
         }
 
-        lblFlatArea.Text = newBill.FlatArea.ToString();
-        lblRate.Text = newBill.Rate.ToString();
-        lblChargeType.Text = newBill.ChargeType;
+        lblFlatArea.Text = newBill.op_FlatArea.ToString();
+        lblRate.Text = newBill.op_Rate.ToString();
+        lblChargeType.Text = newBill.op_ChargeType;
         lblFromDate.Text = newBill.BillStartDate.ToShortDateString();
         txtFlatBillAmt.Visible = true;
         txtFlatBillAmt.Text = newBill.CurrentBillAmount.ToString();
@@ -431,14 +473,14 @@ public partial class ActiveBillPlan : System.Web.UI.Page
 
         newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, CurrentBillEndDate);
 
-        if (newBill.Days <= 0)
+        if (newBill.op_Days <= 0)
         {
             lblBillDuplicate.Text = "Bill is Already Generated";
         }
 
-        lblFlatArea.Text = newBill.FlatArea.ToString();
-        lblRate.Text = newBill.Rate.ToString();
-        lblChargeType.Text = newBill.ChargeType;
+        lblFlatArea.Text = newBill.op_FlatArea.ToString();
+        lblRate.Text = newBill.op_Rate.ToString();
+        lblChargeType.Text = newBill.op_ChargeType;
         lblFromDate.Text = newBill.BillStartDate.ToShortDateString();
         txtFlatBillAmt.Visible = true;
         txtFlatBillAmt.Text = newBill.CurrentBillAmount.ToString();
@@ -485,7 +527,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
             bill = new Bill();
         }
 
-        int BillID = newBill.BillID;
+        int BillID = newBill.SocietyBillID;
         DateTime BillEndDate = Convert.ToDateTime(txtBillDate.Text);
         String FlatNumber = lblFlatNuber.Text;
         Double PrevBalance = Convert.ToDouble(lblPreviousBalance.Text);
@@ -505,7 +547,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
 
                 if (result2)
                 {
-                    bool result1 = DeActivateBill(newBill.BillID, newBill.FlatNumber, newBill.BillEndDate);
+                    bool result1 = DeActivateBill(newBill.SocietyBillID, newBill.op_FlatNumber, newBill.BillEndDate);
 
                     //Added by aarshi on 11-Sept-2017 for bug fix
                     if (result1)

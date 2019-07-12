@@ -18,16 +18,35 @@ public partial class SocietyBillPlan : System.Web.UI.Page
 {
     User muser;
     static DataSet dsBillType;
+    static DataSet dsBillPlanType;
+
+
     protected void Page_Load(object sender, EventArgs e)
     {
         SessionVariables.CurrentPage = "SocietyBillPlan.aspx";
         LoadSocietyBillPlanData();
+        if (!IsPostBack)
+        {
+            LoadBillData();
+        }
     }
 
 
     #region BillPlan
 
-   
+
+
+    private void LoadBillData()
+    {
+        if (dsBillPlanType == null)
+        {
+            dsBillPlanType = Bill.GetSocietyBillTypes();
+        }
+        drpAddBillType.DataSource = dsBillPlanType;
+        drpAddBillType.DataValueField = dsBillPlanType.Tables[0].Columns["ID"].ToString();
+        drpAddBillType.DataTextField = dsBillPlanType.Tables[0].Columns["BillType"].ToString();
+        drpAddBillType.DataBind();
+    }
 
     protected void linkSocietyplans_Click(object sender, EventArgs e)
     {
@@ -156,8 +175,11 @@ public partial class SocietyBillPlan : System.Web.UI.Page
 
             
             BillPlan billPlan = new BillPlan();
+            
+
+
             muser = (User)SessionVariables.User;
-            int BillID = billPlan.AddSocietyBillPlan(drpAddBillType.SelectedItem.Text, ChargeType, txtBillRate.Text, CycleType, ApplyTo,muser.currentResident.SocietyID);
+            int BillID = billPlan.AddSocietyBillPlan( Convert.ToInt32(drpAddBillType.SelectedValue.ToString()) ,  drpAddBillType.SelectedItem.Text, ChargeType, txtBillRate.Text, CycleType, ApplyTo,muser.currentResident.SocietyID);
 
             if (BillID > 0)
             {
@@ -239,7 +261,7 @@ public partial class SocietyBillPlan : System.Web.UI.Page
         HiddenEditsocietyID.Value = billID;
         HiddenFormRequired.Value = "NewEditSocietyPlanForm";
 
-        drpAddBillType.SelectedValue = BillType;
+   
         drpbillcycle.SelectedValue = HiddenCycleType.Value;
         drpchargetype.SelectedValue = HiddenChargeType.Value;
         txtBillRate.Text = HiddenEditSocietyRate.Value;

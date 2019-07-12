@@ -137,10 +137,10 @@
 
         });
 
-        function ActiveBillPopup(BillID, FlatID, FlatArea, BillType, Rate, ChargeType, CycleType, cyclestart, cycleEnd, Element) {
+        function ActiveBillPopup(BillID, FlatID, FlatArea, BillType, Rate, ChargeType, Element) {
            
 
-            var status = Element.parentNode.parentNode.cells[7].innerHTML;
+           // var status = Element.parentNode.parentNode.cells[7].innerHTML;
 
             document.getElementById("HiddenField1").value = FlatID;
             document.getElementById("HiddenField2").value = BillType;
@@ -149,7 +149,7 @@
             document.getElementById("txtchargeType").value = ChargeType;
             document.getElementById("txtBillType").value = BillType;
 
-
+          
             var Posx = 0;
             var Posy = 0;
             while (Element != null) {
@@ -169,8 +169,8 @@
             document.getElementById("HiddenBillID").value = BillID;
             document.getElementById("HiddenFieldFlatArea").value = FlatArea;
             document.getElementById("HiddenFieldRate").value = Rate;
-            document.getElementById("HiddenFieldCycleType").value = CycleType;
-            document.getElementById("HiddenFieldChargeType").value = ChargeType;
+           // document.getElementById("HiddenFieldCycleType").value = CycleType;
+           /* document.getElementById("HiddenFieldChargeType").value = ChargeType;
             document.getElementById("HiddenFieldCycleStart").value = cyclestart;
 
 
@@ -179,7 +179,7 @@
             var cyclestartdatenew = new Date(cyclestart);
             var cycleenddatenew = new Date(cycleEnd);
             var cyclestartdate = cyclestartdatenew.toLocaleDateString();
-            var cycleenddate = cycleenddatenew.toLocaleDateString();
+            var cycleenddate = cycleenddatenew.toLocaleDateString();*/
 
             if (status == "InActive") {
 
@@ -289,8 +289,8 @@
                                 
                                    <AlternatingRowStyle BackColor="#f5f5f5" />
                                  <Columns>
-                                        <asp:BoundField DataField="BillID" HeaderText="BillID" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="30px"/>
-                                     <asp:BoundField DataField="FlatID" HeaderText="FlatNumber" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="60px"/>
+                                        <asp:BoundField DataField="SocietyBillID" HeaderText="SocietyBillID" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="30px"/>
+                                     <asp:BoundField DataField="FlatNumber" HeaderText="FlatNumber" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="60px"/>
                                      <asp:BoundField DataField="FlatArea" HeaderText="FlatArea" ItemStyle-CssClass="BillActiveGrid"  HeaderStyle-Width="60px"/>
                                      <asp:BoundField DataField="BillType" HeaderText="BillType" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="80px"/>
                                      <asp:BoundField DataField="Rate" HeaderStyle-Width="70px" HeaderText="Rate" ItemStyle-Width="70px" ItemStyle-CssClass="BillActiveGrid">
@@ -299,12 +299,13 @@
                                      </asp:BoundField>
                                      <asp:BoundField DataField="ChargeType" HeaderText="ChargeType"  ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="60px"/>
                                      <asp:BoundField DataField="CycleType" HeaderText="CycleType"  ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="80px"/>
-                                     <asp:BoundField DataField="CycleStart" HeaderText="CycleStart" DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-Font-Size="Small"  HeaderStyle-Width="80px"/>
+                                    <%-- <asp:BoundField DataField="CycleStart" HeaderText="CycleStart" DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-Font-Size="Small"  HeaderStyle-Width="80px"/>
                                        <asp:BoundField DataField="CycleEnD" HeaderText="CycleEnD" DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-Font-Size="Small"  HeaderStyle-Width="80px"/>
-                                       <asp:BoundField  HeaderText="Status"  ItemStyle-CssClass="BillActiveGrid"  ItemStyle-Wrap="false" ItemStyle-Width="50px" HeaderStyle-Width="60px"/>
+           --%>                            <asp:BoundField  HeaderText="Status"  ItemStyle-CssClass="BillActiveGrid"  ItemStyle-Wrap="false" ItemStyle-Width="50px" HeaderStyle-Width="60px"/>
                                      <asp:TemplateField  HeaderStyle-Width="20px">
                                   <ItemTemplate>
-                             <button id="button" onclick="ActiveBillPopup('<%# Eval("BillID") %>' ,'<%# Eval("FlatID") %>' , '<%# Eval("FlatArea") %>' ,'<%# Eval("BillType") %>','<%# Eval("Rate") %>','<%# Eval("ChargeType") %>','<%# Eval("CycleType") %>','<%# Eval("CycleStart") %>','<%# Eval("CycleEnD") %>',this)" type="button" style=" width:20px;background-color:transparent;border:none;outline:0; height:20px;">
+                             <%--<button id="button" onclick="ActiveBillPopup('<%# Eval("SocietyBillID") %>' ,'<%# Eval("FlatID") %>' , '<%# Eval("FlatArea") %>' ,'<%# Eval("BillType") %>','<%# Eval("Rate") %>','<%# Eval("ChargeType") %>','<%# Eval("CycleType") %>','<%# Eval("CycleStart") %>','<%# Eval("CycleEnD") %>',this)" type="button" style=" width:20px;background-color:transparent;border:none;outline:0; height:20px;">--%>
+                                      <button id="button" onclick="ActiveBillPopup('<%# Eval("SocietyBillID") %>' ,'<%# Eval("FlatID") %>' , '<%# Eval("FlatArea") %>' ,'<%# Eval("BillType") %>','<%# Eval("Rate") %>','<%# Eval("ChargeType") %>',this)" type="button" style=" width:20px;background-color:transparent;border:none;outline:0; height:20px;">
                               <i class="fa fa-angle-double-right" id="left_icon" style="color:gray;font-size:20px"></i>
                                          </ItemTemplate>
                                      </asp:TemplateField>
@@ -334,8 +335,8 @@
 
 
                                 <div id="ActiveBillDropdown" class="layout-dropdown-content theme-dropdown-content">                                   
-                                             <asp:Button ID="btnFlatbillGen" runat="server" CssClass="layout_dropdown_Button"  CausesValidation="false" Text="Generate Bill "  OnClick="btnFlatbillGen_Click"/>
-                                            <button type="button" id="btnActivateBill"  class="layout_dropdown_Button">Activate</button> 
+                                   <asp:Button ID="btnFlatbillGen" runat="server" CssClass="layout_dropdown_Button"  CausesValidation="false" Text="Generate Bill "  OnClick="btnFlatbillGen_Click"/>
+                                  <button type="button" id="btnActivateBill"  class="layout_dropdown_Button">Activate</button> 
                                     <asp:Button ID="btnDeactivate" runat="server" Text="Deactivate" CssClass="layout_dropdown_Button"  CausesValidation="false" OnClick="btnDeactivatebill_Click" />
                                 </div>
                          </td>

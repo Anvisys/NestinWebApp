@@ -370,7 +370,7 @@ public partial class LatestBill : System.Web.UI.Page
             {
                 newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, CurrentBillEndDate);
 
-                if (newBill.Days <= 0)
+                if (newBill.op_Days <= 0)
                 {
                     lblBillDuplicate.Text = "Bill is Already Generated";
                 }
@@ -380,9 +380,9 @@ public partial class LatestBill : System.Web.UI.Page
                     lblBillDuplicate.Text = "";
                 }
 
-                lblFlatArea.Text = newBill.FlatArea.ToString();
-                lblRate.Text = newBill.Rate.ToString();
-                lblChargeType.Text = newBill.ChargeType;
+                lblFlatArea.Text = newBill.op_FlatArea.ToString();
+                lblRate.Text = newBill.op_Rate.ToString();
+                lblChargeType.Text = newBill.op_ChargeType;
                 lblNewBillType.Text = BillType;
                 lblFromDate.Text = newBill.BillStartDate.ToShortDateString();
                 txtFlatBillAmt.Visible = true;
@@ -413,9 +413,41 @@ public partial class LatestBill : System.Web.UI.Page
             String mode = drpPayMode.SelectedValue.ToString();
             int TransID = Convert.ToInt32(txtTransaID.Text);
             int InvoiceID = Convert.ToInt32(txtInvID.Text) ;
+            int FlatID = Convert.ToInt32(lblFlat.Text);
+           
+
+            GenerateBill genBill = new GenerateBill();
+  
+            genBill.AmountPaid = Amount;
+            genBill.AmountPaidDate = DateTime.Now;
+            genBill.BillDescription = "Payment";
+            genBill.BillEndDate = DateTime.UtcNow;
+            genBill.BillMonth = DateTime.UtcNow;
+            genBill.BillTypeID = 5;
+            genBill.BillStartDate = DateTime.UtcNow;
+            genBill.CurrentBillAmount = 0;
+            genBill.ActionType = "Payment";
+            genBill.Activated = 1;
+            genBill.CycleType = "Quaterly";
+            genBill.FlatID = FlatID;
+            genBill.InvoiceID = InvoiceID.ToString();
+            genBill.ModifiedAt = DateTime.UtcNow;
+            genBill.PaymentDueDate = DateTime.UtcNow;
+            genBill.PaymentMode = mode;
+            genBill.PreviousMonthBalance = 0;
+            genBill.SocietyBillID = 2;
+            genBill.SocietyID = 1;
+            genBill.TransactionID = TransID.ToString();
+
+
+            genBill.op_BillType = "";
 
             Bill bill = new Bill();
-            bool result = bill.UpdatePayment(InvoiceID, Amount, mode, TransID, paid);                //bool result = true;
+
+            bool result = bill.InsertNewBillPay(genBill);
+
+          //  Bill bill = new Bill();
+           // bool result = bill.UpdatePayment(InvoiceID, Amount, mode, TransID, paid);                //bool result = true;
 
             if (result)
             {
@@ -477,19 +509,19 @@ public partial class LatestBill : System.Web.UI.Page
                     for (int i = 0; i < dataBills.Rows.Count; i++)
                     {
                         GenerateBill previousBill = new GenerateBill();
-                        previousBill.FlatNumber = dataBills.Rows[i]["FlatNumber"].ToString();
-                        previousBill.FlatArea = Convert.ToInt32(dataBills.Rows[i]["FlatArea"]);
-                        previousBill.ChargeType = dataBills.Rows[i]["ChargeType"].ToString();
+                        previousBill.op_FlatNumber = dataBills.Rows[i]["FlatNumber"].ToString();
+                        previousBill.op_FlatArea = Convert.ToInt32(dataBills.Rows[i]["FlatArea"]);
+                        previousBill.op_ChargeType = dataBills.Rows[i]["ChargeType"].ToString();
                         previousBill.CycleType = dataBills.Rows[i]["CycleType"].ToString();
-                        previousBill.Rate = Convert.ToDouble(dataBills.Rows[i]["Rate"]);
+                        previousBill.op_Rate = Convert.ToDouble(dataBills.Rows[i]["Rate"]);
                         previousBill.BillStartDate = Convert.ToDateTime(dataBills.Rows[i]["BillStartDate"]);
                         previousBill.BillEndDate = Convert.ToDateTime(dataBills.Rows[i]["BillEndDate"]);
-                        previousBill.BillID = Convert.ToInt32(dataBills.Rows[i]["BillID"]);
+                        previousBill.SocietyBillID = Convert.ToInt32(dataBills.Rows[i]["SocietyBillID"]);
                         previousBill.CurrentMonthBalance = Convert.ToInt32(dataBills.Rows[i]["CurrentMonthBalance"]);
 
                         GenerateBill newBill = Bill.CalculateNewBill(previousBill, "Auto", Utility.GetCurrentDateTimeinUTC());
 
-                        if (newBill.Days > 0)
+                        if (newBill.op_Days > 0)
                         {
                             bool result = bill.InsertNewBill(newBill);
 
@@ -646,7 +678,7 @@ public partial class LatestBill : System.Web.UI.Page
                 ctrl.Items.Clear();
                 foreach (DataRow dtRow in dsBillType.Tables[0].Rows)
                 {
-                    ctrl.Items.Add(new ListItem(dtRow["BillType"].ToString(), dtRow["BillID"].ToString()));
+                    ctrl.Items.Add(new ListItem(dtRow["BillType"].ToString(), dtRow["BillTypeID"].ToString()));
                 }
 
                 if (ctrl.ID == "drpCurrentBillType" || ctrl.ID == "drpActivatedBillType" || ctrl.ID == "drpGeneratedBillType")
@@ -863,7 +895,7 @@ public partial class LatestBill : System.Web.UI.Page
     {
         DateTime Date = Utility.GetCurrentDateTimeinUTC();
         DataAccess dacess = new DataAccess();
-        String BillPaidCheck = "select * From dbo.ViewLatestGeneratedBill where PayID = '" + PayID + "'";
+        String BillPaidCheck = "select * From dbo.ViewLatestFlatBill where PayID = '" + PayID + "'";
         //String BillPaidCheck = "select AmountPaidDate,TransactionID,InvoiceID From dbo.GeneratedBill where PayID = '" + PayID + "'";
         DataSet dscheck = dacess.ReadData(BillPaidCheck);
         String PaidDateFormat = "";
@@ -880,7 +912,7 @@ public partial class LatestBill : System.Web.UI.Page
                 DateTime tempDate;
                 DataTable dt = dscheck.Tables[0];
                 lblBillType.Text = dt.Rows[0]["BillType"].ToString();
-                lblFlat.Text = dt.Rows[0]["FlatNumber"].ToString();
+                lblFlat.Text = dt.Rows[0]["FlatID"].ToString();
                 lblBillAmount.Text = dt.Rows[0]["CurrentBillAmount"].ToString();
                 lblBalance.Text = dt.Rows[0]["PreviousMonthBalance"].ToString();
 
@@ -1001,7 +1033,7 @@ public partial class LatestBill : System.Web.UI.Page
             bill = new Bill();
         }
 
-        int BillID = newBill.BillID;
+        int BillID = newBill.SocietyBillID;
         DateTime BillEndDate = DateTime.ParseExact(txtBillDate.Text, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture); 
         String FlatNumber = lblFlatNuber.Text;
         Double PrevBalance =  Convert.ToDouble(lblPreviousBalance.Text);
@@ -1020,7 +1052,7 @@ public partial class LatestBill : System.Web.UI.Page
 
                 if (result2)
                 {
-                    bool result1 = DeActivateBill(newBill.BillID, newBill.FlatNumber, newBill.BillEndDate);
+                    bool result1 = DeActivateBill(newBill.SocietyBillID, newBill.op_FlatNumber, newBill.BillEndDate);
 
                     //Added by aarshi on 11-Sept-2017 for bug fix
                     if (result1)
@@ -1350,7 +1382,7 @@ public partial class LatestBill : System.Web.UI.Page
             {
                 newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, CurrentBillEndDate);
 
-                if (newBill.Days <= 0)
+                if (newBill.op_Days <= 0)
                 {
                     lblBillDuplicate.Text = "Bill is Already Generated";
                 }
@@ -1360,9 +1392,9 @@ public partial class LatestBill : System.Web.UI.Page
                     lblBillDuplicate.Text = "";
                 }
 
-                lblFlatArea.Text = newBill.FlatArea.ToString();
-                lblRate.Text = newBill.Rate.ToString();
-                lblChargeType.Text = newBill.ChargeType;
+                lblFlatArea.Text = newBill.op_FlatArea.ToString();
+                lblRate.Text = newBill.op_Rate.ToString();
+                lblChargeType.Text = newBill.op_ChargeType;
                 lblNewBillType.Text = BillType;
                 lblFromDate.Text = newBill.BillStartDate.ToShortDateString();
                 txtFlatBillAmt.Visible = true;

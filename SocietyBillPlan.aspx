@@ -78,7 +78,7 @@
 
 
         $(document).ready(function () {
-            window.parent.FrameSourceChanged();
+
 
             $("#BillCancel_Button").click(function () {
                $('#NewEditSocietyPlanForm').hide();
@@ -197,7 +197,8 @@
                                      <div><h4 class="pull-left ">Bill Plans : </h4></div>
                                  </div>
                                 <div class="col-sm-6 col-xs-12" style="padding:0px;">
-                                </div>
+                                                         
+                                                      </div>
                                  <div class="col-sm-3 hidden-xs" style="vertical-align:middle; margin-top:10px;">
                                     <div>
                                         <button type="button" id="IDNewBill" class="btn-sm btn btn-primary"><i class="fa fa-plus"></i> Add Plan</button>  
@@ -220,13 +221,12 @@
                 
                                       <asp:DataList 
                                           ID="BillPlanDataList" runat="server" HorizontalAlign="Center" 
-                                          RepeatColumns="2" RepeatDirection="Horizontal" Width="100%"  
+                                          RepeatColumns="3" RepeatDirection="Horizontal" Width="80%"  CellSpacing="5" 
                                            OnItemDataBound="SocietyBillPlan_ItemDataBound"> 
                                        
                                         <ItemStyle />
                                         <ItemTemplate>
-                                   <div class="col-xs-6">
-                                     <table class="col-xs-6 BillCycle_table" >
+                                    <table class="BillCycle_table" >
                                         <tr class="layout_header theme_third_bg" style="height:35px; ">
                                             <td colspan="2" style="text-align:center;margin-top:5px;">
                                                 <asp:Label ID="Label3" runat="server" ForeColor="White" Text='<%# Eval("BillType") %>'> </asp:Label>
@@ -267,9 +267,9 @@
                                         </tr>                                                                     
                                          <tr style="text-align:right;">
                           <td colspan="2">
-                          <asp:Label ID="lblID" runat="server" ForeColor="White" Text='<%# Eval("BillID") %>'> </asp:Label>
+                          <asp:Label ID="lblID" runat="server" ForeColor="White" Text='<%# Eval("SocietyBillID") %>'> </asp:Label>
 
-                              <button type ="button" id="PlansEdit" style="border:none;border-radius:5px; background-color:#fff;" onclick="EditPlansPopup('<%# Eval("BillID") %>','<%# Eval("BillType") %>','<%# Eval("chargeType") %>','<%# Eval("Rate") %>','<%# Eval("CycleType") %>','<%# Eval("Applyto") %>',this)">
+                              <button type ="button" id="PlansEdit" style="border:none;border-radius:5px; background-color:#fff;" onclick="EditPlansPopup('<%# Eval("SocietyBillID") %>','<%# Eval("BillType") %>','<%# Eval("chargeType") %>','<%# Eval("Rate") %>','<%# Eval("CycleType") %>','<%# Eval("Applyto") %>',this)">
                                  <i class="fa fa-pencil-square-o fa-2x"  aria-hidden="true"></i>
 
                               </button>
@@ -280,11 +280,10 @@
                  </tr>
                                           
                                     </table>
-                                       </div>
                                 </ItemTemplate>
                                 <AlternatingItemStyle />
 
-                                                                    
+                                
                             </asp:DataList>
 
                 </td>
@@ -333,17 +332,19 @@
                                     <div class="col-xs-8"> 
                                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                                 <ContentTemplate>
+                                                      <fieldset>
                                                     <asp:DropDownList ID="drpAddBillType" runat="server" CssClass="form-control ddl_style" AutoPostBack="true" OnSelectedIndexChanged="drpAddBillType_SelectedIndexChanged">
-                                                        <asp:ListItem Value="0">Select</asp:ListItem>
-                                                        <asp:ListItem>Electricity</asp:ListItem>
+                                                      <%--  <asp:ListItem Value="0">Select</asp:ListItem>--%>
+                                                       <%-- <asp:ListItem>Electricity</asp:ListItem>
                                                         <asp:ListItem>Maintenance</asp:ListItem>
                                                         <asp:ListItem>Club</asp:ListItem>
                                                         <asp:ListItem>Gas</asp:ListItem>
                                                         <asp:ListItem>Water</asp:ListItem>
                                                         <asp:ListItem>Security</asp:ListItem>
-                                                        <asp:ListItem>CulturalActivities</asp:ListItem>
+                                                        <asp:ListItem>CulturalActivities</asp:ListItem>--%>
                                                     </asp:DropDownList> 
                                                     <asp:Label ID="lblBillCheck" runat="server" Font-Size="Small" ForeColor="#FF6666"></asp:Label>
+                                                          </fieldset>
                                                 </ContentTemplate>
 
                                             </asp:UpdatePanel>

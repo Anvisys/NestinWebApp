@@ -15,9 +15,11 @@ public class Bill
 
     private static String TableName = "dbo.GeneratedBill";
    // private static String ViewName = "dbo.ViewLatestGeneratedBill";
-    private static String ViewName = "dbo.ViewLatestGeneratedBill_Resident";
-
+   // private static String ViewName = "dbo.ViewLatestGeneratedBill_Resident";
+    private static String ViewName = "dbo.viewLatestFlatBill";
     
+
+
 
     public Bill()
     {
@@ -38,8 +40,107 @@ public class Bill
     {
     }
 
-    
+    public static DataSet GetSocietyBillTypes() {
+        string BillTypeQuery = "Select * from dbo.lukBillType";
+        DataAccess dacess = new DataAccess();
+        return dacess.GetData(BillTypeQuery);
+    }
 
+
+    public DataSet GetActivatedBill(string BillStatus, string BillType, string FlatNumber)
+    {
+        String BillStatusCondition = "", FlatCondition, BillCondition;
+
+        if (BillStatus == "Active")
+        {
+            BillStatusCondition = " and CycleStart <= GETDATE()+1  and GETDATE() < CycleEnD";
+
+        }
+        else if (BillStatus == "DeActive")
+        {
+            BillStatusCondition = " and GETDATE() >= CycleEnD and CycleEnD != CycleStart";
+
+        }
+        else if (BillStatus == "InActive")
+        {
+            BillStatusCondition = " and CycleStart = CycleEnD";
+
+        }
+        else if (BillStatus == "Show All")
+        {
+            BillStatusCondition = "";
+        }
+
+        if (FlatNumber == "")
+        {
+
+            FlatCondition = " FlatID is not null";
+        }
+        else
+        {
+            FlatCondition = " FlatID = '" + FlatNumber + "'";
+        }
+
+        if (BillType == "Show All")
+        {
+
+            BillCondition = " BillType is not null";
+        }
+        else
+        {
+            BillCondition = " BillType = '" + BillType + "'";
+        }
+
+        //Added by Aarshi on 14 - Sept - 2017 for bug fix
+        String BillGenQuery = "select * from " + ViewName + "  Where ((ApplyTo = 0 and Activated = 1) or ApplyTo = 1) and " + FlatCondition + " and " + BillCondition;// + BillStatusCondition;
+        //  BillGenQuery += " Select Count(*) FROM " + ViewName + " WHERE CycleStart <= GETDATE()+1  and GETDATE() < CycleEnD";
+        //  BillGenQuery += " Select Count(*) FROM " + ViewName + " WHERE GETDATE() >= CycleEnD and CycleEnD != CycleStart";
+        //  BillGenQuery += " Select Count(*) FROM " + ViewName + " WHERE CycleStart = CycleEnD";
+
+
+        DataAccess dacess = new DataAccess();
+        DataSet dsActivatedBill = dacess.GetData(BillGenQuery);
+        return dsActivatedBill;
+    }
+
+
+    public DataSet GetDeActivatedBill(string BillStatus, string BillType, string FlatNumber)
+    {
+        String BillStatusCondition = "", FlatCondition, BillCondition;
+
+        if (FlatNumber == "")
+        {
+
+            FlatCondition = " FlatID is not null";
+        }
+        else
+        {
+            FlatCondition = " FlatID = '" + FlatNumber + "'";
+        }
+
+        if (BillType == "Show All")
+        {
+
+            BillCondition = " BillType is not null";
+        }
+        else
+        {
+            BillCondition = " BillType = '" + BillType + "'";
+        }
+
+
+        //Added by Aarshi on 14 - Sept - 2017 for bug fix
+        String BillGenQuery = "select * from " + ViewName + "  Where (ApplyTo = 0 and Activated != 1) and " + FlatCondition + " and " + BillCondition;// + BillStatusCondition;
+        //  BillGenQuery += " Select Count(*) FROM " + ViewName + " WHERE CycleStart <= GETDATE()+1  and GETDATE() < CycleEnD";
+        //  BillGenQuery += " Select Count(*) FROM " + ViewName + " WHERE GETDATE() >= CycleEnD and CycleEnD != CycleStart";
+        //  BillGenQuery += " Select Count(*) FROM " + ViewName + " WHERE CycleStart = CycleEnD";
+
+
+
+        DataAccess dacess = new DataAccess();
+        DataSet dsActivatedBill = dacess.GetData(BillGenQuery);
+        return dsActivatedBill;
+    }
 
     private static void AddFlatBillCycle(int BillID, int ApplyTo)
     {
@@ -160,7 +261,7 @@ public class Bill
             }
 
             //Added by Aarshi on 21-Sept-2017 for bug fix
-            LatestBillGenQuery = "select * from " + ViewName + " where " + FlatCond + " and " + BillTypeCond + " and " + DateCond;
+            LatestBillGenQuery = "select * from " + ViewName + " where ((ApplyTo = 0 and Activated = 1) or ApplyTo = 1) and " + FlatCond + " and " + BillTypeCond + " and " + DateCond;
             //Ends here
 
            
@@ -324,7 +425,7 @@ public class Bill
         {
             DataAccess dacess = new DataAccess();
             String Generatebill = "Insert into " + TableName + "(FlatNumber,BillID,BillStartDate,BillEndDate,CurrentBillAmount,CycleType,PaymentDueDate,BillMonth,PreviousMonthBalance,ModifiedAt,BillDescription, SocietyID) Values('" 
-                + newBill.FlatNumber + "','" + newBill.BillID + "','" + DateString(newBill.BillStartDate) + "','" + DateString(newBill.BillEndDate) + "','" + newBill.CurrentBillAmount + "','" + newBill.CycleType + "','" + DateString(newBill.PaymentDueDate) + "','" + DateString(newBill.BillMonth) + "','" + newBill.PreviousMonthBalance + "','" + DateString(newBill.ModifiedAt) + "','" + newBill.BillDescription +"'," + SessionVariables.SocietyID + ")";
+                + newBill.op_FlatNumber + "','" + newBill.SocietyBillID + "','" + DateString(newBill.BillStartDate) + "','" + DateString(newBill.BillEndDate) + "','" + newBill.CurrentBillAmount + "','" + newBill.CycleType + "','" + DateString(newBill.PaymentDueDate) + "','" + DateString(newBill.BillMonth) + "','" + newBill.PreviousMonthBalance + "','" + DateString(newBill.ModifiedAt) + "','" + newBill.BillDescription +"'," + SessionVariables.SocietyID + ")";
             return dacess.Update(Generatebill);
         }
         catch
@@ -340,11 +441,11 @@ public class Bill
         return dateTime.ToString("MM-dd-yyyy HH:MM:ss");
     }
 
-    public static int InsertFirstZeroBill(String FlatNumber, int BillID, String CycleType, String CycleStart)
+    public static int oldInsertFirstZeroBill(String FlatNumber, int BillID, String CycleType, String CycleStart)
     {
         GenerateBill emptyBill = new GenerateBill();
-        emptyBill.FlatNumber = FlatNumber;
-        emptyBill.BillID = BillID;
+        emptyBill.op_FlatNumber = FlatNumber;
+        emptyBill.SocietyBillID = BillID;
         emptyBill.CurrentBillAmount = 0;
         emptyBill.CycleType = CycleType;
         emptyBill.PaymentDueDate = Convert.ToDateTime(CycleStart).AddDays(7);
@@ -358,7 +459,7 @@ public class Bill
         DataAccess dacess = new DataAccess();
 
         String Generatebill = "Insert into dbo.GeneratedBill(FlatNumber,BillID,BillStartDate,BillEndDate,CurrentBillAmount,CycleType,PaymentDueDate,BillMonth,PreviousMonthBalance,ModifiedAt,BillDescription, SocietyID) Values('" 
-            + emptyBill.FlatNumber + "','" + emptyBill.BillID + "','" + emptyBill.BillStartDate + "','" + emptyBill.BillEndDate + "','" + emptyBill.CurrentBillAmount + "','" + emptyBill.CycleType + "','" + emptyBill.PaymentDueDate + "','" + emptyBill.BillMonth 
+            + emptyBill.op_FlatNumber + "','" + emptyBill.SocietyBillID + "','" + emptyBill.BillStartDate + "','" + emptyBill.BillEndDate + "','" + emptyBill.CurrentBillAmount + "','" + emptyBill.CycleType + "','" + emptyBill.PaymentDueDate + "','" + emptyBill.BillMonth 
             + "','" + emptyBill.PreviousMonthBalance + "','" + emptyBill.ModifiedAt + "','" + emptyBill.BillDescription + "','" + SessionVariables.SocietyID + "')";
         bool result = dacess.Update(Generatebill);
 
@@ -430,11 +531,13 @@ public class Bill
         {
             DataAccess dacess = new DataAccess();
             String Generatebill = "Insert into " + TableName 
-                                + "(FlatNumber,BillID,BillStartDate,BillEndDate,CurrentBillAmount,CycleType,PaymentDueDate,BillMonth,PreviousMonthBalance,AmountPaidDate,AmountPaid,PaymentMode,TransactionID,InvoiceID,ModifiedAt,BillDescription,SocietyID) Values('" 
-                                   + newBill.FlatNumber + "','" + newBill.BillID + "','" + newBill.BillStartDate + "','" + newBill.BillEndDate + "','" + newBill.CurrentBillAmount+"','"+newBill.CycleType+ "','"+newBill.PaymentDueDate+"','"+newBill.BillMonth + "','" 
-                                   + newBill.PreviousMonthBalance + "','" + newBill.AmountPaidDate + "','" + newBill.AmountPaid+ "','" + newBill.PaymentMode+ "','" + newBill.TransactionID + "','" + newBill.InvoiceID + "','" + newBill.ModifiedAt + "','" + newBill.BillDescription + "'," + SessionVariables.SocietyID + ")";
+                                + "(FlatID,ActionType,Activated,SocietyBillID,BillStartDate,BillEndDate,CurrentBillAmount,CycleType,PaymentDueDate,BillMonth,PreviousMonthBalance,AmountPaidDate,AmountPaid,PaymentMode,TransactionID,InvoiceID,ModifiedAt,BillDescription,SocietyID) Values('"
+                                   + newBill.FlatID + "','" + newBill.ActionType + "','" + newBill.Activated + "','" + newBill.SocietyBillID + "','" + newBill.BillStartDate.ToString("MM-dd-yyyy HH:MM:ss") + "','" + newBill.BillEndDate.ToString("MM-dd-yyyy HH:MM:ss") + "','" + newBill.CurrentBillAmount+"','"+newBill.CycleType+ "','"+newBill.PaymentDueDate.ToString("MM-dd-yyyy HH:MM:ss") + "','"+newBill.BillMonth.ToString("MM-dd-yyyy HH:MM:ss") + "','" 
+                                   + newBill.PreviousMonthBalance + "','" + newBill.AmountPaidDate.ToString("MM-dd-yyyy HH:MM:ss") + "','" + newBill.AmountPaid+ "','" + newBill.PaymentMode+ "','" + newBill.TransactionID + "','" + newBill.InvoiceID + "','" + newBill.ModifiedAt + "','" + newBill.BillDescription + "'," + SessionVariables.SocietyID + ")";
             return dacess.Update(Generatebill);
         }
+
+
         catch
         {
             return false;
@@ -519,60 +622,60 @@ public class Bill
 
             newBill.PaymentDueDate = newBill.BillEndDate.AddDays(7);
 
-            if (previousBill.ChargeType == "Fixed")
+            if (previousBill.op_ChargeType == "Fixed")
             {
 
                 if (previousBill.CycleType == "Monthly")
                 {
-                    BillAmount = Convert.ToDouble(previousBill.Rate) / 30 * days + 0.5d;
+                    BillAmount = Convert.ToDouble(previousBill.op_Rate) / 30 * days + 0.5d;
                 }
                 else if (previousBill.CycleType == "Quaterly")
                 {
-                    BillAmount = Convert.ToDouble(previousBill.Rate) / (30 * 3) * days;
+                    BillAmount = Convert.ToDouble(previousBill.op_Rate) / (30 * 3) * days;
                 }
                 else if (previousBill.CycleType == "Yearly")
                 {
-                    BillAmount = Convert.ToDouble(previousBill.Rate) / 365 * days;
+                    BillAmount = Convert.ToDouble(previousBill.op_Rate) / 365 * days;
 
                 }
             }
 
-            if (previousBill.ChargeType == "Rate")
+            if (previousBill.op_ChargeType == "Rate")
             {
                 if (previousBill.CycleType == "Monthly")
                 {
-                    BillAmount = Convert.ToDouble(previousBill.Rate) * Convert.ToDouble(previousBill.FlatArea) / 30 * days;
+                    BillAmount = Convert.ToDouble(previousBill.op_Rate) * Convert.ToDouble(previousBill.op_FlatArea) / 30 * days;
                 }
 
                 else if (previousBill.CycleType == "Quaterly")
                 {
-                    BillAmount = Convert.ToDouble(previousBill.Rate) * Convert.ToDouble(previousBill.Rate) / (30 * 3) * days;
+                    BillAmount = Convert.ToDouble(previousBill.op_Rate) * Convert.ToDouble(previousBill.op_Rate) / (30 * 3) * days;
                 }
 
                 else if (previousBill.CycleType == "Yearly")
                 {
-                    BillAmount = Convert.ToDouble(previousBill.Rate) * Convert.ToDouble(previousBill.FlatArea) / 365 * days;
+                    BillAmount = Convert.ToDouble(previousBill.op_Rate) * Convert.ToDouble(previousBill.op_FlatArea) / 365 * days;
 
                 }
             }
-            if (previousBill.ChargeType == "Manual")
+            if (previousBill.op_ChargeType == "Manual")
             {
                 BillAmount = 0;
             }
 
         }
 
-        newBill.Days = days;
-        newBill.BillID = previousBill.BillID;
-        newBill.FlatArea = previousBill.FlatArea;
-        newBill.ChargeType = previousBill.ChargeType;
+        newBill.op_Days = days;
+        newBill.SocietyBillID = previousBill.SocietyBillID;
+        newBill.op_FlatArea = previousBill.op_FlatArea;
+        newBill.op_ChargeType = previousBill.op_ChargeType;
         newBill.CurrentBillAmount = (int)(BillAmount + 0.5d);
         newBill.ModifiedAt = Utility.GetCurrentDateTimeinUTC();
         newBill.PreviousMonthBalance = previousBill.CurrentMonthBalance;
-        newBill.FlatNumber = previousBill.FlatNumber;
+        newBill.op_FlatNumber = previousBill.op_FlatNumber;
         newBill.CycleType = previousBill.CycleType;
         newBill.BillMonth = newBill.BillEndDate;
-        newBill.Rate = previousBill.Rate;
+        newBill.op_Rate = previousBill.op_Rate;
         return newBill;
     }
 
@@ -595,14 +698,14 @@ public class Bill
                 for (int i = 0; i < dataBills.Rows.Count; i++)
                 {
                     GenerateBill previousBill = new GenerateBill();
-                    LastBill.FlatNumber = dataBills.Rows[i]["FlatNumber"].ToString();
-                    LastBill.FlatArea = Convert.ToInt32(dataBills.Rows[i]["FlatArea"]);
-                    LastBill.ChargeType = dataBills.Rows[i]["ChargeType"].ToString();
+                    LastBill.op_FlatNumber = dataBills.Rows[i]["FlatNumber"].ToString();
+                    LastBill.op_FlatArea = Convert.ToInt32(dataBills.Rows[i]["FlatArea"]);
+                    LastBill.op_ChargeType = dataBills.Rows[i]["ChargeType"].ToString();
                     LastBill.CycleType = dataBills.Rows[i]["CycleType"].ToString();
-                    LastBill.Rate = Convert.ToDouble(dataBills.Rows[i]["Rate"]);
+                    LastBill.op_Rate = Convert.ToDouble(dataBills.Rows[i]["Rate"]);
                     LastBill.BillStartDate = Convert.ToDateTime(dataBills.Rows[i]["BillStartDate"]);
                     LastBill.BillEndDate = Convert.ToDateTime(dataBills.Rows[i]["BillEndDate"]);
-                    LastBill.BillID = Convert.ToInt32(dataBills.Rows[i]["BillID"]);
+                    LastBill.SocietyBillID = Convert.ToInt32(dataBills.Rows[i]["BillID"]);
                     LastBill.CurrentMonthBalance = Convert.ToInt32(dataBills.Rows[i]["CurrentMonthBalance"]);
                     // LastBill.CycleEndDate = Convert.ToDateTime(dataBills.Rows[i]["CycleEnD"]);
                 }
@@ -640,14 +743,14 @@ public class Bill
                 for (int i = 0; i < dataBills.Rows.Count; i++)
                 {
                     GenerateBill previousBill = new GenerateBill();
-                    LastBill.FlatNumber = dataBills.Rows[i]["FlatNumber"].ToString();
-                    LastBill.FlatArea = Convert.ToInt32(dataBills.Rows[i]["FlatArea"]);
-                    LastBill.ChargeType = dataBills.Rows[i]["ChargeType"].ToString();
+                    LastBill.op_FlatNumber = dataBills.Rows[i]["FlatNumber"].ToString();
+                    LastBill.op_FlatArea = Convert.ToInt32(dataBills.Rows[i]["FlatArea"]);
+                    LastBill.op_ChargeType = dataBills.Rows[i]["ChargeType"].ToString();
                     LastBill.CycleType = dataBills.Rows[i]["CycleType"].ToString();
-                    LastBill.Rate = Convert.ToDouble(dataBills.Rows[i]["Rate"]);
+                    LastBill.op_Rate = Convert.ToDouble(dataBills.Rows[i]["Rate"]);
                     LastBill.BillStartDate = Convert.ToDateTime(dataBills.Rows[i]["BillStartDate"]);
                     LastBill.BillEndDate = Convert.ToDateTime(dataBills.Rows[i]["BillEndDate"]);
-                    LastBill.BillID = Convert.ToInt32(dataBills.Rows[i]["BillID"]);
+                    LastBill.SocietyBillID = Convert.ToInt32(dataBills.Rows[i]["SocietyBillID"]);
                     LastBill.CurrentMonthBalance = Convert.ToInt32(dataBills.Rows[i]["CurrentMonthBalance"]);
                     // LastBill.CycleEndDate = Convert.ToDateTime(dataBills.Rows[i]["CycleEnD"]);
                 }

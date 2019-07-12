@@ -62,7 +62,7 @@ public class BillPlan
                 {
                     ChargeType = rdr["ChargeType"].ToString();
                     Rate = rdr["Rate"].ToString();
-                    BillID = Convert.ToInt32(rdr["BillId"].ToString());
+                    BillID = Convert.ToInt32(rdr["SocietyBillId"].ToString());
                 }
             }
             return true;
@@ -79,7 +79,7 @@ public class BillPlan
         try
         {
             DataAccess dacess = new DataAccess();
-            String FillBillType = "Select distinct BillType,BillID from " + Table_Name ;
+            String FillBillType = "Select distinct BillTypeID, BillType, SocietyBillId from " + Table_Name ;
             return dacess.ReadData(FillBillType);
         }
         catch (Exception ex)
@@ -90,11 +90,12 @@ public class BillPlan
 
     }
 
-    public int AddSocietyBillPlan(String BillType, String ChargeType, String Rate, String CycleType, int Applyto, int SocietyID)
+    public int AddSocietyBillPlan(int BillTypeID , String BillType, String ChargeType, String Rate, String CycleType, int Applyto, int SocietyID)
     {
         int ID=0;
         DataAccess dacess = new DataAccess();
-        String BillingQuery = "Insert into "+ Table_Name+" (BillType,ChargeType,Rate,CycleType,Applyto,SocietyID) Values('" + BillType + "','" + ChargeType + "','" + Rate + "','" + CycleType + "','" + Applyto + "','" + SocietyID + "')";
+        String BillingQuery = "Insert into "+ Table_Name+ " (BillTypeID, BillType,ChargeType,Rate,CycleType,Applyto,SocietyID) Values('"
+          + BillTypeID + "','" + BillType + "','" + ChargeType + "','" + Rate + "','" + CycleType + "','" + Applyto + "','" + SocietyID + "')";
         bool result = dacess.Update(BillingQuery);
         if (result == true)
         {
@@ -109,7 +110,7 @@ public class BillPlan
     public int GetBillID(string BillType)
     {
         DataAccess dacess = new DataAccess();
-        String GetBillIdQuery = "Select BillID from " + Table_Name + " where BillType ='" + BillType + "'";
+        String GetBillIdQuery = "Select SocietyBillID from " + Table_Name + " where BillType ='" + BillType + "'";
         int billID = dacess.GetSingleValue(GetBillIdQuery);
         return billID;
     }
@@ -117,7 +118,8 @@ public class BillPlan
     public bool UpdateSocietyBillPlan(string ChargeType, string BillRate, string CycleType, int ApplyTo, string billID)
     {
         DataAccess dacess = new DataAccess();
-        String DelSocietyPlanQuery = "Update " + Table_Name + " set ChargeType ='" + ChargeType + "', Rate ='" + BillRate + "', CycleType ='" + CycleType + "', ApplyTo ='" + ApplyTo + "' where BillID = '" + billID + " '";
+        String DelSocietyPlanQuery = "Update " + Table_Name + " set ChargeType ='" + ChargeType + "', Rate ='" + BillRate + "', CycleType ='" + CycleType +
+            "', ApplyTo ='" + ApplyTo + "' where SocietyBillID = '" + billID + " '";
         bool result = dacess.Update(DelSocietyPlanQuery);
         return result;
     }
@@ -125,7 +127,7 @@ public class BillPlan
     public bool DeactiveSocietyBillPlan(string billID)
     {
         DataAccess dacess = new DataAccess();
-        String DelSocietyPlanQuery = "Delete from  dbo.SocietyBillPlans where BillID = '" + billID + "' ";
+        String DelSocietyPlanQuery = "Delete from  dbo.SocietyBillPlans where SocietyBillID = '" + billID + "' ";
         bool result = dacess.Update(DelSocietyPlanQuery);
         return result;
     }
