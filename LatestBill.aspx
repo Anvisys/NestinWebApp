@@ -818,13 +818,10 @@
                                       
                              <label  class="lbltxt" style="width:150px;">Cycle Type :</label>
                               <asp:Label width="100" ID="Label1"  runat="server" Font-Size="Small"></asp:Label> <br />
-
-                                      
+                      
                              <label  class="lbltxt" style="width:150px;"> Bill Type :  </label>
                               <asp:Label width="100" ID="lblNewBillType" runat="server" Font-Size="Small"></asp:Label><br />
-                            
-                        
-                            
+      
                              <label  class="lbltxt"  style="width:150px;">Flat Area : </label>
                               <asp:Label width="100" ID="lblFlatArea" runat="server" Font-Size="Small"></asp:Label> <br />
                              
@@ -834,13 +831,11 @@
                              <label  class="lbltxt" style="width:150px;">Current MonthBalance :</label>
                               <asp:Label width="100" ID="Label4"  runat="server" Font-Size="Small"></asp:Label> <br />
 
-
                              <label  class="lbltxt"  style="width:150px;"> Charge Type :</label>
                              <asp:Label width="100" ID="lblChargeType" runat="server" Font-Size="Small"></asp:Label> <br />
 
                              <label  class="lbltxt"  style="width:150px;"> Rate :</label>
                               <asp:Label width="100" ID="lblRate" runat="server" Font-Size="Small"></asp:Label> <br />
-
 
                              <label  class="lbltxt"  style="width:150px;"> From Date :  </label>
                              <asp:Label width="100" ID="lblFromDate" runat="server" Font-Size="Small"></asp:Label> <br />
