@@ -1402,6 +1402,9 @@ public partial class LatestBill : System.Web.UI.Page
                 txtBillDate.Text = newBill.BillEndDate.ToShortDateString();
                 lblPreviousBalance.Text = newBill.PreviousMonthBalance.ToString();
                 txtBillGenSingleFlatdesc.Text = string.Empty;//Added by Aarshi on 11-Sept-2017 for bug fix
+                lblCycle.Text = newBill.CycleType;
+                lblsocietybillid.Text = newBill.SocietyBillID.ToString();
+                lblCurrentmonthbal.Text = "Rs. "+newBill.CurrentMonthBalance.ToString();
             }
             else
             {
