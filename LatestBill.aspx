@@ -837,10 +837,10 @@
                              <label  class="lbltxt"  style="width:150px;">Flat Area : </label>
                               <asp:Label width="100" ID="lblFlatArea" runat="server" Font-Size="Small"></asp:Label> <br />
                              
-                             <label  class="lbltxt" style="width:150px;">Society BillID :</label>
+                             <label  class="lbltxt" style="width:150px;">Society Bill ID :</label>
                               <asp:Label width="100" ID="lblsocietybillid"  runat="server" Font-Size="Small"></asp:Label> <br />
                                      
-                             <label  class="lbltxt" style="width:150px;">Current MonthBalance :</label>
+                             <label  class="lbltxt" style="width:150px;">Current Month Balance :</label>
                               <asp:Label width="100" ID="lblCurrentmonthbal"  runat="server" Font-Size="Small"></asp:Label> <br />
 
 
@@ -861,7 +861,7 @@
                              <label class="lbltill" style="width:150px;">Till Date : </label>
                             
                                                
-                                           <asp:TextBox ID="txtBillDate"  CssClass="form-control" runat="server"></asp:TextBox>                     
+                                           <asp:TextBox ID="txtBillDate" Width="150"  CssClass="form-control" runat="server"></asp:TextBox>                     
                                 <%-- >  <asp:Label ID="lblTillDate" runat="server" Font-Size="Small"></asp:Label>--%>
                                  
                            
@@ -879,7 +879,7 @@
                                          <label class="lbltxt" style="width:150px;"> Amount : </label>
                             
                                              
-                                                        <asp:TextBox width="100" ID="txtFlatBillAmt" runat="server" CssClass="form-control " Visible="False"></asp:TextBox>
+                                                        <asp:TextBox width="150" ID="txtFlatBillAmt" runat="server" CssClass="form-control " Visible="False"></asp:TextBox>
                                                   </ContentTemplate>
                                               </asp:UpdatePanel>                        
                               
@@ -889,7 +889,7 @@
                                
                                         <label class="lbltxt" style="width:150px;"> Description :</label>
                                
-                                            <asp:TextBox width="100" ID="txtBillGenSingleFlatdesc" runat="server" onchange="ResizeBillGeTextbox();" CssClass="form-control "></asp:TextBox><br />
+                                            <asp:TextBox width="150" ID="txtBillGenSingleFlatdesc" runat="server" onchange="ResizeBillGeTextbox();" CssClass="form-control "></asp:TextBox><br />
                                
                             
                                           <asp:Label  ID="lblBillDuplicate" runat="server" Font-Size="Small" ForeColor="#55AAFF" ></asp:Label>

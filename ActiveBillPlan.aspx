@@ -148,7 +148,7 @@
             document.getElementById("txtRate").value = Rate;
             document.getElementById("txtchargeType").value = ChargeType;
             document.getElementById("txtBillType").value = BillType;
-
+            alert(ChargeType);
           
             var Posx = 0;
             var Posy = 0;
@@ -278,7 +278,7 @@
                          <ContentTemplate>--%>
                              <asp:GridView ID="FlatsBillsGrid"  runat="server" AllowPaging="True" 
                                  HeaderStyle-BackColor="#2ecc71" 
-                                
+                                OnSelectedIndexChanged="FlatsBillsGrid_SelectedIndexChanged"
                                  HeaderStyle-ForeColor="#ffffff"
                              HeaderStyle-BorderStyle="None"  
                                  AutoGenerateColumns="false"  BackColor="#E8E8E8" BorderColor="Silver" BorderStyle="Solid"
@@ -289,7 +289,7 @@
                                 
                                    <AlternatingRowStyle BackColor="#f5f5f5" />
                                  <Columns>
-                                        <asp:BoundField DataField="SocietyBillID" HeaderText="SocietyBillID" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="30px"/>
+                                     <asp:BoundField DataField="SocietyBillID"  HeaderText="SocietyBillID" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="30px"/>
                                      <asp:BoundField DataField="FlatNumber" HeaderText="FlatNumber" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="60px"/>
                                      <asp:BoundField DataField="FlatArea" HeaderText="FlatArea" ItemStyle-CssClass="BillActiveGrid"  HeaderStyle-Width="60px"/>
                                      <asp:BoundField DataField="BillType" HeaderText="BillType" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="80px"/>
