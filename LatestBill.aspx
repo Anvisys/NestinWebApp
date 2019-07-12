@@ -815,6 +815,9 @@
                                     
                              <label  class="lbltxt" style="width:150px;">Flat Number :</label>
                               <asp:Label width="100" ID="lblFlatNuber"  runat="server" Font-Size="Small"></asp:Label> <br />
+                                      
+                             <label  class="lbltxt" style="width:150px;">Cycle Type :</label>
+                              <asp:Label width="100" ID="Label1"  runat="server" Font-Size="Small"></asp:Label> <br />
 
                                       
                              <label  class="lbltxt" style="width:150px;"> Bill Type :  </label>
@@ -824,6 +827,12 @@
                             
                              <label  class="lbltxt"  style="width:150px;">Flat Area : </label>
                               <asp:Label width="100" ID="lblFlatArea" runat="server" Font-Size="Small"></asp:Label> <br />
+                             
+                             <label  class="lbltxt" style="width:150px;">Society BillID :</label>
+                              <asp:Label width="100" ID="Label3"  runat="server" Font-Size="Small"></asp:Label> <br />
+                                     
+                             <label  class="lbltxt" style="width:150px;">Current MonthBalance :</label>
+                              <asp:Label width="100" ID="Label4"  runat="server" Font-Size="Small"></asp:Label> <br />
 
 
                              <label  class="lbltxt"  style="width:150px;"> Charge Type :</label>
