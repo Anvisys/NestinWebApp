@@ -932,8 +932,8 @@ public partial class Flats : System.Web.UI.Page
                         CycleEnd = new DateTime(year + 5, CycleStart.Month, CycleStart.Day);
 
                         GenerateBill emptyBill = new GenerateBill();
-                        emptyBill.FlatNumber = FlatNumber;
-                        emptyBill.BillID = BillId;
+                        emptyBill.FlatID = Convert.ToInt32(FlatNumber);
+                        emptyBill.SocietyBillID = BillId;
                         emptyBill.CurrentBillAmount = 0;
                         emptyBill.CycleType = CycleType;
                         emptyBill.PaymentDueDate = Convert.ToDateTime(CycleStart).AddDays(7);

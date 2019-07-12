@@ -705,7 +705,7 @@ public class Bill
                     LastBill.op_Rate = Convert.ToDouble(dataBills.Rows[i]["Rate"]);
                     LastBill.BillStartDate = Convert.ToDateTime(dataBills.Rows[i]["BillStartDate"]);
                     LastBill.BillEndDate = Convert.ToDateTime(dataBills.Rows[i]["BillEndDate"]);
-                    LastBill.SocietyBillID = Convert.ToInt32(dataBills.Rows[i]["BillID"]);
+                    LastBill.SocietyBillID = Convert.ToInt32(dataBills.Rows[i]["SocietyBillID"]);
                     LastBill.CurrentMonthBalance = Convert.ToInt32(dataBills.Rows[i]["CurrentMonthBalance"]);
                     // LastBill.CycleEndDate = Convert.ToDateTime(dataBills.Rows[i]["CycleEnD"]);
                 }

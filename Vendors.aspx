@@ -729,7 +729,7 @@ hr {
             var req = "{\"VendorID\":" + vendorid + ",\"offerdescription\":\"" + description + "\",\"StartDate\":\"" + Start + "\",\"EndDate\":\"" +end + "\",\"SocietyID\":" + societyid + "} ";
             console.log(req);
 
-            var url = "http://localhost:5103/" + "api/Offers/New";
+            var url = api_url + "api/Offers/New";
             $.ajax({
                 datatype:"jason",
                 data: req,
