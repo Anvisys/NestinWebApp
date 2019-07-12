@@ -254,10 +254,7 @@
                 </div>
 
                 <table id="tblFlatBills" runat="server" style="margin-top: 1%; width: 100%;">
-
-
-
-
+               
                     <tr>
                         <td colspan="4" style="text-align: center;">Activated :
                            <asp:Label ID="lblActivateCount" runat="server" Text=""></asp:Label>
@@ -265,11 +262,9 @@
                             <asp:Label ID="lblDeactivateCount" runat="server" Text=""></asp:Label>
                             Not Activated :
                            <asp:Label ID="lblNotActivateCount" runat="server" Text=""></asp:Label>
-
                         </td>
-
-
                     </tr>
+
                     <tr>
                         <td colspan="4" style="text-align: center; height: 10px;"></td>
                     </tr>

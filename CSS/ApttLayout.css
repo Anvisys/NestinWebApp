@@ -137,14 +137,14 @@
          .layout_dropdown_Button
         {
           background-color:transparent;
+          align-content:center;
           text-align:center;
- 
-            border:0px solid white;
-            padding:6px 6px;
-            width:100%;
-            color:white;
-            outline:0;
-            border-bottom:0.4px solid #ffffff;
+          border:0px solid white;
+          padding:6px 6px;
+          width:100%;
+          color:white;
+          outline:0;
+          border-bottom:0.4px solid #ffffff;
         }
 
        .layout_filter_box
