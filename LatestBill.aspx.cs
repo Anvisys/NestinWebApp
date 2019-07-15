@@ -411,8 +411,8 @@ public partial class LatestBill : System.Web.UI.Page
             int paid = Convert.ToInt32(lblAmountPaid.Text);
             int Amount = Convert.ToInt32(txtAmt.Text);
             String mode = drpPayMode.SelectedValue.ToString();
-            int TransID = Convert.ToInt32(txtTransaID.Text);
-            int InvoiceID = Convert.ToInt32(txtInvID.Text) ;
+            string TransID = txtTransaID.Text;
+            string InvoiceID = txtInvID.Text;
             int FlatID = Convert.ToInt32(lblFlat.Text);
            
 
