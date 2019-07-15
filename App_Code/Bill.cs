@@ -424,8 +424,8 @@ public class Bill
         try
         {
             DataAccess dacess = new DataAccess();
-            String Generatebill = "Insert into " + TableName + "(FlatID,SocietyBillID,BillStartDate,BillEndDate,CurrentBillAmount,CycleType,PaymentDueDate,BillMonth,PreviousMonthBalance,ModifiedAt,BillDescription, SocietyID) Values('"
-                + newBill.FlatID + "','" + newBill.SocietyBillID + "','" + DateString(newBill.BillStartDate ,true) + "','" + DateString(newBill.BillEndDate, true) + "','" + newBill.CurrentBillAmount + "','" + newBill.CycleType + "','" + DateString(newBill.PaymentDueDate ,false) + "','" + DateString(newBill.BillMonth ,false) + "','" + newBill.PreviousMonthBalance + "','" + DateString(newBill.ModifiedAt ,true) + "','" + newBill.BillDescription +"'," + SessionVariables.SocietyID + ")";
+            String Generatebill = "Insert into " + TableName + "(FlatID,SocietyBillID ,ActionType ,BillStartDate,BillEndDate,CurrentBillAmount,CycleType,PaymentDueDate,BillMonth,PreviousMonthBalance,AmountPaidDate,ModifiedAt,BillDescription, SocietyID ) Values("
+                + newBill.FlatID + "," + newBill.SocietyBillID +",'"+newBill.ActionType+ "','" + DateString(newBill.BillStartDate ,true) + "','" + DateString(newBill.BillEndDate, true) + "'," + newBill.CurrentBillAmount + ",'" + newBill.CycleType + "','" + DateString(newBill.PaymentDueDate ,false) + "','" + DateString(newBill.BillMonth ,false) + "'," + newBill.PreviousMonthBalance + ",'"+DateString(newBill.AmountPaidDate ,true)+"','" + DateString(newBill.ModifiedAt ,true) + "','" + newBill.BillDescription +"'," + SessionVariables.SocietyID + ")";
             return dacess.Update(Generatebill);
         }
         catch(Exception ex)
