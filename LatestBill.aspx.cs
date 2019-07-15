@@ -1012,7 +1012,7 @@ public partial class LatestBill : System.Web.UI.Page
                 newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, BillEnddate);
             }
 
-            txtFlatBillAmt.Text = newBill.CurrentBillAmount.ToString();
+            txtFlatBillAmt.Text ="Rs. "+ newBill.CurrentBillAmount.ToString();
         }
         catch (Exception ex)
         { 
@@ -1389,18 +1389,18 @@ public partial class LatestBill : System.Web.UI.Page
                 }
 
                 lblFlatArea.Text = newBill.op_FlatArea.ToString();
-                lblRate.Text = newBill.op_Rate.ToString();
+                lblRate.Text ="Rs. "+ newBill.op_Rate.ToString();
                 lblChargeType.Text = newBill.op_ChargeType;
                 lblNewBillType.Text = BillType;
                 lblFromDate.Text = newBill.BillStartDate.ToShortDateString();
                 txtFlatBillAmt.Visible = true;
-                txtFlatBillAmt.Text = newBill.CurrentBillAmount.ToString();
+               // txtFlatBillAmt.Text = newBill.CurrentBillAmount.ToString();
                 txtBillDate.Text = newBill.BillEndDate.ToShortDateString();
                 lblPreviousBalance.Text = newBill.PreviousMonthBalance.ToString();
                 txtBillGenSingleFlatdesc.Text = string.Empty;//Added by Aarshi on 11-Sept-2017 for bug fix
                 lblCycle.Text = newBill.CycleType;
                 lblsocietybillid.Text = newBill.SocietyBillID.ToString();
-                lblCurrentmonthbal.Text = "Rs. "+newBill.CurrentMonthBalance.ToString();
+                lblCurrentmonthbal.Text = "Rs."+newBill.CurrentMonthBalance.ToString();
             }
             else
             {

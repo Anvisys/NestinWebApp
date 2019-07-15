@@ -153,7 +153,6 @@
             document.getElementById("txtchargeType").value = ChargeType;
             document.getElementById("txtBillType").value = BillType;
 
-
             var Posx = 0;
             var Posy = 0;
             while (Element != null) {
@@ -274,28 +273,31 @@
                         <td colspan="4" style="text-align: center;">
                             <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server">
                          <ContentTemplate>--%>
-                            <asp:GridView ID="FlatsBillsGrid" runat="server" AllowPaging="True"
-                                HeaderStyle-BackColor="#2ecc71"
-                                HeaderStyle-ForeColor="#ffffff"
-                                HeaderStyle-BorderStyle="None"
-                                AutoGenerateColumns="false" BackColor="#E8E8E8" BorderColor="Silver" BorderStyle="Solid"
-                                BorderWidth="1px" EmptyDataText="No Records Found" Font-Names="Calibri" ForeColor="#666666"
-                                HorizontalAlign="Center" PageSize="15"
-                                ShowHeaderWhenEmpty="True" Style="margin-bottom: 0px; width: 100%;"
-                                OnPageIndexChanging="FlatsBillsGrid_PageIndexChanging" OnRowDataBound="FlatsBillsGrid_RowDataBound">
 
-                                <AlternatingRowStyle BackColor="#f5f5f5" />
-                                <Columns>
-                                    <asp:BoundField DataField="SocietyBillID" HeaderText="SocietyBillID" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="30px" />
-                                    <asp:BoundField DataField="FlatNumber" HeaderText="FlatNumber" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="60px" />
-                                    <asp:BoundField DataField="FlatArea" HeaderText="FlatArea" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="60px" />
-                                    <asp:BoundField DataField="BillType" HeaderText="BillType" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="80px" />
-                                    <asp:BoundField DataField="Rate" HeaderStyle-Width="70px" HeaderText="Rate" ItemStyle-Width="70px" ItemStyle-CssClass="BillActiveGrid">
-                                        <HeaderStyle Width="70px" />
-                                        <ItemStyle Width="70px" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="ChargeType" HeaderText="ChargeType" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="60px" />
-                                    <asp:BoundField DataField="CycleType" HeaderText="CycleType" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="80px" />
+                             <asp:GridView ID="FlatsBillsGrid"  runat="server" AllowPaging="True" 
+                                 HeaderStyle-BackColor="#2ecc71" 
+                                OnSelectedIndexChanged="FlatsBillsGrid_SelectedIndexChanged"
+                                 HeaderStyle-ForeColor="#ffffff"
+                             HeaderStyle-BorderStyle="None"  
+                                 AutoGenerateColumns="false"  BackColor="#E8E8E8" BorderColor="Silver" BorderStyle="Solid"
+                                  BorderWidth="1px" EmptyDataText="No Records Found" Font-Names="Calibri" ForeColor="#666666" 
+                                 HorizontalAlign="Center" PageSize="15" 
+                                 ShowHeaderWhenEmpty="True" style="margin-bottom: 0px;width:100%;" 
+                                 OnPageIndexChanging="FlatsBillsGrid_PageIndexChanging" OnRowDataBound="FlatsBillsGrid_RowDataBound">
+                                
+                                   <AlternatingRowStyle BackColor="#f5f5f5" />
+                                 <Columns>
+                                     <asp:BoundField DataField="SocietyBillID"  HeaderText="SocietyBillID" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="30px"/>
+                                     <asp:BoundField DataField="FlatNumber" HeaderText="FlatNumber" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="60px"/>
+                                     <asp:BoundField DataField="FlatArea" HeaderText="FlatArea" ItemStyle-CssClass="BillActiveGrid"  HeaderStyle-Width="60px"/>
+                                     <asp:BoundField DataField="BillType" HeaderText="BillType" ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="80px"/>
+                                     <asp:BoundField DataField="Rate" HeaderStyle-Width="70px" HeaderText="Rate" ItemStyle-Width="70px" ItemStyle-CssClass="BillActiveGrid">
+                                     <HeaderStyle Width="70px" />
+                                     <ItemStyle Width="70px" />
+                                     </asp:BoundField>
+                                     <asp:BoundField DataField="ChargeType" HeaderText="ChargeType"  ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="60px"/>
+                                     <asp:BoundField DataField="CycleType" HeaderText="CycleType"  ItemStyle-CssClass="BillActiveGrid" HeaderStyle-Width="80px"/>
+
                                     <%-- <asp:BoundField DataField="CycleStart" HeaderText="CycleStart" DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-Font-Size="Small"  HeaderStyle-Width="80px"/>
                                        <asp:BoundField DataField="CycleEnD" HeaderText="CycleEnD" DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-Font-Size="Small"  HeaderStyle-Width="80px"/>
                                     --%>

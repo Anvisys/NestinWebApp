@@ -424,21 +424,24 @@ public class Bill
         try
         {
             DataAccess dacess = new DataAccess();
-            String Generatebill = "Insert into " + TableName + "(FlatNumber,BillID,BillStartDate,BillEndDate,CurrentBillAmount,CycleType,PaymentDueDate,BillMonth,PreviousMonthBalance,ModifiedAt,BillDescription, SocietyID) Values('" 
-                + newBill.op_FlatNumber + "','" + newBill.SocietyBillID + "','" + DateString(newBill.BillStartDate) + "','" + DateString(newBill.BillEndDate) + "','" + newBill.CurrentBillAmount + "','" + newBill.CycleType + "','" + DateString(newBill.PaymentDueDate) + "','" + DateString(newBill.BillMonth) + "','" + newBill.PreviousMonthBalance + "','" + DateString(newBill.ModifiedAt) + "','" + newBill.BillDescription +"'," + SessionVariables.SocietyID + ")";
+            String Generatebill = "Insert into " + TableName + "(FlatID,SocietyBillID,BillStartDate,BillEndDate,CurrentBillAmount,CycleType,PaymentDueDate,BillMonth,PreviousMonthBalance,ModifiedAt,BillDescription, SocietyID) Values('"
+                + newBill.FlatID + "','" + newBill.SocietyBillID + "','" + DateString(newBill.BillStartDate ,true) + "','" + DateString(newBill.BillEndDate, true) + "','" + newBill.CurrentBillAmount + "','" + newBill.CycleType + "','" + DateString(newBill.PaymentDueDate ,false) + "','" + DateString(newBill.BillMonth ,false) + "','" + newBill.PreviousMonthBalance + "','" + DateString(newBill.ModifiedAt ,true) + "','" + newBill.BillDescription +"'," + SessionVariables.SocietyID + ")";
             return dacess.Update(Generatebill);
         }
-        catch
+        catch(Exception ex)
         {
             return false;
         }
         
     }
 
-    private String DateString(DateTime dateTime)
+    private string DateString(DateTime dateTime ,bool cond)
     {
-
-        return dateTime.ToString("MM-dd-yyyy HH:MM:ss");
+        string date;
+        
+            date = dateTime.ToString("yyyy-MM-dd");
+        
+        return (date);
     }
 
     public static int oldInsertFirstZeroBill(String FlatNumber, int BillID, String CycleType, String CycleStart)
@@ -629,7 +632,7 @@ public class Bill
                 {
                     BillAmount = Convert.ToDouble(previousBill.op_Rate) / 30 * days + 0.5d;
                 }
-                else if (previousBill.CycleType == "Quaterly")
+                else if (previousBill.CycleType == "Quarterly")
                 {
                     BillAmount = Convert.ToDouble(previousBill.op_Rate) / (30 * 3) * days;
                 }
@@ -647,7 +650,7 @@ public class Bill
                     BillAmount = Convert.ToDouble(previousBill.op_Rate) * Convert.ToDouble(previousBill.op_FlatArea) / 30 * days;
                 }
 
-                else if (previousBill.CycleType == "Quaterly")
+                else if (previousBill.CycleType == "Quarterly")
                 {
                     BillAmount = Convert.ToDouble(previousBill.op_Rate) * Convert.ToDouble(previousBill.op_Rate) / (30 * 3) * days;
                 }

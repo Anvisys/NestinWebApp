@@ -877,8 +877,7 @@
                                 </div>
 
                             </div>
-
-                        </div>
+                       </div>
                     </div>
 
                     <%--   Import Bill Form  --%>

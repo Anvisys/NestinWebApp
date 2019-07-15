@@ -427,12 +427,10 @@ public partial class ActiveBillPlan : System.Web.UI.Page
     protected void btnFlatbillGen_Click(object sender, EventArgs e)
     {
         DateTime CurrentBillEndDate = Utility.GetCurrentDateTimeinUTC();
-        String GenerateCycle = "Manual";
+        String GenerateCycle = "Manual"; ;
         btnSingleFlatGenerate.Text = "Generate Bill";
         lblFlatNuber.Text = HiddenField1.Value;
         lblBillType.Text = HiddenField2.Value;
-
-
 
         previousBill = Bill.GetLastGeneratedBill(lblFlatNuber.Text, lblBillType.Text);
 
@@ -746,4 +744,11 @@ public partial class ActiveBillPlan : System.Web.UI.Page
 
 
     //Ends here
+
+    protected void FlatsBillsGrid_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        string value = FlatsBillsGrid.DataMember[0].ToString();
+    }
+
+   
 }
