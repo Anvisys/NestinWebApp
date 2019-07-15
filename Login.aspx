@@ -654,7 +654,7 @@
                     <h3>NestIn</h3>
                     <p class="lead" style="font-size: 18px;">NestIn is developed by Anvisys Technologies  for the Apartment Societies. </p>
                     <p style="text-align: justify;">
-                        NestIn is developed by <a href="http://www.anvisys.net" style="color: red;">Anvisys Technologies Pvt. Ltd.</a> To 
+                        NestIn is developed by <a href="http://www.anvisys.net" style="color: blue;">Anvisys Technologies Pvt. Ltd.</a> To 
                         cater the needs of RWA operations and society management needs. While the trend of residential complex is
                         increasing due to varies advantage like security, facilities, gardens, club houses etc, there is a growing 
                         demand of a management system to manage these operations and communication mechanism to involve residents in operations
@@ -761,11 +761,9 @@
                         <h1 style="color: black;">Ride Share Feature</h1>                   
                     </div>
                     <div class="col-md-12 col-xs-12 pull-left">
-                            <%--<img src="images/icon/s1.png" width="200" height="200" />--%>
-                        <%--<iframe height="400" width="500" src="images/icon/v1.mp4"></iframe>--%>
-                        <iframe class="my_class_name" width="500" height="360" src="images/icon/v1.mp4" frameborder="0" allowfullscreen></iframe>
-                            <%--<img src="images/icon/s2.png" width="200" height="200" />--%>
-                       
+                        <video width="250" height="400" controls="controls" type="video/mp4" preload="none">
+                            <source  src="images/icon/v1.mp4"/>
+                        </video>                       
                     </div>
                 </div>
             </div>
