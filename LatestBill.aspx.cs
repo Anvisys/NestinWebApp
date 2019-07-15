@@ -924,11 +924,11 @@ public partial class LatestBill : System.Web.UI.Page
                 lblDueDate.Text = tempDate.ToString("dd MMM yyyy");
                 //lblDueDate.Text =  dt.Rows[0]["PaymentDueDate"].ToString("dd MMM YYYY");
                 lblCycletype.Text = dt.Rows[0]["CycleType"].ToString();
-               
 
+            Iblpyamt.Text = dt.Rows[0]["AmountTobePaid"].ToString();
 
-                //Added by Aarshi on 18 auh 2017 for session storage
-                SessionVariables.Rate = dt.Rows[0]["Rate"].ToString();
+            //Added by Aarshi on 18 auh 2017 for session storage
+            SessionVariables.Rate = dt.Rows[0]["Rate"].ToString();
                 SessionVariables.ChargeType = dt.Rows[0]["ChargeType"].ToString();
                 SessionVariables.FlatArea = dt.Rows[0]["FlatArea"].ToString();
 
@@ -1355,6 +1355,7 @@ public partial class LatestBill : System.Web.UI.Page
         else if (e.CommandName == "Pay")
         {
             int PayID = Convert.ToInt32((row.FindControl("lblPayID") as Label).Text);
+       
             ShowPaymentForm(PayID);
 
         }
