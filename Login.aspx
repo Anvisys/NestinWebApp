@@ -40,13 +40,14 @@
     <link href="CSS_3rdParty/footer.css" rel="stylesheet" type="text/css" />
     <link href="CSS_3rdParty/mythirdpartystylesheets.css" rel="stylesheet" type="text/css" />
     <link href="CSS/IP.css" rel="stylesheet" />
-  
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-5831709708295912",
-        enable_page_level_ads: true
-    });
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5831709708295912",
+            enable_page_level_ads: true
+        });
     </script>
 
     <script>
@@ -331,6 +332,10 @@
             font-size: 20px;
             color: #2e363f;
         }
+        .my_class_name {
+	margin: 0 auto;
+	border: 10px outset #ddd;
+}
     </style>
 
 
@@ -360,18 +365,20 @@
         .nav-color {
             color: #ffffff !important;
             background-color: #727CF5 !important;
-            
         }
 
         .main-boxs {
             height: 20vh;
             width: 15vw;
         }
-       
+        
+      .m-back {
+          background-image: url(../image/icon/taxi.jpg/) !important;
+      }
+
     </style>
 
     <!-- For RENT -->
-
 
     <!-- end Rent -->
 
@@ -467,11 +474,11 @@
     </form>
 
 
-   
+
     <!-- New Header -->
 
 
-    <header>               
+    <header>
         <nav class="navbar navbar-default nav-color navbar-fixed-top">
             <div class="container-fluid">
 
@@ -601,7 +608,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- For Mobile -->
     <section class="goletfullwidth text-center hidden-md hidden-lg" style="background-color: #d9d9d9; color: blue;">
         <div class="container">
@@ -745,6 +752,30 @@
         <br />
     </section>
     <div class="clearfix"></div>
+    <hr style="color: black; height: 3px;" />
+    <section class="m-back">
+        <div align="center">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">  
+                        <h1 style="color: black;">Ride Share Feature</h1>                   
+                    </div>
+                    <div class="col-md-12 col-xs-12 pull-left">
+                            <%--<img src="images/icon/s1.png" width="200" height="200" />--%>
+                        <%--<iframe height="400" width="500" src="images/icon/v1.mp4"></iframe>--%>
+                        <iframe class="my_class_name" width="500" height="360" src="images/icon/v1.mp4" frameborder="0" allowfullscreen></iframe>
+                            <%--<img src="images/icon/s2.png" width="200" height="200" />--%>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr style="color: black;" />
+    <br />
+    <br />
+
+
 
     <section class="parallax delayed margin-footer parallax-init" data-stellar-background-ratio="0.7">
         <span class="overlay" style="background-color: #eee;"></span>
@@ -885,8 +916,9 @@
         </div>
 
         <div class="footer-copyright">
-            <p>© 2019 <a href="www.Anvisys.net" target="_blank">ANVISYS TECHNOLOGIES</a>| ALL RIGHTS RESERVED. 
-               <img class="pull-right" src="http://hitwebcounter.com/counter/counter.php?page=7115764&style=0005&nbdigits=4&type=ip&initCount=0" title="website counter" Alt="website counter"   border="0"  />     
+            <p>
+                © 2019 <a href="www.Anvisys.net" target="_blank">ANVISYS TECHNOLOGIES</a>| ALL RIGHTS RESERVED. 
+               <img class="pull-right" src="http://hitwebcounter.com/counter/counter.php?page=7115764&style=0005&nbdigits=4&type=ip&initCount=0" title="website counter" alt="website counter" border="0" />
             </p>
         </div>
     </footer>

@@ -231,7 +231,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
             genBill.BillEndDate = enddate;
             genBill.BillMonth = enddate;
             genBill.BillTypeID = 5;
-            genBill.BillStartDate= DateTime.UtcNow;
+            genBill.BillStartDate= DateTime.UtcNow; 
             genBill.CurrentBillAmount = 500;
             genBill.ActionType = "Activate";
             genBill.Activated = 1;
