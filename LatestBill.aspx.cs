@@ -1072,13 +1072,8 @@ public partial class LatestBill : System.Web.UI.Page
                 bool result = bill.InsertNewBill(newBill);
                 //bool result = true;
                 if (result)
-                {
-                    //Added by aarshi on 8-Sept-2017 for bug fix
-                    //lblBillDuplicate.Text = "Bill Generated Sucessfully";
-
-                    //Added by Aarshi on 14 - Sept - 2017 for bug fix                    
+                {                          
                     string PaymentDueDate = newBill.PaymentDueDate.ToString("dd-MM-yyyy");
-                    //Added by Aarshi on 21 - Sept - 2017 for bug fix
 
                     SendNotification(lblBillType.Text, PaymentDueDate);
                     SendMail();
@@ -1091,7 +1086,8 @@ public partial class LatestBill : System.Web.UI.Page
 
                 else
                 {
-                    lblBillDuplicate.Text = "Bill Generated Failed";
+                    //lblBillDuplicate.Text = "Bill Generated Failed";
+                    Response.Write("<script>alert('Bill Generated Failed')</script>");
                 }
             }
             bill = null;
