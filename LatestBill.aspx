@@ -874,8 +874,6 @@
                                     <button type="button" id="btnBillGencancel" class="btn btn-danger">Cancel</button>
 
                                     <asp:Button ID="btnSingleFlatGenerate" runat="server" Text="Generate Bill" CssClass="btn btn-success" OnClick="btnSingleFlatGenerate_Click" ValidationGroup="Textbox" />
-
-
                                 </div>
 
                             </div>
