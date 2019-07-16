@@ -52,6 +52,7 @@ public partial class LatestBill : System.Web.UI.Page
         LoadBillTypeDropdown(drpCurrentBillType, drpGenBillForOnLatest);
         LoadLatestBillData();
         MultiView1.ActiveViewIndex = 0;
+        
     }
 
     public void LoadLatestBillData()
@@ -286,6 +287,9 @@ public partial class LatestBill : System.Web.UI.Page
     {
         try
         {
+            GridViewRow row = GridlatestBills.SelectedRow;
+            btnBillPay.CommandArgument = row.RowIndex.ToString();
+
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 DataRowView drv = e.Row.DataItem as DataRowView;
@@ -454,6 +458,11 @@ public partial class LatestBill : System.Web.UI.Page
                 MultiView1.ActiveViewIndex = 0;
                 LoadLatestBillData();
                 ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "alert('Payment updated successfully')", true);
+
+                Button btn = new Button();
+                string arg = btn.CommandArgument;
+                GridlatestBills.Rows[Convert.ToInt32(arg)].Dispose();
+
             }
             else
             {
