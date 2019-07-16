@@ -414,7 +414,7 @@ public partial class LatestBill : System.Web.UI.Page
             string TransID = txtTransaID.Text;
             string InvoiceID = txtInvID.Text;
             int FlatID = Convert.ToInt32(lblFlat.Text);
-           
+            string FlatNumber = lblFlatNuber.Text;
 
             GenerateBill genBill = new GenerateBill();
   
@@ -430,13 +430,15 @@ public partial class LatestBill : System.Web.UI.Page
             genBill.Activated = 1;
             genBill.CycleType = "Quaterly";
             genBill.FlatID = FlatID;
+            genBill.op_FlatNumber = FlatNumber;
             genBill.InvoiceID = InvoiceID.ToString();
             genBill.ModifiedAt = DateTime.UtcNow;
             genBill.PaymentDueDate = DateTime.UtcNow;
             genBill.PaymentMode = mode;
             genBill.PreviousMonthBalance = 0;
-            genBill.SocietyBillID = 2;
-            genBill.SocietyID = 1;
+            string s = lblsocietybillid.Text;
+            genBill.SocietyID = SessionVariables.SocietyID;
+            genBill.SocietyBillID = Convert.ToInt32(s);
             genBill.TransactionID = TransID.ToString();
 
 
@@ -900,7 +902,7 @@ public partial class LatestBill : System.Web.UI.Page
         DataSet dscheck = dacess.ReadData(BillPaidCheck);
         String PaidDateFormat = "";
         DataTable dtcheck = dscheck.Tables[0];
-
+        lblFlatNuber.Text = dtcheck.Rows[0]["FlatNumber"].ToString();
 
         String TransactionID = dtcheck.Rows[0]["TransactionID"].ToString();
         String InvoiceID = dtcheck.Rows[0]["InvoiceID"].ToString();
@@ -924,6 +926,7 @@ public partial class LatestBill : System.Web.UI.Page
                 lblDueDate.Text = tempDate.ToString("dd MMM yyyy");
                 //lblDueDate.Text =  dt.Rows[0]["PaymentDueDate"].ToString("dd MMM YYYY");
                 lblCycletype.Text = dt.Rows[0]["CycleType"].ToString();
+            lblsocietybillid.Text = dt.Rows[0]["SocietyBillID"].ToString();
 
             Iblpyamt.Text = dt.Rows[0]["AmountTobePaid"].ToString();
 
@@ -933,6 +936,7 @@ public partial class LatestBill : System.Web.UI.Page
                 SessionVariables.FlatArea = dt.Rows[0]["FlatArea"].ToString();
 
                 lblCurrentTime.Text = Date.ToString();
+               // int camt=Convert.ToInt32(dt.Rows[0]["CurrentMonthBalance"])+Convert.ToInt32(dt.Rows[0]["CurrentMonthBalance"])
                 txtAmt.Text = dt.Rows[0]["CurrentMonthBalance"].ToString();
                 txtTransaID.Text = "";
                 MultiView1.ActiveViewIndex = 2;
@@ -1042,6 +1046,7 @@ public partial class LatestBill : System.Web.UI.Page
         DateTime BillStartDate = DateTime.ParseExact(lblFromDate.Text, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture); 
        // String ChargeType = HiddenFieldChargeType.Value;
         String BillDescription = txtBillGenSingleFlatdesc.Text;
+
 
         if (newBill != null)
         {
@@ -1331,6 +1336,8 @@ public partial class LatestBill : System.Web.UI.Page
 
             //Fetch value of Name.
             string BillType = (row.FindControl("lblBillType") as Label).Text;
+
+            //string FlatID = ((HiddenField)row.FindControl("hdnFlatId")).Value;
 
             //Fetch value of Country
             string FlatNumber = (row.FindControl("lblFlatNumar") as Label).Text;

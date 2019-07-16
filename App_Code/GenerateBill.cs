@@ -13,6 +13,7 @@ public class GenerateBill
     public int SocietyBillID;
     //public String FlatNumber;
     public int BillTypeID;
+    public int ResID;
 
     public int CurrentBillAmount;
     public String CycleType;

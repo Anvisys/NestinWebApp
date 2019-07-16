@@ -396,7 +396,7 @@
                                                     <span style="padding: 5px; float: right; color: #03a9f4;">Invoice ID
                                                         <asp:Label ID="lblPayID" runat="server" Text='<%#Eval("PayID") %>'></asp:Label></span>
                                                     <hr style="margin-bottom: 10px; margin-top: 10px;" />
-
+                                                    <asp:HiddenField ID="hdnFlatId" runat="server" Value='<%# Eval("FlatID") %>' />
 
                                                     <div class="col-xs-4 " style="padding: 7px 30px;">
 
@@ -409,7 +409,7 @@
 
                                                     <div class="col-xs-4 ">
                                                         Amount:
-                                                        <asp:Label ForeColor="Red" ID="Label2" runat="server" Text='<%# (int)Eval("CurrentBillAmount") -  (int)Eval("AmountPaid") %>'></asp:Label>
+                                                        <asp:Label ForeColor="Red" ID="Label2" runat="server" Text='<%# (int)Eval("CurrentMonthBalance") %>'></asp:Label>
                                                         to be  paid by:
                                                          <span style="color: #009688">
                                                              <asp:Label ID="Label5" runat="server" Text='<%# Eval("PaymentDueDate", "{0:dd/MMM/yy}") %>'></asp:Label></span><br />
