@@ -427,7 +427,7 @@
 
             <div class="col-md-2 hidden-sm hidden-xs margin-zero">
 
-                <div id="Admin_Navigation" style="position:fixed;height:100%;background-color:#98c8dc;width:inherit;" >
+                <div id="Admin_Navigation" style="position:fixed;height:100%;background-color:#1f404e;width:inherit;" >
                     <div class="Left-Nav">
                         <ul  id="admin-dd-Menu">
 

@@ -672,7 +672,7 @@
                                 <ItemStyle></ItemStyle>
                                 <ItemTemplate>
 
-                                    <div class="row layout_shadow_table" style="margin-left: 3px;">
+                                    <div class="row layout_shadow_table" style="margin-left: 7px !important;">
 
                                         <div class="col-sm-2 col-xs-6">
 

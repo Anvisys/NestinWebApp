@@ -388,8 +388,6 @@
                                         <asp:TemplateField FooterStyle-BorderStyle="None">
                                             <ItemTemplate>
                                                 <div class="row layout_shadow_table">
-
-
                                                     <span style="font-size: medium; color: #000; margin: 10px;">
                                                         <asp:Label ID="lblFlatNumar" runat="server" Text='<%# Eval("FlatNumber") %>'></asp:Label>, 
                                                            <asp:Label ID="lblBillType" runat="server" Text='<%# Eval("BillType") %>'></asp:Label></span>
@@ -399,24 +397,19 @@
                                                     <asp:HiddenField ID="hdnFlatId" runat="server" Value='<%# Eval("FlatID") %>' />
 
                                                     <div class="col-xs-4 " style="padding: 7px 30px;">
-
-                                                        <%--  <img   class="profile-image" src='<%# "GetImages.ashx?UserID="+ Eval("OwnerUserID")+"&Name="+Eval("OwnerFirstName") +"&UserType=Owner" %>' 
-                                                            /><br />
-                                                          
-                                                            <asp:Label ID="Label8" runat="server" Text='<%# "Owner: " + Eval("OwnerFirstName") %>' ></asp:Label>
-                                                        --%>
                                                     </div>
 
                                                     <div class="col-xs-4 ">
                                                         Amount:
+
                                                         <asp:Label ForeColor="Red" ID="Label2" runat="server" Text='<%# (int)Eval("CurrentMonthBalance") %>'></asp:Label>
+
+                                                      
                                                         to be  paid by:
                                                          <span style="color: #009688">
                                                              <asp:Label ID="Label5" runat="server" Text='<%# Eval("PaymentDueDate", "{0:dd/MMM/yy}") %>'></asp:Label></span><br />
                                                         Current Bill: <%# "Rs. "+ Eval("CurrentBillAmount") %>
                                                         <%# "Paid: "+ Eval("AmountPaid") %><br />
-
-
                                                         <asp:Button ID="btnBillPay" runat="server"
                                                             CommandName="Pay"
                                                             CommandArgument="<%# Container.DataItemIndex %>"
@@ -426,7 +419,6 @@
                                                             CommandName="History"
                                                             CommandArgument="<%# Container.DataItemIndex %>"
                                                             Text="Details" CssClass="btn btn-info btn-sm" CausesValidation="false" />
-
                                                     </div>
                                                     <div class="col-xs-4 ">
                                                         From:   <%# Eval("BillStartDate", "{0:dd/MMM/yy}") %>
@@ -440,24 +432,20 @@
                                                             CommandArgument="<%# Container.DataItemIndex %>"
                                                             Text="Generate" CssClass="btn btn-success btn-sm" CausesValidation="false" />
                                                     </div>
-
                                                     <div class="col-xs-12">
                                                     </div>
                                                 </div>
-
                                             </ItemTemplate>
                                         </asp:TemplateField>
-
                                         <asp:TemplateField Visible="false">
                                             <ItemTemplate>
                                                 <asp:HiddenField ID="hdnModifiedAt" Value='<%# Eval("ModifiedAt") %>' runat="server"></asp:HiddenField>
 
                                             </ItemTemplate>
                                         </asp:TemplateField>
-
-
-
                                     </Columns>
+
+
                                     <EmptyDataRowStyle BackColor="#EEEEEE" />
 
                                     <PagerSettings Mode="NumericFirstLast" />
