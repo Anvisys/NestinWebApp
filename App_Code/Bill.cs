@@ -537,8 +537,8 @@ public class Bill
             DataAccess dacess = new DataAccess();
             String Generatebill = "Insert into " + TableName 
                                 + "(FlatID,ActionType,Activated,SocietyBillID,BillStartDate,BillEndDate,CurrentBillAmount,CycleType,PaymentDueDate,BillMonth,PreviousMonthBalance,AmountPaidDate,AmountPaid,PaymentMode,TransactionID,InvoiceID,ModifiedAt,BillDescription,SocietyID) Values('"
-                                   + newBill.FlatID + "','" + newBill.ActionType + "','" + newBill.Activated + "','" + newBill.SocietyBillID + "','" + newBill.BillStartDate.ToString("MM-dd-yyyy HH:MM:ss") + "','" + newBill.BillEndDate.ToString("MM-dd-yyyy HH:MM:ss") + "','" + newBill.CurrentBillAmount+"','"+newBill.CycleType+ "','"+newBill.PaymentDueDate.ToString("MM-dd-yyyy HH:MM:ss") + "','"+newBill.BillMonth.ToString("MM-dd-yyyy HH:MM:ss") + "','" 
-                                   + newBill.PreviousMonthBalance + "','" + newBill.AmountPaidDate.ToString("MM-dd-yyyy HH:MM:ss") + "','" + newBill.AmountPaid+ "','" + newBill.PaymentMode+ "','" + newBill.TransactionID + "','" + newBill.InvoiceID + "','" + newBill.ModifiedAt + "','" + newBill.BillDescription + "'," + SessionVariables.SocietyID + ")";
+                                   + newBill.FlatID + "','" + newBill.ActionType + "','" + newBill.Activated + "','" + newBill.SocietyBillID + "','" + DateString(newBill.BillStartDate,true) + "','" + DateString(newBill.BillEndDate,true) + "','" + newBill.CurrentBillAmount+"','"+newBill.CycleType+ "','"+ DateString(newBill.PaymentDueDate,true) + "','"+ DateString(newBill.BillMonth,true)+ "','" 
+                                   + newBill.PreviousMonthBalance + "','" + DateString(newBill.AmountPaidDate,true) + "','" + newBill.AmountPaid+ "','" + newBill.PaymentMode+ "','" + newBill.TransactionID + "','" + newBill.InvoiceID + "','" + DateString(newBill.ModifiedAt,true) + "','" + newBill.BillDescription + "'," + SessionVariables.SocietyID + ")";
             return dacess.Update(Generatebill);
         }
 

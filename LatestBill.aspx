@@ -75,9 +75,20 @@
 
             });
 
-            //$("#lbltill").datetimepicker({
-            //    format:'DD-MM-YYYY'
-            //});
+
+
+            if ($("#Iblpyamt").text() == "0") {
+                $("#btnPaySubmit").prop("disabled", true);
+
+            }
+            else {
+                $("#btnPaySubmit").prop("disabled", false);
+                $("#chkbtn").prop("disabled", true);
+               
+            }
+
+         
+
 
             $("#txtBillDate").datetimepicker({
                 //  format: 'YYYY-MM-DD'
@@ -250,6 +261,22 @@
             document.getElementById("generatedbilldescriptnmodal").style.display = "block";
         }
 
+        function EnableCheckbox(checkbox) {
+
+            if (checkbox.checked == true) {
+
+                document.getElementById("btnPaySubmit").removeAttribute("disabled");
+
+            }
+            else {
+
+                document.getElementById("btnPaySubmit").setAttribute("disabled", true);
+
+            }
+          
+
+        }
+
     </script>
     <style>
         .modal {
@@ -296,6 +323,12 @@
 
         #lblBillDuplicate {
             margin-left: 130px;
+        }
+
+        .m-chk {
+            width:100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
     </style>
 
@@ -605,7 +638,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td style="width: 50%; text-align: right;">Flat Number :
+                                    <td style="width: 50%; text-align: left;">Flat Number :
                                     </td>
                                     <td style="width: 50%; padding-left: 3%;">
                                         <asp:Label ID="lblFlat" runat="server"></asp:Label>
@@ -613,7 +646,7 @@
 
                                 </tr>
                                 <tr>
-                                    <td style="width: 50%; text-align: right;">Bill Type :
+                                    <td style="width: 50%; text-align: left;">Bill Type :
                                     </td>
                                     <td style="width: 50%; padding-left: 3%;">
                                         <asp:Label ID="lblBillType" runat="server"></asp:Label>
@@ -621,7 +654,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td style="width: 50%; text-align: right;">Due Date :
+                                    <td style="width: 50%; text-align: left;">Due Date :
                                     </td>
                                     <td style="width: 50%; padding-left: 3%;">
                                         <asp:Label ID="lblDueDate" runat="server"></asp:Label>
@@ -629,7 +662,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td style="width: 50%; text-align: right;">Bill Amount :
+                                    <td style="width: 50%; text-align: left;">Bill Amount :
                                     </td>
                                     <td style="width: 50%; padding-left: 3%;">
                                         <asp:Label ID="lblBillAmount" runat="server"></asp:Label>
@@ -637,7 +670,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td style="width: 50%; text-align: right;">Previous Balance :
+                                    <td style="width: 50%; text-align: left;">Previous Balance :
                                     </td>
                                     <td style="width: 50%; padding-left: 3%;">
                                         <asp:Label ID="lblBalance" runat="server"></asp:Label>
@@ -645,14 +678,14 @@
                                 </tr>
 
                                 <tr>
-                                    <td style="width: 50%; text-align: right;">Total Payble :
+                                    <td style="width: 50%; text-align: left;">Total Payble :
                                     </td>
                                     <td style="width: 50%; padding-left: 3%;">
                                         <asp:Label ID="lblTotalPay" runat="server"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 50%; text-align: right;">Due For :
+                                    <td style="width: 50%; text-align: left;">Due For :
                                     </td>
                                     <td style="width: 50%; padding-left: 3%;">
                                         <asp:Label ID="lblDueFor" runat="server"></asp:Label>
@@ -660,7 +693,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td style="width: 50%; text-align: right;">Cycle Type :
+                                    <td style="width: 50%; text-align: left;">Cycle Type :
                                     </td>
                                     <td style="width: 50%; padding-left: 3%;">
                                         <asp:Label ID="lblCycletype" runat="server"></asp:Label>
@@ -668,7 +701,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td style="width: 50%; text-align: right;">Due Date :
+                                    <td style="width: 50%; text-align: left;">Due Date :
                                     </td>
                                     <td style="width: 50%; padding-left: 3%;">&nbsp;<asp:Label ID="lblCurrentTime" runat="server"></asp:Label>
                                     </td>
@@ -680,7 +713,7 @@
                                 </tr>
                                 <tr>
 
-                                    <td style="width: 50%; text-align: right;">Paid Amount :
+                                    <td style="width: 50%; text-align: left;">Paid Amount :
                                     </td>
                                     <td style="width: 50%; padding-left: 3%;">
                                         <asp:Label ID="lblAmountPaid" runat="server"></asp:Label>
@@ -689,7 +722,7 @@
                                 </tr>
                                 <tr>
 
-                                    <td style="width: 50%; text-align: right;">Paid On :
+                                    <td style="width: 50%; text-align: left;">Paid On :
                                     </td>
                                     <td style="width: 50%; padding-left: 3%;">
                                         <asp:Label ID="lblPaidDate" runat="server"></asp:Label>
@@ -698,10 +731,24 @@
                                 </tr>
 
                                 <tr>
-                                    <td colspan="2" style="height: 50px; background-color: #f2f2f2; color: #bfbfbf; padding-left: 3%; font-size: x-large;">Payment Mode :
+                                    <td colspan="2" style="height: 50px; background-color: #f2f2f2; color: #bfbfbf; padding-left: 3%; font-size: x-large;">Payment Mode :   
                                     </td>
+                                   
                                 </tr>
+                                <%--<tr>
+                                    <td>
+                                        <p>you Have "<%# Eval("lblBillAmount") %>" dueamount. Check below button to pay advance.</p>
+                                        <input type="checkbox" name="vehicle1" value="Bike" />
+                                        Pay Advance
+                                        <br />
+                                    </td>
+
+                                </tr>--%>
+
                                 <tr style="text-align: center;">
+
+
+
                                     <td>
                                         <a href="#" class="mode_button" id="lnkPaypal">PayPal Entry</a>
                                     </td>
@@ -711,6 +758,19 @@
 
                                 </tr>
                             </table>
+
+                             <br />
+                                   <div class="row"> 
+                                      <div class="container">
+                                    You Have  
+                                    <asp:Label ID="Iblpyamt" Text="" runat="server" />
+                                    due amount.  Check below button to pay advance.
+                             <br />
+                                    <input id="chkbtn" onchange="EnableCheckbox(this);" type="checkbox" name="vehicle1" value="Bike" />
+                                    Pay Advance
+                                    </div>
+                                   </div>
+                             <br />
 
                             <table id="paymannual" style="width: 70%; margin-left: 15%; text-align: center;">
                                 <tr>
@@ -731,7 +791,7 @@
                                     <td style="text-align: right;">Payment Mode:
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="drpPayMode" runat="server" CssClass="ddl_style">
+                                        <asp:DropDownList ID="drpPayMode" runat="server" CssClass="ddl_style m-chk btn btn-primary pull-left left">
                                             <asp:ListItem>Cash</asp:ListItem>
                                             <asp:ListItem>Cheque</asp:ListItem>
                                         </asp:DropDownList>
@@ -762,13 +822,14 @@
                                     <td colspan="3" style="text-align: center;"></td>
                                 </tr>
                                 <tr>
+
                                     <td style="height: 50px; text-align: right;">
-                                        <asp:Button ID="btnPaySubmit" runat="server" Text="Submit" CssClass="send" OnClick="btnpaymannual_Click" />
+                                        <asp:Button ID="btnPaySubmit" runat="server" Text="Submit" CssClass="btn btn-primary send " OnClick="btnpaymannual_Click" />
                                     </td>
 
 
                                     <td colspan="2" style="text-align: center;">
-                                        <asp:Button ID="btnPayCancel" runat="server" Text="Cancel" CssClass="send" CausesValidation="False" OnClick="btnpayCancel_Click" />
+                                        <asp:Button ID="btnPayCancel" runat="server" Text="Cancel" CssClass="btn btn-danger send" CausesValidation="False" OnClick="btnpayCancel_Click" />
                                     </td>
                                 </tr>
                             </table>
@@ -879,7 +940,7 @@
                                 </div>
 
                             </div>
-                       </div>
+                        </div>
                     </div>
 
                     <%--   Import Bill Form  --%>
@@ -968,14 +1029,16 @@
                                     <div class="row">
                                         <div class="col-xs-6">Bill Type :</div>
                                         <div class="col-xs-6">
-                                            <asp:Label ID="lblBilltypeDes" runat="server" Text=""></asp:Label></div>
+                                            <asp:Label ID="lblBilltypeDes" runat="server" Text=""></asp:Label>
+                                        </div>
                                     </div>
 
 
                                     <div class="row">
                                         <div class="col-xs-6">Chargetype :</div>
                                         <div class="col-xs-6">
-                                            <asp:Label ID="lblchargetypeDes" runat="server" Text=""></asp:Label></div>
+                                            <asp:Label ID="lblchargetypeDes" runat="server" Text=""></asp:Label>
+                                        </div>
                                     </div>
 
                                     <div class="row">
@@ -988,18 +1051,21 @@
                                     <div class="row">
                                         <div class="col-xs-6">Rows Effect : </div>
                                         <div class="col-xs-6">
-                                            <asp:Label ID="lblRowsEffectDes" runat="server" Text=""></asp:Label></div>
+                                            <asp:Label ID="lblRowsEffectDes" runat="server" Text=""></asp:Label>
+                                        </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <asp:Label ID="lblBillGeneraStatus" runat="server" ForeColor="White" Text="status"></asp:Label></div>
+                                            <asp:Label ID="lblBillGeneraStatus" runat="server" ForeColor="White" Text="status"></asp:Label>
+                                        </div>
                                         <div class="col-xs-6"></div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <asp:FileUpload ID="uploadBill" runat="server" Visible="false" /></div>
+                                            <asp:FileUpload ID="uploadBill" runat="server" Visible="false" />
+                                        </div>
                                         <div class="col-xs-6">
                                             <asp:Button ID="btnbillCaluclate" runat="server" CssClass="btn_style" OnClick="btnbillCaluclate_Click" Text="Generate Bill" ValidationGroup="BillGentype" Visible="false" />
                                         </div>
