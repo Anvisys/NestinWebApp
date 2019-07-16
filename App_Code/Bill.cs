@@ -567,6 +567,7 @@ public class Bill
         GenerateBill newBill = new GenerateBill();
         int days = 0;
         double BillAmount=0;
+        string ActionType = "Generate";
 
         newBill.BillStartDate = previousBill.BillEndDate.AddDays(1);
 
@@ -681,6 +682,8 @@ public class Bill
         newBill.CycleType = previousBill.CycleType;
         newBill.BillMonth = newBill.BillEndDate;
         newBill.op_Rate = previousBill.op_Rate;
+        newBill.FlatID = previousBill.FlatID;
+        newBill.ActionType = ActionType;
         return newBill;
     }
 

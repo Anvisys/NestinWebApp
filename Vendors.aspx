@@ -848,7 +848,7 @@ hr {
         }
 
         function CheckOffers() {
-            var url = "http://localhost:5103/"+"api/Offers/Society/"+<%=Session["SocietyID"]%>
+            var url = api_url + "api/Offers/Society/" +<%=Session["SocietyID"]%>
             $.ajax({
                 datatype:"json",
                 url: url,
