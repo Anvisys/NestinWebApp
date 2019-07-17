@@ -453,6 +453,14 @@
                                 </asp:GridView>
                                 &nbsp;
                              
+
+                                <%--Bill Details Grid View GrdDetail==> Sagar--%>
+
+                                <asp:GridView ID="GrdDetail" runat="server"></asp:GridView>
+
+                                <%-- Bill Details Grid View GrdDetail--%>
+
+
                               <%--Added by Aarshi on 27-Sept-2017 for bug fix--%>
                                 <asp:HiddenField ID="HiddenFlatNumberHistory" runat="server" />
                                 <asp:HiddenField ID="HiddenBillTypeHistory" runat="server" />

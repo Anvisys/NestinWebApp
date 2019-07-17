@@ -64,7 +64,7 @@ public partial class LatestBill : System.Web.UI.Page
             String FlatNumber = txtLatestFlatFilter.Text;
             int SocietyID = muser.currentResident.SocietyID;
             Bill bill = new Bill();
-            dsLatestBillData = bill.GetLatestBills(FlatNumber, BillType, "", "");//Added by Aarshi on 13-Sept-2017 for bug fix
+            dsLatestBillData = bill.GetLatestBills(FlatNumber, BillType, "", "","ViewGeneratedBill" );//Added by Aarshi on 13-Sept-2017 for bug fix
 
             if (dsLatestBillData != null && dsLatestBillData.Tables.Count > 0)
             {
@@ -287,17 +287,18 @@ public partial class LatestBill : System.Web.UI.Page
     {
         try
         {
-            GridViewRow row = GridlatestBills.SelectedRow;
-            btnBillPay.CommandArgument = row.RowIndex.ToString();
+            //GridViewRow row = GridlatestBills.SelectedRow;
+            //btnBillPay.CommandArgument = row.RowIndex.ToString();
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 DataRowView drv = e.Row.DataItem as DataRowView;
-                DateTime BillDate = Convert.ToDateTime(drv["BillDate"].ToString());
+                //DateTime BillDate = Convert.ToDateTime(drv["BillDate"].ToString());
                 int Amount = Convert.ToInt32(drv["CurrentMonthBalance"].ToString());
                 int Balance = Convert.ToInt32(drv["PreviousMonthBalance"].ToString());
                 DateTime PaymentDate = Convert.ToDateTime(drv["PaymentDueDate"].ToString());
 
+                txtLatestFlatFilter.Text = drv["FlatNumber"].ToString();
                 //if (Amount <= 0)
                 //{
                 //    e.Row.BackColor = System.Drawing.Color.White;
@@ -320,7 +321,7 @@ public partial class LatestBill : System.Web.UI.Page
 
                 e.Row.ToolTip = (e.Row.DataItem as DataRowView)["BillDescription"].ToString();
 
-                TableCell statusCell = e.Row.Cells[22];
+                TableCell statusCell = e.Row.Cells[15];
                 statusCell.Text = (e.Row.DataItem as DataRowView)["BillDescription"].ToString().Substring(0, 5) + "..";
 
 
@@ -419,6 +420,7 @@ public partial class LatestBill : System.Web.UI.Page
             string InvoiceID = txtInvID.Text;
             int FlatID = Convert.ToInt32(lblFlat.Text);
             string FlatNumber = lblFlatNuber.Text;
+            int CurrentMonthBal = Convert.ToInt32(lblCurrentmonthbal.Text);
 
             GenerateBill genBill = new GenerateBill();
   
@@ -444,7 +446,7 @@ public partial class LatestBill : System.Web.UI.Page
             genBill.SocietyID = SessionVariables.SocietyID;
             genBill.SocietyBillID = Convert.ToInt32(s);
             genBill.TransactionID = TransID.ToString();
-
+            genBill.CurrentMonthBalance = CurrentMonthBal;
 
             genBill.op_BillType = "";
 
@@ -912,7 +914,7 @@ public partial class LatestBill : System.Web.UI.Page
         String PaidDateFormat = "";
         DataTable dtcheck = dscheck.Tables[0];
         lblFlatNuber.Text = dtcheck.Rows[0]["FlatNumber"].ToString();
-
+        lblCurrentmonthbal.Text = dtcheck.Rows[0]["CurrentMonthBalance"].ToString();
         String TransactionID = dtcheck.Rows[0]["TransactionID"].ToString();
         String InvoiceID = dtcheck.Rows[0]["InvoiceID"].ToString();
 
@@ -1345,12 +1347,13 @@ public partial class LatestBill : System.Web.UI.Page
 
             //Fetch value of Name.
             string BillType = (row.FindControl("lblBillType") as Label).Text;
+            drpCurrentBillType.SelectedItem.Text = BillType;
 
             //string FlatID = ((HiddenField)row.FindControl("hdnFlatId")).Value;
 
             //Fetch value of Country
             string FlatNumber = (row.FindControl("lblFlatNumar") as Label).Text;
-
+            txtLatestFlatFilter.Text = FlatNumber;
             //Added by Aarshi on 13-Sept-2017 for bug fix
             string StartDate = DateTime.Now.AddMonths(-2).ToString("dd-MM-yyyy");
             string EndDate = DateTime.Now.ToString("dd-MM-yyyy");

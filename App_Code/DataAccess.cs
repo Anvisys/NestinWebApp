@@ -182,9 +182,7 @@ public class DataAccess
         try
         {
             SqlConnection SQLConnection = this.ConnectSocietyDB();
-            SqlCommand cmd = new SqlCommand(queryString, SQLConnection);
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            adapter.SelectCommand = cmd;
+            SqlDataAdapter adapter = new SqlDataAdapter(queryString, SQLConnection);
             DataSet ds = new DataSet();
             adapter.Fill(ds);
             if (ds.Tables[0].Rows.Count < 1)

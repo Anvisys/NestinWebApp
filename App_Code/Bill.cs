@@ -223,7 +223,7 @@ public class Bill
         return result;
     }
 
-    public DataSet GetLatestBills(String FlatNumber, String BillType,string StartDate, string EndDate)//Added by Aarshi on 13-Sept-2017 for bug fix
+    public DataSet GetLatestBills(String FlatNumber, String BillType,string StartDate, string EndDate ,string ViewName= "viewLatestFlatBill")//Added by Aarshi on 13-Sept-2017 for bug fix
     {
         try
         {
@@ -264,11 +264,11 @@ public class Bill
             LatestBillGenQuery = "select * from " + ViewName + " where ((ApplyTo = 0 and Activated = 1) or ApplyTo = 1) and " + FlatCond + " and " + BillTypeCond + " and " + DateCond;
             //Ends here
 
-            if (BillType.Equals("Show All"))
-            {
-                LatestBillGenQuery = "select * from " + ViewName;
+            //if (BillType.Equals("Show All"))
+            //{
+            //    LatestBillGenQuery = "select * from " + ViewName;
 
-            }
+            //}
             DataAccess dacess = new DataAccess();
             return dacess.GetData(LatestBillGenQuery);
             
@@ -574,7 +574,7 @@ public class Bill
             String Generatebill = "Insert into " + TableName
                                 + "(FlatID,ActionType,Activated,SocietyBillID,BillStartDate,BillEndDate,CurrentBillAmount,CycleType,PaymentDueDate,BillMonth,PreviousMonthBalance,AmountPaidDate,AmountPaid,PaymentMode,TransactionID,InvoiceID,ModifiedAt,BillDescription,SocietyID,ResID) Values('"
                                    + newBill.FlatID + "','" + newBill.ActionType + "','" + newBill.Activated + "','" + newBill.SocietyBillID + "','" + DateString(newBill.BillStartDate, true) + "','" + DateString(newBill.BillEndDate, true) + "','" + newBill.CurrentBillAmount  +"','"+newBill.CycleType+ "','"+ DateString(newBill.PaymentDueDate,true) + "','"+ DateString(newBill.BillMonth,true)+ "','" 
-                                   + newBill.PreviousMonthBalance + "','" + DateString(newBill.AmountPaidDate,true) + "','" + newBill.AmountPaid+ "','" + newBill.PaymentMode+ "','" + newBill.TransactionID + "','" + newBill.InvoiceID + "','" + DateString(newBill.ModifiedAt,true) + "','" + newBill.BillDescription + "'," + SessionVariables.SocietyID + ","+newBill.ResID+")";
+                                   + newBill.CurrentMonthBalance + "','" + DateString(newBill.AmountPaidDate,true) + "','" + newBill.AmountPaid+ "','" + newBill.PaymentMode+ "','" + newBill.TransactionID + "','" + newBill.InvoiceID + "','" + DateString(newBill.ModifiedAt,true) + "','" + newBill.BillDescription + "'," + SessionVariables.SocietyID + ","+newBill.ResID+")";
             return dacess.Update(Generatebill);
         }
 
