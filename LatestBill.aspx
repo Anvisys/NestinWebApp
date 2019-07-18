@@ -84,10 +84,10 @@
             else {
                 $("#btnPaySubmit").prop("disabled", false);
                 $("#chkbtn").prop("disabled", true);
-               
+
             }
 
-         
+
 
 
             $("#txtBillDate").datetimepicker({
@@ -247,7 +247,7 @@
             }
 
             document.getElementById("current_dropdown").style.top = Posy + 'px';
-            document.getElementById("current_dropdown").style.left = Posx-500 + 'px';
+            document.getElementById("current_dropdown").style.left = Posx - 500 + 'px';
 
             $("#current_dropdown").slideDown();
             event.stopPropagation();
@@ -273,7 +273,7 @@
                 document.getElementById("btnPaySubmit").setAttribute("disabled", true);
 
             }
-          
+
 
         }
 
@@ -295,12 +295,39 @@
             background-color: rgba(0,0,0,0.4);
         }
 
-        .columnscss
-{
-width:150px;
-padding:5px;
-align-content:center;
-}
+        <%--Sagar GrdDetails Styling--%>
+        .columnscss {
+            min-width: 150px;
+            padding: 5px;
+            align-content: center;
+            border-right:3px outset #ccccff;
+            
+        }
+
+        .headerdecore{
+            height:50px;
+            color:white;
+            font-weight:bold;
+            ali
+            padding:5px;
+            background-color:#ccccff;
+            font-size:18px;
+            
+        }
+
+        .boxdecore{
+            min-height:100px;
+           font-size:16px;
+            margin:10px;
+        }
+
+        #GrdDetail table {
+            margin-left: 10px;
+            padding:5px;
+            border-right:3px outset #ccccff;
+        }
+
+         <%--Sagar GrdDetails Styling--%>
 
         .form-control {
             display: inline;
@@ -332,7 +359,7 @@ align-content:center;
         }
 
         .m-chk {
-            width:100%;
+            width: 100%;
             margin-top: 10px;
             margin-bottom: 10px;
         }
@@ -410,7 +437,7 @@ align-content:center;
 
                                                         <asp:Label ForeColor="Red" ID="Label2" runat="server" Text='<%# (int)Eval("CurrentMonthBalance") %>'></asp:Label>
 
-                                                      
+
                                                         to be  paid by:
                                                          <span style="color: #009688">
                                                              <asp:Label ID="Label5" runat="server" Text='<%# Eval("PaymentDueDate", "{0:dd/MMM/yy}") %>'></asp:Label></span><br />
@@ -491,59 +518,63 @@ align-content:center;
                         </asp:View>
 
                         <asp:View ID="viewBillDetails" runat="server">
-                              <%--Bill Details Grid View GrdDetail==> Sagar--%>
+                            <%--Bill Details Grid View GrdDetail==> Sagar--%>
 
-                                <asp:GridView ID="GrdDetail" runat="server" HeaderStyle-CssClass="columnscss" AutoGenerateColumns="False" DataKeyNames="PayID" AllowPaging="True" CellPadding="5" ForeColor="#333333" ShowFooter="True" PagerSettings-NextPageText="Next" PagerSettings-PreviousPageText="Prev" AllowSorting="False" CellSpacing="10" EditRowStyle-HorizontalAlign="NotSet" FooterStyle-HorizontalAlign="Center" OnRowDataBound="GrdDetail_RowDataBound">
-                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775"></AlternatingRowStyle>
-                                    <Columns>
-                                        
-                                        <asp:BoundField DataField="FlatNumber" HeaderText="Flat Number" SortExpression="FlatNumber" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="ActionType" HeaderText="Action Type" SortExpression="ActionType" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="BillType" HeaderText="Bill Type" SortExpression="BillType" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="ChargeType" HeaderText="Charge Type" SortExpression="ChargeType" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="Rate" HeaderText="Rate" SortExpression="Rate" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="CycleType" HeaderText="Cycle Type" SortExpression="CycleType" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="BillDescription" HeaderText="Bill Description" SortExpression="BillDescription" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        
-                                        <asp:BoundField DataField="CurrentBillAmount" HeaderText="Current Bill Amount" SortExpression="CurrentBillAmount" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="PaymentDueDate" HeaderText="Due Date" SortExpression="PaymentDueDate" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="BillMonth" HeaderText="Month" SortExpression="BillMonth" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="AmountTobePaid" HeaderText="Amount To be Paid" ReadOnly="True" SortExpression="AmountTobePaid" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="PreviousMonthBalance" HeaderText="Previous Month Balance" SortExpression="PreviousMonthBalance" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="AmountPaidDate" HeaderText="Payment Date" SortExpression="AmountPaidDate" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="AmountPaid" HeaderText="Amount Paid" SortExpression="AmountPaid" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="CurrentMonthBalance" HeaderText="Current Month Balance" ReadOnly="True" SortExpression="CurrentMonthBalance" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="PaymentMode" HeaderText="Payment Mode" SortExpression="PaymentMode" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="TransactionID" HeaderText="TransactionID" SortExpression="TransactionID" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        <asp:BoundField DataField="InvoiceID" HeaderText="InvoiceID" SortExpression="InvoiceID" ItemStyle-CssClass="columnscss"></asp:BoundField>
-                                        
-                                        
-                                    </Columns>
-                                    <EditRowStyle BackColor="#999999" Wrap="False"></EditRowStyle>
+                            <div class="boxdecore">
+                                <div class="headerdecore">Bill Details</div>
+                                <span>Flat Number :</span><asp:Label ID="lblFlatNumbergrddetails" runat="server"></asp:Label><br>
+                                <span>Bill Type :</span><asp:Label ID="lblbilltypegrddetails" runat="server"></asp:Label><br />
+                                <span>Charge Type :</span><asp:Label ID="lblchargetypegrddetails" runat="server"></asp:Label><br />
+                                <span>Rate :</span><asp:Label ID="lblRategrddetails" runat="server"></asp:Label>
+                            </div>
+                            <div style="position:absolute;">
+                            <asp:GridView ID="GrdDetail" runat="server" HeaderStyle-CssClass="columnscss" AutoGenerateColumns="False" DataKeyNames="PayID" AllowPaging="True" CellPadding="5" ForeColor="#333333" ShowFooter="True" PagerSettings-NextPageText="Next" PagerSettings-PreviousPageText="Prev" AllowSorting="False" CellSpacing="10" EditRowStyle-HorizontalAlign="NotSet" FooterStyle-HorizontalAlign="Center" OnRowDataBound="GrdDetail_RowDataBound">
+                                <AlternatingRowStyle BackColor="White" ForeColor="#284775"></AlternatingRowStyle>
+                                <Columns>
 
-                                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></FooterStyle>
 
-                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" Height="50px" HorizontalAlign="Center" Wrap="False"></HeaderStyle>
+                                    <asp:BoundField DataField="ActionType" HeaderText="Action Type" SortExpression="ActionType" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                    <asp:BoundField DataField="CycleType" HeaderText="Cycle Type" SortExpression="CycleType" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                    <asp:BoundField DataField="BillDescription" HeaderText="Bill Description" SortExpression="BillDescription" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                    <asp:BoundField DataField="CurrentBillAmount" HeaderText="Current Bill Amount" SortExpression="CurrentBillAmount" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                    <asp:BoundField DataField="PaymentDueDate" HeaderText="Due Date" SortExpression="PaymentDueDate" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                    <asp:BoundField DataField="BillMonth" HeaderText="Month" SortExpression="BillMonth" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                    <asp:BoundField DataField="AmountTobePaid" HeaderText="Amount To be Paid" ReadOnly="True" SortExpression="AmountTobePaid" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                    <asp:BoundField DataField="PreviousMonthBalance" HeaderText="Previous Month Balance" SortExpression="PreviousMonthBalance" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                    <asp:BoundField DataField="AmountPaidDate" HeaderText="Payment Date" SortExpression="AmountPaidDate" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                    <asp:BoundField DataField="AmountPaid" HeaderText="Amount Paid" SortExpression="AmountPaid" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                    <asp:BoundField DataField="CurrentMonthBalance" HeaderText="Current Month Balance" ReadOnly="True" SortExpression="CurrentMonthBalance" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                    <asp:BoundField DataField="PaymentMode" HeaderText="Payment Mode" SortExpression="PaymentMode" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                    <asp:BoundField DataField="TransactionID" HeaderText="TransactionID" SortExpression="TransactionID" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                    <asp:BoundField DataField="InvoiceID" HeaderText="InvoiceID" SortExpression="InvoiceID" ItemStyle-CssClass="columnscss"></asp:BoundField>
 
-                                    <PagerSettings FirstPageText="Prev,Next" LastPageText="Prev,Next;" Mode="NextPrevious" NextPageText="Next" PreviousPageText="Prev" />
 
-                                    <PagerStyle HorizontalAlign="Center" BackColor="#284775" ForeColor="White"></PagerStyle>
+                                </Columns>
+                                <EditRowStyle BackColor="#999999" Wrap="False"></EditRowStyle>
 
-                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
+                                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></FooterStyle>
 
-                                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></SelectedRowStyle>
+                                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" Height="50px" HorizontalAlign="Center" Wrap="False"></HeaderStyle>
 
-                                    <SortedAscendingCellStyle BackColor="#E9E7E2" Height="50px" HorizontalAlign="Center" Width="120px" Wrap="False"></SortedAscendingCellStyle>
+                                <PagerSettings FirstPageText="Prev,Next" LastPageText="Prev,Next;" Mode="NextPrevious" NextPageText="Next" PreviousPageText="Prev" />
 
-                                    <SortedAscendingHeaderStyle BackColor="#506C8C" Height="50px" HorizontalAlign="Center" Width="120px" Wrap="False"></SortedAscendingHeaderStyle>
+                                <PagerStyle HorizontalAlign="Center" BackColor="#284775" ForeColor="White"></PagerStyle>
 
-                                    <SortedDescendingCellStyle BackColor="#FFFDF8" Height="50px" HorizontalAlign="Center" Width="120px" Wrap="False"></SortedDescendingCellStyle>
+                                <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
 
-                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" Height="50px" HorizontalAlign="Center"></SortedDescendingHeaderStyle>
-                                </asp:GridView>
+                                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></SelectedRowStyle>
 
-                                <%-- Bill Details Grid View GrdDetail--%>
+                                <SortedAscendingCellStyle BackColor="#E9E7E2" Height="50px" HorizontalAlign="Center" Width="120px" Wrap="False"></SortedAscendingCellStyle>
 
+                                <SortedAscendingHeaderStyle BackColor="#506C8C" Height="50px" HorizontalAlign="Center" Width="120px" Wrap="False"></SortedAscendingHeaderStyle>
+
+                                <SortedDescendingCellStyle BackColor="#FFFDF8" Height="50px" HorizontalAlign="Center" Width="120px" Wrap="False"></SortedDescendingCellStyle>
+
+                                <SortedDescendingHeaderStyle BackColor="#6F8DAE" Height="50px" HorizontalAlign="Center"></SortedDescendingHeaderStyle>
+                            </asp:GridView>
+                                </div>
+
+                            <%-- Bill Details Grid View GrdDetail--%>
                         </asp:View>
 
                         <asp:View ID="Bill_Detail_View" runat="server">
@@ -582,7 +613,7 @@ align-content:center;
 
                                     </td>
                                     <td colspan="1" style="width: 70%; text-align: left;">
-                                       <%-- <asp:CheckBox ID="ChckBillsGenerated" runat="server" Text="Show Details" AutoPostBack="true" OnCheckedChanged="ChckBillsGenerated_CheckedChanged" />--%>
+                                        <%-- <asp:CheckBox ID="ChckBillsGenerated" runat="server" Text="Show Details" AutoPostBack="true" OnCheckedChanged="ChckBillsGenerated_CheckedChanged" />--%>
                                     </td>
                                     <td colspan="1" style="width: 15%; text-align: center;"></td>
                                 </tr>
@@ -787,7 +818,7 @@ align-content:center;
                                 <tr>
                                     <td colspan="2" style="height: 50px; background-color: #f2f2f2; color: #bfbfbf; padding-left: 3%; font-size: x-large;">Payment Mode :   
                                     </td>
-                                   
+
                                 </tr>
                                 <%--<tr>
                                     <td>
@@ -813,18 +844,18 @@ align-content:center;
                                 </tr>
                             </table>
 
-                             <br />
-                                   <div class="row"> 
-                                      <div class="container">
+                            <br />
+                            <div class="row">
+                                <div class="container">
                                     You Have  
                                     <asp:Label ID="Iblpyamt" Text="" runat="server" />
                                     due amount.  Check below button to pay advance.
                              <br />
                                     <input id="chkbtn" onchange="EnableCheckbox(this);" type="checkbox" name="vehicle1" value="Bike" />
                                     Pay Advance
-                                    </div>
-                                   </div>
-                             <br />
+                                </div>
+                            </div>
+                            <br />
 
                             <table id="paymannual" style="width: 70%; margin-left: 15%; text-align: center;">
                                 <tr>

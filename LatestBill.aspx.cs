@@ -69,6 +69,10 @@ public partial class LatestBill : System.Web.UI.Page
             {
                 dsLatestBillData = bill.GetLatestBills(FlatNumber, BillType, "", "" ,"ViewGeneratedBill");
                 grd = GrdDetail;
+                lblFlatNumbergrddetails.Text = dsLatestBillData.Tables[0].Rows[0].ItemArray[29].ToString();
+                lblbilltypegrddetails.Text = dsLatestBillData.Tables[0].Rows[0].ItemArray[3].ToString();
+                lblchargetypegrddetails.Text=dsLatestBillData.Tables[0].Rows[0].ItemArray[4].ToString();
+                lblRategrddetails.Text = dsLatestBillData.Tables[0].Rows[0].ItemArray[6].ToString();
 
                 MultiView1.ActiveViewIndex = 1;
             }
@@ -1449,11 +1453,22 @@ public partial class LatestBill : System.Web.UI.Page
 
     protected void GrdDetail_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+        int[] arrindex = { 3,6,7 ,9 ,10 };
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             for (int i = 0; i > e.Row.Cells.Count; i++)
             {
-                e.Row.Cells[i].CssClass = "columnscss";
+              //  e.Row.Cells[i].CssClass = "columnscss";
+            }
+            
+            foreach(int index in arrindex)
+            {
+                TableCell tcell = e.Row.Cells[index];
+                int amt = Convert.ToInt32(tcell.Text);
+                if (amt < 0)
+                {
+                    tcell.Text = amt * -1 + "  Paid in Advance.";
+                }
             }
         }
     }
