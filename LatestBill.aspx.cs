@@ -389,8 +389,10 @@ public partial class LatestBill : System.Web.UI.Page
 
                 if (newBill.op_Days <= 0)
                 {
+                   
                     lblBillDuplicate.Text = "Bill is Already Generated";
                     //btnSingleFlatGenerate.BackColor = new System.Drawing.Color(#b3b3ff);
+                    btnSingleFlatGenerate.Visible = false;
                 }
 
                 else

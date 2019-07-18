@@ -247,7 +247,7 @@
             }
 
             document.getElementById("current_dropdown").style.top = Posy + 'px';
-            document.getElementById("current_dropdown").style.left = Posx + 'px';
+            document.getElementById("current_dropdown").style.left = Posx-500 + 'px';
 
             $("#current_dropdown").slideDown();
             event.stopPropagation();
