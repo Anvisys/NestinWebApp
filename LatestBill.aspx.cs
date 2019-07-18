@@ -391,6 +391,7 @@ public partial class LatestBill : System.Web.UI.Page
                    
                     lblBillDuplicate.Text = "Bill is Already Generated";
                     //btnSingleFlatGenerate.BackColor = new System.Drawing.Color(#b3b3ff);
+                    btnSingleFlatGenerate.Visible = false;
                 }
 
                 else

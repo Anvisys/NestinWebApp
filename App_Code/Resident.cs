@@ -365,8 +365,8 @@ public class Resident
             String EncryptPassword = newUser.EncryptPassword(newUser.UserLogin.ToLower(), newUser.Password);
 
             String newUserQuery =
-                "Insert Into dbo.TotalUsers  (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address,UserType,SocietyID) output INSERTED.UserID values('" +
-                newUser.FirstName + "','','" + newUser.LastName + "','" + newUser.MobileNumber + "','" + newUser.EmailID + "','" + newUser.Gender + "','" + newUser.ParentName + "','" + newUser.UserLogin + "','" + EncryptPassword + "','" + newUser.Address + "','Owner','" + SessionVariables.SocietyID + "')";
+                "Insert Into dbo.TotalUsers  (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address) output INSERTED.UserID values('" +
+                newUser.FirstName + "','','" + newUser.LastName + "','" + newUser.MobileNumber + "','" + newUser.EmailID + "','" + newUser.Gender + "','" + newUser.ParentName + "','" + newUser.UserLogin + "','" + EncryptPassword + "','" + newUser.Address + "')";
 
             using (TransactionScope tran = new TransactionScope())
             {

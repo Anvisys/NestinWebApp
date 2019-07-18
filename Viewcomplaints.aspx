@@ -1055,6 +1055,8 @@
                              <asp:TextBox ID="lblCompID" Style="margin: 5px;" runat="server"></asp:TextBox><br />
                             New Status:  
                              <asp:TextBox ID="lblComplaintStatus" Style="margin: 14px;" runat="server"></asp:TextBox><br />
+                             Assigned:  
+                             <asp:TextBox ID="TextBox1" Style="margin: 14px;" runat="server"></asp:TextBox><br />
 
                             <button style="margin-left: 92px;" type="button" onclick="ConfirmClose()">Cancel</button>
                             <asp:Button ID="btnUpdate2" runat="server" CausesValidation="false" Text="Update" OnClick="btnUpdate_Click2"></asp:Button>

@@ -167,7 +167,7 @@
 
 
             document.getElementById("ActiveBillDropdown").style.top = Posy + 'px';
-            document.getElementById("ActiveBillDropdown").style.left = Posx + 10 + 'px';
+            document.getElementById("ActiveBillDropdown").style.left = Posx - 100 + 'px';
 
 
             document.getElementById("HiddenBillID").value = BillID;
