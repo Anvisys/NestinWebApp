@@ -163,7 +163,9 @@
 
          $(document).ready(function () {
              $("#Cancel_AddEmployee").click(function () {
+                 alert("166");
                  $("#AddEmployeeModal").hide();
+                 alert("168");
                  $("input:text").val("");
                  $("#lblstatus").html('');
              });

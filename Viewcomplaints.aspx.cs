@@ -382,7 +382,7 @@ public partial class Viewcomplaints : System.Web.UI.Page
         try
         {
             DataAccess dacess = new DataAccess();
-            String DataAssignedTypeQuery = "Select * from dbo.ViewSocietyUsers where ServiceType = '" + service + "' and SocietyID = " + SessionVariables.SocietyID;
+            String DataAssignedTypeQuery = "Select * from dbo.ViewSocietyUsers where CompType = '" + service + "' and SocietyID = " + SessionVariables.SocietyID;
             DataSet ds = dacess.ReadData(DataAssignedTypeQuery);
             
             if (ds==null || ds.Tables[0].Rows.Count == 0)

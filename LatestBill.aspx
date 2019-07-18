@@ -295,6 +295,12 @@
             background-color: rgba(0,0,0,0.4);
         }
 
+        .columnscss
+{
+width:150px;
+padding:5px;
+align-content:center;
+}
 
         .form-control {
             display: inline;
@@ -487,41 +493,39 @@
                         <asp:View ID="viewBillDetails" runat="server">
                               <%--Bill Details Grid View GrdDetail==> Sagar--%>
 
-                                <asp:GridView ID="GrdDetail" runat="server" AutoGenerateColumns="False" DataKeyNames="PayID"  AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                <asp:GridView ID="GrdDetail" runat="server" HeaderStyle-CssClass="columnscss" AutoGenerateColumns="False" DataKeyNames="PayID" AllowPaging="True" CellPadding="5" ForeColor="#333333" ShowFooter="True" PagerSettings-NextPageText="Next" PagerSettings-PreviousPageText="Prev" AllowSorting="False" CellSpacing="10" EditRowStyle-HorizontalAlign="NotSet" FooterStyle-HorizontalAlign="Center" OnRowDataBound="GrdDetail_RowDataBound">
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775"></AlternatingRowStyle>
                                     <Columns>
-                                        <asp:BoundField DataField="PayID" HeaderText="PayID" ReadOnly="True" SortExpression="PayID"></asp:BoundField>
-                                        <asp:BoundField DataField="ActionType" HeaderText="ActionType" SortExpression="ActionType"></asp:BoundField>
-                                        <asp:BoundField DataField="BillType" HeaderText="BillType" SortExpression="BillType"></asp:BoundField>
-                                        <asp:BoundField DataField="ChargeType" HeaderText="ChargeType" SortExpression="ChargeType"></asp:BoundField>
-                                        <asp:BoundField DataField="Rate" HeaderText="Rate" SortExpression="Rate"></asp:BoundField>
-                                        <asp:BoundField DataField="CycleType" HeaderText="CycleType" SortExpression="CycleType"></asp:BoundField>
-                                        <asp:BoundField DataField="Activated" HeaderText="Activated" SortExpression="Activated"></asp:BoundField>
-                                        <asp:BoundField DataField="FlatID" HeaderText="FlatID" SortExpression="FlatID"></asp:BoundField>
-                                        <asp:BoundField DataField="SocietyID" HeaderText="SocietyID" SortExpression="SocietyID"></asp:BoundField>
-                                        <asp:BoundField DataField="BillStartDate" HeaderText="BillStartDate" SortExpression="BillStartDate"></asp:BoundField>
-                                        <asp:BoundField DataField="BillEndDate" HeaderText="BillEndDate" SortExpression="BillEndDate"></asp:BoundField>
-                                        <asp:BoundField DataField="BillDescription" HeaderText="BillDescription" SortExpression="BillDescription"></asp:BoundField>
-                                        <asp:BoundField DataField="FlatArea" HeaderText="FlatArea" SortExpression="FlatArea"></asp:BoundField>
-                                        <asp:BoundField DataField="CurrentBillAmount" HeaderText="CurrentBillAmount" SortExpression="CurrentBillAmount"></asp:BoundField>
-                                        <asp:BoundField DataField="PaymentDueDate" HeaderText="PaymentDueDate" SortExpression="PaymentDueDate"></asp:BoundField>
-                                        <asp:BoundField DataField="BillMonth" HeaderText="BillMonth" SortExpression="BillMonth"></asp:BoundField>
-                                        <asp:BoundField DataField="AmountTobePaid" HeaderText="AmountTobePaid" ReadOnly="True" SortExpression="AmountTobePaid"></asp:BoundField>
-                                        <asp:BoundField DataField="PreviousMonthBalance" HeaderText="PreviousMonthBalance" SortExpression="PreviousMonthBalance"></asp:BoundField>
-                                        <asp:BoundField DataField="AmountPaidDate" HeaderText="AmountPaidDate" SortExpression="AmountPaidDate"></asp:BoundField>
-                                        <asp:BoundField DataField="AmountPaid" HeaderText="AmountPaid" SortExpression="AmountPaid"></asp:BoundField>
-                                        <asp:BoundField DataField="CurrentMonthBalance" HeaderText="CurrentMonthBalance" ReadOnly="True" SortExpression="CurrentMonthBalance"></asp:BoundField>
-                                        <asp:BoundField DataField="PaymentMode" HeaderText="PaymentMode" SortExpression="PaymentMode"></asp:BoundField>
-                                        <asp:BoundField DataField="TransactionID" HeaderText="TransactionID" SortExpression="TransactionID"></asp:BoundField>
-                                        <asp:BoundField DataField="InvoiceID" HeaderText="InvoiceID" SortExpression="InvoiceID"></asp:BoundField>
-                                        <asp:BoundField DataField="ModifiedAt" HeaderText="ModifiedAt" SortExpression="ModifiedAt"></asp:BoundField>
-                                        <asp:BoundField DataField="FlatNumber" HeaderText="FlatNumber" SortExpression="FlatNumber"></asp:BoundField>
+                                        
+                                        <asp:BoundField DataField="FlatNumber" HeaderText="Flat Number" SortExpression="FlatNumber" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="ActionType" HeaderText="Action Type" SortExpression="ActionType" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="BillType" HeaderText="Bill Type" SortExpression="BillType" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="ChargeType" HeaderText="Charge Type" SortExpression="ChargeType" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="Rate" HeaderText="Rate" SortExpression="Rate" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="CycleType" HeaderText="Cycle Type" SortExpression="CycleType" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="BillDescription" HeaderText="Bill Description" SortExpression="BillDescription" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        
+                                        <asp:BoundField DataField="CurrentBillAmount" HeaderText="Current Bill Amount" SortExpression="CurrentBillAmount" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="PaymentDueDate" HeaderText="Due Date" SortExpression="PaymentDueDate" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="BillMonth" HeaderText="Month" SortExpression="BillMonth" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="AmountTobePaid" HeaderText="Amount To be Paid" ReadOnly="True" SortExpression="AmountTobePaid" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="PreviousMonthBalance" HeaderText="Previous Month Balance" SortExpression="PreviousMonthBalance" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="AmountPaidDate" HeaderText="Payment Date" SortExpression="AmountPaidDate" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="AmountPaid" HeaderText="Amount Paid" SortExpression="AmountPaid" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="CurrentMonthBalance" HeaderText="Current Month Balance" ReadOnly="True" SortExpression="CurrentMonthBalance" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="PaymentMode" HeaderText="Payment Mode" SortExpression="PaymentMode" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="TransactionID" HeaderText="TransactionID" SortExpression="TransactionID" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        <asp:BoundField DataField="InvoiceID" HeaderText="InvoiceID" SortExpression="InvoiceID" ItemStyle-CssClass="columnscss"></asp:BoundField>
+                                        
+                                        
                                     </Columns>
-                                    <EditRowStyle BackColor="#999999"></EditRowStyle>
+                                    <EditRowStyle BackColor="#999999" Wrap="False"></EditRowStyle>
 
                                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></FooterStyle>
 
-                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></HeaderStyle>
+                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" Height="50px" HorizontalAlign="Center" Wrap="False"></HeaderStyle>
+
+                                    <PagerSettings FirstPageText="Prev,Next" LastPageText="Prev,Next;" Mode="NextPrevious" NextPageText="Next" PreviousPageText="Prev" />
 
                                     <PagerStyle HorizontalAlign="Center" BackColor="#284775" ForeColor="White"></PagerStyle>
 
@@ -529,13 +533,13 @@
 
                                     <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></SelectedRowStyle>
 
-                                    <SortedAscendingCellStyle BackColor="#E9E7E2"></SortedAscendingCellStyle>
+                                    <SortedAscendingCellStyle BackColor="#E9E7E2" Height="50px" HorizontalAlign="Center" Width="120px" Wrap="False"></SortedAscendingCellStyle>
 
-                                    <SortedAscendingHeaderStyle BackColor="#506C8C"></SortedAscendingHeaderStyle>
+                                    <SortedAscendingHeaderStyle BackColor="#506C8C" Height="50px" HorizontalAlign="Center" Width="120px" Wrap="False"></SortedAscendingHeaderStyle>
 
-                                    <SortedDescendingCellStyle BackColor="#FFFDF8"></SortedDescendingCellStyle>
+                                    <SortedDescendingCellStyle BackColor="#FFFDF8" Height="50px" HorizontalAlign="Center" Width="120px" Wrap="False"></SortedDescendingCellStyle>
 
-                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE"></SortedDescendingHeaderStyle>
+                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" Height="50px" HorizontalAlign="Center"></SortedDescendingHeaderStyle>
                                 </asp:GridView>
 
                                 <%-- Bill Details Grid View GrdDetail--%>

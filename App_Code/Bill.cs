@@ -74,11 +74,11 @@ public class Bill
         if (FlatNumber == "")
         {
 
-            FlatCondition = " FlatID is not null";
+            FlatCondition = " FlatNumber is not null";
         }
         else
         {
-            FlatCondition = " FlatID = '" + FlatNumber + "'";
+            FlatCondition = " FlatNumber = '" + FlatNumber + "'";
         }
 
         if (BillType == "Show All")
@@ -111,11 +111,11 @@ public class Bill
         if (FlatNumber == "")
         {
 
-            FlatCondition = " FlatID is not null";
+            FlatCondition = " FlatNumber is not null";
         }
         else
         {
-            FlatCondition = " FlatID = '" + FlatNumber + "'";
+            FlatCondition = " FlatNumber = '" + FlatNumber + "'";
         }
 
         if (BillType == "Show All")

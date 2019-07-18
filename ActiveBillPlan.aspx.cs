@@ -179,10 +179,10 @@ public partial class ActiveBillPlan : System.Web.UI.Page
     public static List<string> GetFlatNumber(string FlatNumber)
     {
         //Added by Aarshi on 17 Aug 2017 for code restructuring
-        List<string> Emp = new List<string>();
+        List<string> Flat = new List<string>();
         BillCycle billCycle = new BillCycle();
-        Emp = billCycle.GetFlatNumber(FlatNumber);
-        return Emp;
+        Flat = billCycle.GetFlatNumber(FlatNumber);
+        return Flat;
     }
 
     protected void btnBillcycleSubmit_Click(object sender, EventArgs e)//Activated Bill

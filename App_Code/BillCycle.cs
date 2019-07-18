@@ -11,7 +11,9 @@ using System.Data.SqlClient;
 public class BillCycle
 {
     string Table_Name = "dbo.BillCycle";
-    private static String ViewName = "dbo.ViewLatestBillCycle";
+    //  private static String ViewName = "dbo.ViewLatestBillCycle";
+
+         private static String ViewName = "dbo.ViewLatestFlatBill";
 
     public BillCycle()
 	{
@@ -225,7 +227,7 @@ public class BillCycle
     public List<string> GetFlatNumber(string FlatNumber)
     {
         List<string> Emp = new List<string>();
-        string query = string.Format("select distinct FlatID from " + ViewName + " where FlatID like '" + FlatNumber + "%' order by FlatID asc");
+        string query = string.Format("select distinct FlatNumber from " + ViewName + " where FlatNumber like '" + FlatNumber + "%' order by FlatNumber asc");
         using (SqlConnection con = new SqlConnection(Utility.SocietyConnectionString))
         {
             con.Open();

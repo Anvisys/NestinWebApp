@@ -69,6 +69,7 @@ public partial class LatestBill : System.Web.UI.Page
             {
                 dsLatestBillData = bill.GetLatestBills(FlatNumber, BillType, "", "" ,"ViewGeneratedBill");
                 grd = GrdDetail;
+
                 MultiView1.ActiveViewIndex = 1;
             }
             else
@@ -1442,5 +1443,16 @@ public partial class LatestBill : System.Web.UI.Page
             ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "ShowGenerateDeActivateBillForm()", true);
         }
         
+    }
+
+    protected void GrdDetail_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            for (int i = 0; i > e.Row.Cells.Count; i++)
+            {
+                e.Row.Cells[i].CssClass = "columnscss";
+            }
+        }
     }
 }
