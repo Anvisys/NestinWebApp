@@ -55,7 +55,7 @@ public partial class LatestBill : System.Web.UI.Page
         
     }
 
-    public void LoadLatestBillData()
+    public void LoadLatestBillData(string cmdname="")
     {
         try
         {
@@ -64,12 +64,23 @@ public partial class LatestBill : System.Web.UI.Page
             String FlatNumber = txtLatestFlatFilter.Text;
             int SocietyID = muser.currentResident.SocietyID;
             Bill bill = new Bill();
-            dsLatestBillData = bill.GetLatestBills(FlatNumber, BillType, "", "");//Added by Aarshi on 13-Sept-2017 for bug fix
+            GridView grd = new GridView() ;
+            if (cmdname.Equals("History"))
+            {
+                dsLatestBillData = bill.GetLatestBills(FlatNumber, BillType, "", "" ,"ViewGeneratedBill");
+                grd = GrdDetail;
+                MultiView1.ActiveViewIndex = 1;
+            }
+            else
+            {
+                dsLatestBillData = bill.GetLatestBills(FlatNumber, BillType, "", "");//Added by Aarshi on 13-Sept-2017 for bug fix
+                grd = GridlatestBills;
+            }
 
             if (dsLatestBillData != null && dsLatestBillData.Tables.Count > 0)
             {
-                GridlatestBills.DataSource = dsLatestBillData;
-                GridlatestBills.DataBind();
+                grd.DataSource = dsLatestBillData;
+                grd.DataBind();
 
                 lblLatestBillCount.Text = dsLatestBillData.Tables[0].Rows.Count.ToString();
 
@@ -379,7 +390,7 @@ public partial class LatestBill : System.Web.UI.Page
                 {
                    
                     lblBillDuplicate.Text = "Bill is Already Generated";
-                    btnSingleFlatGenerate.Enabled = false;
+                    //btnSingleFlatGenerate.BackColor = new System.Drawing.Color(#b3b3ff);
                 }
 
                 else
@@ -708,7 +719,7 @@ public partial class LatestBill : System.Web.UI.Page
 
     protected void ChckBillsGenerated_CheckedChanged(object sender, EventArgs e)
     {
-        if (ChckBillsGenerated.Checked)
+        if (/*ChckBillsGenerated.Checked*/true)
         {
             GeneratedBillsGrid.Columns[3].Visible = true;
             GeneratedBillsGrid.Columns[4].Visible = true;
@@ -1363,7 +1374,7 @@ public partial class LatestBill : System.Web.UI.Page
             MultiView1.ActiveViewIndex = 1;
             //OldLoadGeneratedBillData(FlatNumber, BillType, StartDate, EndDate);
 
-            LoadLatestBillData();
+            LoadLatestBillData(e.CommandName);
             LoadBillTypeDropdown(drpGeneratedBillType);
             txtGenBillsFlatfilter.Text = FlatNumber;
             drpGeneratedBillType.Items.FindByText(BillType).Selected = true;
@@ -1403,6 +1414,7 @@ public partial class LatestBill : System.Web.UI.Page
                 if (newBill.op_Days <= 0)
                 {
                     lblBillDuplicate.Text = "Bill is Already Generated";
+
                 }
 
                 else

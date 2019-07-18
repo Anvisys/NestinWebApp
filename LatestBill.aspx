@@ -454,14 +454,10 @@
                                 &nbsp;
                              
 
-                                <%--Bill Details Grid View GrdDetail==> Sagar--%>
+                              
 
-                                <asp:GridView ID="GrdDetail" runat="server"></asp:GridView>
-
-                                <%-- Bill Details Grid View GrdDetail--%>
-
-
-                              <%--Added by Aarshi on 27-Sept-2017 for bug fix--%>
+                                <%--Added by Aarshi on 27-Sept-2017 for bug fix--%>
+                                <asp:SqlDataSource runat="server" ID="Dsdetail" ConnectionString='<%$ ConnectionStrings:MasterDBString %>' SelectCommand="SELECT [PayID], [ActionType], [BillType], [ChargeType], [Rate], [CycleType], [Activated], [FlatID], [SocietyID], [BillStartDate], [BillEndDate], [BillDescription], [FlatArea], [CurrentBillAmount], [PaymentDueDate], [BillMonth], [AmountTobePaid], [PreviousMonthBalance], [AmountPaidDate], [AmountPaid], [CurrentMonthBalance], [PaymentMode], [TransactionID], [InvoiceID], [ModifiedAt], [FlatNumber] FROM [ViewGeneratedBill]"></asp:SqlDataSource>
                                 <asp:HiddenField ID="HiddenFlatNumberHistory" runat="server" />
                                 <asp:HiddenField ID="HiddenBillTypeHistory" runat="server" />
                                 <asp:HiddenField ID="HiddenGeneratedBillData" runat="server" />
@@ -486,6 +482,64 @@
 
                             </div>
                             <%--------------------------------------------------------- Pay the  Amount Section starts from here  ---------------------------------------------------------------------------------- --%>
+                        </asp:View>
+
+                        <asp:View ID="viewBillDetails" runat="server">
+                              <%--Bill Details Grid View GrdDetail==> Sagar--%>
+
+                                <asp:GridView ID="GrdDetail" runat="server" AutoGenerateColumns="False" DataKeyNames="PayID"  AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775"></AlternatingRowStyle>
+                                    <Columns>
+                                        <asp:BoundField DataField="PayID" HeaderText="PayID" ReadOnly="True" SortExpression="PayID"></asp:BoundField>
+                                        <asp:BoundField DataField="ActionType" HeaderText="ActionType" SortExpression="ActionType"></asp:BoundField>
+                                        <asp:BoundField DataField="BillType" HeaderText="BillType" SortExpression="BillType"></asp:BoundField>
+                                        <asp:BoundField DataField="ChargeType" HeaderText="ChargeType" SortExpression="ChargeType"></asp:BoundField>
+                                        <asp:BoundField DataField="Rate" HeaderText="Rate" SortExpression="Rate"></asp:BoundField>
+                                        <asp:BoundField DataField="CycleType" HeaderText="CycleType" SortExpression="CycleType"></asp:BoundField>
+                                        <asp:BoundField DataField="Activated" HeaderText="Activated" SortExpression="Activated"></asp:BoundField>
+                                        <asp:BoundField DataField="FlatID" HeaderText="FlatID" SortExpression="FlatID"></asp:BoundField>
+                                        <asp:BoundField DataField="SocietyID" HeaderText="SocietyID" SortExpression="SocietyID"></asp:BoundField>
+                                        <asp:BoundField DataField="BillStartDate" HeaderText="BillStartDate" SortExpression="BillStartDate"></asp:BoundField>
+                                        <asp:BoundField DataField="BillEndDate" HeaderText="BillEndDate" SortExpression="BillEndDate"></asp:BoundField>
+                                        <asp:BoundField DataField="BillDescription" HeaderText="BillDescription" SortExpression="BillDescription"></asp:BoundField>
+                                        <asp:BoundField DataField="FlatArea" HeaderText="FlatArea" SortExpression="FlatArea"></asp:BoundField>
+                                        <asp:BoundField DataField="CurrentBillAmount" HeaderText="CurrentBillAmount" SortExpression="CurrentBillAmount"></asp:BoundField>
+                                        <asp:BoundField DataField="PaymentDueDate" HeaderText="PaymentDueDate" SortExpression="PaymentDueDate"></asp:BoundField>
+                                        <asp:BoundField DataField="BillMonth" HeaderText="BillMonth" SortExpression="BillMonth"></asp:BoundField>
+                                        <asp:BoundField DataField="AmountTobePaid" HeaderText="AmountTobePaid" ReadOnly="True" SortExpression="AmountTobePaid"></asp:BoundField>
+                                        <asp:BoundField DataField="PreviousMonthBalance" HeaderText="PreviousMonthBalance" SortExpression="PreviousMonthBalance"></asp:BoundField>
+                                        <asp:BoundField DataField="AmountPaidDate" HeaderText="AmountPaidDate" SortExpression="AmountPaidDate"></asp:BoundField>
+                                        <asp:BoundField DataField="AmountPaid" HeaderText="AmountPaid" SortExpression="AmountPaid"></asp:BoundField>
+                                        <asp:BoundField DataField="CurrentMonthBalance" HeaderText="CurrentMonthBalance" ReadOnly="True" SortExpression="CurrentMonthBalance"></asp:BoundField>
+                                        <asp:BoundField DataField="PaymentMode" HeaderText="PaymentMode" SortExpression="PaymentMode"></asp:BoundField>
+                                        <asp:BoundField DataField="TransactionID" HeaderText="TransactionID" SortExpression="TransactionID"></asp:BoundField>
+                                        <asp:BoundField DataField="InvoiceID" HeaderText="InvoiceID" SortExpression="InvoiceID"></asp:BoundField>
+                                        <asp:BoundField DataField="ModifiedAt" HeaderText="ModifiedAt" SortExpression="ModifiedAt"></asp:BoundField>
+                                        <asp:BoundField DataField="FlatNumber" HeaderText="FlatNumber" SortExpression="FlatNumber"></asp:BoundField>
+                                    </Columns>
+                                    <EditRowStyle BackColor="#999999"></EditRowStyle>
+
+                                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></FooterStyle>
+
+                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></HeaderStyle>
+
+                                    <PagerStyle HorizontalAlign="Center" BackColor="#284775" ForeColor="White"></PagerStyle>
+
+                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
+
+                                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></SelectedRowStyle>
+
+                                    <SortedAscendingCellStyle BackColor="#E9E7E2"></SortedAscendingCellStyle>
+
+                                    <SortedAscendingHeaderStyle BackColor="#506C8C"></SortedAscendingHeaderStyle>
+
+                                    <SortedDescendingCellStyle BackColor="#FFFDF8"></SortedDescendingCellStyle>
+
+                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE"></SortedDescendingHeaderStyle>
+                                </asp:GridView>
+
+                                <%-- Bill Details Grid View GrdDetail--%>
+
                         </asp:View>
 
                         <asp:View ID="Bill_Detail_View" runat="server">
@@ -524,7 +578,7 @@
 
                                     </td>
                                     <td colspan="1" style="width: 70%; text-align: left;">
-                                        <asp:CheckBox ID="ChckBillsGenerated" runat="server" Text="Show Details" AutoPostBack="true" OnCheckedChanged="ChckBillsGenerated_CheckedChanged" />
+                                       <%-- <asp:CheckBox ID="ChckBillsGenerated" runat="server" Text="Show Details" AutoPostBack="true" OnCheckedChanged="ChckBillsGenerated_CheckedChanged" />--%>
                                     </td>
                                     <td colspan="1" style="width: 15%; text-align: center;"></td>
                                 </tr>
