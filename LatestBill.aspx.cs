@@ -64,7 +64,7 @@ public partial class LatestBill : System.Web.UI.Page
             String FlatNumber = txtLatestFlatFilter.Text;
             int SocietyID = muser.currentResident.SocietyID;
             Bill bill = new Bill();
-            dsLatestBillData = bill.GetLatestBills(FlatNumber, BillType, "", "","ViewGeneratedBill" );//Added by Aarshi on 13-Sept-2017 for bug fix
+            dsLatestBillData = bill.GetLatestBills(FlatNumber, BillType, "", "");//Added by Aarshi on 13-Sept-2017 for bug fix
 
             if (dsLatestBillData != null && dsLatestBillData.Tables.Count > 0)
             {
@@ -377,7 +377,9 @@ public partial class LatestBill : System.Web.UI.Page
 
                 if (newBill.op_Days <= 0)
                 {
+                   
                     lblBillDuplicate.Text = "Bill is Already Generated";
+                    btnSingleFlatGenerate.Enabled = false;
                 }
 
                 else
