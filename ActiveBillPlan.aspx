@@ -464,7 +464,7 @@
                          <%-- </td>
                             <td class="lbltxt" style="width: 50%;">Current Month Balance :
 
-                            </td> --%>               
+                            </td>               
                             <td class="lbltxt" style="width: 50%;  visibility:hidden"">Current Month Balance :
 
                             </td>

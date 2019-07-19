@@ -21,10 +21,10 @@ public partial class Dashboard : System.Web.UI.Page
 
        // SetSummary();
         FlatData();
-        BillChart();
+        //BillChart();
         SetComplaintData();
         SetForumData();
-        ComplaintChart();
+        //ComplaintChart();
         NoticeData();
         PollData();
         VendorData();
@@ -136,57 +136,57 @@ public partial class Dashboard : System.Web.UI.Page
 
     }
 
-    private void BillChart()
-    {
+    //private void BillChart()
+    //{
 
-        try
-        {
-            int PreviousBalance = 0, BillsPaid = 0, BillsDue = 0, CurrentBill = 0;
-            DataAccess dacess = new DataAccess();
-            String query = " Select Sum(CurrentBillAmount) as BillAmount, Sum(PreviousMonthBalance) as PreviousBalance," +
-                           "  sum(AmountPaid) as Paid, Sum(CurrentMonthBalance) as Balance from ViewLatestGeneratedBill ";
+    //    try
+    //    {
+    //        int PreviousBalance = 0, BillsPaid = 0, BillsDue = 0, CurrentBill = 0;
+    //        DataAccess dacess = new DataAccess();
+    //        String query = " Select Sum(CurrentBillAmount) as BillAmount, Sum(PreviousMonthBalance) as PreviousBalance," +
+    //                       "  sum(AmountPaid) as Paid, Sum(CurrentMonthBalance) as Balance from ViewLatestGeneratedBill ";
 
-            DataSet ds = dacess.ReadData(query);
+    //        DataSet ds = dacess.ReadData(query);
 
 
-            if (ds == null)
-            {
-                lblpending.Text = "Percentage of Complaint Category Data is Empty";
-            }
-            else
-            {
-                int length = ds.Tables[0].Rows.Count;
-                for (int i = 0; i < length; i++)
-                {
-                    CurrentBill = Convert.ToInt32(ds.Tables[0].Rows[i]["BillAmount"]);
-                    BillsPaid = Convert.ToInt32(ds.Tables[0].Rows[i]["Paid"]);
-                    PreviousBalance = Convert.ToInt32(ds.Tables[0].Rows[i]["PreviousBalance"]);
-                    BillsDue = Convert.ToInt32(ds.Tables[0].Rows[i]["Balance"]);
+    //        if (ds == null)
+    //        {
+    //            lblpending.Text = "Percentage of Complaint Category Data is Empty";
+    //        }
+    //        else
+    //        {
+    //            int length = ds.Tables[0].Rows.Count;
+    //            for (int i = 0; i < length; i++)
+    //            {
+    //                CurrentBill = Convert.ToInt32(ds.Tables[0].Rows[i]["BillAmount"]);
+    //                BillsPaid = Convert.ToInt32(ds.Tables[0].Rows[i]["Paid"]);
+    //                PreviousBalance = Convert.ToInt32(ds.Tables[0].Rows[i]["PreviousBalance"]);
+    //                BillsDue = Convert.ToInt32(ds.Tables[0].Rows[i]["Balance"]);
                  
 
-                }
+    //            }
 
                
-                lblpending.Text = "Current Bills: " + CurrentBill + "</br>" + "Bills Paid: " + BillsPaid + "</br>" + "Pending Bills: " + BillsDue + "</br>" + "Previous Balance: " + PreviousBalance;
+    //            lblpending.Text = "Current Bills: " + CurrentBill + "</br>" + "Bills Paid: " + BillsPaid + "</br>" + "Pending Bills: " + BillsDue + "</br>" + "Previous Balance: " + PreviousBalance;
 
 
-                string[] x = new string[] { "Current", "Paid", "Balance", "Previous" };
-                int[] y = new int[] { CurrentBill, BillsPaid, BillsDue, PreviousBalance };
+    //            string[] x = new string[] { "Current", "Paid", "Balance", "Previous" };
+    //            int[] y = new int[] { CurrentBill, BillsPaid, BillsDue, PreviousBalance };
 
-                billChart.Series["Series1"].Points.DataBindXY(x, y);
-                billChart.Series["Series1"].Label = "#VAL";
-                this.billChart.Series[0]["PieLabelStyle"] = "Inside";
-                //Title Title = new Title("No Of Complaints", Docking.Top, new Font("Verdana", 12), Color.Black);
-                billChart.Titles.Add(Title);
-                billChart.DataBind();
-            }
-        }
-        catch (Exception ex)
-        {
-            Piechart.Visible = false;
-        }
+    //            billChart.Series["Series1"].Points.DataBindXY(x, y);
+    //            billChart.Series["Series1"].Label = "#VAL";
+    //            this.billChart.Series[0]["PieLabelStyle"] = "Inside";
+    //            //Title Title = new Title("No Of Complaints", Docking.Top, new Font("Verdana", 12), Color.Black);
+    //            billChart.Titles.Add(Title);
+    //            billChart.DataBind();
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Piechart.Visible = false;
+    //    }
 
-    }
+    //}
 
     private void SetComplaintData()
     {
@@ -288,80 +288,80 @@ public partial class Dashboard : System.Web.UI.Page
         }
     }
 
-    private void ComplaintChart()
-    {
-        try
-        {
-            DataAccess dacess = new DataAccess();
+    //private void ComplaintChart()
+    //{
+    //    try
+    //    {
+    //        DataAccess dacess = new DataAccess();
 
-            //String BarChartQuery = "Select Count(*) as 'Number_Of_Complaints' , Age from dbo.ViewComplaintSummary where LastStatusID=4 Group By Age";
+    //        //String BarChartQuery = "Select Count(*) as 'Number_Of_Complaints' , Age from dbo.ViewComplaintSummary where LastStatusID=4 Group By Age";
 
-            String query = " select t.range as [Age_range], count(*) as [Number_Of_Complaints]"
-                          + "from (  select case  "
-                               + " when Age between 0 and 1 then ' 0- 1'"
-                               + " when Age between 2 and 5 then '2-5'"
-                               + " else '6-10' end as range"
-                                + " from dbo.ViewComplaintSummary where SocietyID="+SessionVariables.SocietyID+") t group by t.range";
+    //        String query = " select t.range as [Age_range], count(*) as [Number_Of_Complaints]"
+    //                      + "from (  select case  "
+    //                           + " when Age between 0 and 1 then ' 0- 1'"
+    //                           + " when Age between 2 and 5 then '2-5'"
+    //                           + " else '6-10' end as range"
+    //                            + " from dbo.ViewComplaintSummary where SocietyID="+SessionVariables.SocietyID+") t group by t.range";
 
-            DataSet databarchart = dacess.ReadData(query);
-            if (databarchart == null)
-            {
-                lblEmptyDataText.Text = "Age of Complaints Data is Empty";
-                BarChart.Width = 0;
-            }
+    //        DataSet databarchart = dacess.ReadData(query);
+    //        if (databarchart == null)
+    //        {
+    //            lblEmptyDataText.Text = "Age of Complaints Data is Empty";
+    //            BarChart.Width = 0;
+    //        }
 
-            else
-            {
-                DataTable dtable = databarchart.Tables[0];
-                BarChart.DataSource = dtable;
-                BarChart.Series["Series1"].XValueMember = "Age_range";
-                BarChart.Series["Series1"].YValueMembers = "Number_Of_Complaints";
-                BarChart.ChartAreas[0].AxisX.Title = "Duration in Days";
-                BarChart.ChartAreas[0].AxisY.Title = "number of complaints";
-                BarChart.DataBind();
-            }
+    //        else
+    //        {
+    //            DataTable dtable = databarchart.Tables[0];
+    //            BarChart.DataSource = dtable;
+    //            BarChart.Series["Series1"].XValueMember = "Age_range";
+    //            BarChart.Series["Series1"].YValueMembers = "Number_Of_Complaints";
+    //            BarChart.ChartAreas[0].AxisX.Title = "Duration in Days";
+    //            BarChart.ChartAreas[0].AxisY.Title = "number of complaints";
+    //            BarChart.DataBind();
+    //        }
 
-            String PieChartQuery = "Select Count(*) as Number_Of_Complaints , CompType from dbo.ViewComplaintSummary Group By CompType";
+    //        String PieChartQuery = "Select Count(*) as Number_Of_Complaints , CompType from dbo.ViewComplaintSummary Group By CompType";
 
-            //  ReportPieChart.DataSource = dacess.ReadData(PieChartQuery).Tables[0];
+    //        //  ReportPieChart.DataSource = dacess.ReadData(PieChartQuery).Tables[0];
 
-            DataSet ds = dacess.ReadData(PieChartQuery);
+    //        DataSet ds = dacess.ReadData(PieChartQuery);
 
 
-            if (ds == null)
-            {
-                lblpiechart.Text = "Percentage of Complaint Category Data is Empty";
-            }
-            else
-            {
-                DataTable dt = ds.Tables[0];
-                string[] x = new string[dt.Rows.Count];
-                int[] y = new int[dt.Rows.Count];
+    //        if (ds == null)
+    //        {
+    //            lblpiechart.Text = "Percentage of Complaint Category Data is Empty";
+    //        }
+    //        else
+    //        {
+    //            DataTable dt = ds.Tables[0];
+    //            string[] x = new string[dt.Rows.Count];
+    //            int[] y = new int[dt.Rows.Count];
 
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
+    //            for (int i = 0; i < dt.Rows.Count; i++)
+    //            {
 
-                    x[i] = dt.Rows[i][1].ToString();
-                    y[i] = Convert.ToInt32(dt.Rows[i][0]);
+    //                x[i] = dt.Rows[i][1].ToString();
+    //                y[i] = Convert.ToInt32(dt.Rows[i][0]);
 
-                }
+    //            }
 
-                Piechart.Series["Series1"].Points.DataBindXY(x, y);
-                Piechart.Series["Series1"].Label = "#PERCENT{P2}";
-                this.Piechart.Series[0]["PieLabelStyle"] = "Inside";
-                //Title Title = new Title("No Of Complaints", Docking.Top, new Font("Verdana", 12), Color.Black);
-                Piechart.Titles.Add(Title);
-                Piechart.DataBind();
-            }
-        }
-        catch (Exception ex)
-        {
-            Piechart.Visible = false;
-            //Barchart.Visible = false;
-            //lblbarchart.Text = "Complaints data is empty";
-            lblpiechart.Text = "Complaint Category data is empty";
-        }
-    }
+    //            Piechart.Series["Series1"].Points.DataBindXY(x, y);
+    //            Piechart.Series["Series1"].Label = "#PERCENT{P2}";
+    //            this.Piechart.Series[0]["PieLabelStyle"] = "Inside";
+    //            //Title Title = new Title("No Of Complaints", Docking.Top, new Font("Verdana", 12), Color.Black);
+    //            Piechart.Titles.Add(Title);
+    //            Piechart.DataBind();
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Piechart.Visible = false;
+    //        //Barchart.Visible = false;
+    //        //lblbarchart.Text = "Complaints data is empty";
+    //        lblpiechart.Text = "Complaint Category data is empty";
+    //    }
+    //}
 
     private void NoticeData()
     {
