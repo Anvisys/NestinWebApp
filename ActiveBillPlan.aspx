@@ -67,6 +67,10 @@
         th {
             padding: 8px;
         }
+
+        .m-right {
+            align-content: center;
+        }
     </style>
     <script>
 
@@ -397,7 +401,7 @@
 
                 <%----------------------------------------------------- Activate a Bill for flat----------------------------------------------------%>
                 <%--  <div id="Mymodalactivatenewplan" class="modal"> --%>
-                <div id="ActivateBillForm" class="modal">
+                <%--                <div id="" class="modal">
                     <table style="width: 50%; margin-left: 15%; margin-top: 3%; background-color: #e0dada;">
                         <tr style="background-color: #5ca6de; color: #579ed4; padding: 2% 0 2% 0;">
                             <td colspan="6" style="text-align: left; color: white; font-weight: bold; font-size: large; padding: 1% 0 1% 3%;">New Bill :
@@ -409,17 +413,17 @@
                         <tr>
                             <td class="lbltxt" style="width: 50%;">Flat Number :
                             </td>
-                            <td style="width: 50%;">
-                                <asp:TextBox ID="txtFlatID" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                            <td>
+                               
                             </td>
                             <td style="width: 1%;">
 
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtFlatID" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
-                            <td class="lbltxt" style="width: 50%;">Society BillID :
+                            <td class="lbltxt" style="width: 50%; visibility:hidden">Society BillID :
                             </td>
                             <td style="width: 50%;">
-                                <asp:TextBox ID="TextBox2" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                                <asp:TextBox ID="TextBox2" runat="server" CssClass="txtbox_style" Visible="false"></asp:TextBox>
                             </td>
                             <td style="width: 1%;">
 
@@ -431,7 +435,7 @@
                             <td class="lbltxt" style="width: 50%;">Current Bill Amount :
                             </td>
                             <td style="width: 50%;">
-                                <asp:TextBox ID="TextBox3" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                                
                             </td>
                             <td style="width: 1%;">
 
@@ -440,7 +444,7 @@
                             <td class="lbltxt" style="width: 50%;">Payment Due Date :
                             </td>
                             <td style="width: 50%;">
-                                <asp:TextBox ID="TextBox4" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                                <asp:TextBox ID="" runat="server" CssClass="txtbox_style"></asp:TextBox>
                             </td>
                             <td style="width: 1%;">
 
@@ -452,16 +456,20 @@
                             <td class="lbltxt" style="width: 50%;">Amount Paid:
                             </td>
                             <td style="width: 50%;">
-                                <asp:TextBox ID="TextBox1" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                                
                             </td>
                             <td style="width: 1%;">
 
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtFlatID" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
-                            </td>
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtFlatID" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
+                         <%-- </td>
                             <td class="lbltxt" style="width: 50%;">Current Month Balance :
+
+                            </td> --%>               
+                            <td class="lbltxt" style="width: 50%;  visibility:hidden"">Current Month Balance :
+
                             </td>
                             <td style="width: 50%;">
-                                <asp:TextBox ID="TextBox5" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                                <asp:TextBox ID="TextBox5" runat="server" CssClass="txtbox_style" Visible="false"></asp:TextBox>
                             </td>
                             <td style="width: 1%;">
 
@@ -472,7 +480,7 @@
                             <td class="lbltxt" style="width: 50%;">Modified at :
                             </td>
                             <td style="width: 50%;">
-                                <asp:TextBox ID="TextBox6" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                                
                             </td>
                             <td style="width: 1%;">
 
@@ -481,7 +489,7 @@
                             <td class="lbltxt" style="width: 50%;">Bill Description :
                             </td>
                             <td style="width: 50%;">
-                                <asp:TextBox ID="TextBox7" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                                
                             </td>
                             <td style="width: 1%;">
 
@@ -492,7 +500,7 @@
                             <td class="lbltxt" style="width: 50%;">BillType :
                             </td>
                             <td style="width: 50%;">
-                                <asp:TextBox ID="txtBillType" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                                
                             </td>
                             <td style="width: 1%;">
 
@@ -501,14 +509,14 @@
                             <td class="lbltxt" style="width: 50%;">Charge Type:
                             </td>
                             <td style="width: 50%;">
-                                <asp:TextBox ID="txtchargeType" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                                
                             </td>
                         </tr>
                         <tr>
                             <td class="lbltxt" style="width: 50%;">Rate:
                             </td>
                             <td style="width: 50%;">
-                                <asp:TextBox ID="txtRate" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                               
                             </td>
                             <td class="lbltxt" style="width: 50%;">CycleType:
                             </td>
@@ -524,20 +532,13 @@
                             <td class="lbltxt" style="width: 10%;">Cyclestart :
                             </td>
                             <td style="width: 10%;">
-                                <asp:TextBox ID="txtCyclestart" runat="server" CssClass="txtbox_style" ForeColor="#808080"></asp:TextBox>
-                            </td>
-                            <td style="width: 1%;">
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtCyclestart" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
+                               
                             </td>
 
                             <td class="lbltxt">CycleEnd :
                             </td>
                             <td>
-                                <asp:TextBox ID="txtCycleend" runat="server" CssClass="txtbox_style" ForeColor="#808080"></asp:TextBox>
-                            </td>
-                            <td style="width: 1%;">
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtCycleend" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
-                            </td>
+                               </td>
                         </tr>
                         <tr>
                             <td colspan="2" style="height: 30px; text-align: center;">
@@ -557,7 +558,111 @@
                         </tr>
                     </table>
 
+                </div>--%>
+
+                <div id="ActivateBillForm" class="modal">
+                    <div class="row" style="width: 80%; margin-left: 15%; margin-top: 3%; background-color: #e0dada;">
+                        <div class="row" style="background-color: #5ca6de; color: #579ed4; padding: 2% 0 2% 0;">
+                            <div class="col-md-6 col-sm-6" style="text-align: left; color: white; font-weight: bold; font-size: large; padding: 1% 0 1% 3%;">
+                                New Bill :
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col" style="height: 15px;"></div>
+                        </div>
+                        <!-- Model Content -->
+                        <div class="row" style="margin-top: 5px;">
+                            <div class="col-md-6 col-sm-6 lbltxt">
+                                    Flat Number : 
+                                    <asp:TextBox ID="txtFlatID" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                            </div>
+                            <div class="col-md-6 col-sm-6 lbltxt">
+                                Bill Type : 
+                            <asp:TextBox ID="txtBillType" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 5px;">
+                            <div class="col-md-6 col-sm-6 lbltxt">
+                                Charge Type : 
+                            <asp:TextBox ID="txtchargeType" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                            </div>
+                            <div class="col-md-6 col-sm-6 lbltxt">
+                                Rate : 
+                             <asp:TextBox ID="txtRate" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 5px;">
+                            <div class="col-md-6 col-sm-6 lbltxt">
+                                Cycle Type : 
+                            <asp:DropDownList ID="drpCycletype" runat="server" CssClass="ddl_style" Enabled="false">
+                                <asp:ListItem>Monthly</asp:ListItem>
+                                <asp:ListItem>Quarterly</asp:ListItem>
+                                <asp:ListItem>Yearly</asp:ListItem>
+                            </asp:DropDownList>
+                            </div>
+                            <div class="col-md-6 col-sm-6 lbltxt">
+                                Current Bill Amount : 
+                             <asp:TextBox ID="TextBox3" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 5px;">
+                            <div class="col-md-6 col-sm-6 lbltxt">
+                                Payment Due Date : 
+                            <asp:TextBox ID="TextBox4" runat="server" CssClass="txtbox_style" ForeColor="#808080"></asp:TextBox>
+                            </div>
+                            <div class="col-md-6 col-sm-6 lbltxt">
+                                Amount Paid : 
+                             <asp:TextBox ID="TextBox1" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 5px;">
+                            <div class="col-md-6 col-sm-6 lbltxt">
+                                Start Date : 
+                             <asp:TextBox ID="txtCyclestart" runat="server" CssClass="txtbox_style" ForeColor="#808080"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtCyclestart" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-md-6 col-sm-6 lbltxt">
+                                End Date : 
+                              <asp:TextBox ID="txtCycleend" runat="server" CssClass="txtbox_style" ForeColor="#808080"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtCycleend" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 5px;">
+                            <div class="col-md-12 col-sm-12" style="height: 30px; text-align: center;">
+                                <asp:Label ID="lblbilltypeexist" runat="server" Font-Size="Small" ForeColor="#FF6262"></asp:Label>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 5px;">
+                            <div class="col-md-12 col-sm-12 lbltxt">
+                                Description : 
+                            <asp:TextBox ID="TextBox7" runat="server" CssClass="txtbox_style" Width="70%"></asp:TextBox>
+                            </div>
+                        </div>
+
+                        <div class="row" style="text-align: center; margin-top: 5px;">
+                            <div class="col-md-6 col-sm-6" style="text-align: center;">
+                                <asp:Button ID="btnBillcycleSubmit" runat="server" Text="Activate" CssClass="btn_style" OnClick="btnBillcycleSubmit_Click" />
+                            </div>
+                            <div class="col-md-6 col-sm-6" style="text-align: center;">
+                                <button type="button" id="btnBillactvationcancel" class="btn_style btn-danger">Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="row" style="width: 50%; visibility: hidden">
+                            <asp:TextBox ID="TextBox2" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                            <asp:TextBox ID="TextBox6" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                            <asp:TextBox ID="TextBox5" runat="server" CssClass="txtbox_style"></asp:TextBox>
+                        </div>
+                    </div>
                 </div>
+
+
 
 
                 <%------------------------------------------------------- end of the bills activation page----------------------------------%>
