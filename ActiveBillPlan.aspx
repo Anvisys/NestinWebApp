@@ -541,11 +541,11 @@
                         </div>
                         <!-- Model Content -->
                         <div class="row" style="margin-top: 5px;">
-                            <div class="col-md-6 col-sm-6 lbltxt">
+                            <div class="">
                                     Flat Number : 
                                     <asp:TextBox ID="txtFlatID" runat="server" CssClass="txtbox_style"></asp:TextBox>
                             </div>
-                            <div class="col-md-6 col-sm-6 lbltxt">
+                            <div class="">
                                 Bill Type : 
                             <asp:TextBox ID="txtBillType" runat="server" CssClass="txtbox_style"></asp:TextBox>
                             </div>
@@ -638,7 +638,7 @@
 
 
 
-                <%--   ---------------------------    Activated Bills View Section Ends Here     -------------  -------- --------------%>
+                <%--    Activated Bills View Section Ends Here     -------------  -------- --------------%>
                 <%-- ------------------------------------------------- GenerateDeActivateBillForm For Single Flat ---------------------------------------------------  --%>
 
                 <div id="GenerateDeActivateBillForm" class="modal">
