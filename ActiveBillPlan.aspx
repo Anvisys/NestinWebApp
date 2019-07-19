@@ -146,13 +146,16 @@
 
         });
 
-        function ActiveBillPopup(BillID, FlatID, FlatArea, BillType, Rate, ChargeType, Element) {
+        function ActiveBillPopup(BillID, FlatID, FlatArea, BillType, Rate, ChargeType, FlatNumber , Element) {
 
 
             // var status = Element.parentNode.parentNode.cells[7].innerHTML;
 
+           // console.log("150    "+BillID ,FlatID ,FlatArea ,BillType ,Rate ,ChargeType ,Element , +"Flat Number= "+FlatNumber);
+
             document.getElementById("HiddenField1").value = FlatID;
             document.getElementById("HiddenField2").value = BillType;
+            document.getElementById("Hiddenflatnumber").value = FlatNumber;
             txtFlatID.value = FlatID;
             document.getElementById("txtRate").value = Rate;
             document.getElementById("txtchargeType").value = ChargeType;
@@ -221,6 +224,14 @@
             document.getElementById("GenerateDeActivateBillForm").style.display = "block";
 
         }
+
+        function closeAddFlat() {
+            $("#txtBillDate").val("");
+            $("#txtFlatBillAmt").val("");
+            $("#txtBillGenSingleFlatdesc").val("");
+            $("#GenerateDeActivateBillForm").hide();
+        }
+
     </script>
 </head>
 <body style="background-color: #f7f7f7;">
@@ -310,8 +321,24 @@
                                     <asp:TemplateField HeaderStyle-Width="20px">
                                         <ItemTemplate>
                                             <%--<button id="button" onclick="ActiveBillPopup('<%# Eval("SocietyBillID") %>' ,'<%# Eval("FlatID") %>' , '<%# Eval("FlatArea") %>' ,'<%# Eval("BillType") %>','<%# Eval("Rate") %>','<%# Eval("ChargeType") %>','<%# Eval("CycleType") %>','<%# Eval("CycleStart") %>','<%# Eval("CycleEnD") %>',this)" type="button" style=" width:20px;background-color:transparent;border:none;outline:0; height:20px;">--%>
-                                            <button id="button" onclick="ActiveBillPopup('<%# Eval("SocietyBillID") %>' ,'<%# Eval("FlatID") %>' , '<%# Eval("FlatArea") %>' ,'<%# Eval("BillType") %>','<%# Eval("Rate") %>','<%# Eval("ChargeType") %>',this)" type="button" style="width: 20px; background-color: transparent; border: none; outline: 0; height: 20px;">
+                                            <button id="button" onclick="ActiveBillPopup('<%# Eval("SocietyBillID") %>' ,'<%# Eval("FlatID") %>' , '<%# Eval("FlatArea") %>' ,'<%# Eval("BillType") %>','<%# Eval("Rate") %>','<%# Eval("ChargeType") %>' ,'<%# Eval("FlatNumber") %>' ,this)" type="button" style="width: 20px; background-color: transparent; border: none; outline: 0; height: 20px;">
                                                 <i class="fa fa-angle-double-right" id="left_icon" style="color: gray; font-size: 20px"></i>
+
+                                               <%-- <asp:HiddenField ID="HiddenBillID" runat="server" />
+                                                <asp:HiddenField ID="HiddenField1" runat="server" />
+                                                <asp:HiddenField ID="HiddenField2" runat="server" />
+                                                <asp:HiddenField ID="Hiddenflatnumber" runat="server" />
+
+                                                <asp:HiddenField ID="HiddenBillActvFlat" runat="server" />
+                                                <asp:HiddenField ID="HiddenActDeact" runat="server" />
+                                                <asp:HiddenField ID="HiddenbillType" runat="server" />
+
+
+                                                <asp:HiddenField ID="HiddenFieldRate" runat="server" />
+                                                <asp:HiddenField ID="HiddenFieldFlatArea" runat="server" />
+                                                <asp:HiddenField ID="HiddenFieldCycleType" runat="server" />
+                                                <asp:HiddenField ID="HiddenFieldChargeType" runat="server" />
+                                                <asp:HiddenField ID="HiddenFieldCycleStart" runat="server" />--%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -326,6 +353,7 @@
                             <asp:HiddenField ID="HiddenBillID" runat="server" />
                             <asp:HiddenField ID="HiddenField1" runat="server" />
                             <asp:HiddenField ID="HiddenField2" runat="server" />
+                            <asp:HiddenField ID="Hiddenflatnumber" runat="server" />
 
                             <asp:HiddenField ID="HiddenBillActvFlat" runat="server" />
                             <asp:HiddenField ID="HiddenActDeact" runat="server" />
@@ -412,7 +440,7 @@
                             <td style="width: 1%;">
 
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtFlatID" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
-                            </td>                     
+                            </td>
                             <td class="lbltxt" style="width: 50%;">Payment Due Date :
                             </td>
                             <td style="width: 50%;">
@@ -432,9 +460,13 @@
                             </td>
                             <td style="width: 1%;">
 
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtFlatID" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
-                            </td>                
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtFlatID" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
+                         <%-- </td>
+                            <td class="lbltxt" style="width: 50%;">Current Month Balance :
+
+                            </td> --%>               
                             <td class="lbltxt" style="width: 50%;  visibility:hidden"">Current Month Balance :
+
                             </td>
                             <td style="width: 50%;">
                                 <asp:TextBox ID="TextBox5" runat="server" CssClass="txtbox_style" Visible="false"></asp:TextBox>
@@ -486,8 +518,7 @@
                             <td style="width: 50%;">
                                
                             </td>
-                            <td class="lbltxt" style="width: 50%;">
-                                CycleType:
+                            <td class="lbltxt" style="width: 50%;">CycleType:
                             </td>
                             <td style="width: 80%;">
                                 <asp:DropDownList ID="drpCycletype" runat="server" CssClass="ddl_style" Enabled="false">
@@ -716,7 +747,8 @@
                                     <td style="width: 10px;">
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                             <ContentTemplate>
-                                                <asp:ImageButton ID="btnCalculate" runat="server" ImageUrl="~/Images/Icon/caluclate_icon.png" Width="30" Height="30" CausesValidation="false" OnClick="btnCalculateOnEnddate_Click" />
+                                                <%--<asp:Button ID="btnCalculate" runat="server" Text="Calculate"  Width="30" Height="30" CausesValidation="false" OnClick="btnCalculateOnEnddate_Click" />--%>
+                                                <asp:Label ID="lblcalc" CssClass="fa fa-calculator" runat="server" Font-Size="20"  Width="30" Height="30" CausesValidation="false" OnClick="btnCalculateOnEnddate_Click" />
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                     </td>
@@ -760,7 +792,7 @@
                         <div class="panel-footer" style="text-align: right;">
                             <asp:Button ID="btnSingleFlatGenerate" runat="server" Text="Generate Bill" CssClass="btn btn-primary" OnClick="btnSingleFlatGenerate_Click" ValidationGroup="Textbox" />
 
-                            <button type="button" id="btnBillGencancel" class="btn btn-danger">Cancel</button>
+                            <button type="button" id="btnBillGencancel" onclick="closeAddFlat();" class="btn btn-danger">Cancel</button>
 
                             <%--<asp:Button ID="btnBillGencancel" runat="server" Text="Cancel"  CssClass="btn_style" OnClick="btnBillGencancel_Click"/>--%>
                         </div>
