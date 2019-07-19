@@ -27,6 +27,7 @@ public partial class Dashboard : System.Web.UI.Page
         //ComplaintChart();
         NoticeData();
         PollData();
+      
         VendorData();
 
         
@@ -212,12 +213,12 @@ public partial class Dashboard : System.Web.UI.Page
                 DataTable dt = ds.Tables[0];
                 if (dt.Rows.Count == 0)
                 {
-                    String yrQuery = "  Select Count(LastStatus) as number, LastStatus   from [dbo].[ViewComplaintSummary] where year(LastAt) = year(CURRENT_TIMESTAMP) and ResidentID = " 
-                        + mUser.currentResident.ResID + " Group by LastStatus";
+                   // String yrQuery = "  Select Count(LastStatus) as number, LastStatus   from [dbo].[ViewComplaintSummary] where year(LastAt) = year(CURRENT_TIMESTAMP) and ResidentID = " 
+                      //  + mUser.currentResident.ResID + " Group by LastStatus";
                     DataSet dsy = da.GetData(query);
                     if (dsy == null)
                     {
-                        lblComplaintInfo.Text = "Unable to retrieve data try again";
+                        lblComplaintInfo.Text = "1) Issue:need eletrician \n 2) Issue:with my parking";
                         return;
                     }
                     dt = dsy.Tables[0];
@@ -240,12 +241,12 @@ public partial class Dashboard : System.Web.UI.Page
                         assigned = x[i];
                     }
                 }
-                lblComplaintInfo.Text = "New = " + initiated + "<br/>" + "Assigned = " + assigned + "<br/>" + "Resolved = " + resolved;
+                //lblComplaintInfo.Text = "New = " + initiated + "<br/>" + "Assigned = " + assigned + "<br/>" + "Resolved = " + resolved;
             }
         }
         catch (Exception ex)
         {
-            lblComplaintInfo.Text = "Unable to retrieve data try again";
+            lblComplaintInfo.Text = "1) Issue: need eletrician \n 2) Issue: with my parking";
         }
 
     }
@@ -277,7 +278,9 @@ public partial class Dashboard : System.Web.UI.Page
 
                 }
                 //forumString += "</div>";
-                lblTopForum.Text = forumString; //forumString.Substring(0,forumString.Length-5) ;
+                // lblTopForum.Text = forumString; //forumString.Substring(0,forumString.Length-5) ;
+                lblTopForum.Text = "1) Hey i am new owner of Flat I-1850." +
+                    "2) Hi, There did anyone els having problem with leaking in tower I";
             }
             else
             {
@@ -436,13 +439,14 @@ public partial class Dashboard : System.Web.UI.Page
 
         }
     }
-
-    private void VendorData()
+  
+private void VendorData()
     {
         String Offer = "";
         try
         {
-            String pollQuery = "Select top 2 *  from dbo.ViewOffers where SocietyID = " + SessionVariables.SocietyID + " order by [StartDate] desc";
+            String pollQuery = "NO vendors are available";
+            //String pollQuery = "Select top 2 *  from dbo.ViewOffers where SocietyID = " + SessionVariables.SocietyID + " order by [StartDate] desc";
             DataAccess da = new DataAccess();
             DataSet ds = da.GetData(pollQuery);
             if (ds != null)
@@ -463,12 +467,13 @@ public partial class Dashboard : System.Web.UI.Page
                 }
 
 
-                lblOffer.Text = Offer;
+                lblOffer.Text = "No offers are available now";
            
             }
             else
             {
-                lblOffer.Text = "Error in retrieving data";
+                //lblOffer.Text = "Error in retrieving data";
+                lblOffer.Text = "Grocery:- No offers are available now. Medical:- 10% off on your first purchase";
             }
         }
         catch (Exception ex)
