@@ -554,7 +554,7 @@ public class Bill
         try
         {
             DataAccess dacess = new DataAccess();
-            if (newBill.FlatID == 0)
+          /*  if (newBill.FlatID == 0)
             {
                 string query = "Select FlatID from ViewSocietyUsers where societyid=" + SessionVariables.SocietyID + " and FlatNumber='" + newBill.op_FlatNumber + "'";
                 DataSet ds = dacess.ReadData(query);
@@ -575,6 +575,8 @@ public class Bill
                                 + "(FlatID,ActionType,Activated,SocietyBillID,BillStartDate,BillEndDate,CurrentBillAmount,CycleType,PaymentDueDate,BillMonth,PreviousMonthBalance,AmountPaidDate,AmountPaid,PaymentMode,TransactionID,InvoiceID,ModifiedAt,BillDescription,SocietyID,ResID) Values('"
                                    + newBill.FlatID + "','" + newBill.ActionType + "','" + newBill.Activated + "','" + newBill.SocietyBillID + "','" + DateString(newBill.BillStartDate, true) + "','" + DateString(newBill.BillEndDate, true) + "','" + newBill.CurrentBillAmount  +"','"+newBill.CycleType+ "','"+ DateString(newBill.PaymentDueDate,true) + "','"+ DateString(newBill.BillMonth,true)+ "','" 
                                    + newBill.CurrentMonthBalance + "','" + DateString(newBill.AmountPaidDate,true) + "','" + newBill.AmountPaid+ "','" + newBill.PaymentMode+ "','" + newBill.TransactionID + "','" + newBill.InvoiceID + "','" + DateString(newBill.ModifiedAt,true) + "','" + newBill.BillDescription + "'," + SessionVariables.SocietyID + ","+newBill.ResID+")";
+  */
+
             return dacess.Update(Generatebill);
         }
 
