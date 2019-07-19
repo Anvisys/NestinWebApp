@@ -17,8 +17,8 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Collections;
-using System.Collections.Generic;
 using System.Web.UI.HtmlControls;
+using Newtonsoft.Json;
 
 public partial class Notifications : System.Web.UI.Page
 {
@@ -180,15 +180,27 @@ public partial class Notifications : System.Web.UI.Page
         String GCMRegIDs = GetRegIDS();
         
         int NoticeID = -99;
+        String txtNotice = txtNotificationText.Text;
 
         NoticeID = AttachmentUploadNew();
         if (NoticeID > 0)
         {
-            if (GCMRegIDs != "")
-            {
+            /*  if (GCMRegIDs != "")
+              {
 
-               // SendNotification(GCMRegIDs, NoticeID);
-            }
+                 SendNotification(GCMRegIDs, NoticeID);
+              }*/
+
+
+            Message msg = new Message();
+            msg.Topic = "RWANotice";
+            msg.SocietyID = muser.currentResident.SocietyID;
+            msg.TextMessage = "RWA has shared a new Notice : " + txtNotice.Substring(0,20);
+
+            Notification notification = new Notification();
+            notification.Notify(Notification.TO.Society, muser.currentResident.SocietyID, msg);
+
+
             FillNotificationData(muser.currentResident.SocietyID);
         }
         else
@@ -260,17 +272,31 @@ public partial class Notifications : System.Web.UI.Page
                 fileName = "a";
 
             }
+
             String date_time = String.Format("{0:s}", Notice_time_stamp);
             String TillDate = ValidTill.Value;
 
+            RWAMessage rwaMessage = new RWAMessage();
+            rwaMessage.notice_id = notice_id;
+            rwaMessage.isFile = has_attachment;
+            rwaMessage.file_name = fileName;
+            rwaMessage.message = txtNotificationText.Text;
+            rwaMessage.sent_by = muser.currentResident.ResID;
+            rwaMessage.notice_date = Utility.GetCurrentDateTimeinUTC().ToLongDateString();
+            rwaMessage.valid_till = TillDate;
+
+  
             //Added by Aarshi on 14 - Sept - 2017 for bug fix
+         
+        /*    Message msg = new Message();
+            msg.Topic = "RWANotice";
+            msg.SocietyID = muser.currentResident.ResID;
+            msg.TextMessage = JsonConvert.SerializeObject(rwaMessage); 
 
-            String Message = notice_id + "&" + txtNotificationText.Text  + "&" + TillDate + "&" + date_time + "&" + has_attachment 
-                + "&" + fileName + "&" + muser.currentResident.ResID;
-            Notification noti = new Notification();
-           // noti.SendNotification(receiverID, Message);
+            GCMMessage gcm = new GCMMessage();
+            gcm.SendNotification(receiverID, msg);
 
-
+    */
           
         }
         catch (Exception ex)
