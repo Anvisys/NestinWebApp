@@ -308,7 +308,6 @@
             height:50px;
             color:white;
             font-weight:bold;
-            ali
             padding:5px;
             background-color:#ccccff;
             font-size:18px;
