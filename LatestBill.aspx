@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="LatestBill.aspx.cs" Inherits="LatestBill" %>
+﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeFile="LatestBill.aspx.cs" Inherits="LatestBill" %>
 
 <!DOCTYPE html>
 
@@ -308,7 +308,6 @@
             height:50px;
             color:white;
             font-weight:bold;
-            ali
             padding:5px;
             background-color:#ccccff;
             font-size:18px;
