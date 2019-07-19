@@ -429,7 +429,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
         DateTime CurrentBillEndDate = Utility.GetCurrentDateTimeinUTC();
         String GenerateCycle = "Manual"; ;
         btnSingleFlatGenerate.Text = "Generate Bill";
-        lblFlatNuber.Text = HiddenField1.Value;
+        lblFlatNuber.Text = Hiddenflatnumber.Value;
         lblBillType.Text = HiddenField2.Value;
 
         previousBill = Bill.GetLastGeneratedBill(lblFlatNuber.Text, lblBillType.Text);
