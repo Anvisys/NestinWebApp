@@ -541,13 +541,13 @@ public class Bill
             }
             return dacess.Update(PayManuual);
         }
-#pragma warning disable 0168
+
         catch (Exception ex)
         {
 
             return false;
         }
-#pragma warning restore 0168
+
 
 
         
@@ -580,7 +580,7 @@ public class Bill
                                   + "(FlatID,ActionType,Activated,SocietyBillID,BillStartDate,BillEndDate,CurrentBillAmount,CycleType,PaymentDueDate,BillMonth,PreviousMonthBalance,AmountPaidDate,AmountPaid,PaymentMode,TransactionID,InvoiceID,ModifiedAt,BillDescription,SocietyID,ResID) Values('"
                                      + newBill.FlatID + "','" + newBill.ActionType + "','" + newBill.Activated + "','" + newBill.SocietyBillID + "','" + DateString(newBill.BillStartDate, true) + "','" + DateString(newBill.BillEndDate, true) + "','" + newBill.CurrentBillAmount  +"','"+newBill.CycleType+ "','"+ DateString(newBill.PaymentDueDate,true) + "','"+ DateString(newBill.BillMonth,true)+ "','" 
                                      + newBill.CurrentMonthBalance + "','" + DateString(newBill.AmountPaidDate,true) + "','" + newBill.AmountPaid+ "','" + newBill.PaymentMode+ "','" + newBill.TransactionID + "','" + newBill.InvoiceID + "','" + DateString(newBill.ModifiedAt,true) + "','" + newBill.BillDescription + "'," + SessionVariables.SocietyID + ","+newBill.ResID+")";
-    */
+  
 
             return true;// dacess.Update(Generatebill);
         }
