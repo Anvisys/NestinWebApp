@@ -199,7 +199,7 @@ public partial class SocietyBillPlan : System.Web.UI.Page
                 }
                 LoadSocietyBillPlanData();
 
-                dsBillType = billPlan.GetActiveBillType();
+                dsBillType = billPlan.GetActiveBillType(muser.currentResident.SocietyID);
             }
             else
             {

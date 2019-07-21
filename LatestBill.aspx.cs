@@ -385,11 +385,11 @@ public partial class LatestBill : System.Web.UI.Page
 
 
 
-            previousBill = Bill.GetLastGeneratedBill(Flat, BillType);
+            previousBill = Bill.GetLastGeneratedBill(Flat, 0);
 
             if (previousBill != null)
             {
-                newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, CurrentBillEndDate);
+                newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, CurrentBillEndDate,0);
 
                 if (newBill.op_Days <= 0)
                 {
@@ -551,7 +551,7 @@ public partial class LatestBill : System.Web.UI.Page
                         previousBill.SocietyBillID = Convert.ToInt32(dataBills.Rows[i]["SocietyBillID"]);
                         previousBill.CurrentMonthBalance = Convert.ToInt32(dataBills.Rows[i]["CurrentMonthBalance"]);
 
-                        GenerateBill newBill = Bill.CalculateNewBill(previousBill, "Auto", Utility.GetCurrentDateTimeinUTC());
+                        GenerateBill newBill = Bill.CalculateNewBill(previousBill, "Auto", Utility.GetCurrentDateTimeinUTC(),0);
 
                         if (newBill.op_Days > 0)
                         {
@@ -701,7 +701,7 @@ public partial class LatestBill : System.Web.UI.Page
         if (dsBillType == null)
         {
             BillPlan billPlan = new BillPlan();
-            dsBillType = billPlan.GetActiveBillType();
+            dsBillType = billPlan.GetActiveBillType( muser.currentResident.SocietyID);
         }
         if (dsBillType != null)
         {
@@ -1043,7 +1043,7 @@ public partial class LatestBill : System.Web.UI.Page
 
             if (previousBill != null)
             {
-                newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, BillEnddate);
+                newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, BillEnddate,0);
             }
 
             txtFlatBillAmt.Text ="Rs. "+ newBill.CurrentBillAmount.ToString();
@@ -1411,11 +1411,11 @@ public partial class LatestBill : System.Web.UI.Page
 
 
 
-            previousBill = Bill.GetLastGeneratedBill(Flat, BillType);
+            previousBill = Bill.GetLastGeneratedBill(Flat, 0);
 
             if (previousBill != null)
             {
-                newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, CurrentBillEndDate);
+                newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, CurrentBillEndDate,0);
 
                 if (newBill.op_Days <= 0)
                 {

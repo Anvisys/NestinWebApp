@@ -74,12 +74,12 @@ public class BillPlan
         }
     }
 
-    public DataSet GetActiveBillType()
+    public DataSet GetActiveBillType(int SocietyID)
     {
         try
         {
             DataAccess dacess = new DataAccess();
-            String FillBillType = "Select distinct BillTypeID, BillType, SocietyBillId from " + Table_Name ;
+            String FillBillType = "Select distinct BillTypeID, BillType, SocietyBillId from " + Table_Name + " Where SocietyID = " + SocietyID  ;
             return dacess.ReadData(FillBillType);
         }
         catch (Exception ex)
