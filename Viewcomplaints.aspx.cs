@@ -847,16 +847,29 @@ public partial class Viewcomplaints : System.Web.UI.Page
                            btnOpen.Visible=false;
                            btnComplete.Visible=false;
                            btnAssign.Visible=false;
+                           btnReopen.Visible = true;
                         }
                       else if(CompSTatus.Equals("New") || CompSTatus.Equals("InProgress")||CompSTatus.Equals("Assigned"))
                          {
                            btnClose.Visible=false;
                            btnOpen.Visible=false;
+                           
                            btnComplete.Visible=true;
                            btnAssign.Visible=true;
-                         }
-               
-            }
+                        btnReopen.Visible = false;
+
+                    }
+                    else if (CompSTatus.Equals("Re-Open"))
+                    {
+                        btnClose.Visible = true;
+                        btnReopen.Visible = false;
+                        btnOpen.Visible = false;
+                        btnComplete.Visible = false;
+                        btnAssign.Visible = false;
+
+                    }
+
+                }
                 else if (muser.currentResident.UserType == "Owner" ||muser.currentResident.UserType == "Tenant")
                 {
                       if (CompSTatus.Equals("Complete") ) {

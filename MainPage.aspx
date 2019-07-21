@@ -452,7 +452,7 @@
                                             <ul class="dropdown-menu">
                                                 <li style="margin-top:2px;"><a href="LatestBill.aspx" target="targetframe">Latest</a></li>
 
-                                                <li style="margin-top:2px;"><a href="ActiveBillPlan.aspx" target="targetframe">Active</a></li>
+                                                <li style="margin-top:2px;"><a href="ActiveBillPlan.aspx" target="targetframe">InActive</a></li>
                                                 <li style="margin-top:2px;"><a href="SocietyBillPlan.aspx" target="targetframe">Plans</a></li>
                                                 </ul>
                                        </li>

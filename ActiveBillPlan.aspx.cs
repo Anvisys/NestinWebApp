@@ -13,6 +13,7 @@ using System.Data.OleDb;
 using System.Configuration;
 using System.Web.UI.HtmlControls;
 using System.Text;
+using System.Globalization;
 
 public partial class ActiveBillPlan : System.Web.UI.Page
 {
@@ -20,14 +21,34 @@ public partial class ActiveBillPlan : System.Web.UI.Page
     static GenerateBill previousBill = null;
     static DataSet dsBillType;
     Bill bill = null;
+
+    User muser;
+
+    private class BillType
+    {
+        public int BillTypeID { get; set; }
+        public String Type { get; set; }
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        muser = SessionVariables.User;
+        if (muser == null)
+        {
+
+            Response.Redirect("Login.aspx");
+
+        }
+
+        SessionVariables.CurrentPage = "ActiveBillPlan.aspx";
+
         if (!IsPostBack)
         {
 
-            drpBillStatusype.SelectedIndex = 1;
+            //drpBillStatusype.SelectedIndex = 1;
             LoadBillTypeDropdown(drpActivatedBillType);//Added by Aarshi on 3 aug 2017 for bill management structuring
             LoadActivatedBill();
+
         }
     }
 
@@ -57,7 +78,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
     {
         try
         {
-            String BillStatus = drpBillStatusype.SelectedItem.Text;
+            String BillStatus = "InActive"; //drpBillStatusype.SelectedItem.Text;
             String BillType = drpActivatedBillType.SelectedItem.Text;
             String FlatNumber = txtActBillsFlats.Text;
             Bill billCycle = new Bill();
@@ -74,6 +95,9 @@ public partial class ActiveBillPlan : System.Web.UI.Page
 
             if (dsActivatedBill != null)
             {
+
+             
+
                 if (dsActivatedBill.Tables.Count > 0)
                 {
                     FlatsBillsGrid.DataSource = dsActivatedBill;
@@ -203,9 +227,10 @@ public partial class ActiveBillPlan : System.Web.UI.Page
         String CycleEnD = txtCycleend.Text;
         String ChargeType = HiddenFieldChargeType.Value;
         DateTime Date = Utility.GetCurrentDateTimeinUTC();
-        String CycleType = drpCycletype.SelectedItem.Text;
-        String Rate = txtRate.Text;
-        String FlatNumber = txtFlatID.Text;
+        String CycleType = labelcycletype.Text;
+        String Rate = labelRate.Text;
+        String FlatNumber = lblFlatNumber.Text;
+
 
 
 
@@ -216,8 +241,8 @@ public partial class ActiveBillPlan : System.Web.UI.Page
         int count = 0;
         if (ID != 0)
         {
-            DateTime startdate = DateTime.ParseExact(CycleStart, "MM/dd/yyyy", null);
-            DateTime enddate = DateTime.ParseExact(CycleEnD, "MM/dd/yyyy", null);
+            DateTime startdate = DateTime.ParseExact(CycleStart, "dd-MM-yyyy", null);
+            DateTime enddate = DateTime.ParseExact(CycleEnD, "dd-MM-yyyy", null);
 
             //BillCycle billCycle = new BillCycle();
             // Bill.ActivateBillForFlat(Convert.ToInt32(billid), FlatNumber, Convert.ToDateTime(CycleStart), Convert.ToDateTime(CycleEnD));
@@ -251,7 +276,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
 
             Bill bill = new Bill();
 
-           bool isInserted = bill.InsertNewBillPay(genBill);
+           //bool isInserted = bill.InsertNewBillPay(genBill);
 
 
 
@@ -404,7 +429,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
         if (dsBillType == null)
         {
             BillPlan billPlan = new BillPlan();
-            dsBillType = billPlan.GetActiveBillType();
+            dsBillType = billPlan.GetActiveBillType(muser.currentResident.SocietyID);
         }
         if (dsBillType != null)
         {
@@ -427,14 +452,15 @@ public partial class ActiveBillPlan : System.Web.UI.Page
     protected void btnFlatbillGen_Click(object sender, EventArgs e)
     {
         DateTime CurrentBillEndDate = Utility.GetCurrentDateTimeinUTC();
-        String GenerateCycle = "Manual"; ;
+        String GenerateCycle = "Manual";
+     
         btnSingleFlatGenerate.Text = "Generate Bill";
         lblFlatNuber.Text = Hiddenflatnumber.Value;
         lblBillType.Text = HiddenField2.Value;
 
-        previousBill = Bill.GetLastGeneratedBill(lblFlatNuber.Text, lblBillType.Text);
+        previousBill = Bill.GetLastGeneratedBill(lblFlatNuber.Text, 0);
 
-        newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, CurrentBillEndDate);
+        newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, CurrentBillEndDate,0);
 
         if (newBill.op_Days <= 0)
         {
@@ -449,7 +475,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
         lblFlatArea.Text = newBill.op_FlatArea.ToString();
         lblRate.Text = newBill.op_Rate.ToString();
         lblChargeType.Text = newBill.op_ChargeType;
-        lblFromDate.Text = newBill.BillStartDate.ToShortDateString();
+        txtStartDate.Text = newBill.BillStartDate.ToShortDateString();
         txtFlatBillAmt.Visible = true;
         txtFlatBillAmt.Text = newBill.CurrentBillAmount.ToString();
         txtBillDate.Text = newBill.BillEndDate.ToShortDateString();
@@ -467,9 +493,9 @@ public partial class ActiveBillPlan : System.Web.UI.Page
         lblFlatNuber.Text = HiddenField1.Value;
         lblBillType.Text = HiddenField2.Value;
 
-        previousBill = Bill.GetLastGeneratedBill(lblFlatNuber.Text, lblBillType.Text);
+        previousBill = Bill.GetLastGeneratedBill(lblFlatNuber.Text, 0);
 
-        newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, CurrentBillEndDate);
+        newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, CurrentBillEndDate,0);
 
         if (newBill.op_Days <= 0)
         {
@@ -479,7 +505,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
         lblFlatArea.Text = newBill.op_FlatArea.ToString();
         lblRate.Text = newBill.op_Rate.ToString();
         lblChargeType.Text = newBill.op_ChargeType;
-        lblFromDate.Text = newBill.BillStartDate.ToShortDateString();
+        txtStartDate.Text = newBill.BillStartDate.ToShortDateString();
         txtFlatBillAmt.Visible = true;
         txtFlatBillAmt.Text = newBill.CurrentBillAmount.ToString();
         txtBillDate.Text = newBill.BillEndDate.ToShortDateString();
@@ -496,11 +522,16 @@ public partial class ActiveBillPlan : System.Web.UI.Page
         try
         {
             String GenerateCycle = "Manual";
-            DateTime BillEnddate = Convert.ToDateTime(txtBillDate.Text);
+            CultureInfo us = new CultureInfo("en-US");
+            
+            DateTime BillEnddate = DateTime.ParseExact(txtBillDate.Text, "dd-MM-yyyy", us);
+            DateTime BillStartdate = DateTime.ParseExact(txtStartDate.Text, "dd-MM-yyyy", us);
+
+            int days = Utility.GetDifferenceinDays(BillStartdate, BillEnddate);
 
             if (previousBill != null)
             {
-                newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, BillEnddate);
+                newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, BillEnddate, days);
             }
 
             txtFlatBillAmt.Text = newBill.CurrentBillAmount.ToString();
@@ -531,10 +562,10 @@ public partial class ActiveBillPlan : System.Web.UI.Page
         Double PrevBalance = Convert.ToDouble(lblPreviousBalance.Text);
         Double CurrentAmount = Convert.ToDouble(txtFlatBillAmt.Text);
         String CycleType = HiddenFieldCycleType.Value;
-        DateTime BillStartDate = Convert.ToDateTime(lblFromDate.Text);
+        DateTime BillStartDate = Convert.ToDateTime(txtStartDate.Text);
         String BillType = HiddenField2.Value;
         String ChargeType = HiddenFieldChargeType.Value;
-        String BillDescription = txtBillGenSingleFlatdesc.Text;
+        //String BillDescription = txtBillGenSingleFlatdesc.Text;
 
         if (newBill != null)
         {
@@ -561,7 +592,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
             {
 
                 newBill.CurrentBillAmount = Convert.ToInt32(txtFlatBillAmt.Text);
-                newBill.BillDescription = txtBillGenSingleFlatdesc.Text;
+                //newBill.BillDescription = txtBillGenSingleFlatdesc.Text;
                 bool result = bill.InsertNewBill(newBill);
                 //bool result = true;
                 if (result)
@@ -750,5 +781,166 @@ public partial class ActiveBillPlan : System.Web.UI.Page
         string value = FlatsBillsGrid.DataMember[0].ToString();
     }
 
+
+
+    protected void btnActivateBill_Click(object sender, EventArgs e)
+    {
+        DateTime CurrentBillEndDate = Utility.GetCurrentDateTimeinUTC();
+        String GenerateCycle = "Manual"; ;
+        btnSingleFlatGenerate.Text = "Generate Bill";
+        lblFlatNumber.Text = Hiddenflatnumber.Value;
+        lablebillType.Text = HiddenField2.Value;
+
+        int FlatID = Convert.ToInt32(HiddenField1.Value);
+        int SocietyBillID = Convert.ToInt32(HiddenField2.Value);
+
+        LoadActivatedBillForm(FlatID,SocietyBillID);
+/*
+        previousBill = Bill.GetLastGeneratedBill(FlatID, SocietyBillID, muser.currentResident.SocietyID);
+
+       
+
+        lblFlatArea.Text = previousBill.op_FlatArea.ToString();
+        lblRate.Text = previousBill.op_Rate.ToString();
+        lblChargeType.Text = previousBill.op_ChargeType;
+        lblFromDate.Text = previousBill.BillStartDate.ToShortDateString();
+        txtFlatBillAmt.Visible = true;
+        txtFlatBillAmt.Text = previousBill.CurrentBillAmount.ToString();
+        txtBillDate.Text = previousBill.BillEndDate.ToShortDateString();
+        lblPreviousBalance.Text = previousBill.PreviousMonthBalance.ToString();
+
+        ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "ShowActivateBillForm()", true);*/
+    }
+
+    protected void btnActivateFlatBill_Click(object sender, EventArgs e)
+    {
+        bool isInserted = false;
+        String CycleEnd = txtBillDate.Text.ToString();
+        String CycleStart = txtStartDate.Text.ToString();
+        int amount = Convert.ToInt32(txtFlatBillAmt.Text.ToString());
+
+        if (previousBill != null)
+        {
+          /*  DateTime startdate;
+          
+            if (previousBill.BillEndDate.Year < 2000)
+            {
+                startdate = DateTime.UtcNow;
+            }
+            else {
+                startdate = previousBill.BillEndDate;
+            }
+            */
+
+            DateTime enddate = DateTime.ParseExact(CycleEnd, "dd-MM-yyyy", null);
+            DateTime startdate = DateTime.ParseExact(CycleStart, "dd-MM-yyyy", null);
+
+            GenerateBill genBill = new GenerateBill();
+            genBill.AmountTobePaid = 0;
+            genBill.AmountPaid = 0;
+            genBill.AmountPaidDate = DateTime.Now;
+            genBill.BillDescription = txtActivateDescription.Text.ToString();
+            genBill.BillEndDate = enddate;
+            genBill.BillMonth = enddate;
+            genBill.BillTypeID = previousBill.BillTypeID;
+            genBill.BillStartDate = startdate;
+            genBill.CurrentBillAmount = amount;
+            genBill.ActionType = "Activate";
+            genBill.Activated = 1;
+            genBill.CycleType = previousBill.CycleType;
+            genBill.FlatID = previousBill.FlatID;
+            genBill.InvoiceID = "Activate-1";
+            genBill.ModifiedAt = DateTime.UtcNow;
+            genBill.PaymentDueDate = DateTime.UtcNow.AddDays(7);
+            genBill.PaymentMode = "";
+            genBill.PreviousMonthBalance = previousBill.CurrentMonthBalance;
+            genBill.SocietyBillID = previousBill.SocietyBillID;
+            genBill.SocietyID = muser.currentResident.SocietyID;
+            genBill.TransactionID = "Activated";
+
+
+            genBill.op_BillType = "";
+
+            Bill bill = new Bill();
+
+            isInserted = bill.InsertNewBillPay(genBill);
+
+
+
+            /*  if (result)
+              {
+                 // count = Bill.InsertFirstZeroBill(FlatNumber, billid, CycleType, CycleStart);
+              }*/
+        }
+
+        else
+        {
+            lblbilltypeexist.Text =  "Previous Bill Detail Not found";
+        }
+
+
+        if (isInserted)
+        {
+            lblbilltypeexist.Text = "Bill Generated Sucessfully";
+        }
+
+        else
+        {
+            lblbilltypeexist.Text = "Bill Generated Failed";
+        }
+
+
+        LoadActivatedBill();
+    }
+
+    protected void ActivateBill_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        //int rowIndex = Convert.ToInt32(e.CommandArgument);
+
+        String[] arrayArgument = e.CommandArgument.ToString().Split(new char[] { ','});
+
+        int SocietyBillID = Convert.ToInt32(arrayArgument[0]);
+        int FlatID = Convert.ToInt32(arrayArgument[1]);
+
+        LoadActivatedBillForm(FlatID, SocietyBillID);
+
+ 
+       
+    }
+
+
+    private void LoadActivatedBillForm(int FlatID, int SocietyBillID)
+    {
+        DateTime CurrentBillEndDate = Utility.GetCurrentDateTimeinUTC();
+        String GenerateCycle = "Manual"; ;
+
+        DateTime startdate;
+        previousBill = Bill.GetLastGeneratedBill(FlatID, SocietyBillID, muser.currentResident.SocietyID);
+        if (previousBill.BillEndDate.Year < 2000)
+        {
+            startdate = DateTime.UtcNow;
+        }
+        else
+        {
+            startdate = previousBill.BillEndDate;
+        }
+
    
+
+        lblFlatNuber.Text = previousBill.op_FlatNumber;
+        lblBillType.Text = previousBill.op_BillType;
+
+        lblFlatArea.Text = previousBill.op_FlatArea.ToString();
+        lblRate.Text = previousBill.op_Rate.ToString();
+        lblChargeType.Text = previousBill.op_ChargeType;
+        txtStartDate.Text = startdate.ToShortDateString();
+        txtFlatBillAmt.Visible = true;
+        txtFlatBillAmt.Text = previousBill.CurrentBillAmount.ToString();
+        txtBillDate.Text = startdate.ToShortDateString();
+        lblPreviousBalance.Text = previousBill.PreviousMonthBalance.ToString();
+
+        ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "ShowActivateBillForm()", true);
+
+
+    }
 }
