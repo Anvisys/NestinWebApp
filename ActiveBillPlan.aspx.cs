@@ -276,7 +276,7 @@ public partial class ActiveBillPlan : System.Web.UI.Page
 
             Bill bill = new Bill();
 
-           bool isInserted = bill.InsertNewBillPay(genBill);
+           //bool isInserted = bill.InsertNewBillPay(genBill);
 
 
 

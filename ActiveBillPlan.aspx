@@ -484,6 +484,10 @@
                              <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtFlatID" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                          </td>
                                           
+                         <%-- </td>
+                            <td class="lbltxt" style="width: 50%;">Current Month Balance :
+
+                            </td>               
                             <td class="lbltxt" style="width: 50%;  visibility:hidden"">Current Month Balance :
 
                             </td>
@@ -591,11 +595,11 @@
                         </div>
                         <!-- Model Content -->
                         <div class="row" style="margin-top: 5px;">
-                            <div class="col-md-6 col-sm-6 lbltxt">
+                            <div class="">
                                     Flat Number : 
                                     <asp:Label ID="lblFlatNumber" runat="server" CssClass="txtbox_style"></asp:Label>
                             </div>
-                            <div class="col-md-6 col-sm-6 lbltxt">
+                            <div class="">
                                 Bill Type : 
                             <asp:Label ID="lablebillType" runat="server" CssClass="txtbox_style"></asp:Label>
                             </div>
@@ -686,6 +690,8 @@
 
                 <%--   ---------------------------    Activated Bills View Section Ends Here     -------------  -------- --------------%>
                 <%-- ------------------------------------------------- ActivateBillForm For Single Flat ---------------------------------------------------  --%>
+                <%--    Activated Bills View Section Ends Here     -------------  -------- --------------%>
+                <%-- ------------------------------------------------- GenerateDeActivateBillForm For Single Flat ---------------------------------------------------  --%>
 
                 <div id="ActivateBillForm" class="modal">
                     <div class="panel panel-primary" style="width: 400px; margin-left: 155px; position: absolute;">
