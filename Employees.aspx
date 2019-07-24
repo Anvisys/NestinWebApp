@@ -457,7 +457,7 @@
                         HeaderStyle-BackColor="#6eab91" 
                         HeaderStyle-BorderStyle="None"
                         RowStyle-Width="100px"
-                       
+                        
                         BorderStyle="None"
                         GridLines="None"
                         ShowHeader="false"
@@ -465,7 +465,7 @@
                         EmptyDataRowStyle-BorderColor="ActiveBorder" 
                         ShowHeaderWhenEmpty="True" 
                         OnSelectedIndexChanged="EmployeeGrid_SelectedIndexChanged" 
-                        ForeColor="#666666" Font-Names="Calibri" OnRowDataBound="Employee_RowDataBound">
+                        ForeColor="#666666" Font-Names="Arial" OnRowDataBound="Employee_RowDataBound">
                        
                          <AlternatingRowStyle BackColor="#f7f7f7" />
                         <Columns>                                    
@@ -480,10 +480,10 @@
                                      </div>
 
                                         <div class="col-sm-4 col-xs-12" style="padding:10px;text-align:left;">
-
-                                        <span class="fa fa-user" style="color:#2b7a2d;"></span>&nbsp;&nbsp;Email : <%#Eval("Emailid")%><br />
-                                        <span class="fa fa-envira" style="color:#2b7a2d;"></span>&nbsp;&nbsp;Company : <%#Eval("CompanyName")%><br />
-                                        <span class="fa fa-info-circle" style="color:#2b7a2d;"></span>&nbsp;&nbsp;Type: <%#Eval("CompType")%>
+                                            
+                                        <span class="fa fa-user" style="color:black;"></span>&nbsp;&nbsp;Email : <%#Eval("Emailid")%><br />
+                                        <span class="fa fa-building" style="color:black;"></span>&nbsp;&nbsp;Company : <%#Eval("CompanyName")%><br />
+                                        <span class="fa fa-info-circle" style="color:black;"></span>&nbsp;&nbsp;Type: <%#Eval("CompType")%>
                                         <%#Eval("Address")%>
                                         </div>
 

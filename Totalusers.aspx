@@ -704,12 +704,12 @@
 
                                                 <div class="col-sm-4 col-xs-12">
                                                     <br />
-                                                    <span class="fa fa-envelope" style="color: blue;"></span>&nbsp;&nbsp;<%# Eval("Emailid") %>
+                                                    <span class="fa fa-envelope" style="color: black;"></span>&nbsp;&nbsp;<%# Eval("Emailid") %>
                                                     <br />
-                                                    <span class="fa fa-phone" style="color: blue;"></span>&nbsp;&nbsp;<%# Eval("MobileNo") %>
+                                                    <span class="fa fa-phone" style="color: black;"></span>&nbsp;&nbsp;<%# Eval("MobileNo") %>
                                                     <%# Eval("ParentName") %>
                                                     <br />
-                                                    <span class="fa fa-clock-o" style="color: blue;"></span>&nbsp;&nbsp;<%# Eval("ActiveDate","{0:dd MMM,yy}") %>
+                                                    <span class="fa fa-clock-o" style="color: black;"></span>&nbsp;&nbsp;<%# Eval("ActiveDate","{0:dd MMM,yy}") %>
                                                     <br />
                                                 </div>
 
