@@ -801,7 +801,7 @@
                                 <tr>
                                     <td class="lbltxt">Description :</td>
                                     <td colspan="3">
-                                        <asp:TextBox ID="txtActivateDescription" style="resize:none;" runat="server" TextMode="MultiLine" Rows="3" Width="250px" Height="50px" onchange="ResizeBillGeTextbox();" ></asp:TextBox>
+                                        <asp:TextBox ID="txtActivateDescription" style="resize:none;" runat="server" TextMode="MultiLine" Rows="3" Width="250px" Height="50px" ></asp:TextBox>
                                     </td>
                                 </tr>
 

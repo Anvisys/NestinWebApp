@@ -554,7 +554,7 @@
                                       </div>
                  <div class="col-sm-4 col-xs-12" style="vertical-align:middle;">
                     <div style=" align-content">
-                          <button id="Add_Flat_Button" type="button" class="btn-sm btn btn-primary pull-right" style="cursor:pointer;margin-right:30px;"><i class="fa fa-plus"></i> Add Flat</button>  
+                          <button id="Add_Flat_Button" type="button" class="btn-sm btn btn-primary pull-right" style="cursor:pointer;margin-right:30px;"> Assign Flat</button>  
                           <%--<a id="linkTemplate" type="button"  class="btn-sm btn btn-primary pull-right"  href="http://www.myaptt.com/NewTestApp/Excel_Format.zip" download="true" style="cursor:pointer;border-color:#2ECC71!important;"><i class="fa fa-plus"></i> Template</a>--%>
                           <button id="Add_Flat_New" type="button" class="btn-sm btn btn-primary pull-right" style="cursor:pointer;margin-right:30px;"><i class="fa fa-plus"></i> Add New Flat</button>  
                     </div>
@@ -682,7 +682,7 @@
                                          </div>
                                          <div class="col-xs-6">
                                              BHK:<br />
-                                                <asp:DropDownList runat="server" ID="drpbhk" Width="100px">
+                                                <asp:DropDownList runat="server" ID="drpbhk" Enabled="false" Width="100px">
                                                     <asp:ListItem Value="Select">Select BHK</asp:ListItem>
                                                     <asp:ListItem Value="1" > 1 BHK</asp:ListItem>
                                                      <asp:ListItem Value="2"> 2 BHK</asp:ListItem>
@@ -1029,7 +1029,7 @@
                             <div class="col-sm-6">
                                 <asp:Label ID="lblUserExist" CssClass="lbltxt" runat="server" style="display:none;" Font-Size="Small" ForeColor="#59ACFF"></asp:Label>
 
-                                <asp:CheckBox ID="checkFlatsOnly" Text="Add Flats for existing user" runat="server" OnCheckedChanged="checkFlatsOnly_CheckedChanged" Visible="false" AutoPostBack="true" Font-Size="Small" />
+                                <asp:CheckBox Enabled="false" ID="checkFlatsOnly" Text="Add Flats for existing user" runat="server" OnCheckedChanged="checkFlatsOnly_CheckedChanged" Visible="false" AutoPostBack="true" Font-Size="Small" />
                             </div>
                         </div>
 
@@ -1053,7 +1053,7 @@
                                     Flat number :
                                 </label>
 
-                                <asp:TextBox Width="100px" ID="txtFltAdd" runat="server" AutoPostBack="True" Height="25px" OnTextChanged="txtFltAdd_TextChanged" TabIndex="9"></asp:TextBox>
+                                <asp:TextBox Width="100px" ID="txtFltAdd" runat="server" AutoPostBack="True" Height="25px"  OnTextChanged="txtFltAdd_TextChanged" TabIndex="9"></asp:TextBox>
 
                                 <asp:Image ID="flatMsg" Height="10px" Width="10px" runat="server" />
                                 <span style="display:none;"><asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" ForeColor="Red" ControlToValidate="txtFltAdd" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator></span>
@@ -1063,7 +1063,7 @@
                                     Block :
                                 </label>
 
-                                <asp:TextBox Width="100px" ID="txtAddBlock" runat="server" Height="25px" TabIndex="10"></asp:TextBox>
+                                <asp:TextBox Enabled="false" Width="100px" ID="txtAddBlock" runat="server" Height="25px" TabIndex="10"></asp:TextBox>
 
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtAddBlock" ErrorMessage="*" ForeColor="Red" InitialValue="0" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator>
                             </div>
@@ -1077,7 +1077,7 @@
                                     Floor :
                                 </label>
 
-                                <asp:TextBox  Width="100px" ID="txtAddfltFlr" runat="server" Height="25px" TabIndex="11" MaxLength="3"></asp:TextBox>
+                                <asp:TextBox  Enabled="false" Width="100px" ID="txtAddfltFlr" runat="server" Height="25px" TabIndex="11" MaxLength="3"></asp:TextBox>
 
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="txtAddfltFlr" ErrorMessage="*" ForeColor="Red" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator>
 
@@ -1089,7 +1089,7 @@
                                     Flat Area :
                                 </label>
 
-                                <asp:TextBox Width="100px" ID="txtFlatArea" runat="server" Height="25px" onfocus="Focus(this.id,'in Sqfts.')" onblur="Blur(this.id,'in Sqfts.')" ToolTip="In sqfts." TabIndex="12"></asp:TextBox>
+                                <asp:TextBox Width="100px" Enabled="false" ID="txtFlatArea" runat="server" Height="25px" onfocus="Focus(this.id,'in Sqfts.')" onblur="Blur(this.id,'in Sqfts.')" ToolTip="In sqfts." TabIndex="12"></asp:TextBox>
 
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtFlatArea" ErrorMessage="*" ForeColor="Red" InitialValue="0" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator>
 
@@ -1100,7 +1100,7 @@
                                                      BHK :
                                                 </label>
                                                
-                                                     <asp:DropDownList Width="100px" ID="drpAddflatBHK" runat="server" Height="25px" TabIndex="13">
+                                                     <asp:DropDownList Width="100px" ID="drpAddflatBHK" Enabled="false" runat="server" Height="25px" TabIndex="13">
                                                      <asp:ListItem Value="0">Select</asp:ListItem>
                                                      <asp:ListItem>1</asp:ListItem>
                                                      <asp:ListItem>2</asp:ListItem>
@@ -1112,7 +1112,7 @@
                                                     InterCom :
                                                 </label>
                                               
-                                                    <asp:TextBox Width="100px" ID="txtAddflatIntrc" runat="server" MaxLength="5" Height="25px" TabIndex="14"></asp:TextBox>
+                                                    <asp:TextBox Width="100px" Enabled="false" ID="txtAddflatIntrc" runat="server" MaxLength="5" Height="25px" TabIndex="14"></asp:TextBox>
                                               
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server" ControlToValidate="txtAddflatIntrc" ErrorMessage="*" ForeColor="Red" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator>
                                             

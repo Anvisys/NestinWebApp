@@ -59,6 +59,23 @@
                 //alert(ele);
             });
 
+            $("#pool_type").change(function () {
+               var selectedOption = $(this).children("option:selected").val();
+                //alert("You have selected  - " + selectedOption);
+                if (selectedOption == "One Way") {
+                    $("#divreturn").css("display", 'none');
+                    $("#pool_cycle").prop('disabled', true);
+                    $("#pool_cycle").val("One Time");
+                }
+
+                else {
+                    $("#divreturn").css("display", 'none');
+                    $("#pool_cycle").prop("disabled", false);
+                    $("#pool_cycle").val("Select");
+                }
+                   
+            });
+
 
             $('#newDeactiveDate').datetimepicker({
                 //  format: 'YYYY-MM-DD'
@@ -697,6 +714,7 @@
 
         function ChangeDeactiveDate() {
             document.getElementById("ChangeDate").style.display = "block";
+            document.getElementById("divupdate").style.display = "block";
             $('#newDeactiveDate').attr("min", ReverseDateFormat(ActiveDate))
             $('#newDeactiveDate').datetimepicker({
                 format: 'YYYY-MM-DD'
@@ -1004,11 +1022,28 @@
             CarPool.InitiatedDateTime = GetDateTimeinISO(new Date());
             var date = $("#date_when").val();
             var time = $("#time_when").val();
+            if (date == null || time == null) {
+                var today = new Date();
+                 date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                date = DisplayDateOnly(datenew);
+                time = DisplayDateTime(datenew);
+            }
             var datetime = date + "T" + time + ":00";
             CarPool.JourneyDateTime = datetime;
             var date_return = $("#date_return").val();
             var time_return = $("#time_return").val();
 
+            if (date_return == '' || time_return == '') {
+                alert("1036");
+                var today = new Date();
+                date_return = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                alert("in "+date_return);
+
+                if(today.getMinutes()<10)
+                    time_return = today.getHours() + ":" + "0" + today.getMinutes();
+                else
+                    time_return = today.getHours() + ":" + today.getMinutes();
+            }
 
             var datetime_return = date_return + "T" + time_return + ":00";
 
@@ -1168,7 +1203,7 @@
                success: function (data) {
                    //var da = JSON.stringify(data);
                    //var js = jQuery.parseJSON(da);
-                   alert(JSON.stringify(data));
+                 //  alert(JSON.stringify(data));
                    var Response = data.Response;
                    if (Response == "OK") {
 
@@ -1227,14 +1262,14 @@
        }
 
        function CloseRentInventory() {
-          
+
            var InventoryUpdate = "{\"RentInventoryID\":\"\",\"InventoryTypeID\":\"\",\"AccomodationTypeID\":\"\",\"RentValue\":\"\",\"Available\":\"\",Description\":\"\",\"ContactName\":\"\",\"ContactNumber\":\"\",\"UserID\":\"\",\"FlatID\":\" \",\"HouseID\":\"\"} ";
            InventoryUpdate.InventoryId = currentInvetoryID;
            InventoryUpdate.Status = 0;
            console.log("1233==" + InventoryUpdate);
            var url = api_url + "/api/RentInventory/Close"
 
-          // console.log(RentInventoryID);
+           // console.log(RentInventoryID);
            $.ajax({
                dataType: "json",
                url: url,
@@ -1294,6 +1329,7 @@
 
            }
        }
+
 
 
     </script>
@@ -1446,15 +1482,15 @@
                                     <label style="width: 100px;" class="data_heading">Till :</label>
                                     <label style="width: 50px;" class="data_label" id="lblFlatTenantTo">...</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                     <button id="btnEdit" type="button" class="btn btn-danger" style="display: none" onclick="ChangeDeactiveDate()">Set End Date</button>
-                                    <div id="ChangeDate" style="display: none">
+                                  <div  style="display: none">
                                         <%--<input type="date" id="newDeactiveDate" style="width: 150px" />--%>
 
                                     </div>
                                     <div class="row" style="margin-top: 10px;">
-                                      <div class="col-sm-8">                                                                   
+                                      <div class="col-sm-8" id="ChangeDate" style="display:none;">                                                                   
                                            <input type='text'  id='newDeactiveDate' class="form-control" placeholder="DD/MM/YYYY" tabindex="5"  />                                
                                       </div>
-                                      <div class=" col-sm-4 ">                                 
+                                      <div class=" col-sm-4 " id="divupdate" style="display:none;">                                 
 
                                             <button id="btnUpdate" type="button" onclick="UpdateDeactiveDate();">Update</button>
                                       </div>
@@ -1747,8 +1783,9 @@
                                 <label class="labelwidth col-sm-4 col-form-label">Type :</label>
                                 <div class="col-sm-8">
                                 <select id="pool_type" class="form-control form-control-sm" onblur="" tabindex="1" >
-                                    <option "1">One Way</option>
-                                    <option "2">Two Way</option>
+                                    <option "1">Select</option>
+                                    <option "2">One Way</option>
+                                    <option "3">Two Way</option>
                                 </select>
                                 </div>
                             </div>
@@ -1799,7 +1836,7 @@
                                </div>
                             </div>
                         </div>
-                         <div class="row" style="margin-top: 10px;">
+                         <div class="row" id="divreturn" style="margin-top: 10px;">
                             <div class="col-sm-6">
                                 <label class="labelwidth col-sm-4 col-form-label">Return:</label>
                              <div class="col-sm-8">  

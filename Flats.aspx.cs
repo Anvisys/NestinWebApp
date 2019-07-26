@@ -70,7 +70,7 @@ public partial class Flats : System.Web.UI.Page
         }
         else
         {
-            querystring = "Select * from dbo.ViewFlatsUser where SocietyId = " + muser.currentResident.SocietyID;
+            querystring = "Select * from dbo.ViewFlatsUser where SocietyId = " + muser.currentResident.SocietyID+ "order by ID Desc ";
         }
 
         DataSet ds = dacess.GetData(querystring);
@@ -781,13 +781,34 @@ public partial class Flats : System.Web.UI.Page
     {
         try
         {
-
+            int ID = 0;
             String flat = txtFltAdd.Text;
-            String FlatCheckQuery = "select  ID from Flats where FlatNumber = '" + txtFltAdd.Text + "'";
+            //String FlatCheckQuery = "select  * from Flats where FlatNumber = '" + txtFltAdd.Text + "'";
             DataAccess dacess = new DataAccess();
     
-            int ID = dacess.GetSingleValue(FlatCheckQuery);
+            //int ID = dacess.GetSingleValue(FlatCheckQuery);
 
+            String query = "select  * from Flats where FlatNumber = '" + txtFltAdd.Text + "'";
+
+            DataSet ds=dacess.ReadData(query);
+            if (ds!=null)
+            {
+
+                ID = (int)ds.Tables[0].Rows[0]["ID"];
+                string floor = ds.Tables[0].Rows[0]["Floor"].ToString();
+                int x = ds.Tables[0].Rows.Count;
+                string block = ds.Tables[0].Rows[0]["Block"].ToString();
+                string FlatArea = ds.Tables[0].Rows[0]["FlatArea"].ToString();
+                string intercom = ds.Tables[0].Rows[0]["IntercomNumber"].ToString();
+                string bhk= ds.Tables[0].Rows[0]["BHK"].ToString();
+
+                txtAddfltFlr.Text = floor;
+                txtAddBlock.Text = block;
+                txtFlatArea.Text = FlatArea;
+                txtAddflatIntrc.Text = intercom;
+                drpAddflatBHK.SelectedItem.Text = bhk;
+
+            }
             if (flat.IndexOf(' ') > 0)
             {
               
@@ -811,6 +832,7 @@ public partial class Flats : System.Web.UI.Page
         }
         catch (Exception ex)
         {
+            
             lblAddfltAvailble.Text = ex.Message;
         }
     }
