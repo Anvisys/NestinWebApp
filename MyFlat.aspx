@@ -35,7 +35,7 @@
     <script id="MyFlatData">
         var CurrentUserType, ResID, UserID, Type, BHK, FirstName, LastName, MobileNo, EmailId, FlatID, FlatNumber, Address, ParentName, SocietyID, SocietyName, Gender, ActiveDate, DeActiveDate, TenantUserID;
         var MobileExist, EmailExist, TenantResID, chkExistingUser = false;
-        var api_url = "www.kevintech.in/";
+        var api_url = "";
         var _ResID = 0;
         var currentInvetoryID = 0;
 
@@ -126,14 +126,14 @@
             ResID = '<%=Session["ResiID"] %>';
             UserID = '<%=Session["UserID"] %>';
 
-            GetFlatInfo(FlatNumber);
+            GetFlatInfo(FlatID);
             GetRentalInfo(FlatNumber);
 
         }
 
 
-        function GetFlatInfo(FlatNumber) {
-
+        function GetFlatInfo(FlatID) {
+            alert(FlatID);
             // alert("minimum val is "+minvalue);
             // alert("maximum value is "+maxvalue);
             $("#TenantDetail").hide();
@@ -162,7 +162,7 @@
         };
 
         function SetFlatInfo(data) {
-
+            alert(data);
             var da = JSON.stringify(data);
             var js = jQuery.parseJSON(da);
             document.getElementById("lblFlatNumber").innerHTML = js.FlatNumber;
