@@ -17,7 +17,7 @@ public partial class Login : System.Web.UI.Page
     User muser;
     protected void Page_Load(object sender, EventArgs e)
     {
-        SessionVariables.API_URL = "http://www.kevintech.in/Nestin-WebApi";
+        SessionVariables.API_URL = "http://www.Nestin.online/NestinWebApi";
     }
 
     protected void btnForgotpass_Click(object sender, EventArgs e)
@@ -60,11 +60,9 @@ public partial class Login : System.Web.UI.Page
                         lblerror.Visible = false;
                     }
                 }
-
             }
             else
             {
-
             }
         }
         else
@@ -77,7 +75,7 @@ public partial class Login : System.Web.UI.Page
     public void SendMailForgot(string UserLogin, string password, string EmailID)
     {
 
-        string URI = "http://www.kevintech.in/mailserver.php";
+        string URI = "http://www.Nestin.Online/mailserver.php";
         WebRequest request = WebRequest.Create(URI);
         request.Method = "POST";
         request.ContentType = "application/x-www-form-urlencoded";

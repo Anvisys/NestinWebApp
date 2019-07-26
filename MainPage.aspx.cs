@@ -57,15 +57,7 @@ public partial class MainPage : System.Web.UI.Page
                 //currentResident = (Resident)muser.AllResidents[0];
                else if (muser.AllResidents.Count > 0)
                 {
-                    if (muser.currentResident.UserType == "Individual")
-                    {
-                        SessionVariables.CurrentPage = "MyHouse.aspx";
-
-                    }
-                    else if (muser.currentResident.UserType == "SuperAdmin")
-                    {
-                        SessionVariables.CurrentPage = "SuperAdmin.aspx";
-                    }
+                    
                     
                     muser.currentResident = (Resident)muser.AllResidents[0];
                     initializePageControl(muser.currentResident);
@@ -101,9 +93,13 @@ public partial class MainPage : System.Web.UI.Page
             SessionVariables.CurrentPage = "MyHouse.aspx?Res="+ SessionVariables.ResiID;
 
         }
+        else if (muser.currentResident.UserType == "SuperAdmin")
+        {
+            SessionVariables.CurrentPage = "SuperAdmin.aspx";
+        }
         else if (muser.currentResident.UserType == "Admin")
         {
-            SessionVariables.CurrentPage = "Dashboard.aspx";
+           // SessionVariables.CurrentPage = "Dashboard.aspx";
            
         }
 

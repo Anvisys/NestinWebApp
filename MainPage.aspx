@@ -165,9 +165,9 @@
             SetMenu();
 
             var currentPage = '<%=Session["CurrentPage"] %>';
-
+         
             $('#content_frame').attr('src', currentPage);
-             GetAdvertisementData();
+             //GetAdvertisementData();
              $("#changeLoggedinSociety").hide();
         });
 
