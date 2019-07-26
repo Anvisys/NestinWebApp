@@ -969,7 +969,7 @@ public partial class LatestBill : System.Web.UI.Page
                // int camt=Convert.ToInt32(dt.Rows[0]["CurrentMonthBalance"])+Convert.ToInt32(dt.Rows[0]["CurrentMonthBalance"])
                 txtAmt.Text = dt.Rows[0]["CurrentMonthBalance"].ToString();
                 txtTransaID.Text = "";
-                MultiView1.ActiveViewIndex = 2;
+                MultiView1.ActiveViewIndex = 3;
                 if (TransactionID == "" || InvoiceID == "")
                 {
                     lblAmountPaid.Text = 0.ToString();

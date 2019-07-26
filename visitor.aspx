@@ -135,6 +135,8 @@
             SocietyId = '<%=Session["SocietyID"]%>';
             FlatNumber = '<%=Session["FlatNumber"]%>';
 
+      
+
             console.log(SocietyId);
             if (UserType != "Admin") {
                 $("#btnVerifyVisitor").hide();
@@ -371,7 +373,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    //console.log(data);
+                  
                     document.getElementById("data_loading").style.display = "none";
                     if (data != null) {
                        //  alert(data.values +" at 365 ==>> is not null");
@@ -406,12 +408,14 @@
                     }
 
                     else {
+                     
                         $("#pagination>nav").hide();
                         $("#pagination").html("<h4>NO Visitor Data!!</h4>");
                        // alert("NO Data!!");                        
                     }
                 },
                 failure: function (response) {
+                    
                     document.getElementById("data_loading").style.display = "none";
 
                   //  alert(response.d);
@@ -426,6 +430,14 @@
            //alert("at set data");
            // var jarray = data.$values;
             var length = jarray.length;
+
+            if (length == 0) {
+                  $("#pagination>nav").hide();
+                $("#pagination").html("<h4>NO Visitor Data!!</h4>");
+
+                return;
+            }
+
             var viewString = "";
            
             var con = document.getElementById("dataContainer");

@@ -212,15 +212,15 @@ hr {
             userType = '<%=Session["UserType"] %>';
             if (userType == "Admin") {
                 // alert("158");
-               // document.getElementsByTagName("Add_Vendor").style.visibility = 'visible';
-                //document.getElementById("Edit_Vendor").style.visibility = 'visible';
-                //document.getElementById("vendor_delete").style.visibility = 'visible';
+                 document.getElementsByTagName("Add_Vendor").style.visibility = 'visible';
+                document.getElementById("Edit_Vendor").style.visibility = 'visible';
+                document.getElementById("vendor_delete").style.visibility = 'visible';
               //  $('i').attr('visibility' ,'visible');
-                //document.getElementById("editoffer").style.visibility = 'visible';
+                document.getElementById("editoffer").style.visibility = 'visible';
                // alert("220");
             }
             else {
-                document.getElementById("Add_Vendor").style.visibility = 'hidden';
+                document.getElementById("Add_Vendor").style.visibility = 'none';
                 $("#btn_Submit").css("display", "none");
             }
 
@@ -948,7 +948,7 @@ hr {
                                                 <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px; margin:0px;">
                                                        
                                                   <i class="fa fa-edit " id="Edit_Vendor" style="color: #fff;  cursor: pointer; float: left;" onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit    </i>
-                                                  <i class="fa fa-trash " id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer; " aria-hidden="true">Delete</i> 
+                                                  <i class="fa fa-trash " id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer; " aria-hidden="true"></i> 
                                                         
                                               </p>                                      
                                             </asp:panel>
