@@ -266,13 +266,13 @@
 
         function HideAddFlatModal()
         {
-            $("#myModalPopup").hide();
+            $("#modalAssignFlat").hide();
           
             document.getElementById("txtAddfltMobile").value = "";
             document.getElementById("txtAddflatFirstname").value = "";
             document.getElementById("drpFlatGender").value = "";
             document.getElementById("txtAddfltParentName").value = "";
-            document.getElementById("txtAddfltEmail").value = "";
+            document.getElementById("txtAssignFlatEmail").value = "";
             document.getElementById("txtAddflatLastName").value = "";
             document.getElementById("txtAddflatUserLogin").value = "";
             document.getElementById("txtAddfltAddrs").value = "";
@@ -299,7 +299,7 @@
             document.getElementById("txtAddflatFirstname").value = "";
             document.getElementById("drpFlatGender").value = "";
             document.getElementById("txtAddfltParentName").value = "";
-            document.getElementById("txtAddfltEmail").value = "";
+            document.getElementById("txtAssignFlatEmail").value = "";
             document.getElementById("txtAddflatLastName").value = "";
             document.getElementById("txtAddflatUserLogin").value = "";
             document.getElementById("txtAddfltAddrs").value = "";
@@ -318,7 +318,7 @@
             if (result == false) {
                 document.getElementById('txtAddfltMobile').focus();
             }else {
-                document.getElementById('txtAddfltEmail').focus();
+                document.getElementById('txtAssignFlatEmail').focus();
                
             }
 
@@ -326,7 +326,7 @@
         function EmailExist(result) {
 
             if (result == false) {
-                document.getElementById('txtAddfltEmail').focus();
+                document.getElementById('txtAssignFlatEmail').focus();
             } else {
                 document.getElementById('txtAddflatFirstname').focus();
             }
@@ -357,7 +357,7 @@
 
     
         //$("#btnCancelAddFlat").click(function () {
-        //    $("#myModalPopup").hide();
+        //    $("#modalAssignFlat").hide();
         //    $("input:text").val("");
         //    $("#lblstatus").html("");
 
@@ -373,8 +373,10 @@
 
         function CloseWindow()
         {
-           
-            $("#myModalPopup").hide();
+            $("[id*=txtAssignFlatNumber]").val() = "";
+
+            
+            $("#modalAssignFlat").hide();
 
             //added by aarshi to clear all fields on cancel click
             var txts = document.getElementsByClassName('flats_textboxes');
@@ -394,10 +396,10 @@
           
             setTimeout(function ()
             {
-            var FlatNumber = document.getElementById('<%=txtFltAdd.ClientID%>').value;
+            //var FlatNumber = document.getElementById('<%=txtAssignFlatNumber.ClientID%>').value;
 
             if (FlatNumber != "") {
-                document.getElementById("myModalPopup").style.display = "block";
+                document.getElementById("modalAssignFlat").style.display = "block";
             }
            
             if (HiddenEditID.value != "") {             
@@ -440,7 +442,7 @@
             });
 
               $("#Add_Flat_Button").click(function () {
-                $("#myModalPopup").show();
+                $("#modalAssignFlat").show();
             });
 
                $("#Flats_Edit_Cancel").click(function () {
@@ -450,7 +452,7 @@
 
              $("#Cancel_Popup").click(function () {
                 
-                $("#myModalPopup").hide();
+                $("#modalAssignFlat").hide();
                 $("input:text").val("");
                 $("#lblAddflatStatus").html("");
                 $("#lblDefalutBillText").html("");
@@ -491,7 +493,8 @@
 
         function CloseAddFlat()
         {
-            $("#myModalPopup").hide();
+            $("[id*=txtAssignFlatNumber]").val() = ""; 
+            $("#modalAssignFlat").hide();
         }
      
 
@@ -902,10 +905,10 @@
 
 
 
-        <%---------------------------------------------Add Flats Section UI  ---------------------------------------------------------------------------------------------------------------------------------%>
+        <%---------------------------------------------Assign Flats Section UI  ---------------------------------------------------------------------------------------------------------------------------------%>
 
 
-         <div class="modal" id="myModalPopup">
+         <div class="modal" id="modalAssignFlat">
 
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" EnableViewState="true">
             <ContentTemplate>
@@ -913,14 +916,14 @@
                 <div class="panel panel-primary"  style="width:520px;background-color:#f2f2f2;margin: auto;">
                     <div class="panel-heading">
                         
-                            Add Flat
+                            Add Flat: Assign
                        <span class="fa fa-close" onclick="HideAddFlatModal()" style="color:white;float:right; cursor:pointer;"></span>
                         
                     </div>
                     <form class="form-group"autocomplete="off">
                     <div class="panel-body" style="background-color:#fff;" >
                              <div class="row">
-                                 <div class="col-xs-12"><asp:RegularExpressionValidator ID="RegularExpressionValidator15" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Please enter valid Email" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtAddfltEmail" ValidationGroup="Add_Flat" Display="Dynamic"></asp:RegularExpressionValidator> </div>
+                                 <div class="col-xs-12"><asp:RegularExpressionValidator ID="RegularExpressionValidator15" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Please enter valid Email" Font-Size="Small" ForeColor="#FF5050" ControlToValidate="txtAssignFlatEmail" ValidationGroup="Add_Flat" Display="Dynamic"></asp:RegularExpressionValidator> </div>
                              </div>
                              <div class="row"  style="border-top-left-radius:10px;">
                                  <div class="col-sm-12 col-xs-12">
@@ -934,7 +937,8 @@
                                              Mobile :
                                          </label>
 
-                                         <asp:TextBox Width="100px" ID="txtAddfltMobile" onkeypress="return isNumberKey(event)" runat="server" MaxLength="10" Height="25px" OnTextChanged="txtAddfltMobile_TextChanged" onclick="Reset()" TabIndex="1" AutoPostBack="True"></asp:TextBox>
+                                         <asp:TextBox Width="100px" ID="txtAssignFlatMobile" onkeypress="return isNumberKey(event)" runat="server" MaxLength="10" Height="25px" 
+                                             OnTextChanged="txtAddfltMobile_TextChanged" onclick="Reset()" TabIndex="1" AutoPostBack="True"></asp:TextBox>
 
                                          <asp:Image ID="mobileMsg" Height="1px" Width="1px" runat="server" />
                                          <i id='mobInvalid' class="fa fa-circle" style="color: green; display: none;" aria-hidden="true"></i>
@@ -945,10 +949,12 @@
                                              Email :
                                          </label>
 
-                                         <asp:TextBox Width="100px" ID="txtAddfltEmail" runat="server" Height="25px" onfocus="Focus(this.id,'in Sqfts.')" onblur="Blur(this.id,'in Sqfts.')" TabIndex="2" AutoPostBack="True" OnTextChanged="txtAddfltEmail_TextChanged"></asp:TextBox>
+                                         <asp:TextBox Width="100px" ID="txtAssignFlatEmail" runat="server" Height="25px" 
+                                           TabIndex="2" AutoPostBack="True"  OnTextChanged="txtAddfltEmail_TextChanged"></asp:TextBox>
 
                                          <asp:Image ID="emailMsg" Height="10px" Width="10px" runat="server" />
-                                         <span style="display:none;"><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ForeColor="Red"  ControlToValidate="txtAddfltEmail" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator></span>
+                                         <span style="display:none;">
+                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ForeColor="Red"  ControlToValidate="txtAssignFlatEmail" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator></span>
                                      </div>
 
                                    
@@ -959,7 +965,7 @@
                                          <label style="width: 100px;">
                                              FirstName :
                                          </label>
-                                         <asp:TextBox Width="100px" ID="txtAddflatFirstname" BorderWidth="0" runat="server" onClick="Reset()" ReadOnly="true"  Height="25px" TabIndex="3"></asp:TextBox>
+                                         <asp:TextBox Width="100px" ID="txtAddflatFirstname" BorderWidth="0" runat="server" onClick="Reset()" ReadOnly="true"  Height="25px" TabIndex="0"></asp:TextBox>
                                          <asp:RequiredFieldValidator ID="RequireAddflatOwnername" runat="server" ErrorMessage="*" ForeColor="Red" ControlToValidate="txtAddflatFirstname" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator>
 
                                      </div>
@@ -968,7 +974,7 @@
                                              LastName :
                                          </label>
 
-                                         <asp:TextBox Width="100px" ID="txtAddflatLastName" ReadOnly="true" BorderWidth="0" runat="server" Height="25px" TabIndex="4"></asp:TextBox>
+                                         <asp:TextBox Width="100px" ID="txtAddflatLastName" ReadOnly="true" BorderWidth="0" runat="server" Height="25px" TabIndex="0"></asp:TextBox>
 
                                          <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ErrorMessage="*" ForeColor="Red" ControlToValidate="txtAddflatLastName" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator>
                                      </div>
@@ -979,7 +985,7 @@
                                              Gender :
                                          </label>
 
-                                         <asp:DropDownList Width="100px" ID="drpFlatGender" ReadOnly="true" BorderWidth="0" runat="server" Height="25px" TabIndex="5">
+                                         <asp:DropDownList Width="100px" ID="drpFlatGender" ReadOnly="true" BorderWidth="0" runat="server" Height="25px" TabIndex="0">
                                              <asp:ListItem>Male</asp:ListItem>
                                              <asp:ListItem>Female</asp:ListItem>
                                          </asp:DropDownList>
@@ -989,7 +995,7 @@
                                              Parent Name :
                                          </label>
 
-                                         <asp:TextBox Width="100px" ID="txtAddfltParentName" ReadOnly="true" BorderWidth="0" runat="server" Height="25px" TabIndex="6"></asp:TextBox>
+                                         <asp:TextBox Width="100px" ID="txtAddfltParentName" ReadOnly="true" BorderWidth="0" runat="server" Height="25px" TabIndex="0"></asp:TextBox>
 
                                          <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*" ForeColor="Red" ControlToValidate="txtAddfltParentName" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator>
 
@@ -1004,7 +1010,7 @@
                                     UserLogin :
                                 </label>
 
-                                <asp:TextBox Width="100px" ID="txtAddflatUserLogin" Enabled="false" runat="server" Height="25px" OnTextChanged="txtAddflatUserLogin_TextChanged" TabIndex="7" AutoPostBack="True"></asp:TextBox>
+                                <asp:TextBox Width="100px" ID="txtAddflatUserLogin" Enabled="false" runat="server" Height="25px" OnTextChanged="txtAddflatUserLogin_TextChanged" TabIndex="0" AutoPostBack="True"></asp:TextBox>
 
                                 <asp:Image ID="loginMsg" Height="1px" Width="1px" runat="server" />
                             </div>
@@ -1015,7 +1021,7 @@
                                     Address :
                                 </label>
 
-                                <asp:TextBox Width="100px" ID="txtAddfltAddrs" ReadOnly="true" BorderWidth="0" runat="server" Height="42px" TabIndex="8"></asp:TextBox>
+                                <asp:TextBox Width="100px" ID="txtAddfltAddrs" ReadOnly="true" BorderWidth="0" runat="server" Height="42px" TabIndex="0"></asp:TextBox>
 
 
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ForeColor="Red" ControlToValidate="txtAddfltAddrs" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator>
@@ -1053,20 +1059,21 @@
                                     Flat number :
                                 </label>
 
-                                <asp:TextBox Width="100px" ID="txtFltAdd" runat="server" AutoPostBack="True" Height="25px"  OnTextChanged="txtFltAdd_TextChanged" TabIndex="9"></asp:TextBox>
+                                <asp:TextBox Width="100px" ID="txtAssignFlatNumber" runat="server" AutoPostBack="True" Height="25px"  
+                                    OnTextChanged="txtFltAdd_TextChanged" TabIndex="3"></asp:TextBox>
 
                                 <asp:Image ID="flatMsg" Height="10px" Width="10px" runat="server" />
-                                <span style="display:none;"><asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" ForeColor="Red" ControlToValidate="txtFltAdd" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator></span>
+                                <span style="display:none;"><asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" 
+                                    ForeColor="Red" ControlToValidate="txtAssignFlatNumber" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator></span>
                             </div>
                             <div class="col-xs-6">
                                 <label style="width: 100px;">
                                     Block :
                                 </label>
 
-                                <asp:TextBox Enabled="false" Width="100px" ID="txtAddBlock" runat="server" Height="25px" TabIndex="10"></asp:TextBox>
+                                <asp:TextBox Enabled="false" Width="100px" ID="txtAddBlock" runat="server" Height="25px" TabIndex="0"></asp:TextBox>
 
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtAddBlock" ErrorMessage="*" ForeColor="Red" InitialValue="0" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator>
-                            </div>
+                                                          </div>
 
                         </div>
                         <div class="row">
@@ -1077,9 +1084,7 @@
                                     Floor :
                                 </label>
 
-                                <asp:TextBox  Enabled="false" Width="100px" ID="txtAddfltFlr" runat="server" Height="25px" TabIndex="11" MaxLength="3"></asp:TextBox>
-
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="txtAddfltFlr" ErrorMessage="*" ForeColor="Red" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator>
+                                <asp:TextBox  Enabled="false" Width="100px" ID="txtAddfltFlr" runat="server" Height="25px" TabIndex="0" MaxLength="3"></asp:TextBox>
 
                                 <td style="width: 100px;">
                             </div>
@@ -1089,10 +1094,9 @@
                                     Flat Area :
                                 </label>
 
-                                <asp:TextBox Width="100px" Enabled="false" ID="txtFlatArea" runat="server" Height="25px" onfocus="Focus(this.id,'in Sqfts.')" onblur="Blur(this.id,'in Sqfts.')" ToolTip="In sqfts." TabIndex="12"></asp:TextBox>
+                                <asp:TextBox Width="100px" Enabled="false" ID="txtFlatArea" runat="server" Height="25px" onfocus="Focus(this.id,'in Sqfts.')" onblur="Blur(this.id,'in Sqfts.')" ToolTip="In sqfts." TabIndex="0"></asp:TextBox>
 
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtFlatArea" ErrorMessage="*" ForeColor="Red" InitialValue="0" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator>
-
+                             
 
                             </div>
                         </div>
@@ -1100,7 +1104,7 @@
                                                      BHK :
                                                 </label>
                                                
-                                                     <asp:DropDownList Width="100px" ID="drpAddflatBHK" Enabled="false" runat="server" Height="25px" TabIndex="13">
+                                                     <asp:DropDownList Width="100px" ID="drpAddflatBHK" Enabled="false" runat="server" Height="25px" TabIndex="0">
                                                      <asp:ListItem Value="0">Select</asp:ListItem>
                                                      <asp:ListItem>1</asp:ListItem>
                                                      <asp:ListItem>2</asp:ListItem>
@@ -1112,10 +1116,8 @@
                                                     InterCom :
                                                 </label>
                                               
-                                                    <asp:TextBox Width="100px" Enabled="false" ID="txtAddflatIntrc" runat="server" MaxLength="5" Height="25px" TabIndex="14"></asp:TextBox>
+                                                    <asp:TextBox Width="100px" Enabled="false" ID="txtAddflatIntrc" runat="server" MaxLength="6" Height="25px" TabIndex="0"></asp:TextBox>
                                               
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server" ControlToValidate="txtAddflatIntrc" ErrorMessage="*" ForeColor="Red" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator>
-                                            
 
                                  </div>
                         </form>
@@ -1123,7 +1125,7 @@
                          <asp:Label ID="msg" runat="server" ForeColor="Red" text=""></asp:Label>
                              <div class="panle-footer" style="text-align:right;padding-right:10px;margin:10px;">
                                
-                                     <asp:Button ID="btnAddflatSubmit" runat="server" Text="Submit" OnClientClick=""   OnClick="btnAddflatSubmit_Click" TabIndex="15" ValidationGroup="Add_Flat" class="btn btn-primary"/>
+                                     <asp:Button ID="btnAddflatSubmit" runat="server" Text="Submit" OnClientClick=""   OnClick="btnAddflatSubmit_Click" TabIndex="4" ValidationGroup="Add_Flat" class="btn btn-primary"/>
                                 
                                      <button type="button" id="btnCancelAddFlat"  onclick="HideAddFlatModal()" class="btn btn-danger">Cancel</button>
                                 </div>

@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
-using System.Net;
 using System.IO;
-using System.Data;
+using System.Linq;
+using System.Net;
 using System.Text;
-using Newtonsoft.Json;
 
 public partial class Login : System.Web.UI.Page
 {
@@ -69,7 +62,7 @@ public partial class Login : System.Web.UI.Page
         {
             lblPasswordRes.Text = "Please Enter Valid UserID";
         }
-    
+
     }
 
     public void SendMailForgot(string UserLogin, string password, string EmailID)
@@ -138,7 +131,7 @@ public partial class Login : System.Web.UI.Page
         User muser = new User();
         if (muser.Validate(user.Username, user.Password))
         {
-           var residents = muser.SetResidentInfo();
+            var residents = muser.SetResidentInfo();
             if (residents == null)
             {
 
@@ -184,10 +177,10 @@ public partial class Login : System.Web.UI.Page
 
                 return 1;
             }
-          
-          
-           
-        
+
+
+
+
         }
         else
             return -1;
