@@ -559,22 +559,25 @@ public class Bill
         try
         {
             DataAccess dacess = new DataAccess();
-            /*  if (newBill.FlatID == 0)
-              {
-                  string query = "Select FlatID from ViewSocietyUsers where societyid=" + SessionVariables.SocietyID + " and FlatNumber='" + newBill.op_FlatNumber + "'";
-                  DataSet ds = dacess.ReadData(query);
-                  DataRow row = ds.Tables[0].Rows[0];
-                  newBill.FlatID = (int)row[0];
-              }
-
-            /*
-            if (newBill.ResID == 0)
+            if (newBill.ActionType.Equals("Pay"))
             {
-                string query = "Select ResID from ViewSocietyUsers where societyid=" + SessionVariables.SocietyID + " and FlatNumber='" + newBill.op_FlatNumber + "'";
-                DataSet ds = dacess.ReadData(query);
-                DataRow row = ds.Tables[0].Rows[0];
-                newBill.ResID = (int)row[0];
-            }*/
+                if (newBill.FlatID == 0)
+                {
+                    string query = "Select FlatID from ViewSocietyUsers where societyid=" + SessionVariables.SocietyID + " and FlatNumber='" + newBill.op_FlatNumber + "'";
+                    DataSet ds = dacess.ReadData(query);
+                    DataRow row = ds.Tables[0].Rows[0];
+                    newBill.FlatID = (int)row[0];
+                }
+
+
+                if (newBill.ResID == 0)
+                {
+                    string query = "Select ResID from ViewSocietyUsers where societyid=" + SessionVariables.SocietyID + " and FlatNumber='" + newBill.op_FlatNumber + "'";
+                    DataSet ds = dacess.ReadData(query);
+                    DataRow row = ds.Tables[0].Rows[0];
+                    newBill.ResID = (int)row[0];
+                } 
+            }
 
               String Generatebill = "Insert into " + TableName
                                   + "(FlatID,ActionType,Activated,SocietyBillID,BillStartDate,BillEndDate,CurrentBillAmount,CycleType,PaymentDueDate,BillMonth,PreviousMonthBalance,AmountPaidDate,AmountPaid,PaymentMode,TransactionID,InvoiceID,ModifiedAt,BillDescription,SocietyID,ResID) Values('"
@@ -582,7 +585,7 @@ public class Bill
                                      + newBill.CurrentMonthBalance + "','" + DateString(newBill.AmountPaidDate,true) + "','" + newBill.AmountPaid+ "','" + newBill.PaymentMode+ "','" + newBill.TransactionID + "','" + newBill.InvoiceID + "','" + DateString(newBill.ModifiedAt,true) + "','" + newBill.BillDescription + "'," + SessionVariables.SocietyID + ","+newBill.ResID+")";
   
 
-            return true;// dacess.Update(Generatebill);
+             return dacess.Update(Generatebill);
         }
 
 

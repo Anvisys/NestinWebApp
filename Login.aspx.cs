@@ -198,4 +198,9 @@ public partial class Login : System.Web.UI.Page
         public string Username { get; set; }
         public string Password { get; set; }
     }
+
+    protected void lnkbtn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("instant.aspx");
+    }
 }
