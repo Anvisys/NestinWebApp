@@ -299,18 +299,19 @@
         .columnscss {
             min-width: 150px;
             padding: 5px;
-            align-content: center;
             border-right:3px outset #ccccff;
-            
         }
 
         .headerdecore{
             height:50px;
             color:white;
-            font-weight:bold;
+            font-weight:100;
+            display:flex;
             padding:5px;
             background-color:#ccccff;
-            font-size:18px;
+            justify-content:center;
+            text-align:center;
+            font-size:25px;
             
         }
 
@@ -318,6 +319,8 @@
             min-height:100px;
            font-size:16px;
             margin:10px;
+            position:page;
+            
         }
 
         #GrdDetail table {
@@ -521,10 +524,25 @@
 
                             <div class="boxdecore">
                                 <div class="headerdecore">Bill Details</div>
-                                <span>Flat Number :</span><asp:Label ID="lblFlatNumbergrddetails" runat="server"></asp:Label><br>
-                                <span>Bill Type :</span><asp:Label ID="lblbilltypegrddetails" runat="server"></asp:Label><br />
-                                <span>Charge Type :</span><asp:Label ID="lblchargetypegrddetails" runat="server"></asp:Label><br />
-                                <span>Rate :</span><asp:Label ID="lblRategrddetails" runat="server"></asp:Label>
+                                <div style="position:relative; left:200px; padding:5px;">
+
+                                    <div style="width: 30%; display: inline-block;">Flat Number :</div>
+                                    <div style="width: 40%; display: inline-block;">
+                                        <asp:Label ID="lblFlatNumbergrddetails" runat="server"></asp:Label><br>
+                                    </div>
+                                    <div style="width: 30%; display: inline-block;">Bill Type :</div>
+                                    <div style="width: 40%; display: inline-block;">
+                                        <asp:Label ID="lblbilltypegrddetails" runat="server"></asp:Label><br />
+                                    </div>
+                                    <div style="width: 30%; display: inline-block;">Charge Type :</div>
+                                    <div style="width: 40%; display: inline-block;">
+                                        <asp:Label ID="lblchargetypegrddetails" runat="server"></asp:Label><br />
+                                    </div>
+                                    <div style="width: 30%; display: inline-block;">Rate :</div>
+                                    <div style="width: 40%; display: inline-block;">
+                                        <asp:Label ID="lblRategrddetails" runat="server"></asp:Label>
+                                    </div>
+                                </div>
                             </div>
                             <div style="position:absolute;">
                             <asp:GridView ID="GrdDetail" runat="server" HeaderStyle-CssClass="columnscss" AutoGenerateColumns="False" DataKeyNames="PayID" AllowPaging="True" CellPadding="5" ForeColor="#333333" ShowFooter="True" PagerSettings-NextPageText="Next" PagerSettings-PreviousPageText="Prev" AllowSorting="False" CellSpacing="10" EditRowStyle-HorizontalAlign="NotSet" FooterStyle-HorizontalAlign="Center" OnRowDataBound="GrdDetail_RowDataBound">

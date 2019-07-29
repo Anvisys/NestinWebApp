@@ -984,6 +984,16 @@ public partial class Flats : System.Web.UI.Page
 
     }
 
+
+    public string DateString(DateTime dateTime, bool cond)
+    {
+        string date;
+
+        date = dateTime.ToString("yyyy-MM-dd");
+
+        return (date);
+    }
+
     public void AddBillToFlat(String FlatNumber, String FlatArea)
     {
         int ApplyTo = 0;
