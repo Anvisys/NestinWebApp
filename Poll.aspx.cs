@@ -520,7 +520,17 @@ public partial class Poll : System.Web.UI.Page
                     {
                         DisplayPage(1, DisplayStatus);
                     }
-                   // DisplayPage(currPageNumber);
+                    // DisplayPage(currPageNumber);
+
+                    Message msg = new Message();
+                    msg.Topic = "Poll";
+                    msg.SocietyID = muser.currentResident.SocietyID;
+                    msg.TextMessage = "A new Poll is initiated in your Society ";
+
+                    Notification notification = new Notification();
+                    notification.Notify(Notification.TO.Society, muser.currentResident.SocietyID, msg);
+
+
                     ClientScript.RegisterStartupScript(this.GetType(), "alert()", "alert('Poll Added Sucessfully')", true);
                 }
                 else

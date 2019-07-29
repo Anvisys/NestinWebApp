@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
-using System.Net;
 using System.IO;
-using System.Data;
+using System.Linq;
+using System.Net;
 using System.Text;
-using Newtonsoft.Json;
 
 public partial class Login : System.Web.UI.Page
 {
@@ -17,7 +10,7 @@ public partial class Login : System.Web.UI.Page
     User muser;
     protected void Page_Load(object sender, EventArgs e)
     {
-        SessionVariables.API_URL = "http://www.kevintech.in/Nestin-WebApi";
+        SessionVariables.API_URL = "http://www.Nestin.online/NestinWebApi";
     }
 
     protected void btnForgotpass_Click(object sender, EventArgs e)
@@ -60,24 +53,22 @@ public partial class Login : System.Web.UI.Page
                         lblerror.Visible = false;
                     }
                 }
-
             }
             else
             {
-
             }
         }
         else
         {
             lblPasswordRes.Text = "Please Enter Valid UserID";
         }
-    
+
     }
 
     public void SendMailForgot(string UserLogin, string password, string EmailID)
     {
 
-        string URI = "http://www.kevintech.in/mailserver.php";
+        string URI = "http://www.Nestin.Online/mailserver.php";
         WebRequest request = WebRequest.Create(URI);
         request.Method = "POST";
         request.ContentType = "application/x-www-form-urlencoded";
@@ -140,7 +131,7 @@ public partial class Login : System.Web.UI.Page
         User muser = new User();
         if (muser.Validate(user.Username, user.Password))
         {
-           var residents = muser.SetResidentInfo();
+            var residents = muser.SetResidentInfo();
             if (residents == null)
             {
 
@@ -186,10 +177,10 @@ public partial class Login : System.Web.UI.Page
 
                 return 1;
             }
-          
-          
-           
-        
+
+
+
+
         }
         else
             return -1;
@@ -199,5 +190,10 @@ public partial class Login : System.Web.UI.Page
     {
         public string Username { get; set; }
         public string Password { get; set; }
+    }
+
+    protected void lnkbtn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("instant.aspx");
     }
 }

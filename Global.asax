@@ -19,7 +19,14 @@
     void Application_Error(object sender, EventArgs e)
     {
         // Code that runs when an unhandled error occurs
-
+        Exception ex = Server.GetLastError();
+        string path = "";
+        if(sender is HttpApplication)
+        {
+            path = ((HttpApplication)sender).Request.Url.PathAndQuery;
+        }
+       // string arg = String.Format("<br>Path :{0} </br>",path);
+       // Server.Transfer("~/Custom-Error/Error1.aspx?handler="+ex ,true);
     }
 
     void Session_Start(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="LatestBill.aspx.cs" Inherits="LatestBill" %>
+﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeFile="LatestBill.aspx.cs" Inherits="LatestBill" %>
 
 <!DOCTYPE html>
 
@@ -709,7 +709,7 @@
                                     <td colspan="1" style="text-align: center; width: 30%;"></td>
                                     <td colspan="1" style="text-align: center; width: 15%;">
                                         <!--  <button type="button" id="btnPayNow" class="theme-btn-primary">Pay</button>-->
-                                        <asp:LinkButton ID="linkPay" runat="server" OnClick="PayLink_Click" CausesValidation="false" CssClass="theme-btn-primary"> Pay Now</asp:LinkButton>
+                                        <asp:LinkButton ID="linkPay" runat="server" OnClick="PayLink_Click" CausesValidation="false"  CssClass="theme-btn-primary"> Pay Now</asp:LinkButton>
                                         <!-- <asp:Button ID="Button2" runat="server" Text="PayNow" CssClass="theme-btn-primary" CausesValidation="false" OnClick="PayNow_Click" />-->
 
                                     </td>
