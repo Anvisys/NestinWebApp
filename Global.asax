@@ -25,8 +25,8 @@
         {
             path = ((HttpApplication)sender).Request.Url.PathAndQuery;
         }
-        string arg = String.Format("<br>Path :{0} </br>",path);
-        Server.Transfer("~/Custom-Error/Error1.aspx?handler="+ex ,true);
+       // string arg = String.Format("<br>Path :{0} </br>",path);
+       // Server.Transfer("~/Custom-Error/Error1.aspx?handler="+ex ,true);
     }
 
     void Session_Start(object sender, EventArgs e)

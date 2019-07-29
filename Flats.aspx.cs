@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.OleDb;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
-using System.Web;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
-using System.IO;
-using System.Data;
-using System.Data.SqlClient;
-using System.Data.OleDb;
-using System.Configuration;
-using System.Text;
 
 public partial class Flats : System.Web.UI.Page
 {
@@ -77,7 +75,7 @@ public partial class Flats : System.Web.UI.Page
         if (ds != null)
             if (ds.Tables.Count > 0)
             {
-                
+
 
                 if (ds.Tables[0].Rows.Count == 0)
                 {
@@ -94,7 +92,7 @@ public partial class Flats : System.Web.UI.Page
                     adsource.PageSize = 5;
                     adsource.AllowPaging = true;
                     adsource.CurrentPageIndex = pos;
-                    dataListFlats.DataSource = adsource ;
+                    dataListFlats.DataSource = adsource;
                     //dataListFlats.DataSource = ds;
                     btnprevious.Visible = !adsource.IsFirstPage;
                     btnnext.Visible = !adsource.IsLastPage;
@@ -107,7 +105,8 @@ public partial class Flats : System.Web.UI.Page
             {
                 lblFlatGridEmptyText.Text = "Unable to retrieve data.";
             }
-        else {
+        else
+        {
             lblFlatGridEmptyText.Text = "Unable to retrieve data.";
         }
         string TotalCountQuery = "select count(FlatNumber) from dbo.Flats";
@@ -121,7 +120,7 @@ public partial class Flats : System.Web.UI.Page
         FillFlatdata();
     }
 
-    
+
 
 
     protected void btnFlatnumbrSrch_Click(object sender, EventArgs e)
@@ -130,36 +129,36 @@ public partial class Flats : System.Web.UI.Page
         {
             FillFlatdata();
 
-/*
-            String FlatNumber = txtFltsFlatNmbr.Text;
-            String OwnerName = txtFlltsOwnernme.Text;
-            DataAccess dacess = new DataAccess();
+            /*
+                        String FlatNumber = txtFltsFlatNmbr.Text;
+                        String OwnerName = txtFlltsOwnernme.Text;
+                        DataAccess dacess = new DataAccess();
 
-            String FlatNumberQuery = "";
+                        String FlatNumberQuery = "";
 
-            if (OwnerName == "" & FlatNumber != "")
-            {
-                FlatNumberQuery = "Select * from dbo.Flats where FlatNumber like  '" + FlatNumber + "%'";
-            }
+                        if (OwnerName == "" & FlatNumber != "")
+                        {
+                            FlatNumberQuery = "Select * from dbo.Flats where FlatNumber like  '" + FlatNumber + "%'";
+                        }
 
-            if (OwnerName != "" & FlatNumber == "")
-            {
-                FlatNumberQuery = "Select * from dbo.Flats where OwnerName like  '%" + OwnerName + "%'";
-            }
+                        if (OwnerName != "" & FlatNumber == "")
+                        {
+                            FlatNumberQuery = "Select * from dbo.Flats where OwnerName like  '%" + OwnerName + "%'";
+                        }
 
-            if (OwnerName != "" & FlatNumber != "")
-            {
-                FlatNumberQuery = "Select * from dbo.Flats where FlatNumber like  '" + FlatNumber + "%'  and OwnerName like  '%" + OwnerName + "%'";
-            }
+                        if (OwnerName != "" & FlatNumber != "")
+                        {
+                            FlatNumberQuery = "Select * from dbo.Flats where FlatNumber like  '" + FlatNumber + "%'  and OwnerName like  '%" + OwnerName + "%'";
+                        }
 
-            DataSet ds = dacess.GetData(FlatNumberQuery);
+                        DataSet ds = dacess.GetData(FlatNumberQuery);
 
-            if (ds.Tables.Count > 0)
-            {
-                FlatGrid.DataSource = ds;
-                FlatGrid.DataBind();
-                btnFltsShwall.Visible = true;
-            }*/
+                        if (ds.Tables.Count > 0)
+                        {
+                            FlatGrid.DataSource = ds;
+                            FlatGrid.DataBind();
+                            btnFltsShwall.Visible = true;
+                        }*/
         }
 
 
@@ -516,7 +515,7 @@ public partial class Flats : System.Web.UI.Page
                 TempResData.WriteToServer(databulk);
             }
 
-            
+
             String TempDataViewQuery = "Select * from dbo.TempResidentView";
             DataSet tempData = dacess.ReadData(TempDataViewQuery);
             DataTable ResFlatData = tempData.Tables[0];
@@ -691,7 +690,7 @@ public partial class Flats : System.Web.UI.Page
                     for (int i = 0; i < dtDuplicate.Rows.Count; i++)
                     {
                         DataRow r = dtDuplicate.Rows[i];
-                          
+
                         String FlatNumber = r["FlatNumber"].ToString();
                         Double Floor = (Double)r["Floor"];
                         Double NewFloor = Math.Truncate(Floor);
@@ -782,16 +781,16 @@ public partial class Flats : System.Web.UI.Page
         try
         {
             int ID = 0;
-            String flat = txtFltAdd.Text;
+            String flat = txtAssignFlatNumber.Text;
             //String FlatCheckQuery = "select  * from Flats where FlatNumber = '" + txtFltAdd.Text + "'";
             DataAccess dacess = new DataAccess();
-    
+
             //int ID = dacess.GetSingleValue(FlatCheckQuery);
 
-            String query = "select  * from Flats where FlatNumber = '" + txtFltAdd.Text + "'";
+            String query = "select  * from Flats where FlatNumber = '" + txtAssignFlatNumber.Text + "'";
 
-            DataSet ds=dacess.ReadData(query);
-            if (ds!=null)
+            DataSet ds = dacess.ReadData(query);
+            if (ds != null)
             {
 
                 ID = (int)ds.Tables[0].Rows[0]["ID"];
@@ -800,25 +799,27 @@ public partial class Flats : System.Web.UI.Page
                 string block = ds.Tables[0].Rows[0]["Block"].ToString();
                 string FlatArea = ds.Tables[0].Rows[0]["FlatArea"].ToString();
                 string intercom = ds.Tables[0].Rows[0]["IntercomNumber"].ToString();
-                string bhk= ds.Tables[0].Rows[0]["BHK"].ToString();
+                string bhk = ds.Tables[0].Rows[0]["BHK"].ToString();
 
                 txtAddfltFlr.Text = floor;
                 txtAddBlock.Text = block;
                 txtFlatArea.Text = FlatArea;
                 txtAddflatIntrc.Text = intercom;
                 drpAddflatBHK.SelectedItem.Text = bhk;
+                flatMsg.ImageUrl = "~/Images/Icon/Cancelled.png";
+                //txtAssignFlatMobile.Focus();
 
             }
             if (flat.IndexOf(' ') > 0)
             {
-              
+
                 flatMsg.ImageUrl = "~/Images/Icon/Cancelled.png";
                 msg.Text = "Space not allowed in Flat number.";
 
-            
-                 return;
-                    }
-        
+
+                return;
+            }
+
             if (ID == 0)
             {
                 flatMsg.ImageUrl = "~/Images/Icon/green-tick.jpg";
@@ -826,13 +827,13 @@ public partial class Flats : System.Web.UI.Page
             }
             else
             {
-               
+
                 flatMsg.ImageUrl = "~/Images/Icon/Cancelled.png";
             }
         }
         catch (Exception ex)
         {
-            
+
             lblAddfltAvailble.Text = ex.Message;
         }
     }
@@ -841,7 +842,7 @@ public partial class Flats : System.Web.UI.Page
     {
         try
         {
-            String FlatCheckQuery = "select  ID from Flats where FlatNumber = '" + txtFltAdd.Text + "'";
+            String FlatCheckQuery = "select  ID from Flats where FlatNumber = '" + txtAssignFlatNumber.Text + "'";
             DataAccess dacess = new DataAccess();
             int ID = dacess.GetSingleValue(FlatCheckQuery);
 
@@ -871,8 +872,8 @@ public partial class Flats : System.Web.UI.Page
         newUser.FirstName = txtAddflatFirstname.Text;
         newUser.LastName = txtAddflatLastName.Text;
         newUser.Address = txtAddfltAddrs.Text;
-        newUser.MobileNumber = txtAddfltMobile.Text;
-        newUser.EmailID = txtAddfltEmail.Text;
+        newUser.MobileNumber = txtAssignFlatMobile.Text;
+        newUser.EmailID = txtAssignFlatEmail.Text;
         newUser.Gender = drpFlatGender.SelectedItem.Text;
         newUser.ParentName = txtAddfltParentName.Text;
         newUser.UserLogin = txtAddflatUserLogin.Text.ToLower();
@@ -882,13 +883,13 @@ public partial class Flats : System.Web.UI.Page
         newFlat.Block = txtAddBlock.Text;
         newFlat.Floor = txtAddfltFlr.Text;
         newFlat.Intercom = Convert.ToInt32(txtAddflatIntrc.Text);
-        newFlat.FlatNumber = txtFltAdd.Text;
-       newFlat.FlatArea = txtFlatArea.Text;
+        newFlat.FlatNumber = txtAssignFlatNumber.Text;
+        newFlat.FlatArea = txtFlatArea.Text;
         newFlat.BHK = Convert.ToInt32(drpAddflatBHK.SelectedItem.Text);
 
         newUser.Password = "Password@123";
-     
-       
+
+
         DateTime ActiveDate = Utility.GetCurrentDateTimeinUTC();
         try
         {
@@ -1092,7 +1093,7 @@ public partial class Flats : System.Web.UI.Page
         DataAccess dacess = new DataAccess();
         try
         {
-            String MobileNoCheckQuery = "select *  from dbo.TotalUsers where MobileNo= '" + txtAddfltMobile.Text + "'";
+            String MobileNoCheckQuery = "select *  from dbo.TotalUsers where MobileNo= '" + txtAssignFlatMobile.Text + "'";
             DataSet dUser = dacess.GetUserData(MobileNoCheckQuery);
 
             if (dUser == null || dUser.Tables[0].Rows.Count == 0)
@@ -1101,13 +1102,13 @@ public partial class Flats : System.Web.UI.Page
                 ExistingUser = false;
                 //RegularExpressionValidator13.ForeColor = System.Drawing.Color.AliceBlue;
                 //RegularExpressionValidator13.ErrorMessage = "√";
-               // mobInvalid.ForeColor = System.Drawing.Color.AliceBlue;
-                
-               
-                
+                // mobInvalid.ForeColor = System.Drawing.Color.AliceBlue;
 
-              
-                
+
+
+
+
+
                 //ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "MobileExit(true)", true);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:MobileExist(true)", true);
             }
@@ -1125,9 +1126,10 @@ public partial class Flats : System.Web.UI.Page
 
                 mobileMsg.ForeColor = System.Drawing.Color.Red;
                 mobileMsg.ImageUrl = "~/Images/Icon/Cancelled.png";
-                lblUserExist.Text = "Enter Your flat Dteails";
+                lblUserExist.Text = "Enter Your flat Details";
                 ExistingUser = true;
-               // ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "MobileExit(false)", true);
+                //txtAssignFlatNumber.Focus();
+                // ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "MobileExit(false)", true);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:MobileExit(false)", true);
             }
         }
@@ -1162,7 +1164,7 @@ public partial class Flats : System.Web.UI.Page
         }
 
     }
-  
+
 
 
     protected void txtAddfltEmail_TextChanged(object sender, EventArgs e)
@@ -1172,7 +1174,7 @@ public partial class Flats : System.Web.UI.Page
         {
             if (ExistingUser == false)
             {
-                String EmailIDCheckQuery = "  select UserID  from dbo.TotalUsers where EmailId = '" + txtAddfltEmail.Text + "'";
+                String EmailIDCheckQuery = "  select UserID  from dbo.TotalUsers where EmailId = '" + txtAssignFlatEmail.Text + "'";
                 int UserId = dacess.GetSingleUserValue(EmailIDCheckQuery);
 
                 if (UserId == 0)
@@ -1190,7 +1192,7 @@ public partial class Flats : System.Web.UI.Page
 
             else if (ExistingUser == true)
             {
-                if (txtAddfltEmail.Text.ToLower() == newUser.EmailID.ToLower())
+                if (txtAssignFlatEmail.Text.ToLower() == newUser.EmailID.ToLower())
                 {
                     ExistingUserID = newUser.ID;
                     txtAddflatFirstname.Text = newUser.FirstName;
@@ -1201,18 +1203,18 @@ public partial class Flats : System.Web.UI.Page
                     drpFlatGender.Items.Insert(1, new ListItem(newUser.Gender));
                     checkFlatsOnly.Visible = true;
                     //Added by Aarshi on 21-July-2017
-                  /*  String ViewFlat = "select * from dbo.ViewFlats where Ownermobile = '" + txtAddfltMobile.Text + "' and OwnerEmail = '" + txtAddfltEmail.Text + "'";
-                    DataSet dsFlatsView = dacess.GetData(ViewFlat);
-                    if (dsFlatsView != null && dsFlatsView.Tables[0].Rows.Count > 0)
-                    {
-                        DataTable dtFlatsView = dsFlatsView.Tables[0];
-                        txtFltAdd.Text = dtFlatsView.Rows[0]["FlatNumber"].ToString();
-                        //txtFlatArea.Text = dtFlatsView.Rows[0]["FlatNumber"].ToString();
-                        txtAddBlock.Text = dtFlatsView.Rows[0]["Block"].ToString();
-                        txtAddfltFlr.Text = dtFlatsView.Rows[0]["Floor"].ToString();
-                        drpAddflatBHK.SelectedItem.Text = dtFlatsView.Rows[0]["BHK"].ToString();
-                        txtAddflatIntrc.Text = dtFlatsView.Rows[0]["IntercomNumber"].ToString();
-                    }*/
+                    /*  String ViewFlat = "select * from dbo.ViewFlats where Ownermobile = '" + txtAddfltMobile.Text + "' and OwnerEmail = '" + txtAddfltEmail.Text + "'";
+                      DataSet dsFlatsView = dacess.GetData(ViewFlat);
+                      if (dsFlatsView != null && dsFlatsView.Tables[0].Rows.Count > 0)
+                      {
+                          DataTable dtFlatsView = dsFlatsView.Tables[0];
+                          txtFltAdd.Text = dtFlatsView.Rows[0]["FlatNumber"].ToString();
+                          //txtFlatArea.Text = dtFlatsView.Rows[0]["FlatNumber"].ToString();
+                          txtAddBlock.Text = dtFlatsView.Rows[0]["Block"].ToString();
+                          txtAddfltFlr.Text = dtFlatsView.Rows[0]["Floor"].ToString();
+                          drpAddflatBHK.SelectedItem.Text = dtFlatsView.Rows[0]["BHK"].ToString();
+                          txtAddflatIntrc.Text = dtFlatsView.Rows[0]["IntercomNumber"].ToString();
+                      }*/
 
                     mobileMsg.ImageUrl = "~/Images/Icon/check-mark.png";
                     emailMsg.ImageUrl = "~/Images/Icon/check-mark.png";
@@ -1221,7 +1223,7 @@ public partial class Flats : System.Web.UI.Page
                 else
                 {
                     //lblEmailCheck.Text = "Wrong Email ID";
-                    txtAddfltEmail.Text = "";
+                    txtAssignFlatEmail.Text = "";
                     emailMsg.ImageUrl = "~/Images/Icon/Cancelled.png";
                 }
             }
@@ -1417,14 +1419,14 @@ public partial class Flats : System.Web.UI.Page
                 txtAddTDeactiveDate.Text = Deactive.ToString("dd/MM/yyyy");
                 btnDeactivate.Visible = true;
                 lblHeadText.Visible = true;
-               // HideTenantFields();
+                // HideTenantFields();
             }
         }
 
         else
         {
             lblHeadText.Visible = false;
-           // ShowTenantFields();
+            // ShowTenantFields();
             btnDeactivate.Visible = false;
         }
     }
@@ -1509,7 +1511,7 @@ public partial class Flats : System.Web.UI.Page
             String Address = txtAddTAddress.Text;
 
             String AddTenantUserQuery = "Insert Into dbo.TotalUsers  (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin,Address,UserType,SocietyID) Values('"
-                   + Firstname + "','','" + Lastname + "','" + txtAddTMobile.Text + "','" + txtAddTEmailID.Text + "','" + drpAddTGender.SelectedItem.Text 
+                   + Firstname + "','','" + Lastname + "','" + txtAddTMobile.Text + "','" + txtAddTEmailID.Text + "','" + drpAddTGender.SelectedItem.Text
                    + "','" + txtAddTParentName.Text + "','" + UserLogin + "','" + Address + "','" + UserType + "','" + muser.currentResident.SocietyID + "')";
             bool Userresult = dacess.UpdateUser(AddTenantUserQuery);
 
@@ -1517,22 +1519,22 @@ public partial class Flats : System.Web.UI.Page
 
             if (Userresult == true)
             {
-               
+
                 //Added by Aarshi on 14 - Sept - 2017 for bug fix
                 //muser.SendMailToUsers(UserLogin, Password, EmailId, FirstName);
-                SendMail(UserLogin, Password, Email, Firstname); 
+                SendMail(UserLogin, Password, Email, Firstname);
                 bool EncryptPass = muser.UpdatePassword(UserLogin, Password);
 
                 if (EncryptPass == true)
                 {
-                    String UserIDQuery = "select max(UserID) as UserID from dbo.TotalUsers  where UserLogin = '" 
+                    String UserIDQuery = "select max(UserID) as UserID from dbo.TotalUsers  where UserLogin = '"
                         + txtAddTUserLogin.Text + "' and SocietyID = '" + muser.currentResident.SocietyID + "'";
 
                     DataSet ds = dacess.ReadUserData(UserIDQuery);
                     DataTable dt = ds.Tables[0];
                     UserID = dt.Rows[0][0].ToString();
 
-        
+
                     String AddTenantQuery = "Insert Into dbo.SocietyUser  (UserID,FlatID,Type,ServiceType,CompanyName,ActiveDate,DeactiveDate, SocietyID) Values('" + UserID + "','" + txtAddTFlatNo.Text + "','" + Tenant + "','0','NA','" + Date + "','" + Deactivedate + "','" + SessionVariables.SocietyID + "')";
 
                     //String AddTenantQuery = "Insert into dbo.Resident(UserID,FlatID,Type,FirstName,LastName,MobileNo,EmailId,Addres,ActiveDate,DeactiveDate) values('" +
@@ -1685,7 +1687,7 @@ public partial class Flats : System.Web.UI.Page
         {
             con.Open();
             string query = string.Format("Select FlatNumber from dbo.Flats where FlatNumber = '" + Flatno);
-            SqlCommand cmd = new SqlCommand(query,con);
+            SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
@@ -1762,7 +1764,7 @@ public partial class Flats : System.Web.UI.Page
         pos = (int)this.ViewState["vs"];
         pos -= 1;
         this.ViewState["vs"] = pos;
-       FillFlatdata();
+        FillFlatdata();
     }
 
     protected void btnnext_Click(object sender, EventArgs e)
@@ -1773,7 +1775,7 @@ public partial class Flats : System.Web.UI.Page
         FillFlatdata();
     }
 
-  
+
 
     protected void btnCreateNewFlat_Click(object sender, EventArgs e)
     {
@@ -1800,7 +1802,7 @@ public partial class Flats : System.Web.UI.Page
         newFlat.FlatArea = txtfltarea.Text;
         newFlat.BHK = Convert.ToInt32(drpbhk.SelectedItem.Value);
 
-      //  newUser.Password = "Password@123";
+        //  newUser.Password = "Password@123";
 
 
         DateTime ActiveDate = Utility.GetCurrentDateTimeinUTC();
@@ -1808,7 +1810,7 @@ public partial class Flats : System.Web.UI.Page
         {
             if (ExistingUser == false)
             {
-              int res =newFlat.AddFlat(newFlat);
+                int res = newFlat.AddFlat(newFlat);
                 // SendMail(newUser.EmailID, newUser.Password, newUser.EmailID, newUser.FirstName);
                 if (res > 0)
                     lblassignHeading.Text = "success";
