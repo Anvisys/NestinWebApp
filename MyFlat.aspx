@@ -45,7 +45,9 @@
             // alert("45 ==>> "+api_url);
             _ResID = <%=ResID%>;
             GetData();
-            filladmindata();
+            //filladmindata();
+
+
             var x = document.getElementById("inAddTMobile");
             // x.addEventListener("focusin", myFocusFunction);
             // x.addEventListener("focusout", ValidateMobile);

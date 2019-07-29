@@ -54,23 +54,23 @@ public partial class Flats : System.Web.UI.Page
 
         if (OwnerName == "" & FlatNumber != "")
         {
-            querystring = "Select * from dbo.ViewFlatsUser where FlatNumber like  '" + FlatNumber + "%' and  SocietyId = " + muser.currentResident.SocietyID;
+            querystring = "Select * from dbo.oldViewFlatsUser where FlatNumber like  '" + FlatNumber + "%' and  SocietyId = " + muser.currentResident.SocietyID;
         }
 
         else if (OwnerName != "" & FlatNumber == "")
         {
-            querystring = "Select * from dbo.ViewFlatsUser where OwnerFirstName like  '%" + OwnerName + "' or OwnerLastName like  '%" + OwnerName + 
+            querystring = "Select * from dbo.oldViewFlatsUser where OwnerFirstName like  '%" + OwnerName + "' or OwnerLastName like  '%" + OwnerName + 
                 "%' and SocietyId = " + muser.currentResident.SocietyID;
         }
 
         else if (OwnerName != "" & FlatNumber != "")
         {
-            querystring = "Select * from dbo.ViewFlatsUser where FlatNumber like  '" + FlatNumber + "%'  and OwnerFirstName like  '%" + OwnerName + "' or OwnerLastName like  '%" + OwnerName + 
+            querystring = "Select * from dbo.oldViewFlatsUser where FlatNumber like  '" + FlatNumber + "%'  and OwnerFirstName like  '%" + OwnerName + "' or OwnerLastName like  '%" + OwnerName + 
                 "%'  and  SocietyId = " + muser.currentResident.SocietyID;
         }
         else
         {
-            querystring = "Select * from dbo.ViewFlatsUser where SocietyId = " + muser.currentResident.SocietyID+ "order by ID Desc ";
+            querystring = "Select * from dbo.oldViewFlatsUser where SocietyId = " + muser.currentResident.SocietyID+ "order by ID Desc ";
         }
 
         DataSet ds = dacess.GetData(querystring);
@@ -980,6 +980,16 @@ public partial class Flats : System.Web.UI.Page
             lblDefalutBillText.Text = ex.Message;
         }
 
+    }
+
+
+    public string DateString(DateTime dateTime, bool cond)
+    {
+        string date;
+
+        date = dateTime.ToString("yyyy-MM-dd");
+
+        return (date);
     }
 
     public void AddBillToFlat(String FlatNumber, String FlatArea)
