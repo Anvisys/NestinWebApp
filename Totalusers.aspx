@@ -31,12 +31,53 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
 
     <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
-    <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+   
+     
+         <script type="text/javascript" src="Scripts/datetime.js"></script>
+   
+    <script type="text/javascript" src="https://momentjs.com/downloads/moment.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css"/>
+ 
+    
 
     <script type="text/javascript">
 
         var CurrentUserType;
+        // Sagar 
+        $(document).ready(function () {
+
+            $("#txtdeact").datetimepicker({
+                //  format: 'YYYY-MM-DD'
+                format: 'DD-MM-YYYY'
+            });
+
+            $("#txtact").datetimepicker({
+
+                format:'DD-MM-YYYY'
+            });
+        });
+
+
+        $(document).ready(function () {
+            //Binding Code
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+            function EndRequestHandler(sender, args) {
+                //Binding Code Again
+                $("#txtdeact").datetimepicker({
+                    //  format: 'YYYY-MM-DD'
+                    format: 'DD-MM-YYYY'
+                });
+
+                $("#txtact").datetimepicker({
+
+                    format: 'DD-MM-YYYY'
+                });
+            }
+        });
+
+        //Sagar end
 
         function myFunction() {
 
@@ -46,13 +87,13 @@
                 hideColumn();
             }
             else {
-                showColumn();
+              //  showColumn();
             }
 
         }
 
-
-
+        function ShowUserPopup() {}
+    
         $(function () {
             $("#txtUserSrch,#txtFlatNoFilter").autocomplete({
                 source: function (request, response) {
@@ -425,7 +466,7 @@
             var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
             if (reg.test(emailField.value) == false) {
-                alert('Invalid Email Address');
+               // alert('Invalid Email Address');
                 return false;
             }
 
@@ -719,7 +760,7 @@
                                                             Action <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu">
-                                                            <li><a href="#" onclick="ShowEditForm('<%# Eval("UserID") %>' ,'<%# Eval("FirstName") %>' ,'<%# Eval("LastName") %>','<%# Eval("MobileNo") %>','<%# Eval("ParentName") %>','<%# Eval("EmailId") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Edit</a></li>
+                                                            
                                                             <li><a href="#" onclick="ShowAddTenant()">Tenant</a></li>
                                                             <li><a href="#" onclick="ShowDeactivateForm('<%# Eval("UserID") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Deactivate</a></li>
                                                             <li></li>
@@ -857,6 +898,7 @@
                             <ContentTemplate>
                                 <div class="container-fluid">
                                     <div class="panel panel-primary popup_box_size" style="width: 630px; position: relative;">
+
                                         <div class="panel-heading">
                                             Add User :
                                                 <a onclick="CloseAddResident()" style="cursor: pointer;"><span class="fa fa-close" style="color: white; float: right"></span></a>
@@ -957,7 +999,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row">
+                                                <div class="row" style="margin-bottom:15px;">
 
                                                     <div class="col-xs-12 col-sm-6">
 
@@ -994,9 +1036,37 @@
                                                         </div>
 
                                                     </div>
+                                                </div>
+                                                <div class="row">
+                                                      <div class="col-xs-12 col-sm-6">
+                                                        <label class="col-xs-5">Activate Date :</label>
+                                                        <div class="col-xs-7">
+                                                            <asp:TextBox ID="txtact" runat="server" CssClass="form-control col-xs-8" ViewStateMode="Enabled" ></asp:TextBox>
+                                                    
+                                                        </div>
+                                                    </div>
 
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <label class="col-xs-5">Deactivate Datae :</label>
+                                                        <div class="col-xs-7">
+                                                            <asp:TextBox ID="txtdeact" runat="server" CssClass="form-control col-xs-8" ViewStateMode="Enabled"></asp:TextBox>
+                                                          
+                                                        </div>
+                                                    </div>
+                                                    <asp:HiddenField ID="hiddenflatid" runat="server" Value="0" />
+                                                    <asp:HiddenField ID="hiddenhouseid" runat="server" Value="0" />
+                                                    <asp:HiddenField ID="hiddenUserid" runat="server" Value="0" />
                                                 </div>
 
+                                                 <div class="row">
+                                                      <div class="col-xs-12 col-sm-6">
+                                                        <label class="col-xs-5">Flat :</label>
+                                                        <div class="col-xs-7">
+                                                            <asp:TextBox ID="txtflatid" runat="server" CssClass="form-control col-xs-8" ViewStateMode="Enabled" ></asp:TextBox>
+                                                    
+                                                        </div>
+                                                    </div>
+                                                     </div>
                                             </form>
                                         </div>
 
