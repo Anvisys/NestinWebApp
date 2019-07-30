@@ -304,7 +304,7 @@ public class DataAccess
             return true;
 
         }
-        catch
+        catch ( Exception ex)
         {
             return false;
         }

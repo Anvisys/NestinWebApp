@@ -132,7 +132,7 @@ public class Resident
 
 
             String societyUserQuery = "Insert Into dbo.SocietyUser (UserID,FlatID,Type,ServiceType,CompanyName,ActiveDate,DeActiveDate,ModifiedDate, SocietyID,Status, HouseID) output INSERTED.ResID Values('" +
-                                      UserID + "','" + FlatID + "','"+UserType+"','" + ServiceType + "','" + CompanyName+"','"+ActiveDate+"','" + DeActiveDate + "','" + ModifiedDate + "','" + SocietyID + "','" + Status + "','" + HouseID+")";
+                                      UserID + "','" + FlatID + "','"+UserType+"','" + ServiceType + "','" + CompanyName+"','"+ActiveDate+"','" + DeActiveDate + "','" + ModifiedDate + "','" + SocietyID + "','" + Status + "','" + HouseID+"')";
 
             DataAccess da = new DataAccess();
             bool result = da.UpdateQuery(societyUserQuery);
@@ -290,7 +290,8 @@ public class Resident
     public bool ApproveResident(DateTime _Date, int _ResID)
     {
         DataAccess dacess = new DataAccess();
-        String DeactiveUserQuery = "Update " + CONSTANTS.Table_SocietyUser + "  set Status = 2 , DeActiveDate = '" + _Date.ToString("MM-dd-yyyy HH:MM:ss") + "'  where ResID = " + _ResID;
+        String DeactiveUserQuery = "Update " + CONSTANTS.Table_SocietyUser + "  set Status = 2 , ActiveDate = '" + _Date.ToString("MM-dd-yyyy HH:MM:ss")
+                                   +"', DeActiveDate = '" + _Date.AddYears(5).ToString("MM-dd-yyyy HH:MM:ss") + "'  where ResID = " + _ResID;
         bool result = dacess.Update(DeactiveUserQuery);
         return result;
     }

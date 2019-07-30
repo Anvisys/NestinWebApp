@@ -39,7 +39,7 @@ public partial class NewFlats : System.Web.UI.Page
 
     public void FillFlatdata()
     {
-        String FlatNumber = txtFltsFlatNmbr.Text;
+        String FlatNumber = txtFlatNumberSearch.Text;
         String OwnerName = txtFlltsOwnernme.Text;
         DataAccess dacess = new DataAccess();
 
@@ -47,23 +47,23 @@ public partial class NewFlats : System.Web.UI.Page
 
         if (OwnerName == "" & FlatNumber != "")
         {
-            querystring = "Select * from dbo.ViewFlats where FlatNumber like  '" + FlatNumber + "%' and  SocietyId = " + muser.currentResident.SocietyID;
+            querystring = "Select * from dbo.ViewNewFlats where FlatNumber like  '" + FlatNumber + "%' and  SocietyId = " + muser.currentResident.SocietyID;
         }
 
         else if (OwnerName != "" & FlatNumber == "")
         {
-            querystring = "Select * from dbo.ViewFlats where OwnerFirstName like  '%" + OwnerName + "' or OwnerLastName like  '%" + OwnerName +
+            querystring = "Select * from dbo.ViewNewFlats where OwnerFirstName like  '%" + OwnerName + "' or OwnerLastName like  '%" + OwnerName +
                 "%' and SocietyId = " + muser.currentResident.SocietyID;
         }
 
         else if (OwnerName != "" & FlatNumber != "")
         {
-            querystring = "Select * from dbo.ViewFlats where FlatNumber like  '" + FlatNumber + "%'  and OwnerFirstName like  '%" + OwnerName + "' or OwnerLastName like  '%" + OwnerName +
+            querystring = "Select * from dbo.ViewNewFlats where FlatNumber like  '" + FlatNumber + "%'  and OwnerFirstName like  '%" + OwnerName + "' or OwnerLastName like  '%" + OwnerName +
                 "%'  and  SocietyId = " + muser.currentResident.SocietyID;
         }
         else
         {
-            querystring = "Select * from dbo.ViewFlats where SocietyId = " + muser.currentResident.SocietyID + "order by ID Desc ";
+            querystring = "Select * from dbo.ViewNewFlats where SocietyId = " + muser.currentResident.SocietyID + "order by ID Desc ";
         }
 
         DataSet ds = dacess.GetData(querystring);
@@ -249,6 +249,37 @@ public partial class NewFlats : System.Web.UI.Page
 
 
 
+                HtmlButton btnAssignTenant = (HtmlButton)e.Item.FindControl("btnAssignTenant");
+                HtmlButton btnRemoveTenant = (HtmlButton)e.Item.FindControl("btnRemoveTenant");
+                HtmlButton btnApproveTenant = (HtmlButton)e.Item.FindControl("btnApproveTenant");
+
+              
+                int TenantUserID = Convert.ToInt32(drv["TenantUserID"].ToString());
+
+                int TenantStatusID = Convert.ToInt32(drv["TenantStatusID"].ToString());
+
+                if (TenantUserID == 0 || (TenantStatusID != 2 && TenantStatusID != 1))
+                {
+                    btnAssignTenant.Visible = true;
+                    btnRemoveTenant.Visible = false;
+                    btnApproveTenant.Visible = false;
+                }
+                else if (TenantUserID != 0 && TenantStatusID == 1)
+                {
+
+                    btnAssignTenant.Visible = false;
+                    btnRemoveTenant.Visible = false;
+                    btnApproveTenant.Visible = true;
+                }
+                else
+                {
+                    btnAssignTenant.Visible = false;
+                    btnRemoveTenant.Visible = true;
+                    btnApproveTenant.Visible = false;
+                }
+
+
+
             }
 
         }
@@ -263,6 +294,8 @@ public partial class NewFlats : System.Web.UI.Page
     {
         int FlatID = Convert.ToInt32(HiddenField1.Value.ToString());
         int UserID = ExistingUserID;
+
+        String ResidentType = HiddenField3.Value.ToString();
 
         Resident res = new Resident();
 
@@ -282,7 +315,7 @@ public partial class NewFlats : System.Web.UI.Page
                 res.FlatID = FlatID;
                 res.SocietyID = muser.currentResident.SocietyID;
                 res.Status = 2;
-                res.UserType = "Owner";
+                res.UserType = ResidentType;
 
                 bool result = res.AddSocietyUser();
 
@@ -406,4 +439,31 @@ public partial class NewFlats : System.Web.UI.Page
 
         }
     }
+
+
+
+
+    [System.Web.Services.WebMethod]
+    public static List<string> GetFlatNumber(string FlatNumber)
+    {
+        List<string> Emp = new List<string>();
+        string query = string.Format("Select FlatNumber from dbo.Flats where FlatNumber like '" + FlatNumber + "%'");
+        using (SqlConnection con = new SqlConnection(Utility.SocietyConnectionString))
+        {
+            con.Open();
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Emp.Add(reader.GetString(0));
+
+                }
+            }
+        }
+        return Emp;
+    }
+
+
+
 }

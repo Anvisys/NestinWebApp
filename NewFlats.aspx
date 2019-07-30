@@ -59,10 +59,10 @@
         }
 
 
-       function RemoveOwner(ID,FlatNumber,Block,OwnerUserID,FirstName,LastName)
+       function RemoveOwner(FlatID,FlatNumber,Block,OwnerUserID,FirstName,LastName)
        {
 
-           $("[id*=HiddenField1]").val(ID);
+           $("[id*=HiddenField1]").val(FlatID);
            $("[id*=HiddenField2]").val(OwnerUserID);
 
            $("#removeFlatNumber").text(FlatNumber); 
@@ -98,9 +98,24 @@
             $("#approveFlatOwnerModal").hide();
         }
 
+        HiddenField3
+
+        function AssignTenant(ID, FlatNumber,BHK,FlatArea,Floor,Block)
+        {
+            $("[id*=HiddenField3]").val("Tenant"); 
+            $("[id*=HiddenField1]").val(ID); 
+             $("[id*=HiddenField1]").val(ID); 
+             $("[id*=assignFlatNumber]").val(FlatNumber); 
+             $("[id*=assignFlatArea]").val(FlatArea); 
+             $("[id*=assignFlatBHK]").val(BHK);
+             $("[id*=assignFlatBlock]").val(Block); 
+             $("[id*=assignFlatFloor]").val(Floor);
+            $("#newAssignFlatModal").show();
+        }
 
         function AssignOwner(ID, FlatNumber,BHK,FlatArea,Floor,Block)
         {
+            $("[id*=HiddenField3]").val("Owner"); 
             
              $("[id*=HiddenField1]").val(ID); 
              $("[id*=assignFlatNumber]").val(FlatNumber); 
@@ -126,6 +141,47 @@
             $("#newAssignFlatModal").hide();
         }
 
+
+
+
+
+        //*****   JQuery Functions
+
+         $(function () {
+            $("#txtFlatNumberSearch").autocomplete({
+                source: function (request, response) {
+                    var param = {
+                        FlatNumber: $('#txtFlatNumberSearch').val()
+                    };
+
+                    $.ajax({
+                        url: "Flats.aspx/GetFlatNumber",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function (data) { return data; },
+                        success: function (data) {
+
+                            response($.map(data.d, function (item) {
+                                return {
+                                    value: item
+                                }
+                            }))
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                            console.log("Ajax Error!");
+                        }
+                    });
+                },
+                minLength: 2 //This is the Char length of inputTextBox  
+            });
+
+
+        });
+
     </script>
 
 
@@ -143,7 +199,7 @@
                  </div>
                 <div class="col-sm-5 col-xs-12">
                                           <div class="form-group" >
-                                            <asp:TextBox ID="txtFltsFlatNmbr" placeholder="Flat" runat="server"  CssClass="form-control"></asp:TextBox>
+                                            <asp:TextBox ID="txtFlatNumberSearch" placeholder="Flat" runat="server"  CssClass="form-control"></asp:TextBox>
                                             <asp:TextBox ID="txtFlltsOwnernme" placeholder="First Name" runat="server" CssClass="form-control" ></asp:TextBox>
                                           <asp:LinkButton runat="server" BackColor="Transparent" CausesValidation="false" ForeColor="Black" OnClick="btnFlatnumbrSrch_Click"> <span class="glyphicon glyphicon-search" style="background-color:chocolate;"></span></asp:LinkButton>
                                               
@@ -183,7 +239,7 @@
                                                 <div class="row layout_shadow_table ">
                                                
                                                  
-                                                        <div class="col-sm-4 col-xs-12" style="text-align:center;">
+                                                        <div class="col-sm-2 col-xs-6" style="text-align:center;">
                                                             
                                                             <%-- <asp:Image CssClass="UserImage" ID="user_image" runat="server" style="border-radius:50%;border:2px solid #dcdbdb;width:40px;height:40px;" ImageUrl='<%# "GetImages.ashx?ResID="+ Eval("ResidentID") %>' /><br />--%>
                                                                <img src='<%# "GetImages.ashx?UserID="+ Eval("OwnerUserID")+"&Name="+Eval("OwnerFirstName") +"&UserType=Owner" %>' class="profile-image" /> <br /> 
@@ -194,7 +250,7 @@
                                                       
                                                                 
                                                          </div>
-                                                        <div class="col-sm-4 col-xs-6">
+                                                        <div class="col-sm-3 col-xs-6">
                                                         
                                                             
                                                                 Floor: <asp:Label ID="lblFloor" runat="server" Text='<%# Eval("Floor") %>'></asp:Label><br />
@@ -214,7 +270,7 @@
               
                                                         </div>
 
-                                                        <div class="col-sm-4 col-xs-6" style="border-left:solid 2px black;">
+                                                        <div class="col-sm-3 col-xs-6" style="border-left:solid 2px black;">
                                                            
                                                                  Owner Name: <asp:Label ID="Label1" runat="server" Text='<%# Eval("OwnerFirstName") + " "+ Eval("OwnerLastName") %>'></asp:Label><br />
                                                                           Status: <asp:Label ID="Label5" runat="server" Text='<%# Eval("OwnerStatus") %>'></asp:Label>                                              
@@ -227,6 +283,21 @@
                                                    
                                                             <button id="btnApprove" class="btn-sm btn btn-primary" 
                                                             onclick='<%#"ApproveOwner(" + Eval("OwnerResID") +",\""+ Eval("FlatNumber")+"\",\""+ Eval("Block")+"\",\""+ Eval("OwnerUserID")+"\",\""+ Eval("OwnerFirstName")+"\",\""+ Eval("OwnerLastName")+ "\")"%>' runat="server" type="button">Approve Owner</button>
+                                                   
+                                                       </div>
+                                                     <div class="col-sm-3 col-xs-6" style="border-left:solid 2px black;">
+                                                           
+                                                                 Tenant Name: <asp:Label ID="Label9" runat="server" Text='<%# Eval("TenantFirstName") + " "+ Eval("TenantLastName") %>'></asp:Label><br />
+                                                                          Status: <asp:Label ID="Label11" runat="server" Text='<%# Eval("TenantStatus") %>'></asp:Label>                                              
+                                                                  Address: <asp:Label ID="Label12" runat="server" Text='<%# Eval("TenantAddress") %>'></asp:Label>
+
+                                                            <button id="btnRemoveTenant" class="btn-sm btn btn-success" 
+                                                                onclick='<%#"RemoveTenant(" + Eval("TenantResID")+",\""+ Eval("FlatNumber")+"\",\""+ Eval("Block") +"\","+ Eval("TenantUserID")+",\""+ Eval("TenantFirstName")+"\",\""+ Eval("TenantLastName")+ "\")"%>' runat="server" type="button">Remove Tenant</button>
+                                                        <button id="btnAssignTenant" class="btn-sm btn btn-warning" 
+                                                            onclick='<%#"AssignTenant(" + Eval("ID") +",\""+ Eval("FlatNumber")+"\",\""+ Eval("BHK")+"\",\""+ Eval("FlatArea")+"\",\""+ Eval("Floor")+"\",\""+ Eval("Block")+ "\")"%>' runat="server" type="button">Assign Tenant</button>
+                                                   
+                                                            <button id="btnApproveTenant" class="btn-sm btn btn-primary" 
+                                                            onclick='<%#"ApproveTenant(" + Eval("TenantResID") +",\""+ Eval("FlatNumber")+"\",\""+ Eval("Block")+"\",\""+ Eval("TenantUserID")+"\",\""+ Eval("TenantFirstName")+"\",\""+ Eval("TenantLastName")+ "\")"%>' runat="server" type="button">Approve Tenant</button>
                                                    
                                                        </div>
  
@@ -524,6 +595,7 @@
             <div>
                 <asp:HiddenField runat="server" ID="HiddenField1" />
                 <asp:HiddenField runat="server" ID="HiddenField2" />
+                <asp:HiddenField runat="server" ID="HiddenField3" />
             </div>
 
         </div>
