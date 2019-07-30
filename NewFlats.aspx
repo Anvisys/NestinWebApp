@@ -218,8 +218,9 @@
                 </div>
             </div>
         </div>
-
-        <asp:Label ID="lblFlatGridEmptyText" runat="server" ForeColor="#42A0FF"></asp:Label><br />
+        <div class="col-sm-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red; text-align:center; margin-top: 20%;">
+           <asp:Label ID="lblFlatGridEmptyText" runat="server" ></asp:Label><br />
+        </div>
         <br />
         <asp:Label ID="totalFlats" runat="server" ForeColor="#007cf9" Text="Total Flats:"></asp:Label>
         <asp:Label ID="lblTotalFlats" runat="server" ForeColor="#4774d1" Text=""></asp:Label>
