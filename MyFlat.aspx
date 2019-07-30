@@ -77,20 +77,47 @@
             $("#pool_type").change(function () {
                var selectedOption = $(this).children("option:selected").val();
                 //alert("You have selected  - " + selectedOption);
+                 
                 if (selectedOption == "One Way") {
-                    $("#divreturn").css("display", 'none');
-                    $("#pool_cycle").prop('disabled', true);
+                    $(".divreturn").css("display", 'none');
+                    $("#pool_cycle").prop('disabled', true); 
                     $("#pool_cycle").val("One Time");
                 }
 
                 else {
-                    $("#divreturn").css("display", 'none');
+                    $(".divreturn").css("display", 'block');
                     $("#pool_cycle").prop("disabled", false);
-                    $("#pool_cycle").val("Select");
+                    $("#pool_cycle").val("Two Way");
+                    $("#pool_cycle").val("One Time");
+                     $(".divarrive").css("display", 'block');
                 }
                    
             });
 
+            $("#pool_cycle").change(function () {
+
+                var selectedType = $("#pool_type").children("option:selected").val();
+                var selectedOption = $(this).children("option:selected").val();
+
+                if (selectedOption == "Daily" && selectedType=='Two Way') {
+                    $(".divarrive").css("display", 'none');
+                    $(".divreturn").css("display", 'none');
+            //        $("#pool_cycle").prop('disabled', false); 
+            //        $("#pool_type").val("Two Way");
+            //        $("#pool_type").prop('disabled', true); 
+                }
+
+                else {
+                    $(".divreturn").css("display", 'block');
+                    $(".divarrive").css("display", 'block');
+                    $("#pool_cycle").prop("disabled", false);
+                    $("#pool_cycle").val("One Time");
+            //        $("#pool_cycle").prop("disabled", false);
+            //        $("#pool_cycle").val("Two Way");
+            //        $("#pool_cycle").val("One Time");
+                    
+                }
+            });
 
             $('#newDeactiveDate').datetimepicker({
                 //  format: 'YYYY-MM-DD'
@@ -1038,10 +1065,15 @@
             var date = $("#date_when").val();
             var time = $("#time_when").val();
             if (date == null || time == null) {
+                alert("ok");
                 var today = new Date();
-                 date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-                date = DisplayDateOnly(datenew);
-                time = DisplayDateTime(datenew);
+                date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                alert("in "+date);
+
+                if(today.getMinutes()<10)
+                    time = today.getHours() + ":" + "0" + today.getMinutes();
+                else
+                    time = today.getHours() + ":" + today.getMinutes();
             }
             var datetime = date + "T" + time + ":00";
             CarPool.JourneyDateTime = datetime;
@@ -1798,9 +1830,10 @@
                                 <label class="labelwidth col-sm-4 col-form-label">Type :</label>
                                 <div class="col-sm-8">
                                 <select id="pool_type" class="form-control form-control-sm" onblur="" tabindex="1" >
-                                    <option "1">Select</option>
+                                    
+                                    <option "1">Two Way</option>
                                     <option "2">One Way</option>
-                                    <option "3">Two Way</option>
+                                    
                                 </select>
                                 </div>
                             </div>
@@ -1816,7 +1849,7 @@
                         </div>
                         <div class="row"style="margin-top: 10px;" >
                             <div class="col-sm-6">
-                                <label class="labelwidth col-sm-4 col-form-label">Where: </label>
+                                <label class="labelwidth col-sm-4 col-form-label">Destination: </label>
                                 <div class="col-sm-8">
                                 <input type="text" id="destination" class="form-control form-control-sm" onblur="" tabindex="3" />
                                </div>
@@ -1828,32 +1861,45 @@
                             </div>
                           </div>
                         </div>
-                        <div class="row" style="margin-top: 0px;">
-                            <div class="col-sm-6">
-                                <label class="labelwidth col-sm-4 col-form-label">When: </label>
-                                <div class="col-sm-8">
-                                <%--<div class="form-group">
+                        <div class="row divarrive" style="margin-top: 0px; padding-left:15px;">
+                            
+                            <div class="col-sm-2" style="top:8px; padding-left:15px; width:auto;">When :</div>
+                            <div class="col-sm-4" ><hr /></div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row divarrive" style="margin-top: 0px;">
+                        
+                             <div class="col-sm-6">
+                                 <label class="labelwidth col-sm-4 col-form-label">Date: </label>
+                                 <div class="col-sm-8">
+                                     <%--<div class="form-group">
                                 <div class='input-group date'>--%>
-                                    <input type='text'  id='date_when' class="form-control" placeholder="DD/MM/YYYY" tabindex="5"  />
-                              <%--      <span class="input-group-addon">
+                                     <input type='text' id='date_when' class="form-control" placeholder="DD/MM/YYYY" tabindex="5" />
+                                     <%--      <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                              </div>--%>
-                                </div>
-                                </div>
-                            <div class="col-sm-6">
-                                <label class="labelwidth col-sm-4 col-form-label">Time:</label>
-                                <div class="col-sm-8">
-                                
-                                         <input type='text'  id='time_when' class="form-control" placeholder="00 : 00 AM" tabindex="6" />
-                                        
-                               </div>
-                            </div>
+                                 </div>
+                             </div>
+                             <div class="col-sm-6">
+                                 <label class="labelwidth col-sm-4 col-form-label">Time:</label>
+                                 <div class="col-sm-8">
+
+                                     <input type='text' id='time_when' class="form-control" placeholder="00 : 00 AM" tabindex="6" />
+
+                                 </div>
+                             </div>
                         </div>
-                         <div class="row" id="divreturn" style="margin-top: 10px;">
+                         <div class="row divreturn" style="margin-top: 0px; padding-left:15px;">
+                            
+                            <div class="col-sm-2" style="top:8px; padding-left:15px; width:auto;">Return :</div>
+                            <div class="col-sm-4" ><hr /></div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                         <div class="row divreturn" style="margin-top: 10px;">
                             <div class="col-sm-6">
-                                <label class="labelwidth col-sm-4 col-form-label">Return:</label>
+                                <label class="labelwidth col-sm-4 col-form-label">Date:</label>
                              <div class="col-sm-8">  
                                
                                     <%--<input type='date'  id='date_return' max='' min='10-09-2019' class="form-control"  tabindex="7" />--%>
