@@ -425,10 +425,9 @@
             $("#myModalEditPopup").show()
         }
 
-       
-        function ShowDeactivateForm(UserID, type, FlatNumber, DeactiveDate) {
+        function ShowDeactivateForm(ResID, type, FlatNumber, DeactiveDate) {
 
-            document.getElementById("HiddenField1").value = UserID;
+            document.getElementById("HiddenField1").value = ResID;
             document.getElementById("HiddenField2").value = FlatNumber;
             document.getElementById("HiddenDeactivedate").value = DeactiveDate;
             $("#confirmDeactivatBox").show();
@@ -758,8 +757,7 @@
                                                             <button type="button"  class="btn btn-primary" 
                                                                onclick="ShowAddTenant();" <%--onclick="ShowEditForm('<%# Eval("UserID") %>' ,'<%# Eval("FirstName") %>' ,'<%# Eval("LastName") %>','<%# Eval("MobileNo") %>','<%# Eval("ParentName") %>','<%# Eval("EmailId") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')"--%> >Tenant</button>
                                                              
-                                                            <button type="button"  class="btn btn-success" 
-                                                                onclick="ShowDeactivateForm('<%# Eval("UserID") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Deactivate</button>
+                                                            <button class="btn btn-success" onclick="ShowDeactivateForm('<%# Eval("ResID") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Deactivate</button>
                                                     <%--</div>--%>
 
                                                     <asp:HiddenField ID="hiddenflatid" runat="server" Value='<%# Eval("FlatID") %>' />

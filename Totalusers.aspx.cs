@@ -207,13 +207,13 @@ public partial class Totalusers : System.Web.UI.Page
     {
         DataAccess Dacess = new DataAccess();
 
-        String UserID = HiddenField1.Value;
+        int ResID = Convert.ToInt32(HiddenField1.Value);
         String FlatNumber = HiddenField2.Value;
         DateTime Date = System.DateTime.Now;
        
 
         Resident res = new Resident();
-        res.UpdateResidentDeactive(Date, UserID);
+        res.DeactivateResident(Date, ResID);
         Response.Redirect("Totalusers.aspx");
     }
 

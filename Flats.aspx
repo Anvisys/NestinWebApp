@@ -100,7 +100,7 @@
     <script>
 
 
-        var societyid, societyname;
+        var societyid, societyname,FlatNumber;
         $(function () {
             $("#txtFlltsOwnernme").autocomplete({
                 source: function (request, response) {
@@ -266,9 +266,9 @@
 
         function HideAddFlatModal()
         {
-            $("#modalAssignFlat").hide();
+           
           
-            document.getElementById("txtAddfltMobile").value = "";
+            //document.getElementById("txtAddfltMobile").value = "";
             document.getElementById("txtAddflatFirstname").value = "";
             document.getElementById("drpFlatGender").value = "";
             document.getElementById("txtAddfltParentName").value = "";
@@ -276,12 +276,14 @@
             document.getElementById("txtAddflatLastName").value = "";
             document.getElementById("txtAddflatUserLogin").value = "";
             document.getElementById("txtAddfltAddrs").value = "";
-            document.getElementById("txtFltAdd").value = "";
+            document.getElementById("txtAssignFlatNumber").value = "";
             document.getElementById("txtAddBlock").value = "";
             document.getElementById("txtAddfltFlr").value = "";
             document.getElementById("txtFlatArea").value = "";
             document.getElementById("drpAddflatBHK").value = "";
             document.getElementById("txtAddflatIntrc").value = "";
+
+             $("#modalAssignFlat").hide();
         }
 
 
@@ -303,7 +305,7 @@
             document.getElementById("txtAddflatLastName").value = "";
             document.getElementById("txtAddflatUserLogin").value = "";
             document.getElementById("txtAddfltAddrs").value = "";
-            document.getElementById("txtFltAdd").value = "";
+            document.getElementById("txtAssignFlatNumber").value = "";
             document.getElementById("txtAddBlock").value = "";
             document.getElementById("txtAddfltFlr").value = "";
             document.getElementById("txtFlatArea").value = "";
@@ -399,7 +401,7 @@
             //var FlatNumber = document.getElementById('<%=txtAssignFlatNumber.ClientID%>').value;
 
             if (FlatNumber != "") {
-                document.getElementById("modalAssignFlat").style.display = "block";
+              //  document.getElementById("modalAssignFlat").style.display = "block";
             }
            
             if (HiddenEditID.value != "") {             
@@ -527,8 +529,41 @@
         }
 
         function btnCancelModel() {
-            $("#ModalNewFlat").hide();
+           
         }
+
+
+
+       function RemoveOwner(ID,FlatNumber,OwnerUserID,status,Complete)
+       {
+
+       }
+
+
+        function AssignOwner(ID, FlatNumber,BHK,FlatArea)
+        {
+            
+            $("#assignFlatNumber").val =FlatNumber ;
+            $("#assignFlatArea").val = FlatArea;
+            $("#assignFlatBHK").val = BHK;
+
+             $("#newAssignFlatModal").show();
+        }
+                                                   
+        function hideAssignFlatModal() {
+
+             $("#assignFlatNumber").val() ="" ;
+            $("#assignFlatArea").val() = "";
+            $("#assignFlatBHK").val() = "";
+
+             $("#newAssignFlatModal").hide();
+
+
+        }
+
+
+
+        
 
     </script>
 </head>
@@ -585,13 +620,13 @@
                                         BackColor ="Transparent" 
                                         footerstyle-font-size="9pt"
                                         footerstyle-font-italic="True"  Height="1px" ForeColor="#CCCCCC" 
+                                        OnItemDataBound="DataListFlat_ItemDataBound" 
                                         >
-                                   
                                            <ItemStyle ></ItemStyle>
                                            <ItemTemplate>
                                                 <div class="row layout_shadow_table ">
                                                
-                                                    <table>
+                                                 
                                                         <div class="col-sm-4 col-xs-12" style="text-align:center;">
                                                             
                                                             <%-- <asp:Image CssClass="UserImage" ID="user_image" runat="server" style="border-radius:50%;border:2px solid #dcdbdb;width:40px;height:40px;" ImageUrl='<%# "GetImages.ashx?ResID="+ Eval("ResidentID") %>' /><br />--%>
@@ -621,28 +656,27 @@
                                                               
                                                                   
               
-
-                                                              </td>
                                                         </div>
 
                                                         <div class="col-sm-4 col-xs-6" style="border-left:solid 2px black;">
-                                                            
+                                                           
                                                                  Owner Name: <asp:Label ID="Label1" runat="server" Text='<%# Eval("OwnerFirstName") + " "+ Eval("OwnerLastName") %>'></asp:Label><br />
-
-                                                            
+                                                                          Status: <asp:Label ID="Label5" runat="server" Text='<%# Eval("OwnerStatus") %>'></asp:Label>                                              
                                                                   Address: <asp:Label ID="Label4" runat="server" Text='<%# Eval("OwnerAddress") %>'></asp:Label>
-                                                            
+                                                            <button id="btnRemove" class="btn-sm btn btn-success" onclick='<%#"RemoveOwner(" + Eval("ID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("OwnerUserID")+ "\",4,\"Complete\")"%>' runat="server" type="button">Remove Owner</button>
+                                                        <button id="btnAssign" class="btn-sm btn btn-warning" onclick='<%#"AssignOwner(" + Eval("ID") +",\""+ Eval("FlatNumber")+"\",\""+ Eval("BHK")+"\",\""+ Eval("FlatArea")+ "\")"%>' runat="server" type="button">Assign Owner</button>
+                                                   
                                                             
                                                        </div>
-
-                                                        </table>  
-                                                   
-                                                     </div>
+ 
+                                                   <div class="row" style="float: right; margin-right: 5px;">
+                                                             <%--<button id="btnOpen" class="btn-sm btn btn-info" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("CompType")+ "\",3,\"Open\")"%>' runat="server" type="button">Open</button>
+                                                        <button id="btnReopen" class="btn-sm btn btn-info" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("CompType")+ "\",6,\"Re-open\")"%>' runat="server" type="button">Reopen</button>
+                                                        <button id="btnClose" class="btn-sm btn btn-success" onclick='<%#"ShowAssignConfirmation(" + Eval("CompID")+",\""+ Eval("FlatNumber") +"\",\""+ Eval("CompType")+ "\",5,\"Close\")"%>' runat="server" type="button">Close</button>--%>
+                                                    </div>
+                                                  </div>
                                           </ItemTemplate>
-                              
-
-
-                                      <EditItemStyle Height="0px" BackColor="Transparent" />                       
+                                    <EditItemStyle Height="0px" BackColor="Transparent" />                       
                                     <SeparatorStyle BackColor="Transparent" Height="50px" />
                           </asp:DataList>
    
@@ -770,7 +804,8 @@
                              <asp:BoundField DataField="Address" HeaderText="Address" ItemStyle-Width="100px" HeaderStyle-Width="100px"/>
                              <asp:TemplateField HeaderStyle-Width="20px">
                                     <ItemTemplate>
-                                      <button  onclick="ShowDialog('<%# Eval("UserLogin") %>' , '<%# Eval("FlatNumber") %>',this)" type="button" style="width: 20px; background-color: transparent; border: none; outline: 0; height: 20px; background-repeat: no-repeat;">
+                                      <button  onclick="ShowDialog('<%# Eval("UserLogin") %>' , '<%# Eval("FlatNumber") %>',this)" type="button"
+                                          style="width: 20px; background-color: transparent; border: none; outline: 0; height: 20px; background-repeat: no-repeat;">
                                       <i class="fa fa-angle-double-right" id="left_icon" style="color:gray;   font-size:20px"></i>
                                     </ItemTemplate>
                              </asp:TemplateField>
@@ -1047,7 +1082,7 @@
                                 <asp:Label ID="lblAddfltAvailble" runat="server" Font-Size="Small" ForeColor="#FF5050"></asp:Label>
                                 <asp:Label ID="lblAddflatStatus" runat="server" Font-Size="Small" ForeColor="#4AA5FF"></asp:Label>
                                 <asp:Label ID="lblDefalutBillText" runat="server" Font-Size="Small" ForeColor="#48A4FF"></asp:Label>
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" ValidationExpression="^[0-9]{5}$" runat="server" ControlToValidate="txtAddflatIntrc" ErrorMessage="Please Enter 5  Digits" Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Add_Flat" Display="Dynamic"></asp:RegularExpressionValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" ValidationExpression="^[0-9]{6}$" runat="server" ControlToValidate="txtAddflatIntrc" ErrorMessage="Please Enter 5  Digits" Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Add_Flat" Display="Dynamic"></asp:RegularExpressionValidator>
                             </div>
 
                         </div>
@@ -1527,7 +1562,181 @@
                <tr>
                    <td colspan="8" style="height:15px;">  </td>
                </tr>  
-      </table>                
+      </table>     
+             
+
+
+              <div class="modal" id="newAssignFlatModal">
+
+        <asp:UpdatePanel ID="UpdatePanel2" runat="server" EnableViewState="true">
+            <ContentTemplate>
+              <div class="container-fluid">
+                <div class="panel panel-primary"  style="width:520px;background-color:#f2f2f2;margin: auto;">
+                    <div class="panel-heading">
+                        
+                            Assign Owner To Flat
+                       <span class="fa fa-close" onclick="hideAssignFlatModal()" style="color:white;float:right; cursor:pointer;"></span>
+                        
+                    </div>
+                    <form class="form-group"autocomplete="off">
+                    <div class="panel-body" style="background-color:#fff;" >
+                             
+                             <div class="row"  style="border-top-left-radius:10px;">
+                                 <div class="col-sm-12 col-xs-12">
+                                    <b> User Details:</b>
+                                 </div>
+                                 </div>
+                                 <div class="row">
+                                     <div class="col-sm-6 col-xs-12">
+
+                                         <label style="width: 100px;">
+                                             Mobile :
+                                         </label>
+
+                                         <asp:TextBox Width="100px" ID="newOwnerMobile" onkeypress="return isNumberKey(event)" runat="server" MaxLength="10" Height="25px" 
+                                             OnTextChanged="txtAddfltMobile_TextChanged" onclick="Reset()" TabIndex="1" AutoPostBack="True"></asp:TextBox>
+
+                                         <asp:Image ID="Image1" Height="1px" Width="1px" runat="server" />
+                                         <i id='newMobInvalid' class="fa fa-circle" style="color: green; display: none;" aria-hidden="true"></i>
+                                     </div>
+                                     <div class="col-sm-6 col-xs-12">
+
+                                         <label style="width: 100px;">
+                                             Email :
+                                         </label>
+
+                                         <asp:TextBox Width="100px" ID="newOwnerEmail" runat="server" Height="25px" 
+                                           TabIndex="2" AutoPostBack="True"  OnTextChanged="txtAddfltEmail_TextChanged"></asp:TextBox>
+
+                                         <asp:Image ID="Image2" Height="10px" Width="10px" runat="server" />
+                                         <span style="display:none;">
+                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ForeColor="Red"  ControlToValidate="newOwnerEmail" ValidationGroup="Add_Flat"></asp:RequiredFieldValidator></span>
+                                     </div>
+
+                                   
+                                 </div>
+                        <hr />
+                           <div class="row">
+                                       <div class="col-sm-6 col-xs-12">
+                                         <label style="width: 100px;">
+                                             Name :
+                                         </label>
+                                         <asp:TextBox Width="100px" ID="newOwnerName" BorderWidth="0" runat="server" onClick="Reset()" ReadOnly="true"  Height="25px" TabIndex="0"></asp:TextBox>
+                                        
+                                     </div>
+                                     <div class="col-sm-6 col-xs-12">
+                                         <label style="width: 100px;">
+                                             Parent Name :
+                                         </label>
+
+                                         <asp:TextBox Width="100px" ID="TextBox5" ReadOnly="true" BorderWidth="0" runat="server" Height="25px" TabIndex="0"></asp:TextBox>
+
+                                    </div>
+                                 </div>
+                              
+                             
+                        <div class="row">
+
+                            <div class="col-sm-6">
+
+
+                                <label style="width: 100px;">
+                                    Address :
+                                </label>
+
+                                <asp:TextBox Width="100px" ID="TextBox7" ReadOnly="true" BorderWidth="0" runat="server" Height="42px" TabIndex="0"></asp:TextBox>
+
+
+
+                            </div>
+                        </div>
+                        <hr />
+                      
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <b>Flat Details: </b>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+
+                            <div class="col-xs-6">
+
+                                <label style="width: 100px;">
+                                    Flat number :
+                                </label>
+
+                                <asp:TextBox Width="100px" ID="assignFlatNumber" runat="server" AutoPostBack="True" Height="25px" > </asp:TextBox>
+
+                           
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width: 100px;">
+                                    Block :
+                                </label>
+
+                                <asp:TextBox Enabled="false" Width="100px" ID="TextBox9" runat="server" Height="25px" TabIndex="0"></asp:TextBox>
+
+                                                          </div>
+
+                        </div>
+                        <div class="row">
+
+                            <div class="col-xs-6">
+
+                                <label style="width: 100px;">
+                                    Floor :
+                                </label>
+
+                                <asp:TextBox  Enabled="false" Width="100px" ID="TextBox10" runat="server" Height="25px" TabIndex="0" MaxLength="3"></asp:TextBox>
+
+                            </div>
+                            <div class="col-xs-6">
+
+                                <label style="width: 100px;">
+                                    Flat Area :
+                                </label>
+
+                                <asp:TextBox Width="100px" Enabled="false" ID="assignFlatArea" runat="server" Height="25px" onfocus="Focus(this.id,'in Sqfts.')" onblur="Blur(this.id,'in Sqfts.')" ToolTip="In sqfts." TabIndex="0"></asp:TextBox>
+
+                             
+
+                            </div>
+                        </div>
+                                                <label style="width:100px;">
+                                                     BHK :
+                                                </label>
+                                               
+                                                 <asp:TextBox Width="100px" Enabled="false" ID="assignFlatBHK" runat="server" Height="25px" ></asp:TextBox>
+
+                                                
+
+                                 </div>
+                        </form>
+                             
+                         <asp:Label ID="Label10" runat="server" ForeColor="Red" text=""></asp:Label>
+                             <div class="panle-footer" style="text-align:right;padding-right:10px;margin:10px;">
+                               
+                                     <asp:Button ID="Button1" runat="server" Text="Submit" OnClientClick=""   OnClick="btnAddflatSubmit_Click" TabIndex="4" ValidationGroup="Add_Flat" class="btn btn-primary"/>
+                                
+                                     <button type="button" id="btnCancelAssignFlat"  onclick="hideAssignFlatModal()" class="btn btn-danger">Cancel</button>
+                                </div>
+                    </div>
+                        
+                    
+                
+                <div id="data_loading_assign" class="layout-overlay" style="background-color:#000; width:100%; height:100%; opacity: 0.5; filter: alpha(opacity=50); text-align:center;vertical-align:middle;">
+                                       <img src="Images/Icon/ajax-loader.gif" style="width:20px; height:20px;margin-top:200px;" />
+
+                                 </div>
+             
+                  </div>
+               </ContentTemplate>
+            </asp:UpdatePanel>
+            
+       </div>
+
+
 </div>
        
     </div>
