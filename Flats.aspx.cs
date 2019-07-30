@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 
 public partial class Flats : System.Web.UI.Page
 {
@@ -52,23 +53,23 @@ public partial class Flats : System.Web.UI.Page
 
         if (OwnerName == "" & FlatNumber != "")
         {
-            querystring = "Select * from dbo.ViewFlatsUser where FlatNumber like  '" + FlatNumber + "%' and  SocietyId = " + muser.currentResident.SocietyID;
+            querystring = "Select * from dbo.ViewFlats where FlatNumber like  '" + FlatNumber + "%' and  SocietyId = " + muser.currentResident.SocietyID;
         }
 
         else if (OwnerName != "" & FlatNumber == "")
         {
-            querystring = "Select * from dbo.ViewFlatsUser where OwnerFirstName like  '%" + OwnerName + "' or OwnerLastName like  '%" + OwnerName +
+            querystring = "Select * from dbo.ViewFlats where OwnerFirstName like  '%" + OwnerName + "' or OwnerLastName like  '%" + OwnerName +
                 "%' and SocietyId = " + muser.currentResident.SocietyID;
         }
 
         else if (OwnerName != "" & FlatNumber != "")
         {
-            querystring = "Select * from dbo.ViewFlatsUser where FlatNumber like  '" + FlatNumber + "%'  and OwnerFirstName like  '%" + OwnerName + "' or OwnerLastName like  '%" + OwnerName +
+            querystring = "Select * from dbo.ViewFlats where FlatNumber like  '" + FlatNumber + "%'  and OwnerFirstName like  '%" + OwnerName + "' or OwnerLastName like  '%" + OwnerName +
                 "%'  and  SocietyId = " + muser.currentResident.SocietyID;
         }
         else
         {
-            querystring = "Select * from dbo.ViewFlatsUser where SocietyId = " + muser.currentResident.SocietyID + "order by ID Desc ";
+            querystring = "Select * from dbo.ViewFlats where SocietyId = " + muser.currentResident.SocietyID + "order by ID Desc ";
         }
 
         DataSet ds = dacess.GetData(querystring);
@@ -806,7 +807,7 @@ public partial class Flats : System.Web.UI.Page
                 txtFlatArea.Text = FlatArea;
                 txtAddflatIntrc.Text = intercom;
                 drpAddflatBHK.SelectedItem.Text = bhk;
-                flatMsg.ImageUrl = "~/Images/Icon/Cancelled.png";
+               // flatMsg.ImageUrl = "~/Images/Icon/Cancelled.png";
                 //txtAssignFlatMobile.Focus();
 
             }
@@ -827,8 +828,8 @@ public partial class Flats : System.Web.UI.Page
             }
             else
             {
-
-                flatMsg.ImageUrl = "~/Images/Icon/Cancelled.png";
+                flatMsg.ImageUrl = "~/Images/Icon/green-tick.jpg";
+                // flatMsg.ImageUrl = "~/Images/Icon/Cancelled.png";
             }
         }
         catch (Exception ex)
@@ -981,6 +982,16 @@ public partial class Flats : System.Web.UI.Page
             lblDefalutBillText.Text = ex.Message;
         }
 
+    }
+
+
+    public string DateString(DateTime dateTime, bool cond)
+    {
+        string date;
+
+        date = dateTime.ToString("yyyy-MM-dd");
+
+        return (date);
     }
 
     public void AddBillToFlat(String FlatNumber, String FlatArea)
@@ -1825,6 +1836,41 @@ public partial class Flats : System.Web.UI.Page
             lblAddflatStatus.ForeColor = System.Drawing.Color.Red;
             lblAddflatStatus.Text = "Could not Submit  Flat try later or Contact Admin";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:HideAddFlatModal()", true);
+        }
+    }
+
+    protected void DataListFlat_ItemDataBound(object sender, DataListItemEventArgs e)
+    {
+        try
+        {
+            if ((e.Item.ItemType == ListItemType.Item) || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                HtmlButton btnAssign = (HtmlButton)e.Item.FindControl("btnAssign");
+                HtmlButton btnRemove = (HtmlButton)e.Item.FindControl("btnRemove");
+          
+                DataRowView drv = e.Item.DataItem as DataRowView;
+                int OwnerUserID = Convert.ToInt32(drv["OwnerUserID"].ToString());
+
+                int OwnerStatusID = Convert.ToInt32(drv["OwnerStatusID"].ToString());
+
+                if (OwnerUserID == 0 || (OwnerStatusID != 2 && OwnerStatusID != 1))
+                {
+                    btnAssign.Visible = true;
+                    btnRemove.Visible = false;
+                }
+                else {
+                    btnAssign.Visible = false;
+                    btnRemove.Visible = true;
+                }
+
+                
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            int a = 1;
         }
     }
 }

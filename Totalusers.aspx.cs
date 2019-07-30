@@ -50,7 +50,8 @@ public partial class Totalusers : System.Web.UI.Page
         }
 
        ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "ShowUserPopup();", true);
-    }
+        //ClientScript.RegisterStartupScript(this.GetType(), "datetime", " $(document).ready(function () {$('#txtdeact').datetimepicker({format: 'DD-MM-YYYY'}); $('#txttest').datetimepicker({ format: 'DD-MM-YYYY'});});", true);
+   }
 
     public void LoadResidentData()
     {
@@ -206,13 +207,13 @@ public partial class Totalusers : System.Web.UI.Page
     {
         DataAccess Dacess = new DataAccess();
 
-        String UserID = HiddenField1.Value;
+        int ResID = Convert.ToInt32(HiddenField1.Value);
         String FlatNumber = HiddenField2.Value;
         DateTime Date = System.DateTime.Now;
        
 
         Resident res = new Resident();
-        res.UpdateResidentDeactive(Date, UserID);
+        res.DeactivateResident(Date, ResID);
         Response.Redirect("Totalusers.aspx");
     }
 
@@ -372,6 +373,12 @@ public partial class Totalusers : System.Web.UI.Page
             String Parentname = txtParentname.Text;
             String UserLogin = txtEmailId.Text;
             String Password = "Password@123";
+            string Resid =hiddenUserid.Value;
+            string FlatId = txtflatid.Text;
+            string HouseId = "0";
+            string Actdate = txtact.Text;
+            string Deactdate = txtdeact.Text;
+           // int FlatId = Convert.ToInt32(txtflatid.Text);
            // String Password = txtAddusrPasswrd.Text;
           //  String Confirmpassword = txtAddusrConfirmpaswrd.Text;
             String Address = txtAddress.Text;
@@ -379,6 +386,11 @@ public partial class Totalusers : System.Web.UI.Page
             //String ConnectionString = Utility.SocietyConnectionString;
             //String SocietyName = muser.currentResident.SocietyName;
             //string SocietyID = muser.currentResident.SocietyID.ToString();//Added by Aarshi on 15 aug 2017
+
+            string query = "INSERT INTO[dbo].[SocietyUser]([UserID],[FlatID],[Type],[ServiceType],[CompanyName],[ActiveDate],[DeActiveDate],[ModifiedDate],[SocietyID],[Status],[HouseID])"+
+                "values("+Resid+" ,"+FlatId+" ,'Tenant' ,0 ,'' ,'"+Actdate+"' ,'"+Deactdate+"' ,'"+DateTime.UtcNow+"' ,"+SessionVariables.SocietyID+" ,2 "+HouseId+")";
+            DataAccess daccess = new DataAccess();
+            bool result=daccess.UpdateQuery(query);
 
             if (Gender == "" || FirstName == "" || MobileNo == ""|| EmailId==""|| UserLogin=="" || Password=="")
             {
@@ -392,6 +404,8 @@ public partial class Totalusers : System.Web.UI.Page
            
             //Added by Aarshi on 15 Aug 2017 for code restructuring
             Resident res = new Resident();
+
+            
             bool assuserresult = res.InsertUserResident(FirstName, LastName, MobileNo, EmailId, Password, Gender, Parentname, UserLogin, Address);
 
             if (assuserresult == true)                             
@@ -466,28 +480,30 @@ public partial class Totalusers : System.Web.UI.Page
 
     protected void txtMobileno_TextChanged(object sender, EventArgs e)
     {
-        if (ExistingUser)
+        DataAccess dacess = new DataAccess();
+        string query = "select * from  totalusers where userlogin='" + txtEmailId.Text + "' and mobileno= '" +txtMobileno.Text+"'";
+        DataSet ds=dacess.ReadData(query);
+        if (ds!=null)
         {
-            if (txtMobileno.Text == newUser.MobileNumber)
-            {
-                txtFirstname.Text = newUser.FirstName;
-                txtMiddleName.Text = newUser.MiddleName;
-                txtLastname.Text = newUser.LastName;
-                txtAddress.Text = newUser.Address;
-                drpAddusrGendr.Text = newUser.Gender;
+                
+                txtFirstname.Text = ds.Tables[0].Rows[0]["FirstName"].ToString();
+                txtMiddleName.Text = ds.Tables[0].Rows[0]["MiddleName"].ToString(); 
+                txtLastname.Text = ds.Tables[0].Rows[0]["LastName"].ToString();
+                txtAddress.Text = ds.Tables[0].Rows[0]["Address"].ToString(); 
+                drpAddusrGendr.Text = ds.Tables[0].Rows[0]["Gender"].ToString(); 
                 //txtNewusername.Text = newUser.UserLogin;
-                txtParentname.Text = newUser.ParentName;
+                txtParentname.Text = ds.Tables[0].Rows[0]["ParentName"].ToString();
+            hiddenflatid.Value = txtflatid.Text;
+           // hiddenhouseid.Value = ds.Tables[0].Rows[0]["HouseID"].ToString();
+            hiddenUserid.Value = ds.Tables[0].Rows[0]["UserID"].ToString();
                 lblmobileavailbe.Text = string.Empty;//Added by Aarshi on 15 Aug 2017 to clear validation message when entered correct data
-            }
-            else
-            {
-                lblmobileavailbe.Text = "Mobile No do not match with User.";
-            }
+            lblEmailcheck.Text = "User Fetched";
+            lblEmailcheck.ForeColor = System.Drawing.Color.Green;
         
         }
         else
         {
-            lblmobileavailbe.Text = string.Empty;//Added by Aarshi on 15 Aug 2017 to clear validation message when entered correct data
+            lblEmailcheck.Text = "Not an Existing User. Register first";//Added by Aarshi on 15 Aug 2017 to clear validation message when entered correct data
         }
      
     }

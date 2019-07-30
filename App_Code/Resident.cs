@@ -11,32 +11,44 @@ public class Resident
 {
 
     public int ResID { get; set; }
+    public int UserID { get; set; }
     public int FlatID { get; set; }
-    public String FlatNumber { get; set; }
+
     public String UserType { get; set; }
     public int ServiceType { get; set; }
     public String CompanyName { get; set; }
     public String ActiveDate { get; set; }
     public String DeActiveDate { get; set; }
+    public String ModifiedDate { get; set; }
     public int SocietyID { get; set; }
+    public int Status { get; set; }
+    public int HouseID { get; set; }
+
     public String SocietyName { get; set; }
     public String IntercomNumber { get; set; }
+    public String FlatNumber { get; set; }
 
-    public int HouseID { get; set; }
     public string HouseNo { get; set; }
     public string Sector { get; set; }
     public string City { get; set; }
     public string State { get; set; }
     public string Pin { get; set; }
 
-
-
-
+    
     public Resident()
     {
-        //
-        // TODO: Add constructor logic here
-        //
+        ResID = 0;
+        UserID = 0;
+        FlatID = 0;
+        UserType = "Owner";
+        ServiceType = 0;
+        CompanyName = "NA";
+        ActiveDate = DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss");
+        DeActiveDate = DateTime.UtcNow.AddYears(5).ToString("MM-dd-yyyy HH:MM:ss");
+        ModifiedDate = DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss");
+        SocietyID = 1;
+        Status = 1;
+        HouseID = 0;
     }
 
     public DataSet GetResidentForUser(int UserId)
@@ -91,14 +103,37 @@ public class Resident
         return dsResident;
     }
 
-    public bool AddSocietyUser(int UserId, int FlatID, int SocieyID)
+    public bool AddSocietyUser(int UserId, int FlatID, int _SocietyID)
     {
         try
         {
 
 
             String societyUserQuery = "Insert Into dbo.SocietyUser  (UserID,FlatID,Type,ServiceType,CompanyName,ActiveDate, SocietyID,Status) output INSERTED.ResID Values('" +
-                                                                 UserId + "','" + FlatID + "','Owner','0','NA','" + DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss") + "','" + SocieyID + "',1)";
+                                                                 UserId + "','"+ FlatID + "','Owner','0','NA','" + DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss") + "','" + _SocietyID + "',"+Status+")";
+
+
+    DataAccess da = new DataAccess();
+            bool result =   da.UpdateQuery(societyUserQuery);
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+
+    }
+
+    public bool AddSocietyUser()
+    {
+        try
+        {
+
+
+            String societyUserQuery = "Insert Into dbo.SocietyUser (UserID,FlatID,Type,ServiceType,CompanyName,ActiveDate,DeActiveDate,ModifiedDate, SocietyID,Status, HouseID) output INSERTED.ResID Values('" +
+                                      UserID + "','" + FlatID + "','"+UserType+"','" + ServiceType + "','" + CompanyName+"','"+ActiveDate+"','" + DeActiveDate + "','" + ModifiedDate + "','" + SocietyID + "','" + Status + "','" + HouseID+"')";
+
             DataAccess da = new DataAccess();
             bool result = da.UpdateQuery(societyUserQuery);
 
@@ -110,6 +145,29 @@ public class Resident
         }
 
     }
+
+    public DataSet GetActiveOwner(int FlatId, int SocietyId)
+    {
+        try
+        {
+
+            DataAccess dacess = new DataAccess();
+            String UserSearchQuery = "select UserID, FirstName, LastName from " + CONSTANTS.View_SocietyUser 
+                + " Where Status = 2 and ActiveDate < GetDate() and DeActiveDate > GetDate() and FlatID = " + FlatId + " and SocietyID = " + SocietyId;
+
+           DataSet dsResidentUserFlat = dacess.GetData(UserSearchQuery);
+         
+
+            return dsResidentUserFlat;
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+    }
+
+
 
     public DataSet GetResidentUserFlat(string UserName, String FlatNumber)
     {
@@ -221,15 +279,25 @@ public class Resident
     }
 
 
-    public bool UpdateResidentDeactive(DateTime Date, string UserID)
+    public bool DeactivateResident(DateTime _Date, int _ResID)
     {
         DataAccess dacess = new DataAccess();
-        String DeactiveUserQuery = "Update " + CONSTANTS.Table_SocietyUser + "  set DeActiveDate = '" + Date + "' , where UserID = '" + UserID + "'";
+        String DeactiveUserQuery = "Update " + CONSTANTS.Table_SocietyUser + "  set Status = 4 , DeActiveDate = '" + _Date.ToString("MM-dd-yyyy HH:MM:ss") + "'  where ResID = " + _ResID ;
         bool result = dacess.Update(DeactiveUserQuery);
         return result;
     }
 
-    public bool InsertUserResident(string FirstName, string LastName, string MobileNo, string EmailId, String Password, string Gender, string Parentname, string UserLogin, string Address)
+    public bool ApproveResident(DateTime _Date, int _ResID)
+    {
+        DataAccess dacess = new DataAccess();
+        String DeactiveUserQuery = "Update " + CONSTANTS.Table_SocietyUser + "  set Status = 2 , ActiveDate = '" + _Date.ToString("MM-dd-yyyy HH:MM:ss")
+                                   +"', DeActiveDate = '" + _Date.AddYears(5).ToString("MM-dd-yyyy HH:MM:ss") + "'  where ResID = " + _ResID;
+        bool result = dacess.Update(DeactiveUserQuery);
+        return result;
+    }
+
+
+    public bool InsertUserResident(string FirstName, string LastName, string MobileNo, string EmailId,String Password, string Gender, string Parentname, string UserLogin, string Address)
     {
         DataAccess dacess = new DataAccess();
         User newUser = new User();

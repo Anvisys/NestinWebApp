@@ -45,6 +45,21 @@
             // alert("45 ==>> "+api_url);
             _ResID = <%=ResID%>;
             GetData();
+
+
+
+            $('#txtdeact').datetimepicker({
+                //  format: 'YYYY-MM-DD'
+                format: 'DD-MM-YYYY'
+            });
+
+
+
+            $('#txtact').datetimepicker({
+                //  format: 'YYYY-MM-DD'
+                format: 'DD-MM-YYYY'
+            });
+
             filladmindata();
             var x = document.getElementById("inAddTMobile");
             // x.addEventListener("focusin", myFocusFunction);
