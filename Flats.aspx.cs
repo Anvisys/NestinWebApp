@@ -1643,7 +1643,7 @@ public partial class Flats : System.Web.UI.Page
     public static List<string> GetOwnerName(string empName)
     {
         List<string> Emp = new List<string>();
-        string query = string.Format("SELECT OwnerName FROM Flats WHERE OwnerName LIKE '" + empName + "%'");
+        string query = string.Format("SELECT OwnerFirstName+' '+OwnerLastName as OwnerName FROM ViewNewFlats WHERE OwnerFirstName+OwnerLastName LIKE '" + empName + "%'");
         using (SqlConnection con = new SqlConnection(Utility.SocietyConnectionString))
         {
             con.Open();
@@ -1662,7 +1662,7 @@ public partial class Flats : System.Web.UI.Page
     [System.Web.Services.WebMethod]
     public static List<string> GetFlatNumber(string FlatNumber)
     {
-        List<string> Emp = new List<string>();
+       List<string> Emp = new List<string>();
         string query = string.Format("Select FlatNumber from dbo.Flats where FlatNumber like '" + FlatNumber + "%'");
         using (SqlConnection con = new SqlConnection(Utility.SocietyConnectionString))
         {
