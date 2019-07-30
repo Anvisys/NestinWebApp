@@ -128,7 +128,7 @@ public partial class Reports : System.Web.UI.Page
             if (nopiedata && nocompage)
             {
                 reports.Visible = false;
-                lblmessage.Text = "No Rport Data Available!! ";
+                lblmessage.Text = "No Report Data Available!! ";
             }
         }
 

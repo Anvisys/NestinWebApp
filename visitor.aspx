@@ -108,7 +108,7 @@
         }
     </style>
     <script>
-     
+ 
 
         var UserType, ResId, SocietyId, FlatNumber, RequestID, VisitorEntryHour,api_url; 
         var page = 1;
@@ -410,7 +410,7 @@
                     else {
                      
                         $("#pagination>nav").hide();
-                        $("#pagination").html("<h4>NO Visitor Data!!</h4>");
+                        $("#pagination").html("<h4 style="color: red;">NO Visitor Data!!</h4>");
                        // alert("NO Data!!");                        
                     }
                 },

@@ -1052,9 +1052,9 @@ hr {
                         </div>
 
                         <div class="row">
-
-                            <asp:Label ID="lblVendrEmptyText" runat="server" ForeColor="#3e9eff" Text=""></asp:Label>
-
+                            <div class="col-sm-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red; text-align:center; margin-top: 20%;">
+                            <asp:Label ID="lblVendrEmptyText" runat="server" Text=""></asp:Label>
+                            </div>
                         </div>
 
                         <input type="hidden" name="imgEditX1" id="imgEditX1" />

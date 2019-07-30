@@ -312,13 +312,7 @@
 
     <div class="container-fluid">
         <div class="row" id="scroll_div" style="min-height: 500px;">
-
             <div class="col-xs-12" style="background-color: #f7f7f7;">
-
-
-
-
-
                 <form id="form1" runat="server" autocomplete="off">
 
 
@@ -347,8 +341,8 @@
                             </div>
                             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                             <div class="row">
-                                <div class="col-sm-12">
-                                    <asp:Label ID="lblEmptyPie1" runat="server" Visible="false" ForeColor="#E91E63"></asp:Label>
+                                <div class="col-sm-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red !important; text-align:center; margin-top: 20%;">
+                                    <asp:Label ID="lblEmptyPie1" runat="server" Visible="false"></asp:Label>
 
                                 </div>
                             </div>

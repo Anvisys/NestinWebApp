@@ -470,7 +470,7 @@ public partial class Dashboard : System.Web.UI.Page
             else
             {
                 //lblOffer.Text = "Error in retrieving data";
-                lblOffer.Text = "Grocery:- No offers are available now. Medical:- 10% off on your first purchase";
+                lblOffer.Text = "";
             }
         }
         catch (Exception ex)
