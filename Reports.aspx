@@ -20,7 +20,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     
             <script src="Scripts/jquery-1.11.1.min.js"></script>
-         <link rel="stylesheet" href="/CSS/NewAptt.css" />
+            <link rel="stylesheet" href="mystylesheets.css" /> 
             <link rel="stylesheet" href="/CSS/ApttTheme.css" />
             <link rel="stylesheet" href="CSS/ApttLayout.css" />
       
@@ -43,8 +43,8 @@
 
                <form id="form1" runat="server">
                 <div class="container-fluid">
-                    <div class="row hidden-xs">
-                       <div class="col-sm-12 ">
+                    <div class="row">
+                       <div class="col-sm-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red; text-align:center; margin-top: 20%;">
                             <h4>  <asp:label ID="lblmessage" runat="server" Text="Reports :"></asp:label></h4>
                         </div>
                     </div>

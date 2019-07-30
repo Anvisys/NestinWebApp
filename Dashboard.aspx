@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Dashboard.aspx.cs" Inherits="Dashboard" %>
+﻿﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Dashboard.aspx.cs" Inherits="Dashboard" %>
 
 <!DOCTYPE html>
 
@@ -109,8 +109,8 @@
                     <table style="width:100%;">
                         <tr>
                             
-                            <td style="width:40%;">
-                                <asp:Chart ID="billChart" runat="server" Height="85px" Width="85px" BackColor="#E74C3C" >
+                            <td style="width:0%;">
+                                <asp:Chart ID="billChart" runat="server" Height="0px" Width="0px" BackColor="#E74C3C" >
                                                             <%--  <Series>
                                                                <asp:Series Name="Series1" ChartType="Pie"  LegendText="#VALX" ChartArea="billChartArea" Legend="billLegend" CustomProperties="PieDrawingStyle=SoftEdge" MarkerSize="0" MarkerStyle="Circle">
                                                                </asp:Series>
@@ -122,7 +122,7 @@
                                                            </ChartAreas>--%>
                                             </asp:Chart>
                             </td>
-                            <td style="width:60%;">
+                            <td style="width:100%;">
                               <asp:Label ID="lblpending" runat="server"></asp:Label>
                                  
                              <ol>
@@ -224,8 +224,17 @@
                     <div class="panel-body">
                     <table style="width:100%;">
                         <tr>
-                            <td style="width:60%;">
+                            <td style="width:0%;">
                             <asp:Label ID="lblOffer" runat="server"></asp:Label>
+                            </td>
+                            <td style="width:100%;">
+                            <ol>
+                                <li>
+                                     Grocery:- No offers are available now.</li>
+                                <li>
+                                     Medical:- 10% off on download app</li>
+                               
+                            </ol>
                             </td>
                             
                         </tr>

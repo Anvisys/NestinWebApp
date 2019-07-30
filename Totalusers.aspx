@@ -729,7 +729,7 @@
 
                                             <div class="row layout_shadow_table" style="margin-left: 10px;">
 
-                                                <div class="col-sm-4 col-xs-12" style="text-align: center;">
+                                                <div class="col-sm-6 col-xs-12" style="text-align: center;">
 
                                                     <img class="profile-image" src='<%# "GetImages.ashx?ResID="+ Eval("ResID")+"&Name="+Eval("FirstName") +"&UserType="+Eval("Type") %>' />
                                                     <br />
@@ -740,7 +740,7 @@
                                                     <%# Eval("Type") %>
                                                 </div>
 
-                                                <div class="col-sm-4 col-xs-12">
+                                                <div class="col-sm-6 col-xs-12">
                                                     <br />
                                                     <span class="fa fa-envelope" style="color: black;"></span>&nbsp;&nbsp;<%# Eval("Emailid") %>
                                                     <br />
@@ -752,13 +752,13 @@
                                                 </div>
 
                                                 <div class="col-sm-4 col-xs-12">
-                                                   <%-- <div class="btn-group">--%>
-                                                            <%--<li><a href="#" onclick="ShowEditForm('<%# Eval("UserID") %>' ,'<%# Eval("FirstName") %>' ,'<%# Eval("LastName") %>','<%# Eval("MobileNo") %>','<%# Eval("ParentName") %>','<%# Eval("EmailId") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Edit</a></li>--%>
-                                                            <button type="button"  class="btn btn-primary" 
-                                                               onclick="ShowAddTenant();" <%--onclick="ShowEditForm('<%# Eval("UserID") %>' ,'<%# Eval("FirstName") %>' ,'<%# Eval("LastName") %>','<%# Eval("MobileNo") %>','<%# Eval("ParentName") %>','<%# Eval("EmailId") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')"--%> >Tenant</button>
+                                                <%--   <div class="btn-group">--%>
+                                                           <%--   <li><a href="#" onclick="ShowEditForm('<%# Eval("UserID") %>' ,'<%# Eval("FirstName") %>' ,'<%# Eval("LastName") %>','<%# Eval("MobileNo") %>','<%# Eval("ParentName") %>','<%# Eval("EmailId") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Edit</a></li>--%>
+                                                        <%--    <button type="button"  class="btn btn-primary" 
+                                                               onclick="ShowAddTenant();" <%--onclick="ShowEditForm('<%# Eval("UserID") %>' ,'<%# Eval("FirstName") %>' ,'<%# Eval("LastName") %>','<%# Eval("MobileNo") %>','<%# Eval("ParentName") %>','<%# Eval("EmailId") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Tenant</button> --%>
                                                              
-                                                            <button class="btn btn-success" onclick="ShowDeactivateForm('<%# Eval("ResID") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Deactivate</button>
-                                                    <%--</div>--%>
+                                                            <%--  <button class="btn btn-success" onclick="ShowDeactivateForm('<%# Eval("ResID") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Deactivate</button>--%>
+                                                   <%--   </div> --%>
 
                                                     <asp:HiddenField ID="hiddenflatid" runat="server" Value='<%# Eval("FlatID") %>' />
                                                     <asp:HiddenField ID="hiddenhouseid" runat="server" Value='<%# Eval("HouseID") %>' />

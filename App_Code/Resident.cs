@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Transactions;
+using System.Web;
 /// <summary>
 /// Summary description for Resident
 /// </summary>
@@ -57,9 +56,9 @@ public class Resident
         DataSet dsResidentUserFlat = null;
         try
         {
-            
+
             DataAccess dacess = new DataAccess();
-            String UserSearchQuery = "select * from " + CONSTANTS.View_SocietyUser + " Where (Type = 'Owner' or Type = 'Tenant') and UserID =" + UserId  ;
+            String UserSearchQuery = "select * from " + CONSTANTS.View_SocietyUser + " Where (Type = 'Owner' or Type = 'Tenant') and UserID =" + UserId;
             dsResidentUserFlat = dacess.GetData(UserSearchQuery);
         }
         catch (Exception ex)
@@ -76,8 +75,8 @@ public class Resident
         {
 
             DataAccess dacess = new DataAccess();
-            String UserSearchQuery = "select * from " + CONSTANTS.View_SocietyUser + " Where UserID =" + UserId +" and StatusID = 2 and DeActiveDate > GetDate()";
-                                     
+            String UserSearchQuery = "select * from " + CONSTANTS.View_SocietyUser + " Where UserID =" + UserId + " and StatusID = 2 and DeActiveDate > GetDate()";
+
             //
             dsResidentUserFlat = dacess.GetData(UserSearchQuery);
         }
@@ -106,7 +105,8 @@ public class Resident
 
     public bool AddSocietyUser(int UserId, int FlatID, int _SocietyID)
     {
-        try {
+        try
+        {
 
 
             String societyUserQuery = "Insert Into dbo.SocietyUser  (UserID,FlatID,Type,ServiceType,CompanyName,ActiveDate, SocietyID,Status) output INSERTED.ResID Values('" +
@@ -205,9 +205,9 @@ public class Resident
     }
 
     public DataSet GetResident(String FlatNumber, String ResType, int SocietyID)
-    {        
+    {
         try
-        {           
+        {
             String ResidentGenQuery = "";
 
             if (FlatNumber != "" && ResType != "All")
@@ -223,7 +223,7 @@ public class Resident
 
             else if (FlatNumber == "" && ResType != "All")
             {
-                ResidentGenQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type ='" + ResType + "' and societyID = " + SocietyID ;
+                ResidentGenQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type ='" + ResType + "' and societyID = " + SocietyID;
             }
 
             else if (FlatNumber == "" && ResType == "All")
@@ -238,24 +238,24 @@ public class Resident
         {
             return null;
         }
-       
+
     }
 
     public DataSet GetInReviewResident(int _SocietyID)
     {
         try
-        { 
-        String ResidentGenQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type = 'Owner' and StatusID = 1 and societyID = '" + _SocietyID + "'";
-        DataAccess dacess = new DataAccess();
-        return dacess.GetData(ResidentGenQuery);
-         }
+        {
+            String ResidentGenQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type = 'Owner' and StatusID = 1 and societyID = '" + _SocietyID + "'";
+            DataAccess dacess = new DataAccess();
+            return dacess.GetData(ResidentGenQuery);
+        }
         catch (Exception ex)
         {
             return null;
         }
     }
 
-    public DataSet GetEmployee( int SocietyID, int ServiceTypeID)
+    public DataSet GetEmployee(int SocietyID, int ServiceTypeID)
     {
         try
         {
@@ -302,10 +302,10 @@ public class Resident
         DataAccess dacess = new DataAccess();
         User newUser = new User();
         string strNewPassword = newUser.EncryptPassword(EmailId, Password);
-        
-        String UpdateQuery = "Insert into " + CONSTANTS.Table_Users + 
-            " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address) Values('" 
-            + FirstName + "','','" + LastName + "','" + MobileNo + "','" + EmailId + "','" + Gender + "','" + Parentname + "','" + UserLogin +"','" + strNewPassword + "','" + Address +  "')";
+
+        String UpdateQuery = "Insert into " + CONSTANTS.Table_Users +
+            " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address) Values('"
+            + FirstName + "','','" + LastName + "','" + MobileNo + "','" + EmailId + "','" + Gender + "','" + Parentname + "','" + UserLogin + "','" + strNewPassword + "','" + Address + "')";
 
 
 
@@ -382,7 +382,7 @@ public class Resident
 
             while (myReader.Read())
             {
-               
+
                 //editUSer.FlatNumber = FlatNumber;
                 editUSer.FirstName = (myReader["FirstName"].ToString());
                 editUSer.MiddleName = (myReader["MiddleName"].ToString());
@@ -393,7 +393,7 @@ public class Resident
                 editUSer.UserLogin = (myReader["UserLogin"].ToString());
                 editUSer.UserID = Convert.ToInt32(UserId);
                 HttpContext.Current.Session.Add("EditUser", editUSer);
-                HttpContext.Current.Session["UserID"] = UserId;           
+                HttpContext.Current.Session["UserID"] = UserId;
             }
             con.Close();
         }
@@ -406,7 +406,7 @@ public class Resident
         //Changed View name by aarshi on 4 aug 2017, it was throwing exception for ViewOwnerResidents not exist
         //string query = string.Format("Select distinct FlatNumber from dbo.ViewOwnerResidents where FlatNumber like '" + FlatNumber + "%'");
 
-        string query = string.Format("Select distinct FlatNumber from " + CONSTANTS.Table_Flats + " where SocietyID = "+ SocietyID + " and FlatNumber like '" + FlatNumber + "%'");
+        string query = string.Format("Select distinct FlatNumber from " + CONSTANTS.Table_Flats + " where SocietyID = " + SocietyID + " and FlatNumber like '" + FlatNumber + "%'");
         using (SqlConnection con = new SqlConnection(Utility.SocietyConnectionString))
         {
             con.Open();
@@ -423,7 +423,7 @@ public class Resident
         return Emp;
     }
 
-   
+
 
     public bool AddEmployeeWithUser(User newUser, int ServiceType, String CompanyName)
     {
@@ -472,7 +472,7 @@ public class Resident
 
     }
 
-    public bool ActivateUser( int _ResId, DateTime _activeDate, DateTime _deactiveDate)
+    public bool ActivateUser(int _ResId, DateTime _activeDate, DateTime _deactiveDate)
     {
         try
         {
@@ -480,7 +480,7 @@ public class Resident
             String UpdateQuery = "update " + CONSTANTS.Table_SocietyUser
                                + " set ActiveDate = '" + Utility.ChangeDateTimeLocalToSQLServerFormat(_activeDate) + "', DeActiveDate = '" + Utility.ChangeDateTimeLocalToSQLServerFormat(_deactiveDate)
                                + "', Status = 2 Where ResID = " + _ResId;
-            
+
             bool result = dacess.Update(UpdateQuery);
             return result;
         }

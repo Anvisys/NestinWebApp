@@ -25,9 +25,7 @@
 
     <script src="Scripts/jquery-1.11.1.min.js"></script>
 
-<%--    <link rel="stylesheet" href="CSS/ApttTheme.css" />
-    <link rel="stylesheet" href="CSS/ApttLayout.css" />
-    <link rel="stylesheet" href="CSS/NewAptt.css" />--%>
+
     <link rel="stylesheet" href="CSS/mystylesheets.css" />
 
     <script>
@@ -350,8 +348,8 @@
 
 
                         <div class="row">
-                            <div class="col-xs-12">
-                                <asp:Label ID="lblEmptyTitle" runat="server" ForeColor="#4FA7FF" Visible="false"></asp:Label>
+                            <div class="col-xs-12" style="font-family:'Times New Roman', Times, serif !important; color: red !important; text-align:center; margin-top: 20%;">
+                                <asp:Label ID="lblEmptyTitle" runat="server"  Visible="false"></asp:Label>
                             </div>
 
                         </div>
@@ -543,6 +541,7 @@
 
             </div>
 
+        </div>
         </div>
 
 

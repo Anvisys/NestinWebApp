@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Web;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 /// <summary>
 /// Summary description for DataAccess
 /// </summary>
 public class DataAccess
 {
-	public DataAccess()
-	{
-		//
-		// TODO: Add constructor logic here
-		//
-	}
+    public DataAccess()
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+    }
 
 
     public SqlConnection ConnectUserDB()

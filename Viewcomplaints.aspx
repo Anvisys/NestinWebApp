@@ -27,7 +27,9 @@
     <link rel="stylesheet" href="CSS/ApttTheme.css" />
     <link rel="stylesheet" href="CSS/ApttLayout.css" />
     <%-- <link rel="stylesheet" href="CSS/Vendor.css" />--%>
-    <link rel="stylesheet" href="CSS/NewAptt.css" />
+   <%-- <link rel="stylesheet" href="CSS/NewAptt.css" />--%>
+
+    <link rel="stylesheet" href="CSS/mystylesheets.css" />
 
 
     <link rel="stylesheet" href="CSS/Nestin.css" />
@@ -607,19 +609,19 @@
                     </div>
 
                     <div class="row" style="margin-top: 10px;">
-                        <div class="col-md-3 col-sm-3 hidden-xs">
+                        <div class="col-sm-3 hidden-xs">
                             <h4>Complaints:</h4>
                          
                         </div>
                         
-                        <div class="col-md-6 col-sm-6 col-xs-12" style="align-content: center; text-align:center; margin: auto;" runat="server" id="topnav">
+                        <div class="col-sm-3 col-xs-12" style="align-content: center; text-align:center; margin: auto;" runat="server" id="topnav">
                             <asp:DropDownList EnableViewState="true" ID="drpVCompStatusF" runat="server" CssClass="search-dropdown">
                             </asp:DropDownList>
                             <asp:TextBox ID="txtVcompFlatSrch" runat="server" CssClass="search-text" placeholder="Flat Number" OnTextChanged="txtVcompFlatSrch_TextChanged"></asp:TextBox>
                             <asp:LinkButton ID="ImgCompSearch" runat="server" CssClass="search-button" BackColor="Transparent" ForeColor="white" OnClick="ImgCompSearch_Click"> <span class="glyphicon glyphicon-search"></span></asp:LinkButton>
                         </div>
 
-                        <div class="col-md-4 col-xs-2" style="display: none;">
+                        <div class="col-sm-3 col-xs-2" style="display: none;">
                             <asp:DropDownList ID="drpComplaintDateFilter" runat="server" OnSelectedIndexChanged="drpComplaintDateFilter_SelectedIndexChanged" CssClass="form-control">
                                 <asp:ListItem Selected="True">Current month</asp:ListItem>
                                 <asp:ListItem>Last month</asp:ListItem>
@@ -629,7 +631,7 @@
 
                             </asp:DropDownList>
                         </div>
-                        <div class="col-md-3 col-sm-3 col-xs-2">
+                        <div class="col-sm-3 col-xs-2">
                             <button type="button" id="btnAddComplaint" style="margin-top: 0px;" class="pull-right btn btn-primary btn-sm">Add Complaint</button>
                         </div>
                     </div>
@@ -733,14 +735,14 @@
 
                             <div class="row">
 
-                                <div class="col-xs-4" style="text-align: center; padding: 8px;">
+                                <div class="col-xs-3" style="text-align: center; padding: 8px;">
                                     <asp:Button ID="btnprevious" runat="server" Font-Bold="true" Text="Prev" Height="31px" Width="60px" OnClick="btnprevious_Click" />
 
                                 </div>
-                                <div class="col-xs-4">
-                                    <asp:Label ID="lblPage" runat="server" Font-Size="Small" ForeColor="#f9f9f9f"></asp:Label>
+                                <div class="col-xs-6" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red; text-align:center; margin-top: 20%;">
+                                    <asp:Label ID="lblPage" runat="server"></asp:Label>
                                 </div>
-                                <div class="col-xs-4" style="text-align: center; padding: 8px;">
+                                <div class="col-xs-3" style="text-align: center; padding: 8px;">
                                     <asp:Button ID="btnnext" runat="server" Font-Bold="true" Text="Next" Height="31px" Width="60px" OnClick="btnnext_Click" />
                                 </div>
                             </div>
