@@ -404,8 +404,8 @@
         //    $('table[id$="residentsDataList"] tr:odd').css("background-color", "#AAAAAA");
         //});
 
-
         function ShowEditForm(UserID, FirstName, LastName, MobileNo, ParentName, EmailId, type, FlatNumber, DeactiveDate) {
+            alert(FirstName);
             // document.getElementById("EditHidedenFlat").value = UserLogin;
             document.getElementById("HiddenField1").value = UserID;
             document.getElementById("HiddenField2").value = FlatNumber;
@@ -422,10 +422,7 @@
             $("#txtEditusrParentN").val(ParentName);
             $("#txtEditMobileNo").val(MobileNo);
             $("#txtEditEmailID").val(EmailId);
-
-
-
-            $("#myModalEditPopup").show();
+            $("#myModalEditPopup").show()
         }
 
         function ShowDeactivateForm(ResID, type, FlatNumber, DeactiveDate) {
@@ -757,10 +754,16 @@
                                                 <div class="col-sm-4 col-xs-12">
                                                    <%-- <div class="btn-group">--%>
                                                             <%--<li><a href="#" onclick="ShowEditForm('<%# Eval("UserID") %>' ,'<%# Eval("FirstName") %>' ,'<%# Eval("LastName") %>','<%# Eval("MobileNo") %>','<%# Eval("ParentName") %>','<%# Eval("EmailId") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Edit</a></li>--%>
-                                                            <button class="btn btn-primary" onclick="ShowAddTenant()">Tenant</button> 
+                                                            <button type="button"  class="btn btn-primary" 
+                                                               onclick="ShowAddTenant();" <%--onclick="ShowEditForm('<%# Eval("UserID") %>' ,'<%# Eval("FirstName") %>' ,'<%# Eval("LastName") %>','<%# Eval("MobileNo") %>','<%# Eval("ParentName") %>','<%# Eval("EmailId") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')"--%> >Tenant</button>
                                                              
                                                             <button class="btn btn-success" onclick="ShowDeactivateForm('<%# Eval("ResID") %>' ,'<%# Eval("Type") %>', '<%# Eval("FlatNumber") %>','<%# Eval("DeActiveDate") %>')">Deactivate</button>
                                                     <%--</div>--%>
+
+                                                    <asp:HiddenField ID="hiddenflatid" runat="server" Value='<%# Eval("FlatID") %>' />
+                                                    <asp:HiddenField ID="hiddenhouseid" runat="server" Value='<%# Eval("HouseID") %>' />
+                                                    <asp:HiddenField ID="hiddenUserid" runat="server" Value='<%# Eval("UserID") %>' />
+
                                                 </div>
 
                                             </div>
@@ -1047,9 +1050,7 @@
                                                           
                                                         </div>
                                                     </div>
-                                                    <asp:HiddenField ID="hiddenflatid" runat="server" Value="0" />
-                                                    <asp:HiddenField ID="hiddenhouseid" runat="server" Value="0" />
-                                                    <asp:HiddenField ID="hiddenUserid" runat="server" Value="0" />
+                                                   
                                                 </div>
 
                                                  <div class="row">
@@ -1082,11 +1083,11 @@
 
                                 <div class="panel-heading" style="height: 40px;">
 
-                                    <span>Edit Userpan>
+                                    <span>Edit User</span>
 
                                 </div>
                                 <div class="panel-body">
-                                    <form class="from-group" autocomplete="off">
+                                    <div class="from-group">
                                         <asp:UpdatePanel ID="UpdatePanel7" runat="server">
                                             <ContentTemplate>
                                                 <table>
@@ -1214,7 +1215,7 @@
                                         </asp:UpdatePanel>
 
 
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-2">

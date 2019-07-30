@@ -373,8 +373,10 @@ public partial class Totalusers : System.Web.UI.Page
             String Parentname = txtParentname.Text;
             String UserLogin = txtEmailId.Text;
             String Password = "Password@123";
-            string Resid =hiddenUserid.Value;
-            string FlatId = txtflatid.Text;
+            HiddenField FlatID = (HiddenField)residentsDataList.FindControl("hiddenflatid");
+            HiddenField UserID = (HiddenField)residentsDataList.FindControl("hiddenUserid");
+            string Userid = UserID.Value;
+            string FlatId = FlatID.Value;
             string HouseId = "0";
             string Actdate = txtact.Text;
             string Deactdate = txtdeact.Text;
@@ -388,7 +390,7 @@ public partial class Totalusers : System.Web.UI.Page
             //string SocietyID = muser.currentResident.SocietyID.ToString();//Added by Aarshi on 15 aug 2017
 
             string query = "INSERT INTO[dbo].[SocietyUser]([UserID],[FlatID],[Type],[ServiceType],[CompanyName],[ActiveDate],[DeActiveDate],[ModifiedDate],[SocietyID],[Status],[HouseID])"+
-                "values("+Resid+" ,"+FlatId+" ,'Tenant' ,0 ,'' ,'"+Actdate+"' ,'"+Deactdate+"' ,'"+DateTime.UtcNow+"' ,"+SessionVariables.SocietyID+" ,2 "+HouseId+")";
+                "values("+ Userid + " ,"+FlatId+" ,'Tenant' ,0 ,'' ,'"+Actdate+"' ,'"+Deactdate+"' ,'"+DateTime.UtcNow+"' ,"+SessionVariables.SocietyID+" ,2 "+HouseId+")";
             DataAccess daccess = new DataAccess();
             bool result=daccess.UpdateQuery(query);
 
@@ -493,9 +495,9 @@ public partial class Totalusers : System.Web.UI.Page
                 drpAddusrGendr.Text = ds.Tables[0].Rows[0]["Gender"].ToString(); 
                 //txtNewusername.Text = newUser.UserLogin;
                 txtParentname.Text = ds.Tables[0].Rows[0]["ParentName"].ToString();
-            hiddenflatid.Value = txtflatid.Text;
+            //hiddenflatid.Value = txtflatid.Text;
            // hiddenhouseid.Value = ds.Tables[0].Rows[0]["HouseID"].ToString();
-            hiddenUserid.Value = ds.Tables[0].Rows[0]["UserID"].ToString();
+            //hiddenUserid.Value = ds.Tables[0].Rows[0]["UserID"].ToString();
                 lblmobileavailbe.Text = string.Empty;//Added by Aarshi on 15 Aug 2017 to clear validation message when entered correct data
             lblEmailcheck.Text = "User Fetched";
             lblEmailcheck.ForeColor = System.Drawing.Color.Green;
