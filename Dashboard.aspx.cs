@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 using System.Data;
 public partial class Dashboard : System.Web.UI.Page
@@ -19,7 +14,7 @@ public partial class Dashboard : System.Web.UI.Page
             Response.Redirect("Login.aspx");
         }
 
-       // SetSummary();
+        // SetSummary();
         FlatData();
         //BillChart();
         SetComplaintData();
@@ -27,10 +22,10 @@ public partial class Dashboard : System.Web.UI.Page
         //ComplaintChart();
         NoticeData();
         PollData();
-      
+
         VendorData();
 
-        
+
 
     }
 
@@ -58,7 +53,7 @@ public partial class Dashboard : System.Web.UI.Page
                     {
                         Tenant = Convert.ToInt32(ds.Tables[0].Rows[i]["value"]);
                     }
-                    
+
                 }
 
                 Owner = TotalFlat - Tenant;
@@ -80,16 +75,16 @@ public partial class Dashboard : System.Web.UI.Page
 
     private void SetBillData()
     {
-        int TotalBills = 0, BillsPaid = 0, BillsDue = 0, CurrentBill = 0 ;
+        int TotalBills = 0, BillsPaid = 0, BillsDue = 0, CurrentBill = 0;
         try
         {
-           String billQuery = "Select BillType, Sum(AmountTobePaid) as amount, Count(PayID) as value , Sum (case when CurrentMonthBalance >0 and PaymentDueDate>GetDate() then 1 else 0 end) as status  from[dbo].[ViewLatestGeneratedBill] where SocietyID = " + SessionVariables.SocietyID + "  group by BillType";
-        
+            String billQuery = "Select BillType, Sum(AmountTobePaid) as amount, Count(PayID) as value , Sum (case when CurrentMonthBalance >0 and PaymentDueDate>GetDate() then 1 else 0 end) as status  from[dbo].[ViewLatestGeneratedBill] where SocietyID = " + SessionVariables.SocietyID + "  group by BillType";
+
             // String billQuery = "  Select Count(PayID) from [dbo].[ViewLatestGeneratedBill] where FlatNumber = '" + mUser.FlatNumber + "' and CurrentMonthBalance >0";
             DataAccess da = new DataAccess();
-           // int pendingBillCount = da.GetSingleValue(billQuery);
+            // int pendingBillCount = da.GetSingleValue(billQuery);
 
-          
+
             DataSet ds = da.GetData(billQuery);
             if (ds != null)
             {
@@ -113,7 +108,7 @@ public partial class Dashboard : System.Web.UI.Page
                 lblpending.Text = "Total Bills: " + TotalBills + "</br>" + "Bills Paid: " + BillsPaid + "</br>" + "Pending Bills: " + BillsDue;
 
 
-                string[] x =  new string[] { "Payable","Paid","Balance"};
+                string[] x = new string[] { "Payable", "Paid", "Balance" };
                 int[] y = new int[] { TotalBills, BillsPaid, BillsDue };
 
                 billChart.Series["Series1"].Points.DataBindXY(x, y);
@@ -163,11 +158,11 @@ public partial class Dashboard : System.Web.UI.Page
     //                BillsPaid = Convert.ToInt32(ds.Tables[0].Rows[i]["Paid"]);
     //                PreviousBalance = Convert.ToInt32(ds.Tables[0].Rows[i]["PreviousBalance"]);
     //                BillsDue = Convert.ToInt32(ds.Tables[0].Rows[i]["Balance"]);
-                 
+
 
     //            }
 
-               
+
     //            lblpending.Text = "Current Bills: " + CurrentBill + "</br>" + "Bills Paid: " + BillsPaid + "</br>" + "Pending Bills: " + BillsDue + "</br>" + "Previous Balance: " + PreviousBalance;
 
 
@@ -198,13 +193,14 @@ public partial class Dashboard : System.Web.UI.Page
             {
                 query = "  Select Count(LastStatus) as number, LastStatus   from [dbo].[ViewComplaintSummary] where month(LastAt) = month(CURRENT_TIMESTAMP) Group by LastStatus";
             }
-            else {
-               query = "  Select Count(LastStatus) as number, LastStatus   from [dbo].[ViewComplaintSummary] where month(LastAt) = month(CURRENT_TIMESTAMP) and ResidentID = "
-                + mUser.currentResident.ResID + " Group by LastStatus";
+            else
+            {
+                query = "  Select Count(LastStatus) as number, LastStatus   from [dbo].[ViewComplaintSummary] where month(LastAt) = month(CURRENT_TIMESTAMP) and ResidentID = "
+                 + mUser.currentResident.ResID + " Group by LastStatus";
             }
 
 
-                
+
 
             DataAccess da = new DataAccess();
             DataSet ds = da.GetData(query);
@@ -213,8 +209,8 @@ public partial class Dashboard : System.Web.UI.Page
                 DataTable dt = ds.Tables[0];
                 if (dt.Rows.Count == 0)
                 {
-                   // String yrQuery = "  Select Count(LastStatus) as number, LastStatus   from [dbo].[ViewComplaintSummary] where year(LastAt) = year(CURRENT_TIMESTAMP) and ResidentID = " 
-                      //  + mUser.currentResident.ResID + " Group by LastStatus";
+                    // String yrQuery = "  Select Count(LastStatus) as number, LastStatus   from [dbo].[ViewComplaintSummary] where year(LastAt) = year(CURRENT_TIMESTAMP) and ResidentID = " 
+                    //  + mUser.currentResident.ResID + " Group by LastStatus";
                     DataSet dsy = da.GetData(query);
                     if (dsy == null)
                     {
@@ -253,8 +249,8 @@ public partial class Dashboard : System.Web.UI.Page
 
     private void SetForumData()
     {
-        String forumQuery = "Select Top 3 * from dbo.ViewThreadSummaryNoImageCount where SocietyID="+SessionVariables.SocietyID+" order by UpdatedAt desc";
-       // String forumQuery = "Select Top 3 * from dbo.ViewThreadSummaryNoImageCount  order by UpdatedAt desc";
+        String forumQuery = "Select Top 3 * from dbo.ViewThreadSummaryNoImageCount where SocietyID=" + SessionVariables.SocietyID + " order by UpdatedAt desc";
+        // String forumQuery = "Select Top 3 * from dbo.ViewThreadSummaryNoImageCount  order by UpdatedAt desc";
 
         DataAccess da = new DataAccess();
         DataSet ds = da.GetData(forumQuery);
@@ -271,9 +267,9 @@ public partial class Dashboard : System.Web.UI.Page
                     {
                         forText = forText.Substring(0, 50);
                     }
-                    int ResID =  Convert.ToInt32(ds.Tables[0].Rows[i]["FirstResID"].ToString());
+                    int ResID = Convert.ToInt32(ds.Tables[0].Rows[i]["FirstResID"].ToString());
                     string Name = ds.Tables[0].Rows[i]["Initiater"].ToString();
-                    forumString += "<div style=\"margin:3px;\"> <img class=\"profile-image\" style=\"height:20px;width:20px;\" src='GetImages.ashx?ResID="+ ResID + "&Name="+ Name + "&UserType=Resident' /> &nbsp; "
+                    forumString += "<div style=\"margin:3px;\"> <img class=\"profile-image\" style=\"height:20px;width:20px;\" src='GetImages.ashx?ResID=" + ResID + "&Name=" + Name + "&UserType=Resident' /> &nbsp; "
                         + forText + "...  <br/></div>";
 
                 }
@@ -371,7 +367,7 @@ public partial class Dashboard : System.Web.UI.Page
         String notice = "";
         try
         {
-            String noticeQuery = "Select top 2 *  from dbo.Notifications where SocietyID = " + SessionVariables.SocietyID +" order by [Date] desc";
+            String noticeQuery = "Select top 2 *  from dbo.Notifications where SocietyID = " + SessionVariables.SocietyID + " order by [Date] desc";
             DataAccess da = new DataAccess();
             DataSet ds = da.GetData(noticeQuery);
             if (ds != null)
@@ -379,17 +375,17 @@ public partial class Dashboard : System.Web.UI.Page
                 int length = ds.Tables[0].Rows.Count;
                 if (length > 0)
                     for (int i = 0; i < length; i++)
-                {
+                    {
                         String notText = (ds.Tables[0].Rows[i]["Notification"]).ToString();
 
                         if (notText.Length > 50)
                         { notice = notice + notText.Substring(0, 50) + "...<br/>" + "<br/>"; }
                         else
                         { notice = notice + notText + "...<br/>" + "<br/>"; }
-                  
 
 
-                }
+
+                    }
                 else
                 {
                     notice = "Notice Box Empty";
@@ -398,14 +394,14 @@ public partial class Dashboard : System.Web.UI.Page
                 lblTopNotice.Text = notice;
 
             }
-           
+
         }
         catch (Exception ex)
         {
 
         }
     }
-    
+
     private void PollData()
     {
         String Poll = "";
@@ -417,14 +413,14 @@ public partial class Dashboard : System.Web.UI.Page
             if (ds != null)
             {
                 int length = ds.Tables[0].Rows.Count;
-                if (length>0)
-                for (int i = 0; i < length; i++)
-                {
+                if (length > 0)
+                    for (int i = 0; i < length; i++)
+                    {
 
-                    Poll = Poll + (ds.Tables[0].Rows[i]["Question"]).ToString() + "<br/>" + "<br/>";
+                        Poll = Poll + (ds.Tables[0].Rows[i]["Question"]).ToString() + "<br/>" + "<br/>";
 
 
-                }
+                    }
                 else
                 {
                     Poll = "Polling Data are Empty";
@@ -433,14 +429,14 @@ public partial class Dashboard : System.Web.UI.Page
                 lblTopPoll.Text = Poll;
             }
         }
-        
+
         catch (Exception ex)
         {
 
         }
     }
-  
-private void VendorData()
+
+    private void VendorData()
     {
         String Offer = "";
         try
@@ -461,14 +457,15 @@ private void VendorData()
 
                     }
                 }
-                else {
+                else
+                {
 
                     Offer = "Currently,no any vendor added in your society";
                 }
 
 
                 lblOffer.Text = "No offers are available now";
-           
+
             }
             else
             {
