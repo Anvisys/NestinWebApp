@@ -1,4 +1,4 @@
-﻿nnn<%@ Page Language="C#" AutoEventWireup="true" CodeFile="NewUser.aspx.cs" Inherits="NewUser" %>
+﻿nnnn<%@ Page Language="C#" AutoEventWireup="true" CodeFile="NewUser.aspx.cs" Inherits="NewUser" %>
 
 <!DOCTYPE html>
 

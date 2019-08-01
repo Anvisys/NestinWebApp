@@ -97,7 +97,7 @@
             $("#approveFlatOwnerModal").hide();
         }
 
-        HiddenField3
+ 
 
         function AssignTenant(ID, FlatNumber, BHK, FlatArea, Floor, Block) {
             $("[id*=HiddenField3]").val("Tenant");
@@ -180,8 +180,39 @@
 
         });
 
+        $(function () {
+            alert(186);
+            $("#txtFlltsOwnernme").autocomplete({
+                source: function (request, response) {
+                    var param = {
+                        empName: $("#txtFlltsOwnernme").val()
+                    };
+                    $.ajax({
 
-        
+                        url: "Flats.aspx/GetOwnerName",
+                        data: JSON.stringify(param),
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function (data) { return data; },
+                        success: function (data) {
+                          
+                            response($.map(data.d, function (item) {
+                                return {
+                                    value:item
+                                }
+                            }))
+                        },
+                        error: function (XMLHttpRequest, textstatus, errorthrown) {
+                            var err = eval("(" + XMLHttpRequest + ")");
+                            alert(err.Message);
+                             console.log("Ajax Error!");
+                        }
+                    });
+                },
+                minLength: 2
+            });
+        });
 
     </script>
 

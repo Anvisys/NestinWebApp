@@ -177,6 +177,9 @@ public partial class NewFlats : System.Web.UI.Page
 
     protected void txtAddfltEmail_TextChanged(object sender, EventArgs e)
     {
+        assignFlatNumber.Enabled = false;
+        assignFlatBlock.Enabled = false;
+        assignFlatFloor.Enabled = false;
         DataAccess dacess = new DataAccess();
         try
         {
