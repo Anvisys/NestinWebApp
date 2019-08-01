@@ -37,18 +37,23 @@
 <body style="background-color:#f7f7f7;"> 
 
           <div class="container-fluid">
-           <div class="row">
-                     
+           <div class="row">          
             <div  class="col-xs-12 col-sm-12">
-
                <form id="form1" runat="server">
                 <div class="container-fluid">
-                    <div class="row">
-                       <div class="col-sm-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red; text-align:center; margin-top: 20%;">
-                            <h4>  <asp:label ID="lblmessage" runat="server" Text="Reports :"></asp:label></h4>
-                        </div>
-                    </div>
-
+                         <div class="row" style="height: 50px;">
+                            <div class="col-sm-3  col-xs-2">
+                                <div>
+                                    <h4 class="pull-left ">Report :</h4>
+                               </div>
+                            </div>
+                         </div>
+                               <div class="row">
+                                <div class="col-md-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red !important; text-align:center; margin-top: 20%;">
+                                    <asp:Label ID="lblmessage" runat="server"></asp:Label>
+                                </div>
+                               </div>
+                     
                     <div class ="row" style="margin-top:5px;" id="reports" runat="server">
                         <div class="col-sm-6 hcenter" style="margin-top:10px;" >
                                <div class="layout_shadow_box">
