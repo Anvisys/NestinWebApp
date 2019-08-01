@@ -102,6 +102,7 @@
                 if (selectedOption == "Daily" && selectedType=='Two Way') {
                     $(".divarrive").css("display", 'none');
                     $(".divreturn").css("display", 'none');
+                    $("#pool_type").prop("disabled" ,true);
             //        $("#pool_cycle").prop('disabled', false); 
             //        $("#pool_type").val("Two Way");
             //        $("#pool_type").prop('disabled', true); 
@@ -112,6 +113,7 @@
                     $(".divarrive").css("display", 'block');
                     $("#pool_cycle").prop("disabled", false);
                     $("#pool_cycle").val("One Time");
+                    $("#pool_type").prop("disabled", false);
             //        $("#pool_cycle").prop("disabled", false);
             //        $("#pool_cycle").val("Two Way");
             //        $("#pool_cycle").val("One Time");
@@ -1064,36 +1066,28 @@
             CarPool.InitiatedDateTime = GetDateTimeinISO(new Date());
             var date = $("#date_when").val();
             var time = $("#time_when").val();
-            if (date == null || time == null) {
-                alert("ok");
-                var today = new Date();
-                date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-                alert("in "+date);
-
-                if(today.getMinutes()<10)
-                    time = today.getHours() + ":" + "0" + today.getMinutes();
-                else
-                    time = today.getHours() + ":" + today.getMinutes();
+            var datetime;
+            if (date == '' || time == '') {
+                //alert("ok");
+                
+                datetime = datetimeformat();
             }
-            var datetime = date + "T" + time + ":00";
+            else
+             datetime = date + "T" + time + ":00";
+            alert("in " + datetime);
             CarPool.JourneyDateTime = datetime;
             var date_return = $("#date_return").val();
             var time_return = $("#time_return").val();
+            var datetime_return;
 
             if (date_return == '' || time_return == '') {
-                alert("1036");
-                var today = new Date();
-                date_return = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-                alert("in "+date_return);
 
-                if(today.getMinutes()<10)
-                    time_return = today.getHours() + ":" + "0" + today.getMinutes();
-                else
-                    time_return = today.getHours() + ":" + today.getMinutes();
+                
+                datetime_return = datetimeformat();
             }
-
-            var datetime_return = date_return + "T" + time_return + ":00";
-
+            else
+             datetime_return = date_return + "T" + time_return + ":00";
+            alert(datetime_return);
             CarPool.ReturnDateTime = datetime_return;
 
             CarPool.VehicleType = $("#vehicle_type").val();
@@ -1131,10 +1125,34 @@
                 }
 
             });
+
+            
             $("#ProgressBar").hide();
         }
 
+        function datetimeformat() {
+            var today = new Date();
+            var hrs = today.getHours;
+            var mins = today.getMinutes;
+            var day = today.getDate;
+            var month = today.getMonth;
+            var year = today.getFullYear;
 
+            if (day < 10)
+                day = "0" + day;
+            if (month < 10)
+                day = "0" + day;
+
+
+            if (hrs < 10)
+                hrs = "0" + hrs;
+            if (mins < 10)
+                mins = "0" + hrs;
+
+            var datetime = year + "-" + month + "-" + day + "T" + hrs + ":" + mins + ":" + "00";
+            alert(datetime);
+            
+        }
     </script>
 
    <script id="inventoryData">
