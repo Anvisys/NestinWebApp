@@ -82,6 +82,7 @@
                     $(".divreturn").css("display", 'none');
                     $("#pool_cycle").prop('disabled', true); 
                     $("#pool_cycle").val("One Time");
+                    
                 }
 
                 else {
@@ -89,7 +90,8 @@
                     $("#pool_cycle").prop("disabled", false);
                     $("#pool_cycle").val("Two Way");
                     $("#pool_cycle").val("One Time");
-                     $(".divarrive").css("display", 'block');
+                    $(".divarrive").css("display", 'block');
+                    
                 }
                    
             });
@@ -102,6 +104,7 @@
                 if (selectedOption == "Daily" && selectedType=='Two Way') {
                     $(".divarrive").css("display", 'none');
                     $(".divreturn").css("display", 'none');
+                     $("#pool_type").prop('disabled', true); 
             //        $("#pool_cycle").prop('disabled', false); 
             //        $("#pool_type").val("Two Way");
             //        $("#pool_type").prop('disabled', true); 
@@ -112,6 +115,7 @@
                     $(".divarrive").css("display", 'block');
                     $("#pool_cycle").prop("disabled", false);
                     $("#pool_cycle").val("One Time");
+                     $("#pool_type").prop('disabled', false); 
             //        $("#pool_cycle").prop("disabled", false);
             //        $("#pool_cycle").val("Two Way");
             //        $("#pool_cycle").val("One Time");
@@ -1064,10 +1068,18 @@
             CarPool.InitiatedDateTime = GetDateTimeinISO(new Date());
             var date = $("#date_when").val();
             var time = $("#time_when").val();
-            if (date == null || time == null) {
-                alert("ok");
-                var today = new Date();
-                date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+           
+            if (date == '' || time == '') {
+                 var today = new Date();
+                var m;
+                var d;
+                if (today.getMonth() + 1 < 10)
+                    m = "0" +( today.getMonth() + 1);
+
+                    if (today.getDate()  < 10)
+                    d = "0" + today.getDate() ;
+           
+                date = today.getFullYear()+'-'+m+'-'+d;
                 alert("in "+date);
 
                 if(today.getMinutes()<10)
@@ -1076,14 +1088,22 @@
                     time = today.getHours() + ":" + today.getMinutes();
             }
             var datetime = date + "T" + time + ":00";
+            alert("datetime journey"+datetime)
             CarPool.JourneyDateTime = datetime;
             var date_return = $("#date_return").val();
             var time_return = $("#time_return").val();
 
             if (date_return == '' || time_return == '') {
-                alert("1036");
                 var today = new Date();
-                date_return = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var m;
+                var d;
+                if (today.getMonth() + 1 < 10)
+                    m = "0" + (today.getMonth() + 1);
+
+                    if (today.getDate()  < 10)
+                    d = "0" + today.getDate() ;
+                
+                date_return = today.getFullYear()+'-'+m+'-'+d;
                 alert("in "+date_return);
 
                 if(today.getMinutes()<10)

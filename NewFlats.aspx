@@ -179,8 +179,10 @@
 
         });
 
+        function RemoveTenat
+
         $(function () {
-            alert(186);
+           // alert(186);
             $("#txtFlltsOwnernme").autocomplete({
                 source: function (request, response) {
                     var param = {
