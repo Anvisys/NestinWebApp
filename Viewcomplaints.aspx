@@ -609,19 +609,19 @@
                     </div>
 
                     <div class="row" style="margin-top: 10px;">
-                        <div class="col-sm-3 hidden-xs">
+                        <div class="col-sm-4 hidden-xs">
                             <h4>Complaints:</h4>
                          
                         </div>
                         
-                        <div class="col-sm-3 col-xs-12" style="align-content: center; text-align:center; margin: auto;" runat="server" id="topnav">
+                        <div class="col-sm-4 col-xs-12" style="align-content: center; text-align:center; margin: auto;" runat="server" id="topnav">
                             <asp:DropDownList EnableViewState="true" ID="drpVCompStatusF" runat="server" CssClass="search-dropdown">
                             </asp:DropDownList>
                             <asp:TextBox ID="txtVcompFlatSrch" runat="server" CssClass="search-text" placeholder="Flat Number" OnTextChanged="txtVcompFlatSrch_TextChanged"></asp:TextBox>
                             <asp:LinkButton ID="ImgCompSearch" runat="server" CssClass="search-button" BackColor="Transparent" ForeColor="white" OnClick="ImgCompSearch_Click"> <span class="glyphicon glyphicon-search"></span></asp:LinkButton>
                         </div>
 
-                        <div class="col-sm-3 col-xs-2" style="display: none;">
+                        <div class="col-sm-4 col-xs-2" style="display: none;">
                             <asp:DropDownList ID="drpComplaintDateFilter" runat="server" OnSelectedIndexChanged="drpComplaintDateFilter_SelectedIndexChanged" CssClass="form-control">
                                 <asp:ListItem Selected="True">Current month</asp:ListItem>
                                 <asp:ListItem>Last month</asp:ListItem>
@@ -631,7 +631,7 @@
 
                             </asp:DropDownList>
                         </div>
-                        <div class="col-sm-3 col-xs-2">
+                        <div class="col-sm-4 col-xs-2" style="margin-left:200px;">
                             <button type="button" id="btnAddComplaint" style="margin-top: 0px;" class="pull-right btn btn-primary btn-sm">Add Complaint</button>
                         </div>
                     </div>

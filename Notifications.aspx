@@ -312,7 +312,7 @@
                         <div class="row" style="height: 50px;">
                             <div class="col-sm-3  col-xs-2">
                                 <div>
-                                    <p class="pull-left" style="margin-top: 16px; font-size: 15px; color: #000;">Notice: </p>
+                                    <h4 class="pull-left ">Notice :</h4>
                                 </div>
                             </div>
                             <div id="myDIV" class="col-sm-6  col-xs-6" style="margin-top: 10px; text-align: center;">

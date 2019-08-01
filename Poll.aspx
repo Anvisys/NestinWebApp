@@ -339,6 +339,7 @@
                                     <button id="Add_Poll" type="button" style="margin-top: 0px;" class="btn btn-primary pull-right btn-sm">Add Poll</button>
                                 </div>
                             </div>
+                            </div>
                             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                             <div class="row">
                                 <div class="col-sm-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red !important; text-align:center; margin-top: 20%;">

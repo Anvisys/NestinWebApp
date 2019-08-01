@@ -906,10 +906,9 @@ hr {
                                 <asp:DropDownList ID="drpvendorfilter" CssClass="layout_ddl_filter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="drpvendorfilter_SelectedIndexChanged">
                                 </asp:DropDownList>
                             </div>
-                            <div class=" hidden-xs col-sm-3  " style="vertical-align: middle;">
+                            <div class=" col-sm-3 " style="vertical-align: middle;">
                                 <div>
-                                    <a id="Add_Vendor" class="Add_Button pull-right btn btn-primary btn-sm fa fa-plus"   style="visibility: hidden;margin-top:10px; cursor: pointer;">Add Vendor</a>
-
+                                    <a id="Add_Vendor" class="Add_Button pull-right btn btn-primary btn-sm fa fa-plus" style="margin-top:10px; cursor: pointer;">Add Vendor</a>
                                 </div>
                             </div>
                         </div>

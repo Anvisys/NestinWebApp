@@ -798,7 +798,10 @@
                          <div class="row" style="margin-top:15px;">
                                
                              <div class="col-md-3 col-sm-3  hidden-xs">
-                                     <div><h4 class="pull-left ">Visitor </h4></div>
+                                     <div>
+                                         <h4 class="pull-left ">Visitor :</h4>
+
+                                     </div>
                                  </div>
 
                                  <div class="col-md-6 col-sm-6 col-xs-6" style="margin-top:-20px" id="pagination">                           
@@ -817,7 +820,6 @@
                                          <button id="btnAddVisitor" class="btn btn-primary btn-sm" type="button"><i class="fa fa-plus"></i> Add Visitor</button>
                                          <button id="btnVerifyVisitor"  class="btn btn-primary btn-sm" type="button"><i class="fa fa-check"></i> Verify</button>
                                  </div>
-
                              </div>
    
        
