@@ -112,6 +112,7 @@
         }
 
         function AssignOwner(ID, FlatNumber, BHK, FlatArea, Floor, Block) {
+            //alert();
             $("[id*=HiddenField3]").val("Owner");
 
             $("[id*=HiddenField1]").val(ID);
@@ -137,12 +138,6 @@
             $("[id*=assignFlatFloor]").val("");
             $("#newAssignFlatModal").hide();
         }
-
-
-
-
-
-        //*****   JQuery Functions
 
         $(function () {
             $("#txtFlatNumberSearch").autocomplete({
@@ -180,10 +175,26 @@
 
         });
 
-        function RemoveTenat
+        function RemoveTenant(FlatID, FlatNumber, Block, OwnerUserID, FirstName, LastName) {
+
+            $("[id*=HiddenField1]").val(FlatID);
+            $("[id*=HiddenField2]").val(OwnerUserID);
+
+          /*  $("#removeFlatNumber").text(FlatNumber);
+            $("#removeFlatBlock").text(Block);
+            $("#removeOwnerName").text(FirstName + " " + LastName);*/
+            $("#modalremovetenant").show();
+
+
+        }
 
         $(function () {
-           // alert(186);
+
+            $("#removeno").click(function () {
+                $("#modalremovetenant").hide();
+
+            });
+            
             $("#txtFlltsOwnernme").autocomplete({
                 source: function (request, response) {
                     var param = {
@@ -328,7 +339,7 @@
                                         onclick='<%#"RemoveOwner(" + Eval("OwnerResID")+",\""+ Eval("FlatNumber")+"\",\""+ Eval("Block") +"\","+ Eval("OwnerUserID")+",\""+ Eval("OwnerFirstName")+"\",\""+ Eval("OwnerLastName")+ "\")"%>' runat="server" type="button">
                                         Remove Owner</button>
                                     <button id="btnAssign" class="btn-sm btn btn-warning"
-                                        onclick='<%#"AssignOwner(" + Eval("ID") +",\""+ Eval("FlatNumber")+"\",\""+ Eval("BHK")+"\",\""+ Eval("FlatArea")+"\",\""+ Eval("Floor")+"\",\""+ Eval("Block")+ "\")"%>' runat="server" type="button">
+                                        onclick='<%#"AssignOwner(" + Eval("ID") +",\""+ Eval("FlatNumber")+"\",\""+ Eval("BHK")+"\",\""+ Eval("FlatArea")+"\",\""+ Eval("Floor")+"\",\""+ Eval("Block")+ "\");"%>' runat="server" type="button">
                                         Assign Owner</button>
 
                                     <button id="btnApprove" class="btn-sm btn btn-primary"
@@ -656,13 +667,13 @@
             </div>
            
             <!-- Remove tenant -->
-            <div class="modal" id="removetenant">
+            <div class="modal" id="modalremovetenant">
                 <div class="container-fluid" style="width: 500px;">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <asp:Label runat="server" ID="Label13">Remove Tenant</asp:Label>
-                            <button class="btn btn-danger" id="removeyes" >Yes</button>
-                            <button class="btn btn-success" id="removeno" >no</button>
+                            <asp:Button CssClass="btn btn-danger" ID="removeyes" runat="server" Text="yes" OnClick="removeno_Click" />
+                            <button class="btn btn-success" id="removeno">no</button>
                         </div>
                     </div>
                 </div>
