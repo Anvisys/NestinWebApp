@@ -181,8 +181,7 @@
         });
 
         $(function () {
-            alert(186);
-            $("#txtFlltsOwnernme").autocomplete({
+                     $("#txtFlltsOwnernme").autocomplete({
                 source: function (request, response) {
                     var param = {
                         empName: $("#txtFlltsOwnernme").val()
@@ -253,7 +252,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12" style="font-size: 20px !important; font-family: 'Times New Roman', Times, serif !important; color: red; text-align: center; margin-top: 20%;">
+            <div class="col-sm-12" style="font-size: 20px !important; font-family: 'Times New Roman', Times, serif !important; color: red; text-align: center;">
                 <asp:Label ID="lblFlatGridEmptyText" runat="server"></asp:Label><br />
             </div>
             <br />
@@ -367,10 +366,8 @@
                     </asp:DataList>
 
                     <div class="row">
-
                         <div class="col-xs-4" style="text-align: center; padding: 8px;">
                             <asp:Button ID="btnprevious" CausesValidation="false" runat="server" Font-Bold="true" Text="Prev" Height="31px" Width="60px" OnClick="btnprevious_Click" />
-
                         </div>
                         <div class="col-xs-4">
                             <asp:Label ID="lblPage" runat="server" Font-Size="Small" ForeColor="#f9f9f9f"></asp:Label>
