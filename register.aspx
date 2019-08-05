@@ -98,14 +98,7 @@
                             $('#lblPasswordRes').hide();
                             $("#Forgotpass").show();
                         }
-                        //else {
-                        //    alert(response.d);
-                        //    var js = jQuery.parseJSON(response.d);
-                        //    alert(JSON.stringify(js));
-                        //    $("#topNav").hide();
-                        //    $("#loginModal").hide();
-                        //    $("#select_flat").show();
-                        //}
+                       
                     }
                 });
                 return false;
@@ -160,10 +153,8 @@
                 Gender = "Female";
             }
 
-
-            //alert(visitDate);
             var start = new Date();
-            // alert(start);
+         
 
             var month = start.getMonth() + 1;
 
@@ -279,12 +270,11 @@
                 Gender = "Female";
             }
 
-            //   alert(1);
-            //alert(visitDate);
+          
             var start = new Date();
             var startDateForDBInsertion = GetDateTimeinISO(start);
 
-            // alert(start);
+           
 
             var month = start.getMonth() + 1;
 
@@ -328,7 +318,10 @@
                 strEndDay = endDay.toString();
             }
 
-            //alert(strEndDay);
+        
+
+
+            (strEndDay);
 
 
             var strStartDate = start.getFullYear() + "-" + strMonth + "-" + strDay + "T00:00:00";
@@ -337,17 +330,16 @@
             var strEndDate = endDate.getFullYear() + "-" + strEndMonth + "-" + strEndDay + "T00:00:00";
 
             document.getElementById("post_loading").style.display = "block";
-            //    alert(3);
+          
             var strURL = api_url + "/api/User/Add/Demo";
             //var strURL = "visitor.aspx/AddVisitor";
-            //   alert(4);
+          
             var user = "{\"UserLogin\":\"" + email + "\",\"Password\":\"Password@123\",\"MiddleName\":\"K\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname
                 + " \",\"MobileNumber\":\"" + mobile + "\",\"StartTime\":\"" + startDateForDBInsertion + "\",\"EndTime\":\"" + endDateForDBInsertion +
                 "\",\"EmailID\":\"" + email + "\",\"Gender\":\"" + Gender + "\",\"ParentName\":\"" + parentname + "\",\"Address\":\"" + address
                 + "\",\"SocietyID\":\"" + 1 + "\",\"UserType\":\"Demo\"}";
 
-            //    var user1 = "{\"UserLogin\":\"" + email + "\"}";
-            //  alert(user);
+          
 
             var url = "";
             if (role == "Demo") {
@@ -360,7 +352,7 @@
             }
 
             var jData = JSON.parse(user)
-                  alert(url);
+             
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -383,7 +375,7 @@
                         alert('Mobile Number or Email is in use, Please go to login');
                     }
                     else {
-                        alert('Server Error');
+                        alert('Try again, Server Error');
                     }
 
                 },
@@ -627,7 +619,7 @@
     <section id="contact">
         <div class="jumbotron text-center" style="height: 120px;">
             <h3 style="padding-top: 40px; color: #ffffff;">
-                <lable id="lblRegisterUser"></lable>
+                <label id="lblRegisterUser" style="color: black;"></label>
             </h3>
 
 
@@ -646,13 +638,13 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Email</label>
                                     <div class="col-sm-9">
-                                        <input type="email" name="Email" class="form-control form-control-sm" id="email" placeholder="Enter Email" required autocomplete="off" />
+                                        <input type="email" name="Email" class="form-control form-control-sm" id="email" placeholder="Enter Email"  autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Mobile No.</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="Mobile" class="form-control form-control-sm" id="mobile" placeholder="Enter Mobile No." pattern="^\d{10}$" required maxlength="10" autocomplete="off" />
+                                        <input type="text" name="Mobile" class="form-control form-control-sm" id="mobile" placeholder="Enter Mobile No." title="Mobile Number" pattern="^\d{10}$" required maxlength="10" autocomplete="off" />
                                         <span id="errmsg"></span>
                                     </div>
                                 </div>
