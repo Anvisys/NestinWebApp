@@ -29,6 +29,9 @@ public partial class NewFlats : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            assignFlatNumber.Enabled = false;
+            assignFlatFloor.Enabled = false;
+            assignFlatBlock.Enabled = false;
             this.ViewState["vs"] = 0;
             pos = (int)this.ViewState["vs"];
             FillFlatdata();
@@ -306,9 +309,17 @@ public partial class NewFlats : System.Web.UI.Page
 
         if (owner != null)
         {
-            if (owner.Tables[0].Rows.Count > 0)
+            if (owner.Tables[0].Rows.Count > 0)  
             {
-                String Name = owner.Tables[0].Rows[0]["OwnerFirstName"].ToString() + owner.Tables[0].Rows[0]["OwnerLastName"].ToString();
+                String Name = "";
+                try
+                {
+                     Name = owner.Tables[0].Rows[0]["FirstName"].ToString() + owner.Tables[0].Rows[0]["LastName"].ToString();
+                }
+                catch (Exception ex)
+                {
+
+                }
 
                 lblUserCheck.Text = "Selected Flat Already has an Active User " + Name;
             }
@@ -469,4 +480,32 @@ public partial class NewFlats : System.Web.UI.Page
 
 
 
+
+    protected void removeno_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int resid = Convert.ToInt32(HiddenField1.Value);
+            int userid = Convert.ToInt32(HiddenField2.Value);
+
+            Resident deactresident = new Resident();
+            bool result = deactresident.DeactivateResident(DateTime.UtcNow, resid);
+
+            if (result)
+            {
+                FillFlatdata();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:HideRemoveOwner()", true);
+            }
+            else
+            {
+                lblRemoveOwnerMessage.ForeColor = System.Drawing.Color.Red;
+                lblRemoveOwnerMessage.Text = "Could not remove owner try later or Contact Admin";
+            }
+        }
+        catch (Exception ex)
+        {
+
+            
+        }
+    }
 }

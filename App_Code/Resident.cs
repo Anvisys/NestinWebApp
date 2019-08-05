@@ -152,8 +152,8 @@ public class Resident
         {
 
             DataAccess dacess = new DataAccess();
-            String UserSearchQuery = "select UserID, FirstName, LastName from " + CONSTANTS.View_SocietyUser 
-                + " Where Status = 2 and ActiveDate < GetDate() and DeActiveDate > GetDate() and FlatID = " + FlatId + " and SocietyID = " + SocietyId;
+            String UserSearchQuery = "select UserID, FirstName, LastName from ViewSocietyUsers "
+                + " Where statusID = 2 and ActiveDate < GetDate() and DeActiveDate > GetDate() and FlatID = " + FlatId + " and SocietyID = " + SocietyId;
 
            DataSet dsResidentUserFlat = dacess.GetData(UserSearchQuery);
          

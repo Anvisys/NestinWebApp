@@ -1009,3 +1009,6 @@ Addflat:btnAddflatSubmit_Click ExceptionObject reference not set to an instance 
 Addflat:btnAddflatSubmit_Click ExceptionExecuteScalar requires an open and available Connection. The connection's current state is closed.28-06-2019 12:39:56
 Addflat:btnAddflatSubmit_Click ExceptionUnclosed quotation mark after the character string '11)'.
 Incorrect syntax near '11)'.28-06-2019 12:43:54
+Addflat:btnAddflatSubmit_Click ExceptionConversion failed when converting date and/or time from character string.29-07-2019 09:07:44
+Addflat:btnAddflatSubmit_Click ExceptionConversion failed when converting date and/or time from character string.29-07-2019 09:11:52
+Addflat:btnAddflatSubmit_Click ExceptionConversion failed when converting date and/or time from character string.29-07-2019 09:18:48
