@@ -59,7 +59,7 @@
         var ResId;
 
         $(document).ready(function () {
-            window.parent.FrameSourceChanged();
+          //  window.parent.FrameSourceChanged();
           let params = (new URL(document.location)).searchParams;
 
             if (params != null) {
