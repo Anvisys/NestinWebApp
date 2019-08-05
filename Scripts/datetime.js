@@ -5,11 +5,11 @@
     var dMin = "00";
     var dSec = "00";
   //  var datetime = new Date(datetime);
-    alert(datetime+"  "+jQuery.type(datetime));
+    //alert(datetime+"  "+jQuery.type(datetime));
     var dYear = datetime.getFullYear();
-    alert(dYear);
+    //alert(dYear);
     var month = datetime.getUTCMonth();
-    alert(month);
+    //alert(month);
     if (month < 10) {
 
         dMonth = "0" + month;
@@ -18,7 +18,7 @@
         dMonth = month;
     }
     var day = datetime.getUTCDay();
-    alert(day);
+    //alert(day);
     if (day < 10) {
         dDay = "0" + day;
     }
@@ -49,7 +49,7 @@
     else {
         dSec = Sec;
     }
-    alert(dYear + "-" + dMonth + "-" + dDay + "T" + dHour + ":" + dMin + ":" + dSec);
+    //alert(dYear + "-" + dMonth + "-" + dDay + "T" + dHour + ":" + dMin + ":" + dSec);
     return dYear + "-" + dMonth + "-" + dDay + "T" + dHour + ":" + dMin + ":" + dSec;   
 }
 
@@ -73,7 +73,7 @@ function DisplayDateTime(inputdate) {
     var NewFormatDate;
     var date = new Date(inputdate);
 
-    //alert(date);
+ 
     var Currentdate = new Date();
 
     if (date.getDate() == Currentdate.getDate()) {

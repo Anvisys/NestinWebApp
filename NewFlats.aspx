@@ -212,7 +212,8 @@
                         },
                         error: function (XMLHttpRequest, textstatus, errorthrown) {
                             var err = eval("(" + XMLHttpRequest + ")");
-                            alert(err.Message);
+
+                            (err.Message);
                              console.log("Ajax Error!");
                         }
                     });
