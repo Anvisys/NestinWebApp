@@ -97,7 +97,15 @@
             $("#approveFlatOwnerModal").hide();
         }
 
- 
+        function RemoveTenant(FlatID, FlatNumber, Block, OwnerUserID, FirstName, LastName) {
+
+              $("[id*=HiddenField1]").val(FlatID);
+              $("[id*=HiddenField2]").val(OwnerUserID);
+              alert("Remove Tenant");
+             $("#modalremovetenant").show();
+              //document.getElementById('modalremovetenant').setAttribute('display' ,'block');
+
+            } 
 
         function AssignTenant(ID, FlatNumber, BHK, FlatArea, Floor, Block) {
             $("[id*=HiddenField3]").val("Tenant");
@@ -173,19 +181,6 @@
 
 
         });
-
-        function RemoveTenant(FlatID, FlatNumber, Block, OwnerUserID, FirstName, LastName) {
-
-            $("[id*=HiddenField1]").val(FlatID);
-            $("[id*=HiddenField2]").val(OwnerUserID);
-
-          /*  $("#removeFlatNumber").text(FlatNumber);
-            $("#removeFlatBlock").text(Block);
-            $("#removeOwnerName").text(FirstName + " " + LastName);*/
-            $("#modalremovetenant").show();
-
-
-        }
 
         $(function () {
 
