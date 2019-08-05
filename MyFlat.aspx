@@ -1092,6 +1092,7 @@
             CarPool.JourneyDateTime = datetime;
             var date_return = $("#date_return").val();
             var time_return = $("#time_return").val();
+            var datetime_return;
 
             if (date_return == '' || time_return == '') {
                 var today = new Date();
@@ -1114,6 +1115,12 @@
 
             var datetime_return = date_return + "T" + time_return + ":00";
 
+                
+                datetime_return = datetimeformat();
+            }
+            else
+             datetime_return = date_return + "T" + time_return + ":00";
+            alert(datetime_return);
             CarPool.ReturnDateTime = datetime_return;
 
             CarPool.VehicleType = $("#vehicle_type").val();
@@ -1151,10 +1158,34 @@
                 }
 
             });
+
+            
             $("#ProgressBar").hide();
         }
 
+        function datetimeformat() {
+            var today = new Date();
+            var hrs = today.getHours;
+            var mins = today.getMinutes;
+            var day = today.getDate;
+            var month = today.getMonth;
+            var year = today.getFullYear;
 
+            if (day < 10)
+                day = "0" + day;
+            if (month < 10)
+                day = "0" + day;
+
+
+            if (hrs < 10)
+                hrs = "0" + hrs;
+            if (mins < 10)
+                mins = "0" + hrs;
+
+            var datetime = year + "-" + month + "-" + day + "T" + hrs + ":" + mins + ":" + "00";
+            alert(datetime);
+            
+        }
     </script>
 
    <script id="inventoryData">

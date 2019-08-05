@@ -480,4 +480,32 @@ public partial class NewFlats : System.Web.UI.Page
 
 
 
+
+    protected void removeno_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int resid = Convert.ToInt32(HiddenField1.Value);
+            int userid = Convert.ToInt32(HiddenField2.Value);
+
+            Resident deactresident = new Resident();
+            bool result = deactresident.DeactivateResident(DateTime.UtcNow, resid);
+
+            if (result)
+            {
+                FillFlatdata();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:HideRemoveOwner()", true);
+            }
+            else
+            {
+                lblRemoveOwnerMessage.ForeColor = System.Drawing.Color.Red;
+                lblRemoveOwnerMessage.Text = "Could not remove owner try later or Contact Admin";
+            }
+        }
+        catch (Exception ex)
+        {
+
+            
+        }
+    }
 }
