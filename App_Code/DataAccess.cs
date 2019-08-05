@@ -221,7 +221,7 @@ public class DataAccess
             Object value = cmd.ExecuteScalar();
             return value;
         }
-        catch
+        catch(Exception ex)
         {
             return null;
         }

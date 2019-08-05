@@ -545,6 +545,12 @@ public class User
             }
             else
             {
+                //Sagar Added
+                if(UserLogin.Equals("") && EmailID.Equals(""))
+                {
+                    UserLogin = MobileNumber;
+                }
+                //Sagar Added
                 string strEncPassword = this.EncryptPassword(EmailID.ToLower(), Password);
 
                 String UpdateQuery = "Insert into " + CONSTANTS.Table_Users
