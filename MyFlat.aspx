@@ -349,6 +349,8 @@
 
         }
 
+        //For tenant popup//
+
         function PopulateAddModal2() {
             var url = api_url + "/api/RentInventory/Find/" + FlatID + "/0";
             // var url = api_url + "/api/RentInventory/Find";
@@ -802,6 +804,21 @@
         }
 
 
+        //jQuery(document).ready(function () {
+
+        //    //$("#chkUser").click(function () {
+        //    //    $('#inAddTFirstName,#inAddTLastName,#inAddTParentName,#mgender,#inAddTAddress,#inAddPassword,#inTConfirmPassword').attr("disabled", $(this).is(":checked"));
+        //    //    if ($(this).is(":checked")) {
+
+        //    //        chkExistingUser = true;
+        //    //    }
+        //    //    else {
+
+        //    //        chkExistingUser = false;
+        //    //    }
+        //    //});
+        //    checkbox();
+        //});
 
         function checkbox() {
             //  alert("672 ==>> " + jQuery.type($("#chkUser").is(":checked")));
@@ -1015,6 +1032,12 @@
                 // format: 'DD-MM-YYYY'
             });
 
+
+            //$('#date_return').datetimepicker({ format: 'YYYY-MM-DD' });
+
+            //$('#date_return').attr("min", "10-10-2020");
+            //$('#newDeactiveDate').attr("min", "2020-06-10")
+
         });
 
 
@@ -1091,7 +1114,12 @@
             }
 
             var datetime_return = date_return + "T" + time_return + ":00";
-          
+
+                
+                datetime_return = datetimeformat();
+            }
+            else
+             datetime_return = date_return + "T" + time_return + ":00";
             alert(datetime_return);
             CarPool.ReturnDateTime = datetime_return;
 
