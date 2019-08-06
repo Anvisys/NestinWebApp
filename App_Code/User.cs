@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using System.Net;
-using System.IO;
 using System.Transactions;
 
 
@@ -30,12 +27,12 @@ public class User
     public string MiddleName;
     public string LastName;
     public string MobileNumber;
-    public string EmailID="";
+    public string EmailID = "";
     public string Address;
     public string EmpAddress;
     public string UserType = "Owner";
-    public int Status=0;
-  
+    public int Status = 0;
+
     public string UserLogin;
     public string EmpID;
     public string EmpUserID;
@@ -45,8 +42,8 @@ public class User
     public string EmpActiveDate;
     public string ActiveDate, DeActiveDate;
     public string IntercomNumber;
-    
-  
+
+
     public string TotalFlats;
     public String ParentName;
     public String Gender;
@@ -57,7 +54,7 @@ public class User
 
     private List<Resident> allResidents = new List<Resident>();
 
-  
+
 
     public List<Resident> AllResidents
     {
@@ -72,12 +69,12 @@ public class User
 
     //string strPassword;
     DataAccess dbAccess = new DataAccess();
-	public User()
-	{
-		//
-		// TODO: Add constructor logic here
-		//
-	}
+    public User()
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+    }
 
     public SqlConnection ConnectUserDB()
     {
@@ -127,15 +124,15 @@ public class User
 
                 if (int.TryParse(userID, out n))
                 {
-                    strQuery = "select Emailid from dbo.TotalUsers where MobileNo = '" + userID ;
+                    strQuery = "select Emailid from dbo.TotalUsers where MobileNo = '" + userID;
                     DataAccess da = new DataAccess();
-                    userID =   da.GetSingleValue(strQuery).ToString();
+                    userID = da.GetSingleValue(strQuery).ToString();
                 }
 
                 string encryptPWD = EncryptPassword(userID.ToLower(), userPWD);
-               // String alternatePWD = EncryptPassword(strEmailID.ToLower(), userPWD);
+                // String alternatePWD = EncryptPassword(strEmailID.ToLower(), userPWD);
 
-                strQuery = "select * from dbo.TotalUsers where UserLogin = '" + userID + "' and Password = '" 
+                strQuery = "select * from dbo.TotalUsers where UserLogin = '" + userID + "' and Password = '"
                     + encryptPWD + "'";
 
                 SqlCommand cmd = new SqlCommand(strQuery, sqlConn);
@@ -158,11 +155,11 @@ public class User
                         EmailID = rdr["EmailID"].ToString();
                         UserLogin = rdr["UserLogin"].ToString();
                         Address = rdr["Address"].ToString().Trim();
-                     }
+                    }
                     rdr.Close();
                 }
 
-               
+
             }
 
             return true;
@@ -189,7 +186,7 @@ public class User
                 societyConn.Open();
 
                 Resident res = new Resident();
-                DataSet ds =  res.GetActiveResident(UserID);
+                DataSet ds = res.GetActiveResident(UserID);
 
                 if (ds == null)
                 {
@@ -202,7 +199,7 @@ public class User
                     return allResidents;
 
                 }
-                else 
+                else
                 {
                     allResidents = new List<Resident>();
                     foreach (DataRow item in ds.Tables[0].Rows)
@@ -237,7 +234,7 @@ public class User
                         }
                         else if (userType == "Employee" || userType == "Admin")
                         {
-                            int.TryParse( item["ServiceType"].ToString(),out serviceType);
+                            int.TryParse(item["ServiceType"].ToString(), out serviceType);
                             compName = item["CompanyName"].ToString();
                         }
                         else if (userType == "Individual")
@@ -279,7 +276,7 @@ public class User
                         };
 
                         allResidents.Add(newRes);
-                        if(currentResident == null)
+                        if (currentResident == null)
                         {
                             currentResident = newRes;
                         }
@@ -321,7 +318,7 @@ public class User
                 //    { return null; }
                 //}
 
-              }
+            }
 
 
             //return new List<Resident>() { this};
@@ -491,9 +488,9 @@ public class User
                         String newUserQuery = "Insert into " + CONSTANTS.Table_Users
                             + " (FirstName, MiddleName,LastName,MobileNo,EmailId,Gender,Parentname,UserLogin, Password,Address) output INSERTED.UserID Values('"
                              + FirstName + "','" + MiddleName + "','" + LastName + "','" + MobileNumber + "','" + EmailID + "','" + Gender + "','" + ParentName
-                             + "','" + UserLogin + "','" + strEncPassword + "','" + Address +  "')";
+                             + "','" + UserLogin + "','" + strEncPassword + "','" + Address + "')";
 
-                       
+
                         sqlComm.CommandText = newUserQuery;
                         UserID = (int)sqlComm.ExecuteScalar();
 
@@ -514,7 +511,7 @@ public class User
                         int flatId = (int)sqlComm.ExecuteScalar();
 
                         String societyUserQuery = "Insert Into dbo.SocietyUser  (UserID,FlatID,Type,ServiceType,CompanyName,ActiveDate, SocietyID, Status, HouseID) output INSERTED.ResID Values('" +
-                                                                                 UserID + "','" + flatId + "','Owner','0','NA','" + DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss") + "','" + SocietyID + 
+                                                                                 UserID + "','" + flatId + "','Owner','0','NA','" + DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss") + "','" + SocietyID +
                                                                                    "',0,0)";
 
                         sqlComm.CommandText = societyUserQuery;
@@ -526,7 +523,7 @@ public class User
             }
         }
         catch (Exception ex)
-        { 
+        {
             result = 0;
         }
 
@@ -541,13 +538,19 @@ public class User
 
             String checkQuery = "Select * from " + CONSTANTS.Table_Users + " Where MobileNo = " + MobileNumber + " or EmailId = '" + EmailID + "'";
 
-             DataSet ds  = dacess.GetData(checkQuery);
+            DataSet ds = dacess.GetData(checkQuery);
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
                 UserID = -1;
             }
             else
             {
+                //Sagar Added
+                if(UserLogin.Equals("") && EmailID.Equals(""))
+                {
+                    UserLogin = MobileNumber;
+                }
+                //Sagar Added
                 string strEncPassword = this.EncryptPassword(EmailID.ToLower(), Password);
 
                 String UpdateQuery = "Insert into " + CONSTANTS.Table_Users

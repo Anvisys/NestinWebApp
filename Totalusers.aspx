@@ -333,9 +333,9 @@
                 $("#HiddenCompDeactiveID").val("");
             });
 
-            $("#txtEndDate").datepicker({ dateFormat: 'dd-mm-yy' });
+            $("#txtEndDate").datetimepicker({  format: 'DD-MM-YYYY' });
 
-            $("#txtStartDate").datepicker({ dateFormat: 'dd-mm-yy' });
+            $("#txtStartDate").datetimepicker({ format: 'DD-MM-YYYY' });
         });
 
 

@@ -218,7 +218,9 @@
             document.getElementById("HiddenGeneratedBillData").value = FlatNumber + "&" + BillStartDate + "&" + BillEndDate + "&" + CurrentBillAmount + "&" + CycleType + "&" + PreviousMonthBalance + "&" + BillID + "&" + PayID + "&" + CurrentMonthBalance;
 
             document.getElementById("HiddenAmountPaidDate").value = AmountPaidDate;
-            //  alert(a);
+            //  
+
+            (a);
             var status = theElement.parentNode.parentNode.cells[7].innerHTML;
             //   alert(b);
             //Added by Aarshi on 26 Sept 2017

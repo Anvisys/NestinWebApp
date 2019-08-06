@@ -104,7 +104,7 @@ public partial class Flats : System.Web.UI.Page
             }
             else
             {
-                lblFlatGridEmptyText.Text = "Unable to retrieve data.";
+                lblFlatGridEmptyText.Text = "No Data Found.";
             }
         else
         {
