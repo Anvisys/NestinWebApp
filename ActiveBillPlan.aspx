@@ -45,7 +45,6 @@
             background-color: #e6e2e2;
             background-color: rgba(0,0,0,0.4);
         }
-      
 
         .form-control {
             display: inline;
@@ -252,7 +251,7 @@
         <div class="col-xs-12 col-sm-12">
             <form id="form1" runat="server">
                 <asp:ScriptManager runat="server" ID="ScriptManager1"></asp:ScriptManager>
-                <div class="container-fluid" style="height: 50px !important;">
+                <div class="container-fluid">
 
 
                     <div class="row" style="height: 50px; margin-top: 15px;">
@@ -271,7 +270,7 @@
                                 </asp:DropDownList>
                                 <asp:DropDownList ID="drpActivatedBillType" runat="server" CssClass="form-control" />
                                 <asp:TextBox ID="txtActBillsFlats" runat="server" ToolTip="Enter Flat" placeholder="Flat Number" CssClass="form-control"></asp:TextBox>
-                                <asp:LinkButton runat="server" BackColor="Transparent" ForeColor="Black" OnClick="searchActivatedBills_Click" ValidationGroup="Flat_Search"> <span class="glyphicon glyphicon-search" style="color: white !important;"></span></asp:LinkButton>
+                                <asp:LinkButton runat="server" BackColor="Transparent" ForeColor="Black" OnClick="searchActivatedBills_Click" ValidationGroup="Flat_Search"> <span class="glyphicon glyphicon-search"></span></asp:LinkButton>
 
                             </div>
                         </div>
@@ -304,7 +303,7 @@
                          <ContentTemplate>--%>
 
                             <asp:GridView ID="FlatsBillsGrid" runat="server" AllowPaging="True"
-                                HeaderStyle-BackColor="#102663"
+                                HeaderStyle-BackColor="#2ecc71"
                                 OnSelectedIndexChanged="FlatsBillsGrid_SelectedIndexChanged"
                                 HeaderStyle-ForeColor="#ffffff"
                                 HeaderStyle-BorderStyle="None"
