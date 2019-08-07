@@ -5,7 +5,7 @@
     var dMin = "00";
     var dSec = "00";
   //  var datetime = new Date(datetime);
-    //alert(datetime+"  "+jQuery.type(datetime));
+    alert(datetime+"  "+jQuery.type(datetime));
     var dYear = datetime.getFullYear();
     //alert(dYear);
     var month = datetime.getUTCMonth();
