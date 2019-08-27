@@ -367,6 +367,15 @@ public partial class NewFlats : System.Web.UI.Page
         newFlat.BHK = Convert.ToInt32(drpbhk.SelectedItem.Value);
              
         DateTime ActiveDate = Utility.GetCurrentDateTimeinUTC();
+
+        string query = "select * from dbo.Flats where FlatNumber='"+ newFlat.FlatNumber + "' and SocietyID=" +SessionVariables.SocietyID;
+        DataSet ds = daAccess.ReadUserData(query);
+        if (ds != null && ds.Tables[0].Rows.Count > 0)
+        {
+            ExistingUser = true;
+        }
+        else
+            ExistingUser = false;
         try
         {
             if (ExistingUser == false)
