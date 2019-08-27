@@ -401,7 +401,7 @@
                     <div class="container-fluid">
                         <div class="panel panel-primary" style="width: 520px; background-color: #f2f2f2; margin: auto;">
                             <div class="panel-heading">
-                                Assign Owner To Flat
+                                Assign Tenant To Flat
                                <span class="fa fa-close" onclick="hideAssignFlatModal()" style="color: white; float: right; cursor: pointer;"></span>
 
                             </div>
@@ -481,9 +481,6 @@
                                     </label>
 
                                     <asp:TextBox Width="100px" Enabled="false" ID="assignFlatBHK" runat="server" Height="25px"></asp:TextBox>
-
-
-
                                 </div>
                             </form>
 
@@ -624,7 +621,6 @@
             <div class="container-fluid" style="width: 500px;">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-
                         <asp:Label runat="server" ID="Label7">Approve Owner Request</asp:Label>
 
                         <span class="fa fa-times" onclick="HideApproveOwner()" style="float: right; cursor: pointer;"></span>
@@ -647,12 +643,21 @@
                             <div class="col-xs-6"></div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-6"></div>
-                            <div class="col-xs-6"></div>
+                            <div class="col-xs-6">
+                              <%--  <button class="btn btn-danger">Reject</button>--%>
+                            </div>
+                            <div class="col-xs-6">
+                               <%-- <button class="btn btn-success">Accept</button>--%>
+                            </div>
                         </div>
-
+                        <asp:Label runat="server" ID="Label8" />
+                        <div class="panel-footer" style="text-align: right; margin-top: 15px;">
+                            <button class="btn btn-danger" type="button" onclick="HideApproveOwner()">Cancel</button>
+                            <asp:Button runat="server" name="ApproveOwnerSubmit" Text="Submit" ID="Button1" OnClick="btnApproveOwnerSubmit_Click" CssClass="btn btn-success" />
+                        </div>
                     </div>
                 </div>
+            </div>
             </div>
            
             <!-- Remove tenant -->
@@ -667,7 +672,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+
 
         <div>
             <asp:HiddenField runat="server" ID="HiddenField1" />
