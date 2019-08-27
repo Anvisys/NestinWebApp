@@ -410,7 +410,7 @@
                     else {
                      
                         $("#pagination>nav").hide();
-                        $("#pagination").html("<h4 style="color: red;">NO Visitor Data!!</h4>");
+                        $("#pagination").html("<h4 style='color: red;'>NO Visitor Data!!</h4>");
                        // alert("NO Data!!");                        
                     }
                 },
@@ -526,8 +526,8 @@
             startTime = $("#timeList").val();
             var start = new Date(visitDate);
             var strStartDate = GetDateTimeinISO(start);
-           // alert("at 498==> " + strStartDate);
-            var strEndDate="2020-05-10 00:00:00.000";
+            // alert("at 498==> " + strStartDate);
+            var strEndDate = GetDateTimeinISO(new Date("2020-05-10T00:00:00.000"));
             
          //   alert(strStartDate);
 

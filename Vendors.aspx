@@ -212,10 +212,13 @@ hr {
             userType = '<%=Session["UserType"] %>';
             if (userType == "Admin") {
                 // alert("158");
-                 document.getElementsByTagName("Add_Vendor").style.visibility = 'visible';
-                document.getElementById("Edit_Vendor").style.visibility = 'visible';
+                document.getElementById("Add_Vendor").style.visibility = 'visible';
+                if( document.getElementById("Edit_Vendor")!=null)
+                    document.getElementById("Edit_Vendor").style.visibility = 'visible';
+                 if( document.getElementById("vendor_delete")!=null)
                 document.getElementById("vendor_delete").style.visibility = 'visible';
               //  $('i').attr('visibility' ,'visible');
+                if( document.getElementById("editoffer")!=null)
                 document.getElementById("editoffer").style.visibility = 'visible';
                // alert("220");
             }

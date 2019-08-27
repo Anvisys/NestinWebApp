@@ -99,11 +99,11 @@ public partial class NewFlats : System.Web.UI.Page
             }
             else
             {
-                lblFlatGridEmptyText.Text = "Unable To Retrive Data";
+                lblFlatGridEmptyText.Text = "Unable to retrieve data.";
             }
         else
         {
-            lblFlatGridEmptyText.Text = "No Data Available.";
+            lblFlatGridEmptyText.Text = "Unable to retrieve data.";
         }
         string TotalCountQuery = "select count(FlatNumber) from dbo.Flats";
         lblTotalFlats.Text = (dacess.GetSingleValue(TotalCountQuery)).ToString();
