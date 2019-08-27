@@ -665,6 +665,7 @@
                     </div>
                 </div>
             </div>
+            </div>
            
             <!-- Remove tenant -->
             <div class="modal" id="modalremovetenant">
