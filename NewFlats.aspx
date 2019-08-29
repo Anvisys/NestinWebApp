@@ -266,9 +266,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12" style="font-size: 20px !important; font-family: 'Times New Roman', Times, serif !important; color: red; text-align: center; margin-top: 20%;">
+            
+            <div class="col-sm-12" style="font-size: 20px !important; font-family: 'Times New Roman', Times, serif !important; color: red; text-align: center;">
                 <asp:Label ID="lblFlatGridEmptyText" runat="server"></asp:Label><br />
             </div>
+            
             <br />
             <asp:Label ID="totalFlats" runat="server" ForeColor="#007cf9" Text="Total Flats:"></asp:Label>
             <asp:Label ID="lblTotalFlats" runat="server" ForeColor="#4774d1" Text=""></asp:Label>
@@ -380,10 +382,8 @@
                     </asp:DataList>
 
                     <div class="row">
-
                         <div class="col-xs-4" style="text-align: center; padding: 8px;">
                             <asp:Button ID="btnprevious" CausesValidation="false" runat="server" Font-Bold="true" Text="Prev" Height="31px" Width="60px" OnClick="btnprevious_Click" />
-
                         </div>
                         <div class="col-xs-4">
                             <asp:Label ID="lblPage" runat="server" Font-Size="Small" ForeColor="#f9f9f9f"></asp:Label>
@@ -400,7 +400,6 @@
             </div>
 
             <div class="modal" id="newAssignFlatModal">
-
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server" EnableViewState="true">
                     <ContentTemplate>
                         <div class="container-fluid">
@@ -511,9 +510,7 @@
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-
             </div>
-
 
             <!--Add New Flat Model-->
 
@@ -542,8 +539,8 @@
                                         <asp:ListItem Value="4"> 4 BHK</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
-
                             </div>
+
                             <div class="row" style="margin: 5px;">
                                 <div class="col-xs-6">
                                     Flat Area :  
@@ -553,7 +550,6 @@
                                 <div class="col-xs-6">
                                     Intercom Number:<br />
                                     <asp:TextBox runat="server" ID="txtintercom" Width="100px" />
-
                                 </div>
                             </div>
 
@@ -687,8 +683,6 @@
                 <asp:HiddenField runat="server" ID="HiddenField2" />
                 <asp:HiddenField runat="server" ID="HiddenField3" />
             </div>
-
-        </div>
     </form>
 </body>
 </html>

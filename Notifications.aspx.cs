@@ -385,7 +385,7 @@ public partial class Notifications : System.Web.UI.Page
                     DataAccess dacess = new DataAccess();
 
                     string NotificationQuery = "Insert into "+ TABLE_NOTIFICATION   + " (Notification,EndDate,send_by, Date,SocietyID) values('" + txtNotificationText.Text + "','" 
-                        + Utility.ChangeDateTimeLocalToSQLServerFormat(TillDate) + "','" + muser.currentResident.ResID + "','" + Utility.ChangeDateTimeLocalToSQLServerFormat(Notice_time_stamp) + "','" + muser.currentResident.SocietyID + "' )";
+                        + Utility.GetCurrentDateTimeinUTC() + "','" + muser.currentResident.ResID + "','" + Utility.ChangeDateTimeLocalToSQLServerFormat(Notice_time_stamp) + "','" + muser.currentResident.SocietyID + "' )";
 
                     SqlCommand cmd = new SqlCommand(NotificationQuery, con1);
                     UpdateCount = cmd.ExecuteNonQuery();

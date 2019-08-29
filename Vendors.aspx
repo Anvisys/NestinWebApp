@@ -1054,7 +1054,7 @@ hr {
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red; text-align:center; margin-top: 20%;">
+                            <div class="col-sm-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red; text-align:center;">
                             <asp:Label ID="lblVendrEmptyText" runat="server" Text=""></asp:Label>
                             </div>
                         </div>

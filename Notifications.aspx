@@ -348,7 +348,7 @@
 
 
                         <div class="row">
-                            <div class="col-xs-12" style="font-family:'Times New Roman', Times, serif !important; color: red !important; text-align:center; margin-top: 20%;">
+                            <div class="col-xs-12" style="font-family:'Times New Roman', Times, serif !important; color: red !important; text-align:center;">
                                 <asp:Label ID="lblEmptyTitle" runat="server"  Visible="false"></asp:Label>
                             </div>
 

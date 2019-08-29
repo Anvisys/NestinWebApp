@@ -342,7 +342,7 @@
                             </div>
                             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                             <div class="row">
-                                <div class="col-sm-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red !important; text-align:center; margin-top: 20%;">
+                                <div class="col-sm-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red !important; text-align:center;">
                                     <asp:Label ID="lblEmptyPie1" runat="server" Visible="false"></asp:Label>
 
                                 </div>

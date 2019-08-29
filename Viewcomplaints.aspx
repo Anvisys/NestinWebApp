@@ -1,4 +1,4 @@
-﻿v<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Viewcomplaints.aspx.cs" Inherits="Viewcomplaints" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Viewcomplaints.aspx.cs" Inherits="Viewcomplaints" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <!DOCTYPE html>
@@ -739,7 +739,7 @@
                                     <asp:Button ID="btnprevious" runat="server" Font-Bold="true" Text="Prev" Height="31px" Width="60px" OnClick="btnprevious_Click" />
 
                                 </div>
-                                <div class="col-xs-6" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red; text-align:center; margin-top: 20%;">
+                                <div class="col-xs-6" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red; text-align:center;">
                                     <asp:Label ID="lblPage" runat="server"></asp:Label>
                                 </div>
                                 <div class="col-xs-3" style="text-align: center; padding: 8px;">

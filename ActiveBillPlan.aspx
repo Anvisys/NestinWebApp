@@ -303,7 +303,7 @@
                          <ContentTemplate>--%>
 
                             <asp:GridView ID="FlatsBillsGrid" runat="server" AllowPaging="True"
-                                HeaderStyle-BackColor="#2ecc71"
+                                HeaderStyle-BackColor="#271573"
                                 OnSelectedIndexChanged="FlatsBillsGrid_SelectedIndexChanged"
                                 HeaderStyle-ForeColor="#ffffff"
                                 HeaderStyle-BorderStyle="None"

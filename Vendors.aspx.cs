@@ -323,7 +323,7 @@ public partial class Vendors : System.Web.UI.Page
                 }
                 else
                 {
-                    String InsetdataQuery = "Insert Into Vendors (ShopCategory,VendorName,ContactNumber,ContactNumber2,Address,Address2,date,SocietyID, CmdType) Values ('" + VendorCat + "','" + Vendorname + "','" + contact + "','" + contact2 + "','" + Address + "','" + Address2 + "','" + date + "'," + SessionVariables.SocietyID + ",'insert')";
+                    String InsetdataQuery = "Insert Into Vendors (ShopCategory,VendorName,ContactNumber,ContactNumber2,Address,Address2,date,SocietyID, CmdType) Values ('" + VendorCat + "','" + Vendorname + "','" + contact + "','" + contact2 + "','" + Address + "','" + Address2 + "','" + Utility.ChangeDateTimeLocalToSQLServerFormat(date) + "'," + SessionVariables.SocietyID + ",'insert')";
                     bool result = dacess.Update(InsetdataQuery);
 
                     if (result == true)

@@ -163,9 +163,8 @@
 
          $(document).ready(function () {
              $("#Cancel_AddEmployee").click(function () {
-                 alert("166");
-                 $("#AddEmployeeModal").hide();
-                 alert("168");
+                $("#AddEmployeeModal").hide();
+               
                  $("input:text").val("");
                  $("#lblstatus").html('');
              });
@@ -426,9 +425,6 @@
                             <tr>
                                 <td colspan="2" style="height: 15px;"></td>
                             </tr>
-
-
-
 
                         </table>
                     </div>

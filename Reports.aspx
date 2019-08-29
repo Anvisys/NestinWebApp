@@ -49,7 +49,7 @@
                             </div>
                          </div>
                                <div class="row">
-                                <div class="col-md-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red !important; text-align:center; margin-top: 20%;">
+                                <div class="col-md-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red !important; text-align:center;">
                                     <asp:Label ID="lblmessage" runat="server"></asp:Label>
                                 </div>
                                </div>
