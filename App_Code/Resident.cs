@@ -337,6 +337,14 @@ public class Resident
         return ds;
     }
 
+    public DataSet SearchUsers(String Email ,int Mobileno)
+    {
+        DataAccess dacess = new DataAccess();
+        String query = "select * from " + CONSTANTS.Table_Users + " where Emailid= " + Email + " and MobileNo= " + Mobileno;
+        DataSet ds = dacess.GetData(query);
+        return ds;
+    }
+
     public bool UpdateUserResident(string FirstName, string MiddleName, string LastName, string EmailId, string ParentName, string MobileNo, string UserID)
     {
         DataAccess dacess = new DataAccess();

@@ -55,7 +55,7 @@ public partial class NewFlats : System.Web.UI.Page
 
         else if (OwnerName != "" & FlatNumber == "")
         {
-            querystring = "Select * from dbo.ViewNewFlats where OwnerFirstName like  '%" + OwnerName + "' or OwnerLastName like  '%" + OwnerName +
+            querystring = "Select * from dbo.ViewNewFlats where OwnerFirstName like  '%" + OwnerName.Split(' ')[0] + "' or OwnerLastName like  '%" + OwnerName.Split(' ')[1] +
                 "%' and SocietyId = " + muser.currentResident.SocietyID;
         }
 

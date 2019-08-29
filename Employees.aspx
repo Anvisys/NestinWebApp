@@ -610,7 +610,7 @@
                                            First Name:
                                         </div>
                                          <div class="col-xs-6"">
-                                           <asp:TextBox ID="txtAddEmpFName" runat="server"  CssClass="form-control" TabIndex="2"></asp:TextBox>
+                                           <asp:TextBox ID="txtAddEmpFName" runat="server"  CssClass="form-control" TabIndex="2" ></asp:TextBox>
                                          </div>
                                          <div class="col-xs-1">
                                              <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtAddEmpFName" ValidationGroup="Add_Employee"></asp:RequiredFieldValidator>
@@ -638,7 +638,7 @@
                                            Parent Name :
                                         </div>
                                          <div class="col-xs-6">
-                                           <asp:TextBox ID="txtAddempPName" runat="server"  CssClass="form-control" TabIndex="6"></asp:TextBox>
+                                           <asp:TextBox ID="txtAddempPName" runat="server"  CssClass="form-control" TabIndex="6" ></asp:TextBox>
                                          </div>
                                          <div class="col-xs-1">
                                              <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="txtAddempPName" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Employee"></asp:RequiredFieldValidator>
@@ -649,7 +649,7 @@
                                            Gender :
                                         </div>
                                          <div class="col-xs-6">
-                                            <asp:DropDownList ID="drpAddempGender" runat="server"  CssClass="form-control" Width="100%" TabIndex="5">
+                                            <asp:DropDownList ID="drpAddempGender" runat="server"  CssClass="form-control" Width="100%" TabIndex="5" >
                                                 <asp:ListItem>Male</asp:ListItem>
                                                 <asp:ListItem>Female</asp:ListItem>
                                             </asp:DropDownList>
@@ -673,13 +673,13 @@
                                            Address :
                                         </div>
                                          <div class="col-xs-6" >
-                                           <asp:TextBox ID="txtAddEmpAddress" runat="server" Style="margin-bottom:10px;" CssClass="form-control" TabIndex="8"></asp:TextBox>
+                                           <asp:TextBox ID="txtAddEmpAddress" runat="server" Style="margin-bottom:10px;" CssClass="form-control" TabIndex="8" ></asp:TextBox>
                                          </div>
                                          <div class="col-xs-1">
                                              
                                          </div>
                                            </div>
-                                    <div class="col-xs-12 col-sm-6">
+                                 <div class="col-xs-12 col-sm-6">
                                         <div class="col-xs-5" >
                                            Userlogin :
                                         </div>

@@ -469,16 +469,25 @@ public partial class Employees : System.Web.UI.Page
     {
         DataAccess dacess = new DataAccess();
 
-        String EmailAvailbleQuery = "Select  Max(UserID) from dbo.TotalUsers where EmailId = '" + txtAddEmpEmailId.Text + "'";
-        int UserId = dacess.GetSingleUserValue(EmailAvailbleQuery);
+        String EmailAvailbleQuery = "Select  * from dbo.TotalUsers where EmailId = '" + txtAddEmpEmailId.Text + "' and MobileNo= "+ txtAddEmpMobile.Text;
+        DataSet Employee = dacess.GetData(EmailAvailbleQuery);
+        int UserId =Convert.ToInt32(Employee.Tables[0].Rows[0]["UserID"]);
 
         if (UserId == 0)
         {
-            lblEmpError.Text = "";
+            lblEmpError.Text = "Please Register first to proceed...";
+            
         }
         else
         {
-            lblEmpError.Text = "EmailID  is not available";
+            lblEmpError.Text = "Please check details and proceed...";
+            txtAddEmpFName.Text = Employee.Tables[0].Rows[0]["FirstName"].ToString();
+            txtAddEmpLName.Text = Employee.Tables[0].Rows[0]["LastName"].ToString();
+            txtAddempPName.Text = Employee.Tables[0].Rows[0]["ParentName"].ToString();
+            drpAddempGender.SelectedValue = Employee.Tables[0].Rows[0]["Gender"].ToString();
+            txtAddEmpAddress.Text = Employee.Tables[0].Rows[0]["Address"].ToString();
+            txtEmpUsrid.Text = Employee.Tables[0].Rows[0]["UserLogin"].ToString();
+
         }
     }
     protected void txtAddEmpMobile_TextChanged(object sender, EventArgs e)
