@@ -33,6 +33,7 @@
           
 
     <script id="MyFlatData">
+
         var CurrentUserType, ResID, UserID, Type, BHK, FirstName, LastName, MobileNo, EmailId, FlatID, FlatNumber, Address, ParentName, SocietyID, SocietyName, Gender, ActiveDate, DeActiveDate, TenantUserID;
         var MobileExist, EmailExist, TenantResID, chkExistingUser = false;
         var api_url = "";
@@ -196,7 +197,7 @@
 
 
         function GetFlatInfo(FlatID) {
-            alert(FlatID);
+           
             // alert("minimum val is "+minvalue);
             // alert("maximum value is "+maxvalue);
             $("#TenantDetail").hide();
@@ -225,7 +226,7 @@
         };
 
         function SetFlatInfo(data) {
-            alert(data);
+           
             var da = JSON.stringify(data);
             var js = jQuery.parseJSON(da);
             document.getElementById("lblFlatNumber").innerHTML = js.FlatNumber;
@@ -237,7 +238,7 @@
             document.getElementById("lblFlatOwner").innerHTML = js.OwnerFirstName + " " + js.OwnerLastName;
             document.getElementById("lblFlatOwnerMobile").innerHTML = js.OwnerMobile;
             TenantResID = js.TenantResID;
-            document.getElementById("OwnerImage").src =  "GetImages.ashx?UserID=<% =UserID %>&Name=<% =UserFirstName %>&UserType=Owner";;
+            document.getElementById("OwnerImage").src =  "GetImages.ashx?Type=User&ID=<% =UserID %>&Name=<% =UserFirstName %>";;
 
             TenantUserID = js.TenantUserID;
             var OwnerElement = document.getElementById("OwnerImage");
@@ -259,7 +260,7 @@
                 DeActiveDate = ChangeDateformat(js.TenantTo);
                 document.getElementById("lblFlatTenantTo").innerHTML = DeActiveDate;
 
-                document.getElementById("TenantImage").src = "GetImages.ashx?UserID=" + js.TenantUserID + "&Name=" + js.TenantFirstName + "&UserType=Tenant";
+                document.getElementById("TenantImage").src = "GetImages.ashx?Type=User&ID=" + js.TenantUserID + "&Name=" + js.TenantFirstName;
 
             }
             else {
@@ -328,7 +329,7 @@
             // var obj = da;
 
             if (obj.length == 0) {
-                alert("false");
+               
                 $("#RentalDetail").hide();
                 $("#btnAddForRent").show();
             }
@@ -939,7 +940,7 @@
 
             if (engData.length > 0) {
                 for (var i = 0; i < engData.length; i++) {
-                    var ImageSource = "GetImages.ashx?ResID=" + engData[i].ResID + "&Name=" + engData[i].FirstName + "&UserType= Owner";
+                    var ImageSource = "GetImages.ashx?Type=Resident&ID=" + engData[i].ResID + "&Name=" + engData[i].FirstName;
                     //var JourneyDTime = DisplayDateTime(results[i].JourneyDateTime);
                     //var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
                     //var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
@@ -1274,7 +1275,7 @@
 
        function CloseRentalBox() {
            $("#addInventoryModal").hide();
-           document.location.reload();
+          // document.location.reload();
 
        }
 
@@ -1292,6 +1293,11 @@
            RentInventory.UserID = <%=UserID%>;
            RentInventory.HouseID = 0;
            RentInventory.FlatID = FlatID;
+           if (RentInventory.Description =="" || RentInventory.ContactName =="" || RentInventory.ContactNumber =="" || RentInventory.RentValue =="" ) {
+               document.getElementById("lblAddInventoryMessage").innerHTML = "Fill empty fields";
+                 $("#lblAddInventoryMessage").show();
+               return;
+           }
 
            var url = api_url + "/api/RentInventory/New"
 
@@ -1308,11 +1314,12 @@
                  //  alert(JSON.stringify(data));
                    var Response = data.Response;
                    if (Response == "OK") {
-
-                       document.getElementById("lblMessage").innerHTML = "Your inventory is submitted for Rent";
+                       $("#addInventoryModal").hide();
+                        document.location.reload();
+                       //document.getElementById("lblMessage").innerHTML = "Your inventory is submitted for Rent";
                    }
                    else {
-                       document.getElementById("lblMessage").innerHTML = "Could not submitt, Please contact admin";
+                       document.getElementById("lblAddInventoryMessage").innerHTML = "Could not submit, Please contact admin";
                    }
 
                },
@@ -1365,7 +1372,7 @@
 
        function CloseRentInventory() {
 
-           var InventoryUpdate = "{\"RentInventoryID\":\"\",\"InventoryTypeID\":\"\",\"AccomodationTypeID\":\"\",\"RentValue\":\"\",\"Available\":\"\",Description\":\"\",\"ContactName\":\"\",\"ContactNumber\":\"\",\"UserID\":\"\",\"FlatID\":\" \",\"HouseID\":\"\"} ";
+           var InventoryUpdate = {};
            InventoryUpdate.InventoryId = currentInvetoryID;
            InventoryUpdate.Status = 0;
            console.log("1233==" + InventoryUpdate);
@@ -1432,7 +1439,12 @@
            }
        }
 
-
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
 
     </script>
 
@@ -1808,7 +1820,7 @@
                                         <div class="col-sm-6">
                                             <label class="labelwidth col-sm-4 col-form-label">Rent: </label>
                                             <div class="col-sm-8">
-                                                <input id="inRent" type="number" onblur="" class="form-control form-control-sm" />
+                                                <input id="inRent" onkeypress="return isNumberKey(event)" onblur="" class="form-control form-control-sm" />
                                             </div>
                                         </div>
 
@@ -1824,11 +1836,13 @@
                                         <div class="col-sm-6">
                                             <label class="labelwidth col-sm-4 col-form-label">Contact Number:</label>
                                             <div class="col-sm-8">
-                                                <input id="contactNumber" type="number" class="form-control form-control-lg" tabindex="3" />
+                                                <input id="contactNumber" onkeypress="return isNumberKey(event)" class="form-control form-control-lg" tabindex="3" />
                                             </div>
                                         </div>
                                     </div>
                                 </form>
+
+                                <label id="lblAddInventoryMessage" style="color:red; display:none;"></label>
                             </div>
 
                             <div class="panel-footer" style="text-align: right;">

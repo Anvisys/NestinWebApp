@@ -24,21 +24,22 @@
     
     <script>
 
-          var UserId,SocietyID,api_url, selectedInventoryID;
+          var UserId,SocietyID,api_url,FlatId, selectedInventoryID;
        
 
         $(document).ready(function () {
             window.parent.FrameSourceChanged();
             UserId = <%=UserID %>;
             SocietyID = '<%=Session["SocietyID"] %>';
-             api_url = '<%=Session["api_url"] %>';
+            api_url = '<%=Session["api_url"] %>';
+              FlatId = '<%=Session["FlatID"] %>';
             GetRentInventory();
 
         });
 
 
         function GetRentInventory() {
-            var abs_url = api_url + "/api/RentInventory/" + SocietyID+"/1/5";
+            var abs_url = api_url + "/api/RentInventory/" + SocietyID+ "/" + FlatId + "/1/5";
             console.log(abs_url);
              $.ajax({
                 url: abs_url,
@@ -54,9 +55,10 @@
 
 
         function ShowRentInventory(results) {
-            console.log(results);
+           
                $("#ProgressBar").hide();
-       var  js=  JSON.stringify(results);
+            var js = JSON.stringify(results);
+           
               var strData = "";
 
        //     var js = response.$values;
@@ -64,7 +66,7 @@
 
             if (results.length > 0) {
                 for (var i = 0; i < results.length; i++) {
-                          var ImageSource = "GetImages.ashx?UserID=" + js[i].UserID + "&Name=" + results[i].ContactName + "&UserType= Owner";
+                          var ImageSource = "GetImages.ashx?Type=User&ID=" + results[i].UserID + "&Name=" + results[i].ContactName + "&UserType= Owner";
 
                     strData = strData + "<div class=\"col-sm-3 col-xs-12 panel panel-success \" style=\"margin:10px; margin-right:10px; padding:0px; \">" +
                         "<div class='panel-heading'>" 
@@ -128,7 +130,7 @@
 
             var url = api_url + "/api/RentInventory/Add/Interest";
             var carPoolInterestData = JSON.stringify(RentInterest);
-            console.log(carPoolInterestData);
+         
             $.ajax({
                 dataType: "json",
                 url: url,

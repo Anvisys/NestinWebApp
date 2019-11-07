@@ -60,7 +60,7 @@
             UserName = '<%=Session["FirstName"] %>';
               UserType = '<%=Session["UserType"] %>';
 
-            document.getElementById("MyProfileImg").src =  "GetImages.ashx?UserID=<% =UserID %>&Name=<% =UserNameFirstLetter %>&UserType=<% =UserType %>";
+            document.getElementById("MyProfileImg").src =  "GetImages.ashx?Type=User&ID=<% =UserID %>&Name=<% =UserNameFirstLetter %>";
             window.parent.FrameSourceChanged();
 
             sessionStorage.setItem("minvalue", 0);
@@ -500,7 +500,7 @@
             var Comments = (jarray[id].commentsCount - 1);
       
 
-           var FirstImageSource = "GetImages.ashx?UserID=" + jarray[id].FirstUserID + "&Name=" + jarray[id].Initiater + "&UserType= Owner";
+           var FirstImageSource = "GetImages.ashx?Type=User&ID=" + jarray[id].FirstUserID + "&Name=" + jarray[id].Initiater ;
 
 
             var strSummaryRow = '<tr  id="Summary' + RowId + '" class="main_thread_row">' +
@@ -537,7 +537,7 @@
             //if (ImageDictionary[Tjarray[id].ResID] != null && ImageDictionary[Tjarray[id].ResID] != "") {
             //    ImageSource = "data:image/jpeg;charset=utf-8;base64," + ImageDictionary[Tjarray[id].ResID];
             //}
-            var ImageSource = "GetImages.ashx?UserID=" + Tjarray[id].UserID + "&Name=" +  Tjarray[id].FirstName + "&UserType= Owner";
+            var ImageSource = "GetImages.ashx?Type=User&ID=" + Tjarray[id].UserID + "&Name=" +  Tjarray[id].FirstName ;
             var strCommentRow = '<tr id="Comment' + id + '" class="comment_row">' +
                                      '<td class="image_div">' +
                                      "</td> " +
@@ -563,7 +563,7 @@
             var Newformat = ChangeDateformat(date);
            // var LastImageSource = "Images/Icon/profile.jpg";
 
-             var LastImageSource = "GetImages.ashx?UserID=" + Tjarray[id].LastUserID + "&Name=" +  Tjarray[id].CurrentPostBy + "&UserType= Owner";
+             var LastImageSource = "GetImages.ashx?Type=User&ID=" + Tjarray[id].LastUserID + "&Name=" +  Tjarray[id].CurrentPostBy;
 
             //if (ImageDictionary[Tjarray[id].LastResID] != null) {
             //    LastImageSource = "data:image/jpeg;charset=utf-8;base64," + ImageDictionary[Tjarray[id].LastResID];

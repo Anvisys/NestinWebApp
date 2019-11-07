@@ -78,7 +78,7 @@ public partial class Vendors : System.Web.UI.Page
         drpVendorcategory.DataTextField = "Key";
         drpVendorcategory.DataValueField = "value";
         drpVendorcategory.DataBind();
-        drpVendorcategory.Items.Insert(0, new ListItem("All", "-1"));
+       // drpVendorcategory.Items.Insert(0, new ListItem("All", "-1"));
 
         
 
@@ -92,23 +92,8 @@ public partial class Vendors : System.Web.UI.Page
     {
         try
         {
-            DataAccess dacess = new DataAccess();
-            String DatalistQuery;
-
-            if (UserType.Equals("Admin"))
-            {
-                //ScriptManager.RegisterStartupScript(this, GetType(), "visiblemang","document.getElementById('Edit_Vendor').style.visibility = 'visible';", true);
-            }
-
-            if (UserType.Equals("SuperAdmin"))
-                DatalistQuery= "Select ID, ShopCategory, VendorName, ContactNumber,ContactNumber2, Address,Address2 from dbo.Vendors order by ShopCategory asc  ";
-
-
-            //DatalistQuery = "Select ID, ShopCategory, VendorName, ContactNum,ContantNumber2, Address,Address2 from dbo.Vendors where SocietyID ='" + SocietyID + "' order by ShopCategory asc  ";
-            else
-            DatalistQuery = "Select ID, ShopCategory, VendorName, ContactNumber,ContactNumber2, Address,Address2 from dbo.Vendors where SocietyID ='" + SocietyID + "' order by ShopCategory asc  ";
-
-            DataSet DatasetVendors = dacess.ReadData(DatalistQuery);
+            VendorController vendorController = new VendorController();
+            DataSet DatasetVendors = vendorController.GetVendors(muser.currentResident.SocietyID, muser.currentResident.UserType, 0);
 
             //String TotalvendorsQuery = "Select Count(ID) from dbo.vendors;";
             int Totalvendors = 0; //dacess.GetSingleValue(TotalvendorsQuery);          
@@ -265,23 +250,39 @@ public partial class Vendors : System.Web.UI.Page
             System.Drawing.Image EditedImage = null;
             System.Drawing.Image image = null;
             //DateTime date = System.DateTime.Now;
-            DateTime date = Utility.GetCurrentDateTimeinUTC();
-            string VendorCat = drpVendorcategory.SelectedItem.Text;
-            string Vendorname = txtvendorname.Text;
-            String VendorIconFormat = FileVendorImg.PostedFile.ContentType;
-            String contact = txtvendromobile.Text;
-            String contact2 = txtMobile2.Text;
-            String Address = txtvendoraddress.Text;
-            String Address2 = txtvendoraddress2.Text;
 
+            Vendor newVendor = new Vendor();
+
+            DateTime date = Utility.GetCurrentDateTimeinUTC();
+            newVendor.ShopCategoryID = Convert.ToInt32(drpVendorcategory.SelectedItem.Value);
+            newVendor.VendorName = txtvendorname.Text;
+            newVendor.IconFormat = FileVendorImg.PostedFile.ContentType;
+            newVendor.ContactNumber = txtvendromobile.Text;
+            newVendor.ContactNumber2 = txtMobile2.Text;
+            newVendor.Address = txtvendoraddress.Text;
+            newVendor.Address2 = txtvendoraddress2.Text;
+            newVendor.InsertDate = Utility.GetCurrentDateTimeinUTC();
             try
             {
-                //Condition to check if the file uploaded or not
+
                 if (FileVendorImg.HasFile)
                 {
-                    if (FileVendorImg.PostedFile.ContentLength < 20728650)
+                    if (FileVendorImg.PostedFile.ContentLength > 20728650)
                     {
-                        //Save  the  image  to  local  folder
+                        lblstatus.Text = "Image Size is large, Please select smaller Image";
+                        return;
+                    }
+
+                }
+
+                VendorController vendorController = new VendorController();
+                int VendorID = vendorController.AddVendor(newVendor);
+
+                if (VendorID > 0)
+                {
+
+                    if (FileVendorImg.HasFile)
+                    {
                         String Savepath = Request.PhysicalApplicationPath + "Images/Vendor";
                         //FileVendorImg.SaveAs(Savepath + FileVendorImg.FileName);
                         //image = System.Drawing.Image.FromFile(Savepath + FileVendorImg.FileName);
@@ -292,55 +293,92 @@ public partial class Vendors : System.Web.UI.Page
                         string base64 = Request.Form["imgCropped"];
                         byte[] bytesImages = Convert.FromBase64String(base64.Split(',')[1]);
 
-                       
-
-                      
-                        using (SqlConnection con1 = new SqlConnection(Utility.SocietyConnectionString))
-                        {
-                            con1.Open();
-                            // SqlCommand cmd = new SqlCommand("INSERT INTO Vendors (ShopCategory,VendorName,ContactNumber,Address,VendorIcon,VendorIconFormat) VALUES (@ShopCategory,@VendorName,@ContactNum,@Address,@VendorIcon,@VendorIconFormat)", con1);
-                            SqlCommand cmd = new SqlCommand("Insert Into Vendors (ShopCategory,VendorName,ContactNumber,ContactNumber2,Address,Address2,VendorIcon,VendorIconFormat,date,SocietyID,CmdType) Values ('" 
-                                + VendorCat + "','" + Vendorname + "','" + contact + "','" + contact2 + "','" + Address + "','" + Address2 + "',@VendorIcon,'" + VendorIconFormat + "','" + Utility.ChangeDateTimeLocalToSQLServerFormat(date) + "'," + SessionVariables.SocietyID + ",'Insert')", con1);
-                            cmd.Parameters.Add("@VendorIcon", SqlDbType.Image).Value = bytesImages;
-                            int count = cmd.ExecuteNonQuery();
-                            con1.Close();
-
-                            if (count == 1)
-                            {
-                                
-                                FillVendorDataList(muser.currentResident.SocietyID,muser.currentResident.UserType);
-                               
-                            }
-
-                            else
-                            {
-                                ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "VendorActionPopup()", true);
-                                lblstatus.Text = "Vendor Added Failed";
-                                // lblVendrAuctionlMsg.Text = "Vendor Added Failed";
-                            }
-                        }
+                        vendorController.AddImage(bytesImages, VendorID, Savepath);
                     }
+                    else
+                    {
+                        FillVendorDataList(muser.currentResident.SocietyID, muser.currentResident.UserType);
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "CloseAddVendor()", true);
+                    }
+
+
                 }
                 else
                 {
-                    String InsetdataQuery = "Insert Into Vendors (ShopCategory,VendorName,ContactNumber,ContactNumber2,Address,Address2,date,SocietyID, CmdType) Values ('" + VendorCat + "','" + Vendorname + "','" + contact + "','" + contact2 + "','" + Address + "','" + Address2 + "','" + Utility.ChangeDateTimeLocalToSQLServerFormat(date) + "'," + SessionVariables.SocietyID + ",'insert')";
-                    bool result = dacess.Update(InsetdataQuery);
+                    lblstatus.Text = "Vendor Added Failed";
 
-                    if (result == true)
-                    {
-                        Response.AddHeader("REFRESH", "50;URL=Vendors.aspx");
-                        Response.Redirect("Vendors.aspx", false);
-                    }
-
-                    else
-                    {
-                        ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "Showpopup()", true);
-                        lblstatus.Text = "Vendor Added Failed";
-                    }
                 }
-
             }
 
+            /*
+                        try
+                        {
+                            //Condition to check if the file uploaded or not
+                            if (FileVendorImg.HasFile)
+                            {
+                                if (FileVendorImg.PostedFile.ContentLength < 20728650)
+                                {
+                                    //Save  the  image  to  local  folder
+                                    String Savepath = Request.PhysicalApplicationPath + "Images/Vendor";
+                                    //FileVendorImg.SaveAs(Savepath + FileVendorImg.FileName);
+                                    //image = System.Drawing.Image.FromFile(Savepath + FileVendorImg.FileName);
+
+                                    string imagename = Path.GetFileNameWithoutExtension(FileVendorImg.FileName);
+
+
+                                    string base64 = Request.Form["imgCropped"];
+                                    byte[] bytesImages = Convert.FromBase64String(base64.Split(',')[1]);
+
+
+
+
+                                    using (SqlConnection con1 = new SqlConnection(Utility.SocietyConnectionString))
+                                    {
+                                        con1.Open();
+                                        // SqlCommand cmd = new SqlCommand("INSERT INTO Vendors (ShopCategory,VendorName,ContactNumber,Address,VendorIcon,VendorIconFormat) VALUES (@ShopCategory,@VendorName,@ContactNum,@Address,@VendorIcon,@VendorIconFormat)", con1);
+                                        SqlCommand cmd = new SqlCommand("Insert Into Vendors (ShopCategory,VendorName,ContactNumber,ContactNumber2,Address,Address2,VendorIcon,VendorIconFormat,date,SocietyID,CmdType) Values ('" 
+                                            + VendorCat + "','" + Vendorname + "','" + contact + "','" + contact2 + "','" + Address + "','" + Address2 + "',@VendorIcon,'" + VendorIconFormat + "','" + Utility.ChangeDateTimeLocalToSQLServerFormat(date) + "'," + SessionVariables.SocietyID + ",'Insert')", con1);
+                                        cmd.Parameters.Add("@VendorIcon", SqlDbType.Image).Value = bytesImages;
+                                        int count = cmd.ExecuteNonQuery();
+                                        con1.Close();
+
+                                        if (count == 1)
+                                        {
+
+                                            FillVendorDataList(muser.currentResident.SocietyID,muser.currentResident.UserType);
+
+                                        }
+
+                                        else
+                                        {
+                                            ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "VendorActionPopup()", true);
+                                            lblstatus.Text = "Vendor Added Failed";
+                                            // lblVendrAuctionlMsg.Text = "Vendor Added Failed";
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                String InsetdataQuery = "Insert Into Vendors (ShopCategory,VendorName,ContactNumber,ContactNumber2,Address,Address2,date,SocietyID, CmdType) Values ('" 
+                                    + VendorCat + "','" + Vendorname + "','" + contact + "','" + contact2 + "','" + Address + "','" + Address2 + "','" + Utility.ChangeDateTimeLocalToSQLServerFormat(date) + "'," + SessionVariables.SocietyID + ",'insert')";
+                                bool result = dacess.Update(InsetdataQuery);
+
+                                if (result == true)
+                                {
+                                    Response.AddHeader("REFRESH", "50;URL=Vendors.aspx");
+                                    Response.Redirect("Vendors.aspx", false);
+                                }
+
+                                else
+                                {
+                                    ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "Showpopup()", true);
+                                    lblstatus.Text = "Vendor Added Failed";
+                                }
+                            }
+
+                        }
+                        */
             catch (Exception ex)
             {
                 lblstatus.Text = ex.Message;
@@ -441,7 +479,7 @@ public partial class Vendors : System.Web.UI.Page
         ImageMap img = (ImageMap)e.Item.FindControl("ImageMap1");
 
 
-        img.Attributes["onerror"] = "this.src='Images/Icon/downloadbg.png'";
+        img.Attributes["onerror"] = "this.src='Images/Icon/downloadbg.jpg'";
 
 
 
@@ -601,39 +639,72 @@ public partial class Vendors : System.Web.UI.Page
     private void EditVendor()
     {
         DataAccess dacess = new DataAccess();
-        String VendorID = HiddenVendorEditID.Value;
-        String VendorName = HiddenVendorName.Value;
+  
         // DateTime Updatedate = System.DateTime.Now;
         DateTime Updatedate = Utility.GetCurrentDateTimeinUTC();
         String NewvendorQuery = null;
 
-        string VendorCat = drpVendorcategory.SelectedItem.Text;
-        string Vendorname = txtvendorname.Text;
-        String contact = txtvendromobile.Text;
-        String Address = txtvendoraddress.Text;
+        
+        
+        VendorController vendorController = new VendorController();
 
         try
         {
-            if (FileVendorImg.HasFile)
-            {
-                ImportImage(FileVendorImg);
-              
+          
+            int VendorID = Convert.ToInt32(HiddenVendorEditID.Value);
+            String VendorName = HiddenVendorName.Value;
+
+            if (checkEditVendor.Checked) {
+                Vendor editVendor = new Vendor();
+                editVendor.ID = VendorID;
+                editVendor.ShopCategoryID = Convert.ToInt32(drpVendorcategory.SelectedItem.Value);
+
+                editVendor.VendorName = txtvendorname.Text;
+                editVendor.ContactNumber = txtMobile2.Text;
+                editVendor.ContactNumber2 = txtvendromobile.Text;
+
+                editVendor.Address = txtvendoraddress.Text;
+                editVendor.Address2 = txtvendoraddress2.Text;
+
+                vendorController.UpdateVendor(editVendor);
+
             }
 
-            else
+            if (FileVendorImg.HasFile)
             {
-                NewvendorQuery = "Update  dbo.Vendors set ShopCategory = '" + VendorCat + "',   VendorName= '" + Vendorname + "', ContactNumber='" + contact + "', Address = '" + Address + "' ,Date = '" + Updatedate + "' ,CmdType ='Update'   where ID = '" + VendorID + "'";
-                bool result = dacess.Update(NewvendorQuery);
-                if (result == true)
+                string base64 = Request.Form["imgCropped"];
+                byte[] bytesImages = Convert.FromBase64String(base64.Split(',')[1]);
+                String Savepath = Request.PhysicalApplicationPath + "ImageServer\\Vendor\\";
+                //Check if size is less than 2 MB
+                if (bytesImages.Length < 2097152)
                 {
-                    FillVendorDataList(muser.currentResident.SocietyID , muser.currentResident.UserType);
-                    
+
+                   
+                    bool result = vendorController.AddImage(bytesImages, VendorID, Savepath);
+                    if (result)
+                    {
+                        lblstatus.Text = "";
+
+                    }
+                    else
+                    {
+                        lblstatus.Text = "Error Saving Image. Try again";
+                    }
+
                 }
                 else
                 {
-                    
+                    lblstatus.Text = "Select smaller Image";
                 }
+
+
             }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert()", "alert('Please Select  a  image to upload')", true);
+            }
+
+            
         }
         catch (Exception ex)
         {
@@ -660,55 +731,31 @@ public partial class Vendors : System.Web.UI.Page
             String VendorName = HiddenVendorName.Value;
             if (file.HasFile)
             {
-
-                //*****************
-                if (file.PostedFile.ContentLength < 20728650)
+                string base64 = Request.Form["imgCropped"];
+                byte[] bytesImages = Convert.FromBase64String(base64.Split(',')[1]);
+                String Savepath = Request.PhysicalApplicationPath + "ImageServer\\Vendor\\";
+                //Check if size is less than 2 MB
+                if (bytesImages.Length < 2097152)
                 {
 
-                    String Savepath = Request.PhysicalApplicationPath + "ImageServer\\Vendor\\";
-                    string imagename = VendorID.ToString();
-                    //string imagename = Path.GetFileNameWithoutExtension(file.FileName);
-                    string base64 = Request.Form["imgCropped"];
-                    byte[] bytesImages = Convert.FromBase64String(base64.Split(',')[1]);
-                    ImageFormat format = ImageFormat.Png;
+                    VendorController vendorController = new VendorController();
 
-                    string filePath = string.Format(Savepath + "\\" + imagename + ".{0}", format.ToString());
-
-                    using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                    bool result = vendorController.AddImage(bytesImages, VendorID, Savepath);
+                    if (result)
                     {
-                        stream.Write(bytesImages, 0, bytesImages.Length);
-                        stream.Flush();
+                        lblstatus.Text = "";
+
+                    }
+                    else {
+                        lblstatus.Text = "Error Saving Image. Try again";
                     }
 
-                    using (SqlConnection con1 = new SqlConnection(Utility.SocietyConnectionString))
-                    {
-                        con1.Open();
-                        String UpdateImageQuery = "Update dbo.Vendors set ShopCategory=@ShopCategory,VendorName=@VendorName,ContactNumber=@ContactNumber,Address= @Address,VendorIcon = @VendorIcon,VendorIconFormat ='" + format + "',Date = '" + date + "',CmdType ='Update'   where ID = '" + VendorID + "'";
-                        SqlCommand cmd = new SqlCommand(UpdateImageQuery, con1);
-                        cmd.Parameters.Add("@VendorIcon", SqlDbType.Image).Value = bytesImages;
-                        cmd.Parameters.Add("@ShopCategory", SqlDbType.VarChar, 50).Value = VendorCat;
-                        cmd.Parameters.Add("@VendorName", SqlDbType.VarChar, 50).Value = Vendorname;
-                        cmd.Parameters.Add("@ContactNumber", SqlDbType.VarChar, 50).Value = contact;
-                        cmd.Parameters.Add("@Address", SqlDbType.VarChar, 50).Value = Address;
-                        int result = cmd.ExecuteNonQuery();
-                        con1.Close();
-
-                        if (result == 1)
-                        {
-                            
-                            //lblEditResult.Text = VendorName + " " + "Edited Sucessfully";
-                            FillVendorDataList(muser.currentResident.SocietyID , muser.currentResident.UserType);
-                            ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "UpdateSuccess()", true);
-                        }
-
-                        else
-                        {
-                           // lblEditResult.Text = VendorName + " " + "Edited Sucessfully";
-                            ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "UpdateFail()", true);
-                        }
-                    }
-                   
                 }
+                else {
+                    lblstatus.Text = "Select smaller Image";
+                }
+
+          
             }
             else
             {
@@ -801,6 +848,47 @@ public partial class Vendors : System.Web.UI.Page
     }
 
 
-   
+
+
+    protected void AddOffer_OnClick (object sender, EventArgs e)
+    {
+        try
+        {
+            String offerDescription = textOffer.Text;
+            String startDate = txtstart.Text;
+            String endDate = txtend.Text;
+          
+            if (offerDescription == "" || startDate == "" || endDate == "")
+            {
+                offerMessage.Text = "Empty Fields not allowed";
+            }
+            else
+            {
+                Offer newOffer = new Offer();
+                newOffer.VendorID = Convert.ToInt32(HiddenVendorEditID.Value) ;
+                newOffer.offerdescription = offerDescription;
+                newOffer.StartDate = DateTime.ParseExact(startDate, "dd-MM-yyyy", null);
+                newOffer.EndDate = DateTime.ParseExact(endDate, "dd-MM-yyyy", null);
+                newOffer.SocietyID = muser.currentResident.SocietyID;
+
+                VendorController vendorController = new VendorController();
+               bool result = vendorController.AddOffer(newOffer);
+                if (result)
+                {
+                    FillVendorDataList(muser.currentResident.SocietyID, muser.currentResident.UserType);
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "HideOfferModel()", true);
+                }
+                else
+                {
+                    offerMessage.Text = "Could not update Offer";
+                }
+
+            }
+        }
+        catch (Exception ex)
+        {
+            offerMessage.Text = "Error Updating Offer.";
+        }
+    }
 }
 

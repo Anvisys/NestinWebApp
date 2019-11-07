@@ -263,7 +263,7 @@ public class User
                             SocietyID = Convert.ToInt32(item["SocietyID"]),
                             SocietyName = item["SocietyName"].ToString(),
                             ActiveDate = activeDate != string.Empty ? Convert.ToDateTime(activeDate).ToString("dd/MM/yyyy") : null,
-                            DeActiveDate = deActiveDate != string.Empty ? Convert.ToDateTime(deActiveDate).ToString("dd/MM/yyyy") : null,
+                            DeActiveDate = Utility.DBStringtoLocalDateTime(deActiveDate),
                             FlatID = flatID,
                             FlatNumber = flatNumber,
                             CompanyName = compName,
@@ -422,7 +422,7 @@ public class User
     {
         try
         {
-            string URI = "http://www.kevintech.org/NewAccountMailer.php";
+            string URI = "http://www.kevintech.in/NewAccountMailer.php";
             WebRequest request = WebRequest.Create(URI);
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";

@@ -122,7 +122,7 @@ public partial class Viewcomplaints : System.Web.UI.Page
             }
             else
             {
-                topnav.Visible = false;
+                //topnav.Visible = false;
                 lblPage.Text = "<h4>No Complaints are available !!!</h4>";
                 btnnext.Visible = false;
                 btnprevious.Visible = false;
@@ -382,7 +382,7 @@ public partial class Viewcomplaints : System.Web.UI.Page
         try
         {
             DataAccess dacess = new DataAccess();
-            String DataAssignedTypeQuery = "Select * from dbo.ViewSocietyUsers where CompType = '" + service + "' and SocietyID = " + SessionVariables.SocietyID;
+            String DataAssignedTypeQuery = "Select * from dbo.ViewEmployeeAssignment where CompType = '" + service + "' and SocietyID = " + SessionVariables.SocietyID;
             DataSet ds = dacess.ReadData(DataAssignedTypeQuery);
             
             if (ds==null || ds.Tables[0].Rows.Count == 0)
@@ -771,22 +771,7 @@ public partial class Viewcomplaints : System.Web.UI.Page
     }
 
 
-    protected void drpComplaintDateFilter_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        
-        String ComplaintDateFilter = drpComplaintDateFilter.SelectedItem.Text;
-        String FlatNumber = txtVcompFlatSrch.Text;
-        String ComplaintStatus = drpVCompStatusF.SelectedItem.Text;
-        Complaint ComplaintView = new Complaint();
-        DataSet dataset = ComplaintView.GetComplaints(muser.currentResident.SocietyID, muser.currentResident.FlatNumber, "", ComplaintStatus, ComplaintDateFilter);
-                
-        if (dataset.Tables.Count > 0)
-                {
-                    //VComplaintsGrid.DataSource = dataset;
-                    //VComplaintsGrid.DataBind();
-                }
  
-    }
 
 
     protected void Complaint_RowDataBound(object sender, GridViewRowEventArgs e)

@@ -18,7 +18,7 @@ public class Resident
     public int ServiceType { get; set; }
     public String CompanyName { get; set; }
     public String ActiveDate { get; set; }
-    public String DeActiveDate { get; set; }
+    public DateTime DeActiveDate { get; set; }
     public String ModifiedDate { get; set; }
     public int SocietyID { get; set; }
     public int Status { get; set; }
@@ -44,7 +44,7 @@ public class Resident
         ServiceType = 0;
         CompanyName = "NA";
         ActiveDate = DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss");
-        DeActiveDate = DateTime.UtcNow.AddYears(5).ToString("MM-dd-yyyy HH:MM:ss");
+        DeActiveDate = DateTime.UtcNow.AddYears(5);
         ModifiedDate = DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss");
         SocietyID = 1;
         Status = 1;
@@ -132,7 +132,7 @@ public class Resident
 
 
             String societyUserQuery = "Insert Into dbo.SocietyUser (UserID,FlatID,Type,ServiceType,CompanyName,ActiveDate,DeActiveDate,ModifiedDate, SocietyID,Status, HouseID) output INSERTED.ResID Values('" +
-                                      UserID + "','" + FlatID + "','"+UserType+"','" + ServiceType + "','" + CompanyName+"','"+ActiveDate+"','" + DeActiveDate + "','" + ModifiedDate + "','" + SocietyID + "','" + Status + "','" + HouseID+"')";
+                                      UserID + "','" + FlatID + "','"+UserType+"','" + ServiceType + "','" + CompanyName+"','"+ActiveDate+"','" + DeActiveDate.ToString("MM-dd-yyyy HH:MM:ss") + "','" + ModifiedDate + "','" + SocietyID + "','" + Status + "','" + HouseID+"')";
 
             DataAccess da = new DataAccess();
             bool result = da.UpdateQuery(societyUserQuery);
@@ -255,17 +255,55 @@ public class Resident
         }
     }
 
-    public DataSet GetEmployee(int SocietyID, int ServiceTypeID)
+    public bool IsUserExist()
+    {
+        bool result = false;
+        try
+        {
+            String EmployeeQuery = "";
+            EmployeeQuery = "select * from " + CONSTANTS.View_SocietyUser + " where ServiceType = "+ ServiceType + " and societyID = " + SocietyID + " and UserID = " + UserID;
+
+            DataAccess dacess = new DataAccess();
+            DataSet ds = dacess.GetData(EmployeeQuery);
+
+            if (ds != null)
+            {
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    result = true;
+                }
+                else {
+                    result = false;
+                }
+            }
+            return result;
+
+        }
+        catch (Exception ex)
+        {
+            return result;
+        }
+    }
+
+
+    public DataSet GetEmployee(int SocietyID, int ServiceTypeID, String EmployeeName)
     {
         try
         {
             String EmployeeQuery = "";
 
-            EmployeeQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type = 'Employee' and societyID = '" + SocietyID + "'";
+            EmployeeQuery = "select * from " + CONSTANTS.View_Employee + " where StatusID = 2 and DeActiveDate > GetDate() and societyID = " + SocietyID ;
 
-            if (ServiceTypeID > 0)
+            if (ServiceTypeID > 0 && EmployeeName == "")
             {
-                EmployeeQuery = "select * from " + CONSTANTS.View_SocietyUser + " where Type = 'Employee' and societyID = '" + SocietyID + "' and ServiceType = " + ServiceTypeID;
+                EmployeeQuery = "select * from " + CONSTANTS.View_Employee + " where StatusID = 2 and DeActiveDate > GetDate() and societyID = '" + SocietyID 
+                    + "' and ServiceType = " + ServiceTypeID ;
+            }
+
+            else if (ServiceTypeID > 0 && EmployeeName != "")
+            {
+                EmployeeQuery = "select * from " + CONSTANTS.View_Employee + " where StatusID = 2 and DeActiveDate > GetDate() and societyID = '" + SocietyID
+                    + "' and ServiceType = " + ServiceTypeID + " and FirstName contains " + EmployeeName;
             }
 
             DataAccess dacess = new DataAccess();

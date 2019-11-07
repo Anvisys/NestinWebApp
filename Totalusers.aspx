@@ -13,13 +13,13 @@
     <meta http-equiv="Page-Enter" content="blendTrans(Duration=.3)" />
     <meta http-equiv="Page-Exit" content="blendTrans(Duration=.3)" />
 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <script src="Scripts/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="CSS/mystylesheets.css" />
-    <link rel="Stylesheet" href="CSS/ApttTheme.css" />
-    <link rel="stylesheet" href="CSS/ApttLayout.css" />
 
 
+
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 
     <!-- jQuery library -->
@@ -28,19 +28,23 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
 
     <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-   
-     
-         <script type="text/javascript" src="Scripts/datetime.js"></script>
-   
-    <script type="text/javascript" src="https://momentjs.com/downloads/moment.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css"/>
- 
-    
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+    <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+    <link rel="stylesheet" href="CSS/NewAptt.css" />
+    <link rel="stylesheet" href="CSS/ApttLayout.css" />
+    <link rel="stylesheet" href="CSS/ApttTheme.css" />
+    <link rel="stylesheet" href="CSS/Nestin.css" />
+    <link rel="stylesheet" href="CSS/Nestin-3rdParty.css" />
+
+
+
+
+
+
+
 
     <script type="text/javascript">
 
@@ -48,12 +52,12 @@
         // Sagar 
         $(document).ready(function () {
 
-            $("#txtdeact").datetimepicker({
+            $("#txtdeact").datepicker({
                 //  format: 'YYYY-MM-DD'
                 format: 'DD-MM-YYYY'
             });
 
-            $("#txtact").datetimepicker({
+            $("#txtact").datepicker({
 
                 format:'DD-MM-YYYY'
             });
@@ -65,12 +69,12 @@
             Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
             function EndRequestHandler(sender, args) {
                 //Binding Code Again
-                $("#txtdeact").datetimepicker({
+                $("#txtdeact").datepicker({
                     //  format: 'YYYY-MM-DD'
                     format: 'DD-MM-YYYY'
                 });
 
-                $("#txtact").datetimepicker({
+                $("#txtact").datepicker({
 
                     format: 'DD-MM-YYYY'
                 });
@@ -84,7 +88,7 @@
             $("#lblScreen").text(window.innerWidth);
             if (window.innerWidth <= 768) {
 
-                hideColumn();
+               // hideColumn();
             }
             else {
               //  showColumn();
@@ -335,11 +339,15 @@
 
             $("#txtEndDate").datepicker({ dateFormat: 'dd-mm-yy' });
 
-            $("#txtStartDate").datepicker({ dateFormat: 'dd-mm-yy' });
+             $("#txtStartDate").datepicker({ dateFormat: 'dd-mm-yy' });
+             //$("#start_date").datepicker({ dateFormat: 'dd-mm-yy' });
+            
         });
 
 
+        function ValidateDate() {
 
+        }
 
         function ShowAddTenant() {
             setTimeout(function () {
@@ -683,7 +691,7 @@
                         <div class="container-fluid" style="margin-top: 50px; width: 350px;">
                             <div class="panel panel-primary" style="position: relative; margin: 0px;">
                                 <div class="panel-heading">
-                                    Delete Confirmation
+                                    Confirm Activation
                                     <span class="fa fa-times" onclick="CancelActivate()" id="cancelAct" style="float: right; cursor: pointer;"></span>
                                 </div>
                                 <div class="panel-body">
@@ -696,7 +704,9 @@
                                         <tr>
                                             <td style="height: 15px;">Active From </td>
                                             <td style="height: 15px;">
-                                                <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox></td>
+                                                <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control"  autocomplete="off"></asp:TextBox>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="height: 15px;">Active Till </td>
@@ -731,7 +741,7 @@
 
                                                 <div class="col-sm-6 col-xs-12" style="text-align: center;">
 
-                                                    <img class="profile-image" src='<%# "GetImages.ashx?ResID="+ Eval("ResID")+"&Name="+Eval("FirstName") +"&UserType="+Eval("Type") %>' />
+                                                    <img class="profile-image" src='<%# "GetImages.ashx?Type=Resident&ID="+ Eval("ResID")+"&Name="+Eval("FirstName") +"&UserType="+Eval("Type") %>' />
                                                     <br />
 
                                                     <%# Eval("FirstName") +" " + Eval("LastName") %> , <%# Eval("FlatNumber") %>
@@ -814,7 +824,7 @@
 
                                                 <div class="col-sm-4 col-xs-12" style="text-align: center;">
 
-                                                    <img class="profile-image" src='<%# "GetImages.ashx?ResID="+ Eval("ResID")+"&Name="+Eval("FirstName") +"&UserType="+Eval("Type") %>' />
+                                                    <img class="profile-image" src='<%# "GetImages.ashx?Type=Resident&ID="+ Eval("ResID")+"&Name="+Eval("FirstName") +"&UserType="+Eval("Type") %>' />
                                                     <br />
 
                                                     <%# Eval("FirstName") +" " + Eval("LastName") %> , <%# Eval("FlatNumber") %>
@@ -930,7 +940,7 @@
                                                     <div class="col-xs-12 col-sm-6">
                                                         <label class="col-xs-5">Email :</label>
                                                         <div class="col-xs-7">
-                                                            <asp:TextBox ID="txtEmailId" runat="server" CssClass="form-control col-xs-8" AutoCompleteType="Disabled" TabIndex="8" onblur="validateEmail(this);" OnTextChanged="txtEmailId_TextChanged" AutoPostBack="True"></asp:TextBox>
+                                                            <asp:TextBox ID="txtEmailId" runat="server" CssClass="form-control col-xs-8" AutoCompleteType="Disabled" TabIndex="1" onblur="validateEmail(this);" OnTextChanged="txtEmailId_TextChanged" AutoPostBack="True"></asp:TextBox>
 
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtEmailId" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
                                                         </div>
@@ -940,7 +950,7 @@
                                                         <label class="col-xs-5">Mobile :</label>
                                                         <div class="col-xs-7">
 
-                                                            <asp:TextBox ID="txtMobileno" onkeypress="return isNumberKey(event)" runat="server" CssClass="form-control" MaxLength="10" TabIndex="1" OnTextChanged="txtMobileno_TextChanged" AutoCompleteType="Disabled" AutoPostBack="True"></asp:TextBox>
+                                                            <asp:TextBox ID="txtMobileno" onkeypress="return isNumberKey(event)" runat="server" CssClass="form-control" MaxLength="10" TabIndex="2" OnTextChanged="txtMobileno_TextChanged" AutoCompleteType="Disabled" AutoPostBack="True"></asp:TextBox>
 
                                                             <asp:RequiredFieldValidator ID="RequireUserMobileNo" runat="server" ControlToValidate="txtMobileno" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
                                                         </div>
@@ -953,7 +963,7 @@
                                                         <label class="col-xs-5">First Name :</label>
                                                         <div class="col-xs-7">
 
-                                                            <asp:TextBox ID="txtFirstname" CssClass="form-control" runat="server" TabIndex="2"></asp:TextBox>
+                                                            <asp:TextBox ID="txtFirstname" CssClass="form-control" runat="server" TabIndex="3"></asp:TextBox>
 
                                                         </div>
                                                     </div>
@@ -963,7 +973,7 @@
                                                         <label class="col-xs-5">Middle Name:</label>
                                                         <div class="col-xs-7">
 
-                                                            <asp:TextBox ID="txtMiddleName" runat="server" CssClass="form-control" TabIndex="3"></asp:TextBox>
+                                                            <asp:TextBox ID="txtMiddleName" runat="server" CssClass="form-control" TabIndex="4"></asp:TextBox>
 
                                                         </div>
                                                     </div>
@@ -977,7 +987,7 @@
 
 
 
-                                                            <asp:TextBox ID="txtLastname" runat="server" CssClass="form-control" TabIndex="4"></asp:TextBox>
+                                                            <asp:TextBox ID="txtLastname" runat="server" CssClass="form-control" TabIndex="5"></asp:TextBox>
 
                                                         </div>
                                                     </div>
@@ -986,7 +996,7 @@
                                                         <div class="col-xs-7">
 
 
-                                                            <asp:DropDownList ID="drpAddusrGendr" runat="server" CssClass="form-control ddl_style" TabIndex="5">
+                                                            <asp:DropDownList ID="drpAddusrGendr" runat="server" CssClass="form-control ddl_style" TabIndex="6">
                                                                 <asp:ListItem>Male</asp:ListItem>
                                                                 <asp:ListItem>Female</asp:ListItem>
                                                             </asp:DropDownList>
@@ -1004,7 +1014,7 @@
                                                         <div class="col-xs-7">
 
 
-                                                            <asp:TextBox ID="txtParentname" runat="server" CssClass="form-control" TabIndex="6"></asp:TextBox>
+                                                            <asp:TextBox ID="txtParentname" runat="server" CssClass="form-control" TabIndex="7"></asp:TextBox>
 
                                                         </div>
                                                     </div>
@@ -1014,7 +1024,7 @@
 
 
 
-                                                            <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TabIndex="9" AutoCompleteType="Disabled"></asp:TextBox>
+                                                            <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" TabIndex="8" AutoCompleteType="Disabled"></asp:TextBox>
                                                         </div>
                                                     </div>
 
@@ -1024,7 +1034,7 @@
 
 
 
-                                                            <asp:DropDownList ID="drpAddusertype" runat="server" CssClass="form-control ddl_style" TabIndex="7">
+                                                            <asp:DropDownList ID="drpAddusertype" runat="server" CssClass="form-control ddl_style" TabIndex="9">
                                                                 <asp:ListItem>Owner</asp:ListItem>
                                                                 <asp:ListItem>Tenant
                                                                 </asp:ListItem>
@@ -1034,26 +1044,26 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row"  style="display:none;">
                                                       <div class="col-xs-12 col-sm-6">
                                                         <label class="col-xs-5">Activate Date :</label>
                                                         <div class="col-xs-7">
-                                                            <asp:TextBox ID="txtact" runat="server" CssClass="form-control col-xs-8" ViewStateMode="Enabled" ></asp:TextBox>
+                                                            <asp:TextBox ID="txtact" runat="server" CssClass="form-control col-xs-8" ViewStateMode="Enabled" TabIndex="10"></asp:TextBox>
                                                     
                                                         </div>
                                                     </div>
 
                                                     <div class="col-xs-12 col-sm-6">
-                                                        <label class="col-xs-5">Deactivate Datae :</label>
+                                                        <label class="col-xs-5">Deactivate Date :</label>
                                                         <div class="col-xs-7">
-                                                            <asp:TextBox ID="txtdeact" runat="server" CssClass="form-control col-xs-8" ViewStateMode="Enabled"></asp:TextBox>
+                                                            <asp:TextBox ID="txtdeact" runat="server" CssClass="form-control col-xs-8" ViewStateMode="Enabled" TabIndex="11"></asp:TextBox>
                                                           
                                                         </div>
                                                     </div>
                                                    
                                                 </div>
 
-                                                 <div class="row">
+                                                 <div class="row" style="display:none;">
                                                       <div class="col-xs-12 col-sm-6">
                                                         <label class="col-xs-5">Flat :</label>
                                                         <div class="col-xs-7">
@@ -1067,7 +1077,8 @@
 
 
                                         <div class="panel-footer" style="text-align: right;">
-                                            <asp:Button ID="btnAddUserResident" runat="server" CssClass="btn btn-primary" Text="Submit" ValidationGroup="Add_User" CausesValidation="False" OnClick="btnAddUserResident_Click" TabIndex="10" />
+                                            <asp:Button ID="btnAddUserResident" runat="server" CssClass="btn btn-primary" Text="Submit" ValidationGroup="Add_User" CausesValidation="False"
+                                                OnClick="btnAddUserResident_Click" TabIndex="10" />
                                             <button type="button" id="btnusercancel" class="btn btn-danger" onclick="HideAddRes();">Cancel</button>
                                         </div>
                                     </div>

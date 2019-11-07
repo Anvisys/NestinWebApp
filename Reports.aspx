@@ -20,7 +20,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     
             <script src="Scripts/jquery-1.11.1.min.js"></script>
-            <link rel="stylesheet" href="mystylesheets.css" /> 
+            <link rel="stylesheet" href="CSS/mystylesheets.css" /> 
             <link rel="stylesheet" href="/CSS/ApttTheme.css" />
             <link rel="stylesheet" href="CSS/ApttLayout.css" />
       

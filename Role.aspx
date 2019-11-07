@@ -59,7 +59,7 @@
         var ResId;
 
         $(document).ready(function () {
-            window.parent.FrameSourceChanged();
+            //window.parent.FrameSourceChanged();
           let params = (new URL(document.location)).searchParams;
 
             if (params != null) {
@@ -567,7 +567,7 @@
         }
 
         function Select(ResId, status) {
-            alert("570==>> resid=" + ResId);
+           // alert("570==>> resid=" + ResId);
             window.location = "MainPage.aspx?Res=" + ResId ;
 
             console.log(window.location);
@@ -739,10 +739,9 @@
                 <div class="container-fluid" id="User_Profile" style="margin: 50px; background-color: white;">                  
                     <div class="row" style="margin: 10px;">                        
                         <div class="col-sm-2">
-                            <img id="uploadPreview" class="img image_large" src="GetImages.ashx?UserID=<% =UserID %>&Name=<% =UserName %>&UserType=Owner" />
+                            <img id="uploadPreview" class="img image_large" src="GetImages.ashx?Type=User&ID=<% =UserID %>&Name=<% =UserName %>&UserType=Owner" />
                         </div>
 
-                        </center>
             <div class="col-md-8 col-xs-12">
                 <table class="w3-table w3-striped w3-bordered">
                     <tr>

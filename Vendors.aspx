@@ -29,9 +29,13 @@
     <script  type="text/javascript" src="http://jcrop-cdn.tapmodo.com/v2.0.0-RC1/js/Jcrop.js"></script>
     <link  rel="stylesheet" href="http://jcrop-cdn.tapmodo.com/v2.0.0-RC1/css/Jcrop.css" type="text/css"/>
 
-    <script type="text/javascript" src="https://momentjs.com/downloads/moment.js"></script>
+<%--    <script type="text/javascript" src="https://momentjs.com/downloads/moment.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" />--%>
+
+      <%--  <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>  --%>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>  
+    <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" /> 
       
   <link rel="stylesheet" href="CSS/NewAptt.css" />
       <link rel="stylesheet" href="CSS/ApttTheme.css" />
@@ -178,6 +182,55 @@ hr {
     margin-bottom:5px;
 }
 
+.offer_div:hover{
+    background-color:#ECD888;
+}
+
+    </style>
+
+    <style id="SlidingCard">
+
+        .cardContainer {
+          position: relative;
+ 
+        }
+
+        .contact {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
+        .offer_overlay {
+          position: absolute;
+          bottom: 100%;
+          left: 0;
+          right: 0;
+          background-color: #ECD888;
+          overflow: hidden;
+          width: 100%;
+          height:0;
+          transition: .5s ease;
+        }
+
+        .cardContainer:hover .offer_overlay {
+              bottom: 0;
+              height: 100%;
+            }
+
+        .offer_text {
+          color: white;
+          font-size: 15px;
+          position: absolute;
+          top: 40%;
+          left: 40%;
+          -webkit-transform: translate(-50%, -25%);
+          -ms-transform: translate(-50%, -25%);
+          transform: translate(-50%, -25%);
+          text-align: left;
+          padding:0px;
+        }
+
     </style>
 
     <script>
@@ -190,19 +243,19 @@ hr {
          var api_url = "http://www.kevintech.in/Nestin-WebApi/";
         $(document).ready(function () {
 
-            $("#txtend").datetimepicker({
+            $("#txtend").datepicker({
                 //  format: 'YYYY-MM-DD'
-                format: 'DD-MM-YYYY'
+               dateFormat: 'dd-mm-yy'
             });
            
-            $("#txtstart").datetimepicker({
+            $("#txtstart").datepicker({
                 //  format: 'YYYY-MM-DD'
-                format: 'DD-MM-YYYY'
+             dateFormat: 'dd-mm-yy'
             });
 
             CheckOffers();
             
-            $(".time").datetimepicker({
+            $(".time").datepicker({
                 //  format: 'YYYY-MM-DD'
                 format: 'DD-MM-YYYY'
             });
@@ -210,6 +263,7 @@ hr {
 
             window.parent.FrameSourceChanged();
             userType = '<%=Session["UserType"] %>';
+
             if (userType == "Admin") {
                 // alert("158");
                 document.getElementById("Add_Vendor").style.visibility = 'visible';
@@ -223,7 +277,7 @@ hr {
                // alert("220");
             }
             else {
-                document.getElementById("Add_Vendor").style.visibility = 'none';
+                document.getElementById("Add_Vendor").style.visibility = 'hidden';
                 $("#btn_Submit").css("display", "none");
             }
 
@@ -231,8 +285,9 @@ hr {
         });
 
         
-         function ShowAddOfferModel(vendorsid) {
-             $("#lblvendor").text(vendorsid);
+        function ShowAddOfferModel(VendorID, Offer, OfferStartDate, OfferEndDate ) {
+             $("#HiddenVendorEditID").val(VendorID);
+             $("#lblvendor").text(VendorID);
              $("#addoffermodel").show();
             // alert("In Model 213");
         }
@@ -269,6 +324,7 @@ hr {
         }
 
         function PreviewImage() {
+            alert("Is this used");
             var oFReader = new FileReader();
             oFReader.readAsDataURL(document.getElementById('FileVendorEdit').files[0]);
 
@@ -278,13 +334,19 @@ hr {
         }
 
         function PreviewAddImage() {
-            var image = document.getElementById("ImgPreview").style.display = "block";
+            document.getElementById("image_modal_div").style.display = "block";
+
             var oFReader = new FileReader();
             oFReader.readAsDataURL(document.getElementById('FileVendorImg').files[0]);
 
             oFReader.onload = function (oFREvent) {
                
-               // document.getElementById("ImgPreview").src = oFREvent.target.result;
+                document.getElementById("Image_crop").src = oFREvent.target.result;
+                
+              //  document.getElementById("ImgPreview").src = oFREvent.target.result;
+
+                 $('#<%=ImgPreview.ClientID %>') .attr('src', oFREvent.target.result); 
+               
             };
         }
 
@@ -295,8 +357,8 @@ hr {
         var selectedAddress;
 
         function ShowEditForm(VendorID, Name, Category, Number,ContantNumber2, Address,Address2, Element) {
-         
-              $("#myVendorAddForm").show();
+               // alert(1);
+               $("#myVendorAddForm").show();
                 $("#FileVendorImg").hide();
                 //Added by Amit on 2sep 2017 
                 $('#headingAddEdit').text('Edit Vendor');
@@ -306,11 +368,13 @@ hr {
                 $("#HiddenVendorName").val(Name);
                 $('#<%=txtvendorname.ClientID %>').val(Name);
                 $('#<%=drpVendorcategory.ClientID%> option:selected').text(Category);
-            $('#<%=txtvendromobile.ClientID %>').val(Number);
-            $('#<%=txtMobile2.ClientID %>').val(ContantNumber2);
-            $('#<%=txtvendoraddress.ClientID %>').val(Address);
-             $('#<%=txtvendoraddress2.ClientID %>').val(Address2);
-                document.getElementById("htmlImage").src = "GetImages.ashx?VendorID=" + VendorID ;
+                $('#<%=txtvendromobile.ClientID %>').val(Number);
+                $('#<%=txtMobile2.ClientID %>').val(ContantNumber2);
+                $('#<%=txtvendoraddress.ClientID %>').val(Address);
+                $('#<%=txtvendoraddress2.ClientID %>').val(Address2);
+                $('#<%=checkEditVendor.ClientID %>').show();
+
+                document.getElementById("htmlImage").src = "GetImages.ashx?Type=Vendor&ID=" + VendorID ;
         }
 
 
@@ -352,20 +416,24 @@ hr {
                 $('#<%=txtvendoraddress2.ClientID %>').val("");
                 //Added by Aarshi on 22 aug 2017 for image crop code
               //     alert(3);
+
+
+                
+                $('#<%=checkEditVendor.ClientID %>').hide();
                 $("#FileVendorImg").hide();
-                document.getElementById("htmlImage").src = "Images/Icon/downloadbg.png";
+                document.getElementById("htmlImage").src = "Images/Icon/downloadbg.jpg";
                 $("#lblstatus").text = "";
                
             });
 
-            $("#Edit_Vendor").click(function () {
-                
+         /*   $("#Edit_Vendor").click(function () {
+                 alert(2);
 
                 img.Attributes["onerror"] = "this.src='Images/Vendor/default.png'";
                 document.getElementById("htmlImage").src = "GetImages.ashx?ImID=" + VenID;
                
             });
-
+            */
 
         
 
@@ -482,9 +550,9 @@ hr {
             }
 
 
-            function ToggleFileUpload()
+            function ToggleFileUpload(element)
             {
-                //var checkbox = document.getElementById("chckAddVendor");
+                var checkbox = document.getElementById("checkAddImage");
                 var FileUpload = document.getElementById("FileVendorImg");
                 if(checkbox.checked)
                 {
@@ -500,9 +568,6 @@ hr {
                     document.getElementById("ImgPreview").style.display = "none";
                 }
             }
-
-
-         
 
 
             $(document).ready(function () {
@@ -550,22 +615,29 @@ hr {
             });
         });
 
+        function CloseImageModal() {
+                        $("#image_modal_div").hide();
+                        $('#Image_crop').data("Jcrop").destroy();
+                        $('#Image_crop').removeAttr('style');
+        }
 
+/*
+        $(document).ready(function () {
 
-            $(document).ready(function () {
                 $("#btnCancel").click(function () {
                     $("#image_modal_div").hide();
                     $('#Image_crop').data("Jcrop").destroy();
                     $('#Image_crop').removeAttr('style');
-                });
-                $(document).ready(function () {
+            });
+
+            
                     $("#btnCan").click(function () {
                         $("#image_modal_div").hide();
                         $('#Image_crop').data("Jcrop").destroy();
                         $('#Image_crop').removeAttr('style');
                     });
 
-                });
+ 
 
                     $(".close").click(function () {
                         $("#image_modal_div").hide();
@@ -575,7 +647,7 @@ hr {
                     });
                 });
 
-    
+    */
             //Added by Aarshi on 23 aug 2017 for image crop code
        
             $(window).load(function () {
@@ -716,7 +788,7 @@ hr {
          return true;
       }
 
-        function EditOffers(vendorid) {
+        function EditOffers(VendorID) {
            
         // var vendorid = $("#lblvendor").text();
             //alert(vendorid);
@@ -729,7 +801,7 @@ hr {
             end = GetDateTimeinISO(new Date(enddate));
             alert("Start Date="+startdate +"</br> End date="+end );
 
-            var req = "{\"VendorID\":" + vendorid + ",\"offerdescription\":\"" + description + "\",\"StartDate\":\"" + Start + "\",\"EndDate\":\"" +end + "\",\"SocietyID\":" + societyid + "} ";
+            var req = "{\"VendorID\":" + VendorID + ",\"offerdescription\":\"" + description + "\",\"StartDate\":\"" + Start + "\",\"EndDate\":\"" +end + "\",\"SocietyID\":" + societyid + "} ";
             console.log(req);
 
             var url = api_url + "api/Offers/New";
@@ -800,39 +872,42 @@ hr {
             $("#Offerdetails" + vendorid).hide();
         }
 
-        function GetOffers(vendorid) {
-            vendorid = vendorid;
+        function GetOffers(VendorID) {
+           
             var societyid =<%=Session["SocietyID"]%>;
           //  $("#btn_Submit" + vendorid).css("disabled", true);
-            if (userType == "Admin") {
-                document.getElementById("editoffer" + vendorid).style.visibility = 'visible';
-               $('#btn_Submit' + vendorid).prop("disabled", true);
-            }
-            else {
-                $("#btn_Submit" + vendorid).css("display", "none");
-            }
-            var url = api_url + "api/Offers/Society/" + societyid + "/Vendor/" + vendorid + "/";
+            //if (userType == "Admin") {
+            //    document.getElementById("editoffer" + vendorid).style.visibility = 'visible';
+            //   $('#btn_Submit' + vendorid).prop("disabled", true);
+            //}
+            //else {
+            //    $("#btn_Submit" + vendorid).css("display", "none");
+            //}
+
+
+            var url = api_url + "api/Offers/Society/" + societyid + "/Vendor/" + VendorID + "/";
             console.log(url);
             $.ajax({
                 datatype:"jason",
                 url: url,
                 success: function (data) {
+                    if (data.length > 0) {
                     var da = JSON.stringify(data[0]);
-                  
+                    alert(da);
                     var js = jQuery.parseJSON(da);
                  //   console.log("#lblofferdescription".vendorid);
-                    if (da != null) {
+                   
                         offer = js.offerdescription;
                         startdate = DisplayDateOnly(new Date(js.startDate));
                         enddate = DisplayDateOnly(new Date(js.EndDate));
                         $("#lblofferdescription" + vendorid).text(js.offerdescription);
                         $('#lblstartdate' + vendorid).val(DisplayDateOnly(new Date(js.startDate)));
                         $('#lblenddate' + vendorid).val(DisplayDateOnly(new Date(js.EndDate)));
-                        document.getElementById("Offerdetails" + vendorid).style.display = 'block';
+                        document.getElementById("Offerdetails").style.display = 'block';
                        
                     }
                     else
-                        document.getElementById("Offerdetails" + vendorid).style.display = 'none';
+                        document.getElementById("Offerdetails").style.display = 'none';
                    
                    
                 },
@@ -861,18 +936,19 @@ hr {
                  //   console.log(jQuery.type(js));
                     js.forEach(element => {
                         if (userType == "Admin") {
-                            $("#offer_color" + element.VendorID).css("display", "block");
-                            $("#offer_color" + element.VendorID).css("background-color", "#ffcc99");
-                            $("#offer_color" + element.VendorID).text("Add New Offer");
-                            $("#offer_color" + element.VendorID).css("color", "white");
+                           // $("#offerDiv_" + element.VendorID).css("display", "block");
+                          /*  $("#offerDiv_" + element.VendorID).css("background-color", "#ffcc99");
+                            $("#offerDiv_" + element.VendorID).text("Add New Offer");
+
+                            $("#offerDiv_" + element.VendorID).css("color", "white");
                             $("#btn_Submit" + element.VendorID).css("display", "block");
-                            $("#offer_color" + element.VendorID).prop("disabled", false);
+                            $("#offerDiv_" + element.VendorID).prop("disabled", false);*/
                         }
                             
                         else {
-                            $("#offer_color" + element.VendorID).text("No Offer Available");
-                            $("#offer_color" + element.VendorID).css("display", "block");
-                            $("#offer_color" + element.VendorID).prop("disabled", true);
+                            $("#offerDiv_" + element.VendorID).text("No Offer Available");
+                            $("#offerDiv_" + element.VendorID).css("display", "block");
+                            $("#offerDiv_" + element.VendorID).prop("disabled", true);
                            
                         }
                     });
@@ -883,6 +959,8 @@ hr {
                 }
             });
         }
+
+
 
    </script>
     </head>
@@ -933,78 +1011,58 @@ hr {
                                     <div class="col-xs-6 col-sm-3 col-md-3" style="margin-top: 10px;">
 
                                         <div class="card">
+                                             <h4 style="color: #000;"><%# Eval("VendorName") %>,</h4>
+                                         
+                                                <p><%# Eval("ShopCategory") %></p>
                                             <asp:ImageMap ID="ImageMap1" runat="server" Width="100%"
-                                                ImageUrl='<%# "GetImages.ashx?VendorID=" + Eval("ID")  %>'>
+                                                ImageUrl='<%# "GetImages.ashx?Type=Vendor&ID=" + Eval("VendorID") +"&Category=" +Eval("ShopCategory")  %>'>
                                             </asp:ImageMap>
                                             
-                                                <h4 style="color: #000;"><%# Eval("VendorName") %></h4>
+                                                <%--<h4 style="color: #000;"><%# Eval("VendorName") %></h4>
                                                 <hr />
                                                 <p class="title"><%# Eval("ShopCategory") %></p>
-                                                <hr />
-                                                <p><i class="fa fa-map-marker" aria-hidden="true"></i><%# Eval("Address") %>, <%# "" + Eval("Address2") %></p>
-                                                <hr />
-                                                <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber") %></p>
-                                                <hr />
-                                                <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber2") %></p>
-                                                <asp:panel runat="server" ID="pnledit" Visible="false">
-                                                <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px; margin:0px;">
-                                                       
-                                                  <i class="fa fa-edit " id="Edit_Vendor" style="color: #fff;  cursor: pointer; float: left;" onclick="ShowEditForm('<%# Eval("ID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit    </i>
-                                                  <i class="fa fa-trash " id="vendor_delete" onclick="DeleteForm('<%# Eval("ID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer; " aria-hidden="true"></i> 
+                                                <hr />--%>
+                                            <div class="cardContainer">
+
+                                                <div class="contact">
+                                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i><%# Eval("Address") %>, <%# "" + Eval("Address2") %></p>
+                                                    <hr />
+                                                    <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber") %></p>
+                                                    <hr />
+                                                    <p><i class="fa fa-phone" aria-hidden="true"></i><%# " " + Eval("ContactNumber2") %></p>
+                                                   
+                                                </div>
+
+                                            <div id="offerSection" class="offer_overlay" >
+                                                <p class="offer_text" id="offerDisc"><%# Eval("offer") %>
+                                                    <i class="fa fa-plus transit" onclick="ShowAddOfferModel('<%# Eval("VendorID") %>','<%# Eval("offer") %>','<%# Eval("OfferStartDate") %>','<%# Eval("OfferEndDate") %>')" >
+                                                       </i>   
+                                                </p>
+                                                    <p >
                                                         
-                                              </p>                                      
-                                            </asp:panel>
+                                                       </p>
+                                                 
+                                            </div>
 
-                                            <p id="offer_color<%# Eval("ID") %>" class="offerbox-raised" >
-                                              <span  onclick="GetOffers('<%# Eval("ID") %>');" > Offers  </span>
-                                            <asp:Label ID="ltradd" runat="server" ><i class="fa fa-plus transit" onclick="ShowAddOfferModel('<%# Eval("ID") %>');" style="float:right; padding-right:5px; padding-top:5px; font-size:15px;">
-                                            </i></asp:Label>
-                             
-                                                
-                                                
-     <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-           !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-
-                <div id="addoffermodel" class="modal">
-                        <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
-                            <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
-                                <button type="button" id="Close_mod"  onclick="HideOfferModel()" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
-                                <h4 id="title" class="modal-title" style="margin-top: 5px;">Add Offers</h4>
-                                <label class="labelwidth" style="visibility:hidden;" id="lblvendor"></label>
-                            </div>
-                         <div class="modal-body">
-                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
-                                    <div class="col-sm-6">
-                                        <label class="labelwidth">Offer Description:</label>
-                                         <textarea id="inaddoffer" rows = "5" cols = "30" name = "description" style="width: 100%;">Add Offer Description ...</textarea>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="labelwidth" style="width: 105px;">Start date :</label>
-                                        <input type="text" id="txtstart"  style="width: 120px"/>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="labelwidth" style="width: 105px;">End date :</label>
-                                        <input type="text" id="txtend" style="width: 120px" />
-                                        <img src="Images/Icon/offer.png" style="width:200px; height:100px; margin-top:10px;"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel-footer" style="text-align: right;">
-                                <button type="button" id="btnCancel"  style="margin-top: 5px;" data-dismiss="modal" onclick="HideOfferModel()" class="btn btn-danger">Cancel</button>
-                                <button type="button" id="btnSubmit" style="margin-top: 5px;" onclick="AddOffers();" class="btn btn-primary">Submit</button>
-
-                            </div>
+                                            </div>
+                                             <asp:panel runat="server" ID="pnledit" Visible="false">
+                                                        <p id="fotter_color" style="background-color: #dc3545;  padding-bottom: 20px; padding-top: 7px; padding-left: 5px; padding-right: 5px; margin:0px;">
+                                                       
+                                                      <i class="fa fa-edit " id="Edit_Vendor" style="color: #fff;  cursor: pointer; float: left;" onclick="ShowEditForm('<%# Eval("VendorID") %>','<%# Eval("VendorName") %>','<%# Eval("ShopCategory")%>','<%# Eval("ContactNumber") %>','<%# Eval("ContactNumber2") %>','<%# Eval("Address") %>',' <%# Eval("Address2") %>',this)">Edit    </i>
+                                                      <i class="fa fa-trash " id="vendor_delete" onclick="DeleteForm('<%# Eval("VendorID")%>','<%# Eval("VendorName")%>','<%# Eval("ShopCategory")%>')" style="color: #fff; float: right; cursor: pointer; " aria-hidden="true"></i> 
+                                                        
+                                                  </p>                                      
+                                                    </asp:panel>
+                                        </div>
+                                     </div>
+                                 
+                                </ItemTemplate>
+                            </asp:DataList>
                         </div>
-                    </div>
 
-            <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                        <!-- MOdel for display offer to owner -->
 
-
-<!-- MOdel for display offer to owner -->
-
-
-                 <div id="Offerdetails<%# Eval("ID") %>" class="modal">
+                              <div id="Offerdetails" class="modal">
                         <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
                             <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
                                 <button type="button" id="Close_mod1"  onclick="HideOfferDetails(<%# Eval("ID") %>);" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
@@ -1033,25 +1091,55 @@ hr {
                             </div>
                         </div>
                     </div>
-<!-- MOdel for display offer to owner -->
+                    <!-- MOdel for display offer to owner -->
 
+                                                                   
+     <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+           !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
- </p>
-             <%--<p id="Offerdetails<%# Eval("ID") %>" style="display:none;">
-                 <label id="lblofferdescription<%# Eval("ID") %>"></label><br>
-                 From : <label id="lblstartdate<%# Eval("ID") %>"></label><br>
-                 Valid Till : <label id="lblenddate<%# Eval("ID") %>"></label><br />
-                  <i class="fa fa-edit" onclick="ShowAddOfferModel('<%# Eval("ID") %>');"></i>
-             </p>--%>
-                                             
-                                        </div>
+                <div id="addoffermodel" class="modal">
+                        <div class="modal-content" style="border: 0px solid; width: 550px; margin: auto;">
+                            <div class="modal-header" style="color: white; background-color: #5ca6de; height: 50px;">
+                                <button type="button" id="Close_mod"  onclick="HideOfferModel()" class="close" data-dismiss="modal" style="color: #000;">&times;</button>
+                                <h4 id="title" class="modal-title" style="margin-top: 5px;">Add Offers</h4>
+                                <label class="labelwidth" style="visibility:hidden;" id="lblvendor"></label>
+                            </div>
+                         <div class="modal-body">
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px">
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth">Offer Description:</label>
+                                        <%-- <textarea id="inaddoffer" rows = "5" cols = "30" name = "description" style="width: 100%;">Add Offer Description ...</textarea>--%>
+                                        <asp:TextBox ID="textOffer" runat="server" Width="95%" placeholder="Enter new offer" Style="resize: none; height: 80px;" AutoCompleteType="Disabled" CssClass="form-control" MaxLength="1200" TextMode="MultiLine" ></asp:TextBox>
+
                                     </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth" style="width: 105px;">Start date :</label>
+                                       <%-- <input type="text" id="txtstart"  style="width: 120px"/>--%>
+                                        <asp:TextBox ID="txtstart" runat="server" Width="120" ></asp:TextBox>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="labelwidth" style="width: 105px;">End date :</label>
+                                        <%--<input type="text" id="txtend" style="width: 120px" />--%>
+                                         <asp:TextBox ID="txtend" runat="server" Width="120" ></asp:TextBox>
 
-            
-
-                                </ItemTemplate>
-                            </asp:DataList>
+                                        <img src="Images/Icon/offer.png" style="width:200px; height:100px; margin-top:10px;"/>
+                                    </div>
+                                </div>
+                             <asp:Label ID="offerMessage" runat="server"  ForeColor="Red"></asp:Label>
+                            </div>
+                            <div class="panel-footer" style="text-align: right;">
+                                <button type="button" id="btnCancel"  style="margin-top: 5px;" data-dismiss="modal" onclick="HideOfferModel()" class="btn btn-danger">Cancel</button>
+                               <%-- <button type="button" id="btnSubmit" style="margin-top: 5px;" onclick="AddOffers();" class="btn btn-primary">Submit</button>--%>
+                                <asp:Button runat="server" id="btnAddOffer"  onclick="AddOffer_OnClick" Text="Submit" CssClass="btn btn-primary"></asp:Button>
+                            </div>
                         </div>
+                    </div>
+
+            <!-- OFFER-ADD-MODEL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!By Shivang!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+
+
 
                         <div class="row">
                             <div class="col-sm-12" style="font-size: 20px !important; font-family:'Times New Roman', Times, serif !important; color: red; text-align:center;">
@@ -1091,6 +1179,7 @@ hr {
 
                                     <div class="row">
                                         <div class="col-xs-8">
+                                            <asp:CheckBox ID="checkEditVendor" runat="server" />Edit Vendor Data
                                             <table class="vendor_add_table" style="text-align: left; margin-top: 1px;">
                                                 <tr>
                                                     <td style="width: 150px; padding-left: 5px;">
@@ -1109,7 +1198,7 @@ hr {
                                                     </td>
                                                     <td style="width: 150px;">
                                                         <asp:TextBox ID="txtvendorname" runat="server" CssClass="form-control" EnableViewState="false" Width="150px"></asp:TextBox>
-                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ValidationExpression="^[a-zA-Z\s0-9.]{0,25}$" ControlToValidate="txtvendorname" ErrorMessage="Enter valid Name" Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Add_Vendor" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ValidationExpression="^[a-zA-Z\s0-9&-.]{0,25}$" ControlToValidate="txtvendorname" ErrorMessage="Enter valid Name" Font-Size="Small" ForeColor="#FF5050" ValidationGroup="Add_Vendor" Display="Dynamic"></asp:RegularExpressionValidator>
                                                     </td>
                                                     <td style="width: 5px;">
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtvendorname" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_Vendor"></asp:RequiredFieldValidator>
@@ -1257,13 +1346,13 @@ hr {
 
                 <%--Added by Aarshi on 22 aug 2017 for image crop code--%>
                 <div id="image_modal_div" class="modal" style="height: auto; width: auto;">
-                    <div style="height: 30px; width: auto; background-color: white; margin-top: 0px;"><span class="close">&times;</span></div>
+                    <div style="height: 30px; width: auto; background-color: white; margin-top: 0px;"><span class="close" onclick="CloseImageModal()" >&times;</span></div>
                     <div style="padding-left: 5px; padding-right: 5px;">
                         <img id="Image_crop" alt="" style="background-color: white; margin: auto;" />
                     </div>
                     <div style="height: 40px; width: auto; background-color: white;">
                         <button type="button" id="btnOK" value="OK" class="btnModal_style" style="margin-left: 25px;">OK</button>
-                        <button type="button" id="btnCan" value="CANCEL" class="btnModal_style" style="margin-right: 25px; float: right">Cancel</button>
+                        <button type="button" id="btnCan" value="CANCEL" class="btnModal_style" onclick="CloseImageModal()" style="margin-right: 25px; float: right">Cancel</button>
                     </div>
                 </div>
 

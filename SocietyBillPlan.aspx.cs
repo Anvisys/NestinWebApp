@@ -179,33 +179,18 @@ public partial class SocietyBillPlan : System.Web.UI.Page
 
 
             muser = (User)SessionVariables.User;
-            int BillID = billPlan.AddSocietyBillPlan( Convert.ToInt32(drpAddBillType.SelectedValue.ToString()) ,  drpAddBillType.SelectedItem.Text, ChargeType, txtBillRate.Text, CycleType, ApplyTo,muser.currentResident.SocietyID);
+            bool result = billPlan.AddSocietyBillPlan( Convert.ToInt32(drpAddBillType.SelectedValue.ToString()) ,  drpAddBillType.SelectedItem.Text, ChargeType, txtBillRate.Text, CycleType, ApplyTo,muser.currentResident.SocietyID);
 
-            if (BillID > 0)
+            if (result)
             {
-                BillCycle billCycle = new BillCycle();
-                bool result = billCycle.AddBillCycleToAllFlats(BillID, ApplyTo);
-                if (result == true)
-                {
-                    //added by aarshi on 31-July 2017 to add zero bill
-                    //Bill.InsertFirstZeroBill(,BillID,CycleType,)
-                    lblBillstatus.Text = "Bill Plan Added Sucessfully, Bill Mapped to All Flats";
-                    billCycle.GenerateInitialZeroBillFlat(BillID, ApplyTo, CycleType);
-                }
-
-                else
-                {
-                    lblBillstatus.Text = "Bill Plan Added Sucessfully, Bill mapping to Flat failed";
-                }
                 LoadSocietyBillPlanData();
-
-                dsBillType = billPlan.GetActiveBillType(muser.currentResident.SocietyID);
+                LoadBillData();
             }
-            else
-            {
+            else {
                 lblBillstatus.Text = "Failed to Add Bill Plan, Please try later.";
             }
 
+         
 
 
         }

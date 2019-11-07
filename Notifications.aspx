@@ -377,7 +377,7 @@
 
                                         <div class="col-sm-2 col-xs-3">
 
-                                            <asp:Image src='<%# "GetImages.ashx?UserID="+ Eval("UserID")+"&Name="+Eval("FirstName") +"&UserType=Admin"%>' CssClass="UserImage  profile-image" ID="user_image" runat="server" />
+                                            <asp:Image src='<%# "GetImages.ashx?Type=User&ID="+ Eval("UserID")+"&Name="+Eval("FirstName") +"&UserType=Admin"%>' CssClass="UserImage  profile-image" ID="user_image" runat="server" />
                                             <br />
 
                                             <%# Eval("FirstName") +" " + Eval("LastName")  %>

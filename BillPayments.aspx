@@ -128,6 +128,14 @@
                                 </div>
                              </div>
                          </div>
+                                <div class="row">
+                            <div class="col-xs-12" style="font-family:'Times New Roman', Times, serif !important; color: red !important; text-align:center;">
+                                 <asp:Label ID="lblResBillsEmptyText" runat="server" ForeColor="#999999" Text=""></asp:Label>
+                            </div>
+
+                        </div>
+
+
                              </div>
 
 
@@ -200,7 +208,7 @@
                                           <asp:Label ID="lblPaymentCheck" runat="server" ForeColor="#4FA7FF"></asp:Label>
                                   
                                    </div>
-                              <asp:Label ID="lblResBillsEmptyText" runat="server" ForeColor="#999999" Text=""></asp:Label>
+                            
                          </asp:View>
                            <asp:View ID="PaymentView" runat="server">
 

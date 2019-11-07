@@ -46,6 +46,15 @@ public partial class Userprofile : System.Web.UI.Page
             return muser.UserID;
         }
     }
+
+    public String UserName
+    {
+        get
+        {
+            return muser.FirstName +" "+ muser.LastName;
+        }
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         
@@ -286,22 +295,21 @@ public partial class Userprofile : System.Web.UI.Page
                     using (SqlConnection con1 = new SqlConnection(Utility.SocietyConnectionString))
                     {
                         con1.Open();
-                        String selectQuery = "Select UserID from dbo.ResidentImage where ResID = '" + muser.currentResident.ResID + "'";
+                        String selectQuery = "Select UserID from " + CONSTANTS.Table_User_Image +" where UserID = '" + muser.UserID + "'";
                         DataAccess da = new DataAccess();
                         int id = da.GetSingleValue(selectQuery);
                         String UpdateImageQuery = "";
                         SqlCommand cmd;
                         if (id == 0)
                         {
-                            UpdateImageQuery = "insert into dbo.ResidentImage (ResID,UserID,Profile_image) values(@ResID,@UserID, @ProfileIcon )";
+                            UpdateImageQuery = "insert into "+ CONSTANTS.Table_User_Image + " (UserID,Profile_image) values(@UserID, @ProfileIcon )";
                             cmd = new SqlCommand(UpdateImageQuery, con1);
                             cmd.Parameters.Add("@ProfileIcon", SqlDbType.Image).Value = bytesImages;
-                            cmd.Parameters.Add("@ResID", SqlDbType.Int).Value = muser.currentResident.ResID;
                             cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = Convert.ToInt32(muser.UserID);
                         }
                         else
                         {
-                            UpdateImageQuery = "Update dbo.ResidentImage set Profile_image = @ProfileIcon where UserID = '" + muser.UserID + "'";
+                            UpdateImageQuery = "Update  " + CONSTANTS.Table_User_Image + "  set Profile_image = @ProfileIcon where UserID = '" + muser.UserID + "'";
                             cmd = new SqlCommand(UpdateImageQuery, con1);
                             cmd.Parameters.Add("@ProfileIcon", SqlDbType.Image).Value = bytesImages;
                         }
@@ -319,7 +327,7 @@ public partial class Userprofile : System.Web.UI.Page
                         }
                         else
                         {
-                            //ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:alert('Could Not Change Profile Image, Try Later')", true);
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:alert('Could Not Change Profile Image, Try Later')", true);
                         }
                     }
 

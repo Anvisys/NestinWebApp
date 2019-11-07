@@ -106,11 +106,22 @@
                 width: 140px;
             }
         }
+
+        .Expired{
+            background-color:antiquewhite;
+        }
+
+        .Awaited {
+            background-color:gold;
+        }
+
+        .Done {
+             background-color:darkseagreen;
+        }
     </style>
     <script>
- 
 
-        var UserType, ResId, SocietyId, FlatNumber, RequestID, VisitorEntryHour,api_url; 
+        var UserType, ResId, SocietyId, FlatNumber, RequestID, VisitorEntryHour, api_url; 
         var page = 1;
         var pagecount=0;
         var size = 5;
@@ -135,9 +146,9 @@
             SocietyId = '<%=Session["SocietyID"]%>';
             FlatNumber = '<%=Session["FlatNumber"]%>';
 
-      
+           
+           
 
-            console.log(SocietyId);
             if (UserType != "Admin") {
                 $("#btnVerifyVisitor").hide();
             }
@@ -151,7 +162,9 @@
 
               //  $("#btnEntryDate").val(strDate);
 
-                $('#btnEntryDate').datepicker("setDate", new Date(2008,9,3) );
+               $("#btnEntryDate").datepicker({ dateFormat: 'dd-MM-yy', currentText: "Now", minDate:new Date() });
+
+                $('#btnEntryDate').datepicker("setDate", new Date() );
 
               var currentHrs = currentDate.getHours();
                 VisitorEntryHour = currentHrs; 
@@ -168,6 +181,10 @@
                 //alert(num);
                 $("#btnEndTime").append(num);
 
+                if (UserType != "Admin") {
+                    $("#txtFlatNumber").val(FlatNumber);
+                    $("#txtFlatNumber").prop('disabled', true);
+                }
           
            
                 $("#AddVisitorModal").show();
@@ -175,10 +192,7 @@
 
             });
 
-            function Select(hr) {
-                $("#btnEndTime").append(num);
-               // console.log("at Select  ==> num=" + num);
-            }
+        
 
             $('#timeList').on('change', function () {
 
@@ -195,6 +209,11 @@
 
 
             $('#btnEntryDate').on('change', function () {
+
+                var selectedDate = $('#btnEntryDate').val();
+
+                console.log(selectedDate);
+
               $('#timeList').empty()
               for (hrs = 1; hrs < 25; hrs++) {
                    
@@ -219,23 +238,17 @@
             //    alert("atsubmit 213");
                 AddVisitor();
             });
-            $(document).ready(function () {
-                $("#btnCancel,#icon_close").click(function () {
+
+
+            $("#btnCancel,#icon_close").click(function () {
                     $("#AddVisitorModal").hide();
                     clearModalFields();
                 });
 
 
-                $("#btnEntryDate").datepicker({ dateFormat: 'dd-MM-yy', currentText: "Now", minDate:new Date() });
+          
                 
-                
-               // $('#btnEntryTime').timepicker('getTime');
-
-                //$("#btnEntryDate").datetimepicker({
-                //    format: 'LT'
-                //});
-
-            });
+   
             $("#btnVerifyVisitor").click(function () {
                
                 $("#VerifyVisitorModal").show();
@@ -348,13 +361,13 @@
             loadingWindow.style.display = "block";
             loadingWindow.style.height = "100%";
             loadingWindow.style.top = "4em";
-            var oneprev = document.getElementById("oneprev");
-            var onenext = document.getElementById("onenext");
+            var oneprev = document.getElementById("linkPrev");
+            var onenext = document.getElementById("linkNext");
             var current = document.getElementById("current");
             oneprev.innerText = page - 1;
             onenext.innerText = page + 1;
             current.innerText = page;
-
+           
 
            // alert("at 345==>> societyid= " + SocietyId);
           
@@ -380,30 +393,18 @@
 
                         if (page > 1) {
                             $("#btnPrevious").show();
-                            $('#btnNext').show();
-                            oneprev.addEventListener("click", ShowPrevious);
                         }
                         else {
                             $("#btnPrevious").hide();
-                            $("#oneprev").hide();
-                            oneprev.removeEventListener("click", ShowPrevious);
                         }
-                      //  if (data.length < size) {
+                   
                         if (data.length < size) {
                             $("#btnNext").hide();
-                            onenext.removeEventListener("click", ShowNext);
                         }
                         else {
-                            onenext.addEventListener("click", ShowNext);
+                            $("#btnNext").show();
                         }
 
-                        /*  if (page = 1) {
-                              $("#btnPrevious").hide();
-                           
-                          }*/
-                       
-                        //pagecount = data.values.count;
-                        //alert("at 391===>> "+pagecount);
                         SetData(data);
                     }
 
@@ -444,62 +445,81 @@
                 con.innerHTML = "";
             for (var i = 0; i < length; i++) {
 
+                var Status = "", BG_Class="";
+
                 var VisitorName = jarray[i].VisitorName;
                 var VisitorMobile = jarray[i].VisitorMobile;
                 var VisitorAddress = jarray[i].VisitorAddress;
                 var VisitPurpose = jarray[i].VisitPurpose;
-                var startTime = jarray[i].StartTime;
-                var InTime = jarray[i].ActualInTime;
-                var OutTime = jarray[i].ActualOutTime;
+
+                var startTime = jarray[i].StartTime + ".000Z";
+                var ActualInTime = jarray[i].ActualInTime  + ".000Z";
+                var ActualOutTime = jarray[i].ActualOutTime + ".000Z";
                 var HostName = jarray[i].FirstName + jarray[i].LastName;
                 var HostType = jarray[i].Type;
                 var FlatNumber = jarray[i].Flat;
-                var endDate = jarray[i].endDate;
+                var endDate = jarray[i].endTime + ".000Z";
+                var endTime = jarray[i].EndTime + ".000Z";
+                var Start_Date_Time = new Date(startTime);
+                var End_Date_Time = new Date(endTime);
+                var Actual_In_Date = new Date(ActualInTime);
+                var Actual_Out_Date = new Date(ActualOutTime);
+                var Base_DateTime = new Date(2000, 01, 01, 10, 33, 30, 0);
+                var current = new Date();
 
-                var today = new Date();
-                var dd = String(today.getDate()).padStart(2, '0');
-                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                var yyyy = today.getFullYear();
-                today = mm + '/' + dd + '/' + yyyy;
-                var todaydate = new Date(today);
-
-                var inTime = new Date(InTime);
-                var stTime = new Date(startTime);
-                var status = "";
-                var time = "";
-                var bgClass;
-               
-                if (todaydate > endDate) {
-                    status = "Expired...";
-                    time = ChangeDateformat(InTime);
-                    bgClass = "Expired...";
-                }
-                else if (todaydate == endDate) {
-                    if (inTime > stTime) {
-                        status = "Checked In...";
-                        time = ChangeDateformat(InTime);
-                        bgClass = "Checked In...";
+                if (Actual_In_Date < Base_DateTime) {
+                    //Not yet Entered
+                    if (End_Date_Time < current) {
+                        Status = "Invite Expired";
+                        BG_Class = "Expired";
                     }
                     else {
-                         status = "Expired...";
-                         time = ChangeDateformat(InTime);
-                         bgClass = "Expired...";
+                        //console.log(Start_Date_Time.toLocaleString());
+                        //console.log(current.toLocaleString());
+                        if (Start_Date_Time > current) {
+                            var diff = Math.round((End_Date_Time - current) / 60000);
+
+                            if (diff < 60) {
+                                Status = "Awaited in " + diff + "min";
+                            }
+                            else if (diff < 120) {
+                                var min = diff - 60;
+                                Status = "Awaited in 1 Hr " + min + "min";
+                            }
+                            else {
+                                 Status = "Expected at" + Start_Date_Time.toLocaleString();
+                            }
+                              BG_Class = "Awaited";
+                        }
+                        else {
+                            var diff = Math.round((End_Date_Time - current) / 60000);
+                            Status = "Expiring in " + diff + "min";
+                             BG_Class = "Awaited";
+                        }
+                     
+                        
                     }
+
                 }
-                else
-                {
-                    status = "Waiting...";
-                    time = "Start After :" + ChangeDateformat(startTime);
-                    bgClass = "Waiting...";
+                else if (Actual_In_Date > Base_DateTime) {
+                    if (Actual_Out_Date < Base_DateTime) {
+                        Status = "Entered";
+                         BG_Class = "Done";
+                    }
+                    else {
+                        Status = "Exited";
+                          BG_Class = "Done";
+                    }
+
                 }
 
-
+    
 
                 viewString += '<div class=\"row layout_shadow_table\">' +
                          '<div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-6\"><b>Visitor: <span class="fa fa-circle" style="color:green;"></span></b> <img id="TenantImage" src="Images/Icon/profile.jpg" height="60" width="60" style="border-radius:50%;"/> </div>' +
                          '<div class=\"col-lg-4 col-md-4 col-sm-4 col-xs-6\"> <br/> <span class="fa fa-user" style="color:#2b7a2d;"></span>  ' + VisitorName + '<br /><span class="fa fa-phone" style="color:#2b7a2d;"></span> ' + VisitorMobile + '<br /><span class="fa fa-home" style="color:#2b7a2d;"></span> ' + VisitorAddress + '</div>' +
                          '<hr class=\"hidden-lg hidden-md hidden-sm\" style="margin-top:90px;" /> ' +
-                         '<div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-6 ' + bgClass + '\"><br/><span class="fa fa-question-circle" style="color:#2b7a2d;"></span> ' + VisitPurpose + '<br/>' + time + '<br /><span class="fa fa-info-circle" style="color:#2b7a2d;"></span><p1> ' + status + '</p1></div>' +
+                         '<div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-6 ' + BG_Class + '\"><br/><span class="fa fa-question-circle" style="color:#2b7a2d;"></span> ' + VisitPurpose + '<br/>' +  '<br /><span class="fa fa-info-circle" style="color:#2b7a2d;"></span><p1> ' + Status + '</p1></div>' +
                          '<div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-6 Host\"><b> Host: <br/><span class="fa fa-user" style="color:#2b7a2d;"></span> </b>' + HostName + ',' + HostType + '<br/><span class="fa fa-phone" style="color:#2b7a2d;"></span> </b>' + VisitorMobile + '<br/><span class="fa fa-home" style="color:#2b7a2d;"></span> </b>' + FlatNumber + '</div>' +
                          '</div>';
 
@@ -515,91 +535,40 @@
 
         function AddVisitor() {
            // alert("at 485 add visitor");
-            var name, mobile, address, purpose,visitDate;
-
+            var name, mobile, address, purpose,visitDate, endDate;
+            FlatNumber =  document.getElementById("txtFlatNumber").value;       
             name = document.getElementById("idName").value;
            // alert("at 450==> name=" + name);
             mobile = document.getElementById("txtmobile").value;
             address = document.getElementById("Address").value;
             purpose = document.getElementById("Purpose").value;
-            visitDate = document.getElementById("btnEntryDate").value;
+
+            strVisitDate = document.getElementById("btnEntryDate").value;
+
+            if (FlatNumber == "" || name == "" || mobile == "" || address == "" || purpose == "" || strVisitDate == "") {
+
+                $("#lblMessage").text("Empty Field");
+                return;
+            }
+
+            visitDate = new Date(strVisitDate);
+
+            console.log(visitDate.toLocaleString());
+          
+            
             startTime = $("#timeList").val();
-            var start = new Date(visitDate);
-            var strStartDate = GetDateTimeinISO(start);
-            // alert("at 498==> " + strStartDate);
-            var strEndDate = GetDateTimeinISO(new Date("2020-05-10T00:00:00.000"));
-            
-         //   alert(strStartDate);
+            var startHours = startTime.split(':')[0];
+            visitDate.setHours(startHours);
 
-        //   // var strStartDate = GetDateTimeinISO(start);
+           // console.log(visitDate.toISOString());
 
-        //    var strStartDate = new Date(visitDate).toISOString();
-        ////    splitstring1 = strStartDate.split(".")[0];
-        //  //  splitstring2 = splitstring1.split("T");
-        //    var start = new Date(visitDate);
-        //   //var startdate = new Date(start.getFullYear() + "/" + start.getMonth() + "/" +start.getDate()+" 00:00:00.000");
-        //    //alert(startdate);
-        //   // alert(strStartDate.getMonth());
-        //    //alert(strStartDate.getDate());
-        //     //alert(strStartDate.getTime());
-
-        //    var endDate = start.setHours(start.getHours + 1);
-
-        //    var strEndDate = "2012/02/10";
-        //    // var strEndDate = GetDateTimeinISO(endDate);
-        //   // var strEndDate = new Date(endDate).toISOString();
-
-
-        //   // alert(start);
-
-        //    var month = start.getMonth() + 1;
-
-        //    var strMonth="";
-        //    if (month < 10) {
-        //        strMonth = 0 + month.toString();
-        //    }
-        //    else {
-        //        strMonth = month.toString();
-        //    }
-
-        //    var day = start.getDate();
-
-        //    var strDay="";
-        //    if (day < 10) {
-        //        strDay = 0 + day.toString();
-        //    }
-        //    else {
-        //        strDay = day.toString();
-        //    }
-
-        //    var startHrs = "";
-        //    var endHrs = "";
-
-        //    if (VisitorEntryHour < 9) {
-        //         startHrs = 0 + VisitorEntryHour.toString();
-        //       endHrs = 0 + (VisitorEntryHour+1).toString();
-
-        //    }
-        //    else if (VisitorEntryHour = 9) {
-        //         startHrs = 0+ VisitorEntryHour.toString();
-        //       endHrs = (VisitorEntryHour+1).toString();
-        //    }
-        //    else {
-        //       startHrs = VisitorEntryHour.toString();
-        //       endHrs = (VisitorEntryHour+1).toString();
-
-        //    }
-
-
-        //    var strStartDate = start.getFullYear() + "-" + strMonth + "-" + strDay + "T" + startHrs + ":00:00";
-            
-
-        //    var strEndDate = start.getFullYear() + "-" + strMonth + "-" + strDay +  "T" + endHrs + ":00:00" ;
+             endDate = new Date(strVisitDate);
+            var endTime = $("#btnEndTime").text();
+            var endHours = endTime.split(':')[0];
+             console.log(endHours);
+             endDate.setHours(endHours);
+             console.log(endDate.toISOString());
            
-        //   // alert(strStartDate);
-           
-     
-        ////   endTime = document.getElementById("btnStartTime").value;
        
             document.getElementById("post_loading").style.display = "block";
 
@@ -608,7 +577,8 @@
              var strURL = api_url +  "/api/Visitor/New";
              //var strURL = "visitor.aspx/AddVisitor";
 
-            var reqBody = "{\"VisitorName\":\"" + name + "\",\"VisitorMobile\":\"" + mobile + "\",\"VisitorAddress\":\"" + address + " \",\"VisitPurpose\":\"" + purpose + "\",\"StartTime\":\"" + strStartDate + "\",\"EndTime\":\"" + strEndDate +
+            var reqBody = "{\"VisitorName\":\"" + name + "\",\"VisitorMobile\":\"" + mobile + "\",\"VisitorAddress\":\"" + address + " \",\"VisitPurpose\":\"" + purpose
+                            + "\",\"StartTime\":\"" + visitDate.toISOString().substring(0,19) + "\",\"EndTime\":\"" + endDate.toISOString().substring(0,19) +
                            "\",\"ResID\":\"" + ResId + "\",\"FlatNumber\":\"" + FlatNumber + "\",\"SocietyId\":\"" + SocietyId + "\"}"
             console.log(reqBody);
           //  alert(reqBody);
@@ -629,7 +599,7 @@
                     }
                     else if (data.Response == "Ok") {
                          $("#AddVisitorModal").hide();
-                        alert('Updated Successfully');
+                       // alert('Updated Successfully');
                         GetVisitorData();
                     }
                     else {
@@ -689,55 +659,20 @@
 
         // ************************************  Date  Change format function 
         function ChangeDateformat(inputdate) {
-            var NewFormatDate;
-            var date = new Date(inputdate);
 
-            //alert(date);
+            var NewFormatDate;
+
+            var serverDate = inputdate + ".000Z"
+
+            var entry_date = new Date(serverDate);
+
+                  
+
             var Currentdate = new Date();
 
-            var DateFormat = date.toLocaleDateString();
+            var diff = (entry_date - Currentdate) / 60000;
 
-            var TimeFormat = date.toLocaleTimeString();
-
-            var CurrentDateFormat = Currentdate.toLocaleDateString();
-
-
-            var Hoursdiff = Math.ceil(Currentdate.getTime() - date.getTime()) / 3600000;
-
-            var diff = (Currentdate.getTime() - date.getTime()) / 1000;
-            diff /= 60;
-
-            //   alert(Currentdate.getTime() - date.getTime());
-
-            var Minsdiffnew = Math.abs(Math.round(diff));
-
-            //  alert(diff);
-            //   alert(Minsdiffnew);
-
-            var TimeHoursdiff = Math.floor(Hoursdiff);
-
-            if (TimeHoursdiff < 12) {
-                if (TimeHoursdiff < 1) {
-                    if (Minsdiffnew == 0) {
-                        NewFormatDate = "just now";
-                    }
-                    else {
-
-                        NewFormatDate = Minsdiffnew + "min";
-                    }
-                }
-                else {
-                    NewFormatDate = TimeHoursdiff + "hrs";
-                }
-            }
-
-            else {
-                NewFormatDate = DateFormat + "  " + TimeFormat;
-            }
-
-
-
-            return NewFormatDate;
+            return DisplayDateTime(entry_date);
         }
         function validateForm() {
             var x = document.forms["myForm"]["fname"].value;
@@ -756,7 +691,7 @@
 
         function getByDataMobile() {
             var MobileNo = document.getElementById("txtmobile").value;
-            console.log(MobileNo);
+           
             url = api_url + "/api/Visitor/" + SocietyId + "/Mob/" + MobileNo;
 
 
@@ -767,10 +702,12 @@
                 dataType: "json",
                 success: function (data) {
 
-                    //console.log(data);
-                    $("#idName").val(data.VisitorName);
-                    $("#Address").val(data.VisitorAddress);
-                    console.log(data.VisitorAddress);
+                    if (data.id > 0) {
+                        //console.log(data);
+                        $("#idName").val(data.VisitorName);
+                        $("#Address").val(data.VisitorAddress);
+                     
+                    }
                 },
                 failure: function (response) {
                     // document.getElementById("verify_loading").style.display = "none";
@@ -807,11 +744,11 @@
                                  <div class="col-md-6 col-sm-6 col-xs-6" style="margin-top:-20px" id="pagination">                           
                                      <nav aria-label="Page navigation example">
                                          <ul class="pagination">
-                                             <li class="page-item"><a class="page-link" href="#"  onclick="ShowPrevious()" id="btnPrevious" >Previous</a></li>
-                                             <li class="page-item"><a class="page-link" id="oneprev" href="#">1</a></li>
-                                             <li class="page-item"><a class="page-link" id="current" href="#">2</a></li>
-                                             <li class="page-item"><a class="page-link" id="onenext" href="#">3</a></li>
-                                             <li class="page-item"><a class="page-link" href="#"  id="btnNext" onclick="ShowNext()" >Next</a></li>
+                                             <li class="page-item" style="display:none;" ><a class="page-link" href="#"  onclick="ShowPrevious()" id="btnPrevious" >Previous</a></li>
+                                             <li class="page-item" style="display:none;"><a class="page-link" id="linkPrev" href="#">1</a></li>
+                                             <li class="page-item" style="display:none;"><a class="page-link" id="current" href="#">2</a></li>
+                                             <li class="page-item" style="display:none;"><a class="page-link" id="linkNext" href="#">3</a></li>
+                                             <li class="page-item" style="display:none;"><a class="page-link" href="#"  id="btnNext" onclick="ShowNext()" >Next</a></li>
                                          </ul>
                                      </nav>
                                 </div>
@@ -831,75 +768,80 @@
                   <%--<i class="fa fa-spinner"  style="width:50px; height:50px;margin-top:100px;"></i>--%>
                    </div>
 
-        <div id="AddVisitorModal" class="modal">
-             
-                  
-                  <div class="panel panel-primary" style="width:400px;background-color:#fff;margin: auto;">
-                              <div class="panel-heading">
-                                  Add Visitor <span class="fa fa-times" id="icon_close" style="cursor:pointer;float:right;"></span>
-                              </div>
-                              <div class="panel-body" >
-                                  <form name="visitor" autocomplete="off">
-                                      <div class="container-fluid">
-                                           <div class="row"style="margin-top:5px">
-                                            <label class="col-xs-4" for="MobileNo">Mobile No:</label>
-                                            <div class="col-xs-8">
-                                                 <input id="txtmobile" type="text" onkeypress="return isNumberKey(event)" class="form-control col-xs-8"  placeholder="Enter Mobile No." name="MobileNo" onblur="blur()" />
-  
-                                            </div>
-                                          </div>
+         <div id="AddVisitorModal" class="modal">
+             <div class="panel panel-primary" style="width: 400px; background-color: #fff; margin: auto;">
+                 <div class="panel-heading">
+                     Add Visitor <span class="fa fa-times" id="icon_close" style="cursor: pointer; float: right;"></span>
+                 </div>
+                 <div class="panel-body">
+                     <form name="visitor" autocomplete="off">
+                         <div class="container-fluid">
 
-                                          <div class="row" style="margin-top:0px">
-                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Name: </label>
-                                            <div class="col-xs-8">
-                                                <input type="text" class="form-control col-xs-8" id="idName"   placeholder="Enter Name" name="Name" />
-                                            </div>
-                                          </div>
-                                         
-                                          <div class="row"style="margin-top:5px">
-                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Address: </label>
-                                            <div class="col-xs-8">
-                                                 <textarea class="form-control col-xs-8" rows="2" id="Address" style="resize:none;" name="Address" placeholder="Enter Address"></textarea>
-                                            </div>
-                                          </div>
-                                          <div class="row"style="margin-top:5px">
-                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Purpose: </label>
-                                            <div class="col-xs-8">
-                                             <input type="text" name="Purpose" class="form-control col-xs-8"id="Purpose" placeholder="Enter Purpose"/>
-                                            </div>
-                                          </div>
-                                          <div class="row"style="margin-top:5px">
-                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Time / Date </label>
-                                            <div class="col-xs-8">
-                                             <input type="text" class="form-control col-xs-4"   id="btnEntryDate"  name="StartDate"/>
-                                             <select class="form-control col-xs-4" id="timeList"></select>
-                                            </div>
-                                          </div>
-                                          <div class="row"style="margin-top:5px">
-                                            <label for="colFormLabel" class="col-xs-4 col-form-label">Valid Till: </label>
-                                            <div class="col-xs-8">
-                                           <label  class="form-control col-xs-8" id="btnEndTime" ></label>
-                                            </div>
-                                          </div>
-                                      </div>
-                                 
-                                  </form>
+                             <div class="row" style="margin-top: 5px">
+                                 <label class="col-xs-4" for="MobileNo">Flat:</label>
+                                 <div class="col-xs-8">
+                                     <input id="txtFlatNumber" type="text" class="form-control col-xs-8" placeholder="Enter Flat No." name="Flat Number"  />
+                                 </div>
+                             </div>
 
 
-                              </div>
+                             <div class="row" style="margin-top: 5px">
+                                 <label class="col-xs-4" for="MobileNo">Mobile No:</label>
+                                 <div class="col-xs-8">
+                                     <input id="txtmobile" type="text" onkeypress="return isNumberKey(event)" class="form-control col-xs-8" required placeholder="Enter Mobile No." name="MobileNo" />
 
-                              <div class="panel-footer" style="text-align:right; background-color:#f7f7f7;">
-                                   <button type="button" id="btnSubmit"  style="margin-top:5px;"  class="btn-sm btn btn-primary">Submit</button>
-                                  <button type="button" id="btnCancel"  style="margin-top:5px;" class="btn-sm btn btn-danger">Cancel</button>
-                                   
-                              </div>
-                      <div id="post_loading" class="container-fluid" style="text-align:center;width:100%; height:200px;background-color:#090909;display:none;opacity:0.2;position:fixed; top:100px; z-index:99;">
-                    <img src="Images/Icon/ajax-loader.gif" style="width:20px;height:20px; margin-top:50px;" />
-                    <%-- <i class="fa fa-spinner" aria-hidden="true" style="width:30px; height:30px;margin-top:100px;"></i>--%>
-                  </div>
-                          </div>
-            
-                 
+                                 </div>
+                             </div>
+
+                             <div class="row" style="margin-top: 0px">
+                                 <label for="colFormLabel" class="col-xs-4 col-form-label">Name: </label>
+                                 <div class="col-xs-8">
+                                     <input type="text" class="form-control col-xs-8" id="idName" placeholder="Enter Name" name="Name" />
+                                 </div>
+                             </div>
+
+                             <div class="row" style="margin-top: 5px">
+                                 <label for="colFormLabel" class="col-xs-4 col-form-label">Address: </label>
+                                 <div class="col-xs-8">
+                                     <textarea class="form-control col-xs-8" rows="2" id="Address" style="resize: none;" name="Address" required placeholder="Enter Address"></textarea>
+                                 </div>
+                             </div>
+                             <div class="row" style="margin-top: 5px">
+                                 <label for="colFormLabel" class="col-xs-4 col-form-label">Purpose: </label>
+                                 <div class="col-xs-8">
+                                     <input type="text" name="Purpose" class="form-control col-xs-8" id="Purpose" placeholder="Enter Purpose" />
+                                 </div>
+                             </div>
+                             <div class="row" style="margin-top: 5px">
+                                 <label for="colFormLabel" class="col-xs-4 col-form-label">Time / Date </label>
+                                 <div class="col-xs-8">
+                                     <input type="text" class="form-control col-xs-4" id="btnEntryDate" name="StartDate" />
+                                     <select class="form-control col-xs-4" id="timeList"></select>
+                                 </div>
+                             </div>
+                             <div class="row" style="margin-top: 5px">
+                                 <label for="colFormLabel" class="col-xs-4 col-form-label">Valid Till: </label>
+                                 <div class="col-xs-8">
+                                     <label class="form-control" id="btnEndTime"></label>
+                                 </div>
+                             </div>
+                         </div>
+
+                     </form>
+                       <label id="lblMessage" style="color:red;"></label>
+
+                 </div>
+
+                 <div class="panel-footer" style="text-align: right; background-color: #f7f7f7;">
+                     <button type="button" id="btnSubmit" style="margin-top: 5px;" class="btn-sm btn btn-primary">Submit</button>
+                     <button type="button" id="btnCancel" style="margin-top: 5px;" class="btn-sm btn btn-danger">Cancel</button>
+
+                 </div>
+                 <div id="post_loading" class="container-fluid" style="text-align: center; width: 100%; height: 200px; background-color: #090909; display: none; opacity: 0.2; position: fixed; top: 100px; z-index: 99;">
+                     <img src="Images/Icon/ajax-loader.gif" style="width: 20px; height: 20px; margin-top: 50px;" />
+                     <%-- <i class="fa fa-spinner" aria-hidden="true" style="width:30px; height:30px;margin-top:100px;"></i>--%>
+                 </div>
+             </div>
         </div>
          
           <div id="VerifyVisitorModal" class="modal">

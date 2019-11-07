@@ -38,9 +38,9 @@
 
         function GetSocietyData() {
 
-          //  var api_url = '<%=Session["api_url"] %>';
-            var api_url = 'http://localhost:5103/api/';
-            var societyURL = api_url + "society/all";
+            var api_url = '<%=Session["api_url"] %>';
+            //var api_url = 'http://localhost:5103/api/';
+            var societyURL = api_url + "/api/society/all";
 
             $.ajax({
                 url: societyURL,
@@ -58,13 +58,14 @@
 
         }
 
-            function DisplayData(data) {
+        function DisplayData(data) {
+                 console.log(data);
                   /* console.log(data.$values);
                 var stringHTMl = JSON.stringify(data);
                  var js = jQuery.parseJSON(stringHTMl);
                 console.log("Data!!!= " + js.FirstName);*/
 
-                var jSonArray = data.$values
+                var jSonArray = data
 
                 var x = jSonArray.length;
                 if (x > 0)
@@ -78,7 +79,7 @@
                                  ' <div class="col-xs-4"> Society Name :' + jSonArray[i].SocietyName + '</div>'+
                                 '<div class="col-xs-4"> Admin: ' + jSonArray[i].FirstName + "  " + jSonArray[i].LastName + '</div>' +
                                
-                                '<div class="col-xs-4"> Sectort: ' +jSonArray[i].Sector + '</div>' +
+                                '<div class="col-xs-4"> Sector: ' +jSonArray[i].Sector + '</div>' +
                                 '<div class="col-xs-4"> City: ' + jSonArray[i].City + '</div>' +
                                 '<div class="col-xs-4"> Pin Code: ' + jSonArray[i].PinCode + '</div>' +
                                 '<div class="col-xs-4"> E mail: ' + jSonArray[i].EmailId + '</div>' +
@@ -87,11 +88,7 @@
                     }
 
                       document.getElementById("societyData").innerHTML = html;
-                    
-                        if (jSonArray[i].Status === 'Approved') {
-                        
-                            //document.getElementById('index').style.backgroundColor = "green";
-                        }
+                 
 
                                             
                 }

@@ -209,7 +209,8 @@ public class BillCycle
     public int GetSingleValueBillCycle(int billID)
     {
         DataAccess dacess = new DataAccess();
-        String GetBillQuery = "Select count(FlatID) from " + Table_Name + " where Cyclestart != CycleEnd and CycleEnd >= getdate() and  BillID =" + billID + "";
+        String GetBillQuery = "Select count(FlatID) from " + ViewName + " where BillTypeID = " + billID;
+        // + " where Cyclestart != CycleEnd and CycleEnd >= getdate() and  BillID =" + billID + "";
         int UserID = dacess.GetSingleUserValue(GetBillQuery);
         return UserID;
     }

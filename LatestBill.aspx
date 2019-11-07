@@ -68,7 +68,7 @@
         })
 
         $(document).ready(function () {
-
+            $('#txtLatestFlatFilter').val("");
             $("#btnImport").click(function () {
                 document.getElementById("importModal").style.display = "block";
                 //$("#importModal").show();
@@ -88,12 +88,10 @@
             }
 
 
-
-
-            $("#txtBillDate").datetimepicker({
-                //  format: 'YYYY-MM-DD'
-                format: 'DD-MM-YYYY'
-            });
+            //$("#txtBillDate").datetimepicker({
+            //    //  format: 'YYYY-MM-DD'
+            //    format: 'DD-MM-YYYY'
+            //});
 
             $("#btnClose").click(function () {
                 document.getElementById("importModal").style.display = "none";
@@ -113,6 +111,8 @@
             $("#txtBillDate").datepicker({ dateFormat: 'dd-mm-yy' });
             $("#txtStartDate").datepicker({ dateFormat: 'dd-mm-yy' });
             $("#txtEndDate").datepicker({ dateFormat: 'dd-mm-yy' });
+               $("#txtDueDate").datepicker({ dateFormat: 'dd-mm-yy' });
+            
 
             $("#BillDescpCancel").click(function () {
                 $("#generatedbilldescriptnmodal").hide();
@@ -138,6 +138,7 @@
             $("#btnPayNow").click(function () {
 
                 var text = document.getElementById("HiddenBillData").value;
+                console.log(text);
                 // FlatNumber + "&" + BillStartDate + "&" + BillEndDate + "&" + CurrentBillAmount + "&" + CycleType + "&" + PreviousMonthBalance + "&" + BillID + "&" + PayID + "&" + CurrentMonthBalance;
                 var res = text.split("&");
                 flatNumber = res[0];
@@ -262,20 +263,19 @@
         }
 
         function EnableCheckbox(checkbox) {
-
             if (checkbox.checked == true) {
-
                 document.getElementById("btnPaySubmit").removeAttribute("disabled");
-
             }
             else {
-
                 document.getElementById("btnPaySubmit").setAttribute("disabled", true);
-
             }
-
-
         }
+
+        function PopupImportBill()
+        {
+              $("#ImportBill").show();
+            //  document.getElementById("ImportBill").style.display = "block";
+          }
 
     </script>
     <style>
@@ -426,6 +426,7 @@
                                                     <span style="font-size: medium; color: #000; margin: 10px;">
                                                         <asp:Label ID="lblFlatNumar" runat="server" Text='<%# Eval("FlatNumber") %>'></asp:Label>, 
                                                            <asp:Label ID="lblBillType" runat="server" Text='<%# Eval("BillType") %>'></asp:Label></span>
+                                                     <asp:Label ID="lblBillTypeID" Visible="false" runat="server" Text='<%# Eval("BillTypeID") %>'></asp:Label></span>
                                                     <span style="padding: 5px; float: right; color: #03a9f4;">Invoice ID
                                                         <asp:Label ID="lblPayID" runat="server" Text='<%#Eval("PayID") %>'></asp:Label></span>
                                                     <hr style="margin-bottom: 10px; margin-top: 10px;" />
@@ -720,7 +721,7 @@
                                 <div class="container-fluid">
                                     <div class="row layout_header theme_primary_bg" style="height: 30px;">
                                         <div class="col-xs-12">
-                                            PayBill:
+                                            PayBill (In use?):
                                         </div>
                                     </div>
                                 </div>
@@ -1012,11 +1013,14 @@
                                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                         <ContentTemplate>
                                             <label class="lbltxt" style="width: 150px;">Amount : </label>
-
+                                            Rs.
                                             <asp:TextBox Width="100" ID="txtFlatBillAmt" runat="server" CssClass="form-control " Visible="False"></asp:TextBox>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
 
+                                    <br />
+                                     <label class="lbltxt" style="width: 150px;">DueDate : </label>
+                                            <asp:TextBox Width="100" ID="txtDueDate" runat="server" CssClass="form-control " ></asp:TextBox>
 
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtFlatBillAmt" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Textbox" InitialValue="0"></asp:RequiredFieldValidator>
                                     <br />
@@ -1184,10 +1188,49 @@
                             </div>
                         </div>
                     </div>
+
+                        <div id="ImportBill" class ="modal">
+             <div class="container-fluid" style="width: 400px;">      
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+                  <asp:Label ID="lblNewvalues" runat="server" CssClass="GridHeader_text" Text="New Values :"></asp:Label>
+             </div>
+            <div class="panel-body">
+             <%--  <asp:Button ID="btnUserMap" runat="server" CausesValidation="False" CssClass="list_type"  Visible="false" Text="Map Resident" OnClick="btnUserMap_Click" />--%>
+             <div id="NewValueScroll_Div" runat="server" style="overflow:auto; width:100%;height:200px;">
+                        <asp:GridView ID="ImportNewRecordGrid" runat="server" AutoGenerateColumns="false" HorizontalAlign="Center" Width="100%" PageSize="15"  ShowHeader="true" OnRowDataBound="ImportNewRecordGrid_RowDataBound">
+                           <HeaderStyle BackColor="#3eb1ff"  ForeColor="White"  />
+                              <EditRowStyle  BackColor="#f2f2f2"/>
+                                  <Columns>
+                                           <asp:BoundField DataField="ID" ItemStyle-Width="20px" HeaderText="ID" />
+                                           <asp:BoundField DataField="FlatNumber" ItemStyle-Width="30px" HeaderText="FlatNumber" />
+                                           <asp:BoundField DataField="BillID" ItemStyle-Width="20px" HeaderText="BillID" />
+                                           <asp:BoundField DataField="PreviousEndDate"  DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-Width="20px" HeaderText="PreviousEndDate" />
+                                           <asp:BoundField DataField="BillStartDate"  DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-Width="20px" HeaderText="BillStartDate" />
+                                           <asp:BoundField DataField="BillEndDate"  DataFormatString="{0:dd/MMM/yyyy}" ItemStyle-Width="20px" HeaderText="BillEndDate" />   
+                                           <asp:BoundField DataField="PreviousBalance" ItemStyle-Width="25px" HeaderText="PreviousBalance"/>   
+                                           <asp:BoundField DataField="CurrentBillAmount" ItemStyle-Width="25px" HeaderText="CurrentBillAmount"/>   
+                                   </Columns>
+                              <PagerStyle BackColor="White" ForeColor="#648AD9" />
+                       </asp:GridView>
+               </div>
+
+                </div>
+              <div class="panel-footer" style="text-align: right;">
+               <asp:Button ID="btnselsectdata" runat="server" Text="Import" OnClick="btnselsectdata_Click" BackColor="#3399FF" ForeColor="White" Height="25px" Width="100px"  CausesValidation="false"/>
+            <span style="margin-left:6%;"></span>
+            <asp:Button ID="btncancel" runat="server" Text="Cancel" BackColor="#0099FF" ForeColor="White" Height="25px" Width="100px" CausesValidation="false"  />
+            </div>
+             </div>
+             
+             </div>
+         </div>
+
+    </div>
                 </form>
             </div>
         </div>
 
-    </div>
+     
 </body>
 </html>

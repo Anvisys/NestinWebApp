@@ -67,7 +67,7 @@ public partial class LatestBill : System.Web.UI.Page
             GridView grd = new GridView() ;
             if (cmdname.Equals("History"))
             {
-                dsLatestBillData = bill.GetLatestBills(FlatNumber, BillType, "", "" ,"ViewGeneratedBill");
+                dsLatestBillData = bill.GetLatestBills(FlatNumber, BillType, "", "");
                 grd = GrdDetail;
                 lblFlatNumbergrddetails.Text = dsLatestBillData.Tables[0].Rows[0].ItemArray[29].ToString();
                 lblbilltypegrddetails.Text = dsLatestBillData.Tables[0].Rows[0].ItemArray[3].ToString();
@@ -130,13 +130,11 @@ public partial class LatestBill : System.Web.UI.Page
                 case ".xls":
 
                     Connectionstring = ConfigurationManager.ConnectionStrings["Excel03ConString"].ConnectionString;
-
                     break;
 
                 case ".xlsx":
 
                     Connectionstring = ConfigurationManager.ConnectionStrings["Excel07conString"].ConnectionString;
-
                     break;
             }
 
@@ -180,7 +178,8 @@ public partial class LatestBill : System.Web.UI.Page
                 DBFlatData = dtFlatData.Tables[0];
             }
 
-            DataTable NewDataExcel = DataExcel.AsEnumerable().Where(ra => DBFlatData.AsEnumerable().Any(rb => rb.Field<string>("FlatNumber") == ra.Field<string>("FlatNumber"))).CopyToDataTable();
+            DataTable NewDataExcel = DataExcel.AsEnumerable().Where(ra => DBFlatData.AsEnumerable().Any(rb => rb.Field<string>("FlatNumber") 
+                                   == ra.Field<string>("FlatNumber"))).CopyToDataTable();
 
             if (NewDataExcel.Rows.Count > 0)
             {
@@ -211,11 +210,11 @@ public partial class LatestBill : System.Web.UI.Page
 
                
                 SessionVariables.SocietyBillPlans = tempBillCycle;
-                // Commented temp
-                //ImportNewRecordGrid.DataSource = tempBillCycle;
-                //ImportNewRecordGrid.DataBind();
+      
+                ImportNewRecordGrid.DataSource = tempBillCycle;
+                ImportNewRecordGrid.DataBind();
 
-                SessionVariables.NewBills = DataExcel;
+              
 
                 ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "PopupImportBill()", true);
 
@@ -313,8 +312,13 @@ public partial class LatestBill : System.Web.UI.Page
                 int Amount = Convert.ToInt32(drv["CurrentMonthBalance"].ToString());
                 int Balance = Convert.ToInt32(drv["PreviousMonthBalance"].ToString());
                 DateTime PaymentDate = Convert.ToDateTime(drv["PaymentDueDate"].ToString());
+                int PayID = Convert.ToInt32(drv["PayID"].ToString());
 
                 txtLatestFlatFilter.Text = drv["FlatNumber"].ToString();
+                Button btnBillPay = (Button)e.Row.FindControl("btnBillPay");
+
+                Button btnBillHistory = (Button)e.Row.FindControl("btnBillHistory");
+
                 //if (Amount <= 0)
                 //{
                 //    e.Row.BackColor = System.Drawing.Color.White;
@@ -337,9 +341,13 @@ public partial class LatestBill : System.Web.UI.Page
 
                 e.Row.ToolTip = (e.Row.DataItem as DataRowView)["BillDescription"].ToString();
 
-                TableCell statusCell = e.Row.Cells[15];
-                statusCell.Text = (e.Row.DataItem as DataRowView)["BillDescription"].ToString().Substring(0, 5) + "..";
-
+                //TableCell statusCell = e.Row.Cells[15];
+                //statusCell.Text = (e.Row.DataItem as DataRowView)["BillDescription"].ToString().Substring(0, 5) + "..";
+                if (PayID == 0)
+                {
+                    btnBillPay.Visible = false;
+                    btnBillHistory.Visible = false;
+                }
 
             }
         }
@@ -541,13 +549,25 @@ public partial class LatestBill : System.Web.UI.Page
                     for (int i = 0; i < dataBills.Rows.Count; i++)
                     {
                         GenerateBill previousBill = new GenerateBill();
+                        previousBill.PayID = Convert.ToInt32(dataBills.Rows[i]["PayID"].ToString());
                         previousBill.op_FlatNumber = dataBills.Rows[i]["FlatNumber"].ToString();
                         previousBill.op_FlatArea = Convert.ToInt32(dataBills.Rows[i]["FlatArea"]);
                         previousBill.op_ChargeType = dataBills.Rows[i]["ChargeType"].ToString();
                         previousBill.CycleType = dataBills.Rows[i]["CycleType"].ToString();
                         previousBill.op_Rate = Convert.ToDouble(dataBills.Rows[i]["Rate"]);
-                        previousBill.BillStartDate = Convert.ToDateTime(dataBills.Rows[i]["BillStartDate"]);
-                        previousBill.BillEndDate = Convert.ToDateTime(dataBills.Rows[i]["BillEndDate"]);
+                        if (previousBill.PayID > 0)
+                        {
+                            previousBill.BillStartDate = Convert.ToDateTime(dataBills.Rows[i]["BillStartDate"]);
+                            previousBill.BillEndDate = Convert.ToDateTime(dataBills.Rows[i]["BillEndDate"]);
+                        }
+                        else
+                        {
+                            DateTime FlatAddDate = Convert.ToDateTime(dataBills.Rows[i]["FlatAddDate"]);
+                            DateTime BillPlanDate = Convert.ToDateTime(dataBills.Rows[i]["BillPlanDate"]);
+
+                            previousBill.BillStartDate = FlatAddDate > BillPlanDate ? FlatAddDate : BillPlanDate;
+                            previousBill.BillEndDate = FlatAddDate > BillPlanDate ? FlatAddDate : BillPlanDate;
+                        }
                         previousBill.SocietyBillID = Convert.ToInt32(dataBills.Rows[i]["SocietyBillID"]);
                         previousBill.CurrentMonthBalance = Convert.ToInt32(dataBills.Rows[i]["CurrentMonthBalance"]);
 
@@ -664,8 +684,7 @@ public partial class LatestBill : System.Web.UI.Page
             DataTable New_Bills = new DataTable();
 
             //New_Bills = (DataTable)Session["NewBills"];
-            New_Bills = SessionVariables.NewBills;
-
+       
             String SqlSocietyString = Utility.SocietyConnectionString;
             SqlConnection sqlCon = new SqlConnection(SqlSocietyString);
             sqlCon.Open();
@@ -698,6 +717,33 @@ public partial class LatestBill : System.Web.UI.Page
 
     public void LoadBillTypeDropdown(params DropDownList[] controls)
     {
+        BillPlan billPlan = new BillPlan();
+        dsBillType = billPlan.GetActiveBillType(muser.currentResident.SocietyID);
+
+        if (dsBillType != null) {
+            drpCurrentBillType.DataSource = dsBillType;
+            drpCurrentBillType.DataTextField = "BillType";
+            drpCurrentBillType.DataValueField = "BillTypeID";
+            drpCurrentBillType.DataBind();
+            drpCurrentBillType.Items.Add(new ListItem("Show All", "-1"));
+            drpCurrentBillType.SelectedIndex = dsBillType.Tables[0].Rows.Count;
+        }
+
+   
+        dsBillType = billPlan.GetActiveBillType(muser.currentResident.SocietyID);
+
+        if (dsBillType != null)
+        {
+            drpGenBillForOnLatest.DataSource = dsBillType;
+            drpGenBillForOnLatest.DataTextField = "BillType";
+            drpGenBillForOnLatest.DataValueField = "BillTypeID";
+            drpGenBillForOnLatest.DataBind();
+    
+        }
+
+
+        /*
+
         if (dsBillType == null)
         {
             BillPlan billPlan = new BillPlan();
@@ -719,6 +765,8 @@ public partial class LatestBill : System.Web.UI.Page
                     ctrl.Items.Insert(0, new ListItem("Select", "NA"));
             }
         }
+
+        */
     }
 
     #region GeneratedBill
@@ -944,7 +992,7 @@ public partial class LatestBill : System.Web.UI.Page
                 DateTime tempDate;
                 DataTable dt = dscheck.Tables[0];
                 lblBillType.Text = dt.Rows[0]["BillType"].ToString();
-                lblFlat.Text = dt.Rows[0]["FlatID"].ToString();
+                lblFlat.Text = dt.Rows[0]["FlatNumber"].ToString();
                 lblBillAmount.Text = dt.Rows[0]["CurrentBillAmount"].ToString();
                 lblBalance.Text = dt.Rows[0]["PreviousMonthBalance"].ToString();
 
@@ -1046,7 +1094,7 @@ public partial class LatestBill : System.Web.UI.Page
                 newBill = Bill.CalculateNewBill(previousBill, GenerateCycle, BillEnddate,0);
             }
 
-            txtFlatBillAmt.Text ="Rs. "+ newBill.CurrentBillAmount.ToString();
+            txtFlatBillAmt.Text = newBill.CurrentBillAmount.ToString();
         }
         catch (Exception ex)
         { 
@@ -1101,7 +1149,7 @@ public partial class LatestBill : System.Web.UI.Page
 
             else if (btnSingleFlatGenerate.Text == "Generate Bill")
             {
-
+                newBill.PaymentDueDate = DateTime.ParseExact(txtDueDate.Text, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
                 newBill.CurrentBillAmount = Convert.ToInt32(txtFlatBillAmt.Text);
                 newBill.BillDescription = txtBillGenSingleFlatdesc.Text;
                 bool result = bill.InsertNewBill(newBill);
@@ -1112,7 +1160,7 @@ public partial class LatestBill : System.Web.UI.Page
 
                     SendNotification(lblBillType.Text, PaymentDueDate);
                     SendMail();
-
+                    LoadLatestBillData();
 
                     ClientScript.RegisterStartupScript(GetType(), "SetFocusScript", "<Script>self.close();</Script>");
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:alert('Bill Generates Successfully')", true);
@@ -1288,62 +1336,62 @@ public partial class LatestBill : System.Web.UI.Page
 
     private void GenerateBillPreview(String BillType)
     {
-        try
-        {
-            String ChargeType = "";
-            DataAccess dacess = new DataAccess();
-            if (BillType == "Select")
-            {
-                uploadBill.Visible = false;
-                btnbillCaluclate.Visible = false;
-                //lblBillGeneraStatus.Text = "Please select a Bill Type to be generated"; //Commented by Aarshi on 3 aug 2014 for code structuring as this code is implemented on client side
+        //try
+        //{
+        //    String ChargeType = "";
+        //    DataAccess dacess = new DataAccess();
+        //    if (BillType == "Select")
+        //    {
+        //        uploadBill.Visible = false;
+        //        btnbillCaluclate.Visible = false;
+        //        //lblBillGeneraStatus.Text = "Please select a Bill Type to be generated"; //Commented by Aarshi on 3 aug 2014 for code structuring as this code is implemented on client side
 
-            }
-            else
-            {
-                btnbillCaluclate.Visible = true;
-                lblBilltypeDes.Text = BillType;
-                BillPlan billPlan = new BillPlan();
-                bool result = billPlan.SetPlanDetails(BillType);
-                if (result == true)
-                {
-                    lblchargetypeDes.Text = billPlan.ChargeType;
-                    lblrateDes.Text = billPlan.Rate;
-                    //HiddenBillDescp.Value = billPlan.BillID.ToString();
+        //    }
+        //    else
+        //    {
+        //        btnbillCaluclate.Visible = true;
+        //        lblBilltypeDes.Text = BillType;
+        //        BillPlan billPlan = new BillPlan();
+        //        SocietyBillPlan result = billPlan.GetPlanDetails(BillType);
+        //        if (result == true)
+        //        {
+        //            lblchargetypeDes.Text = billPlan.ChargeType;
+        //            lblrateDes.Text = billPlan.Rate;
+        //            //HiddenBillDescp.Value = billPlan.BillID.ToString();
 
-                    if (billPlan.ChargeType == "Manual")
-                    {
-                        uploadBill.Visible = true;
-                        lblBillGeneraStatus.Text = "Manual Charge need to be imported from Excel";
-                        btnbillCaluclate.Text = "Import";
+        //            if (billPlan.ChargeType == "Manual")
+        //            {
+        //                uploadBill.Visible = true;
+        //                lblBillGeneraStatus.Text = "Manual Charge need to be imported from Excel";
+        //                btnbillCaluclate.Text = "Import";
 
-                    }
-                    else
-                    {
-                        uploadBill.Visible = false;
-                        //commented by Aarshi on 15 Aug 2017 for code restructuring
-                        //String GetBillQuery = "Select count(FlatID) from BillCycle where Cyclestart != CycleEnd and CycleEnd >= getdate() and  BillID =" + billPlan.BillID + "";
-                        //int count = dacess.GetSingleValue(GetBillQuery);
+        //            }
+        //            else
+        //            {
+        //                uploadBill.Visible = false;
+        //                //commented by Aarshi on 15 Aug 2017 for code restructuring
+        //                //String GetBillQuery = "Select count(FlatID) from BillCycle where Cyclestart != CycleEnd and CycleEnd >= getdate() and  BillID =" + billPlan.BillID + "";
+        //                //int count = dacess.GetSingleValue(GetBillQuery);
 
-                        //Added by Aarshi on 15 Aug 2017 for code restructuring
-                        BillCycle billCycle = new BillCycle();
-                        int count = billCycle.GetSingleValueBillCycle(billPlan.BillID);
+        //                //Added by Aarshi on 15 Aug 2017 for code restructuring
+        //                BillCycle billCycle = new BillCycle();
+        //                int count = billCycle.GetSingleValueBillCycle(billPlan.BillID);
 
-                        lblRowsEffectDes.Text = count.ToString();
-                        btnbillCaluclate.Text = "Generate Bill";
-                        lblBillGeneraStatus.Text = "";
+        //                lblRowsEffectDes.Text = count.ToString();
+        //                btnbillCaluclate.Text = "Generate Bill";
+        //                lblBillGeneraStatus.Text = "";
 
-                    }
-                }
-                else
-                {
-                    lblBillGeneraStatus.Text = "Bil Plan do not exist, or connection problem";
-                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            lblBillGeneraStatus.Text = "Bil Plan do not exist, or connection problem";
+        //        }
 
-            }
-        }
-        catch (Exception ex)
-        { }
+        //    }
+        //}
+        //catch (Exception ex)
+        //{ }
 
         ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "ShowGenerateBillPreview()", true);
     }
@@ -1402,6 +1450,7 @@ public partial class LatestBill : System.Web.UI.Page
         {
             String Flat = (row.FindControl("lblFlatNumar") as Label).Text;
             String BillType = (row.FindControl("lblBillType") as Label).Text;
+            String BillTypeID = (row.FindControl("lblBillTypeID") as Label).Text; 
 
             DateTime CurrentBillEndDate = Utility.GetCurrentDateTimeinUTC();
             String GenerateCycle = "Manual";
@@ -1409,9 +1458,9 @@ public partial class LatestBill : System.Web.UI.Page
             lblFlatNuber.Text = Flat;
             lblBillType.Text = BillType;
 
+            txtDueDate.Text = CurrentBillEndDate.AddDays(7).ToString("dd-MM-yyyy");
 
-
-            previousBill = Bill.GetLastGeneratedBill(Flat, 0);
+            previousBill = Bill.GetLastGeneratedBill(Flat, Convert.ToInt32(BillTypeID));
 
             if (previousBill != null)
             {

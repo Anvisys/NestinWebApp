@@ -52,6 +52,7 @@ public partial class register : System.Web.UI.Page
         int UserId = user.InsertUserResident();
         if (UserId > 0)
         {
+           
             SessionVariables.User = user;
             return UserId;
         }

@@ -360,7 +360,7 @@
             }
 
             var jData = JSON.parse(user)
-                  alert(url);
+                 // alert(url);
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -626,7 +626,7 @@
 
     <section id="contact">
         <div class="jumbotron text-center" style="height: 120px;">
-            <h3 style="padding-top: 40px; color: #ffffff;">
+            <h3 style="padding-top: 40px; color: #000;">
                 <lable id="lblRegisterUser"></lable>
             </h3>
 

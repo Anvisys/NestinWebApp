@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 using System.Data;
 using System.Data.SqlClient;
-using System.Data;
+
 using System.Web.UI.HtmlControls;
 
 public partial class Employees : System.Web.UI.Page
@@ -82,7 +82,7 @@ public partial class Employees : System.Web.UI.Page
             int ServiceTypeID = Convert.ToInt32(drpEmpServtFilter.SelectedValue);
 
             Resident res = new Resident();
-            DataSet ds = res.GetEmployee(muser.currentResident.SocietyID, ServiceTypeID);
+            DataSet ds = res.GetEmployee(muser.currentResident.SocietyID, ServiceTypeID,"");
 
       
            if (ds.Tables.Count > 0)

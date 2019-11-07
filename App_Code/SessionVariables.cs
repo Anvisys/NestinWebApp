@@ -229,18 +229,7 @@ public class SessionVariables
         }
     }
 
-    public static DataTable NewBills
-    {
-        get
-        {
-            return (DataTable)HttpContext.Current.Session["NewBills"];
-        }
-
-        set
-        {
-            HttpContext.Current.Session["NewBills"] = value;
-        }
-    }
+ 
 
     public static string PayID
     {

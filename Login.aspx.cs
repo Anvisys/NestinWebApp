@@ -10,8 +10,8 @@ public partial class Login : System.Web.UI.Page
     User muser;
     protected void Page_Load(object sender, EventArgs e)
     {
-        SessionVariables.API_URL = "http://www.anvisys.net/NestinWebApi";
-        //SessionVariables.API_URL = "http://www.kevintech.in/Nestin-WebApi";
+        //SessionVariables.API_URL = "http://www.anvisys.net/NestinWebApi";
+        SessionVariables.API_URL = "http://www.kevintech.in/Nestin-WebApi";
        
     }
 

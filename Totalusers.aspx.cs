@@ -8,7 +8,6 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Data;
 using System.Configuration;
 
 public partial class Totalusers : System.Web.UI.Page
@@ -373,10 +372,10 @@ public partial class Totalusers : System.Web.UI.Page
             String Parentname = txtParentname.Text;
             String UserLogin = txtEmailId.Text;
             String Password = "Password@123";
-            HiddenField FlatID = (HiddenField)residentsDataList.FindControl("hiddenflatid");
-            HiddenField UserID = (HiddenField)residentsDataList.FindControl("hiddenUserid");
-            string Userid = UserID.Value;
-            string FlatId = FlatID.Value;
+            //HiddenField FlatID = (HiddenField)residentsDataList.FindControl("hiddenflatid");
+            //HiddenField UserID = (HiddenField)residentsDataList.FindControl("hiddenUserid");
+            //string Userid = UserID.Value;
+            //string FlatId = FlatID.Value;
             string HouseId = "0";
             string Actdate = txtact.Text;
             string Deactdate = txtdeact.Text;
@@ -389,7 +388,7 @@ public partial class Totalusers : System.Web.UI.Page
             //String SocietyName = muser.currentResident.SocietyName;
             //string SocietyID = muser.currentResident.SocietyID.ToString();//Added by Aarshi on 15 aug 2017
 
-            string query = "INSERT INTO[dbo].[SocietyUser]([UserID],[FlatID],[Type],[ServiceType],[CompanyName],[ActiveDate],[DeActiveDate],[ModifiedDate],[SocietyID],[Status],[HouseID])"+
+           /* string query = "INSERT INTO[dbo].[SocietyUser]([UserID],[FlatID],[Type],[ServiceType],[CompanyName],[ActiveDate],[DeActiveDate],[ModifiedDate],[SocietyID],[Status],[HouseID])"+
                 "values("+ Userid + " ,"+FlatId+" ,'Tenant' ,0 ,'' ,'"+Actdate+"' ,'"+Deactdate+"' ,'"+DateTime.UtcNow+"' ,"+SessionVariables.SocietyID+" ,2 "+HouseId+")";
             DataAccess daccess = new DataAccess();
             bool result=daccess.UpdateQuery(query);
@@ -402,7 +401,7 @@ public partial class Totalusers : System.Web.UI.Page
             else if (FirstName == newName)
             { return; }
             newName = FirstName;
-
+            */
            
             //Added by Aarshi on 15 Aug 2017 for code restructuring
             Resident res = new Resident();
@@ -464,18 +463,23 @@ public partial class Totalusers : System.Web.UI.Page
     protected void btnAddUserResident_Click(object sender, EventArgs e)
     {
         //btnAdduserres.Enabled = false;
-        
-        if (lblusravailblerr.Text == "")
+        try
         {
-            Datasubmit();
-        }
+            if (lblusravailblerr.Text == "")
+            {
+                Datasubmit();
+            }
 
-        else
-        {
-            lblstatus.Text = "UserLogin  already Registered";
-        }
+            else
+            {
+                lblstatus.Text = "UserLogin  already Registered";
+            }
 
-        btnAddUserResident.Enabled = true;
+            btnAddUserResident.Enabled = true;
+        }
+        catch (Exception ex) {
+
+        }
     }
 
 

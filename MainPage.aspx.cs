@@ -64,6 +64,11 @@ public partial class MainPage : System.Web.UI.Page
                 }
               
             }
+            else
+            {
+
+
+            }
 
         }
 
@@ -99,7 +104,7 @@ public partial class MainPage : System.Web.UI.Page
         }
         else if (muser.currentResident.UserType == "Admin")
         {
-           // SessionVariables.CurrentPage = "Dashboard.aspx";
+            SessionVariables.CurrentPage = "Dashboard.aspx";
            
         }
 
@@ -192,7 +197,7 @@ public partial class MainPage : System.Web.UI.Page
     {
 
         string name = muser.FirstName.Substring(0, 1).ToUpper() ;
-        ImgProfileIcon.Attributes["src"] = "GetImages.ashx?UserID=" + id + "&Name=" + name + "&UserType=" + muser.currentResident.UserType;
+        ImgProfileIcon.Attributes["src"] = "GetImages.ashx?Type=User&ID=" + id + "&Name=" + name + "&UserType=" + muser.currentResident.UserType;
         
     }
 

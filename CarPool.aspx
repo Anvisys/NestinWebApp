@@ -71,7 +71,7 @@
                     var JourneyDTime = DisplayDateTime(results[i].JourneyDateTime);
                     var ReturnDTime = DisplayDateTime(results[i].ReturnDateTime);
                     var SeatRemaining = parseInt(results[i].AvailableSeats) - parseInt(results[i].InterestedSeatsCount);
-                    var ImageSource = "GetImages.ashx?ResID=" + results[i].ResID + "&Name=" + results[i].FirstName + "&UserType= Owner";
+                    var ImageSource = "GetImages.ashx?Type=Resident&ID=" + results[i].ResID + "&Name=" + results[i].FirstName ;
 
                     strData = strData + "<div class=\"col-xs-4\" style=\"margin:0px;padding:10px;\">" +
                         "<div class=\"panel panel-success\">"
@@ -192,7 +192,7 @@
         <div class="container-fluid">
 
 
-            <ul class="nav nav-pills" style="margin-top: 10px;">
+            <ul class="nav nav-pills" style="margin-top: 10px;display:none;">
                 <li role="presentation" class="active"><a href="#AllPool" data-toggle="tab">Pool</a></li>
                 <li role="presentation"><a href="#selfPool" data-toggle="tab">My Pool</a></li>
            </ul>
