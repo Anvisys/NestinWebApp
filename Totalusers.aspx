@@ -57,6 +57,11 @@
 
                 format:'DD-MM-YYYY'
             });
+
+
+            $("#txtEndDate").datetimepicker({ format: 'DD-MM-YYYY' });
+
+            $("#txtStartDate").datetimepicker({ format: 'DD-MM-YYYY' });
         });
 
 
@@ -74,6 +79,11 @@
 
                     format: 'DD-MM-YYYY'
                 });
+
+
+                //$("#txtEndDate").datepicker({ dateFormat: 'dd-mm-yy' });
+
+                //$("#txtStartDate").datepicker({ dateFormat: 'dd-mm-yy' });
             }
         });
 
@@ -84,7 +94,7 @@
             $("#lblScreen").text(window.innerWidth);
             if (window.innerWidth <= 768) {
 
-                hideColumn();
+              //  hideColumn();
             }
             else {
               //  showColumn();
@@ -333,9 +343,6 @@
                 $("#HiddenCompDeactiveID").val("");
             });
 
-            $("#txtEndDate").datepicker({ dateFormat: 'dd-mm-yy' });
-
-            $("#txtStartDate").datepicker({ dateFormat: 'dd-mm-yy' });
         });
 
 
@@ -477,6 +484,8 @@
             return true;
         }
 
+        function ValidateDate() {
+        }
 
     </script>
 
@@ -600,6 +609,7 @@
     <div class="container-fluid">
 
         <div class="row">
+       
             <div class="col-md-10">
 
                 <form id="form1" runat="server">
@@ -680,31 +690,39 @@
                     </div>
 
                     <div id="confirmActivateBox" class="modal">
-                        <div class="container-fluid" style="margin-top: 50px; width: 350px;">
-                            <div class="panel panel-primary" style="position: relative; margin: 0px;">
+                        <div class="container-fluid" style="margin-top: 50px; ">
+                            <div class="panel panel-primary popup_box_size" style="width: 400px; position: relative;">
                                 <div class="panel-heading">
-                                    Delete Confirmation
-                                    <span class="fa fa-times" onclick="CancelActivate()" id="cancelAct" style="float: right; cursor: pointer;"></span>
+                                    Activate Confirmation
+                                  <%--  <a class="fa fa-times" onclick="CancelActivate()" id="cancelAct" style=" cursor: pointer;"><span class="fa fa-close" style="color: white; float: right"></span></a>--%>
+
+                                  
+                                  <span class="fa fa-times" onclick="CancelActivate()" id="cancelAct" style="float:right;cursor:pointer;"></span>
+
                                 </div>
                                 <div class="panel-body">
+                                    <form class="form-group" autocomplete="off">
+                                        <div class="row">
 
-                                    <table>
-                                        <tr>
-                                            <td colspan="2" style="text-align: center;">Activate  Resident
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="height: 15px;">Active From </td>
-                                            <td style="height: 15px;">
-                                                <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="height: 15px;">Active Till </td>
-                                            <td style="height: 15px;">
-                                                <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control" onchange="ValidateDate()" autocomplete="off"></asp:TextBox></td>
-                                        </tr>
-                                    </table>
+                                            <div class="col-xs-12" style="text-align: center;">
+                                                Activate  Resident
+                                            </div>
+                                        </div>
+                                        <div class="row" style="height: 30px;">
+                                            <div class="col-xs-4">Active From </div>
+                                            <div class="col-xs-8">
+                                                <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="height: 30px;">
+                                            <div class="col-xs-4">Active Till </div>
+                                            <div class="col-xs-8">
+                                                <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control col-xs-10" onchange="ValidateDate()" ViewStateMode="Enabled"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
+
                                 <div class="panel-footer" style="text-align: right;">
                                     <asp:Button ID="btnActivate" CausesValidation="false" CssClass="btn btn-primary" runat="server" OnClick="btnActivateUser_Click" Text="Yes" />
                                     <button type="button" onclick="CancelActivate()" class="btn btn-danger">No</button>
@@ -898,7 +916,7 @@
 
                                         <div class="panel-heading">
                                             Add User :
-                                                <a onclick="CloseAddResident()" style="cursor: pointer;"><span class="fa fa-close" style="color: white; float: right"></span></a>
+                                                <a class="fa fa-times" onclick="CloseAddResident()" style="cursor: pointer;"><span class="fa fa-close" style="color: white; float: right"></span></a>
 
                                         </div>
                                         <div class=" panel-body ">

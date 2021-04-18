@@ -471,6 +471,11 @@ public partial class Employees : System.Web.UI.Page
 
         String EmailAvailbleQuery = "Select  * from dbo.TotalUsers where EmailId = '" + txtAddEmpEmailId.Text + "' and MobileNo= "+ txtAddEmpMobile.Text;
         DataSet Employee = dacess.GetData(EmailAvailbleQuery);
+        if (Employee.Tables[0].Rows.Count == 0)
+        {
+            lblEmpError.Text = "Please Register first to proceed...";
+            return;
+        }
         int UserId =Convert.ToInt32(Employee.Tables[0].Rows[0]["UserID"]);
 
         if (UserId == 0)

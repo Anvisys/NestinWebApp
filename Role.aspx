@@ -59,7 +59,7 @@
         var ResId;
 
         $(document).ready(function () {
-            window.parent.FrameSourceChanged();
+           // window.parent.FrameSourceChanged();
           let params = (new URL(document.location)).searchParams;
 
             if (params != null) {
@@ -774,7 +774,7 @@
     <div class="container" id="flat_Request" style="background-color: white; margin-top: 40px;">
          <div class="row">          
             <div class="col-md-12 col-xs-12">
-                <h4 style="margin-left: 10px;"/>My Flats  <a onclick="NewFlat()" style="font-size:15px; color:blue;">Click Here To Add New Flat</a>
+                <h4 style="margin-left: 10px;"/>My Flats  <a onclick="NewFlat()" style="font-size:15px; color:blue;">Click Here To Select Flat</a>
             </div>          
         </div>
 

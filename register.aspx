@@ -160,10 +160,8 @@
                 Gender = "Female";
             }
 
-
-            //alert(visitDate);
             var start = new Date();
-            // alert(start);
+    
 
             var month = start.getMonth() + 1;
 
@@ -279,12 +277,10 @@
                 Gender = "Female";
             }
 
-            //   alert(1);
-            //alert(visitDate);
             var start = new Date();
             var startDateForDBInsertion = GetDateTimeinISO(start);
 
-            // alert(start);
+          
 
             var month = start.getMonth() + 1;
 
@@ -337,17 +333,15 @@
             var strEndDate = endDate.getFullYear() + "-" + strEndMonth + "-" + strEndDay + "T00:00:00";
 
             document.getElementById("post_loading").style.display = "block";
-            //    alert(3);
+           
             var strURL = api_url + "/api/User/Add/Demo";
-            //var strURL = "visitor.aspx/AddVisitor";
-            //   alert(4);
+           
             var user = "{\"UserLogin\":\"" + email + "\",\"Password\":\"Password@123\",\"MiddleName\":\"K\",\"FirstName\":\"" + firstname + "\",\"LastName\":\"" + lastname
                 + " \",\"MobileNumber\":\"" + mobile + "\",\"StartTime\":\"" + startDateForDBInsertion + "\",\"EndTime\":\"" + endDateForDBInsertion +
                 "\",\"EmailID\":\"" + email + "\",\"Gender\":\"" + Gender + "\",\"ParentName\":\"" + parentname + "\",\"Address\":\"" + address
                 + "\",\"SocietyID\":\"" + 1 + "\",\"UserType\":\"Demo\"}";
 
-            //    var user1 = "{\"UserLogin\":\"" + email + "\"}";
-            //  alert(user);
+ 
 
             var url = "";
             if (role == "Demo") {
@@ -360,7 +354,7 @@
             }
 
             var jData = JSON.parse(user)
-                  alert(url);
+                 
             $.ajax({
                 type: 'POST',
                 url: url,

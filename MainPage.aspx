@@ -444,7 +444,7 @@
                                                 <li style="margin-top:2px;"><a href="Totalusers.aspx" target="targetframe">Residents</a></li>
 
                                                 <li style="margin-top:2px;"><a href="Employees.aspx" target="targetframe">Employees</a></li>
-                                                <li style="margin-top:2px;"><a href="Flats.aspx" target="targetframe">Flats/Resident</a></li>
+                                               <%-- <li style="margin-top:2px;"><a href="Flats.aspx" target="targetframe">Flats/Resident</a></li>--%>
                                                 <li style="margin-top:2px;"><a href="NewFlats.aspx" target="targetframe">New Flats/Resident</a></li>
                                           </ul>
                                         </li>

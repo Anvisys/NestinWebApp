@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Data;
 using System.Configuration;
+using System.Activities.Expressions;
 
 public partial class Totalusers : System.Web.UI.Page
 {
@@ -388,6 +389,11 @@ public partial class Totalusers : System.Web.UI.Page
             //String ConnectionString = Utility.SocietyConnectionString;
             //String SocietyName = muser.currentResident.SocietyName;
             //string SocietyID = muser.currentResident.SocietyID.ToString();//Added by Aarshi on 15 aug 2017
+
+            //This Factory has yet to be implemented
+            User user = new User();
+            UserFactory userFactory = new UserFactory();
+            IUser newUser = userFactory.GetUser("Owner", user);
 
             string query = "INSERT INTO[dbo].[SocietyUser]([UserID],[FlatID],[Type],[ServiceType],[CompanyName],[ActiveDate],[DeActiveDate],[ModifiedDate],[SocietyID],[Status],[HouseID])"+
                 "values("+ Userid + " ,"+FlatId+" ,'Tenant' ,0 ,'' ,'"+Actdate+"' ,'"+Deactdate+"' ,'"+DateTime.UtcNow+"' ,"+SessionVariables.SocietyID+" ,2 "+HouseId+")";

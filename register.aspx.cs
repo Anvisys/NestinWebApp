@@ -48,8 +48,12 @@ public partial class register : System.Web.UI.Page
     [System.Web.Script.Services.ScriptMethod]
     public static int AddUser(User user)
     {
-       
-        int UserId = user.InsertUserResident();
+        UserFactory userFactory = new UserFactory();
+        IUser demoUser = userFactory.GetUser("Empty", user);
+        if(demoUser == null)
+         return 0; 
+        int UserId = demoUser.AddUser();
+        //int UserId = user.InsertUserResident();
         if (UserId > 0)
         {
             SessionVariables.User = user;
@@ -68,8 +72,11 @@ public partial class register : System.Web.UI.Page
     [System.Web.Script.Services.ScriptMethod]
     public static int AddDemoUser(User user)
     {
-       
-        int UserId = user.CreateDemoUser();
+        UserFactory userFactory = new UserFactory();
+        IUser demoUser = userFactory.GetUser("Demo", user);
+        int UserId = demoUser.AddUser();
+
+        //int UserId = user.CreateDemoUser();
         if (UserId > 0)
         {
             user.SetResidentInfo();
