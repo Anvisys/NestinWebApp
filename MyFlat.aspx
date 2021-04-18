@@ -82,7 +82,6 @@
                     $(".divreturn").css("display", 'none');
                     $("#pool_cycle").prop('disabled', true); 
                     $("#pool_cycle").val("One Time");
-                    
                 }
 
                 else {
@@ -90,8 +89,7 @@
                     $("#pool_cycle").prop("disabled", false);
                     $("#pool_cycle").val("Two Way");
                     $("#pool_cycle").val("One Time");
-                    $(".divarrive").css("display", 'block');
-                    
+                     $(".divarrive").css("display", 'block');
                 }
                    
             });
@@ -102,20 +100,18 @@
                 var selectedOption = $(this).children("option:selected").val();
 
                 if (selectedOption == "Daily" && selectedType=='Two Way') {
-                    $(".when").css("display", 'none');
-                    $(".return").css("display", 'none');
-                     $("#pool_type").prop('disabled', true); 
+                    $(".divarrive").css("display", 'none');
+                    $(".divreturn").css("display", 'none');
             //        $("#pool_cycle").prop('disabled', false); 
             //        $("#pool_type").val("Two Way");
             //        $("#pool_type").prop('disabled', true); 
                 }
 
                 else {
-                    $(".when").css("display", 'block');
-                    $(".return").css("display", 'block');
+                    $(".divreturn").css("display", 'block');
+                    $(".divarrive").css("display", 'block');
                     $("#pool_cycle").prop("disabled", false);
                     $("#pool_cycle").val("One Time");
-                     $("#pool_type").prop('disabled', false); 
             //        $("#pool_cycle").prop("disabled", false);
             //        $("#pool_cycle").val("Two Way");
             //        $("#pool_cycle").val("One Time");
@@ -1068,55 +1064,28 @@
             CarPool.InitiatedDateTime = GetDateTimeinISO(new Date());
             var date = $("#date_when").val();
             var time = $("#time_when").val();
-           
-            if (date == ''  ) {
-                 var today = new Date();
-                var m;
-                var d;
-                if (today.getMonth() + 1 < 10)
-                    m = "0" + (today.getMonth() + 1);
-                else
-                    m = today.getMonth() + 1;
-
-                if (today.getDate() < 10)
-                    d = "0" + today.getDate();
-                else
-                    d = today.getDate();
-           
-                date = today.getFullYear()+'-'+m+'-'+d;
+            if (date == null || time == null) {
+                alert("ok");
+                var today = new Date();
+                date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
                 alert("in "+date);
-                if (time == '') {
-                     var today = new Date();
+
                 if(today.getMinutes()<10)
                     time = today.getHours() + ":" + "0" + today.getMinutes();
                 else
-                        time = today.getHours() + ":" + today.getMinutes();
-                    }
+                    time = today.getHours() + ":" + today.getMinutes();
             }
             var datetime = date + "T" + time + ":00";
-            alert("datetime journey"+datetime)
             CarPool.JourneyDateTime = datetime;
             var date_return = $("#date_return").val();
             var time_return = $("#time_return").val();
-            var datetime_return;
 
-            if (date_return == '' ) {
+            if (date_return == '' || time_return == '') {
+                alert("1036");
                 var today = new Date();
-                var m;
-                var d;
-                if (today.getMonth() + 1 < 10)
-                    m = "0" + (today.getMonth() + 1);
-                else
-                    m = today.getMonth() + 1;
-
-                if (today.getDate() < 10)
-                    d = "0" + today.getDate();
-                else
-                    d = today.getDate();
-                date_return = today.getFullYear()+'-'+m+'-'+d;
+                date_return = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
                 alert("in "+date_return);
 
-                if( time_return == '')
                 if(today.getMinutes()<10)
                     time_return = today.getHours() + ":" + "0" + today.getMinutes();
                 else
@@ -1124,7 +1093,7 @@
             }
 
             var datetime_return = date_return + "T" + time_return + ":00";
-            alert(datetime_return);
+
             CarPool.ReturnDateTime = datetime_return;
 
             CarPool.VehicleType = $("#vehicle_type").val();
@@ -1162,34 +1131,10 @@
                 }
 
             });
-
-            
             $("#ProgressBar").hide();
         }
 
-        function datetimeformat() {
-            var today = new Date();
-            var hrs = today.getHours;
-            var mins = today.getMinutes;
-            var day = today.getDate;
-            var month = today.getMonth;
-            var year = today.getFullYear;
 
-            if (day < 10)
-                day = "0" + day;
-            if (month < 10)
-                day = "0" + day;
-
-
-            if (hrs < 10)
-                hrs = "0" + hrs;
-            if (mins < 10)
-                mins = "0" + hrs;
-
-            var datetime = year + "-" + month + "-" + day + "T" + hrs + ":" + mins + ":" + "00";
-            alert(datetime);
-            
-        }
     </script>
 
    <script id="inventoryData">
@@ -1924,7 +1869,7 @@
                         </div>
                         <div class="row divarrive" style="margin-top: 0px;">
                         
-                             <div class="col-sm-6 when">
+                             <div class="col-sm-6">
                                  <label class="labelwidth col-sm-4 col-form-label">Date: </label>
                                  <div class="col-sm-8">
                                      <%--<div class="form-group">
@@ -1953,7 +1898,7 @@
                             <div class="col-sm-6"></div>
                         </div>
                          <div class="row divreturn" style="margin-top: 10px;">
-                            <div class="col-sm-6 return">
+                            <div class="col-sm-6">
                                 <label class="labelwidth col-sm-4 col-form-label">Date:</label>
                              <div class="col-sm-8">  
                                
@@ -1970,7 +1915,7 @@
                              </div>
                         </div>
                         <div class="row" style="margin-top:10px;">
-                            <div class="col-sm-6 ">
+                            <div class="col-sm-6">
                                 <label class="labelwidth col-sm-4 col-form-label">Vehicle Type:</label>
                                  <div class="col-sm-8">
                                 <input id="vehicle_type" class="form-control form-control-sm" tabindex="9" />
@@ -2017,14 +1962,14 @@
                         </div>
 
                         <div class="modal-body">
-                            <%--<div class="row">
+                            <div class="row">
                                 <div class="col-sm-12">
                                     <label class="labelwidth col-sm-4 col-form-label">Seats: </label>
                                     <div class="col-sm-8">
                                     <input id="close_seats" type="number" onblur="" class="form-control form-control-sm" tabindex="1"/>
                                     </div>
                                 </div>
-                            </div>--%>
+                            </div>
                             <div class="row" style="margin-top: 10px; margin-bottom: 10px">
                                 <div class="col-sm-12">
                                     <label class="labelwidth col-sm-4 col-form-label">Comments:</label>

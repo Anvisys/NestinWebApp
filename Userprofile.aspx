@@ -40,13 +40,11 @@
         var ResiID = '';
         var UserID = '';
         var api_url = '';
+        var UserName = '';
        
-        window.onload = function SetImage() {
-          
-         <%--   // document.getElementById("uploadPreview").src = '/AppImage/Userimages/' + ResiID + '.png';
-            // alert(FlatID);--%>
-
-            document.getElementById("uploadPreview").src = "GetImages.ashx?UserID=" + UserID;
+       function SetImage() {
+       
+            document.getElementById("uploadPreview").src = "GetImages.ashx?Type=User&ID=" + UserID + "&Name=" + UserName;
         };
 
         function LoadMainpage(ResiID) {
@@ -76,8 +74,9 @@
                     FlatID = '<%=Session["FlatID"] %>';
                     ResiID = '<%=Session["ResiID"] %>';
                     UserID = '<%=UserID %>';
-
-
+                    UserName = '<%=UserName %>';
+                    
+                    SetImage();
 
                     $("#update").click(function () {               
                         //  $("#uploadImage").trigger('click');

@@ -15,6 +15,7 @@ public partial class NewFlats : System.Web.UI.Page
     static User newUser;
     static bool ExistingUser = false;
     static int ExistingUserID = 0;
+    static int FlatID = 0;
     PagedDataSource adsource;
     int pos;
     protected void Page_Load(object sender, EventArgs e)
@@ -139,6 +140,8 @@ public partial class NewFlats : System.Web.UI.Page
 
     protected void txtAddfltMobile_TextChanged(object sender, EventArgs e)
     {
+      
+
         DataAccess dacess = new DataAccess();
         try
         {
@@ -298,57 +301,74 @@ public partial class NewFlats : System.Web.UI.Page
 
     protected void btnAssignSubmit_Click(object sender, EventArgs e)
     {
-        int FlatID = Convert.ToInt32(HiddenField1.Value.ToString());
-        int UserID = ExistingUserID;
-
-        String ResidentType = HiddenField3.Value.ToString();
-
-        Resident res = new Resident();
-
-        DataSet owner = res.GetActiveOwner(FlatID, muser.currentResident.SocietyID);
-
-        if (owner != null)
+        try
         {
-            if (owner.Tables[0].Rows.Count > 0)  
+
+            if (HiddenField1.Value.ToString() != "")
             {
-                String Name = "";
-                try
-                {
-                     Name = owner.Tables[0].Rows[0]["FirstName"].ToString() + owner.Tables[0].Rows[0]["LastName"].ToString();
-                }
-                catch (Exception ex)
-                {
-
-                }
-
-                lblUserCheck.Text = "Selected Flat Already has an Active User " + Name;
+                FlatID = Convert.ToInt32(HiddenField1.Value.ToString());
             }
             else
             {
-                res.UserID = ExistingUserID;
-                res.FlatID = FlatID;
-                res.SocietyID = muser.currentResident.SocietyID;
-                res.Status = 2;
-                res.UserType = ResidentType;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:alert('Wrong Flat ID')", true);
+                return;
+            }
 
-                bool result = res.AddSocietyUser();
+          
+            int UserID = ExistingUserID;
 
-                if (result)
+            String ResidentType = HiddenField3.Value.ToString();
+
+            Resident res = new Resident();
+
+            DataSet owner = res.GetActiveOwner(FlatID, muser.currentResident.SocietyID);
+
+            if (owner != null)
+            {
+                if (owner.Tables[0].Rows.Count > 0)
                 {
-                    FillFlatdata();
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:hideAssignFlatModal()", true);
+                    String Name = "";
+                    try
+                    {
+                        Name = owner.Tables[0].Rows[0]["FirstName"].ToString() + owner.Tables[0].Rows[0]["LastName"].ToString();
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
+                    lblUserCheck.Text = "Selected Flat Already has an Active User " + Name;
                 }
                 else
                 {
-                    lblUserCheck.Text = "Error Updating Owner for Flat, Try Later";
+                    res.UserID = ExistingUserID;
+                    res.FlatID = FlatID;
+                    res.SocietyID = muser.currentResident.SocietyID;
+                    res.Status = 2;
+                    res.UserType = ResidentType;
+
+                    bool result = res.AddSocietyUser();
+
+                    if (result)
+                    {
+                        FillFlatdata();
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:hideAssignFlatModal()", true);
+                    }
+                    else
+                    {
+                        lblUserCheck.Text = "Error Updating Owner for Flat, Try Later";
+                    }
                 }
             }
+            else
+            {
+                lblUserCheck.Text = "Error connecting Data Base";
+            }
         }
-        else
+        catch (Exception ex)
         {
-            lblUserCheck.Text = "Error connecting Data Base";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertmessage", "javascript:alert(Error)", true);
         }
-      
 
     }
 

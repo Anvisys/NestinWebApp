@@ -8,7 +8,6 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Data;
 using System.Configuration;
 using System.Activities.Expressions;
 
@@ -374,10 +373,10 @@ public partial class Totalusers : System.Web.UI.Page
             String Parentname = txtParentname.Text;
             String UserLogin = txtEmailId.Text;
             String Password = "Password@123";
-            HiddenField FlatID = (HiddenField)residentsDataList.FindControl("hiddenflatid");
-            HiddenField UserID = (HiddenField)residentsDataList.FindControl("hiddenUserid");
-            string Userid = UserID.Value;
-            string FlatId = FlatID.Value;
+            //HiddenField FlatID = (HiddenField)residentsDataList.FindControl("hiddenflatid");
+            //HiddenField UserID = (HiddenField)residentsDataList.FindControl("hiddenUserid");
+            //string Userid = UserID.Value;
+            //string FlatId = FlatID.Value;
             string HouseId = "0";
             string Actdate = txtact.Text;
             string Deactdate = txtdeact.Text;
@@ -408,7 +407,7 @@ public partial class Totalusers : System.Web.UI.Page
             else if (FirstName == newName)
             { return; }
             newName = FirstName;
-
+            */
            
             //Added by Aarshi on 15 Aug 2017 for code restructuring
             Resident res = new Resident();
@@ -470,18 +469,23 @@ public partial class Totalusers : System.Web.UI.Page
     protected void btnAddUserResident_Click(object sender, EventArgs e)
     {
         //btnAdduserres.Enabled = false;
-        
-        if (lblusravailblerr.Text == "")
+        try
         {
-            Datasubmit();
-        }
+            if (lblusravailblerr.Text == "")
+            {
+                Datasubmit();
+            }
 
-        else
-        {
-            lblstatus.Text = "UserLogin  already Registered";
-        }
+            else
+            {
+                lblstatus.Text = "UserLogin  already Registered";
+            }
 
-        btnAddUserResident.Enabled = true;
+            btnAddUserResident.Enabled = true;
+        }
+        catch (Exception ex) {
+
+        }
     }
 
 

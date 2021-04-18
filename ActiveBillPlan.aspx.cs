@@ -365,64 +365,6 @@ public partial class ActiveBillPlan : System.Web.UI.Page
     #endregion
 
 
-    private void GenerateBillPreview(String BillType)
-    {
-        try
-        {
-            String ChargeType = "";
-            DataAccess dacess = new DataAccess();
-            if (BillType == "Select")
-            {
-               // uploadBill.Visible = false;
-               // btnbillCaluclate.Visible = false;
-               
-
-            }
-            else
-            {
-                //btnbillCaluclate.Visible = true;
-                //lblBilltypeDes.Text = BillType;
-                BillPlan billPlan = new BillPlan();
-                bool result = billPlan.SetPlanDetails(BillType);
-                if (result == true)
-                {
-                    //lblchargetypeDes.Text = billPlan.ChargeType;
-                    //lblrateDes.Text = billPlan.Rate;
-                    //HiddenBillDescp.Value = billPlan.BillID.ToString();
-
-                    if (billPlan.ChargeType == "Manual")
-                    {
-                        //uploadBill.Visible = true;
-                        //lblBillGeneraStatus.Text = "Manual Charge need to be imported from Excel";
-                        //btnbillCaluclate.Text = "Import";
-
-                    }
-                    else
-                    {
-                        //uploadBill.Visible = false;
-                        
-                        //Added by Aarshi on 15 Aug 2017 for code restructuring
-                        BillCycle billCycle = new BillCycle();
-                        int count = billCycle.GetSingleValueBillCycle(billPlan.BillID);
-
-                        //lblRowsEffectDes.Text = count.ToString();
-                        //btnbillCaluclate.Text = "Generate Bill";
-                        //lblBillGeneraStatus.Text = "";
-
-                    }
-                }
-                else
-                {
-                   // lblBillGeneraStatus.Text = "Bil Plan do not exist, or connection problem";
-                }
-
-            }
-        }
-        catch (Exception ex)
-        { }
-
-        ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "ShowGenerateBillPreview()", true);
-    }
 
     public void LoadBillTypeDropdown(params DropDownList[] controls)
     {

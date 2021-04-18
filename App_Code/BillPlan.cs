@@ -10,12 +10,8 @@ using System.Data.SqlClient;
 /// </summary>
 public class BillPlan
 {
-    public int BillID;
-    public String BillType;
-    public String ChargeType;
-    public String Rate;
-    public String CycleType;
-    public int Applyto;
+ 
+
    
 
     private static String Table_Name = "dbo.Societybillplans";
@@ -43,34 +39,58 @@ public class BillPlan
         }
     }
 
-    public bool SetPlanDetails(String BillType)
+    public SocietyBillPlan GetPlan(int BillTypeID, int SocietyID)
+    {
+        try
+        {
+            SocietyBillPlan societyBillPlan = new SocietyBillPlan();
+            DataAccess dacess = new DataAccess();
+            //String VendorQuery = "Select * from dbo.aSocietybillplans";
+            String billPlanQuery = "Select * from " + Table_Name + " where BillTypeID = " + BillTypeID + "and  SocietyID ='" + SocietyID + "' ";
+            DataSet ds = dacess.GetData(billPlanQuery);
+            societyBillPlan.SocietyBillID = Convert.ToInt32(ds.Tables[0].Rows[0]["SocietyBillID"].ToString());
+            societyBillPlan.BillTypeID = Convert.ToInt32(ds.Tables[0].Rows[0]["BillTypeID"].ToString());
+            societyBillPlan.BillType = ds.Tables[0].Rows[0]["BillType"].ToString();
+            societyBillPlan.ChargeType = ds.Tables[0].Rows[0]["ChargeType"].ToString();
+            societyBillPlan.Applyto = Convert.ToInt32(ds.Tables[0].Rows[0]["Applyto"].ToString());
+            societyBillPlan.SocietyID = Convert.ToInt32(ds.Tables[0].Rows[0]["SocietyID"].ToString());
+            societyBillPlan.BillPlanDate = Convert.ToDateTime(ds.Tables[0].Rows[0]["BillPlanDate"].ToString());
+            return societyBillPlan;
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+
+
+    public SocietyBillPlan GetPlanDetails(String BillType)
     {
         DataAccess dacess = new DataAccess();
+        SocietyBillPlan socBillPlan = new SocietyBillPlan();
         try {
             String BillTypeDescp = "Select * from "+Table_Name+" where Billtype ='" + BillType + "'";
             SqlConnection dbConnect = dacess.ConnectSocietyDB();
             SqlCommand cmd = new SqlCommand(BillTypeDescp, dbConnect);
             SqlDataReader rdr = cmd.ExecuteReader();
 
-            if (!rdr.HasRows)
-            {
-            }
-
+          
             if (rdr.HasRows)
             {
                 while (rdr.Read())
                 {
-                    ChargeType = rdr["ChargeType"].ToString();
-                    Rate = rdr["Rate"].ToString();
-                    BillID = Convert.ToInt32(rdr["SocietyBillId"].ToString());
+                    socBillPlan.ChargeType = rdr["ChargeType"].ToString();
+                    socBillPlan.Rate = rdr["Rate"].ToString();
+                    socBillPlan.BillTypeID = Convert.ToInt32(rdr["BillTypeID"].ToString());
                 }
             }
-            return true;
+            return socBillPlan;
         }
         catch (Exception ex)
         {
 
-            return false;
+            return socBillPlan;
         }
     }
 
@@ -79,7 +99,7 @@ public class BillPlan
         try
         {
             DataAccess dacess = new DataAccess();
-            String FillBillType = "Select distinct BillTypeID, BillType, SocietyBillId from " + Table_Name + " Where SocietyID = " + SocietyID  ;
+            String FillBillType = "Select distinct BillTypeID, BillType, SocietyBillId from " + Table_Name + " Where SocietyID = " + SocietyID ;
             return dacess.ReadData(FillBillType);
         }
         catch (Exception ex)
@@ -90,21 +110,32 @@ public class BillPlan
 
     }
 
-    public int AddSocietyBillPlan(int BillTypeID , String BillType, String ChargeType, String Rate, String CycleType, int Applyto, int SocietyID)
+    public DataSet GetBillTypeForCalculation(int SocietyID)
+    {
+        try
+        {
+            DataAccess dacess = new DataAccess();
+            String FillBillType = "Select distinct BillTypeID, BillType, SocietyBillId from " + Table_Name + " Where ChargeType != 'Manual' SocietyID = " + SocietyID;
+            return dacess.ReadData(FillBillType);
+        }
+        catch (Exception ex)
+        {
+
+            return null;
+        }
+
+    }
+
+    public bool AddSocietyBillPlan(int BillTypeID , String BillType, String ChargeType, String Rate, String CycleType, int Applyto, int SocietyID)
     {
         int ID=0;
         DataAccess dacess = new DataAccess();
         String BillingQuery = "Insert into "+ Table_Name+ " (BillTypeID, BillType,ChargeType,Rate,CycleType,Applyto,SocietyID) Values('"
           + BillTypeID + "','" + BillType + "','" + ChargeType + "','" + Rate + "','" + CycleType + "','" + Applyto + "','" + SocietyID + "')";
         bool result = dacess.Update(BillingQuery);
-        if (result == true)
-        {
-            String IDQuery = "Select Max(BillID) from "+Table_Name;
-            ID = dacess.GetSingleValue(IDQuery);
-        }
+       
 
-
-        return ID;
+        return result;
     }
 
     public int GetBillID(string BillType)
@@ -131,4 +162,19 @@ public class BillPlan
         bool result = dacess.Update(DelSocietyPlanQuery);
         return result;
     }
+}
+
+
+
+public class SocietyBillPlan
+{
+    public int SocietyBillID { get; set; }
+    public int BillTypeID { get; set; }
+    public String BillType { get; set; }
+    public String ChargeType { get; set; }
+    public String Rate { get; set; }
+    public String CycleType { get; set; }
+    public int Applyto { get; set; }
+    public int SocietyID { get; set; }
+    public DateTime BillPlanDate { get; set; }
 }

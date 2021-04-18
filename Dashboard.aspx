@@ -109,28 +109,22 @@
                     <table style="width:100%;">
                         <tr>
                             
-                            <td style="width:0%;">
-                                <asp:Chart ID="billChart" runat="server" Height="0px" Width="0px" BackColor="#E74C3C" >
-                                                            <%--  <Series>
-                                                               <asp:Series Name="Series1" ChartType="Pie"  LegendText="#VALX" ChartArea="billChartArea" Legend="billLegend" CustomProperties="PieDrawingStyle=SoftEdge" MarkerSize="0" MarkerStyle="Circle">
+                            <td style="width:50%;">
+                                <asp:Chart ID="billChart" runat="server" Height="100px" Width="100px" BackColor="#E74C3C" >
+                                                              <Series>
+                                                               <asp:Series Name="Series1" ChartType="Pie"  LegendText="#VALX" ChartArea="billChartArea" Legend="billLegend" CustomProperties="PieDrawingStyle=SoftEdge" MarkerSize="10" MarkerStyle="Circle">
                                                                </asp:Series>
                                                              </Series>
                                                          
                                                            <ChartAreas>
                                                               <asp:ChartArea Name="billChartArea" BackColor="#E74C3C">
                                                               </asp:ChartArea>   
-                                                           </ChartAreas>--%>
+                                                           </ChartAreas>
                                             </asp:Chart>
                             </td>
-                            <td style="width:100%;">
+                            <td style="width:50%;">
                               <asp:Label ID="lblpending" runat="server"></asp:Label>
-                                 
-                             <ol>
-                                <li>Maintance: ₹2000 - Due</li>
-                                <li>Electricity: ₹500 - Paid</li>
-                                <li>Clud: ₹2500 - Not Generated</li>
-                            </ol>
-                            
+                                             
                             </td>
                         </tr>
                     </table>
@@ -158,7 +152,9 @@
     
                <div class="col-xs-12 col-sm-4 col-md-4" style="margin-top:2px;">
                    <div class="panel panel-success myclass2" onclick="location.href='Discussions.aspx'" style="background-color:cadetblue;height:178px;cursor:pointer; color:white;">
-                   <div class="panel-heading">Discussion</div> 
+                   <div class="panel-heading">Discussion
+                       (<asp:Label ID="lblTodayCount" runat="server"></asp:Label> thread today)
+                   </div> 
                     <div class="panel-body">
                     <table style="width:100%;">
                         <tr>
@@ -173,7 +169,9 @@
                </div>
                <div class="col-xs-12 col-sm-4 col-md-4" style="margin-top:2px;">
                    <div class="panel panel-success myclass2" onclick="location.href='Notifications.aspx'" style="background-color:#F39C12;height:178px;cursor:pointer; color:white;">
-                   <div class="panel-heading">RWA Notice</div> 
+                   <div class="panel-heading">RWA Notice 
+                       ( <asp:Label ID="lblNoticeCount" runat="server"></asp:Label> Notices)
+                   </div> 
                     <div class="panel-body">
                     <table style="width:100%;">
                         <tr>

@@ -9,191 +9,53 @@ using System.IO;
 
 public class GetImages : IHttpHandler {
 
+    HttpContext context;
+
     //string strcon = ConfigurationManager.AppSettings["ConnectionString"].ToString();
-    public void ProcessRequest(HttpContext context)
+    public void ProcessRequest(HttpContext _context)
     {
+        context = _context;
         context.Response.Clear();
-        String imageid = context.Request.QueryString["ImID"];
-
-        if (imageid != null && imageid != "")
-        {
-
-            try
-            {
-                using (SqlConnection con1 = new SqlConnection(Utility.SocietyConnectionString))
-                {
-
-                    con1.Open();
-                    //  SqlCommand command = new SqlCommand("select Image from Image where ImageID=" + imageid, con1);
-                    SqlCommand command = new SqlCommand("select VendorIcon from Vendors where  ID=" + imageid, con1);
-                    SqlDataReader dr = command.ExecuteReader();
-
-                    if (dr.HasRows)
-                    {
-                        while (dr.Read())
-                        {
-                            context.Response.BinaryWrite((Byte[])dr[0]);
-                            con1.Close();
-                            context.Response.Flush();
-                        }
-                    }
-
-                    else
-                    {
-
-                    }
-
-                }
-            }
-            catch(Exception ex)
-            {
-                int a = 1;
-            }
-
-        }
-
-
 
         try
         {
-            String resID = context.Request.QueryString["ResID"];
-            if (resID != null && resID != "")
+            String ImageType = context.Request.QueryString["Type"];
+            switch (ImageType)
             {
-                string userName = context.Request.QueryString["Name"];
-                string userType = context.Request.QueryString["UserType"];
-                String Savepath = context.Request.PhysicalApplicationPath + "ImageServer\\User";
-                string filePath = string.Format(Savepath + "\\" + resID + ".png");
-                using (SqlConnection con1 = new SqlConnection(Utility.SocietyConnectionString))
-                {
-                    byte[] data = null;
-                    con1.Open();
+                case "Vendor":
+                    String VendorID = context.Request.QueryString["ID"];
+                    string VendorCategor = context.Request.QueryString["Category"];
+                    GetVendorImage(VendorID, VendorCategor);
+                    break;
+                case "User":
+                    String userID = context.Request.QueryString["ID"];
+                    string userName = context.Request.QueryString["Name"];
+                    GetUserImage(userID, userName);
+                    break;
+                case "Resident":
+                    String ResID = context.Request.QueryString["ID"];
+                    string ResName = context.Request.QueryString["Name"];
 
-                    SqlCommand command = new SqlCommand("select Profile_image from dbo.ViewUserImage where  ResID=" + resID, con1);
-                    SqlDataReader dr = command.ExecuteReader();
-                    dr.Read();
-                   if(!dr.HasRows || dr[0] is System.DBNull)
-                        {
-                            string basePath = context.Request.PhysicalApplicationPath + "Images\\Icon\\";
-
-                            var userIcon = new UserDefaultIcon(userName);
-                            String defImgPath = basePath + userIcon.BackgroundImageName;
-                            Brush textBrush = userIcon.TextBrush;
-
-                            if (File.Exists(defImgPath))
-                            {
-                                Utility.SaveImageWithText(defImgPath, filePath, userName.Substring(0,1).ToUpper(),textBrush);
-                                using( FileStream fStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-                                {
-                                    BinaryReader br = new BinaryReader(fStream);
-                                    data = br.ReadBytes((int)fStream.Length);
-                                }
-
-                            }
-                        }
-                        else
-                        {
-                            data = (Byte[])dr[0];
-                        }
-                    con1.Close();
-                    context.Response.BinaryWrite(data);
-                    context.Response.End();
-
-                }
-
+                    GetResidentImage(ResID, ResName);
+                    break;
+                case "Notice":
+                    String NoticeID = context.Request.QueryString["ID"];
+                    GetNoticeImage(NoticeID);
+                    break;
+                default:
+                    Console.WriteLine("Default case");
+                    break;
             }
-        }
 
-        catch(Exception ex)
+
+        }
+        catch (Exception ex)
         {
-
         }
+    }
 
 
-
-        try
-        {
-            String userID = context.Request.QueryString["UserID"];
-            if (userID != null && userID != "")
-            {
-                string userName = context.Request.QueryString["Name"];
-                string userType = context.Request.QueryString["UserType"];
-                String Savepath = context.Request.PhysicalApplicationPath + "ImageServer\\User";
-                string filePath = string.Format(Savepath + "\\" + userID + ".png");
-                if (File.Exists(filePath))
-                {
-                    byte[] data = null;
-                    using ( FileStream fStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-                    {
-                        BinaryReader br = new BinaryReader(fStream);
-                        data = br.ReadBytes((int)fStream.Length);
-                        context.Response.BinaryWrite(data);
-                    }
-
-                }
-                else
-                {
-                    using (SqlConnection con1 = new SqlConnection(Utility.SocietyConnectionString))
-                    {
-                        con1.Open();
-
-                        SqlCommand command = new SqlCommand("select Profile_image from dbo.ViewUserImage where  UserID=" + userID, con1);
-                        SqlDataReader dr = command.ExecuteReader();
-                        dr.Read();
-                        Byte[] data= null;
-
-                        if(!dr.HasRows || dr[0] is System.DBNull)
-                        {
-                            string basePath = context.Request.PhysicalApplicationPath + "Images\\Icon\\";
-
-                            var userIcon = new UserDefaultIcon(userName);
-                            String defImgPath = basePath + userIcon.BackgroundImageName;
-                            Brush textBrush = userIcon.TextBrush;
-
-                            if (File.Exists(defImgPath))
-                            {
-                                Utility.SaveImageWithText(defImgPath, filePath, userName.Substring(0,1).ToUpper(),textBrush);
-                                using( FileStream fStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-                                {
-                                    BinaryReader br = new BinaryReader(fStream);
-                                    data = br.ReadBytes((int)fStream.Length);
-                                }
-
-                            }
-                        }
-                        else
-                        {
-                            data = (Byte[])dr[0];
-                        }
-
-                        context.Response.BinaryWrite(data);
-                        con1.Close();
-                        try
-                        {
-                            using (System.IO.FileStream stream = new System.IO.FileStream(filePath, System.IO.FileMode.Create))
-                            {
-                                stream.Write(data, 0, data.Length);
-                                stream.Flush();
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-
-                        }
-                        context.Response.End();
-                    }
-                }
-
-            }
-        }
-
-        catch(Exception ex)
-        {
-
-        }
-
-
-
-
+    private void GetFirstFlatImage() {
         try
         {
             String firstFlat = context.Request.QueryString["firstFlat"];
@@ -213,11 +75,14 @@ public class GetImages : IHttpHandler {
             }
         }
 
-        catch(Exception ex)
+        catch (Exception ex)
         {
 
         }
 
+    }
+
+    private void GetLastFlatImage() {
         try
         {
             String lastFlat = context.Request.QueryString["lastFlat"];
@@ -237,11 +102,14 @@ public class GetImages : IHttpHandler {
             }
 
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
 
         }
+    }
 
+    private void GetNoticeImage(String NoticeID)
+    {
         try
         {
             String NotifiImID = context.Request.QueryString["NotifiImID"];
@@ -271,10 +139,14 @@ public class GetImages : IHttpHandler {
 
         }
 
-        // vendor images
+    }
+
+
+    private void GetVendorImage(String vendorId, String VendorCategory)
+    {
         try
         {
-            String vendorId = context.Request.QueryString["VendorID"];
+
 
             if (vendorId != null && vendorId != "")
             {
@@ -292,8 +164,6 @@ public class GetImages : IHttpHandler {
                 else
                 {
 
-
-
                     using (SqlConnection con1 = new SqlConnection(Utility.SocietyConnectionString))
                     {
                         con1.Open();
@@ -301,10 +171,10 @@ public class GetImages : IHttpHandler {
                         SqlCommand command = new SqlCommand("select VendorIcon from dbo.Vendors  where  ID ='" + vendorId + "'", con1);
                         SqlDataReader dr = command.ExecuteReader();
                         dr.Read();
-                        Byte[] data= null;
-                        if(dr[0] is System.DBNull)
+                        Byte[] data = null;
+                        if (dr[0] is System.DBNull)
                         {
-                            String defImgPath = context.Request.PhysicalApplicationPath + "Images\\Icon\\downloadbg.png";
+                            String defImgPath = context.Request.PhysicalApplicationPath + "Images\\Icon\\"+ VendorCategory +".png";
 
                             if (File.Exists(defImgPath))
                             {
@@ -319,16 +189,18 @@ public class GetImages : IHttpHandler {
                         else
                         {
                             data = (Byte[])dr[0];
+
+                            using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                stream.Write(data, 0, data.Length);
+                                stream.Flush();
+                            }
                         }
 
                         context.Response.BinaryWrite(data);
                         con1.Close();
 
-                        using (System.IO.FileStream stream = new System.IO.FileStream(filePath, System.IO.FileMode.Create))
-                        {
-                            stream.Write(data, 0, data.Length);
-                            stream.Flush();
-                        }
+
                         context.Response.End();
                     }
                 }
@@ -345,10 +217,133 @@ public class GetImages : IHttpHandler {
             context.Response.End();
         }
 
+    }
 
+    private void GetResidentImage(String ResidentID, String ResidentName)
+    {
+
+        using (SqlConnection con1 = new SqlConnection(Utility.SocietyConnectionString))
+        {
+            byte[] data = null;
+            con1.Open();
+
+            SqlCommand command = new SqlCommand("select UserID, Profile_image from dbo.ViewUserImage where  ResID=" + ResidentID, con1);
+            SqlDataReader dr = command.ExecuteReader();
+            dr.Read();
+
+
+            if(!dr.HasRows || dr[1] is System.DBNull)
+            {
+                String UserID = dr[0].ToString();
+                String Savepath = context.Request.PhysicalApplicationPath + "ImageServer\\User";
+                string filePath = string.Format(Savepath + "\\" + UserID + ".png");
+
+                if (File.Exists(filePath))
+                {
+
+                    using (FileStream fStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                    {
+                        BinaryReader br = new BinaryReader(fStream);
+                        data = br.ReadBytes((int)fStream.Length);
+                        context.Response.BinaryWrite(data);
+                    }
+                }
+                else {
+                        Image img = CreateProfilePicture();
+                     
+                         using (var ms = new MemoryStream())
+                           {
+                              img.Save(ms,img.RawFormat);
+                              data =  ms.ToArray();
+                           }
+                }
+
+            }
+            else
+            {
+                data = (Byte[])dr[0];
+
+            }
+            con1.Close();
+            context.Response.BinaryWrite(data);
+            context.Response.End();
+
+        }
+    }
+
+    private void GetUserImage(String UserID, String UserName)
+    {
+        String Savepath = context.Request.PhysicalApplicationPath + "ImageServer\\User";
+        string filePath = string.Format(Savepath + "\\" + UserID + ".png");
+        if (File.Exists(filePath))
+        {
+            byte[] data = null;
+            using (FileStream fStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                BinaryReader br = new BinaryReader(fStream);
+                data = br.ReadBytes((int)fStream.Length);
+                context.Response.BinaryWrite(data);
+            }
+
+        }
+        else
+        {
+            using (SqlConnection con1 = new SqlConnection(Utility.SocietyConnectionString))
+            {
+                con1.Open();
+
+                SqlCommand command = new SqlCommand("select Profile_image from dbo.ViewUserImage where  UserID=" + UserID, con1);
+                SqlDataReader dr = command.ExecuteReader();
+                dr.Read();
+                Byte[] data = null;
+
+                if (!dr.HasRows || dr[0] is System.DBNull)
+                {
+                    string basePath = context.Request.PhysicalApplicationPath + "Images\\Icon\\";
+
+                    var userIcon = new UserDefaultIcon(UserName);
+                    String defImgPath = basePath + userIcon.BackgroundImageName;
+                    Brush textBrush = userIcon.TextBrush;
+
+                    if (File.Exists(defImgPath))
+                    {
+                        Utility.SaveImageWithText(defImgPath, filePath, UserName.Substring(0, 1).ToUpper(), textBrush);
+                        using (FileStream fStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                        {
+                            BinaryReader br = new BinaryReader(fStream);
+                            data = br.ReadBytes((int)fStream.Length);
+                        }
+
+                    }
+                }
+                else
+                {
+                    data = (Byte[])dr[0];
+                    using (FileStream stream = new System.IO.FileStream(filePath, FileMode.Create))
+                    {
+                        stream.Write(data, 0, data.Length);
+                        stream.Flush();
+                    }
+                }
+
+                context.Response.BinaryWrite(data);
+                con1.Close();
+
+                context.Response.End();
+
+            }
+        }
 
     }
 
+    public Image CreateProfilePicture()
+    {
+        Font font = new Font(FontFamily.GenericSerif, 25, FontStyle.Bold);
+        Color fontcolor = ColorTranslator.FromHtml("#FFF");
+        Color bgcolor = ColorTranslator.FromHtml("#83B869");
+        Image iconImage = Utility.GenerateAvtarImage("A", font, fontcolor, bgcolor, "test");
+            return iconImage;
+    }
 
 
     public bool IsReusable {

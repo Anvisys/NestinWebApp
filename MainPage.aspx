@@ -165,8 +165,9 @@
             SetMenu();
 
             var currentPage = '<%=Session["CurrentPage"] %>';
-         
+           // alert(currentPage);
             $('#content_frame').attr('src', currentPage);
+            alert(currentPage);
              //GetAdvertisementData();
              $("#changeLoggedinSociety").hide();
         });
@@ -395,7 +396,7 @@
 
                     <li  class="dropdown">
                         <span id="image">
-                             <asp:Image runat="server" ID="ImgProfileIcon" Style="height: 40px; width: 40px; border-radius: 50%;" ImageUrl="GetImages.ashx?UserID=100181&Name=A&UserType=" />
+                             <asp:Image runat="server" ID="ImgProfileIcon" Style="height: 40px; width: 40px; border-radius: 50%;" ImageUrl="GetImages.ashx?Type=User&ID=100000&Name=A" />
                         </span>
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                            <asp:Label ID="lblUserName" runat="server" ForeColor="white"></asp:Label>
@@ -452,7 +453,7 @@
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bills <b class="caret"></b></a>
                                             <ul class="dropdown-menu">
                                                 <li style="margin-top:2px;"><a href="LatestBill.aspx" target="targetframe">Latest</a></li>
-
+                                                  <li style="margin-top:2px;"><a href="BillGeneration.aspx" target="targetframe">Generate</a></li>
                                                 <li style="margin-top:2px;"><a href="ActiveBillPlan.aspx" target="targetframe">InActive</a></li>
                                                 <li style="margin-top:2px;"><a href="SocietyBillPlan.aspx" target="targetframe">Plans</a></li>
                                                 </ul>
@@ -512,7 +513,7 @@
                         <ul id="navbar-SuperAdmin">
 
                             <li> <a href="SuperAdmin.aspx" target="targetframe">Requests</a></li>
-                            <li><a href="Vendors.aspx" target="targetframe">Vendors</a></li>
+                           <%-- <li><a href="Vendors.aspx" target="targetframe">Vendors</a></li>--%>
                             <li> <a href="Services.aspx" target="targetframe">Services</a></li>
                              <li> <a href="Societies.aspx" target="targetframe">Societies</a></li>
 
@@ -526,7 +527,7 @@
 
       
             <div class="col-md-8 col-sm-12 col-xs-12" style="height:600px; margin:0px; padding:0px;">
-  <iframe   style="margin:0px;padding:0px;background-color: #f7f7f7;" id="content_frame" onload="iframeLoaded()" name="targetframe" src="Dashboard.aspx" class="iframe-layout"></iframe>
+  <iframe   style="margin:0px;padding:0px;background-color: #f7f7f7;" id="content_frame" onload="iframeLoaded()" name="targetframe" src="#" class="iframe-layout"></iframe>
             </div>
 
         <div class="col-md-2 col-sm-12 hidden-xs" id="displayData">

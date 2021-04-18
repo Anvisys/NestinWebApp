@@ -31,19 +31,22 @@ public partial class MyFlat : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         muser = SessionVariables.User;
-        if (UserType == "Admin")
-        {
-            Response.Redirect("Flats.aspx");
-        }
-
-
-        SessionVariables.CurrentPage = "MyFlat.aspx";
         if (muser == null)
         {
 
             Response.Redirect("Login.aspx");
 
         }
+        else if (UserType == "Admin")
+        {
+            Response.Redirect("Flats.aspx");
+        }
+        else
+        {
+
+            SessionVariables.CurrentPage = "MyFlat.aspx";
+        }
+        
 
     }
 

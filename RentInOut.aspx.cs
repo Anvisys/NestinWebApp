@@ -24,6 +24,11 @@ public partial class RentInOut : System.Web.UI.Page
         get { return muser.currentResident.UserType; }
     }
 
+    public int FlatID
+    {
+        get { return muser.currentResident.FlatID; }
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         muser = (User)Session["User"];

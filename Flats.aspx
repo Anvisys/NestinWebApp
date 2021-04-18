@@ -179,13 +179,13 @@
 
             var param =  $('#txtflatno').val();
                   
-            alert(param);
+         //   alert(param);
         }
 
         $("#txtflatno").blur(function () {
             var param =  $('#txtflatno').val();
                   
-            alert(param);
+           // alert(param);
 
            $.ajax({
                         url: "Flats.aspx/SearchFlat",
@@ -511,10 +511,7 @@
             }
         }
 
-        function Blur(element,value)
-        { }
-
-        function Focus(element, value) { }
+     
         function ShowLoader() {
             
             $("#data_loading").show();
@@ -528,16 +525,10 @@
          return true;
         }
 
-        function btnCancelModel() {
-           
+        function btnCancelAddFlat() {
+            alert(1);
+             $("#ModalNewFlat").hide();
         }
-
-
-
-       function RemoveOwner(ID,FlatNumber,OwnerUserID,status,Complete)
-       {
-
-       }
 
 
         function AssignOwner(ID, FlatNumber,BHK,FlatArea)
@@ -630,7 +621,7 @@
                                                         <div class="col-sm-4 col-xs-12" style="text-align:center;">
                                                             
                                                             <%-- <asp:Image CssClass="UserImage" ID="user_image" runat="server" style="border-radius:50%;border:2px solid #dcdbdb;width:40px;height:40px;" ImageUrl='<%# "GetImages.ashx?ResID="+ Eval("ResidentID") %>' /><br />--%>
-                                                               <img src='<%# "GetImages.ashx?UserID="+ Eval("OwnerUserID")+"&Name="+Eval("OwnerFirstName") +"&UserType=Owner" %>' class="profile-image" /> <br /> 
+                                                               <img src='<%# "GetImages.ashx?Type=User&ID="+ Eval("OwnerUserID")+"&Name="+Eval("OwnerFirstName") %>' class="profile-image" /> <br /> 
                                                                <%-- <asp:Label ID="lblFlatNumber" runat="server" Text='<%# Bind("FlatNumber") %>' ></asp:Label> --%>
                                                            <label id="lblFlatNumber" style="color:black; font-weight:bold;" ><%# Eval("FlatNumber") %> </label> 
                                                                 
@@ -708,14 +699,14 @@
                                     
                                      <asp:Label runat="server" ID="lblassignHeading"> Add New Flat:</asp:Label>
 
-                                     <span class="fa fa-times" onclick="btnCancelModel()" style="float: right; cursor: pointer;"></span>
+                                     <span class="fa fa-times" onclick="btnCancelAddFlat" style="float: right; cursor: pointer;"></span>
                                  </div>
 
                                  <div class="panel-body">
                                      <div class="row" style="margin:5px;">
                                          <div class="col-xs-6">
                                              New Flat Number:<br />
-                                            <asp:TextBox runat="server" ID="txtflatno" Width="100px" on />
+                                            <asp:TextBox runat="server" ID="txtflatno" Width="100px" />
                                          </div>
                                          <div class="col-xs-6">
                                              BHK:<br />
@@ -756,7 +747,7 @@
                                  </div>
 
                                  <div class="panel-footer" style="text-align: right; margin-top: 15px;">
-                                     <button class="btn btn-danger" type="button" onclick="btnCancelModel()">Cancel</button>
+                                     <button class="btn btn-danger" type="button" onclick="btnCancelAddFlat">Cancel</button>
                                      <asp:Button runat="server"  name="btnUpdate" Text="Add New Flat" ID="btnCreateNewFlat" OnClick="btnCreateNewFlat_Click" CssClass="btn btn-success" />
                                  </div>
                              </div>

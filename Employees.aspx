@@ -14,7 +14,7 @@
      
      <script src="Scripts/jquery-1.12.0.js"></script>
 
-   <link rel="stylesheet" href="CSS/mystylesheets.css" />
+    <link rel="stylesheet" href="CSS/mystylesheets.css" />
    
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -23,12 +23,10 @@
    
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>  
 
- <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>  
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>  
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>  
     <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" /> 
 
-
-   
 
      <script>
 
@@ -470,7 +468,7 @@
                                     <div class="row layout_shadow_table">
                                      <div class="col-sm-4 col-xs-12" style="padding:10px;text-align:left;">
 
-                                    <img src='<%# "GetImages.ashx?ResID="+ Eval("UserID")+"&Name="+Eval("FirstName") +"&UserType=Employee"%>' height="40" width="40" style="border-radius:50%;" /> <br /> 
+                                    <img src='<%# "GetImages.ashx?Type=Resident&ID="+ Eval("UserID")+"&Name="+Eval("FirstName") %>' height="40" width="40" style="border-radius:50%;" /> <br /> 
                                       <asp:Label ID="Label2" runat="server" Text='<%#Eval("FirstName")+ " " + Eval("LastName")%>' ></asp:Label> <br /> 
                                     <asp:Label ID="lblName" runat="server" Text='<%#Eval("MobileNo")%>' ></asp:Label>
                                      </div>

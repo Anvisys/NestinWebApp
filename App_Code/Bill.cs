@@ -205,7 +205,8 @@ public class Bill
     public static bool AddSocietyBillPlan(String BillType, String ChargeType, String Rate, String CycleType, int Applyto)
     {
         DataAccess dacess = new DataAccess();
-        String BillingQuery = "Insert into dbo.aSocietybillplans(BillType,ChargeType,Rate,CycleType,Applyto) Values('" + BillType + "','" + ChargeType + "','" + Rate + "','" + CycleType + "','" + Applyto + "')";
+        String BillingQuery = "Insert into dbo.aSocietybillplans(BillType,ChargeType,Rate,CycleType,Applyto) Values('" 
+            + BillType + "','" + ChargeType + "','" + Rate + "','" + CycleType + "','" + Applyto + "')";
         bool result = dacess.Update(BillingQuery);
 
         if (result == true)
@@ -223,7 +224,7 @@ public class Bill
         return result;
     }
 
-    public DataSet GetLatestBills(String FlatNumber, String BillType,string StartDate, string EndDate ,string ViewName= "viewLatestFlatBill")//Added by Aarshi on 13-Sept-2017 for bug fix
+    public DataSet GetLatestBills(String FlatNumber, String BillType,string StartDate, string EndDate )//Added by Aarshi on 13-Sept-2017 for bug fix
     {
         try
         {
@@ -261,7 +262,7 @@ public class Bill
             }
 
             //Added by Aarshi on 21-Sept-2017 for bug fix
-            LatestBillGenQuery = "select * from " + ViewName + " where ((ApplyTo = 0 and Activated = 1) or ApplyTo = 1) and " + FlatCond + " and " + BillTypeCond + " and " + DateCond;
+            LatestBillGenQuery = "select * from " + CONSTANTS.View_LatestFlatBill + " where ((ApplyTo = 0 and Activated = 1) or ApplyTo = 1) and " + FlatCond + " and " + BillTypeCond + " and " + DateCond;
             //Ends here
 
             //if (BillType.Equals("Show All"))
@@ -280,15 +281,15 @@ public class Bill
         }
     }
 
-    public static BillPlan GetSocietyBillPlan(String Query, String BillType)
+    public static SocietyBillPlan GetSocietyBillPlan(String Query, String BillType)
     {
         DataAccess dacess = new DataAccess();
-        BillPlan plan = new BillPlan();
+        SocietyBillPlan plan = new SocietyBillPlan();
         DataSet ds = dacess.ReadData(Query);
         DataTable dt = ds.Tables[0];
         plan.ChargeType = dt.Rows[0]["CycleType"].ToString();
         plan.Rate = dt.Rows[0]["Rate"].ToString();
-        plan.BillID = Convert.ToInt32(dt.Rows[0]["BillID"]);
+        plan.SocietyBillID = Convert.ToInt32(dt.Rows[0]["SocietyBillID"]);
         plan.ChargeType = dt.Rows[0]["ChargeType"].ToString();
         plan.Applyto = Convert.ToInt32(dt.Rows[0]["Applyto"]);
         return plan;
@@ -748,6 +749,7 @@ public class Bill
         newBill.BillMonth = newBill.BillEndDate;
         newBill.op_Rate = previousBill.op_Rate;
         newBill.FlatID = previousBill.FlatID;
+        newBill.ResID = previousBill.ResID;
         newBill.ActionType = ActionType;
         return newBill;
     }
@@ -826,7 +828,7 @@ public class Bill
             DataAccess dacess = new DataAccess();
             GenerateBill LastBill = new GenerateBill();
 
-            String FlatsForBillType = "Select * from "+ ViewName +" where BillID = '" + BillID + "' and FlatNumber = '" + FlatNumber + "'";
+            String FlatsForBillType = "Select * from "+ ViewName +" where BillTypeID = '" + BillID + "' and FlatNumber = '" + FlatNumber + "'";
 
             DataSet FlatsData = dacess.ReadData(FlatsForBillType);
 
@@ -837,13 +839,25 @@ public class Bill
                 for (int i = 0; i < dataBills.Rows.Count; i++)
                 {
                     GenerateBill previousBill = new GenerateBill();
+                    LastBill.PayID = Convert.ToInt32(dataBills.Rows[i]["PayID"]);
                     LastBill.op_FlatNumber = dataBills.Rows[i]["FlatNumber"].ToString();
                     LastBill.op_FlatArea = Convert.ToInt32(dataBills.Rows[i]["FlatArea"]);
                     LastBill.op_ChargeType = dataBills.Rows[i]["ChargeType"].ToString();
                     LastBill.CycleType = dataBills.Rows[i]["CycleType"].ToString();
                     LastBill.op_Rate = Convert.ToDouble(dataBills.Rows[i]["Rate"]);
-                    LastBill.BillStartDate = Convert.ToDateTime(dataBills.Rows[i]["BillStartDate"]);
-                    LastBill.BillEndDate = Convert.ToDateTime(dataBills.Rows[i]["BillEndDate"]);
+                    if (LastBill.PayID > 0)
+                    {
+                        LastBill.BillStartDate = Convert.ToDateTime(dataBills.Rows[i]["BillStartDate"]);
+                        LastBill.BillEndDate = Convert.ToDateTime(dataBills.Rows[i]["BillEndDate"]);
+                    }
+                    else
+                    {
+                        DateTime FlatAddDate = Convert.ToDateTime(dataBills.Rows[i]["FlatAddDate"]);
+                        DateTime BillPlanDate = Convert.ToDateTime(dataBills.Rows[i]["BillPlanDate"]);
+                                                
+                        LastBill.BillStartDate = FlatAddDate > BillPlanDate ? FlatAddDate : BillPlanDate;
+                        LastBill.BillEndDate = FlatAddDate > BillPlanDate ? FlatAddDate : BillPlanDate;
+                    }
                     LastBill.SocietyBillID = Convert.ToInt32(dataBills.Rows[i]["SocietyBillID"]);
                     LastBill.CurrentMonthBalance = Convert.ToInt32(dataBills.Rows[i]["CurrentMonthBalance"]);
                     // LastBill.CycleEndDate = Convert.ToDateTime(dataBills.Rows[i]["CycleEnD"]);

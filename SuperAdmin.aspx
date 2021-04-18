@@ -106,7 +106,12 @@
                          +"<div class='row'>"
                          + "<div class='col-xs-4'> Sector " + results[i].Sector + "</div> <div class='col-xs-4'> " + results[i].PinCode + ", " + results[i].State + "</div> <div class='col-xs-4'> City : " + results[i].City + "</div>"
                          +"</div>"
-                         + "<div class='row'><div class='col-xs-12'>" + results[i].Status + "&nbsp&nbsp" + strButton + "</div></div>" 
+                         + "<div class='row'><div class='col-xs-12'>" + results[i].Status + "&nbsp&nbsp" + strButton + "</div> " +
+                         "<div class='col-xs-6' style='margin-top:20px;' >" + "<button class='btn btn-primary btn-sm' onClick='Details(" + results[i].SocietyID + ")' >Users</button>"
+                         + "</div>"
+                         + "<div class='col-xs-6' style='margin-top:20px;'>" + "<button class='btn btn-primary btn-sm' onClick='Vendors(" + results[i].SocietyID + ")' >Vendors</button>"
+                         + "</div>"
+                         + "</div>" 
 
                  
                         + "</div>"
@@ -126,6 +131,17 @@
 
         }
 
+        function Vendors(SocId) {
+
+            location.href = 'SuperVendors.aspx?SocID=' + SocId;
+
+        }
+
+        function Details(SocId) {
+
+            location.href = 'SocietyDetails.aspx?SocID=' + SocId;
+
+        }
 
         function ApproveRequest(SocId) {
 

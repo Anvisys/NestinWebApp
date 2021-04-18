@@ -46,7 +46,6 @@
 
         function ShowAddFlat() {
             $("#addFlatModal").show();
-
         }
 
         function HideAddFlat() {
@@ -102,7 +101,7 @@
         function AssignTenant(ID, FlatNumber, BHK, FlatArea, Floor, Block) {
             $("[id*=HiddenField3]").val("Tenant");
             $("[id*=HiddenField1]").val(ID);
-            $("[id*=HiddenField1]").val(ID);
+           
             $("[id*=assignFlatNumber]").val(FlatNumber);
             $("[id*=assignFlatArea]").val(FlatArea);
             $("[id*=assignFlatBHK]").val(BHK);
@@ -112,10 +111,12 @@
         }
 
         function AssignOwner(ID, FlatNumber, BHK, FlatArea, Floor, Block) {
-            //alert();
+            alert(ID);
             $("[id*=HiddenField3]").val("Owner");
 
             $("[id*=HiddenField1]").val(ID);
+             $('#<%=HiddenField1.ClientID %>').val(ID);
+
             $("[id*=assignFlatNumber]").val(FlatNumber);
             $("[id*=assignFlatArea]").val(FlatArea);
             $("[id*=assignFlatBHK]").val(BHK);
@@ -227,6 +228,14 @@
             });
         });
 
+         function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : evt.keyCode;
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;    
+         return true;
+        }
+
     </script>
 
 
@@ -300,7 +309,7 @@
                                 <div class="col-sm-2 col-xs-6" style="text-align: center;">
 
                                     <%-- <asp:Image CssClass="UserImage" ID="user_image" runat="server" style="border-radius:50%;border:2px solid #dcdbdb;width:40px;height:40px;" ImageUrl='<%# "GetImages.ashx?ResID="+ Eval("ResidentID") %>' /><br />--%>
-                                    <img src='<%# "GetImages.ashx?UserID="+ Eval("OwnerUserID")+"&Name="+Eval("OwnerFirstName") +"&UserType=Owner" %>' class="profile-image" />
+                                    <img src='<%# "GetImages.ashx?Type=User&ID="+ Eval("OwnerUserID")+"&Name="+Eval("OwnerFirstName") %>' class="profile-image" />
                                     <br />
                                     <%-- <asp:Label ID="lblFlatNumber" runat="server" Text='<%# Bind("FlatNumber") %>' ></asp:Label> --%>
                                     <label id="lblFlatNumber" style="color: black; font-weight: bold;"><%# Eval("FlatNumber") %> </label>
@@ -419,7 +428,7 @@
                                             <div class="col-sm-6 col-xs-12">
                                                 <label style="width: 100px;">Mobile : </label>
                                                 <asp:TextBox Width="100px" ID="newOwnerMobile" onkeypress="return isNumberKey(event)" runat="server" MaxLength="10" Height="25px"
-                                                    OnTextChanged="txtAddfltMobile_TextChanged" onclick="Reset()" TabIndex="1" AutoPostBack="True"></asp:TextBox>
+                                                    OnTextChanged="txtAddfltMobile_TextChanged" TabIndex="1" AutoPostBack="True"></asp:TextBox>
                                             </div>
 
                                             <div class="col-sm-6 col-xs-12">
@@ -437,7 +446,7 @@
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12">
                                                 <label style="width: 100px;">Name : </label>
-                                                <asp:TextBox Width="100px" ID="newOwnerName" BorderWidth="0" runat="server" onClick="Reset()" ReadOnly="true" Height="25px" TabIndex="0"></asp:TextBox>
+                                                <asp:TextBox Width="100px" ID="newOwnerName" BorderWidth="0" runat="server"  ReadOnly="true" Height="25px" TabIndex="0"></asp:TextBox>
 
                                             </div>
                                             <div class="col-sm-6 col-xs-12">
@@ -661,7 +670,7 @@
                     </div>
                 </div>
             </div>
-            </div>
+          
            
             <!-- Remove tenant -->
             <div class="modal" id="modalremovetenant">
@@ -678,11 +687,11 @@
 
             <!-- remove tenant -->
 
-            <div>
+         
                 <asp:HiddenField runat="server" ID="HiddenField1" />
                 <asp:HiddenField runat="server" ID="HiddenField2" />
                 <asp:HiddenField runat="server" ID="HiddenField3" />
-            </div>
+       </div>
     </form>
 </body>
 </html>

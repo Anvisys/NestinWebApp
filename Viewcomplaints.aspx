@@ -609,29 +609,20 @@
                     </div>
 
                     <div class="row" style="margin-top: 10px;">
-                        <div class="col-sm-4 hidden-xs">
+                        <div class="col-sm-3 hidden-xs">
                             <h4>Complaints:</h4>
                          
                         </div>
                         
-                        <div class="col-sm-4 col-xs-12" style="align-content: center; text-align:center; margin: auto;" runat="server" id="topnav">
+                        <div class="col-sm-6 col-xs-12" style="align-content: center; text-align:center; margin: auto;" runat="server" id="topnav">
                             <asp:DropDownList EnableViewState="true" ID="drpVCompStatusF" runat="server" CssClass="search-dropdown">
                             </asp:DropDownList>
                             <asp:TextBox ID="txtVcompFlatSrch" runat="server" CssClass="search-text" placeholder="Flat Number" OnTextChanged="txtVcompFlatSrch_TextChanged"></asp:TextBox>
                             <asp:LinkButton ID="ImgCompSearch" runat="server" CssClass="search-button" BackColor="Transparent" ForeColor="white" OnClick="ImgCompSearch_Click"> <span class="glyphicon glyphicon-search"></span></asp:LinkButton>
                         </div>
 
-                        <div class="col-sm-4 col-xs-2" style="display: none;">
-                            <asp:DropDownList ID="drpComplaintDateFilter" runat="server" OnSelectedIndexChanged="drpComplaintDateFilter_SelectedIndexChanged" CssClass="form-control">
-                                <asp:ListItem Selected="True">Current month</asp:ListItem>
-                                <asp:ListItem>Last month</asp:ListItem>
-                                <asp:ListItem>This year</asp:ListItem>
-                                <asp:ListItem>Last year</asp:ListItem>
-                                <asp:ListItem>All</asp:ListItem>
-
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-sm-4 col-xs-2" style="margin-left:200px;">
+                      
+                        <div class="col-sm-3 col-xs-2">
                             <button type="button" id="btnAddComplaint" style="margin-top: 0px;" class="pull-right btn btn-primary btn-sm">Add Complaint</button>
                         </div>
                     </div>
@@ -679,7 +670,7 @@
                                         <div class="col-sm-2 col-xs-6">
 
                                             <asp:Image CssClass="image_small" ID="user_image" runat="server"
-                                                ImageUrl='<%# "GetImages.ashx?ResID="+ Eval("ResidentID")+"&Name="+Eval("FirstName") +"&UserType=Owner" %>' /><br />
+                                                ImageUrl='<%# "GetImages.ashx?Type=Resident&ID="+ Eval("ResidentID")+"&Name="+Eval("FirstName") +"&UserType=Owner" %>' /><br />
                                             <asp:Label ID="lblComName" runat="server" ForeColor="Black" Text='<%# Eval("FirstName") + ", " + Eval("FlatNumber") %>'></asp:Label>
 
 
@@ -702,7 +693,8 @@
                                             Type:
                                          <asp:Label ID="Label2" runat="server" Text='<%# Eval("CompType") %>'></asp:Label><br />
                                             Assigned To:
-                                         <asp:Label ID="Label1" runat="server" Text='<%# Eval("EmployeeName") %>'></asp:Label>
+                                         <asp:Label ID="Label1" runat="server" Text='<%# Eval("EmployeeName") %> '></asp:Label>
+                                           ( <%# Eval("Type") %> )
                                             <h6>
                                                 <asp:Label ID="lblClosedDate" runat="server" CssClass="margin-right-5p" Text='<%# String.Format("Updated At: {0:ddd, dd MMM yy hh:mm tt}",  Eval("LastAt") )%>'></asp:Label></h6>
 
