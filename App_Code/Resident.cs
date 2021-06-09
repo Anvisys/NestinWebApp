@@ -18,7 +18,7 @@ public class Resident
     public int ServiceType { get; set; }
     public String CompanyName { get; set; }
     public String ActiveDate { get; set; }
-    public DateTime DeActiveDate { get; set; }
+    public String DeActiveDate { get; set; }
     public String ModifiedDate { get; set; }
     public int SocietyID { get; set; }
     public int Status { get; set; }
@@ -44,7 +44,7 @@ public class Resident
         ServiceType = 0;
         CompanyName = "NA";
         ActiveDate = DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss");
-        DeActiveDate = DateTime.UtcNow.AddYears(5);
+        DeActiveDate = DateTime.UtcNow.AddYears(5).ToString("MM-dd-yyyy HH:MM:ss");
         ModifiedDate = DateTime.UtcNow.ToString("MM-dd-yyyy HH:MM:ss");
         SocietyID = 1;
         Status = 1;
@@ -132,7 +132,7 @@ public class Resident
 
 
             String societyUserQuery = "Insert Into dbo.SocietyUser (UserID,FlatID,Type,ServiceType,CompanyName,ActiveDate,DeActiveDate,ModifiedDate, SocietyID,Status, HouseID) output INSERTED.ResID Values('" +
-                                      UserID + "','" + FlatID + "','"+UserType+"','" + ServiceType + "','" + CompanyName+"','"+ActiveDate+"','" + DeActiveDate.ToString("MM-dd-yyyy HH:MM:ss") + "','" + ModifiedDate + "','" + SocietyID + "','" + Status + "','" + HouseID+"')";
+                                      UserID + "','" + FlatID + "','"+UserType+"','" + ServiceType + "','" + CompanyName+"','"+ActiveDate+"','" + DeActiveDate + "','" + ModifiedDate + "','" + SocietyID + "','" + Status + "','" + HouseID+"')";
 
             DataAccess da = new DataAccess();
             bool result = da.UpdateQuery(societyUserQuery);

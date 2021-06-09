@@ -62,10 +62,6 @@
                 format:'DD-MM-YYYY'
             });
 
-
-            $("#txtEndDate").datetimepicker({ format: 'DD-MM-YYYY' });
-
-            $("#txtStartDate").datetimepicker({ format: 'DD-MM-YYYY' });
         });
 
 
@@ -610,7 +606,7 @@
     </style>
 
 </head>
-<body onresize="myFunction()" style="background-color: #f7f7f7">
+<body style="background-color: #f7f7f7">
 
     <div class="container-fluid">
 
@@ -913,8 +909,23 @@
 
 
                     <%----------------------------------------------------------------------- Add Resident Section starts from here----------------------------------------------------------------------------------------- --%>
-                    <!--<div id="myModalPopup" class="modal">-->
                     <div id="myModalPopup" class="modal">
+                        <asp:UpdatePanel ID="testUpdatePanel" runat="server" EnableViewState="true">
+                            <ContentTemplate>
+                                      <div>
+                                            Add User :
+                                                <a class="fa fa-times" onclick="CloseAddResident()" style="cursor: pointer;"><span class="fa fa-close" style="color: white; float: right"></span></a>
+                                        </div>
+                            <div class="row" style="height:30px;"></div>
+                                   <asp:TextBox ID="txtEmail" Width="150px" runat="server" OnTextChanged="CheckEmail" AutoPostBack="True"></asp:TextBox>
+                               
+                                <div class="row" style="height:30px;"></div>
+                            </ContentTemplate>
+
+                        </asp:UpdatePanel>
+                    </div>
+                    <!--<div id="myModalPopup" class="modal">-->
+       <%--             <div id="myModalPopup2" class="modal">
                         <asp:UpdatePanel ID="UpdatePanel15" runat="server" EnableViewState="true">
                             <ContentTemplate>
                                 <div class="container-fluid">
@@ -954,10 +965,8 @@
                                                     <div class="col-xs-12 col-sm-6">
                                                         <label class="col-xs-5">Email :</label>
                                                         <div class="col-xs-7">
-                                                            <asp:TextBox ID="txtEmailId" runat="server" CssClass="form-control col-xs-8" AutoCompleteType="Disabled" TabIndex="1" onblur="validateEmail(this);" OnTextChanged="txtEmailId_TextChanged" AutoPostBack="True"></asp:TextBox>
-
-                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ForeColor="#FF5050" ControlToValidate="txtEmailId" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
-                                                        </div>
+                                                            <asp:TextBox ID="txtEmailId" runat="server" CssClass="form-control col-xs-8" AutoCompleteType="Disabled" TabIndex="1" OnTextChanged="txtEmailId_TextChanged" AutoPostBack="True"></asp:TextBox>
+                                                 </div>
                                                     </div>
 
                                                     <div class="col-xs-12 col-sm-6">
@@ -965,9 +974,7 @@
                                                         <div class="col-xs-7">
 
                                                             <asp:TextBox ID="txtMobileno" onkeypress="return isNumberKey(event)" runat="server" CssClass="form-control" MaxLength="10" TabIndex="2" OnTextChanged="txtMobileno_TextChanged" AutoCompleteType="Disabled" AutoPostBack="True"></asp:TextBox>
-
-                                                            <asp:RequiredFieldValidator ID="RequireUserMobileNo" runat="server" ControlToValidate="txtMobileno" ErrorMessage="*" ForeColor="#FF5050" ValidationGroup="Add_User"></asp:RequiredFieldValidator>
-                                                        </div>
+                                                     </div>
                                                     </div>
                                                 </div>
 
@@ -1096,10 +1103,11 @@
                                             <button type="button" id="btnusercancel" class="btn btn-danger" onclick="HideAddRes();">Cancel</button>
                                         </div>
                                     </div>
+                                    </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
-
+--%>
 
                     <%-------------------------------------------------------------------------------------Edit User Section ---------------------------------------------------------------------------%>           <%--   <div id="myModalEditPopup" class="modal">   --%>
                     <div id="myModalEditPopup" class="modal">

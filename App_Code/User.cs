@@ -254,6 +254,8 @@ public class User
 
                         }
 
+                        String pActiveDate = activeDate != string.Empty ? Utility.DBStringtoLocalDateTime(activeDate).ToString("dd/MM/yyyy") : null;
+                        String pDeActiveDate = Utility.DBStringtoLocalDateTime(deActiveDate).ToString("dd/MM/yyyy");
 
                         Resident newRes = new Resident()
                         {
@@ -262,8 +264,8 @@ public class User
                             UserType = userType,
                             SocietyID = Convert.ToInt32(item["SocietyID"]),
                             SocietyName = item["SocietyName"].ToString(),
-                            ActiveDate = activeDate != string.Empty ? Convert.ToDateTime(activeDate).ToString("dd/MM/yyyy") : null,
-                            DeActiveDate = Utility.DBStringtoLocalDateTime(deActiveDate),
+                            ActiveDate = activeDate != string.Empty ? Utility.DBStringtoLocalDateTime(activeDate).ToString("dd/MM/yyyy") : "",
+                            DeActiveDate = Utility.DBStringtoLocalDateTime(deActiveDate).ToString("dd/MM/yyyy"),
                             FlatID = flatID,
                             FlatNumber = flatNumber,
                             CompanyName = compName,

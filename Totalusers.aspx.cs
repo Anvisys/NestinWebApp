@@ -363,98 +363,97 @@ public partial class Totalusers : System.Web.UI.Page
         //DataAccess daAccess = new DataAccess();
         try
         {
-            String Gender = drpAddusrGendr.SelectedItem.Text;
-            String FirstName = txtFirstname.Text;
-            String newName = "";
-            String MiddleName = txtMiddleName.Text;
-            String LastName = txtLastname.Text;
-            String MobileNo = txtMobileno.Text;
-            String EmailId = txtEmailId.Text;
-            String Parentname = txtParentname.Text;
-            String UserLogin = txtEmailId.Text;
-            String Password = "Password@123";
-            //HiddenField FlatID = (HiddenField)residentsDataList.FindControl("hiddenflatid");
-            //HiddenField UserID = (HiddenField)residentsDataList.FindControl("hiddenUserid");
-            //string Userid = UserID.Value;
-            //string FlatId = FlatID.Value;
-            string HouseId = "0";
-            string Actdate = txtact.Text;
-            string Deactdate = txtdeact.Text;
-           // int FlatId = Convert.ToInt32(txtflatid.Text);
-           // String Password = txtAddusrPasswrd.Text;
-          //  String Confirmpassword = txtAddusrConfirmpaswrd.Text;
-            String Address = txtAddress.Text;
-            //String UserType = drpAddusertype.SelectedItem.Text;
-            //String ConnectionString = Utility.SocietyConnectionString;
-            //String SocietyName = muser.currentResident.SocietyName;
-            //string SocietyID = muser.currentResident.SocietyID.ToString();//Added by Aarshi on 15 aug 2017
+          //  String Gender = drpAddusrGendr.SelectedItem.Text;
+          //  String FirstName = txtFirstname.Text;
+          //  String newName = "";
+          //  String MiddleName = txtMiddleName.Text;
+          //  String LastName = txtLastname.Text;
+          //  String MobileNo = txtMobileno.Text;
+          //  String EmailId = txtEmailId.Text;
+          //  String Parentname = txtParentname.Text;
+          //  String UserLogin = txtEmailId.Text;
+          //  String Password = "Password@123";
+          //  HiddenField FlatID = (HiddenField)residentsDataList.FindControl("hiddenflatid");
+          //  HiddenField UserID = (HiddenField)residentsDataList.FindControl("hiddenUserid");
+          //  string Userid = UserID.Value;
+          //  string FlatId = FlatID.Value;
+          //  string HouseId = "0";
+          //  string Actdate = txtact.Text;
+          //  string Deactdate = txtdeact.Text;
+          // // int FlatId = Convert.ToInt32(txtflatid.Text);
+          // // String Password = txtAddusrPasswrd.Text;
+          ////  String Confirmpassword = txtAddusrConfirmpaswrd.Text;
+          //  String Address = txtAddress.Text;
+          //  //String UserType = drpAddusertype.SelectedItem.Text;
+          //  //String ConnectionString = Utility.SocietyConnectionString;
+          //  //String SocietyName = muser.currentResident.SocietyName;
+          //  //string SocietyID = muser.currentResident.SocietyID.ToString();//Added by Aarshi on 15 aug 2017
 
-            //This Factory has yet to be implemented
-            User user = new User();
-            UserFactory userFactory = new UserFactory();
-            IUser newUser = userFactory.GetUser("Owner", user);
+          //  //This Factory has yet to be implemented
+          //  User user = new User();
+          //  UserFactory userFactory = new UserFactory();
+          //  IUser newUser = userFactory.GetUser("Owner", user);
 
-            string query = "INSERT INTO[dbo].[SocietyUser]([UserID],[FlatID],[Type],[ServiceType],[CompanyName],[ActiveDate],[DeActiveDate],[ModifiedDate],[SocietyID],[Status],[HouseID])"+
-                "values("+ Userid + " ,"+FlatId+" ,'Tenant' ,0 ,'' ,'"+Actdate+"' ,'"+Deactdate+"' ,'"+DateTime.UtcNow+"' ,"+SessionVariables.SocietyID+" ,2 "+HouseId+")";
-            DataAccess daccess = new DataAccess();
-            bool result=daccess.UpdateQuery(query);
+          //  string query = "INSERT INTO[dbo].[SocietyUser]([UserID],[FlatID],[Type],[ServiceType],[CompanyName],[ActiveDate],[DeActiveDate],[ModifiedDate],[SocietyID],[Status],[HouseID])"+
+          //      "values("+ Userid + " ,"+FlatId+" ,'Tenant' ,0 ,'' ,'"+Actdate+"' ,'"+Deactdate+"' ,'"+DateTime.UtcNow+"' ,"+SessionVariables.SocietyID+" ,2 "+HouseId+")";
+          //  DataAccess daccess = new DataAccess();
+          //  bool result=daccess.UpdateQuery(query);
 
-            if (Gender == "" || FirstName == "" || MobileNo == ""|| EmailId==""|| UserLogin=="" || Password=="")
-            {
-                lblstatus.Text = "Fields can not be empty";
-                return;
-            }
-            else if (FirstName == newName)
-            { return; }
-            newName = FirstName;
-            */
-           
-            //Added by Aarshi on 15 Aug 2017 for code restructuring
-            Resident res = new Resident();
+          //  if (Gender == "" || FirstName == "" || MobileNo == ""|| EmailId==""|| UserLogin=="" || Password=="")
+          //  {
+          //      lblstatus.Text = "Fields can not be empty";
+          //      return;
+          //  }
+          //  else if (FirstName == newName)
+          //  { return; }
+          //  newName = FirstName;
+
+          //  //Added by Aarshi on 15 Aug 2017 for code restructuring
+          //  Resident res = new Resident();
 
             
-            bool assuserresult = res.InsertUserResident(FirstName, LastName, MobileNo, EmailId, Password, Gender, Parentname, UserLogin, Address);
+          //  bool assuserresult = res.InsertUserResident(FirstName, LastName, MobileNo, EmailId, Password, Gender, Parentname, UserLogin, Address);
 
-            if (assuserresult == true)                             
-            {
-                lblstatus.Text = "User added  sucessfully. ";
-
-
-                //User newUser = new User();
-                ////bool result = newUser.UpdatePassword(EmailId, Password);
-                //if (result == true)
-                //{
-                //    lblstatus.ForeColor = System.Drawing.Color.Red;
-                //     lblstatus.Text = "User added  sucessfully, password is not  encrypted. ";
-                //}
-
-                //if (result == true)
-                //{
-                //   // ClientScript.RegisterStartupScript(this.GetType(), "alert()", "alert('User Added Sucessfully')", true);
-                //    lblstatus.Text = "User Added Successfully";
-                //    //Filldata();
-                //    LoadResidentData(); //Changed name by Aarshi on 4 aug 2017
-                //}
-                //else
-                //{
-                //    lblstatus.ForeColor = System.Drawing.Color.Red;
-                //    lblstatus.Text = "User added  sucessfully, password is not  encrypted. ";
+          //  if (assuserresult == true)                             
+          //  {
+          //      lblstatus.Text = "User added  sucessfully. ";
 
 
-                //}
-            }
+          //      //User newUser = new User();
+          //      ////bool result = newUser.UpdatePassword(EmailId, Password);
+          //      //if (result == true)
+          //      //{
+          //      //    lblstatus.ForeColor = System.Drawing.Color.Red;
+          //      //     lblstatus.Text = "User added  sucessfully, password is not  encrypted. ";
+          //      //}
 
-            else
-            {
-                lblstatus.Text = "User Added Failed";
+          //      //if (result == true)
+          //      //{
+          //      //   // ClientScript.RegisterStartupScript(this.GetType(), "alert()", "alert('User Added Sucessfully')", true);
+          //      //    lblstatus.Text = "User Added Successfully";
+          //      //    //Filldata();
+          //      //    LoadResidentData(); //Changed name by Aarshi on 4 aug 2017
+          //      //}
+          //      //else
+          //      //{
+          //      //    lblstatus.ForeColor = System.Drawing.Color.Red;
+          //      //    lblstatus.Text = "User added  sucessfully, password is not  encrypted. ";
+
+
+          //      //}
+          //  }
+
+          //  else
+          //  {
+          //      lblstatus.Text = "User Added Failed";
                
-            }
+          //  }
         }
         catch (Exception ex)
         {
 
             //Utility.log("Adduser:btnAdduser_Click Exception " + ex.Message);
-            lblstatus.Text = ex.Message;
+            //lblstatus.Text = ex.Message;
         }
 
         //lblstatus.Text = "";
@@ -469,23 +468,23 @@ public partial class Totalusers : System.Web.UI.Page
     protected void btnAddUserResident_Click(object sender, EventArgs e)
     {
         //btnAdduserres.Enabled = false;
-        try
-        {
-            if (lblusravailblerr.Text == "")
-            {
-                Datasubmit();
-            }
+        //try
+        //{
+        //    if (lblusravailblerr.Text == "")
+        //    {
+        //        Datasubmit();
+        //    }
 
-            else
-            {
-                lblstatus.Text = "UserLogin  already Registered";
-            }
+        //    else
+        //    {
+        //        lblstatus.Text = "UserLogin  already Registered";
+        //    }
 
-            btnAddUserResident.Enabled = true;
-        }
-        catch (Exception ex) {
+        //    btnAddUserResident.Enabled = true;
+        //}
+        //catch (Exception ex) {
 
-        }
+        //}
     }
 
 
@@ -493,60 +492,73 @@ public partial class Totalusers : System.Web.UI.Page
     protected void txtMobileno_TextChanged(object sender, EventArgs e)
     {
         DataAccess dacess = new DataAccess();
-        string query = "select * from  totalusers where userlogin='" + txtEmailId.Text + "' and mobileno= '" +txtMobileno.Text+"'";
-        DataSet ds=dacess.ReadData(query);
-        if (ds!=null)
-        {
+        //string query = "select * from  totalusers where userlogin='" + txtEmailId.Text + "' and mobileno= '" +txtMobileno.Text+"'";
+        //DataSet ds=dacess.ReadData(query);
+        //if (ds!=null)
+        //{
                 
-                txtFirstname.Text = ds.Tables[0].Rows[0]["FirstName"].ToString();
-                txtMiddleName.Text = ds.Tables[0].Rows[0]["MiddleName"].ToString(); 
-                txtLastname.Text = ds.Tables[0].Rows[0]["LastName"].ToString();
-                txtAddress.Text = ds.Tables[0].Rows[0]["Address"].ToString(); 
-                drpAddusrGendr.Text = ds.Tables[0].Rows[0]["Gender"].ToString(); 
-                //txtNewusername.Text = newUser.UserLogin;
-                txtParentname.Text = ds.Tables[0].Rows[0]["ParentName"].ToString();
-            //hiddenflatid.Value = txtflatid.Text;
-           // hiddenhouseid.Value = ds.Tables[0].Rows[0]["HouseID"].ToString();
-            //hiddenUserid.Value = ds.Tables[0].Rows[0]["UserID"].ToString();
-                lblmobileavailbe.Text = string.Empty;//Added by Aarshi on 15 Aug 2017 to clear validation message when entered correct data
-            lblEmailcheck.Text = "User Fetched";
-            lblEmailcheck.ForeColor = System.Drawing.Color.Green;
+        //        txtFirstname.Text = ds.Tables[0].Rows[0]["FirstName"].ToString();
+        //        txtMiddleName.Text = ds.Tables[0].Rows[0]["MiddleName"].ToString(); 
+        //        txtLastname.Text = ds.Tables[0].Rows[0]["LastName"].ToString();
+        //        txtAddress.Text = ds.Tables[0].Rows[0]["Address"].ToString(); 
+        //        drpAddusrGendr.Text = ds.Tables[0].Rows[0]["Gender"].ToString(); 
+        //        //txtNewusername.Text = newUser.UserLogin;
+        //        txtParentname.Text = ds.Tables[0].Rows[0]["ParentName"].ToString();
+        //    //hiddenflatid.Value = txtflatid.Text;
+        //   // hiddenhouseid.Value = ds.Tables[0].Rows[0]["HouseID"].ToString();
+        //    //hiddenUserid.Value = ds.Tables[0].Rows[0]["UserID"].ToString();
+        //        lblmobileavailbe.Text = string.Empty;//Added by Aarshi on 15 Aug 2017 to clear validation message when entered correct data
+        //    lblEmailcheck.Text = "User Fetched";
+        //    lblEmailcheck.ForeColor = System.Drawing.Color.Green;
         
-        }
-        else
-        {
-            lblEmailcheck.Text = "Not an Existing User. Register first";//Added by Aarshi on 15 Aug 2017 to clear validation message when entered correct data
-        }
+        //}
+        //else
+        //{
+        //    lblEmailcheck.Text = "Not an Existing User. Register first";//Added by Aarshi on 15 Aug 2017 to clear validation message when entered correct data
+        //}
      
     }
 
-    protected void txtEmailId_TextChanged(object sender, EventArgs e)
+    protected void CheckEmail(object sender, EventArgs e)
+    {
+        String email = "";
+        if (!string.IsNullOrEmpty(txtEmail.Text))
+        {
+            email = txtEmail.Text;
+        }
+        else
+        {
+            email = "";
+        }
+    }
+
+        protected void txtEmailId_TextChanged(object sender, EventArgs e)
     {
        
        //Added by Aarshi on 15 Aug 2017 for code restructuring
         Resident res = new Resident();
-        DataSet dUser = res.GetEmailAvailable(txtEmailId.Text);
+        //DataSet dUser = res.GetEmailAvailable(txtEmailId.Text);
 
-        if ( dUser == null || dUser.Tables[0].Rows.Count == 0)
-        {
-            ExistingUser = false;
-            lblEmailcheck.Text = " ";
-        }
-        else
-        {
-            newUser = new User();
-            DataTable usertable = dUser.Tables[0];
-            newUser.ID = Convert.ToInt32(usertable.Rows[0]["UserID"]);
-            newUser.FirstName = usertable.Rows[0]["FirstName"].ToString();
-            newUser.LastName = usertable.Rows[0]["LastName"].ToString();
-            newUser.ParentName = usertable.Rows[0]["ParentName"].ToString().Trim();
-            newUser.Address = usertable.Rows[0]["Address"].ToString();
-            newUser.Gender = usertable.Rows[0]["Gender"].ToString();
-            newUser.MobileNumber = usertable.Rows[0]["MobileNo"].ToString();
-            lblEmailcheck.Text = "Email already Exist. Enter Mobile for Exising User or use another Email";
-            ExistingUser = true;
+        //if ( dUser == null || dUser.Tables[0].Rows.Count == 0)
+        //{
+        //    ExistingUser = false;
+        //    lblEmailcheck.Text = " ";
+        //}
+        //else
+        //{
+        //    newUser = new User();
+        //    DataTable usertable = dUser.Tables[0];
+        //    newUser.ID = Convert.ToInt32(usertable.Rows[0]["UserID"]);
+        //    newUser.FirstName = usertable.Rows[0]["FirstName"].ToString();
+        //    newUser.LastName = usertable.Rows[0]["LastName"].ToString();
+        //    newUser.ParentName = usertable.Rows[0]["ParentName"].ToString().Trim();
+        //    newUser.Address = usertable.Rows[0]["Address"].ToString();
+        //    newUser.Gender = usertable.Rows[0]["Gender"].ToString();
+        //    newUser.MobileNumber = usertable.Rows[0]["MobileNo"].ToString();
+        //    lblEmailcheck.Text = "Email already Exist. Enter Mobile for Exising User or use another Email";
+        //    ExistingUser = true;
    
-        }
+        //}
     }
 
     /* -------------------------------------------------------------Edit User Section   ---------------------------------------------------------------------------*/
@@ -746,9 +758,9 @@ public partial class Totalusers : System.Web.UI.Page
 
     protected void btnAddUser_Click(object sender, EventArgs e)
     {
-        txtFlat.Text = HiddenField2.Value;
-        drpAddusertype.SelectedIndex = 1;
-        drpAddusertype.Enabled = false;
+        //txtFlat.Text = HiddenField2.Value;
+        //drpAddusertype.SelectedIndex = 1;
+        //drpAddusertype.Enabled = false;
 
         ClientScript.RegisterStartupScript(this.GetType(), "alert('')", "ShowAddTenant()", true);
     }
